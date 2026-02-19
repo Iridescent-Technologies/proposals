@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UM6P × Zavmo — Pilot Proposal 2026</title>
+<style>
+  :root {
+    --deepNavy:#0a1628;--navy:#0d1e36;--navyLight:#132743;--navyLighter:#1a3a5c;
+    --teal:#00d9c0;--tealOnLight:#008577;--tealGlow:#00ffeb;
+    --tealMuted:rgba(0,217,192,.5);--tealSubtle:rgba(0,217,192,.25);
+    --tealFaint:rgba(0,217,192,.08);--tealWhisper:rgba(0,217,192,.03);
+    --textPrimary:#fff;--textSecondary:#c8d5e6;--textTertiary:#94a7be;--textMuted:#7d92aa;
+    --font:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI','Inter',sans-serif;
+    --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:20px;--r-2xl:24px;--r-full:9999px;
+  }
+  @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font);background:var(--deepNavy);color:var(--textPrimary);min-height:100vh;overflow-x:hidden}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+
+  /* Aurora */
+  .aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+  .orb{position:absolute;border-radius:50%;filter:blur(80px);animation:float 28s ease-in-out infinite}
+  .orb:nth-child(1){width:420px;height:420px;background:radial-gradient(circle,rgba(0,217,192,.07),transparent);top:8%;left:4%;animation-duration:25s}
+  .orb:nth-child(2){width:360px;height:360px;background:radial-gradient(circle,rgba(0,217,192,.05),transparent);top:55%;right:6%;animation-duration:31s;animation-delay:-9s}
+  .orb:nth-child(3){width:300px;height:300px;background:radial-gradient(circle,rgba(0,217,192,.04),transparent);bottom:12%;left:38%;animation-duration:23s;animation-delay:-16s}
+  @keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(28px,-28px) scale(1.1)}66%{transform:translate(-18px,18px) scale(.9)}}
+
+  /* Layout */
+  .wrap{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:0 32px}
+
+  /* Glass */
+  .glass{background:rgba(13,30,54,.4);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgba(0,217,192,.1);box-shadow:0 8px 32px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.05)}
+  .glass-hi{background:rgba(13,30,54,.6);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);border:1px solid rgba(0,217,192,.18);box-shadow:0 16px 48px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08)}
+  .glass-in{background:rgba(10,22,40,.6);border:1px solid rgba(0,217,192,.08);box-shadow:inset 0 2px 4px rgba(0,0,0,.2)}
+
+  /* Header */
+  .hdr{position:sticky;top:0;z-index:100;background:rgba(10,22,40,.88);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);border-bottom:1px solid rgba(0,217,192,.12);box-shadow:0 4px 24px rgba(0,0,0,.4)}
+  .hdr-in{max-width:1400px;margin:0 auto;padding:0 32px;height:64px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-size:20px;font-weight:300;letter-spacing:6px;color:var(--teal);text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:10px}
+  .logo-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px var(--tealGlow);animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+  .hdr-right{display:flex;align-items:center;gap:16px}
+  .hdr-badge{padding:4px 12px;border-radius:var(--r-full);background:var(--tealFaint);border:1px solid var(--tealSubtle);font-size:11px;font-weight:500;color:var(--teal);letter-spacing:.5px}
+  .hdr-meta{font-size:11px;color:var(--textMuted)}
+
+  /* Hero */
+  .hero{padding:64px 0 48px;border-bottom:1px solid rgba(0,217,192,.08)}
+  .eyebrow{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+  .e-line{width:32px;height:2px;background:linear-gradient(90deg,var(--teal),transparent)}
+  .e-text{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--teal)}
+  .hero-title{font-size:clamp(30px,4.5vw,54px);font-weight:300;line-height:1.1;letter-spacing:-.5px;margin-bottom:8px}
+  .hero-title strong{font-weight:700;color:var(--teal)}
+  .hero-sub{font-size:17px;font-weight:300;color:var(--textSecondary);margin-bottom:32px;max-width:620px;line-height:1.6}
+  .hero-kpis{display:flex;gap:32px;flex-wrap:wrap}
+  .kpi{display:flex;flex-direction:column;gap:4px}
+  .kpi-v{font-size:28px;font-weight:700;color:var(--teal);line-height:1}
+  .kpi-l{font-size:11px;color:var(--textMuted);letter-spacing:.5px}
+  .kpi-sep{width:1px;background:rgba(0,217,192,.2);align-self:stretch;margin:4px 0}
+
+  /* Sections */
+  .sec{padding:56px 0;border-bottom:1px solid rgba(0,217,192,.06)}
+  .sec:last-of-type{border-bottom:none}
+  .sec-ey{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .sec-n{width:28px;height:28px;border-radius:var(--r-full);background:var(--tealFaint);border:1px solid var(--tealSubtle);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--teal)}
+  .sec-lbl{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--teal)}
+  .sec-title{font-size:clamp(22px,3vw,32px);font-weight:300;color:var(--textPrimary);margin-bottom:8px;line-height:1.2}
+  .sec-title strong{font-weight:700}
+  .sec-desc{font-size:14px;color:var(--textSecondary);line-height:1.7;max-width:700px;margin-bottom:36px}
+
+  /* Banner */
+  .banner{display:flex;align-items:flex-start;gap:12px;padding:16px 20px;border-radius:var(--r-lg);background:rgba(0,217,192,.06);border:1px solid rgba(0,217,192,.2);margin-bottom:28px}
+  .banner svg{width:18px;height:18px;stroke:var(--teal);stroke-width:1.5;fill:none;flex-shrink:0;margin-top:1px}
+  .banner-txt{font-size:13px;color:var(--textSecondary);line-height:1.6}
+  .banner-txt strong{color:var(--textPrimary)}
+
+  /* Stream Cards */
+  .streams{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:1023px){.streams{grid-template-columns:1fr}}
+  .stream-card{border-radius:var(--r-xl);padding:0;overflow:hidden;position:relative;transition:transform 300ms ease-out;cursor:default}
+  .stream-card:hover{transform:translateY(-5px)}
+  .sc-head{padding:24px 24px 20px;border-bottom:1px solid rgba(0,217,192,.08);position:relative}
+  .sc-stream-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:var(--r-full);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+  .badge-sust{background:rgba(0,217,192,.12);border:1px solid rgba(0,217,192,.3);color:var(--teal)}
+  .badge-tech{background:rgba(0,180,200,.1);border:1px solid rgba(0,180,200,.25);color:#60d4e0}
+  .badge-ent{background:rgba(0,217,192,.06);border:1px solid rgba(0,217,192,.18);color:rgba(0,217,192,.8)}
+  .sc-icon{width:48px;height:48px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;margin-bottom:14px;background:linear-gradient(135deg,var(--navy),var(--navyLight));border:1px solid var(--tealSubtle)}
+  .sc-icon svg{width:24px;height:24px;stroke:var(--teal);stroke-width:1.5;fill:none}
+  .sc-title{font-size:20px;font-weight:700;color:var(--textPrimary);margin-bottom:6px}
+  .sc-subtitle{font-size:13px;color:var(--teal);font-weight:500;margin-bottom:8px}
+  .sc-desc{font-size:13px;color:var(--textSecondary);line-height:1.6}
+  .sc-body{padding:20px 24px}
+  .sc-qual-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--textMuted);margin-bottom:10px}
+  .sc-qual-name{font-size:13px;font-weight:600;color:var(--textPrimary);margin-bottom:12px;line-height:1.4}
+  .sc-units{display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+  .sc-unit{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:var(--r-md);font-size:12px;color:var(--textSecondary);transition:background 150ms,color 150ms;cursor:default}
+  .sc-unit:hover{background:var(--tealFaint);color:var(--textPrimary)}
+  .u-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);flex-shrink:0}
+  .sc-footer{display:flex;align-items:center;justify-content:space-between;padding:14px 24px 20px;border-top:1px solid rgba(0,217,192,.06)}
+  .sc-learners{font-size:13px;color:var(--textTertiary)}
+  .sc-learners strong{color:var(--teal);font-size:20px;margin-right:4px}
+  .sc-delivery{display:flex;flex-direction:column;align-items:flex-end;gap:3px}
+  .delivery-pill{padding:2px 8px;border-radius:var(--r-full);font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;background:var(--tealFaint);border:1px solid var(--tealSubtle);color:var(--teal)}
+  .school-tag{font-size:10px;color:var(--textMuted)}
+  .cohort-num-abs{position:absolute;top:16px;right:16px;width:28px;height:28px;border-radius:var(--r-full);background:linear-gradient(135deg,var(--teal),#00b09b);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--navy)}
+
+  /* 4D Cards */
+  .four-d-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  @media(max-width:1023px){.four-d-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:599px){.four-d-grid{grid-template-columns:1fr}}
+  .fd-card{border-radius:var(--r-xl);padding:28px 22px;position:relative;overflow:hidden;transition:transform 300ms ease-out}
+  .fd-card:hover{transform:translateY(-3px)}
+  .fd-phase{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:var(--r-full);font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;background:rgba(0,217,192,.12);border:1px solid rgba(0,217,192,.3);color:var(--teal)}
+  .fd-icon{width:44px;height:44px;border-radius:var(--r-md);background:linear-gradient(135deg,var(--navy),var(--navyLight));border:1px solid var(--tealSubtle);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+  .fd-icon svg{width:22px;height:22px;stroke:var(--teal);stroke-width:1.5;fill:none}
+  .fd-title{font-size:16px;font-weight:700;color:var(--textPrimary);margin-bottom:6px}
+  .fd-desc{font-size:12px;color:var(--textSecondary);line-height:1.6;margin-bottom:12px}
+  .fd-details{display:flex;flex-direction:column;gap:5px}
+  .fd-detail{display:flex;align-items:flex-start;gap:6px;font-size:11px;color:var(--textTertiary);line-height:1.4}
+  .fd-detail-c{color:var(--teal);flex-shrink:0;margin-top:1px}
+
+  /* Timeline */
+  .timeline{position:relative}
+  .t-track{position:absolute;left:19px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--teal),rgba(0,217,192,.1));border-radius:1px}
+  .t-item{display:flex;gap:24px;padding:0 0 28px;position:relative;cursor:default}
+  .t-item:last-child{padding-bottom:0}
+  .t-dot{width:40px;height:40px;flex-shrink:0;border-radius:var(--r-full);z-index:1;display:flex;align-items:center;justify-content:center;transition:transform 300ms cubic-bezier(.34,1.56,.64,1)}
+  .t-dot.on{background:linear-gradient(135deg,var(--teal),#00b09b);box-shadow:0 0 20px rgba(0,217,192,.4)}
+  .t-dot.off{background:rgba(13,30,54,.6);border:2px solid rgba(0,217,192,.3)}
+  .t-item:hover .t-dot{transform:scale(1.15)}
+  .t-dot svg{width:18px;height:18px;stroke-width:2;fill:none}
+  .t-dot.on svg{stroke:var(--navy)}
+  .t-dot.off svg{stroke:var(--teal)}
+  .t-body{flex:1}
+  .t-week{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+  .t-title{font-size:15px;font-weight:600;color:var(--textPrimary);margin-bottom:5px}
+  .t-desc{font-size:13px;color:var(--textSecondary);line-height:1.6}
+  .t-4d{display:inline-flex;align-items:center;gap:5px;margin-top:6px;padding:3px 10px;border-radius:var(--r-full);background:rgba(0,217,192,.08);border:1px solid rgba(0,217,192,.2);font-size:10px;font-weight:600;color:var(--teal);letter-spacing:.5px}
+
+  /* Commercial */
+  .comm-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media(max-width:768px){.comm-grid{grid-template-columns:1fr}}
+  .comm-card{border-radius:var(--r-xl);padding:28px}
+  .comm-title{font-size:14px;font-weight:600;color:var(--teal);margin-bottom:20px;letter-spacing:.5px}
+  .fee-row{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(0,217,192,.06)}
+  .fee-row:last-child{border-bottom:none;padding-bottom:0}
+  .fee-lbl{font-size:13px;color:var(--textSecondary)}
+  .fee-lbl small{display:block;font-size:11px;color:var(--textMuted);margin-top:2px}
+  .fee-amt{font-size:16px;font-weight:700;color:var(--textPrimary)}
+  .fee-amt.t{color:var(--teal)}
+  .fee-total{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-radius:var(--r-lg);margin-top:16px;background:linear-gradient(135deg,rgba(0,217,192,.12),rgba(0,217,192,.04));border:1px solid rgba(0,217,192,.25)}
+  .ft-lbl{font-size:13px;font-weight:600;color:var(--textPrimary)}
+  .ft-val{font-size:24px;font-weight:700;color:var(--teal)}
+  .pay-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid rgba(0,217,192,.06)}
+  .pay-item:last-child{border-bottom:none}
+  .pay-n{width:32px;height:32px;flex-shrink:0;border-radius:var(--r-full);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--navy);background:linear-gradient(135deg,var(--teal),#00b09b)}
+  .pay-body{flex:1}
+  .pay-trg{font-size:13px;font-weight:600;color:var(--textPrimary);margin-bottom:2px}
+  .pay-detail{font-size:12px;color:var(--textMuted)}
+  .pay-amt{font-size:16px;font-weight:700;color:var(--teal);margin-left:auto;white-space:nowrap}
+
+  /* Divider */
+  .div{height:1px;background:linear-gradient(90deg,transparent,var(--tealSubtle),transparent);margin:32px 0}
+
+  /* Footer */
+  .ftr{border-top:1px solid rgba(0,217,192,.1);padding:32px 0;background:rgba(10,22,40,.6)}
+  .ftr-in{max-width:1400px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .ftr-logo{font-size:16px;font-weight:300;letter-spacing:5px;color:var(--teal);text-transform:uppercase}
+  .ftr-tag{font-size:12px;color:var(--textTertiary);font-style:italic}
+  .ftr-meta{display:flex;flex-direction:column;gap:4px;align-items:flex-end}
+  .ftr-copy{font-size:11px;color:var(--textMuted)}
+  .ftr-ver{font-size:10px;color:var(--textMuted);opacity:.7}
+
+  /* Reveal */
+  .rv{opacity:0;transform:translateY(16px);transition:opacity .5s ease-out,transform .5s ease-out}
+  .rv.vis{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true">
+  <div class="orb"></div><div class="orb"></div><div class="orb"></div>
+</div>
+
+<!-- HEADER -->
+<header class="hdr" role="banner">
+  <div class="hdr-in">
+    <a href="#" class="logo" aria-label="Zavmo home">
+      <div class="logo-dot" aria-hidden="true"></div>ZAVMO
+    </a>
+    <div class="hdr-right">
+      <span class="hdr-badge">PILOT PROPOSAL</span>
+      <span class="hdr-meta">February 2026</span>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<div class="wrap">
+  <section class="hero rv" aria-labelledby="hero-h1">
+    <div class="eyebrow"><div class="e-line" aria-hidden="true"></div><span class="e-text">Discussion Document — Confidential</span></div>
+    <h1 class="hero-title" id="hero-h1">UM6P × <strong>Zavmo</strong><br>Three-Stream Pilot</h1>
+    <p class="hero-sub">A cross-faculty pilot spanning Sustainability, Technology Management and Entrepreneurship — 20 learners per stream, delivering a university-wide proof of concept powered by Zavmo's 4D learning process.</p>
+    <div class="hero-kpis" role="list">
+      <div class="kpi" role="listitem"><span class="kpi-v">60</span><span class="kpi-l">Pilot Learners</span></div>
+      <div class="kpi-sep" aria-hidden="true"></div>
+      <div class="kpi" role="listitem"><span class="kpi-v">3</span><span class="kpi-l">UM6P Streams</span></div>
+      <div class="kpi-sep" aria-hidden="true"></div>
+      <div class="kpi" role="listitem"><span class="kpi-v">4D</span><span class="kpi-l">Learning Process</span></div>
+      <div class="kpi-sep" aria-hidden="true"></div>
+      <div class="kpi" role="listitem"><span class="kpi-v">20</span><span class="kpi-l">Learners Per Stream</span></div>
+    </div>
+  </section>
+</div>
+
+<!-- SECTION 1: THE THREE STREAMS -->
+<div class="wrap">
+  <section class="sec rv" aria-labelledby="streams-title">
+    <div class="sec-ey"><div class="sec-n">01</div><span class="sec-lbl">The Three Streams</span></div>
+    <h2 class="sec-title" id="streams-title">Sustainability · Technology Management · <strong>Entrepreneurship</strong></h2>
+    <p class="sec-desc">Each cohort of 20 learners follows a Zavmo-designed programme aligned to professional standards and UM6P's institutional priorities. Every learner's pathway is personalised through Zavmo's 4D process — Discover, Discuss, Deliver, Demonstrate — ensuring learning maps to individual needs and the programme's Learning Outcomes and Assessment Criteria.</p>
+
+    <div class="streams" role="list">
+
+      <!-- SUSTAINABILITY -->
+      <article class="stream-card glass rv" role="listitem" tabindex="0" aria-label="Stream 1: Sustainability">
+        <div class="sc-head">
+          <div class="cohort-num-abs" aria-label="Stream 1">1</div>
+          <div class="sc-stream-badge badge-sust">Sustainability</div>
+          <div class="sc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8Z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div>
+          <h3 class="sc-title">Sustainability Management</h3>
+          <div class="sc-subtitle">Green City Campus — Benguerir</div>
+          <p class="sc-desc">Professionals and graduates from UM6P's sustainability, agriculture and environmental science programmes. Aligned to UM6P's founding mission and living lab campus model.</p>
+        </div>
+        <div class="sc-body">
+          <div class="sc-qual-label">Zavmo-Designed Programme</div>
+          <div class="sc-qual-name">Sustainability Management</div>
+          <div class="sc-units" aria-label="Programme areas">
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Environmental Management Systems &amp; Auditing</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Carbon Management, Net Zero &amp; Climate Risk</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>ESG Reporting, Compliance &amp; Sustainable Finance</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Environmental Impact Assessment</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Sustainable Procurement &amp; Supply Chain</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Sustainability Leadership, Strategy &amp; Change</div>
+          </div>
+        </div>
+        <div class="sc-footer">
+          <div class="sc-learners"><strong>20</strong> learners</div>
+          <div class="sc-delivery">
+            <div class="delivery-pill">Full 4D Delivery</div>
+            <div class="school-tag">ASARI / Green City Campus</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- TECHNOLOGY MANAGEMENT -->
+      <article class="stream-card glass rv" role="listitem" tabindex="0" aria-label="Stream 2: Technology Management">
+        <div class="sc-head">
+          <div class="cohort-num-abs" aria-label="Stream 2">2</div>
+          <div class="sc-stream-badge badge-tech">Technology</div>
+          <div class="sc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9.75 17 9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2Z"/></svg></div>
+          <h3 class="sc-title">Technology Management</h3>
+          <div class="sc-subtitle">School of Computer Science / Data &amp; AI School — Benguerir</div>
+          <p class="sc-desc">Learners from UM6P's School of Computer Science, Data &amp; AI School and School of Collective Intelligence. Aligned with UM6P's digital innovation mission.</p>
+        </div>
+        <div class="sc-body">
+          <div class="sc-qual-label">Zavmo-Designed Programme</div>
+          <div class="sc-qual-name">Technology Management</div>
+          <div class="sc-units" aria-label="Programme areas">
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Foundations of Data Analytics &amp; Visualisation</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Applied AI &amp; Machine Learning Concepts</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Data Ethics, Governance &amp; Responsible AI</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Cloud Infrastructure &amp; Digital Architecture</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Digital Product Development &amp; Agile Practice</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>AI Strategy, Policy &amp; Organisational Impact</div>
+          </div>
+        </div>
+        <div class="sc-footer">
+          <div class="sc-learners"><strong>20</strong> learners</div>
+          <div class="sc-delivery">
+            <div class="delivery-pill">Full 4D Delivery</div>
+            <div class="school-tag">Data &amp; AI School / CS School</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- ENTREPRENEURSHIP -->
+      <article class="stream-card glass rv" role="listitem" tabindex="0" aria-label="Stream 3: Entrepreneurship">
+        <div class="sc-head">
+          <div class="cohort-num-abs" aria-label="Stream 3">3</div>
+          <div class="sc-stream-badge badge-ent">Entrepreneurship</div>
+          <div class="sc-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <h3 class="sc-title">Entrepreneurship &amp; Innovation</h3>
+          <div class="sc-subtitle">Africa Business School — Rabat Campus</div>
+          <p class="sc-desc">Learners from UM6P's Africa Business School and innovation incubators. Aligned with UM6P's startup accelerator model and pan-African entrepreneurship mission.</p>
+        </div>
+        <div class="sc-body">
+          <div class="sc-qual-label">Zavmo-Designed Programme</div>
+          <div class="sc-qual-name">Entrepreneurship &amp; Innovation Management</div>
+          <div class="sc-units" aria-label="Programme areas">
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Venture Design &amp; Business Model Innovation</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Market Analysis, Validation &amp; Customer Discovery</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Finance for Entrepreneurs &amp; Investment Readiness</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Innovation Strategy &amp; Technology Transfer</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Leadership, Team Building &amp; Scaling</div>
+            <div class="sc-unit"><div class="u-dot" aria-hidden="true"></div>Impact Entrepreneurship &amp; African Market Context</div>
+          </div>
+        </div>
+        <div class="sc-footer">
+          <div class="sc-learners"><strong>20</strong> learners</div>
+          <div class="sc-delivery">
+            <div class="delivery-pill">Full 4D Delivery</div>
+            <div class="school-tag">Africa Business School / Rabat</div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+</div>
+
+<!-- SECTION 2: THE 4D PROCESS -->
+<div class="wrap">
+  <section class="sec rv" aria-labelledby="4d-title">
+    <div class="sec-ey"><div class="sec-n">02</div><span class="sec-lbl">How Zavmo Delivers</span></div>
+    <h2 class="sec-title" id="4d-title">The <strong>4D Learning Process</strong></h2>
+    <p class="sec-desc">Every learner in each stream moves through Zavmo's four-phase cycle. The process begins with understanding the individual, designs a personalised pathway, delivers adaptive learning through conversation, and builds a verified evidence portfolio mapped to every Learning Outcome and Assessment Criterion.</p>
+
+    <div class="four-d-grid" role="list">
+
+      <div class="fd-card glass-hi rv" role="listitem">
+        <div class="fd-phase">D1 — Discover</div>
+        <div class="fd-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        <div class="fd-title">Discover</div>
+        <div class="fd-desc">Zavmo's Intelligent Needs Analysis profiles each learner across four dimensions: current competencies, target competencies, skills benchmarked against professional standards, and qualification pathways. AI-powered gap analysis then triangulates this data to create a personalised development plan.</div>
+        <div class="fd-details">
+          <div class="fd-detail"><span class="fd-detail-c">1</span>Analyse existing competencies (current role)</div>
+          <div class="fd-detail"><span class="fd-detail-c">2</span>Map target competencies (desired role)</div>
+          <div class="fd-detail"><span class="fd-detail-c">3</span>Benchmark against professional standards</div>
+          <div class="fd-detail"><span class="fd-detail-c">4</span>Match to qualification pathways</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Neurodiversity &amp; learning style profiling</div>
+        </div>
+      </div>
+
+      <div class="fd-card glass-hi rv" role="listitem">
+        <div class="fd-phase">D2 — Discuss</div>
+        <div class="fd-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <div class="fd-title">Discuss</div>
+        <div class="fd-desc">A collaborative design conversation where the learner's individual pathway is shaped — aligning their goals, role context and preferences with the programme's Learning Outcomes and Assessment Criteria.</div>
+        <div class="fd-details">
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Personalised learning pathway designed</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Goals aligned to programme LOs &amp; ACs</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Pace &amp; sequence adapted to the individual</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Role &amp; institutional context integrated</div>
+        </div>
+      </div>
+
+      <div class="fd-card glass-hi rv" role="listitem">
+        <div class="fd-phase">D3 — Deliver</div>
+        <div class="fd-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div class="fd-title">Deliver</div>
+        <div class="fd-desc">Zavmo deploys 12 specialist AI learning companions — each with a distinct teaching approach. From Foundation Builder (scaffolding new knowledge) to Pattern Connector (visual mind-mapping for ADHD) and Systems Analyst (systematic precision for autism) — the right companion is matched to each learner's needs.</div>
+        <div class="fd-details">
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>12 AI companions with distinct approaches</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Neurodiversity-specific characters (ADHD, dyslexia, autism)</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Cognitive load optimised (neuroscience-backed)</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Progress tracked against each LO &amp; AC</div>
+        </div>
+      </div>
+
+      <div class="fd-card glass-hi rv" role="listitem">
+        <div class="fd-phase">D4 — Demonstrate</div>
+        <div class="fd-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016Z"/></svg></div>
+        <div class="fd-title">Demonstrate</div>
+        <div class="fd-desc">Zavmo builds a verified evidence portfolio that maps directly to each Assessment Criterion. Evidence is captured continuously through the learning journey — not bolted on at the end — proving genuine capability development.</div>
+        <div class="fd-details">
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Evidence mapped to every AC</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Continuous portfolio build (not end-loaded)</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Measurable skills uplift &amp; ROI data</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Assessment-ready output for each learner</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="banner" role="note" style="margin-top:28px">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547Z"/></svg>
+      <p class="banner-txt"><strong>The same 4D process, three different domains.</strong> Each stream receives identical Zavmo delivery — the differentiation is the programme content and domain context, not the method. This demonstrates Zavmo's versatility: one platform, three entirely different disciplines, all with personalised, evidence-based learning.</p>
+    </div>
+
+    <!-- Proven outcomes -->
+    <div class="div" aria-hidden="true"></div>
+    <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;text-align:center" role="list">
+      <div class="rv" role="listitem" style="padding:16px 8px">
+        <div style="font-size:28px;font-weight:700;color:var(--teal);line-height:1">85%</div>
+        <div style="font-size:10px;color:var(--textMuted);margin-top:4px;line-height:1.3">Learner Engagement<br><span style="font-size:9px;color:var(--textTertiary)">vs 40% industry avg</span></div>
+      </div>
+      <div class="rv" role="listitem" style="padding:16px 8px">
+        <div style="font-size:28px;font-weight:700;color:var(--teal);line-height:1">2.5×</div>
+        <div style="font-size:10px;color:var(--textMuted);margin-top:4px;line-height:1.3">Faster Skill<br>Acquisition</div>
+      </div>
+      <div class="rv" role="listitem" style="padding:16px 8px">
+        <div style="font-size:28px;font-weight:700;color:var(--teal);line-height:1">40%</div>
+        <div style="font-size:10px;color:var(--textMuted);margin-top:4px;line-height:1.3">Reduction in<br>Dropouts</div>
+      </div>
+      <div class="rv" role="listitem" style="padding:16px 8px">
+        <div style="font-size:28px;font-weight:700;color:var(--teal);line-height:1">3×</div>
+        <div style="font-size:10px;color:var(--textMuted);margin-top:4px;line-height:1.3">Higher Knowledge<br>Retention</div>
+      </div>
+      <div class="rv" role="listitem" style="padding:16px 8px">
+        <div style="font-size:28px;font-weight:700;color:var(--teal);line-height:1">60%</div>
+        <div style="font-size:10px;color:var(--textMuted);margin-top:4px;line-height:1.3">Faster Time to<br>Competency</div>
+      </div>
+      <div class="rv" role="listitem" style="padding:16px 8px">
+        <div style="font-size:28px;font-weight:700;color:var(--teal);line-height:1">92%</div>
+        <div style="font-size:10px;color:var(--textMuted);margin-top:4px;line-height:1.3">Learner<br>Satisfaction</div>
+      </div>
+    </div>
+
+    <!-- Certifications & data sovereignty -->
+    <div style="display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;justify-content:center">
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:var(--r-full);background:var(--tealFaint);border:1px solid var(--tealSubtle)">
+        <span style="font-size:11px;font-weight:700;color:var(--teal)">ISO 27001</span>
+        <span style="font-size:10px;color:var(--textMuted)">Information Security</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:var(--r-full);background:var(--tealFaint);border:1px solid var(--tealSubtle)">
+        <span style="font-size:11px;font-weight:700;color:var(--teal)">ISO 42001</span>
+        <span style="font-size:10px;color:var(--textMuted)">AI Management System</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:var(--r-full);background:var(--tealFaint);border:1px solid var(--tealSubtle)">
+        <span style="font-size:11px;font-weight:700;color:var(--teal)">xAPI</span>
+        <span style="font-size:10px;color:var(--textMuted)">Tracking &amp; Verification</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:var(--r-full);background:var(--tealFaint);border:1px solid var(--tealSubtle)">
+        <span style="font-size:11px;font-weight:700;color:var(--teal)">Data Sovereignty</span>
+        <span style="font-size:10px;color:var(--textMuted)">Regional data residency</span>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SECTION 3: TIMELINE -->
+<div class="wrap">
+  <section class="sec rv" aria-labelledby="timeline-title">
+    <div class="sec-ey"><div class="sec-n">03</div><span class="sec-lbl">Pilot Timeline</span></div>
+    <h2 class="sec-title" id="timeline-title">Implementation <strong>Overview</strong></h2>
+    <p class="sec-desc">The pilot runs across three phases: setup and discovery, live 4D delivery across all three streams, and outcomes reporting. Each phase maps directly to the 4D process.</p>
+
+    <div class="timeline" role="list">
+      <div class="t-track" aria-hidden="true"></div>
+
+      <article class="t-item" role="listitem">
+        <div class="t-dot on"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        <div class="t-body">
+          <div class="t-week">Weeks 1–6 — Setup &amp; Discovery</div>
+          <h3 class="t-title">Three-Stream Discovery &amp; Programme Design</h3>
+          <p class="t-desc">Separate discovery sessions with each faculty lead. Zavmo conducts a Training Needs Analysis per stream, mapping UM6P's institutional priorities to each programme's Learning Outcomes and Assessment Criteria. Programme content configured for Sustainability, Technology Management and Entrepreneurship domains. Language and accessibility requirements established per stream.</p>
+          <div class="t-4d">4D Phase: Preparation for Discover</div>
+        </div>
+      </article>
+
+      <article class="t-item" role="listitem">
+        <div class="t-dot on"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="t-body">
+          <div class="t-week">Week 7 — Cohort Onboarding</div>
+          <h3 class="t-title">60 Learners Onboarded — Discover Phase Begins</h3>
+          <p class="t-desc">All 60 learners onboarded across three stream environments. Each learner completes their individual Discover phase: conversational profiling, learning style and neurodiversity assessment, prior learning recognition, and baseline capability mapping against their programme's LOs. Individual learning pathways designed through the Discuss phase.</p>
+          <div class="t-4d">4D Phases: Discover &amp; Discuss</div>
+        </div>
+      </article>
+
+      <article class="t-item" role="listitem">
+        <div class="t-dot off"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div class="t-body">
+          <div class="t-week">Weeks 8–22 — Live Learning</div>
+          <h3 class="t-title">Adaptive Delivery Across All Three Streams</h3>
+          <p class="t-desc">All 60 learners actively progressing through their personalised pathways. Zavmo delivers adaptive conversational learning mapped to each programme's LOs and ACs. Evidence portfolios build continuously through the Demonstrate phase. Mid-point review at Week 14 with comparative data across all three streams. Progress tracked per learner, per unit, per AC.</p>
+          <div class="t-4d">4D Phases: Deliver &amp; Demonstrate</div>
+        </div>
+      </article>
+
+      <article class="t-item" role="listitem">
+        <div class="t-dot off"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Zm-2 12H8m4-4H8m6-6v6h6"/></svg></div>
+        <div class="t-body">
+          <div class="t-week">Weeks 23–26 — Outcomes &amp; Report</div>
+          <h3 class="t-title">Three-Stream Outcomes Report &amp; Rollout Proposal</h3>
+          <p class="t-desc">Comprehensive outcomes report covering all three streams. Completion rates, evidence portfolio quality, learner satisfaction and measurable skills uplift per stream. Cross-stream analysis demonstrating Zavmo's versatility. ROI calculation versus UM6P's current delivery. Fully costed rollout proposal for university-wide adoption.</p>
+          <div class="t-4d">Outcome: Evidence-based rollout case</div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+</div>
+
+<!-- SECTION 4: PHASE 1 COMMERCIAL -->
+<div class="wrap">
+  <section class="sec rv" aria-labelledby="commercial-title">
+    <div class="sec-ey"><div class="sec-n">04</div><span class="sec-lbl">Phase 1 — Pilot Investment</span></div>
+    <h2 class="sec-title" id="commercial-title">Three-Stream <strong>Pilot Commercial</strong></h2>
+    <p class="sec-desc">Phase 1 covers the pilot across all three streams: platform licence, per-learner fees, and dedicated consultancy to ensure each stream delivers measurable outcomes and builds the case for Phase 2 rollout.</p>
+
+    <!-- Strategic Pilot Pricing Justification -->
+    <div style="padding:24px 28px;border-radius:var(--r-xl);background:linear-gradient(135deg,rgba(0,217,192,.08),rgba(0,217,192,.02));border:1px solid rgba(0,217,192,.25);margin-bottom:28px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:16px;right:20px;display:flex;align-items:center;gap:8px;padding:5px 14px;border-radius:var(--r-full);background:linear-gradient(135deg,rgba(255,215,0,.15),rgba(255,215,0,.05));border:1px solid rgba(255,215,0,.35)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ffd700" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.5px;color:#ffd700">TRAINING INDUSTRY AWARD WINNER 2025</span>
+      </div>
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:10px">Strategic Innovation Pilot</div>
+      <div style="font-size:18px;font-weight:600;color:var(--textPrimary);margin-bottom:10px;line-height:1.3;max-width:65%">Why 60 Learners — Not 250</div>
+      <div style="font-size:13px;color:var(--textSecondary);line-height:1.7;margin-bottom:16px">Zavmo's standard commercial model begins at 250 learners (Foundation tier). This pilot is deliberately scoped at 60 learners across three streams as a <strong style="color:var(--textPrimary)">Strategic Innovation Partnership</strong> — offered at preferential terms for three reasons:</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+        <div style="padding:16px;border-radius:var(--r-lg);background:rgba(10,22,40,.5);border:1px solid rgba(0,217,192,.1)">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:6px">1 — Proof of Concept</div>
+          <div style="font-size:12px;color:var(--textSecondary);line-height:1.6">Three streams across three faculties demonstrates Zavmo's versatility at a controlled scale — building the evidence base for a 250+ learner Phase 2 rollout with confidence.</div>
+        </div>
+        <div style="padding:16px;border-radius:var(--r-lg);background:rgba(10,22,40,.5);border:1px solid rgba(0,217,192,.1)">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:6px">2 — Joint Innovation Showcase</div>
+          <div style="font-size:12px;color:var(--textSecondary);line-height:1.6">UM6P becomes a flagship innovation partner. Pilot outcomes will be jointly submitted for international education and AI awards — building on Zavmo's <strong style="color:var(--teal)">Training Industry Award win (2025)</strong>.</div>
+        </div>
+        <div style="padding:16px;border-radius:var(--r-lg);background:rgba(10,22,40,.5);border:1px solid rgba(0,217,192,.1)">
+          <div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal);margin-bottom:6px">3 — Published Case Study</div>
+          <div style="font-size:12px;color:var(--textSecondary);line-height:1.6">A co-branded case study documenting outcomes across all three streams — positioning UM6P as a global leader in AI-driven learning and providing Zavmo with its first pan-African deployment reference.</div>
+        </div>
+      </div>
+      <div style="margin-top:16px;padding:12px 16px;border-radius:var(--r-md);background:rgba(0,217,192,.06);border:1px solid rgba(0,217,192,.15);display:flex;align-items:center;gap:10px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+        <span style="font-size:12px;color:var(--textSecondary);line-height:1.5"><strong style="color:var(--textPrimary)">Pilot-to-Scale pathway:</strong> Phase 1 (60 learners) validates the model across three disciplines. Phase 2 begins at 250 learners (Foundation tier) with the full white-label pricing structure — giving UM6P a clear, de-risked path from pilot to university-wide deployment.</span>
+      </div>
+    </div>
+
+    <div class="comm-grid">
+      <div class="comm-card glass rv">
+        <div class="comm-title">Platform &amp; Learner Fees</div>
+        <div class="fee-row">
+          <div class="fee-lbl">Annual Platform Licence<small>Zavmo platform, all three stream environments, infrastructure &amp; security</small></div>
+          <div class="fee-amt t">£50,000</div>
+        </div>
+        <div class="fee-row">
+          <div class="fee-lbl">Per-Learner Fee<small>60 learners (20 per stream) — full 4D delivery: Discover, Discuss, Deliver, Demonstrate</small></div>
+          <div class="fee-amt">£150 <span style="font-size:11px;font-weight:400;color:var(--textMuted)">/learner/mo</span></div>
+        </div>
+        <div class="fee-row" style="border-bottom:none">
+          <div class="fee-lbl">Annual Learner Fees<small>60 learners × £150 × 12 months</small></div>
+          <div class="fee-amt">£108,000</div>
+        </div>
+      </div>
+      <div class="comm-card glass rv">
+        <div class="comm-title">Pilot Consultancy — Per Stream</div>
+        <div class="banner" role="note" style="margin-bottom:16px">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+          <p class="banner-txt"><strong>7 days per stream × 3 streams = 21 days total.</strong> Each stream receives 5 days of delivery consultancy plus 2 days of reporting &amp; analysis.</p>
+        </div>
+        <div class="fee-row" style="padding-top:4px">
+          <div class="fee-lbl">Delivery (5 days per stream)<small>TNA, programme design, 4D configuration, faculty engagement &amp; learner onboarding</small></div>
+          <div class="fee-amt">5 <span style="font-size:11px;font-weight:400;color:var(--textMuted)">days</span></div>
+        </div>
+        <div class="fee-row">
+          <div class="fee-lbl">Reporting &amp; Analysis (2 days per stream)<small>Mid-point review, outcomes report &amp; rollout proposal per stream</small></div>
+          <div class="fee-amt">2 <span style="font-size:11px;font-weight:400;color:var(--textMuted)">days</span></div>
+        </div>
+        <div class="div" aria-hidden="true" style="margin:12px 0"></div>
+        <div class="fee-row" style="border-bottom:none;padding-bottom:0">
+          <div class="fee-lbl" style="font-size:12px;font-weight:600;color:var(--textPrimary)">Day Rates</div>
+          <div class="fee-amt" style="font-size:12px;color:var(--textMuted)"></div>
+        </div>
+        <div class="fee-row" style="padding-top:4px">
+          <div class="fee-lbl">Lead Consultant</div>
+          <div class="fee-amt">£1,200 <span style="font-size:11px;font-weight:400;color:var(--textMuted)">/day</span></div>
+        </div>
+        <div class="fee-row">
+          <div class="fee-lbl">Support &amp; Technical</div>
+          <div class="fee-amt">£750 <span style="font-size:11px;font-weight:400;color:var(--textMuted)">/day</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SECTION 5: PHASE 2 — WHITE LABEL & GROWTH -->
+<div class="wrap">
+  <section class="sec rv" aria-labelledby="phase2-title">
+    <div class="sec-ey"><div class="sec-n">05</div><span class="sec-lbl">Phase 2 — White-Label Rollout</span></div>
+    <h2 class="sec-title" id="phase2-title">From Pilot to <strong>University-Wide Platform</strong></h2>
+    <p class="sec-desc">Phase 2 transitions UM6P onto a tiered pricing model that rewards scale and unlocks progressively more powerful capabilities. Growth introduces the white-labelled UM6P-branded platform. Performance adds Jan Analytics for advanced behavioural insights. At Enterprise scale, UM6P gains a fine-tuned Small Language Model uniquely trained on its own learner data.</p>
+
+    <!-- Pricing tiers -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px" role="list" aria-label="Pricing tiers">
+      <div class="fd-card glass-hi rv" role="listitem" style="text-align:center">
+        <div class="fd-phase">Foundation</div>
+        <div style="font-size:32px;font-weight:700;color:var(--teal);margin-bottom:2px">£150</div>
+        <div style="font-size:11px;color:var(--textMuted);margin-bottom:14px">per learner / month</div>
+        <div style="font-size:13px;font-weight:600;color:var(--textPrimary);margin-bottom:6px">1–250 Learners</div>
+        <div style="font-size:12px;color:var(--textTertiary);line-height:1.5">Full platform access with personalised 4D delivery across all enrolled programmes.</div>
+      </div>
+      <div class="fd-card glass-hi rv" role="listitem" style="text-align:center">
+        <div class="fd-phase">Growth</div>
+        <div style="font-size:32px;font-weight:700;color:var(--teal);margin-bottom:2px">£110</div>
+        <div style="font-size:11px;color:var(--textMuted);margin-bottom:14px">per learner / month</div>
+        <div style="font-size:13px;font-weight:600;color:var(--textPrimary);margin-bottom:6px">251–500 Learners</div>
+        <div style="font-size:12px;color:var(--textTertiary);line-height:1.5">White-labelled UM6P-branded platform with full 4D delivery and priority support SLA.</div>
+      </div>
+      <div class="fd-card glass-hi rv" role="listitem" style="text-align:center">
+        <div class="fd-phase">Performance</div>
+        <div style="font-size:32px;font-weight:700;color:var(--teal);margin-bottom:2px">£85</div>
+        <div style="font-size:11px;color:var(--textMuted);margin-bottom:14px">per learner / month</div>
+        <div style="font-size:13px;font-weight:600;color:var(--textPrimary);margin-bottom:6px">501–1,000 Learners</div>
+        <div style="font-size:12px;color:var(--textTertiary);line-height:1.5">White-label platform plus Jan Analytics — advanced behavioural insights, cross-programme reporting and predictive learner analytics.</div>
+      </div>
+      <div class="fd-card glass-hi rv" role="listitem" style="text-align:center">
+        <div style="position:absolute;inset:-2px;border-radius:calc(var(--r-xl) + 2px);border:2px solid transparent;animation:slmpulse 3s ease-in-out infinite;pointer-events:none"></div>
+        <div class="fd-phase" style="background:linear-gradient(135deg,rgba(0,217,192,.25),rgba(0,217,192,.1));border:1px solid rgba(0,217,192,.5);color:var(--tealGlow)">Enterprise SLM</div>
+        <div style="font-size:32px;font-weight:700;color:var(--teal);margin-bottom:2px">£65</div>
+        <div style="font-size:11px;color:var(--textMuted);margin-bottom:14px">per learner / month</div>
+        <div style="font-size:13px;font-weight:600;color:var(--textPrimary);margin-bottom:6px">1,001+ Learners</div>
+        <div style="font-size:12px;color:var(--tealGlow);line-height:1.5;font-weight:500">UM6P-specific fine-tuned Small Language Model — a sovereign AI asset trained on UM6P learner data.</div>
+      </div>
+    </div>
+    <style>@keyframes slmpulse{0%,100%{border-color:rgba(0,217,192,0);box-shadow:none}50%{border-color:rgba(0,217,192,.3);box-shadow:0 0 20px rgba(0,217,192,.2)}}</style>
+
+    <!-- SLM & Sovereignty callout -->
+    <div class="banner" role="note" style="margin-top:24px;margin-bottom:28px;background:rgba(0,217,192,.1);border:1px solid rgba(0,217,192,.35)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547Z"/></svg>
+      <p class="banner-txt"><strong>The Enterprise SLM is a strategic asset, not just a pricing tier.</strong> At scale, Zavmo delivers a fine-tuned Small Language Model trained exclusively on UM6P's learner interactions, assessment evidence, and domain knowledge across every faculty. This is an AI model that belongs to UM6P's ecosystem — aligned with the university's mission to build locally-driven AI solutions rather than depending on foreign models. It gets smarter with every learner, every conversation, and every piece of evidence generated through the 4D process.</p>
+    </div>
+
+    <!-- SLM Implementation Timeline -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px" role="list">
+      <div style="padding:18px 14px;border-radius:var(--r-lg);background:rgba(10,22,40,.6);border:1px solid rgba(0,217,192,.08);text-align:center" class="rv" role="listitem">
+        <div style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px">Months 1–3</div>
+        <div style="font-size:12px;font-weight:600;color:var(--textPrimary);margin-bottom:4px">Platform Setup</div>
+        <div style="font-size:20px;font-weight:700;color:var(--teal)">100–200</div>
+        <div style="font-size:10px;color:var(--textMuted)">learners</div>
+        <div style="font-size:10px;color:var(--textTertiary);margin-top:6px">Basic personalisation<br>~50k–200k training examples</div>
+      </div>
+      <div style="padding:18px 14px;border-radius:var(--r-lg);background:rgba(10,22,40,.6);border:1px solid rgba(0,217,192,.08);text-align:center" class="rv" role="listitem">
+        <div style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px">Months 3–6</div>
+        <div style="font-size:12px;font-weight:600;color:var(--textPrimary);margin-bottom:4px">Content Localisation</div>
+        <div style="font-size:10px;color:var(--textTertiary);margin-top:6px">Domain knowledge configured per faculty &amp; programme</div>
+      </div>
+      <div style="padding:18px 14px;border-radius:var(--r-lg);background:rgba(10,22,40,.6);border:1px solid rgba(0,217,192,.12);text-align:center" class="rv" role="listitem">
+        <div style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px">Months 6–9</div>
+        <div style="font-size:12px;font-weight:600;color:var(--textPrimary);margin-bottom:4px">SLM Integration</div>
+        <div style="font-size:20px;font-weight:700;color:var(--teal)">500–1,000</div>
+        <div style="font-size:10px;color:var(--textMuted)">learners</div>
+        <div style="font-size:10px;color:var(--textTertiary);margin-top:6px">Good performance<br>~250k–1M training examples</div>
+      </div>
+      <div style="padding:18px 14px;border-radius:var(--r-lg);background:rgba(0,217,192,.06);border:1px solid rgba(0,217,192,.25);text-align:center" class="rv" role="listitem">
+        <div style="font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--tealGlow);margin-bottom:8px">Months 9–12</div>
+        <div style="font-size:12px;font-weight:600;color:var(--textPrimary);margin-bottom:4px">Full SLM Deployment</div>
+        <div style="font-size:20px;font-weight:700;color:var(--teal)">1,000–5,000</div>
+        <div style="font-size:10px;color:var(--textMuted)">learners</div>
+        <div style="font-size:10px;color:var(--tealGlow);margin-top:6px;font-weight:500">Robust SLM · Full fine-tuning<br>~500k–5M training examples</div>
+      </div>
+    </div>
+
+    <div class="div" aria-hidden="true"></div>
+
+    <!-- 3-Year Scenarios -->
+    <p class="sec-desc" style="margin-bottom:20px">Three illustrative growth scenarios showing how the investment scales over a 3-year partnership. Annual platform licence (£50,000) applies at all tiers. 10% discount available on per-learner fees when paid annually upfront.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px" role="list">
+      <div class="comm-card glass rv" role="listitem" style="padding:22px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:10px">Growth Client</div>
+        <div style="font-size:13px;color:var(--textSecondary);line-height:1.6;margin-bottom:14px">Year 1: 250 learners (Foundation) → Year 2: 500 (Growth — White-Label) → Year 3: 750 (Performance — Jan Analytics)</div>
+        <div style="font-size:22px;font-weight:700;color:var(--teal)">£2.4m</div>
+        <div style="font-size:11px;color:var(--textMuted)">3-year total contract value</div>
+      </div>
+      <div class="comm-card glass rv" role="listitem" style="padding:22px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:10px">Mid-Market</div>
+        <div style="font-size:13px;color:var(--textSecondary);line-height:1.6;margin-bottom:14px">Year 1: 500 learners (Growth — White-Label) → Year 2: 1,000 (Performance — Jan Analytics) → Year 3: 2,000 (Enterprise SLM)</div>
+        <div style="font-size:22px;font-weight:700;color:var(--teal)">£4.3m</div>
+        <div style="font-size:11px;color:var(--textMuted)">3-year total contract value</div>
+      </div>
+      <div class="comm-card glass rv" role="listitem" style="padding:22px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:10px">Full University</div>
+        <div style="font-size:13px;color:var(--textSecondary);line-height:1.6;margin-bottom:14px">Year 1: 1,000 (Performance — Jan Analytics) → Year 2: 2,000 (Enterprise SLM) → Year 3: 5,000+ (Enterprise SLM)</div>
+        <div style="font-size:22px;font-weight:700;color:var(--teal)">£7.9m</div>
+        <div style="font-size:11px;color:var(--textMuted)">3-year total contract value</div>
+      </div>
+    </div>
+
+    <div class="banner" role="note" style="margin-top:28px">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+      <p class="banner-txt"><strong>White-label deployment.</strong> Phase 2 delivers a UM6P-branded Zavmo platform. Contract terms: 12-month minimum initial term, 12-month notice period, 36-month target contract with Year 3 licence incentive available.</p>
+    </div>
+  </section>
+</div>
+
+<!-- SECTION 6: STRATEGIC ALIGNMENT -->
+<div class="wrap">
+  <section class="sec rv" aria-labelledby="alignment-title">
+    <div class="sec-ey"><div class="sec-n">06</div><span class="sec-lbl">Strategic Alignment</span></div>
+    <h2 class="sec-title" id="alignment-title">How Zavmo Meets UM6P's <strong>2030 Vision</strong></h2>
+    <p class="sec-desc">UM6P is building Africa's leading research university with technological sovereignty at its core — backed by MAD 32 billion in capitalisation, Africa's most powerful supercomputer, and the Moroccan International Centre for Artificial Intelligence. Zavmo's Enterprise SLM aligns directly with this mission.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px" role="list">
+      <div class="fd-card glass-hi rv" role="listitem">
+        <div class="fd-phase">Sovereignty</div>
+        <div class="fd-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0 1 12 2.944a11.955 11.955 0 0 1-8.618 3.04A12.02 12.02 0 0 0 3 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016Z"/></svg></div>
+        <div class="fd-title">Technological Sovereignty</div>
+        <div class="fd-desc">UM6P's president has stated that the Global South must become "active contributors in defining global standards," not consumers of foreign technology. A UM6P-specific SLM trained on its own learner data is exactly this — an AI asset that belongs to the institution, not a dependency on an external provider.</div>
+        <div class="fd-details" style="margin-top:12px">
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Aligns with UM6P's AI Movement &amp; Moroccan International Centre for AI</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Supports Morocco Digital 2030 national strategy</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Complements Toubkal supercomputer infrastructure</div>
+        </div>
+      </div>
+      <div class="fd-card glass-hi rv" role="listitem">
+        <div class="fd-phase">Three Pillars</div>
+        <div class="fd-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2Zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8Z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/></svg></div>
+        <div class="fd-title">Three Streams = Three Strategic Priorities</div>
+        <div class="fd-desc">The pilot's three streams map directly to UM6P's institutional pillars. Sustainability aligns with the Green City Campus mission and OCP's green investment strategy. Technology Management feeds the Data &amp; AI School and supercomputing ecosystem. Entrepreneurship supports the Africa Business School and UM6P Ventures.</div>
+        <div class="fd-details" style="margin-top:12px">
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>OCP Foundation's $1B investment in UM6P supports all three areas</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>UM6P Ventures already operates Digital Transformation and Deeptech funds</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>UNESCO-OCP $6M partnership targets AI sovereignty &amp; education</div>
+        </div>
+      </div>
+      <div class="fd-card glass-hi rv" role="listitem">
+        <div class="fd-phase">Pan-African</div>
+        <div class="fd-icon"><svg viewBox="0 0 24 24"><path d="M3.055 11H5a2 2 0 0 1 2 2v1a2 2 0 0 0 2 2 2 2 0 0 1 2 2v2.945M8 3.935V5.5A2.5 2.5 0 0 0 10.5 8h.5a2 2 0 0 1 2 2 2 2 0 0 0 4 0 2 2 0 0 1 2-2h1.064M15 20.488V18a2 2 0 0 1 2-2h3.064M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg></div>
+        <div class="fd-title">Pan-African Scale</div>
+        <div class="fd-desc">UM6P's mission is "Empower talent, empower Africa." A fine-tuned SLM trained on UM6P learner data across Sustainability, Technology and Entrepreneurship becomes a model that could serve partner institutions across the continent — extending UM6P's influence as a hub for AI-driven education, not just a consumer of foreign ed-tech platforms.</div>
+        <div class="fd-details" style="margin-top:12px">
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>UM6P already partners with Boeing, Naval Group &amp; Microsoft</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>Hosted Morocco's first National AI Forum (July 2025)</div>
+          <div class="fd-detail"><span class="fd-detail-c">&#10003;</span>SupercomputingAfrica 2025 hosted at UM6P</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="banner" role="note" style="margin-top:28px;background:rgba(0,217,192,.1);border:1px solid rgba(0,217,192,.35)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.663 17h4.673M12 3v1m6.364 1.636-.707.707M21 12h-1M4 12H3m3.343-5.657-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547Z"/></svg>
+      <p class="banner-txt"><strong>The investment in context:</strong> UM6P's total capitalisation stands at MAD 32 billion (~£2.5 billion), with the OCP Foundation injecting nearly $1 billion in 2023 alone. The full Enterprise SLM deployment at ~£7.9m over three years represents approximately 0.1% of UM6P's capitalisation — whilst delivering a sovereign AI asset that no other African university possesses.</p>
+    </div>
+  </section>
+</div>
+</main>
+
+<!-- FOOTER -->
+<footer class="ftr" role="contentinfo">
+  <div class="ftr-in">
+    <div class="ftr-logo">ZAVMO</div>
+    <div class="ftr-tag">Making learning as unique as you are</div>
+    <div class="ftr-meta">
+      <span class="ftr-copy">&copy; 2026 Iridescent Technology Ltd. All rights reserved.</span>
+      <span class="ftr-ver">Confidential — UM6P Discussion Document v3.0 &middot; February 2026 &middot; Presented by Juliette Denny</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('vis'), i * 55); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
