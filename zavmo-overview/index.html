@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zavmo — Where Neuroscience Meets Learning</title>
+  <style>
+    :root {
+      --bg-primary: #0a1628;
+      --bg-secondary: #0d1e36;
+      --bg-card: rgba(13, 30, 54, 0.6);
+      --teal: #00d9c0;
+      --teal-glow: #00ffeb;
+      --teal-subtle: rgba(0, 217, 192, 0.15);
+      --teal-border: rgba(0, 217, 192, 0.2);
+      --text-primary: #ffffff;
+      --text-secondary: #b8c5d6;
+      --text-tertiary: #6b7c93;
+      --border-subtle: rgba(26, 58, 92, 0.5);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Inter", sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── UTILITY ─── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .teal { color: var(--teal); }
+    .text-center { text-align: center; }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1 { font-size: 48px; font-weight: 600; line-height: 1.15; color: var(--text-primary); }
+    h2 { font-size: 32px; font-weight: 600; line-height: 1.2; color: var(--text-primary); margin-bottom: 16px; }
+    h3 { font-size: 20px; font-weight: 600; line-height: 1.3; color: var(--text-primary); margin-bottom: 8px; }
+    h4 { font-size: 16px; font-weight: 600; line-height: 1.3; color: var(--text-primary); margin-bottom: 6px; }
+    p { font-size: 15px; line-height: 1.7; color: var(--text-secondary); }
+    .subtitle { font-size: 18px; line-height: 1.7; color: var(--text-secondary); max-width: 680px; margin: 0 auto; }
+    .section-label {
+      display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--teal); background: var(--teal-subtle); border: 1px solid var(--teal-border);
+      padding: 6px 16px; border-radius: 20px; margin-bottom: 20px;
+    }
+
+    /* ─── GLASS CARDS ─── */
+    .glass {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px; padding: 32px;
+    }
+    .glass-sm { padding: 24px; border-radius: 14px; }
+    .glass:hover {
+      border-color: var(--teal-border);
+      box-shadow: 0 12px 40px rgba(0, 217, 192, 0.06);
+      transform: translateY(-4px);
+      transition: all 0.4s ease;
+    }
+
+    /* ─── NAVIGATION ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(10, 22, 40, 0.92); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 16px 48px;
+    }
+    nav .inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 20px; font-weight: 300; letter-spacing: 6px; color: var(--text-primary); text-transform: uppercase; }
+    .nav-tagline { font-size: 12px; color: var(--text-tertiary); letter-spacing: 0.5px; }
+    .nav-cta {
+      background: var(--teal); color: var(--bg-primary); padding: 10px 24px;
+      border-radius: 8px; font-size: 14px; font-weight: 600; border: none; cursor: pointer;
+      transition: all 0.3s ease; text-decoration: none;
+    }
+    .nav-cta:hover { background: var(--teal-glow); box-shadow: 0 0 20px rgba(0, 217, 192, 0.4); }
+    .nav-cta-secondary {
+      color: var(--text-primary); padding: 10px 24px; border-radius: 8px;
+      font-size: 14px; font-weight: 600; border: 1px solid var(--border-subtle);
+      background: transparent; cursor: pointer; text-decoration: none; margin-right: 12px;
+      transition: all 0.3s ease;
+    }
+    .nav-cta-secondary:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 160px 24px 100px; text-align: center; position: relative; overflow: hidden;
+    }
+    .hero h1 { margin-bottom: 20px; }
+    .hero h1 span { display: block; }
+    .hero .subtitle { margin-bottom: 40px; }
+    .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* Aurora blobs */
+    .aurora-1, .aurora-2, .aurora-3 {
+      position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.12; pointer-events: none;
+      background: radial-gradient(circle, var(--teal-glow), transparent 70%);
+    }
+    .aurora-1 { width: 500px; height: 500px; top: -100px; left: -100px; animation: float1 20s ease-in-out infinite; }
+    .aurora-2 { width: 400px; height: 400px; bottom: -50px; right: -80px; animation: float2 25s ease-in-out infinite; }
+    .aurora-3 { width: 300px; height: 300px; top: 40%; left: 50%; animation: float3 18s ease-in-out infinite; }
+    @keyframes float1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(40px, 30px); } }
+    @keyframes float2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-30px, -20px); } }
+    @keyframes float3 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(20px, -30px); } }
+
+    /* ─── NEURAL NETWORK HERO VISUAL ─── */
+    .neural-visual {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 700px; height: 700px; pointer-events: none; opacity: 0.08;
+    }
+    .neural-core {
+      position: absolute; top: 50%; left: 50%; width: 20px; height: 20px;
+      background: var(--teal); border-radius: 50%; transform: translate(-50%, -50%);
+      box-shadow: 0 0 40px var(--teal-glow), 0 0 80px rgba(0,217,192,0.3);
+      animation: corePulse 3s ease-in-out infinite;
+    }
+    .neural-node {
+      position: absolute; width: 8px; height: 8px; background: var(--teal);
+      border-radius: 50%; opacity: 0.6;
+    }
+    .neural-node:nth-child(2) { top: 20%; left: 30%; animation: nodeFlicker 4s ease-in-out infinite 0.5s; }
+    .neural-node:nth-child(3) { top: 15%; right: 35%; animation: nodeFlicker 4s ease-in-out infinite 1s; }
+    .neural-node:nth-child(4) { top: 45%; left: 15%; animation: nodeFlicker 4s ease-in-out infinite 1.5s; }
+    .neural-node:nth-child(5) { top: 45%; right: 15%; animation: nodeFlicker 4s ease-in-out infinite 2s; }
+    .neural-node:nth-child(6) { bottom: 25%; left: 30%; animation: nodeFlicker 4s ease-in-out infinite 0.8s; }
+    .neural-node:nth-child(7) { bottom: 20%; right: 30%; animation: nodeFlicker 4s ease-in-out infinite 1.3s; }
+    .neural-node:nth-child(8) { bottom: 40%; left: 50%; animation: nodeFlicker 4s ease-in-out infinite 1.8s; }
+    @keyframes corePulse { 0%, 100% { transform: translate(-50%,-50%) scale(1); opacity: 0.8; } 50% { transform: translate(-50%,-50%) scale(1.3); opacity: 1; } }
+    @keyframes nodeFlicker { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 80px 24px; position: relative; }
+    .section-divider {
+      width: 60px; height: 2px; background: linear-gradient(90deg, var(--teal), transparent);
+      margin: 0 auto 48px;
+    }
+
+    /* ─── PROBLEM GRID ─── */
+    .problem-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px;
+    }
+    .problem-card { position: relative; overflow: hidden; }
+    .problem-card .icon-circle {
+      width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--bg-secondary), #132743);
+      border: 1.5px solid var(--teal-border); margin-bottom: 16px;
+    }
+    .problem-card svg { width: 22px; height: 22px; stroke: var(--teal); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ─── NEUROSCIENCE SECTION ─── */
+    .neuro-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 40px;
+    }
+    .neuro-card { text-align: center; }
+    .neuro-card .neuro-icon {
+      width: 64px; height: 64px; border-radius: 16px; margin: 0 auto 20px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, rgba(0,217,192,0.1), rgba(0,255,235,0.05));
+      border: 1px solid var(--teal-border);
+    }
+    .neuro-card svg { width: 28px; height: 28px; stroke: var(--teal); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ─── USP COLUMNS ─── */
+    .usp-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+    .usp-column .usp-header {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 24px; padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .usp-column .usp-header .icon-circle {
+      width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      background: var(--teal); flex-shrink: 0;
+    }
+    .usp-column .usp-header svg { width: 20px; height: 20px; stroke: var(--bg-primary); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .usp-item { display: flex; gap: 14px; margin-bottom: 20px; }
+    .usp-item .check {
+      width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0; margin-top: 2px;
+      background: var(--teal-subtle); border: 1px solid var(--teal-border);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .usp-item .check svg { width: 14px; height: 14px; stroke: var(--teal); fill: none; stroke-width: 2.5; }
+
+    /* ─── SCREENSHOT MOCKUPS ─── */
+    .mockup-section { margin-top: 48px; }
+    .mockup-row { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 32px; align-items: start; }
+    .mockup-frame {
+      border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-secondary);
+    }
+    .mockup-bar {
+      display: flex; align-items: center; gap: 6px; padding: 10px 16px;
+      background: rgba(10, 22, 40, 0.8); border-bottom: 1px solid var(--border-subtle);
+    }
+    .mockup-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-tertiary); opacity: 0.4; }
+    .mockup-dot:first-child { background: #ff5f57; opacity: 0.7; }
+    .mockup-dot:nth-child(2) { background: #febc2e; opacity: 0.7; }
+    .mockup-dot:nth-child(3) { background: #28c840; opacity: 0.7; }
+    .mockup-bar span { font-size: 11px; color: var(--text-tertiary); margin-left: 8px; }
+    .mockup-body { padding: 20px; }
+    .mockup-label {
+      font-size: 12px; font-weight: 600; color: var(--teal); letter-spacing: 1px;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+
+    /* Mini UI elements inside mockups */
+    .mock-sidebar { width: 48px; background: rgba(10,22,40,0.6); border-radius: 8px; padding: 8px 0; }
+    .mock-sidebar-item { width: 32px; height: 32px; border-radius: 8px; margin: 4px auto; background: rgba(0,217,192,0.08); }
+    .mock-sidebar-item.active { background: var(--teal); }
+    .mock-stat {
+      background: rgba(10,22,40,0.5); border: 1px solid rgba(0,217,192,0.08);
+      border-radius: 10px; padding: 12px; text-align: center;
+    }
+    .mock-stat .num { font-size: 22px; font-weight: 600; color: var(--teal); }
+    .mock-stat .lbl { font-size: 10px; color: var(--text-tertiary); margin-top: 2px; }
+    .mock-progress-bar {
+      height: 6px; border-radius: 3px; background: rgba(0,217,192,0.15); overflow: hidden;
+    }
+    .mock-progress-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--teal), var(--teal-glow)); }
+    .mock-chat-bubble {
+      padding: 10px 14px; border-radius: 12px; font-size: 11px; line-height: 1.5;
+      max-width: 85%; margin-bottom: 8px;
+    }
+    .mock-chat-ai { background: rgba(13,30,54,0.8); border: 1px solid var(--teal-border); color: var(--text-secondary); }
+    .mock-chat-user { background: var(--teal-subtle); border: 1px solid var(--teal-border); color: var(--text-primary); margin-left: auto; }
+    .mock-node {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--teal); position: absolute;
+      box-shadow: 0 0 8px rgba(0,217,192,0.5);
+    }
+    .mock-connection { position: absolute; height: 1px; background: linear-gradient(90deg, var(--teal), transparent); opacity: 0.4; }
+
+    /* ─── HOW IT WORKS ─── */
+    .how-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 40px; }
+    .how-step { text-align: center; position: relative; }
+    .how-step .step-num {
+      font-size: 36px; font-weight: 600; color: var(--teal); opacity: 0.2; margin-bottom: 12px;
+    }
+    .how-step::after {
+      content: ''; position: absolute; top: 30px; right: -10px; width: 20px; height: 1px;
+      background: var(--teal); opacity: 0.2;
+    }
+    .how-step:last-child::after { display: none; }
+
+    /* ─── STATS BAR ─── */
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px;
+    }
+    .stat-item { text-align: center; }
+    .stat-item .stat-num { font-size: 40px; font-weight: 600; color: var(--teal); line-height: 1; }
+    .stat-item .stat-label { font-size: 13px; color: var(--text-tertiary); margin-top: 6px; }
+
+    /* ─── CTA SECTION ─── */
+    .cta-section {
+      text-align: center; padding: 80px 24px;
+      background: linear-gradient(180deg, var(--bg-primary) 0%, rgba(0,217,192,0.03) 50%, var(--bg-primary) 100%);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 40px 24px; border-top: 1px solid var(--border-subtle);
+      text-align: center; font-size: 13px; color: var(--text-tertiary);
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      h1 { font-size: 32px; }
+      h2 { font-size: 24px; }
+      .problem-grid, .neuro-grid, .usp-columns, .mockup-row, .stats-bar, [style*="grid-template-columns: repeat(4"] { grid-template-columns: 1fr 1fr !important; }
+      [style*="grid-template-columns:repeat(5"] { grid-template-columns: repeat(3,1fr) !important; }
+      [style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+      .how-steps { grid-template-columns: 1fr 1fr; }
+      .how-step::after { display: none; }
+      nav { padding: 12px 20px; }
+      .nav-tagline { display: none; }
+      section { padding: 48px 16px; }
+      .hero { padding: 120px 16px 60px; }
+    }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="inner">
+      <div>
+        <div class="logo">ZAVMO</div>
+        <div class="nav-tagline">Where neuroscience meets learning pedagogy</div>
+      </div>
+      <div style="display:flex;align-items:center;">
+        <a href="#" class="nav-cta-secondary">Book a Demo</a>
+        <a href="#" class="nav-cta">Try Zavmo Free</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="aurora-1"></div>
+    <div class="aurora-2"></div>
+    <div class="aurora-3"></div>
+    <div class="neural-visual">
+      <div class="neural-core"></div>
+      <div class="neural-node"></div>
+      <div class="neural-node"></div>
+      <div class="neural-node"></div>
+      <div class="neural-node"></div>
+      <div class="neural-node"></div>
+      <div class="neural-node"></div>
+      <div class="neural-node"></div>
+    </div>
+    <div class="container" style="position:relative;z-index:2;">
+      <div class="section-label">AI-Powered Global Learning Platform</div>
+      <h1>
+        <span>Global Workforce Excellence.</span>
+        <span style="color:var(--teal);">Hyper-Personalised to Every Brain.</span>
+      </h1>
+      <p class="subtitle" style="margin-top:20px;">
+        Zavmo&rsquo;s proprietary Small Language Model &mdash; trained on the neuroscience of learning &mdash; generates hyper-personalised content aligned to global standards and mapped to thousands of job descriptions. Delivering future, functional, and foundational skills to every individual in your organisation, wherever they are in the world.
+      </p>
+      <div class="hero-ctas" style="margin-top:36px;">
+        <a href="#" class="nav-cta" style="padding:14px 32px;font-size:15px;">Try Zavmo Free</a>
+        <a href="#" class="nav-cta-secondary" style="padding:14px 32px;font-size:15px;">Book a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <section style="padding:0 24px 60px;">
+    <div class="container">
+      <div class="stats-bar reveal">
+        <div class="stat-item glass glass-sm">
+          <div class="stat-num">150+</div>
+          <div class="stat-label">Countries with qualification frameworks mapped</div>
+        </div>
+        <div class="stat-item glass glass-sm">
+          <div class="stat-num">1000s</div>
+          <div class="stat-label">Job descriptions mapped worldwide</div>
+        </div>
+        <div class="stat-item glass glass-sm">
+          <div class="stat-num">30+</div>
+          <div class="stat-label">International qualification frameworks aligned</div>
+        </div>
+        <div class="stat-item glass glass-sm">
+          <div class="stat-num">1</div>
+          <div class="stat-label">Proprietary SLM trained on neuroscience</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLOBAL REACH -->
+  <section style="padding-top:40px;">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">Global Reach</div>
+        <h2>One Platform. Every Qualification Framework. Every Region.</h2>
+        <p class="subtitle">Zavmo maps to the national and regional qualification frameworks used across the world &mdash; so your organisation can deliver consistent, standards-aligned skills development to every employee, everywhere.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:16px;margin-top:40px;" class="reveal">
+        <!-- UK -->
+        <div class="glass glass-sm" style="text-align:center;padding:20px;">
+          <div style="font-size:24px;margin-bottom:8px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4 style="font-size:14px;">United Kingdom</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;margin-top:4px;">RQF, SCQF, CQFW, CMI, ILM, City &amp; Guilds, NOS, Ofsted, Apprenticeship Standards</p>
+        </div>
+        <!-- Europe -->
+        <div class="glass glass-sm" style="text-align:center;padding:20px;">
+          <div style="font-size:24px;margin-bottom:8px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4 style="font-size:14px;">Europe (39+ Countries)</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;margin-top:4px;">EQF, all 27 EU member states, plus Iceland, Norway, Switzerland, Turkey, Western Balkans, and more</p>
+        </div>
+        <!-- Asia-Pacific -->
+        <div class="glass glass-sm" style="text-align:center;padding:20px;">
+          <div style="font-size:24px;margin-bottom:8px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4 style="font-size:14px;">Asia-Pacific</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;margin-top:4px;">AQF (Australia), NZQF (New Zealand), MQA (Malaysia), SSG/WSQ (Singapore), HKQF (Hong Kong), PQF (Philippines), TQF (Thailand)</p>
+        </div>
+        <!-- India & South Asia -->
+        <div class="glass glass-sm" style="text-align:center;padding:20px;">
+          <div style="font-size:24px;margin-bottom:8px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4 style="font-size:14px;">India &amp; South Asia</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;margin-top:4px;">NSQF (India), NVQF (Bangladesh), NVQ (Sri Lanka), NQAF national sector skills councils</p>
+        </div>
+      </div>
+      <!-- Second row -->
+      <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:16px;margin-top:16px;" class="reveal">
+        <!-- Middle East -->
+        <div class="glass glass-sm" style="text-align:center;padding:20px;">
+          <div style="font-size:24px;margin-bottom:8px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4 style="font-size:14px;">Middle East &amp; North Africa</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;margin-top:4px;">UAE QualCAT, Bahrain NQF, Oman NQF, Saudi NQF, Qatar NQF, Morocco CNC</p>
+        </div>
+        <!-- Africa -->
+        <div class="glass glass-sm" style="text-align:center;padding:20px;">
+          <div style="font-size:24px;margin-bottom:8px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4 style="font-size:14px;">Africa</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;margin-top:4px;">South Africa NQF, Kenya KNQF, Nigeria NQF, ACQF (African Continental), Rwanda NQF, Ghana NTVETQF</p>
+        </div>
+        <!-- Americas -->
+        <div class="glass glass-sm" style="text-align:center;padding:20px;">
+          <div style="font-size:24px;margin-bottom:8px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4 style="font-size:14px;">Americas</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;margin-top:4px;">Canada provincial frameworks, Caribbean N/CVQ, Chile MNC, Colombia SNET, Costa Rica MNC, US competency frameworks</p>
+        </div>
+        <!-- Caribbean & Pacific -->
+        <div class="glass glass-sm" style="text-align:center;padding:20px;">
+          <div style="font-size:24px;margin-bottom:8px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h4 style="font-size:14px;">East Asia &amp; Pacific</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;margin-top:4px;">Japan NQF, South Korea NCS, Indonesia KKNI, Vietnam VQF, Pacific Islands PRQS</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section>
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">The Problem</div>
+        <h2>Global Workforce Development is Broken</h2>
+        <p class="subtitle">Organisations operating across the UK, Australia, Europe, India, Malaysia, and Singapore face the same challenge: generic training that ignores regional standards, individual roles, and how the brain actually learns. The result? Wasted budgets, disengaged learners, and a workforce without the future, functional, and foundational skills they need.</p>
+      </div>
+      <div class="problem-grid">
+        <div class="glass problem-card reveal">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h4>For Learners</h4>
+          <p style="font-size:14px;">Whether you are in London, Sydney, Mumbai, or Kuala Lumpur, you are handed the same generic content that does not match your role, your goals, or the way your brain processes information. You sit through modules that feel irrelevant, forget most of it within days, and have no clear path to building the future skills your career demands.</p>
+        </div>
+        <div class="glass problem-card reveal">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <h4>For Admins and L&amp;D Teams</h4>
+          <p style="font-size:14px;">You are trying to deliver consistent skills development across multiple countries and regulatory frameworks. You spend months commissioning content that is outdated before it launches, cannot map training to actual job roles at scale, struggle with compliance across jurisdictions, and have zero visibility into whether your global workforce is genuinely building the functional, foundational, and future skills your organisation needs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE NEUROSCIENCE -->
+  <section style="background:linear-gradient(180deg, rgba(0,217,192,0.02) 0%, var(--bg-primary) 100%);">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">The Science</div>
+        <h2>Powered by a Small Language Model Trained on Neuroscience</h2>
+        <p class="subtitle">At the heart of Zavmo is something no other learning platform has: a proprietary Small Language Model (SLM) specifically trained on the neuroscience of how human brains form, strengthen, and retain knowledge. This is not a generic AI bolted onto a course library. This is a purpose-built intelligence that understands learning at a neurological level.</p>
+      </div>
+      <div class="neuro-grid">
+        <div class="glass neuro-card reveal">
+          <div class="neuro-icon">
+            <svg viewBox="0 0 24 24"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+          </div>
+          <h4>Neural Pathway Formation</h4>
+          <p style="font-size:14px;">Every time you learn something, your brain creates a new neural connection. Zavmo&rsquo;s Mind Palace visualises these connections in real time, showing you exactly how new knowledge links to what you already know &mdash; reinforcing deeper understanding.</p>
+        </div>
+        <div class="glass neuro-card reveal">
+          <div class="neuro-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h4>Spaced Repetition</h4>
+          <p style="font-size:14px;">Your brain forgets information at a predictable rate. Zavmo uses scientifically-timed review intervals to resurface concepts just before you would forget them, turning short-term memories into permanent knowledge with minimal effort.</p>
+        </div>
+        <div class="glass neuro-card reveal">
+          <div class="neuro-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h4>Active Recall</h4>
+          <p style="font-size:14px;">Passively reading slides does almost nothing for retention. Zavmo&rsquo;s AI characters engage you in dialogue, ask you questions, challenge your assumptions, and require you to articulate your understanding &mdash; the single most effective way to lock knowledge into long-term memory.</p>
+        </div>
+        <div class="glass neuro-card reveal">
+          <div class="neuro-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2v4"/><path d="m6.34 6.34 2.83 2.83"/><path d="M2 12h4"/><path d="m17.66 6.34-2.83 2.83"/><path d="M22 12h-4"/><path d="m6.34 17.66 2.83-2.83"/><path d="m17.66 17.66-2.83-2.83"/><path d="M12 18v4"/><circle cx="12" cy="12" r="4"/></svg>
+          </div>
+          <h4>Growth Mindset Detection</h4>
+          <p style="font-size:14px;">Zavmo&rsquo;s AI monitors your language patterns in real time. When it detects fixed-mindset thinking (&ldquo;I can&rsquo;t do this&rdquo;), it gently reframes the conversation to build resilience and confidence &mdash; a technique proven to improve learning outcomes.</p>
+        </div>
+        <div class="glass neuro-card reveal">
+          <div class="neuro-icon">
+            <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h4>Neurodiversity by Design</h4>
+          <p style="font-size:14px;">Every brain works differently. Zavmo celebrates neurodiversity with adaptive AI characters designed for different cognitive styles &mdash; whether you learn best through hands-on practice, structured analysis, or creative exploration. No one is left behind.</p>
+        </div>
+        <div class="glass neuro-card reveal">
+          <div class="neuro-icon">
+            <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <h4>Contextual Relevance</h4>
+          <p style="font-size:14px;">Your brain retains information far better when it connects to your real-world context. Zavmo maps every piece of content directly to your job role and career goals, so everything you learn is immediately applicable to your daily work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE SKILLS PILLARS -->
+  <section>
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">The Skills Framework</div>
+        <h2>Future. Functional. Foundational.</h2>
+        <p class="subtitle">Zavmo delivers three categories of skills that every organisation needs &mdash; all hyper-personalised to each individual through our neuroscience-trained SLM.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px;">
+        <div class="glass reveal" style="text-align:center;padding:32px 24px;">
+          <div style="width:56px;height:56px;border-radius:14px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(0,217,192,0.15),rgba(0,255,235,0.05));border:1px solid var(--teal-border);">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m6.34 6.34 2.83 2.83"/><path d="M2 12h4"/><path d="m17.66 6.34-2.83 2.83"/><path d="M22 12h-4"/><path d="m6.34 17.66 2.83-2.83"/><path d="m17.66 17.66-2.83-2.83"/><path d="M12 18v4"/><circle cx="12" cy="12" r="4"/></svg>
+          </div>
+          <h3 style="color:var(--teal);font-size:18px;">Future Skills</h3>
+          <p style="font-size:14px;margin-top:10px;">The skills your organisation will need tomorrow. AI literacy, digital transformation, data-driven decision making, sustainability leadership, and adaptive thinking &mdash; mapped to emerging job roles and industry trends across every region.</p>
+        </div>
+        <div class="glass reveal" style="text-align:center;padding:32px 24px;">
+          <div style="width:56px;height:56px;border-radius:14px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(0,217,192,0.15),rgba(0,255,235,0.05));border:1px solid var(--teal-border);">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3 style="color:var(--teal);font-size:18px;">Functional Skills</h3>
+          <p style="font-size:14px;margin-top:10px;">The skills each person needs to excel in their specific role right now. Leadership, project management, sales strategy, financial planning, clinical practice &mdash; precisely mapped to their job description and regional qualification standard.</p>
+        </div>
+        <div class="glass reveal" style="text-align:center;padding:32px 24px;">
+          <div style="width:56px;height:56px;border-radius:14px;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(0,217,192,0.15),rgba(0,255,235,0.05));border:1px solid var(--teal-border);">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 style="color:var(--teal);font-size:18px;">Foundational Skills</h3>
+          <p style="font-size:14px;margin-top:10px;">The bedrock competencies everyone needs. Communication, critical thinking, emotional intelligence, teamwork, and problem solving &mdash; the core capabilities that underpin success in any role, in any region, at any level.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section>
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">How It Works</div>
+        <h2>From Global Standards to Your Screen in Seconds</h2>
+        <p class="subtitle">Zavmo&rsquo;s SLM ingests international qualification frameworks from the UK, Australia, Europe, India, Malaysia, Singapore, and beyond &mdash; then maps them against thousands of job descriptions to generate hyper-personalised learning for every individual.</p>
+      </div>
+      <div class="how-steps">
+        <div class="glass glass-sm how-step reveal">
+          <div class="step-num">01</div>
+          <h4>Map</h4>
+          <p style="font-size:13px;">We ingest standards from across the globe &mdash; CMI, ILM, City &amp; Guilds, NOS, AQF (Australia), EQF (Europe), NSQF (India), MQA (Malaysia), SSG (Singapore), and more &mdash; and map them against thousands of real job descriptions across industries and regions.</p>
+        </div>
+        <div class="glass glass-sm how-step reveal">
+          <div class="step-num">02</div>
+          <h4>Assess</h4>
+          <p style="font-size:13px;">A Training Needs Analysis identifies exactly where each learner is now &mdash; their existing skills, knowledge gaps, and career aspirations &mdash; benchmarked against their specific role.</p>
+        </div>
+        <div class="glass glass-sm how-step reveal">
+          <div class="step-num">03</div>
+          <h4>Generate</h4>
+          <p style="font-size:13px;">Zavmo&rsquo;s SLM generates bespoke learning content in real time &mdash; covering future skills, functional skills, and foundational skills &mdash; as lessons, assessments, case studies, and portfolio tasks. All aligned to the relevant standard and hyper-personalised to the individual.</p>
+        </div>
+        <div class="glass glass-sm how-step reveal">
+          <div class="step-num">04</div>
+          <h4>Coach</h4>
+          <p style="font-size:13px;">AI characters guide learners through interactive dialogue, adapting in real time to their responses, learning style, and pace. Every interaction is tracked via xAPI for complete transparency.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATFORM SCREENSHOTS -->
+  <section style="background:linear-gradient(180deg, var(--bg-primary) 0%, rgba(0,217,192,0.02) 50%, var(--bg-primary) 100%);">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">The Platform</div>
+        <h2>See Zavmo in Action</h2>
+        <p class="subtitle">A sophisticated, science-driven learning environment that feels intuitive from your very first session.</p>
+      </div>
+
+      <!-- Mockup Row 1: Dashboard + TNA -->
+      <div class="mockup-row reveal">
+        <div>
+          <div class="mockup-frame">
+            <div class="mockup-bar">
+              <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+              <span>Dashboard</span>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-label">Learner Dashboard</div>
+              <div style="display:flex;gap:10px;margin-bottom:14px;">
+                <div class="mock-stat" style="flex:1;"><div class="num">78%</div><div class="lbl">TNA Score</div></div>
+                <div class="mock-stat" style="flex:1;"><div class="num">12</div><div class="lbl">Day Streak</div></div>
+                <div class="mock-stat" style="flex:1;"><div class="num">47</div><div class="lbl">Skills</div></div>
+                <div class="mock-stat" style="flex:1;"><div class="num">86h</div><div class="lbl">Learning</div></div>
+              </div>
+              <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:14px;margin-bottom:10px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                  <span style="font-size:12px;font-weight:600;color:var(--text-primary);">Sales Team Leadership</span>
+                  <span style="font-size:11px;color:var(--teal);">75%</span>
+                </div>
+                <div class="mock-progress-bar"><div class="mock-progress-fill" style="width:75%;"></div></div>
+                <div style="font-size:10px;color:var(--text-tertiary);margin-top:6px;">3 lessons remaining &middot; 2h estimated</div>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:8px;padding:10px;font-size:11px;color:var(--text-secondary);">My Current Role</div>
+                <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:8px;padding:10px;font-size:11px;color:var(--text-secondary);">My Next Role</div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--text-tertiary);margin-top:12px;text-align:center;">Your personalised hub &mdash; see your progress, streaks, and next steps at a glance.</p>
+        </div>
+        <div>
+          <div class="mockup-frame">
+            <div class="mockup-bar">
+              <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+              <span>TNA Assessment</span>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-label">Training Needs Analysis</div>
+              <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:14px;margin-bottom:12px;">
+                <div style="font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:10px;">Skills Assessment</div>
+                <div style="margin-bottom:10px;">
+                  <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;"><span style="color:var(--text-secondary);">Leadership</span><span style="color:var(--teal);">82%</span></div>
+                  <div class="mock-progress-bar"><div class="mock-progress-fill" style="width:82%;"></div></div>
+                </div>
+                <div style="margin-bottom:10px;">
+                  <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;"><span style="color:var(--text-secondary);">Strategic Thinking</span><span style="color:var(--teal);">56%</span></div>
+                  <div class="mock-progress-bar"><div class="mock-progress-fill" style="width:56%;"></div></div>
+                </div>
+                <div style="margin-bottom:10px;">
+                  <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;"><span style="color:var(--text-secondary);">Communication</span><span style="color:var(--teal);">91%</span></div>
+                  <div class="mock-progress-bar"><div class="mock-progress-fill" style="width:91%;"></div></div>
+                </div>
+                <div>
+                  <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;"><span style="color:var(--text-secondary);">Operations</span><span style="color:var(--teal);">40%</span></div>
+                  <div class="mock-progress-bar"><div class="mock-progress-fill" style="width:40%;"></div></div>
+                </div>
+              </div>
+              <div style="background:rgba(0,217,192,0.08);border:1px solid var(--teal-border);border-radius:8px;padding:10px;font-size:11px;color:var(--text-secondary);text-align:center;">
+                Mapped to: <span style="color:var(--teal);font-weight:600;">Sales Manager &middot; CMI L5 (UK) &middot; AQF L6 (AU) &middot; EQF L5 (EU)</span>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--text-tertiary);margin-top:12px;text-align:center;">Precise skills mapping benchmarked against your role and qualification.</p>
+        </div>
+      </div>
+
+      <!-- Mockup Row 2: AI Coaching + Mind Palace -->
+      <div class="mockup-row reveal" style="margin-top:32px;">
+        <div>
+          <div class="mockup-frame">
+            <div class="mockup-bar">
+              <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+              <span>Learning Session</span>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-label">AI Character Coaching</div>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;padding:8px 12px;background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;">
+                <div style="width:28px;height:28px;border-radius:8px;background:var(--teal);display:flex;align-items:center;justify-content:center;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <div><div style="font-size:12px;font-weight:600;color:var(--text-primary);">The Builder</div><div style="font-size:10px;color:var(--text-tertiary);">Foundation Expert</div></div>
+              </div>
+              <div class="mock-chat-bubble mock-chat-ai">Let us explore leadership styles. Can you describe a time when you had to adapt your approach to suit a team member?</div>
+              <div class="mock-chat-bubble mock-chat-user">When I managed the sales team, I noticed one person needed more structure while another thrived with autonomy...</div>
+              <div class="mock-chat-bubble mock-chat-ai">Excellent. You have just demonstrated <span style="color:var(--teal);">situational leadership</span>. This connects directly to AC 3.1 of your CMI unit. Let us go deeper...</div>
+              <div style="display:flex;gap:6px;margin-top:8px;">
+                <div style="background:rgba(0,217,192,0.08);border:1px solid var(--teal-border);border-radius:6px;padding:4px 10px;font-size:10px;color:var(--teal);">Active Recall</div>
+                <div style="background:rgba(0,217,192,0.08);border:1px solid var(--teal-border);border-radius:6px;padding:4px 10px;font-size:10px;color:var(--teal);">xAPI Tracked</div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--text-tertiary);margin-top:12px;text-align:center;">AI characters adapt to your learning style and track every interaction.</p>
+        </div>
+        <div>
+          <div class="mockup-frame">
+            <div class="mockup-bar">
+              <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+              <span>Mind Palace</span>
+            </div>
+            <div class="mockup-body">
+              <div class="mockup-label">Your Knowledge Network</div>
+              <!-- Neural network visualisation mockup -->
+              <div style="position:relative;height:160px;background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;overflow:hidden;margin-bottom:12px;">
+                <!-- Nodes -->
+                <div style="position:absolute;top:30px;left:40px;width:12px;height:12px;border-radius:50%;background:var(--teal-glow);box-shadow:0 0 10px rgba(0,255,235,0.5);"></div>
+                <div style="position:absolute;top:70px;left:100px;width:16px;height:16px;border-radius:50%;background:var(--teal);box-shadow:0 0 14px rgba(0,217,192,0.5);"></div>
+                <div style="position:absolute;top:25px;left:170px;width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px rgba(0,217,192,0.4);opacity:0.7;"></div>
+                <div style="position:absolute;top:90px;left:60px;width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px rgba(0,217,192,0.4);opacity:0.6;"></div>
+                <div style="position:absolute;top:110px;left:180px;width:14px;height:14px;border-radius:50%;background:var(--teal-glow);box-shadow:0 0 12px rgba(0,255,235,0.5);"></div>
+                <div style="position:absolute;top:50px;right:60px;width:12px;height:12px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px rgba(0,217,192,0.5);"></div>
+                <div style="position:absolute;top:120px;right:100px;width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px rgba(0,217,192,0.4);opacity:0.7;"></div>
+                <!-- Labels -->
+                <div style="position:absolute;top:28px;left:58px;font-size:9px;color:var(--text-tertiary);">Leadership</div>
+                <div style="position:absolute;top:68px;left:122px;font-size:9px;color:var(--text-primary);font-weight:600;">Coaching</div>
+                <div style="position:absolute;top:23px;left:186px;font-size:9px;color:var(--text-tertiary);">Strategy</div>
+                <div style="position:absolute;top:108px;left:200px;font-size:9px;color:var(--text-tertiary);">Delegation</div>
+                <div style="position:absolute;top:48px;right:36px;font-size:9px;color:var(--text-tertiary);">KPIs</div>
+                <!-- Connection lines (SVG) -->
+                <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;">
+                  <line x1="46" y1="36" x2="108" y2="78" stroke="var(--teal)" stroke-width="1" opacity="0.3"/>
+                  <line x1="108" y1="78" x2="175" y2="30" stroke="var(--teal)" stroke-width="1" opacity="0.2"/>
+                  <line x1="108" y1="78" x2="66" y2="95" stroke="var(--teal)" stroke-width="1" opacity="0.25"/>
+                  <line x1="108" y1="78" x2="187" y2="117" stroke="var(--teal)" stroke-width="1" opacity="0.3"/>
+                  <line x1="175" y1="30" x2="260" y2="56" stroke="var(--teal)" stroke-width="1" opacity="0.2"/>
+                </svg>
+              </div>
+              <div style="display:flex;gap:8px;">
+                <div class="mock-stat" style="flex:1;"><div class="num" style="font-size:16px;">12</div><div class="lbl">Nodes</div></div>
+                <div class="mock-stat" style="flex:1;"><div class="num" style="font-size:16px;">18</div><div class="lbl">Connections</div></div>
+                <div class="mock-stat" style="flex:1;"><div class="num" style="font-size:16px;">68%</div><div class="lbl">Mastery</div></div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:13px;color:var(--text-tertiary);margin-top:12px;text-align:center;">Watch your knowledge grow as a living neural network &mdash; see connections form in real time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROMPT CONFIGURATION STUDIO -->
+  <section>
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">Admin Exclusive</div>
+        <h2>The Prompt Configuration Studio</h2>
+        <p class="subtitle">Nothing like this exists anywhere else. A command centre that gives L&amp;D teams and administrators unprecedented control over AI-powered learning &mdash; with real-time insights no traditional LMS could ever provide.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px;align-items:start;">
+        <!-- Studio Mockup -->
+        <div class="reveal">
+          <div class="mockup-frame">
+            <div class="mockup-bar">
+              <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+              <span>Prompt Configuration Studio</span>
+            </div>
+            <div class="mockup-body" style="padding:16px;">
+              <!-- Header tabs -->
+              <div style="display:flex;gap:0;border-bottom:1px solid var(--border-subtle);margin-bottom:14px;">
+                <div style="padding:8px 16px;font-size:11px;font-weight:500;color:var(--teal);border-bottom:2px solid var(--teal);">Configure</div>
+                <div style="padding:8px 16px;font-size:11px;font-weight:500;color:var(--text-tertiary);">Simulate</div>
+                <div style="padding:8px 16px;font-size:11px;font-weight:500;color:var(--text-tertiary);">Analytics</div>
+                <div style="padding:8px 16px;font-size:11px;font-weight:500;color:var(--text-tertiary);">Quality</div>
+              </div>
+              <!-- Two-panel layout -->
+              <div style="display:flex;gap:12px;">
+                <!-- Left: Config -->
+                <div style="flex:0.4;">
+                  <div style="font-size:10px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Character</div>
+                  <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:8px;padding:8px 10px;margin-bottom:10px;display:flex;align-items:center;gap:6px;">
+                    <div style="width:20px;height:20px;border-radius:6px;background:var(--teal);"></div>
+                    <span style="font-size:11px;color:var(--text-primary);">The Builder</span>
+                  </div>
+                  <div style="font-size:10px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Prompt Template</div>
+                  <div style="background:rgba(10,22,40,0.8);border:1px solid rgba(26,58,92,0.5);border-radius:6px;padding:8px;font-family:monospace;font-size:9px;color:var(--text-secondary);line-height:1.5;min-height:80px;">
+                    You are {character_name}, a<br>
+                    {role} who teaches using<br>
+                    {methodology}. Adapt your<br>
+                    approach to the learner's<br>
+                    cognitive style: {style}...<br>
+                    <span style="color:var(--teal);">|</span>
+                  </div>
+                  <div style="display:flex;gap:6px;margin-top:8px;">
+                    <div style="flex:1;background:var(--teal);color:var(--bg-primary);font-size:10px;font-weight:600;text-align:center;padding:6px;border-radius:6px;">Test</div>
+                    <div style="flex:1;background:transparent;border:1px solid var(--border-subtle);color:var(--text-secondary);font-size:10px;text-align:center;padding:6px;border-radius:6px;">Save</div>
+                  </div>
+                </div>
+                <!-- Right: Live preview -->
+                <div style="flex:0.6;">
+                  <div style="font-size:10px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Live Simulation</div>
+                  <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:8px;padding:10px;min-height:140px;">
+                    <div class="mock-chat-bubble mock-chat-ai" style="font-size:10px;margin-bottom:6px;">Welcome! I am The Builder. Let us start by exploring what you already know about leadership frameworks.</div>
+                    <div class="mock-chat-bubble mock-chat-user" style="font-size:10px;margin-bottom:6px;">I know about transformational vs transactional styles.</div>
+                    <div class="mock-chat-bubble mock-chat-ai" style="font-size:10px;">Brilliant foundation. Now, how would you apply transformational leadership when your team faces a tight deadline?</div>
+                  </div>
+                  <!-- Quality metrics -->
+                  <div style="display:flex;gap:6px;margin-top:8px;">
+                    <div style="flex:1;background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:6px;padding:6px;text-align:center;">
+                      <div style="font-size:14px;font-weight:600;color:var(--teal);">94%</div>
+                      <div style="font-size:8px;color:var(--text-tertiary);">Quality</div>
+                    </div>
+                    <div style="flex:1;background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:6px;padding:6px;text-align:center;">
+                      <div style="font-size:14px;font-weight:600;color:var(--teal);">A+</div>
+                      <div style="font-size:8px;color:var(--text-tertiary);">Pedagogy</div>
+                    </div>
+                    <div style="flex:1;background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:6px;padding:6px;text-align:center;">
+                      <div style="font-size:14px;font-weight:600;color:var(--teal);">12</div>
+                      <div style="font-size:8px;color:var(--text-tertiary);">xAPI Events</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Studio Features -->
+        <div class="reveal">
+          <div class="usp-item" style="margin-bottom:24px;">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Configure AI characters without code</h4>
+              <p style="font-size:13px;">Edit prompts, personality parameters, and teaching methodology for each AI character. See changes reflected instantly in a live simulation &mdash; no developer needed.</p>
+            </div>
+          </div>
+          <div class="usp-item" style="margin-bottom:24px;">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Real-time quality scoring</h4>
+              <p style="font-size:13px;">Every AI interaction is scored for pedagogical quality, standards alignment, and learner engagement. You can see exactly how effective each character is before deploying to learners.</p>
+            </div>
+          </div>
+          <div class="usp-item" style="margin-bottom:24px;">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Granular analytics and xAPI insights</h4>
+              <p style="font-size:13px;">See every learner interaction as rich data: comprehension levels, engagement patterns, growth mindset indicators, and skill progression &mdash; all tracked via xAPI. This level of insight is unprecedented in learning technology.</p>
+            </div>
+          </div>
+          <div class="usp-item" style="margin-bottom:24px;">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Dialogue quality monitoring</h4>
+              <p style="font-size:13px;">Automated checks ensure AI characters stay on-topic, maintain pedagogical rigour, and avoid hallucination. You get full visibility into the quality of every learning conversation happening across your organisation.</p>
+            </div>
+          </div>
+          <div class="usp-item">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>A/B test teaching approaches</h4>
+              <p style="font-size:13px;">Compare different prompt configurations side by side. Test whether a Socratic approach outperforms direct instruction for a particular topic &mdash; then deploy the winner across your workforce.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEARNING IMPACT INTELLIGENCE -->
+  <section style="background:linear-gradient(180deg, rgba(0,217,192,0.02) 0%, var(--bg-primary) 50%, rgba(0,217,192,0.02) 100%);">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">The Insight Engine</div>
+        <h2>From Knowledge Transfer to Behavioural Change</h2>
+        <p class="subtitle">Most learning platforms can tell you who completed a course. Zavmo can tell you whether learning is actually changing behaviour, being applied in the workplace, and delivering measurable impact to your organisation. This is the fundamental shift L&amp;D leaders have been waiting for.</p>
+      </div>
+
+      <!-- The Big Shift -->
+      <div class="glass reveal" style="max-width:860px;margin:40px auto 0;padding:32px;">
+        <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:200px;text-align:center;">
+            <div style="font-size:13px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Traditional L&amp;D</div>
+            <div style="font-size:18px;font-weight:600;color:var(--text-primary);opacity:0.5;">Knowledge Transfer</div>
+            <p style="font-size:12px;color:var(--text-tertiary);margin-top:6px;">Did they complete the course?<br>Did they pass the quiz?</p>
+          </div>
+          <div style="text-align:center;padding:0 12px;">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+          <div style="flex:1;min-width:200px;text-align:center;">
+            <div style="font-size:13px;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Zavmo</div>
+            <div style="font-size:18px;font-weight:600;color:var(--teal);">Application &amp; Impact</div>
+            <p style="font-size:12px;color:var(--text-secondary);margin-top:6px;">Are they applying knowledge at work?<br>Is it changing organisational outcomes?</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kirkpatrick + Bloom's + xAPI Grid -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px;">
+
+        <!-- LEFT: Kirkpatrick's Model -->
+        <div class="glass reveal" style="padding:32px;">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+            <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(0,217,192,0.15),rgba(0,255,235,0.05));border:1px solid var(--teal-border);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div>
+              <h3 style="margin-bottom:0;font-size:18px;">Kirkpatrick&rsquo;s Four Levels</h3>
+              <p style="font-size:12px;color:var(--text-tertiary);margin-top:2px;">Measured automatically through xAPI</p>
+            </div>
+          </div>
+
+          <!-- Level 4 (top) -->
+          <div style="background:rgba(0,217,192,0.12);border:1px solid rgba(0,217,192,0.3);border-radius:12px;padding:16px;margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:11px;color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:1px;">Level 4: Results</div>
+                <div style="font-size:14px;color:var(--text-primary);font-weight:600;margin-top:4px;">Organisational Impact</div>
+                <p style="font-size:12px;color:var(--text-secondary);margin-top:4px;">Is learning improving KPIs, productivity, and business outcomes? Zavmo tracks skill application against role performance metrics.</p>
+              </div>
+              <div style="font-size:24px;font-weight:600;color:var(--teal);opacity:0.3;padding-left:12px;">4</div>
+            </div>
+          </div>
+          <!-- Level 3 -->
+          <div style="background:rgba(0,217,192,0.08);border:1px solid rgba(0,217,192,0.2);border-radius:12px;padding:16px;margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:11px;color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:1px;">Level 3: Behaviour</div>
+                <div style="font-size:14px;color:var(--text-primary);font-weight:600;margin-top:4px;">Application at Work</div>
+                <p style="font-size:12px;color:var(--text-secondary);margin-top:4px;">Are learners applying what they learned? xAPI tracks portfolio evidence, scenario responses, and real-world task completion.</p>
+              </div>
+              <div style="font-size:24px;font-weight:600;color:var(--teal);opacity:0.25;padding-left:12px;">3</div>
+            </div>
+          </div>
+          <!-- Level 2 -->
+          <div style="background:rgba(0,217,192,0.05);border:1px solid rgba(0,217,192,0.15);border-radius:12px;padding:16px;margin-bottom:10px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:11px;color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:1px;">Level 2: Learning</div>
+                <div style="font-size:14px;color:var(--text-primary);font-weight:600;margin-top:4px;">Knowledge &amp; Comprehension</div>
+                <p style="font-size:12px;color:var(--text-secondary);margin-top:4px;">Did they genuinely understand? AI dialogue reveals true comprehension through active recall, not just quiz scores.</p>
+              </div>
+              <div style="font-size:24px;font-weight:600;color:var(--teal);opacity:0.2;padding-left:12px;">2</div>
+            </div>
+          </div>
+          <!-- Level 1 -->
+          <div style="background:rgba(0,217,192,0.02);border:1px solid rgba(0,217,192,0.1);border-radius:12px;padding:16px;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <div style="font-size:11px;color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:1px;">Level 1: Reaction</div>
+                <div style="font-size:14px;color:var(--text-primary);font-weight:600;margin-top:4px;">Engagement &amp; Satisfaction</div>
+                <p style="font-size:12px;color:var(--text-secondary);margin-top:4px;">Were they engaged? xAPI tracks session duration, interaction depth, voluntary return rates, and sentiment analysis.</p>
+              </div>
+              <div style="font-size:24px;font-weight:600;color:var(--teal);opacity:0.15;padding-left:12px;">1</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Bloom's Taxonomy + Growth Mindset -->
+        <div>
+          <!-- Bloom's Taxonomy -->
+          <div class="glass reveal" style="padding:32px;margin-bottom:24px;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;">
+              <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(0,217,192,0.15),rgba(0,255,235,0.05));border:1px solid var(--teal-border);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              </div>
+              <div>
+                <h3 style="margin-bottom:0;font-size:18px;">Bloom&rsquo;s Taxonomy</h3>
+                <p style="font-size:12px;color:var(--text-tertiary);margin-top:2px;">Every interaction mapped to cognitive depth</p>
+              </div>
+            </div>
+            <p style="font-size:14px;margin-bottom:16px;">Traditional e-learning barely scratches the surface &mdash; hovering at <span style="color:var(--text-primary);font-weight:600;">Remember</span> and <span style="color:var(--text-primary);font-weight:600;">Understand</span>. Zavmo&rsquo;s AI characters are specifically designed to push learners up through every level of Bloom&rsquo;s Taxonomy:</p>
+
+            <!-- Bloom's Taxonomy Pyramid -->
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:8px;">
+              <!-- Create (top - narrowest) -->
+              <div style="width:40%;min-height:40px;border-radius:8px;background:rgba(0,217,192,0.22);border:1px solid rgba(0,217,192,0.35);display:flex;align-items:center;justify-content:center;padding:8px 14px;text-align:center;">
+                <div>
+                  <div style="font-size:12px;font-weight:700;color:var(--teal);margin-bottom:2px;">Create</div>
+                  <div style="font-size:10px;color:var(--text-secondary);line-height:1.4;">Design solutions, produce original work</div>
+                </div>
+              </div>
+              <!-- Evaluate -->
+              <div style="width:52%;min-height:40px;border-radius:8px;background:rgba(0,217,192,0.17);border:1px solid rgba(0,217,192,0.28);display:flex;align-items:center;justify-content:center;padding:8px 14px;text-align:center;">
+                <div>
+                  <div style="font-size:12px;font-weight:700;color:var(--teal);margin-bottom:2px;">Evaluate</div>
+                  <div style="font-size:10px;color:var(--text-secondary);line-height:1.4;">Justify decisions, critique approaches</div>
+                </div>
+              </div>
+              <!-- Analyse -->
+              <div style="width:64%;min-height:40px;border-radius:8px;background:rgba(0,217,192,0.13);border:1px solid rgba(0,217,192,0.22);display:flex;align-items:center;justify-content:center;padding:8px 14px;text-align:center;">
+                <div>
+                  <div style="font-size:12px;font-weight:700;color:var(--teal);margin-bottom:2px;">Analyse</div>
+                  <div style="font-size:10px;color:var(--text-secondary);line-height:1.4;">Compare models, identify patterns, break down problems</div>
+                </div>
+              </div>
+              <!-- Apply -->
+              <div style="width:76%;min-height:40px;border-radius:8px;background:rgba(0,217,192,0.09);border:1px solid rgba(0,217,192,0.17);display:flex;align-items:center;justify-content:center;padding:8px 14px;text-align:center;">
+                <div>
+                  <div style="font-size:12px;font-weight:700;color:var(--teal);margin-bottom:2px;">Apply</div>
+                  <div style="font-size:10px;color:var(--text-secondary);line-height:1.4;">Use knowledge in realistic scenarios, solve workplace problems</div>
+                </div>
+              </div>
+              <!-- Understand (dimmer) -->
+              <div style="width:88%;min-height:40px;border-radius:8px;background:rgba(0,217,192,0.05);border:1px solid rgba(0,217,192,0.1);display:flex;align-items:center;justify-content:center;padding:8px 14px;text-align:center;">
+                <div>
+                  <div style="font-size:12px;font-weight:600;color:var(--text-tertiary);margin-bottom:2px;">Understand</div>
+                  <div style="font-size:10px;color:var(--text-tertiary);line-height:1.4;">Explain concepts in own words</div>
+                </div>
+              </div>
+              <!-- Remember (bottom - widest, dimmest) -->
+              <div style="width:100%;min-height:40px;border-radius:8px;background:rgba(0,217,192,0.02);border:1px solid rgba(0,217,192,0.06);display:flex;align-items:center;justify-content:center;padding:8px 14px;text-align:center;">
+                <div>
+                  <div style="font-size:12px;font-weight:600;color:var(--text-tertiary);opacity:0.7;margin-bottom:2px;">Remember</div>
+                  <div style="font-size:10px;color:var(--text-tertiary);opacity:0.7;line-height:1.4;">Recall facts and definitions</div>
+                </div>
+              </div>
+              <!-- Annotation -->
+              <div style="display:flex;justify-content:space-between;width:100%;margin-top:4px;padding:0 4px;">
+                <div style="font-size:9px;color:var(--text-tertiary);opacity:0.5;">Traditional e-learning stops here</div>
+                <div style="font-size:9px;color:var(--teal);font-weight:600;">Zavmo pushes learners here</div>
+              </div>
+            </div>
+            <p style="font-size:12px;color:var(--text-tertiary);margin-top:12px;">Every learner interaction is tagged with its Bloom&rsquo;s level via xAPI &mdash; so you can see exactly how deep your workforce&rsquo;s learning goes.</p>
+          </div>
+
+          <!-- Growth Mindset Detection -->
+          <div class="glass reveal" style="padding:32px;">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+              <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(0,217,192,0.15),rgba(0,255,235,0.05));border:1px solid var(--teal-border);">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+              </div>
+              <div>
+                <h3 style="margin-bottom:0;font-size:18px;">Growth Mindset Intelligence</h3>
+                <p style="font-size:12px;color:var(--text-tertiary);margin-top:2px;">Real-time mindset detection and intervention</p>
+              </div>
+            </div>
+            <p style="font-size:14px;margin-bottom:16px;">Zavmo&rsquo;s SLM analyses learner language in real time, detecting fixed-mindset indicators (&ldquo;I&rsquo;m not smart enough for this&rdquo;) and triggering neuroscience-backed reframing interventions (&ldquo;You haven&rsquo;t mastered this <em>yet</em>&rdquo;).</p>
+            <p style="font-size:14px;margin-bottom:16px;">For admins, this means unprecedented visibility into your organisation&rsquo;s learning culture:</p>
+            <!-- Mockup: Growth mindset metrics -->
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:12px;text-align:center;">
+                <div style="font-size:22px;font-weight:600;color:var(--teal);">73%</div>
+                <div style="font-size:10px;color:var(--text-tertiary);">Growth mindset ratio</div>
+              </div>
+              <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:12px;text-align:center;">
+                <div style="font-size:22px;font-weight:600;color:var(--teal);">+18%</div>
+                <div style="font-size:10px;color:var(--text-tertiary);">Improvement over 6 months</div>
+              </div>
+              <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:12px;text-align:center;">
+                <div style="font-size:22px;font-weight:600;color:var(--teal);">142</div>
+                <div style="font-size:10px;color:var(--text-tertiary);">Reframing interventions</div>
+              </div>
+              <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:12px;text-align:center;">
+                <div style="font-size:22px;font-weight:600;color:var(--teal);">91%</div>
+                <div style="font-size:10px;color:var(--text-tertiary);">Resilience after intervention</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- xAPI Deep Dive -->
+      <div class="glass reveal" style="max-width:860px;margin:48px auto 0;padding:32px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+          <div style="width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--teal);flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--bg-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div>
+            <h3 style="margin-bottom:0;font-size:18px;">xAPI: Every Interaction Tells a Story</h3>
+            <p style="font-size:12px;color:var(--text-tertiary);margin-top:2px;">Granular learning analytics that go far beyond completion rates</p>
+          </div>
+        </div>
+        <p style="font-size:15px;line-height:1.7;margin-bottom:20px;">
+          Every single learner interaction in Zavmo generates rich xAPI statements. Not just &ldquo;completed module&rdquo; &mdash; but <span style="color:var(--teal);font-weight:600;">what Bloom&rsquo;s level they demonstrated</span>, <span style="color:var(--teal);font-weight:600;">whether they showed growth or fixed mindset</span>, <span style="color:var(--teal);font-weight:600;">which Kirkpatrick level the evidence maps to</span>, and <span style="color:var(--teal);font-weight:600;">how knowledge connections are forming in their Mind Palace</span>.
+        </p>
+        <p style="font-size:15px;line-height:1.7;margin-bottom:20px;">
+          For the first time, L&amp;D leaders can answer the questions that have always been impossible to answer: Is this person genuinely understanding, or just memorising? Are they applying learning at work? Is our investment in training actually moving the dial on organisational performance?
+        </p>
+        <p style="font-size:15px;line-height:1.7;margin-bottom:28px;">
+          This is not a dashboard of vanity metrics. This is <span style="color:var(--teal);font-weight:600;">evidence-based proof</span> that learning is creating real behavioural change &mdash; across every role, every region, and every level of your global organisation.
+        </p>
+
+        <!-- xAPI Analytics Mockup Dashboard -->
+        <div style="background:rgba(10,22,40,0.6);border:1px solid var(--border-subtle);border-radius:12px;padding:20px;overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border-subtle);">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <span style="font-size:12px;font-weight:600;color:var(--text-primary);">xAPI Analytics Dashboard</span>
+            <span style="font-size:10px;color:var(--text-tertiary);margin-left:auto;">Live data &middot; All regions</span>
+          </div>
+          <!-- Top stats row -->
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px;">
+            <div style="background:rgba(0,217,192,0.06);border:1px solid rgba(0,217,192,0.1);border-radius:8px;padding:10px;text-align:center;">
+              <div style="font-size:18px;font-weight:600;color:var(--teal);">2.4M</div>
+              <div style="font-size:9px;color:var(--text-tertiary);">xAPI statements</div>
+            </div>
+            <div style="background:rgba(0,217,192,0.06);border:1px solid rgba(0,217,192,0.1);border-radius:8px;padding:10px;text-align:center;">
+              <div style="font-size:18px;font-weight:600;color:var(--teal);">67%</div>
+              <div style="font-size:9px;color:var(--text-tertiary);">Above &lsquo;Apply&rsquo;</div>
+            </div>
+            <div style="background:rgba(0,217,192,0.06);border:1px solid rgba(0,217,192,0.1);border-radius:8px;padding:10px;text-align:center;">
+              <div style="font-size:18px;font-weight:600;color:var(--teal);">K3.2</div>
+              <div style="font-size:9px;color:var(--text-tertiary);">Avg Kirkpatrick</div>
+            </div>
+            <div style="background:rgba(0,217,192,0.06);border:1px solid rgba(0,217,192,0.1);border-radius:8px;padding:10px;text-align:center;">
+              <div style="font-size:18px;font-weight:600;color:var(--teal);">78%</div>
+              <div style="font-size:9px;color:var(--text-tertiary);">Growth mindset</div>
+            </div>
+            <div style="background:rgba(0,217,192,0.06);border:1px solid rgba(0,217,192,0.1);border-radius:8px;padding:10px;text-align:center;">
+              <div style="font-size:18px;font-weight:600;color:var(--teal);">94%</div>
+              <div style="font-size:9px;color:var(--text-tertiary);">Flow state time</div>
+            </div>
+          </div>
+          <!-- Bloom's per character bar chart mockup -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+            <div style="background:rgba(10,22,40,0.4);border:1px solid var(--border-subtle);border-radius:8px;padding:14px;">
+              <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin-bottom:10px;">Bloom&rsquo;s Distribution by Character</div>
+              <!-- Stacked mini bars for each character -->
+              <div style="display:flex;flex-direction:column;gap:5px;">
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <span style="font-size:8px;color:var(--text-tertiary);width:64px;text-align:right;">Foundation</span>
+                  <div style="flex:1;height:10px;border-radius:3px;background:rgba(0,217,192,0.06);overflow:hidden;display:flex;">
+                    <div style="width:35%;background:rgba(0,217,192,0.12);"></div>
+                    <div style="width:30%;background:rgba(0,217,192,0.2);"></div>
+                    <div style="width:20%;background:rgba(0,217,192,0.3);"></div>
+                    <div style="width:15%;background:rgba(0,217,192,0.45);"></div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <span style="font-size:8px;color:var(--text-tertiary);width:64px;text-align:right;">Challenge</span>
+                  <div style="flex:1;height:10px;border-radius:3px;background:rgba(0,217,192,0.06);overflow:hidden;display:flex;">
+                    <div style="width:10%;background:rgba(0,217,192,0.12);"></div>
+                    <div style="width:15%;background:rgba(0,217,192,0.2);"></div>
+                    <div style="width:25%;background:rgba(0,217,192,0.3);"></div>
+                    <div style="width:30%;background:rgba(0,217,192,0.45);"></div>
+                    <div style="width:20%;background:var(--teal);"></div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <span style="font-size:8px;color:var(--text-tertiary);width:64px;text-align:right;">Creative</span>
+                  <div style="flex:1;height:10px;border-radius:3px;background:rgba(0,217,192,0.06);overflow:hidden;display:flex;">
+                    <div style="width:5%;background:rgba(0,217,192,0.12);"></div>
+                    <div style="width:10%;background:rgba(0,217,192,0.2);"></div>
+                    <div style="width:20%;background:rgba(0,217,192,0.3);"></div>
+                    <div style="width:25%;background:rgba(0,217,192,0.45);"></div>
+                    <div style="width:40%;background:var(--teal);"></div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <span style="font-size:8px;color:var(--text-tertiary);width:64px;text-align:right;">Evidence</span>
+                  <div style="flex:1;height:10px;border-radius:3px;background:rgba(0,217,192,0.06);overflow:hidden;display:flex;">
+                    <div style="width:8%;background:rgba(0,217,192,0.12);"></div>
+                    <div style="width:12%;background:rgba(0,217,192,0.2);"></div>
+                    <div style="width:30%;background:rgba(0,217,192,0.3);"></div>
+                    <div style="width:35%;background:rgba(0,217,192,0.45);"></div>
+                    <div style="width:15%;background:var(--teal);"></div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <span style="font-size:8px;color:var(--text-tertiary);width:64px;text-align:right;">Practical</span>
+                  <div style="flex:1;height:10px;border-radius:3px;background:rgba(0,217,192,0.06);overflow:hidden;display:flex;">
+                    <div style="width:10%;background:rgba(0,217,192,0.12);"></div>
+                    <div style="width:20%;background:rgba(0,217,192,0.2);"></div>
+                    <div style="width:30%;background:rgba(0,217,192,0.3);"></div>
+                    <div style="width:30%;background:rgba(0,217,192,0.45);"></div>
+                    <div style="width:10%;background:var(--teal);"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:8px;justify-content:center;">
+                <span style="font-size:7px;color:var(--text-tertiary);display:flex;align-items:center;gap:3px;"><span style="width:6px;height:6px;border-radius:2px;background:rgba(0,217,192,0.12);display:inline-block;"></span>Remember</span>
+                <span style="font-size:7px;color:var(--text-tertiary);display:flex;align-items:center;gap:3px;"><span style="width:6px;height:6px;border-radius:2px;background:rgba(0,217,192,0.25);display:inline-block;"></span>Apply</span>
+                <span style="font-size:7px;color:var(--text-tertiary);display:flex;align-items:center;gap:3px;"><span style="width:6px;height:6px;border-radius:2px;background:rgba(0,217,192,0.45);display:inline-block;"></span>Evaluate</span>
+                <span style="font-size:7px;color:var(--text-tertiary);display:flex;align-items:center;gap:3px;"><span style="width:6px;height:6px;border-radius:2px;background:var(--teal);display:inline-block;"></span>Create</span>
+              </div>
+            </div>
+            <!-- Activity Heatmap mockup -->
+            <div style="background:rgba(10,22,40,0.4);border:1px solid var(--border-subtle);border-radius:8px;padding:14px;">
+              <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin-bottom:10px;">Activity Heatmap &middot; This Week</div>
+              <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;">
+                <div style="font-size:7px;color:var(--text-tertiary);text-align:center;padding-bottom:4px;">Mon</div>
+                <div style="font-size:7px;color:var(--text-tertiary);text-align:center;padding-bottom:4px;">Tue</div>
+                <div style="font-size:7px;color:var(--text-tertiary);text-align:center;padding-bottom:4px;">Wed</div>
+                <div style="font-size:7px;color:var(--text-tertiary);text-align:center;padding-bottom:4px;">Thu</div>
+                <div style="font-size:7px;color:var(--text-tertiary);text-align:center;padding-bottom:4px;">Fri</div>
+                <div style="font-size:7px;color:var(--text-tertiary);text-align:center;padding-bottom:4px;">Sat</div>
+                <div style="font-size:7px;color:var(--text-tertiary);text-align:center;padding-bottom:4px;">Sun</div>
+                <!-- Row 1: 09:00 -->
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.3);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.5);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.4);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.6);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.3);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.05);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.05);"></div>
+                <!-- Row 2: 12:00 -->
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.6);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.7);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.5);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.8);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.6);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.15);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.1);"></div>
+                <!-- Row 3: 15:00 -->
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.4);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.5);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.3);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.5);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.4);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.2);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.05);"></div>
+                <!-- Row 4: 18:00 -->
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.15);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.2);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.1);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.25);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.15);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.3);"></div>
+                <div style="aspect-ratio:1;border-radius:3px;background:rgba(0,217,192,0.2);"></div>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:8px;">
+                <span style="font-size:7px;color:var(--text-tertiary);">Less activity</span>
+                <div style="display:flex;gap:2px;align-items:center;">
+                  <div style="width:8px;height:8px;border-radius:2px;background:rgba(0,217,192,0.1);"></div>
+                  <div style="width:8px;height:8px;border-radius:2px;background:rgba(0,217,192,0.3);"></div>
+                  <div style="width:8px;height:8px;border-radius:2px;background:rgba(0,217,192,0.5);"></div>
+                  <div style="width:8px;height:8px;border-radius:2px;background:rgba(0,217,192,0.8);"></div>
+                </div>
+                <span style="font-size:7px;color:var(--text-tertiary);">More activity</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 AI TEACHING CHARACTERS -->
+  <section>
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">Meet the Team</div>
+        <h2>12 Specialist AI Teaching Characters</h2>
+        <p class="subtitle">Each character is a purpose-built AI expert, designed using neuroscience principles to guide learners through different cognitive challenges. Together, they cover every dimension of professional development.</p>
+      </div>
+
+      <!-- Character Grid: 4x3 -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px;" class="reveal">
+        <!-- 1. Foundation Builder -->
+        <div class="glass glass-sm" style="padding:20px;text-align:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(0,217,192,0.2),rgba(0,255,235,0.05));border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+          </div>
+          <h4 style="font-size:14px;margin-bottom:4px;">Foundation Builder</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Builds core knowledge through structured recall and comprehension exercises</p>
+        </div>
+        <!-- 2. Challenge Coach -->
+        <div class="glass glass-sm" style="padding:20px;text-align:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(0,217,192,0.2),rgba(0,255,235,0.05));border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h4 style="font-size:14px;margin-bottom:4px;">Challenge Coach</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Pushes boundaries, builds resilience, and develops grit through stretch tasks</p>
+        </div>
+        <!-- 3. Career Navigator -->
+        <div class="glass glass-sm" style="padding:20px;text-align:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(0,217,192,0.2),rgba(0,255,235,0.05));border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </div>
+          <h4 style="font-size:14px;margin-bottom:4px;">Career Navigator</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Guides career pathways, maps skills to roles, and aligns learning to progression</p>
+        </div>
+        <!-- 4. Pattern Connector -->
+        <div class="glass glass-sm" style="padding:20px;text-align:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(0,217,192,0.2),rgba(0,255,235,0.05));border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8.6 8.6L15.4 15.4"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M15.4 8.6L8.6 15.4"/></svg>
+          </div>
+          <h4 style="font-size:14px;margin-bottom:4px;">Pattern Connector</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Reveals cross-domain connections and builds transferable mental models</p>
+        </div>
+        <!-- 5. Systems Analyst -->
+        <div class="glass glass-sm" style="padding:20px;text-align:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(0,217,192,0.2),rgba(0,255,235,0.05));border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+          </div>
+          <h4 style="font-size:14px;margin-bottom:4px;">Systems Analyst</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Develops systems thinking and analytical reasoning for complex problems</p>
+        </div>
+        <!-- 6. Collaboration Guide -->
+        <div class="glass glass-sm" style="padding:20px;text-align:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(0,217,192,0.2),rgba(0,255,235,0.05));border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h4 style="font-size:14px;margin-bottom:4px;">Collaboration Guide</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Builds teamwork, communication, and interpersonal skills through dialogue</p>
+        </div>
+        <!-- 7. Evidence Evaluator -->
+        <div class="glass glass-sm" style="padding:20px;text-align:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(0,217,192,0.2),rgba(0,255,235,0.05));border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          </div>
+          <h4 style="font-size:14px;margin-bottom:4px;">Evidence Evaluator</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Develops critical evaluation skills and evidence-based decision making</p>
+        </div>
+        <!-- 8. Experiment Space -->
+        <div class="glass glass-sm" style="padding:20px;text-align:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(0,217,192,0.2),rgba(0,255,235,0.05));border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h4 style="font-size:14px;margin-bottom:4px;">Experiment Space</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Safe environment for trial-and-error learning, hypothesis testing, and exploration</p>
+        </div>
+        <!-- 9. Practical Builder -->
+        <div class="glass glass-sm" style="padding:20px;text-align:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(0,217,192,0.2),rgba(0,255,235,0.05));border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+          </div>
+          <h4 style="font-size:14px;margin-bottom:4px;">Practical Builder</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Hands-on application through real-world scenarios and portfolio evidence creation</p>
+        </div>
+        <!-- 10. Creative Catalyst -->
+        <div class="glass glass-sm" style="padding:20px;text-align:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(0,217,192,0.2),rgba(0,255,235,0.05));border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+          </div>
+          <h4 style="font-size:14px;margin-bottom:4px;">Creative Catalyst</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Sparks innovation, lateral thinking, and creative problem-solving approaches</p>
+        </div>
+        <!-- 11. Qualification Certifier -->
+        <div class="glass glass-sm" style="padding:20px;text-align:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(0,217,192,0.2),rgba(0,255,235,0.05));border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 6 3 6 3s3 0 6-3v-5"/></svg>
+          </div>
+          <h4 style="font-size:14px;margin-bottom:4px;">Qualification Certifier</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Maps learning to regional qualification frameworks and generates evidence portfolios</p>
+        </div>
+        <!-- 12. Integrator -->
+        <div class="glass glass-sm" style="padding:20px;text-align:center;">
+          <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,rgba(0,217,192,0.2),rgba(0,255,235,0.05));border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4"/><path d="M12 19v4"/><path d="M5.6 5.6l2.8 2.8"/><path d="M15.6 15.6l2.8 2.8"/><path d="M1 12h4"/><path d="M19 12h4"/><path d="M5.6 18.4l2.8-2.8"/><path d="M15.6 8.4l2.8-2.8"/></svg>
+          </div>
+          <h4 style="font-size:14px;margin-bottom:4px;">Integrator</h4>
+          <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Synthesises learning across all characters into a unified understanding</p>
+        </div>
+      </div>
+
+      <p class="reveal" style="text-align:center;font-size:14px;color:var(--text-tertiary);margin-top:24px;max-width:700px;margin-left:auto;margin-right:auto;">Each character targets specific levels of Bloom&rsquo;s Taxonomy and Kirkpatrick&rsquo;s framework. Every interaction is tracked via xAPI, giving admins full visibility into which cognitive skills are developing across the workforce.</p>
+    </div>
+  </section>
+
+  <!-- AGENT 13: FLOW STATE ORCHESTRATOR -->
+  <section style="background:linear-gradient(180deg, rgba(0,217,192,0.03) 0%, var(--bg-primary) 100%);">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">The Invisible Genius</div>
+        <h2>Agent 13: The Flow State Orchestrator</h2>
+        <p class="subtitle">An invisible meta-agent that sits above all 12 teaching characters, continuously adjusting their behaviour to maximise learning impact &mdash; without the learner ever knowing.</p>
+      </div>
+
+      <div class="glass reveal" style="max-width:860px;margin:40px auto 0;padding:40px;">
+        <!-- Based on Flow Theory -->
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;">
+          <div style="width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:var(--teal);flex-shrink:0;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--bg-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></svg>
+          </div>
+          <div>
+            <h3 style="margin-bottom:4px;font-size:20px;">Built on Cs&iacute;kszentmih&aacute;lyi&rsquo;s Flow Theory</h3>
+            <p style="font-size:14px;color:var(--text-secondary);">The scientifically proven state where learning is most effective &mdash; the balance between challenge and ability.</p>
+          </div>
+        </div>
+
+        <p style="font-size:15px;line-height:1.7;margin-bottom:28px;">Agent 13 monitors every learner interaction in real time, detecting when a learner is in the flow state, when they are becoming frustrated (challenge too high), or when they are becoming bored (challenge too low). It then <span style="color:var(--teal);font-weight:600;">dynamically adjusts</span> how the 12 teaching characters behave &mdash; modifying difficulty, switching teaching approaches, or changing the character entirely &mdash; to keep each learner in their optimal learning zone.</p>
+
+        <!-- Three Operational Modes -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;">
+          <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.12);border-radius:12px;padding:20px;text-align:center;">
+            <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,217,192,0.1);border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <h4 style="font-size:13px;color:var(--teal);margin-bottom:6px;">Observer Mode</h4>
+            <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Silently monitors engagement signals, cognitive load, and emotional indicators across all interactions</p>
+          </div>
+          <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.12);border-radius:12px;padding:20px;text-align:center;">
+            <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,217,192,0.1);border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h4 style="font-size:13px;color:var(--teal);margin-bottom:6px;">Recommendation Mode</h4>
+            <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Suggests adjustments to teaching characters &mdash; modify tone, increase scaffolding, or shift cognitive level</p>
+          </div>
+          <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.12);border-radius:12px;padding:20px;text-align:center;">
+            <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,217,192,0.1);border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h4 style="font-size:13px;color:var(--teal);margin-bottom:6px;">Override Mode</h4>
+            <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Directly intervenes to switch characters, adjust difficulty, or trigger a different pedagogical approach entirely</p>
+          </div>
+        </div>
+
+        <div style="background:rgba(0,217,192,0.06);border:1px solid rgba(0,217,192,0.15);border-radius:12px;padding:20px;">
+          <p style="font-size:14px;color:var(--text-secondary);line-height:1.7;margin:0;">
+            <span style="color:var(--teal);font-weight:600;">For admins:</span> Agent 13&rsquo;s orchestration data provides unprecedented insight into workforce learning patterns. See which teams thrive under challenge, which need more scaffolding, and how your organisation&rsquo;s collective learning culture is evolving over time &mdash; all powered by real-time xAPI analytics.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USPs: LEARNER vs ADMIN -->
+  <section>
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">Why Zavmo</div>
+        <h2>Revolutionary for Learners. Transformational for Global Organisations.</h2>
+        <p class="subtitle">Whether you are an individual building your career or a global organisation ensuring every employee has the future, functional, and foundational skills they need &mdash; Zavmo changes everything.</p>
+      </div>
+      <div class="usp-columns">
+        <!-- LEARNER COLUMN -->
+        <div class="glass usp-column reveal">
+          <div class="usp-header">
+            <div class="icon-circle">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <h3 style="margin-bottom:0;">For Learners</h3>
+          </div>
+          <div class="usp-item">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Content built for your brain</h4>
+              <p style="font-size:13px;">AI adapts to how you learn best &mdash; visual, analytical, hands-on, or creative. Neurodivergent learners are celebrated, not accommodated as an afterthought.</p>
+            </div>
+          </div>
+          <div class="usp-item">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Directly mapped to your job role</h4>
+              <p style="font-size:13px;">Every lesson connects to the skills your actual job requires. No more sitting through irrelevant content that has nothing to do with your day-to-day work.</p>
+            </div>
+          </div>
+          <div class="usp-item">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Conversation, not slides</h4>
+              <p style="font-size:13px;">Learn through engaging dialogue with AI characters who ask questions, challenge your thinking, and help you apply knowledge to real scenarios &mdash; proven to boost retention by up to 50%.</p>
+            </div>
+          </div>
+          <div class="usp-item">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>See your knowledge grow</h4>
+              <p style="font-size:13px;">The Mind Palace shows your learning as a living neural network. Watch new connections form as you master concepts &mdash; a powerful motivator backed by neuroscience.</p>
+            </div>
+          </div>
+          <div class="usp-item">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Globally recognised qualifications</h4>
+              <p style="font-size:13px;">Wherever you are &mdash; UK, Australia, Europe, India, Malaysia, or Singapore &mdash; your learning maps directly to the recognised standards in your region. Build a portfolio of evidence towards real qualifications as you learn, with future skills built in from day one.</p>
+            </div>
+          </div>
+        </div>
+        <!-- ADMIN COLUMN -->
+        <div class="glass usp-column reveal">
+          <div class="usp-header">
+            <div class="icon-circle">
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <h3 style="margin-bottom:0;">For Global Admins &amp; L&amp;D</h3>
+          </div>
+          <div class="usp-item">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Global content generated in seconds, not months</h4>
+              <p style="font-size:13px;">Stop waiting for subject matter experts in every region. Zavmo&rsquo;s SLM generates standards-aligned content instantly for any role, in any region, across your entire global organisation. Content that would take months and cost a fortune is ready in moments.</p>
+            </div>
+          </div>
+          <div class="usp-item">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Future, functional, and foundational skills at scale</h4>
+              <p style="font-size:13px;">Automatic skills mapping across your entire global workforce. Every role gets precisely targeted development covering the foundational skills they need today, the functional skills for their current role, and the future skills your organisation needs tomorrow.</p>
+            </div>
+          </div>
+          <div class="usp-item">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Evidence-based ROI through xAPI</h4>
+              <p style="font-size:13px;">Every interaction generates xAPI statements mapped to Kirkpatrick&rsquo;s four levels and Bloom&rsquo;s Taxonomy. See not just who completed training, but who is applying knowledge, changing behaviour, and delivering measurable impact &mdash; real proof of ROI, not vanity metrics.</p>
+            </div>
+          </div>
+          <div class="usp-item">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Multi-region compliance and audit-ready</h4>
+              <p style="font-size:13px;">Content aligned to the specific regulatory and qualification frameworks of each region your workforce operates in. Full audit trails for Ofsted, ASQA, EQF bodies, and international regulators &mdash; built in, not bolted on.</p>
+            </div>
+          </div>
+          <div class="usp-item">
+            <div class="check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div>
+              <h4>Hyper-personalised at global scale</h4>
+              <p style="font-size:13px;">Every single learner in your organisation &mdash; whether they are in the UK, Singapore, or India &mdash; receives content that is personalised to their brain, their role, and their regional qualification framework. This is workforce excellence delivered at a scale that was previously impossible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT MAKES THIS REVOLUTIONARY -->
+  <section style="background:linear-gradient(180deg, rgba(0,217,192,0.02) 0%, var(--bg-primary) 100%);">
+    <div class="container">
+      <div class="text-center reveal">
+        <div class="section-label">The Difference</div>
+        <h2>Why This Has Never Been Done Before</h2>
+      </div>
+      <div class="glass reveal" style="max-width:800px;margin:40px auto 0;">
+        <p style="font-size:16px;line-height:1.8;color:var(--text-secondary);">
+          Until now, global organisations had to choose: use pre-built content that ignores regional standards and individual roles, or spend enormous budgets commissioning custom content for each market that takes months to produce and is outdated on arrival.
+        </p>
+        <p style="font-size:16px;line-height:1.8;color:var(--text-secondary);margin-top:16px;">
+          Zavmo eliminates that choice entirely. Its <span style="color:var(--teal);font-weight:600;">proprietary Small Language Model, trained specifically on the neuroscience of learning</span>, combines <span style="color:var(--teal);font-weight:600;">international qualification frameworks</span> from dozens of regions with <span style="color:var(--teal);font-weight:600;">thousands of job descriptions</span> to generate something that has never existed before: learning content that is simultaneously standards-aligned, role-specific, and hyper-personalised to each individual brain &mdash; covering future, functional, and foundational skills &mdash; generated in real time, anywhere in the world.
+        </p>
+        <p style="font-size:16px;line-height:1.8;color:var(--text-secondary);margin-top:16px;">
+          This is not a generic AI chatbot. This is not incremental improvement. This is a <span style="color:var(--teal);font-weight:600;">purpose-built neuroscience engine</span> that fundamentally transforms how global organisations develop their people and how individuals grow their careers.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container reveal">
+      <div class="section-label">Get Started</div>
+      <h2 style="margin-bottom:12px;">Ready to Deliver Global Workforce Excellence?</h2>
+      <p class="subtitle" style="margin-bottom:36px;">Join global organisations using Zavmo&rsquo;s neuroscience-powered SLM to deliver hyper-personalised future, functional, and foundational skills to every individual, in every region. See the difference in your first session.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="#" class="nav-cta" style="padding:16px 40px;font-size:16px;">Try Zavmo Free</a>
+        <a href="#" class="nav-cta-secondary" style="padding:16px 40px;font-size:16px;">Book a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="logo" style="margin-bottom:12px;font-size:16px;">ZAVMO</div>
+      <p style="font-size:13px;color:var(--text-tertiary);line-height:1.6;">
+        Making learning as unique as you are.<br>
+        Iridescent Technology Ltd &middot; A Growth Engineering Company
+      </p>
+    </div>
+  </footer>
+
+  <!-- SCROLL REVEAL SCRIPT -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
