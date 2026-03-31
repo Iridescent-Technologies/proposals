@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Beauty Club — Admin Console</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --lr-black: #1A1A1A;
+  --lr-gold: #C8A265;
+  --lr-gold-light: #E8D5A8;
+  --lr-gold-pale: #FBF6ED;
+  --lr-white: #FAFAF8;
+  --lr-grey: #7A7A7A;
+  --lr-grey-light: #E5E3E0;
+  --lr-deep-plum: #3D1F33;
+  --lr-rose: #D4637A;
+  --teal: #2A9D8F;
+  --green: #52B788;
+  --purple: #7B68EE;
+  --red: #E05555;
+  --sidebar-w: 240px;
+}
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  background: #F2F1EF;
+  color: var(--lr-black);
+  min-height: 100vh;
+  display: flex;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--lr-black);
+  min-height: 100vh;
+  padding: 0;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 10;
+}
+.sidebar-brand {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid #2a2a2a;
+}
+.sidebar-brand h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px; font-weight: 600;
+  color: #fff;
+}
+.sidebar-brand h1 span { color: var(--lr-gold); }
+.sidebar-brand p {
+  font-size: 9px; color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-top: 3px;
+}
+
+.sidebar-nav { padding: 12px 0; flex: 1; }
+.nav-section {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+.nav-section-label {
+  font-size: 8.5px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #555;
+  padding: 0 4px;
+  margin-bottom: 6px;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  color: #999;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-bottom: 1px;
+}
+.nav-item:hover { background: #222; color: #ccc; }
+.nav-item.active {
+  background: rgba(200,162,101,0.12);
+  color: var(--lr-gold);
+  font-weight: 500;
+}
+.nav-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.nav-dot.gold { background: var(--lr-gold); }
+.nav-dot.teal { background: var(--teal); }
+.nav-dot.purple { background: var(--purple); }
+.nav-dot.green { background: var(--green); }
+.nav-dot.rose { background: var(--lr-rose); }
+
+.sidebar-footer {
+  padding: 14px 20px;
+  border-top: 1px solid #2a2a2a;
+  font-size: 10px;
+  color: #555;
+}
+.sidebar-footer strong { color: var(--lr-gold); }
+
+/* ===== MAIN ===== */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+}
+.top-bar {
+  background: #fff;
+  border-bottom: 1px solid var(--lr-grey-light);
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.top-bar h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 600;
+}
+.top-bar-right {
+  display: flex; align-items: center; gap: 14px;
+}
+.top-bar-badge {
+  font-size: 10px; font-weight: 500;
+  color: var(--lr-grey);
+  padding: 4px 12px;
+  border: 1px solid var(--lr-grey-light);
+  border-radius: 3px;
+}
+.top-bar-user {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--lr-gold);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: var(--lr-black);
+}
+
+.page-content {
+  padding: 24px 28px;
+}
+
+/* Tab pages */
+.tab-page { display: none; }
+.tab-page.active { display: block; }
+
+/* ===== STAT CARDS ===== */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: #fff;
+  border: 1px solid var(--lr-grey-light);
+  border-radius: 4px;
+  padding: 16px;
+}
+.stat-card .sc-label {
+  font-size: 10px; font-weight: 500;
+  color: var(--lr-grey);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin-bottom: 6px;
+}
+.stat-card .sc-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 700;
+  color: var(--lr-black);
+}
+.stat-card .sc-change {
+  font-size: 10px; margin-top: 3px;
+}
+.sc-change.up { color: var(--green); }
+.sc-change.down { color: var(--red); }
+.sc-change.neutral { color: var(--lr-grey); }
+
+/* ===== SECTION CARDS ===== */
+.section-card {
+  background: #fff;
+  border: 1px solid var(--lr-grey-light);
+  border-radius: 4px;
+  margin-bottom: 18px;
+}
+.section-header {
+  padding: 14px 18px;
+  border-bottom: 1px solid #f0efed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.section-header h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-weight: 600;
+}
+.section-tag {
+  font-size: 8px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 3px 8px;
+  border-radius: 2px;
+}
+.section-tag.xapi { background: #EDE7F6; color: #5E35B1; }
+.section-tag.live { background: #E8F5E9; color: #2E7D32; }
+.section-tag.config { background: #FFF8E1; color: #F57F17; }
+.section-tag.sync { background: #E3F2FD; color: #1565C0; }
+.section-body { padding: 18px; }
+
+/* ===== EXPERTISE HEATMAP ===== */
+.heatmap-grid {
+  display: grid;
+  grid-template-columns: 120px repeat(5, 1fr);
+  gap: 2px;
+  font-size: 11px;
+}
+.hm-header {
+  font-size: 9px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--lr-grey);
+  padding: 6px 8px;
+  text-align: center;
+}
+.hm-header:first-child { text-align: left; }
+.hm-row-label {
+  font-size: 11px; font-weight: 500;
+  padding: 8px;
+  color: var(--lr-black);
+  display: flex; align-items: center;
+}
+.hm-cell {
+  padding: 8px;
+  text-align: center;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 11px;
+}
+.hm-cell.expert { background: rgba(200,162,101,0.25); color: #8B6914; }
+.hm-cell.advanced { background: rgba(42,157,143,0.18); color: #1A7A6E; }
+.hm-cell.developing { background: rgba(123,104,238,0.12); color: #5B4BC7; }
+.hm-cell.emerging { background: rgba(0,0,0,0.04); color: #999; }
+.hm-cell.gap { background: rgba(224,85,85,0.1); color: var(--red); }
+
+/* ===== TABLE ===== */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.data-table th {
+  text-align: left;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--lr-grey);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--lr-grey-light);
+}
+.data-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f5f4f2;
+  vertical-align: middle;
+}
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover { background: #FDFCFA; }
+
+.status-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+.status-dot.synced { background: var(--green); }
+.status-dot.pending { background: #F5A623; }
+.status-dot.error { background: var(--red); }
+
+.level-badge {
+  display: inline-block;
+  font-size: 9px; font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+.level-badge.expert { background: rgba(200,162,101,0.2); color: #8B6914; }
+.level-badge.advanced { background: rgba(42,157,143,0.15); color: #1A7A6E; }
+.level-badge.developing { background: rgba(123,104,238,0.12); color: #5B4BC7; }
+.level-badge.emerging { background: rgba(0,0,0,0.05); color: #999; }
+
+/* ===== FORM ELEMENTS ===== */
+.form-row {
+  display: flex; gap: 14px;
+  margin-bottom: 14px;
+}
+.form-group {
+  flex: 1;
+}
+.form-group label {
+  display: block;
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--lr-grey);
+  margin-bottom: 5px;
+}
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--lr-grey-light);
+  border-radius: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  background: #fff;
+  outline: none;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  border-color: var(--lr-gold);
+}
+.form-group textarea { resize: vertical; min-height: 60px; }
+
+.toggle-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f5f4f2;
+}
+.toggle-row:last-child { border-bottom: none; }
+.toggle-label {
+  font-size: 12px; font-weight: 500;
+}
+.toggle-desc {
+  font-size: 10px; color: var(--lr-grey); margin-top: 2px;
+}
+.toggle-switch {
+  width: 36px; height: 20px;
+  background: #ddd;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.toggle-switch.on { background: var(--lr-gold); }
+.toggle-switch::after {
+  content: '';
+  width: 16px; height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px; left: 2px;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+.toggle-switch.on::after { transform: translateX(16px); }
+
+.btn {
+  padding: 8px 18px;
+  border: none;
+  border-radius: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+}
+.btn-gold { background: var(--lr-gold); color: var(--lr-black); }
+.btn-outline { background: transparent; border: 1px solid var(--lr-grey-light); color: var(--lr-grey); }
+
+/* ===== TOP BA TABLE ===== */
+.ba-avatar {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--lr-gold-pale);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; color: var(--lr-gold);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* ===== MINI BAR ===== */
+.mini-bar-track {
+  width: 80px; height: 5px;
+  background: #f0efed;
+  border-radius: 3px;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.mini-bar-fill {
+  height: 100%; border-radius: 3px;
+}
+.mini-bar-fill.gold { background: var(--lr-gold); }
+.mini-bar-fill.teal { background: var(--teal); }
+.mini-bar-fill.purple { background: var(--purple); }
+.mini-bar-fill.grey { background: #ccc; }
+
+/* ===== GRID LAYOUTS ===== */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .two-col, .three-col { grid-template-columns: 1fr; }
+  .sidebar { width: 200px; }
+  .main { margin-left: 200px; }
+  .heatmap-grid { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <h1>My Beauty Club <span>Admin</span></h1>
+    <p>Knowledge Companion Console</p>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-label">Zavmo Intelligence</div>
+      <div class="nav-item active" onclick="showTab('intelligence')">
+        <span class="nav-dot gold"></span> Workforce Intelligence
+      </div>
+      <div class="nav-item" onclick="showTab('expertise')">
+        <span class="nav-dot purple"></span> Expertise Profiles
+      </div>
+      <div class="nav-item" onclick="showTab('gaps')">
+        <span class="nav-dot rose"></span> Knowledge Gaps
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Knowledge Base</div>
+      <div class="nav-item" onclick="showTab('content')">
+        <span class="nav-dot teal"></span> Content Library
+      </div>
+      <div class="nav-item" onclick="showTab('sync')">
+        <span class="nav-dot green"></span> Sync Status
+      </div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Companion</div>
+      <div class="nav-item" onclick="showTab('config')">
+        <span class="nav-dot gold"></span> Configuration
+      </div>
+      <div class="nav-item" onclick="showTab('challenges')">
+        <span class="nav-dot teal"></span> Challenges
+      </div>
+      <div class="nav-item" onclick="showTab('analytics')">
+        <span class="nav-dot purple"></span> Usage Analytics
+      </div>
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    Powered by <strong>Zavmo</strong><br>
+    L'Or&eacute;al Travel Retail Asia Pacific
+  </div>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="main">
+  <div class="top-bar">
+    <h2 id="page-title">Workforce Intelligence</h2>
+    <div class="top-bar-right">
+      <span class="top-bar-badge">Asia Pacific Region</span>
+      <span class="top-bar-badge">March 2026</span>
+      <div class="top-bar-user">SR</div>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- ==================== TAB 1: WORKFORCE INTELLIGENCE ==================== -->
+    <div class="tab-page active" id="tab-intelligence">
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="sc-label">Active Beauty Advisors</div>
+          <div class="sc-value">847</div>
+          <div class="sc-change up">+12% from last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">xAPI Statements This Month</div>
+          <div class="sc-value">14,230</div>
+          <div class="sc-change up">+28% from last month</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Average Bloom's Peak</div>
+          <div class="sc-value">Analyse</div>
+          <div class="sc-change up">Up from Apply in Feb</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Expertise Flags Earned</div>
+          <div class="sc-value">312</div>
+          <div class="sc-change up">+45 this week</div>
+        </div>
+      </div>
+
+      <!-- EXPERTISE HEATMAP -->
+      <div class="section-card">
+        <div class="section-header">
+          <h3>Expertise Heatmap by Airport</h3>
+          <span class="section-tag xapi">xAPI Verified</span>
+        </div>
+        <div class="section-body">
+          <div class="heatmap-grid">
+            <div class="hm-header"></div>
+            <div class="hm-header">Skincare Science</div>
+            <div class="hm-header">Fragrance</div>
+            <div class="hm-header">Colour Cosmetics</div>
+            <div class="hm-header">Competitive Pos.</div>
+            <div class="hm-header">Consultative Sell</div>
+
+            <div class="hm-row-label">Changi (SIN)</div>
+            <div class="hm-cell expert">Expert</div>
+            <div class="hm-cell developing">Developing</div>
+            <div class="hm-cell advanced">Advanced</div>
+            <div class="hm-cell advanced">Advanced</div>
+            <div class="hm-cell expert">Expert</div>
+
+            <div class="hm-row-label">Incheon (ICN)</div>
+            <div class="hm-cell advanced">Advanced</div>
+            <div class="hm-cell expert">Expert</div>
+            <div class="hm-cell developing">Developing</div>
+            <div class="hm-cell advanced">Advanced</div>
+            <div class="hm-cell developing">Developing</div>
+
+            <div class="hm-row-label">Narita (NRT)</div>
+            <div class="hm-cell advanced">Advanced</div>
+            <div class="hm-cell advanced">Advanced</div>
+            <div class="hm-cell expert">Expert</div>
+            <div class="hm-cell developing">Developing</div>
+            <div class="hm-cell advanced">Advanced</div>
+
+            <div class="hm-row-label">KLIA (KUL)</div>
+            <div class="hm-cell developing">Developing</div>
+            <div class="hm-cell emerging">Emerging</div>
+            <div class="hm-cell developing">Developing</div>
+            <div class="hm-cell gap">Gap</div>
+            <div class="hm-cell developing">Developing</div>
+
+            <div class="hm-row-label">Suvarnabhumi (BKK)</div>
+            <div class="hm-cell advanced">Advanced</div>
+            <div class="hm-cell developing">Developing</div>
+            <div class="hm-cell advanced">Advanced</div>
+            <div class="hm-cell emerging">Emerging</div>
+            <div class="hm-cell advanced">Advanced</div>
+
+            <div class="hm-row-label">Sydney (SYD)</div>
+            <div class="hm-cell expert">Expert</div>
+            <div class="hm-cell advanced">Advanced</div>
+            <div class="hm-cell developing">Developing</div>
+            <div class="hm-cell expert">Expert</div>
+            <div class="hm-cell advanced">Advanced</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOP BAs -->
+      <div class="two-col">
+        <div class="section-card">
+          <div class="section-header">
+            <h3>Top Expertise Growth This Month</h3>
+            <span class="section-tag xapi">xAPI Verified</span>
+          </div>
+          <div class="section-body">
+            <table class="data-table">
+              <thead><tr><th>Beauty Advisor</th><th>Airport</th><th>Domain</th><th>Movement</th></tr></thead>
+              <tbody>
+                <tr><td><span class="ba-avatar">WL</span>Wei Ling</td><td>Changi T3</td><td>Skincare Science</td><td><span class="level-badge expert">Expert</span></td></tr>
+                <tr><td><span class="ba-avatar">PK</span>Priya Kumar</td><td>Changi T1</td><td>Fragrance</td><td><span class="level-badge expert">Expert</span></td></tr>
+                <tr><td><span class="ba-avatar">YK</span>Yuna Kim</td><td>Incheon T1</td><td>Competitive Pos.</td><td><span class="level-badge advanced">Advanced</span></td></tr>
+                <tr><td><span class="ba-avatar">AT</span>Ayumi Tanaka</td><td>Narita T2</td><td>Colour Cosmetics</td><td><span class="level-badge expert">Expert</span></td></tr>
+                <tr><td><span class="ba-avatar">JH</span>Jia Hui</td><td>Changi T3</td><td>Consultative Sell</td><td><span class="level-badge advanced">Advanced</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="section-header">
+            <h3>Knowledge Gaps to Address</h3>
+            <span class="section-tag" style="background:#FCE4EC; color:#C62828;">Priority</span>
+          </div>
+          <div class="section-body">
+            <table class="data-table">
+              <thead><tr><th>Domain</th><th>Airport</th><th>BAs Affected</th><th>Severity</th></tr></thead>
+              <tbody>
+                <tr><td>Competitive Positioning</td><td>KLIA</td><td>23</td><td><span class="level-badge" style="background:rgba(224,85,85,0.12); color:var(--red);">Critical</span></td></tr>
+                <tr><td>Fragrance Families</td><td>Changi</td><td>18</td><td><span class="level-badge" style="background:rgba(245,166,35,0.12); color:#C87A00;">High</span></td></tr>
+                <tr><td>Fragrance Families</td><td>KLIA</td><td>31</td><td><span class="level-badge" style="background:rgba(224,85,85,0.12); color:var(--red);">Critical</span></td></tr>
+                <tr><td>Colour Cosmetics</td><td>Incheon</td><td>14</td><td><span class="level-badge" style="background:rgba(245,166,35,0.12); color:#C87A00;">High</span></td></tr>
+                <tr><td>Consultative Selling</td><td>Suvarnabhumi</td><td>9</td><td><span class="level-badge developing">Moderate</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2: EXPERTISE PROFILES ==================== -->
+    <div class="tab-page" id="tab-expertise">
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="sc-label">Expert-Level BAs</div>
+          <div class="sc-value">124</div>
+          <div class="sc-change up">+18 this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Advanced-Level BAs</div>
+          <div class="sc-value">289</div>
+          <div class="sc-change up">+34 this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Developing</div>
+          <div class="sc-value">312</div>
+          <div class="sc-change neutral">Steady</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Emerging / New</div>
+          <div class="sc-value">122</div>
+          <div class="sc-change down">-8 (promoted to Developing)</div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <h3>Individual Expertise Profiles</h3>
+          <div style="display:flex; gap:8px;">
+            <select style="font-family:'DM Sans',sans-serif; font-size:11px; padding:4px 10px; border:1px solid var(--lr-grey-light); border-radius:3px; outline:none;">
+              <option>All Airports</option>
+              <option selected>Changi (SIN)</option>
+              <option>Incheon (ICN)</option>
+              <option>Narita (NRT)</option>
+              <option>KLIA (KUL)</option>
+              <option>Suvarnabhumi (BKK)</option>
+              <option>Sydney (SYD)</option>
+            </select>
+            <button class="btn btn-outline">Export xAPI Report</button>
+          </div>
+        </div>
+        <div class="section-body">
+          <table class="data-table">
+            <thead><tr><th>Beauty Advisor</th><th>Location</th><th>Skincare</th><th>Fragrance</th><th>Colour</th><th>Comp. Pos.</th><th>Consult. Sell</th><th>Bloom's Peak</th><th>Statements</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="ba-avatar">WL</span>Wei Ling</td>
+                <td>Changi T3</td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill gold" style="width:88%"></span></span><span class="level-badge expert">Expert</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill purple" style="width:40%"></span></span><span class="level-badge developing">Dev</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill grey" style="width:22%"></span></span><span class="level-badge emerging">Emrg</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill teal" style="width:72%"></span></span><span class="level-badge advanced">Adv</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill teal" style="width:65%"></span></span><span class="level-badge advanced">Adv</span></td>
+                <td>Analyse</td>
+                <td>47</td>
+              </tr>
+              <tr>
+                <td><span class="ba-avatar">PK</span>Priya Kumar</td>
+                <td>Changi T1</td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill teal" style="width:70%"></span></span><span class="level-badge advanced">Adv</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill gold" style="width:92%"></span></span><span class="level-badge expert">Expert</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill teal" style="width:60%"></span></span><span class="level-badge advanced">Adv</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill purple" style="width:45%"></span></span><span class="level-badge developing">Dev</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill gold" style="width:80%"></span></span><span class="level-badge expert">Expert</span></td>
+                <td>Create</td>
+                <td>63</td>
+              </tr>
+              <tr>
+                <td><span class="ba-avatar">JH</span>Jia Hui Tan</td>
+                <td>Changi T3</td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill teal" style="width:60%"></span></span><span class="level-badge advanced">Adv</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill purple" style="width:35%"></span></span><span class="level-badge developing">Dev</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill gold" style="width:85%"></span></span><span class="level-badge expert">Expert</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill teal" style="width:55%"></span></span><span class="level-badge advanced">Adv</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill teal" style="width:68%"></span></span><span class="level-badge advanced">Adv</span></td>
+                <td>Analyse</td>
+                <td>51</td>
+              </tr>
+              <tr>
+                <td><span class="ba-avatar">SL</span>Siti Lim</td>
+                <td>Changi T1</td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill purple" style="width:38%"></span></span><span class="level-badge developing">Dev</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill grey" style="width:20%"></span></span><span class="level-badge emerging">Emrg</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill purple" style="width:30%"></span></span><span class="level-badge developing">Dev</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill grey" style="width:15%"></span></span><span class="level-badge emerging">Emrg</span></td>
+                <td><span class="mini-bar-track"><span class="mini-bar-fill purple" style="width:42%"></span></span><span class="level-badge developing">Dev</span></td>
+                <td>Apply</td>
+                <td>19</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: KNOWLEDGE GAPS ==================== -->
+    <div class="tab-page" id="tab-gaps">
+      <div class="section-card">
+        <div class="section-header">
+          <h3>Active Knowledge Gaps</h3>
+          <span class="section-tag" style="background:#FCE4EC; color:#C62828;">Action Required</span>
+        </div>
+        <div class="section-body">
+          <p style="font-size:12px; color:var(--lr-grey); margin-bottom:16px;">Zavmo automatically identifies areas where xAPI data shows clusters of BAs below the target competency level. These gaps represent training investment opportunities with the highest potential ROI.</p>
+          <table class="data-table">
+            <thead><tr><th>Domain</th><th>Airports Affected</th><th>BAs Below Target</th><th>Target Level</th><th>Current Average</th><th>Recommended Action</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Competitive Positioning</strong></td>
+                <td>KLIA, Suvarnabhumi</td>
+                <td>32</td>
+                <td><span class="level-badge advanced">Advanced</span></td>
+                <td><span class="level-badge emerging">Emerging</span></td>
+                <td style="font-size:11px;">Deploy targeted Beauty Bytes on L'Or&eacute;al vs Est&eacute;e Lauder and Shiseido positioning</td>
+              </tr>
+              <tr>
+                <td><strong>Fragrance Families</strong></td>
+                <td>Changi, KLIA</td>
+                <td>49</td>
+                <td><span class="level-badge advanced">Advanced</span></td>
+                <td><span class="level-badge developing">Developing</span></td>
+                <td style="font-size:11px;">Priority: Id&ocirc;le and YSL Libre launch Q2 — create fragrance-specific challenge series</td>
+              </tr>
+              <tr>
+                <td><strong>Colour Cosmetics</strong></td>
+                <td>Incheon, Changi</td>
+                <td>27</td>
+                <td><span class="level-badge advanced">Advanced</span></td>
+                <td><span class="level-badge developing">Developing</span></td>
+                <td style="font-size:11px;">Schedule colour theory Beauty Bytes with cross-brand product mapping</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 4: CONTENT LIBRARY ==================== -->
+    <div class="tab-page" id="tab-content">
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="sc-label">Items in Knowledge Base</div>
+          <div class="sc-value">234</div>
+          <div class="sc-change up">+12 this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">eLearning Modules</div>
+          <div class="sc-value">87</div>
+          <div class="sc-change neutral">3 pending sync</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Materials / PDFs</div>
+          <div class="sc-value">147</div>
+          <div class="sc-change up">+8 this month</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">FAQs &amp; Reading Links</div>
+          <div class="sc-value">42 / 18</div>
+          <div class="sc-change neutral">Phase 2 — FAQs + URL resources</div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <h3>Content Items</h3>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-outline">Bulk Update</button>
+            <button class="btn btn-gold">Add Content</button>
+          </div>
+        </div>
+        <div class="section-body">
+          <table class="data-table">
+            <thead><tr><th>Title</th><th>Type</th><th>Description</th><th>URL / File</th><th>Visible to Companion</th><th>Sync Status</th><th>Last Updated</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Lanc&ocirc;me Hero Products</td>
+                <td>eLearning</td>
+                <td style="font-size:11px; color:var(--lr-grey); max-width:180px;">Complete guide to Lanc&ocirc;me's flagship skincare and cosmetics range</td>
+                <td style="font-size:10px;"><a href="#" style="color:var(--lr-gold);">View in LMS</a></td>
+                <td><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></td>
+                <td><span class="status-dot synced"></span>Synced</td>
+                <td>28 Mar 2026</td>
+                <td><button class="btn btn-outline" style="padding:4px 10px; font-size:9px;">Re-sync</button></td>
+              </tr>
+              <tr>
+                <td>Advanced Colour Theory</td>
+                <td>eLearning</td>
+                <td style="font-size:11px; color:var(--lr-grey); max-width:180px;">Foundation and undertone matching across skin types</td>
+                <td style="font-size:10px;"><a href="#" style="color:var(--lr-gold);">View in LMS</a></td>
+                <td><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></td>
+                <td><span class="status-dot synced"></span>Synced</td>
+                <td>25 Mar 2026</td>
+                <td><button class="btn btn-outline" style="padding:4px 10px; font-size:9px;">Re-sync</button></td>
+              </tr>
+              <tr>
+                <td>YSL Libre Product Guide</td>
+                <td>Material (PDF)</td>
+                <td style="font-size:11px; color:var(--lr-grey); max-width:180px;">YSL Libre EDP fragrance notes, positioning, and customer talking points</td>
+                <td style="font-size:10px;"><a href="#" style="color:var(--lr-gold);">libre-guide.pdf</a></td>
+                <td><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></td>
+                <td><span class="status-dot pending"></span>Pending</td>
+                <td>30 Mar 2026</td>
+                <td><button class="btn btn-outline" style="padding:4px 10px; font-size:9px;">Re-sync</button></td>
+              </tr>
+              <tr>
+                <td>Q2 Competitive Positioning Deck</td>
+                <td>Material (PDF)</td>
+                <td style="font-size:11px; color:var(--lr-grey); max-width:180px;">Q2 2026 competitive landscape vs Est&eacute;e Lauder, Shiseido, Dior</td>
+                <td style="font-size:10px;"><a href="#" style="color:var(--lr-gold);">q2-comp-deck.pdf</a></td>
+                <td><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></td>
+                <td><span class="status-dot synced"></span>Synced</td>
+                <td>22 Mar 2026</td>
+                <td><button class="btn btn-outline" style="padding:4px 10px; font-size:9px;">Re-sync</button></td>
+              </tr>
+              <tr>
+                <td>Skincare Layering Protocol v3</td>
+                <td>Material (PDF)</td>
+                <td style="font-size:11px; color:var(--lr-grey); max-width:180px;">Step-by-step layering routine for counter demonstrations</td>
+                <td style="font-size:10px;"><a href="#" style="color:var(--lr-gold);">layering-v3.pdf</a></td>
+                <td><div class="toggle-switch" onclick="this.classList.toggle('on')"></div></td>
+                <td style="color:#999;">Not synced</td>
+                <td>15 Mar 2026</td>
+                <td><button class="btn btn-outline" style="padding:4px 10px; font-size:9px; opacity:0.4;" disabled>Re-sync</button></td>
+              </tr>
+              <tr>
+                <td>Fragrance Families Introduction</td>
+                <td>eLearning</td>
+                <td style="font-size:11px; color:var(--lr-grey); max-width:180px;">Core fragrance families, notes, and customer recommendation logic</td>
+                <td style="font-size:10px;"><a href="#" style="color:var(--lr-gold);">View in LMS</a></td>
+                <td><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></td>
+                <td><span class="status-dot synced"></span>Synced</td>
+                <td>20 Mar 2026</td>
+                <td><button class="btn btn-outline" style="padding:4px 10px; font-size:9px;">Re-sync</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: SYNC STATUS ==================== -->
+    <div class="tab-page" id="tab-sync">
+      <div class="section-card">
+        <div class="section-header">
+          <h3>Knowledge Base Sync Status</h3>
+          <span class="section-tag sync">Auto-Sync Active</span>
+        </div>
+        <div class="section-body">
+          <p style="font-size:12px; color:var(--lr-grey); margin-bottom:16px;">Content is pulled from the Growth Engineering LMS and automatically synced to the Knowledge Companion when the "Visible to Companion" checkbox is enabled. When content is updated, the item is removed and re-pushed to ensure freshness. When content is deleted or taken offline, it is automatically removed from the knowledge base.</p>
+          <div class="stat-row">
+            <div class="stat-card">
+              <div class="sc-label">Last Full Sync</div>
+              <div class="sc-value" style="font-size:18px;">31 Mar 2026, 02:15</div>
+              <div class="sc-change up">All items current</div>
+            </div>
+            <div class="stat-card">
+              <div class="sc-label">Items Synced</div>
+              <div class="sc-value">231 / 234</div>
+              <div class="sc-change neutral">3 pending review</div>
+            </div>
+            <div class="stat-card">
+              <div class="sc-label">Sync Errors</div>
+              <div class="sc-value">0</div>
+              <div class="sc-change up">No errors</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 6: CONFIGURATION ==================== -->
+    <div class="tab-page" id="tab-config">
+      <div class="two-col">
+        <div class="section-card">
+          <div class="section-header">
+            <h3>Companion Appearance</h3>
+            <span class="section-tag config">Theming</span>
+          </div>
+          <div class="section-body">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Companion Name</label>
+                <input type="text" value="My Beauty Club">
+              </div>
+              <div class="form-group">
+                <label>Subtitle</label>
+                <input type="text" value="Your Knowledge Companion">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Welcome Message</label>
+                <textarea>Hi {name}! I'm your Knowledge Companion, here to help you become the best Beauty Advisor you can be. Ask me anything about our products, or say 'surprise me' for a quick challenge.</textarea>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Input Placeholder</label>
+                <input type="text" value="Ask, explore, or say 'surprise me'...">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Accent Colour</label>
+                <input type="color" value="#C8A265" style="width:60px; height:32px; padding:2px; cursor:pointer;">
+              </div>
+              <div class="form-group">
+                <label>Language</label>
+                <select>
+                  <option selected>English</option>
+                  <option>Mandarin</option>
+                  <option>Japanese</option>
+                  <option>Korean</option>
+                  <option>Thai</option>
+                  <option>Bahasa Melayu</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-gold">Save Appearance</button>
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="section-header">
+            <h3>Feature Controls</h3>
+            <span class="section-tag config">Flags</span>
+          </div>
+          <div class="section-body">
+            <div class="toggle-row">
+              <div>
+                <div class="toggle-label">Knowledge Companion Visible</div>
+                <div class="toggle-desc">Show the companion widget to all BAs in this region</div>
+              </div>
+              <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <div class="toggle-label">Push LMS Content to Knowledge Base</div>
+                <div class="toggle-desc">Automatically sync checked content items</div>
+              </div>
+              <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <div class="toggle-label">Proactive Challenges</div>
+                <div class="toggle-desc">Beauty Byte challenges timed to the forgetting curve</div>
+              </div>
+              <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <div class="toggle-label">Social Peer Activity</div>
+                <div class="toggle-desc">Show trending topics and team expertise across airports</div>
+              </div>
+              <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <div class="toggle-label">xAPI Expertise Tracking</div>
+                <div class="toggle-desc">Generate xAPI statements and build competency profiles</div>
+              </div>
+              <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <div class="toggle-label">Emotional Adaptation</div>
+                <div class="toggle-desc">Adapt tone and character based on learner signals</div>
+              </div>
+              <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <div class="toggle-label">Starter Questions</div>
+                <div class="toggle-desc">Show personalised floating starter questions on open</div>
+              </div>
+              <div class="toggle-switch on" onclick="this.classList.toggle('on')"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <h3>Starter Questions</h3>
+          <span class="section-tag config">Personalised</span>
+        </div>
+        <div class="section-body">
+          <p style="font-size:11px; color:var(--lr-grey); margin-bottom:12px;">These are fallback starters shown when the companion has insufficient data to personalise. Zavmo will replace them with personalised questions once the BA has enough xAPI history.</p>
+          <div class="form-row">
+            <div class="form-group"><label>Starter 1</label><input type="text" value="Tell me about our hero skincare products"></div>
+            <div class="form-group"><label>Starter 2</label><input type="text" value="Help me prepare for a customer consultation"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Starter 3</label><input type="text" value="What's trending across the region this week?"></div>
+            <div class="form-group"><label>Starter 4</label><input type="text" value="Show me a quick product challenge"></div>
+          </div>
+          <button class="btn btn-gold">Save Starters</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 7: CHALLENGES ==================== -->
+    <div class="tab-page" id="tab-challenges">
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="sc-label">Active Challenges</div>
+          <div class="sc-value">48</div>
+          <div class="sc-change up">+6 this week</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Challenges Completed This Month</div>
+          <div class="sc-value">3,847</div>
+          <div class="sc-change up">+42% from Feb</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Average Score</div>
+          <div class="sc-value">74%</div>
+          <div class="sc-change up">+6pts from Feb</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Avg. Time to Complete</div>
+          <div class="sc-value">28s</div>
+          <div class="sc-change neutral">Target: 30s</div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <h3>Challenge Library</h3>
+          <button class="btn btn-gold">Create Challenge</button>
+        </div>
+        <div class="section-body">
+          <table class="data-table">
+            <thead><tr><th>Challenge</th><th>Domain</th><th>Bloom's Level</th><th>Completions</th><th>Avg. Score</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Developer volume selection</td><td>Skincare Science</td><td>Apply</td><td>312</td><td>81%</td><td><span class="status-dot synced"></span>Active</td></tr>
+              <tr><td>Revitalift layering protocol</td><td>Skincare Science</td><td>Remember</td><td>287</td><td>89%</td><td><span class="status-dot synced"></span>Active</td></tr>
+              <tr><td>G&eacute;nifique vs ANR positioning</td><td>Competitive Pos.</td><td>Analyse</td><td>198</td><td>64%</td><td><span class="status-dot synced"></span>Active</td></tr>
+              <tr><td>Price objection at duty-free</td><td>Consultative Sell</td><td>Evaluate</td><td>156</td><td>58%</td><td><span class="status-dot synced"></span>Active</td></tr>
+              <tr><td>Id&ocirc;le fragrance family mapping</td><td>Fragrance</td><td>Understand</td><td>43</td><td>72%</td><td><span class="status-dot pending"></span>New</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 8: USAGE ANALYTICS ==================== -->
+    <div class="tab-page" id="tab-analytics">
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="sc-label">Questions Asked This Month</div>
+          <div class="sc-value">8,412</div>
+          <div class="sc-change up">+31% from Feb</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Unique BAs Engaged</div>
+          <div class="sc-value">623 / 847</div>
+          <div class="sc-change up">73.6% adoption</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Avg. Sessions per BA</div>
+          <div class="sc-value">4.2</div>
+          <div class="sc-change up">+0.8 from Feb</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Response Satisfaction</div>
+          <div class="sc-value">91%</div>
+          <div class="sc-change up">+3pts from Feb</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="section-card">
+          <div class="section-header"><h3>Most Asked Topics</h3></div>
+          <div class="section-body">
+            <table class="data-table">
+              <thead><tr><th>Topic</th><th>Questions</th><th>Trend</th></tr></thead>
+              <tbody>
+                <tr><td>Skincare ingredient comparisons</td><td>1,247</td><td><span class="sc-change up">+18%</span></td></tr>
+                <tr><td>Application techniques</td><td>982</td><td><span class="sc-change up">+12%</span></td></tr>
+                <tr><td>Competitive positioning</td><td>876</td><td><span class="sc-change up">+34%</span></td></tr>
+                <tr><td>Customer consultation prep</td><td>654</td><td><span class="sc-change up">+28%</span></td></tr>
+                <tr><td>Fragrance recommendations</td><td>423</td><td><span class="sc-change up">+52%</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="section-card">
+          <div class="section-header"><h3>Character Engagement</h3></div>
+          <div class="section-body">
+            <table class="data-table">
+              <thead><tr><th>Character</th><th>Interactions</th><th>Satisfaction</th></tr></thead>
+              <tbody>
+                <tr><td>Foundation Builder</td><td>2,814</td><td>94%</td></tr>
+                <tr><td>Challenge Coach</td><td>2,156</td><td>89%</td></tr>
+                <tr><td>Pattern Connector</td><td>1,432</td><td>93%</td></tr>
+                <tr><td>Navigator</td><td>1,287</td><td>91%</td></tr>
+                <tr><td>Collaboration Guide</td><td>876</td><td>90%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-content -->
+</div><!-- /main -->
+
+<script>
+function showTab(id) {
+  var pages = document.querySelectorAll('.tab-page');
+  pages.forEach(function(p) { p.classList.remove('active'); });
+
+  var items = document.querySelectorAll('.nav-item');
+  items.forEach(function(i) { i.classList.remove('active'); });
+
+  var target = document.getElementById('tab-' + id);
+  if (target) target.classList.add('active');
+
+  var titles = {
+    'intelligence': 'Workforce Intelligence',
+    'expertise': 'Expertise Profiles',
+    'gaps': 'Knowledge Gaps',
+    'content': 'Content Library',
+    'sync': 'Sync Status',
+    'config': 'Configuration',
+    'challenges': 'Challenges',
+    'analytics': 'Usage Analytics'
+  };
+  var titleEl = document.getElementById('page-title');
+  if (titleEl && titles[id]) titleEl.textContent = titles[id];
+
+  /* highlight nav */
+  items.forEach(function(item) {
+    if (item.getAttribute('onclick') && item.getAttribute('onclick').indexOf(id) > -1) {
+      item.classList.add('active');
+    }
+  });
+}
+</script>
+</body>
+</html>

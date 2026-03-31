@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Beauty Club — Zavmo-Enhanced Knowledge Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --lr-black: #1A1A1A;
+  --lr-gold: #C8A265;
+  --lr-gold-light: #E8D5A8;
+  --lr-gold-pale: #FBF6ED;
+  --lr-white: #FAFAF8;
+  --lr-warm-grey: #F5F3F0;
+  --lr-grey: #7A7A7A;
+  --lr-grey-light: #E5E3E0;
+  --lr-rose: #D4637A;
+  --lr-deep-plum: #3D1F33;
+  --zavmo-teal: #2A9D8F;
+  --zavmo-green: #52B788;
+  --zavmo-purple: #7B68EE;
+}
+
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  background: #EDECEA;
+  color: var(--lr-black);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== HEADER ===== */
+.page-header {
+  background: var(--lr-black);
+  color: var(--lr-white);
+  padding: 22px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-left { display: flex; align-items: center; gap: 16px; }
+.header-left .logo-mark {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--lr-gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 700; color: var(--lr-gold);
+}
+.page-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.page-header h1 span { color: var(--lr-gold); }
+.page-header .sub-title {
+  font-size: 10px;
+  color: var(--lr-grey);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.header-badge {
+  background: var(--lr-gold);
+  color: var(--lr-black);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 14px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+/* ===== SCENARIO NAV ===== */
+.scenario-nav {
+  background: var(--lr-black);
+  border-top: 1px solid #2a2a2a;
+  padding: 12px 40px;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+}
+.scenario-btn {
+  background: transparent;
+  border: 1px solid #3a3a3a;
+  color: #888;
+  padding: 8px 16px;
+  border-radius: 2px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  letter-spacing: 0.4px;
+}
+.scenario-btn:hover { border-color: var(--lr-gold); color: var(--lr-gold-light); }
+.scenario-btn.active {
+  background: var(--lr-gold);
+  color: var(--lr-black);
+  border-color: var(--lr-gold);
+  font-weight: 600;
+}
+
+/* ===== LAYOUT ===== */
+.comparison-area {
+  display: flex;
+  gap: 40px;
+  padding: 32px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+  justify-content: center;
+}
+.side-label {
+  text-align: center;
+  margin-bottom: 14px;
+}
+.side-label h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.side-label p {
+  font-size: 10px;
+  color: var(--lr-grey);
+  letter-spacing: 0.4px;
+}
+.side-label.enhanced h2 { color: var(--lr-gold); }
+
+.phone-column { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; }
+
+/* ===== PHONE FRAME ===== */
+.phone-frame {
+  width: 340px;
+  height: 700px;
+  border-radius: 36px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.phone-frame.basic {
+  background: #fff;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.10), 0 0 0 1px #ddd;
+}
+.phone-frame.enhanced {
+  background: var(--lr-white);
+  box-shadow: 0 16px 48px rgba(200,162,101,0.15), 0 0 0 1px var(--lr-gold-light);
+}
+
+.phone-status {
+  height: 48px;
+  background: var(--lr-black);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 6px;
+}
+.phone-notch {
+  width: 72px; height: 5px;
+  background: #333;
+  border-radius: 4px;
+}
+
+/* App header inside phone */
+.app-header {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.app-header.basic-h {
+  background: #f5f5f5;
+  border-bottom: 1px solid #e8e8e8;
+}
+.app-header.enhanced-h {
+  background: linear-gradient(135deg, var(--lr-black) 0%, var(--lr-deep-plum) 100%);
+  border-bottom: none;
+}
+.app-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; flex-shrink: 0;
+}
+.app-avatar.basic-a { background: #e0e0e0; }
+.app-avatar.enhanced-a {
+  background: linear-gradient(135deg, var(--lr-gold), var(--lr-gold-light));
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700; font-size: 16px; color: var(--lr-black);
+}
+.app-title { font-size: 13px; font-weight: 600; }
+.app-subtitle { font-size: 9.5px; margin-top: 1px; }
+
+/* ===== CHAT ===== */
+.chat-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.msg {
+  max-width: 86%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  animation: msgIn 0.35s ease-out;
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.msg.bot {
+  align-self: flex-start;
+  background: #f0f0f0;
+  border-bottom-left-radius: 4px;
+  color: #444;
+}
+.msg.user {
+  align-self: flex-end;
+  background: var(--lr-black);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.msg.bot.e {
+  background: var(--lr-gold-pale);
+  border: 1px solid var(--lr-gold-light);
+  border-bottom-left-radius: 4px;
+  color: #333;
+}
+.msg.user.eu {
+  background: linear-gradient(135deg, var(--lr-deep-plum), var(--lr-black));
+}
+
+.char-tag {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 9px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.8px;
+  color: var(--lr-gold); margin-bottom: 5px;
+}
+.char-tag .cd {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--lr-gold);
+}
+
+.emotional-pulse {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 9px; color: var(--lr-grey); margin-top: 5px;
+}
+.pd {
+  width: 5px; height: 5px; border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+.pd.conf { background: var(--zavmo-green); }
+.pd.cur { background: var(--zavmo-teal); }
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.5; transform:scale(1.4); }
+}
+
+/* ===== SPECIAL CARDS ===== */
+.social-card {
+  background: linear-gradient(135deg, #1a1a1a, #2d1f28);
+  border-radius: 14px;
+  padding: 13px;
+  margin: 4px 0;
+  align-self: flex-start;
+  max-width: 92%;
+  animation: msgIn 0.35s ease-out;
+}
+.social-card .sh {
+  display: flex; align-items: center; gap: 5px;
+  margin-bottom: 7px;
+}
+.social-card .si { font-size: 13px; }
+.social-card .sl {
+  font-size: 9px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--lr-gold);
+}
+.social-card .sb {
+  font-size: 11.5px; color: #ccc; line-height: 1.5;
+}
+.social-card .sb strong { color: #fff; }
+.social-card .sa {
+  display: inline-block; margin-top: 8px;
+  background: var(--lr-gold);
+  color: var(--lr-black);
+  font-size: 10px; font-weight: 600;
+  padding: 5px 14px; border-radius: 20px;
+  border: none; cursor: pointer;
+  letter-spacing: 0.3px;
+}
+
+.challenge-card {
+  background: linear-gradient(135deg, #FBF6ED, #FFFAF0);
+  border: 1px solid var(--lr-gold);
+  border-radius: 14px;
+  padding: 13px;
+  margin: 4px 0;
+  align-self: flex-start;
+  max-width: 92%;
+  animation: msgIn 0.35s ease-out;
+}
+.challenge-card .ch {
+  display: flex; align-items: center; gap: 5px;
+  margin-bottom: 6px;
+}
+.challenge-card .ci { font-size: 15px; }
+.challenge-card .cl {
+  font-size: 9px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--lr-gold);
+}
+.challenge-card .cb {
+  font-size: 12px; color: #555; line-height: 1.5;
+}
+.challenge-card .co {
+  display: flex; flex-direction: column; gap: 5px; margin-top: 10px;
+}
+.challenge-card .cx {
+  background: #fff;
+  border: 1px solid var(--lr-grey-light);
+  border-radius: 10px;
+  padding: 7px 11px;
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  font-family: 'DM Sans', sans-serif;
+}
+.challenge-card .cx:hover {
+  border-color: var(--lr-gold);
+  background: var(--lr-gold-pale);
+}
+
+.streak-card {
+  background: linear-gradient(135deg, var(--lr-black), var(--lr-deep-plum));
+  border: 1px solid var(--lr-gold);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 4px 0;
+  align-self: flex-start;
+  max-width: 92%;
+  animation: msgIn 0.35s ease-out;
+  text-align: center;
+}
+.streak-card .sf { font-size: 26px; margin-bottom: 6px; }
+.streak-card .st {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--lr-gold); margin-bottom: 4px;
+}
+.streak-card .ss {
+  font-size: 11px; color: #bbb; line-height: 1.45;
+}
+.streak-card .sx {
+  display: inline-block; margin-top: 8px;
+  background: var(--lr-gold);
+  color: var(--lr-black);
+  font-size: 10px; font-weight: 700;
+  padding: 4px 16px; border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* Beauty Byte card */
+.bb-card {
+  background: linear-gradient(135deg, var(--lr-gold-pale), #fff);
+  border: 1px solid var(--lr-gold-light);
+  border-radius: 14px;
+  padding: 13px;
+  margin: 4px 0;
+  align-self: flex-start;
+  max-width: 92%;
+  animation: msgIn 0.35s ease-out;
+}
+.bb-card .bh {
+  display: flex; align-items: center; gap: 5px;
+  margin-bottom: 6px;
+}
+.bb-card .bi { font-size: 13px; }
+.bb-card .bl {
+  font-size: 9px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--lr-rose);
+}
+.bb-card .bd {
+  font-size: 12px; color: #555; line-height: 1.5;
+}
+
+/* ===== INPUT ===== */
+.input-bar {
+  padding: 10px 14px;
+  border-top: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  flex-shrink: 0;
+}
+.input-bar.ei {
+  background: var(--lr-white);
+  border-top: 1px solid var(--lr-gold-light);
+}
+.input-bar input {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  background: #fff;
+}
+.input-bar input:focus { border-color: var(--lr-gold); }
+.send-btn {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+.send-btn.bs { background: #555; color: #fff; }
+.send-btn.es {
+  background: var(--lr-gold);
+  color: var(--lr-black);
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700; font-size: 15px;
+}
+
+/* ===== INSIGHT PANEL ===== */
+.insight-panel {
+  max-width: 1400px;
+  margin: 0 auto 40px;
+  padding: 0 40px;
+}
+.insight-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+.insight-card {
+  background: #fff;
+  border: 1px solid var(--lr-grey-light);
+  border-radius: 3px;
+  padding: 18px;
+}
+.insight-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.insight-card .it {
+  display: inline-block;
+  font-size: 8px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+  padding: 2px 8px; border-radius: 2px;
+  margin-bottom: 8px;
+}
+.it.neuro { background: #EDE7F6; color: #5E35B1; }
+.it.social { background: #E3F2FD; color: #1565C0; }
+.it.gam { background: #FFF8E1; color: #F57F17; }
+.it.emo { background: #FCE4EC; color: #C62828; }
+.it.ped { background: #E8F5E9; color: #2E7D32; }
+.insight-card p {
+  font-size: 11.5px;
+  color: var(--lr-grey);
+  line-height: 1.6;
+}
+
+/* Starter questions */
+.starter-qs {
+  display: flex; flex-direction: column; gap: 6px;
+  margin-top: 4px; align-self: flex-start; max-width: 92%;
+  animation: msgIn 0.35s ease-out;
+}
+.starter-qs .sq-label {
+  font-size: 9px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--lr-gold); margin-bottom: 2px;
+}
+.starter-qs .sq {
+  background: #fff;
+  border: 1px solid var(--lr-gold-light);
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-size: 11.5px;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+  text-align: left;
+}
+.starter-qs .sq:hover {
+  border-color: var(--lr-gold);
+  background: var(--lr-gold-pale);
+  color: var(--lr-black);
+}
+
+/* Expertise card */
+.expertise-card {
+  background: linear-gradient(135deg, var(--lr-black), var(--lr-deep-plum));
+  border: 1px solid var(--lr-gold);
+  border-radius: 14px;
+  padding: 14px;
+  margin: 4px 0;
+  align-self: flex-start;
+  max-width: 92%;
+  animation: msgIn 0.35s ease-out;
+}
+.expertise-card .ex-header {
+  display: flex; align-items: center; gap: 5px;
+  margin-bottom: 10px;
+}
+.expertise-card .ex-icon { font-size: 14px; }
+.expertise-card .ex-label {
+  font-size: 9px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--lr-gold);
+}
+.expertise-card .ex-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-weight: 700;
+  color: #fff; margin-bottom: 10px;
+}
+.ex-skill-row {
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 7px;
+}
+.ex-skill-name {
+  font-size: 10px; color: #bbb;
+  width: 90px; flex-shrink: 0;
+  text-align: right;
+}
+.ex-bar-track {
+  flex: 1; height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+.ex-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+.ex-bar-fill.master { background: linear-gradient(90deg, var(--lr-gold), #E8D5A8); }
+.ex-bar-fill.advanced { background: linear-gradient(90deg, var(--zavmo-teal), #5EC4B6); }
+.ex-bar-fill.developing { background: linear-gradient(90deg, #7B68EE, #A594FF); }
+.ex-bar-fill.emerging { background: linear-gradient(90deg, #888, #aaa); }
+.ex-skill-level {
+  font-size: 8.5px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  width: 62px; flex-shrink: 0;
+}
+.ex-skill-level.master { color: var(--lr-gold); }
+.ex-skill-level.advanced { color: var(--zavmo-teal); }
+.ex-skill-level.developing { color: #A594FF; }
+.ex-skill-level.emerging { color: #999; }
+.ex-flag {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 9px; font-weight: 600;
+  letter-spacing: 0.3px;
+  margin: 2px 3px 2px 0;
+}
+.ex-flag.gold { background: rgba(200,162,101,0.2); color: var(--lr-gold); border: 1px solid rgba(200,162,101,0.3); }
+.ex-flag.teal { background: rgba(42,157,143,0.15); color: var(--zavmo-teal); border: 1px solid rgba(42,157,143,0.25); }
+.ex-flag.new { background: rgba(123,104,238,0.15); color: #A594FF; border: 1px solid rgba(123,104,238,0.25); }
+.ex-footer {
+  margin-top: 10px; padding-top: 8px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 9.5px; color: #888;
+  text-align: center;
+}
+.ex-footer strong { color: var(--lr-gold); }
+
+/* Source citation */
+.source-cite {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 9.5px; color: var(--lr-grey);
+  margin-top: 6px;
+  padding: 3px 8px;
+  background: rgba(200,162,101,0.08);
+  border-radius: 4px;
+  border-left: 2px solid var(--lr-gold-light);
+}
+
+/* Idle state */
+.idle-state {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; color: #bbb;
+  font-size: 12px; padding: 40px 20px;
+  flex: 1;
+}
+.idle-state .idle-icon { font-size: 36px; margin-bottom: 10px; opacity: 0.5; }
+.idle-state .idle-sub { font-size: 10px; color: #ccc; margin-top: 6px; }
+
+.scenario-content { display: none; }
+.scenario-content.active { display: flex; }
+
+@media (max-width: 900px) {
+  .comparison-area { flex-direction: column; align-items: center; padding: 20px; gap: 24px; }
+  .insight-grid { grid-template-columns: 1fr; }
+  .scenario-nav { padding: 10px 16px; }
+  .page-header { padding: 16px 20px; }
+  .insight-panel { padding: 0 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-left">
+    <!-- logo removed -->
+    <div>
+      <h1>My Beauty Club — <span>Knowledge Companion</span></h1>
+      <div class="sub-title">L'Oréal Travel Retail Asia Pacific &bull; Experience Comparison</div>
+    </div>
+  </div>
+  <div class="header-badge">Prototype</div>
+</div>
+
+<nav class="scenario-nav">
+  <button class="scenario-btn active" onclick="showScenario('open')">First Open</button>
+  <button class="scenario-btn" onclick="showScenario('ask')">Product Question</button>
+  <button class="scenario-btn" onclick="showScenario('proactive')">Beauty Byte Challenge</button>
+  <button class="scenario-btn" onclick="showScenario('social')">Social Momentum</button>
+  <button class="scenario-btn" onclick="showScenario('streak')">Expertise Profile</button>
+</nav>
+
+<!-- ===== 1. FIRST OPEN ===== -->
+<div class="comparison-area scenario-content active" id="scene-open">
+  <div class="phone-column">
+    <div class="side-label"><h2>Standard Approach</h2><p>Third-party chatbot (Botsonic) — reactive FAQ widget</p></div>
+    <div class="phone-frame basic">
+      <div class="phone-status"><div class="phone-notch"></div></div>
+      <div class="app-header basic-h">
+        <!-- avatar removed -->
+        <div><div class="app-title">Knowledge Assistant</div><div class="app-subtitle" style="color:#999">Ask me anything</div></div>
+      </div>
+      <div class="chat-area">
+        <div class="msg bot">Hi! I'm your Knowledge Assistant. I can help you find information from your learning materials. What would you like to know?</div>
+        <div class="starter-qs" style="opacity:0.7;">
+          <div class="sq" style="border-color:#ddd; background:#f8f8f8;">What is Lancôme Génifique?</div>
+          <div class="sq" style="border-color:#ddd; background:#f8f8f8;">Tell me about our skincare range</div>
+          <div class="sq" style="border-color:#ddd; background:#f8f8f8;">How do I use Revitalift Filler?</div>
+        </div>
+      </div>
+      <div class="input-bar">
+        <input type="text" placeholder="Type your question...">
+        <button class="send-btn bs">›</button>
+      </div>
+    </div>
+  </div>
+  <div class="phone-column">
+    <div class="side-label enhanced"><h2>Zavmo-Enhanced Experience</h2><p>Neuroscience-grounded, character-driven, adaptive</p></div>
+    <div class="phone-frame enhanced">
+      <div class="phone-status"><div class="phone-notch"></div></div>
+      <div class="app-header enhanced-h">
+        <!-- avatar removed -->
+        <div><div class="app-title" style="color:#fff">My Beauty Club</div><div class="app-subtitle" style="color:var(--lr-gold)">Your Knowledge Companion &bull; powered by Zavmo</div></div>
+      </div>
+      <div class="chat-area">
+        <div class="msg bot e">
+          <div class="char-tag"><span class="cd"></span> Navigator</div>
+          Hi Wei Ling! You completed the Lancôme Advanced Skincare Beauty Byte yesterday — and your quiz score on active ingredients was impressive.
+          <br><br>
+          I noticed you spent extra time on the retinol section. A customer at your Changi T3 counter might ask exactly that kind of question — want a quick scenario to practise your recommendation?
+          <div class="emotional-pulse"><span class="pd cur"></span> Sensing curiosity — adapting to explore mode</div>
+        </div>
+        <div class="starter-qs">
+          <div class="sq-label">Quick starts for you</div>
+          <div class="sq">Practise my retinol recommendation</div>
+          <div class="sq">30-second challenge from yesterday's Beauty Byte</div>
+          <div class="sq">What's trending across APAC this week?</div>
+          <div class="sq">Help me prep for a skincare consultation</div>
+        </div>
+      </div>
+      <div class="input-bar ei">
+        <input type="text" placeholder="Ask, explore, or say 'surprise me'...">
+        <button class="send-btn es">Z</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 2. PRODUCT QUESTION ===== -->
+<div class="comparison-area scenario-content" id="scene-ask">
+  <div class="phone-column">
+    <div class="side-label"><h2>Standard Approach</h2><p>Keyword search of knowledge base</p></div>
+    <div class="phone-frame basic">
+      <div class="phone-status"><div class="phone-notch"></div></div>
+      <div class="app-header basic-h">
+        <!-- avatar removed -->
+        <div><div class="app-title">Knowledge Assistant</div><div class="app-subtitle" style="color:#999">Ask me anything</div></div>
+      </div>
+      <div class="chat-area">
+        <div class="msg user">What's the difference between Lancôme Advanced Génifique and Estée Lauder Advanced Night Repair?</div>
+        <div class="msg bot">Based on your learning materials:<br><br>Lancôme Advanced Génifique is a lightweight serum that focuses on strengthening the skin barrier using bifidus prebiotic. It targets overall radiance and skin resilience.<br><br>Source: "Lancôme Hero Products" module.</div>
+      </div>
+      <div class="input-bar">
+        <input type="text" placeholder="Type your question...">
+        <button class="send-btn bs">›</button>
+      </div>
+    </div>
+  </div>
+  <div class="phone-column">
+    <div class="side-label enhanced"><h2>Zavmo-Enhanced Experience</h2><p>Bloom's progression with competitive positioning</p></div>
+    <div class="phone-frame enhanced">
+      <div class="phone-status"><div class="phone-notch"></div></div>
+      <div class="app-header enhanced-h">
+        <!-- avatar removed -->
+        <div><div class="app-title" style="color:#fff">My Beauty Club</div><div class="app-subtitle" style="color:var(--lr-gold)">Powered by Zavmo</div></div>
+      </div>
+      <div class="chat-area">
+        <div class="msg user eu">What's the difference between Lancôme Advanced Génifique and Estée Lauder Advanced Night Repair?</div>
+        <div class="msg bot e">
+          <div class="char-tag"><span class="cd"></span> Foundation Builder</div>
+          Great question, Wei Ling — this is one of the most common comparisons customers make at the counter.
+          <br><br>
+          Think of it this way: <strong>Génifique</strong> is about <em>strengthening</em> — it feeds your skin's microbiome to build resilience from within. <strong>ANR</strong> is about <em>repairing</em> — it targets overnight damage recovery.
+          <br><br>
+          The hero ingredient story is your secret weapon here…
+          <div class="source-cite">Source: Lancôme Hero Products Beauty Byte &bull; Advanced Skincare Module</div>
+        </div>
+        <div class="msg bot e">
+          <div class="char-tag"><span class="cd" style="background:var(--zavmo-teal)"></span> Challenge Coach</div>
+          Now imagine: a traveller at your Changi counter says <em>"I already use ANR, why should I switch?"</em>
+          <br><br>
+          How would you position Génifique <strong>without</strong> criticising the competitor? What's the consultative approach?
+          <div class="emotional-pulse"><span class="pd conf"></span> You're in flow — pushing to Analyse level</div>
+        </div>
+      </div>
+      <div class="input-bar ei">
+        <input type="text" placeholder="Share your approach...">
+        <button class="send-btn es">Z</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 3. BEAUTY BYTE CHALLENGE ===== -->
+<div class="comparison-area scenario-content" id="scene-proactive">
+  <div class="phone-column">
+    <div class="side-label"><h2>Standard Approach</h2><p>Silent until the learner initiates</p></div>
+    <div class="phone-frame basic">
+      <div class="phone-status"><div class="phone-notch"></div></div>
+      <div class="app-header basic-h">
+        <!-- avatar removed -->
+        <div><div class="app-title">Knowledge Assistant</div><div class="app-subtitle" style="color:#999">Ask me anything</div></div>
+      </div>
+      <div class="chat-area">
+        <div class="idle-state">
+          <div class="idle-icon" style="font-size:14px; font-weight:600; color:#ccc;">IDLE</div>
+          Waiting for a question…
+          <div class="idle-sub">The assistant is idle between learner interactions.<br>No reinforcement. No spaced practice. Knowledge fades.</div>
+        </div>
+      </div>
+      <div class="input-bar">
+        <input type="text" placeholder="Type your question...">
+        <button class="send-btn bs">›</button>
+      </div>
+    </div>
+  </div>
+  <div class="phone-column">
+    <div class="side-label enhanced"><h2>Zavmo-Enhanced Experience</h2><p>Spaced retrieval (Ebbinghaus) timed to the forgetting curve</p></div>
+    <div class="phone-frame enhanced">
+      <div class="phone-status"><div class="phone-notch"></div></div>
+      <div class="app-header enhanced-h">
+        <!-- avatar removed -->
+        <div><div class="app-title" style="color:#fff">My Beauty Club</div><div class="app-subtitle" style="color:var(--lr-gold)">Powered by Zavmo</div></div>
+      </div>
+      <div class="chat-area">
+        <div class="bb-card">
+          <div class="bh"><span class="bi" style="font-size:11px; color:var(--lr-rose);">&#9670;</span><span class="bl">Beauty Byte Refresher</span></div>
+          <div class="bd">You learnt about L'Oréal Paris skincare layering 3 days ago — perfect timing to lock this in!</div>
+        </div>
+        <div class="challenge-card">
+          <div class="ch"><span class="ci" style="font-size:11px; color:var(--lr-gold);">&#9679;</span><span class="cl">30-Second Counter Challenge</span></div>
+          <div class="cb"><strong>A customer at Changi Airport picks up Revitalift Filler Serum and asks: "Do I use this before or after moisturiser, and does it work with my SPF?"</strong></div>
+          <div class="co">
+            <div class="cx">Before moisturiser, and yes — layer SPF on top</div>
+            <div class="cx">After moisturiser, SPF doesn't matter with serums</div>
+            <div class="cx">It replaces moisturiser entirely, just add SPF</div>
+            <div class="cx">Mix it into the moisturiser for better absorption</div>
+          </div>
+        </div>
+        <div class="msg bot e" style="font-size:10.5px; color:var(--lr-grey); max-width:92%;">
+          <div class="char-tag"><span class="cd" style="background:var(--zavmo-purple)"></span> Evidence Evaluator</div>
+          This challenge is timed to your forgetting curve — answering now strengthens the memory trace by up to 80%. Real counter confidence starts here.
+        </div>
+      </div>
+      <div class="input-bar ei">
+        <input type="text" placeholder="Tap an answer or explain your reasoning...">
+        <button class="send-btn es">Z</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 4. SOCIAL MOMENTUM ===== -->
+<div class="comparison-area scenario-content" id="scene-social">
+  <div class="phone-column">
+    <div class="side-label"><h2>Standard Approach</h2><p>Isolated, individual experience</p></div>
+    <div class="phone-frame basic">
+      <div class="phone-status"><div class="phone-notch"></div></div>
+      <div class="app-header basic-h">
+        <!-- avatar removed -->
+        <div><div class="app-title">Knowledge Assistant</div><div class="app-subtitle" style="color:#999">Ask me anything</div></div>
+      </div>
+      <div class="chat-area">
+        <div class="msg bot">Hi! I'm your Knowledge Assistant. What would you like to know?</div>
+        <div class="msg user">What are other Beauty Advisors learning about?</div>
+        <div class="msg bot">I'm sorry, I can only answer questions based on your learning materials. Try asking about a specific product!</div>
+      </div>
+      <div class="input-bar">
+        <input type="text" placeholder="Type your question...">
+        <button class="send-btn bs">›</button>
+      </div>
+    </div>
+  </div>
+  <div class="phone-column">
+    <div class="side-label enhanced"><h2>Zavmo-Enhanced Experience</h2><p>Social learning theory (Bandura) meets peer curiosity</p></div>
+    <div class="phone-frame enhanced">
+      <div class="phone-status"><div class="phone-notch"></div></div>
+      <div class="app-header enhanced-h">
+        <!-- avatar removed -->
+        <div><div class="app-title" style="color:#fff">My Beauty Club</div><div class="app-subtitle" style="color:var(--lr-gold)">Powered by Zavmo</div></div>
+      </div>
+      <div class="chat-area">
+        <div class="social-card">
+          <div class="sh"><span class="si" style="font-size:10px; color:var(--lr-gold);">&#9650;</span><span class="sl">Trending Across Asia Pacific</span></div>
+          <div class="sb"><strong>31 Beauty Advisors</strong> across Singapore, Seoul and Tokyo explored <strong>"How to upsell from Revitalift to Génifique"</strong> this week. The top question? How to handle the price objection at duty-free counters.</div>
+          <button class="sa">Explore this topic</button>
+        </div>
+        <div class="social-card">
+          <div class="sh"><span class="si" style="font-size:10px; color:var(--lr-gold);">&#9670;</span><span class="sl">Changi Expertise This Week</span></div>
+          <div class="sb"><strong>Priya</strong> at T1 reached <em>Expert</em> in Fragrance Families and <strong>Jia Hui</strong> at T3 unlocked <em>Advanced</em> in Consultative Selling. Your <strong>Skincare Science</strong> expertise is the highest at Changi!</div>
+          <button class="sa">View my expertise profile</button>
+        </div>
+        <div class="msg bot e">
+          <div class="char-tag"><span class="cd" style="background:var(--zavmo-green)"></span> Collaboration Guide</div>
+          Learning is better together. The top-performing counters across Travel Retail have one thing in common — their BAs share product insights daily. Want to see what's trending across Changi this month?
+        </div>
+      </div>
+      <div class="input-bar ei">
+        <input type="text" placeholder="Ask, explore, or say 'surprise me'...">
+        <button class="send-btn es">Z</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 5. EXPERTISE PROFILE ===== -->
+<div class="comparison-area scenario-content" id="scene-streak">
+  <div class="phone-column">
+    <div class="side-label"><h2>Standard Approach</h2><p>No visibility into BA knowledge or expertise</p></div>
+    <div class="phone-frame basic">
+      <div class="phone-status"><div class="phone-notch"></div></div>
+      <div class="app-header basic-h">
+        <!-- avatar removed -->
+        <div><div class="app-title">Knowledge Assistant</div><div class="app-subtitle" style="color:#999">Ask me anything</div></div>
+      </div>
+      <div class="chat-area">
+        <div class="msg user">How am I doing? What are my strengths?</div>
+        <div class="msg bot">I'm sorry, I can only answer questions based on your learning materials. Try asking about a specific topic!</div>
+        <div class="idle-state">
+          <span style="font-size:11px; color:#ccc;">No competency tracking.</span>
+          <div class="idle-sub">The chatbot has no concept of what the BA knows or doesn't know. No data flows back to the organisation. Zero workforce intelligence.</div>
+        </div>
+      </div>
+      <div class="input-bar">
+        <input type="text" placeholder="Type your question...">
+        <button class="send-btn bs">›</button>
+      </div>
+    </div>
+  </div>
+  <div class="phone-column">
+    <div class="side-label enhanced"><h2>Zavmo-Enhanced Experience</h2><p>xAPI-powered expertise profiling &amp; workforce intelligence</p></div>
+    <div class="phone-frame enhanced">
+      <div class="phone-status"><div class="phone-notch"></div></div>
+      <div class="app-header enhanced-h">
+        <!-- avatar removed -->
+        <div><div class="app-title" style="color:#fff">My Beauty Club</div><div class="app-subtitle" style="color:var(--lr-gold)">Powered by Zavmo</div></div>
+      </div>
+      <div class="chat-area">
+        <div class="expertise-card">
+          <div class="ex-header"><span class="ex-icon" style="font-size:11px; color:var(--lr-gold);">&#9632;</span><span class="ex-label">Your Expertise Profile</span></div>
+          <div class="ex-title">Wei Ling — Changi T3</div>
+          <div class="ex-skill-row">
+            <span class="ex-skill-name">Skincare Science</span>
+            <div class="ex-bar-track"><div class="ex-bar-fill master" style="width:88%"></div></div>
+            <span class="ex-skill-level master">Expert</span>
+          </div>
+          <div class="ex-skill-row">
+            <span class="ex-skill-name">Competitive Pos.</span>
+            <div class="ex-bar-track"><div class="ex-bar-fill advanced" style="width:72%"></div></div>
+            <span class="ex-skill-level advanced">Advanced</span>
+          </div>
+          <div class="ex-skill-row">
+            <span class="ex-skill-name">Consultative Sell</span>
+            <div class="ex-bar-track"><div class="ex-bar-fill advanced" style="width:65%"></div></div>
+            <span class="ex-skill-level advanced">Advanced</span>
+          </div>
+          <div class="ex-skill-row">
+            <span class="ex-skill-name">Fragrance</span>
+            <div class="ex-bar-track"><div class="ex-bar-fill developing" style="width:40%"></div></div>
+            <span class="ex-skill-level developing">Developing</span>
+          </div>
+          <div class="ex-skill-row">
+            <span class="ex-skill-name">Colour Cosmetics</span>
+            <div class="ex-bar-track"><div class="ex-bar-fill emerging" style="width:22%"></div></div>
+            <span class="ex-skill-level emerging">Emerging</span>
+          </div>
+          <div style="margin-top:10px;">
+            <span class="ex-flag gold">Skincare Expert</span>
+            <span class="ex-flag teal">Positioning Rising</span>
+            <span class="ex-flag new">Fragrance Gap</span>
+          </div>
+          <div class="ex-footer">xAPI verified &bull; <strong>47 statements</strong> this month &bull; Bloom's peak: <strong>Analyse</strong></div>
+        </div>
+        <div class="msg bot e">
+          <div class="char-tag"><span class="cd" style="background:var(--zavmo-teal)"></span> Pattern Connector</div>
+          Wei Ling, your skincare science expertise is genuinely strong — you've demonstrated mastery across active ingredients, layering protocols, and competitive differentiation.
+          <br><br>
+          I've flagged a gap in <strong>Fragrance Families</strong> though. With the Lancôme Idôle and YSL Libre lines launching next month at Changi, this would be a brilliant area to build. Shall I create a personalised learning path?
+          <div class="emotional-pulse"><span class="pd conf"></span> Expertise growing — xAPI: "demonstrated" Skincare Science at Analyse level</div>
+        </div>
+      </div>
+      <div class="input-bar ei">
+        <input type="text" placeholder="Show me my fragrance gap...">
+        <button class="send-btn es">Z</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCIENCE PANEL ===== -->
+<div class="insight-panel">
+  <div style="text-align:center; margin-bottom:20px;">
+    <h2 style="font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600;">Why This Matters — <span style="color:var(--lr-gold)">The Science Behind the Experience</span></h2>
+    <p style="font-size:11px; color:var(--lr-grey); margin-top:5px;">Every enhancement is grounded in peer-reviewed learning science and human psychology</p>
+  </div>
+  <div class="insight-grid">
+    <div class="insight-card">
+      <span class="it neuro">Neuroscience</span>
+      <h3>Spaced Retrieval Practice</h3>
+      <p>Beauty Byte challenges are timed to each BA's forgetting curve (Ebbinghaus, 1885). Retrieving product knowledge at the optimal interval strengthens memory traces far more effectively than re-reading modules. These aren't quizzes — they're precision-timed memory reinforcement that builds real counter confidence.</p>
+    </div>
+    <div class="insight-card">
+      <span class="it social">Social Learning</span>
+      <h3>Airport & Regional Peer Momentum</h3>
+      <p>Bandura's Social Learning Theory shows we're wired to learn from observing others. Showing trending topics across airports and team activity creates healthy social momentum — not competition, but collective curiosity. When a BA in Singapore sees what's trending in Seoul or Tokyo, knowledge flows across the region.</p>
+    </div>
+    <div class="insight-card">
+      <span class="it gam">xAPI Intelligence</span>
+      <h3>Expertise Profiling &amp; Workforce Intelligence</h3>
+      <p>Every interaction generates xAPI statements — "Wei Ling demonstrated Skincare Science at Analyse level." These build a living competency profile per BA, visible to both the learner and the organisation. L'Oréal Travel Retail gains real-time visibility into where expertise sits across airports, which product areas have knowledge gaps, and where to direct training investment. This is workforce intelligence, not vanity metrics.</p>
+    </div>
+    <div class="insight-card">
+      <span class="it emo">Emotional Adaptation</span>
+      <h3>Meeting Every BA Where They Are</h3>
+      <p>Zavmo detects emotional signals from natural conversation and adapts tone, character, and difficulty in real time. A new BA in their first week gets warmth and scaffolding; a seasoned advisor gets challenged with complex customer scenarios. Learning becomes as unique as a fingerprint.</p>
+    </div>
+    <div class="insight-card">
+      <span class="it ped">Bloom's Taxonomy</span>
+      <h3>From Recall to Consultative Selling</h3>
+      <p>The standard chatbot stays at Remember level — retrieve and repeat. Zavmo's characters climb Bloom's taxonomy deliberately, moving BAs from understanding ingredients to analysing customer needs to creating personalised recommendations. The Challenge Coach doesn't give answers — it builds consultants.</p>
+    </div>
+    <div class="insight-card">
+      <span class="it neuro">Character Rotation</span>
+      <h3>Eight Perspectives, Deeper Encoding</h3>
+      <p>Eight distinct teaching characters present product knowledge from different angles — the Foundation Builder uses metaphor, the Evidence Evaluator demands proof, the Pattern Connector reveals links between skincare science and selling technique. Multi-perspective encoding creates richer neural pathways than a single chatbot voice.</p>
+    </div>
+    <div class="insight-card">
+      <span class="it ped">Knowledge Base</span>
+      <h3>Beyond eLearning &amp; Materials</h3>
+      <p>The spec requires the knowledge base to include eLearning (title, description, URL) and materials (title, description, URL, PDF contents). Zavmo's enhanced companion meets this requirement and extends it — answers cite their source module for trust and traceability. Future phases integrate platform FAQs and reading links (URLs), creating a single unified knowledge layer.</p>
+    </div>
+    <div class="insight-card">
+      <span class="it gam">Starter Questions</span>
+      <h3>Personalised, Not Generic</h3>
+      <p>The spec requires floating starter questions. The standard approach offers the same generic prompts to every BA. Zavmo generates personalised starter questions based on what the learner studied recently, their knowledge gaps, and trending topics across their region — turning an FAQ shortcut into a curiosity springboard.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function showScenario(id) {
+  const scenes = document.querySelectorAll('.scenario-content');
+  scenes.forEach(function(el) { el.classList.remove('active'); });
+
+  const btns = document.querySelectorAll('.scenario-btn');
+  btns.forEach(function(b) { b.classList.remove('active'); });
+
+  var target = document.getElementById('scene-' + id);
+  if (target) target.classList.add('active');
+
+  var labels = ['open','ask','proactive','social','streak'];
+  var idx = labels.indexOf(id);
+  if (idx >= 0 && btns[idx]) btns[idx].classList.add('active');
+}
+</script>
+
+</body>
+</html>

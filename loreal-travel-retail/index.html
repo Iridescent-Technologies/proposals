@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zavmo Knowledge Companion — Proposal for L'Oreal Travel Retail Asia Pacific</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --lr-black: #1A1A1A;
+  --lr-gold: #C8A265;
+  --lr-gold-light: #E8D5A8;
+  --lr-gold-pale: #FBF6ED;
+  --lr-white: #FAFAF8;
+  --lr-grey: #7A7A7A;
+  --lr-grey-light: #E5E3E0;
+  --lr-deep-plum: #3D1F33;
+}
+body {
+  font-family: 'DM Sans', -apple-system, sans-serif;
+  background: var(--lr-white);
+  color: var(--lr-black);
+  line-height: 1.6;
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: var(--lr-black);
+  padding: 60px 40px 50px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(200,162,101,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 50%, rgba(61,31,51,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-block;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--lr-gold);
+  border: 1px solid rgba(200,162,101,0.3);
+  padding: 6px 18px;
+  border-radius: 2px;
+  margin-bottom: 24px;
+  position: relative;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 600;
+  color: #fff;
+  max-width: 700px;
+  margin: 0 auto 12px;
+  line-height: 1.15;
+  position: relative;
+}
+.hero h1 span { color: var(--lr-gold); }
+.hero-sub {
+  font-size: 15px;
+  color: #999;
+  max-width: 560px;
+  margin: 0 auto 32px;
+  position: relative;
+}
+.hero-meta {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  position: relative;
+}
+.hero-meta-item {
+  text-align: center;
+}
+.hero-meta-item .hm-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--lr-gold);
+}
+.hero-meta-item .hm-label {
+  font-size: 10px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ===== THE OPPORTUNITY ===== */
+.section { padding: 56px 0; }
+.section-label {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--lr-gold);
+  margin-bottom: 10px;
+}
+.section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 18px;
+  line-height: 1.2;
+}
+
+/* ===== COMPARISON TABLE ===== */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 13px;
+}
+.compare-table th {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 2px solid var(--lr-grey-light);
+}
+.compare-table th:nth-child(2) { color: var(--lr-grey); }
+.compare-table th:nth-child(3) { color: var(--lr-gold); }
+.compare-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0efed;
+  vertical-align: top;
+}
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table td:first-child {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--lr-grey);
+  width: 180px;
+}
+.compare-table td:nth-child(2) { color: var(--lr-grey); }
+.compare-table td:nth-child(3) { color: var(--lr-black); }
+.tick { color: var(--lr-gold); font-weight: 700; }
+.cross { color: #ccc; }
+
+/* ===== PROTOTYPE CARDS ===== */
+.proto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 28px 0;
+}
+.proto-card {
+  background: #fff;
+  border: 1px solid var(--lr-grey-light);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.proto-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+}
+.proto-card.full-width {
+  grid-column: 1 / -1;
+}
+.proto-img {
+  background: #f5f4f2;
+  padding: 24px;
+  text-align: center;
+  border-bottom: 1px solid var(--lr-grey-light);
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.proto-img-placeholder {
+  width: 100%;
+  max-width: 400px;
+  height: 140px;
+  background: linear-gradient(135deg, var(--lr-gold-pale), #fff);
+  border: 1px solid var(--lr-gold-light);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--lr-gold);
+  font-weight: 600;
+}
+.proto-body { padding: 20px; }
+.proto-body h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.proto-body p {
+  font-size: 13px;
+  color: var(--lr-grey);
+  margin-bottom: 14px;
+  line-height: 1.55;
+}
+.proto-link {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--lr-gold);
+  text-decoration: none;
+  padding: 8px 20px;
+  border: 1px solid var(--lr-gold);
+  border-radius: 3px;
+  transition: all 0.15s;
+}
+.proto-link:hover {
+  background: var(--lr-gold);
+  color: var(--lr-black);
+}
+
+/* ===== SCIENCE PILLARS ===== */
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+}
+.pillar {
+  background: #fff;
+  border: 1px solid var(--lr-grey-light);
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+}
+.pillar-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--lr-gold);
+  margin-bottom: 6px;
+}
+.pillar h4 {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.pillar p {
+  font-size: 11px;
+  color: var(--lr-grey);
+  line-height: 1.5;
+}
+
+/* ===== SPEC COMPLIANCE ===== */
+.spec-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 20px 0;
+}
+.spec-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #fff;
+  border: 1px solid var(--lr-grey-light);
+  border-radius: 4px;
+  font-size: 12px;
+}
+.spec-tick {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--lr-gold);
+  color: var(--lr-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.spec-item strong { font-weight: 600; }
+.spec-item span { color: var(--lr-grey); font-size: 11px; }
+
+/* ===== TIMELINE ===== */
+.timeline {
+  display: flex;
+  justify-content: space-between;
+  margin: 28px 0;
+  position: relative;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 60px;
+  right: 60px;
+  height: 2px;
+  background: var(--lr-grey-light);
+}
+.timeline-step {
+  text-align: center;
+  flex: 1;
+  position: relative;
+}
+.timeline-dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--lr-gold);
+  color: var(--lr-black);
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+  position: relative;
+  z-index: 1;
+}
+.timeline-step h4 {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.timeline-step p {
+  font-size: 10px;
+  color: var(--lr-grey);
+  line-height: 1.4;
+}
+
+/* ===== CTA ===== */
+.cta-section {
+  background: var(--lr-black);
+  padding: 48px 40px;
+  text-align: center;
+}
+.cta-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.cta-section p {
+  font-size: 13px;
+  color: #999;
+  max-width: 500px;
+  margin: 0 auto 24px;
+}
+.cta-btn {
+  display: inline-block;
+  padding: 12px 36px;
+  background: var(--lr-gold);
+  color: var(--lr-black);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: all 0.15s;
+}
+.cta-btn:hover { background: var(--lr-gold-light); }
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 24px 40px;
+  text-align: center;
+  font-size: 10px;
+  color: var(--lr-grey);
+  border-top: 1px solid var(--lr-grey-light);
+}
+.footer a { color: var(--lr-gold); text-decoration: none; }
+
+/* ===== DIVIDER ===== */
+.divider {
+  border: none;
+  border-top: 1px solid var(--lr-grey-light);
+  margin: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 28px; }
+  .hero-meta { flex-direction: column; gap: 16px; }
+  .proto-grid { grid-template-columns: 1fr; }
+  .pillar-grid { grid-template-columns: 1fr 1fr; }
+  .spec-grid { grid-template-columns: 1fr; }
+  .timeline { flex-direction: column; gap: 20px; }
+  .timeline::before { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-badge">Proposal &mdash; March 2026</div>
+  <h1>Reimagining the <span>Knowledge Companion</span> for My Beauty Club</h1>
+  <p class="hero-sub">A neuroscience-grounded AI learning companion that transforms product knowledge into measurable Beauty Advisor expertise across Asia Pacific.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="hm-value">5,500+</div>
+      <div class="hm-label">Beauty Advisors</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hm-value">18</div>
+      <div class="hm-label">Countries</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hm-value">6</div>
+      <div class="hm-label">Languages</div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="hm-value">xAPI</div>
+      <div class="hm-label">Expertise Intelligence</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== THE OPPORTUNITY ===== -->
+<div class="container">
+  <div class="section">
+    <div class="section-label">The Opportunity</div>
+    <h2>From reactive FAQ chatbot to intelligent learning companion</h2>
+    <p style="font-size:14px; color:var(--lr-grey); max-width:800px; margin-bottom:24px;">The original specification calls for a third-party chatbot widget that answers Beauty Advisor questions from a knowledge base. That is a reasonable starting point. But L'Or&eacute;al Travel Retail's Beauty Advisors deserve more than a search box with a personality. They deserve a companion that understands how humans actually learn, adapts to each individual, and generates the workforce intelligence that L'Or&eacute;al needs to make strategic training investments.</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Capability</th>
+          <th>Standard Chatbot</th>
+          <th>Zavmo Knowledge Companion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Knowledge base Q&amp;A</td>
+          <td><span class="tick">Yes</span> &mdash; reactive answers</td>
+          <td><span class="tick">Yes</span> &mdash; with source attribution and confidence</td>
+        </tr>
+        <tr>
+          <td>Learning science</td>
+          <td><span class="cross">None</span></td>
+          <td>Bloom's taxonomy progression, spaced retrieval (Ebbinghaus), desirable difficulty</td>
+        </tr>
+        <tr>
+          <td>Personalisation</td>
+          <td><span class="cross">Generic responses</span></td>
+          <td>xAPI expertise profiling per BA, emotional adaptation, personalised starter questions</td>
+        </tr>
+        <tr>
+          <td>Proactive learning</td>
+          <td><span class="cross">Only answers when asked</span></td>
+          <td>Beauty Byte challenges timed to the forgetting curve, proactive knowledge nudges</td>
+        </tr>
+        <tr>
+          <td>Social learning</td>
+          <td><span class="cross">Isolated experience</span></td>
+          <td>Peer trending, airport-level activity, Bandura social learning theory</td>
+        </tr>
+        <tr>
+          <td>Workforce intelligence</td>
+          <td><span class="cross">Basic usage stats</span></td>
+          <td>Expertise heatmaps, knowledge gap detection, Bloom's progression tracking, ROI data</td>
+        </tr>
+        <tr>
+          <td>Teaching approach</td>
+          <td><span class="cross">Single voice</span></td>
+          <td>8 specialised teaching characters rotating based on context and learner need</td>
+        </tr>
+        <tr>
+          <td>Content management</td>
+          <td>Admin checkbox per item</td>
+          <td>Admin checkbox + auto-sync + re-push on update + bulk operations + sync monitoring</td>
+        </tr>
+        <tr>
+          <td>Data standard</td>
+          <td><span class="cross">Proprietary</span></td>
+          <td>xAPI &mdash; portable, interoperable, industry standard</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== SCIENCE ===== -->
+<div class="container">
+  <div class="section">
+    <div class="section-label">The Science</div>
+    <h2>Four pillars of human learning, built into every interaction</h2>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <div class="pillar-num">1</div>
+        <h4>Bloom's Taxonomy Progression</h4>
+        <p>Every conversation moves Beauty Advisors up through Remember, Understand, Apply, Analyse, Evaluate, and Create. Not stuck at surface recall.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">2</div>
+        <h4>Spaced Retrieval Practice</h4>
+        <p>Beauty Byte challenges are timed to the Ebbinghaus forgetting curve. Knowledge is tested at the precise moment it begins to fade.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">3</div>
+        <h4>Multi-Perspective Characters</h4>
+        <p>Eight teaching characters offer different cognitive perspectives. A Foundation Builder explains differently from a Challenge Coach or Pattern Connector.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">4</div>
+        <h4>Emotional Adaptation</h4>
+        <p>Six emotional archetypes detected through conversation signals. Tone, pacing, and character selection adapt to how the learner is feeling.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== INTERACTIVE PROTOTYPES ===== -->
+<div class="container">
+  <div class="section">
+    <div class="section-label">Interactive Prototypes</div>
+    <h2>See the difference. Click through the experience.</h2>
+    <p style="font-size:14px; color:var(--lr-grey); max-width:800px; margin-bottom:8px;">We have built two interactive prototypes to demonstrate the Zavmo Knowledge Companion in context. Every element is grounded in the original specification requirements and enhanced with learning science.</p>
+
+    <div class="proto-grid">
+      <div class="proto-card">
+        <div class="proto-img">
+          <div class="proto-img-placeholder">Learner Experience</div>
+        </div>
+        <div class="proto-body">
+          <h3>Side-by-Side Comparison</h3>
+          <p>Five clickable scenarios showing the standard chatbot approach alongside the Zavmo-enhanced experience. See how the same Beauty Advisor question transforms from a simple FAQ lookup into a genuine learning moment, with spaced retrieval challenges, social momentum from peers across the region, and xAPI expertise profiling.</p>
+          <a href="loreal-knowledge-assistant-prototype.html" class="proto-link">Open Learner Prototype</a>
+        </div>
+      </div>
+      <div class="proto-card">
+        <div class="proto-img">
+          <div class="proto-img-placeholder">Admin Console</div>
+        </div>
+        <div class="proto-body">
+          <h3>Client Administration Console</h3>
+          <p>Eight pages of admin functionality spanning Zavmo Workforce Intelligence (expertise heatmaps, knowledge gap detection, BA profiles), Knowledge Base management (content library with visibility toggles, sync monitoring), and Companion configuration (feature flags, starter questions, theming, challenge management, usage analytics).</p>
+          <a href="loreal-admin-prototype.html" class="proto-link">Open Admin Prototype</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== SPEC COMPLIANCE ===== -->
+<div class="container">
+  <div class="section">
+    <div class="section-label">Specification Compliance</div>
+    <h2>Every original requirement met, then elevated</h2>
+    <p style="font-size:14px; color:var(--lr-grey); max-width:800px; margin-bottom:8px;">The Zavmo Knowledge Companion is not a different product from the specification. It is the same product built properly, with science underneath. Every requirement from the AI Powered Knowledge Assistant Phase 1 brief has been addressed.</p>
+
+    <div class="spec-grid">
+      <div class="spec-item">
+        <div class="spec-tick">&#10003;</div>
+        <div><strong>Widget integration</strong><br><span>Bottom-right chatbot widget with opened/closed states, directly integrated into My Beauty Club</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick">&#10003;</div>
+        <div><strong>Knowledge base from LMS</strong><br><span>eLearning (title, description, URL) and Materials (title, description, URL, PDF contents) sourced from Growth Engineering LMS</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick">&#10003;</div>
+        <div><strong>Admin visibility checkbox</strong><br><span>Per-item "Visible to Companion" toggle on both eLearning and Material forms</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick">&#10003;</div>
+        <div><strong>Feature flags</strong><br><span>Widget visibility flag and LMS content push flag, plus additional Zavmo feature controls</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick">&#10003;</div>
+        <div><strong>Auto-sync on update</strong><br><span>When content is updated, the item is removed and re-pushed. Deletion and offline removal handled automatically</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick">&#10003;</div>
+        <div><strong>Bulk update capability</strong><br><span>Bulk update button for initial launch sync and ongoing mass operations</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick">&#10003;</div>
+        <div><strong>Starter questions</strong><br><span>Configurable fallback starters, replaced by personalised questions as xAPI data builds</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick">&#10003;</div>
+        <div><strong>Source attribution</strong><br><span>Every companion response cites the source eLearning or Material it drew from</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick">&#10003;</div>
+        <div><strong>Theming and customisation</strong><br><span>Companion name, subtitle, welcome message, accent colour, language — all configurable</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick">&#10003;</div>
+        <div><strong>Phase 2 readiness</strong><br><span>Architecture supports FAQs and reading links (URLs) as future content types</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== WHAT ZAVMO ADDS ===== -->
+<div class="container">
+  <div class="section">
+    <div class="section-label">Beyond the Brief</div>
+    <h2>What Zavmo adds that a chatbot cannot</h2>
+    <div class="spec-grid">
+      <div class="spec-item">
+        <div class="spec-tick" style="background:var(--lr-deep-plum); color:#fff;">+</div>
+        <div><strong>xAPI expertise profiling</strong><br><span>Every interaction generates xAPI statements. Over time, Zavmo builds a verified competency profile for each BA across five product domains</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick" style="background:var(--lr-deep-plum); color:#fff;">+</div>
+        <div><strong>Workforce intelligence dashboard</strong><br><span>Expertise heatmaps by airport, knowledge gap detection, top growth tracking — strategic training data for L&apos;Or&eacute;al leadership</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick" style="background:var(--lr-deep-plum); color:#fff;">+</div>
+        <div><strong>Spaced retrieval practice</strong><br><span>Beauty Byte micro-challenges timed to the Ebbinghaus forgetting curve. Knowledge that sticks, not knowledge that fades</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick" style="background:var(--lr-deep-plum); color:#fff;">+</div>
+        <div><strong>Bloom's taxonomy progression</strong><br><span>Conversations move from Remember to Create. Workforce analytics show average Bloom&apos;s peak per BA and per airport</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick" style="background:var(--lr-deep-plum); color:#fff;">+</div>
+        <div><strong>Social learning (Bandura)</strong><br><span>Peer trending, airport-level activity, team expertise visibility — learning as a social experience, not an isolated one</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick" style="background:var(--lr-deep-plum); color:#fff;">+</div>
+        <div><strong>Emotional adaptation</strong><br><span>Six emotional archetypes detected through conversation signals. Tone, character, and pacing adapt to each BA</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick" style="background:var(--lr-deep-plum); color:#fff;">+</div>
+        <div><strong>8 teaching characters</strong><br><span>Foundation Builder, Challenge Coach, Navigator, Pattern Connector, Evidence Evaluator, Collaboration Guide, and more — each with a distinct pedagogical role</span></div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-tick" style="background:var(--lr-deep-plum); color:#fff;">+</div>
+        <div><strong>No third-party dependency</strong><br><span>Zavmo is a proprietary platform, not a resold chatbot. No Botsonic API limitations, no file UUID workarounds, no vendor lock-in</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== IMPLEMENTATION ===== -->
+<div class="container">
+  <div class="section">
+    <div class="section-label">Implementation</div>
+    <h2>Phased delivery, immediate value</h2>
+    <div class="timeline">
+      <div class="timeline-step">
+        <div class="timeline-dot">1</div>
+        <h4>Foundation</h4>
+        <p>Knowledge base integration from GE LMS. Widget deployment. Admin visibility controls. Feature flags. Core Q&amp;A with source attribution.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot">2</div>
+        <h4>Intelligence</h4>
+        <p>xAPI expertise profiling. Bloom's taxonomy tracking. Workforce intelligence dashboard. Knowledge gap detection.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot">3</div>
+        <h4>Adaptation</h4>
+        <p>Teaching character rotation. Emotional adaptation layer. Personalised starter questions. Beauty Byte challenge engine.</p>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot">4</div>
+        <h4>Scale</h4>
+        <p>Multi-language rollout. Social learning features. FAQs and reading link integration. Full APAC deployment across 18 countries.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CTA ===== -->
+<div class="cta-section">
+  <h2>Ready to transform how your Beauty Advisors learn?</h2>
+  <p>The prototypes above are interactive. Click through them, explore the admin console, and see how every original specification requirement has been met — and then exceeded.</p>
+  <a href="loreal-knowledge-assistant-prototype.html" class="cta-btn">Explore the Prototype</a>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <p>Prepared by <a href="https://www.growthengineering.co.uk">Growth Engineering</a> for L'Or&eacute;al Travel Retail Asia Pacific &mdash; Powered by <a href="#">Zavmo</a> &mdash; March 2026</p>
+  <p style="margin-top:6px;">Confidential. For internal review only.</p>
+</div>
+
+</body>
+</html>
