@@ -462,6 +462,9 @@ body {
       <div class="nav-item" onclick="showTab('analytics')">
         <span class="nav-dot purple"></span> Usage Analytics
       </div>
+      <div class="nav-item" onclick="showTab('chathistory')">
+        <span class="nav-dot rose"></span> Chat History
+      </div>
     </div>
   </nav>
   <div class="sidebar-footer">
@@ -760,14 +763,14 @@ body {
           <div class="sc-change neutral">3 pending sync</div>
         </div>
         <div class="stat-card">
-          <div class="sc-label">Materials / PDFs</div>
+          <div class="sc-label">Document Materials</div>
           <div class="sc-value">147</div>
           <div class="sc-change up">+8 this month</div>
         </div>
         <div class="stat-card">
-          <div class="sc-label">FAQs &amp; Reading Links</div>
+          <div class="sc-label">FAQs &amp; External Links</div>
           <div class="sc-value">42 / 18</div>
-          <div class="sc-change neutral">Phase 2 — FAQs + URL resources</div>
+          <div class="sc-change up">Active — scraped and indexed</div>
         </div>
       </div>
 
@@ -805,7 +808,7 @@ body {
               </tr>
               <tr>
                 <td>YSL Libre Product Guide</td>
-                <td>Material (PDF)</td>
+                <td>Document Material</td>
                 <td style="font-size:11px; color:var(--lr-grey); max-width:180px;">YSL Libre EDP fragrance notes, positioning, and customer talking points</td>
                 <td style="font-size:10px;"><a href="#" style="color:var(--lr-gold);">libre-guide.pdf</a></td>
                 <td><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></td>
@@ -815,7 +818,7 @@ body {
               </tr>
               <tr>
                 <td>Q2 Competitive Positioning Deck</td>
-                <td>Material (PDF)</td>
+                <td>Document Material</td>
                 <td style="font-size:11px; color:var(--lr-grey); max-width:180px;">Q2 2026 competitive landscape vs Est&eacute;e Lauder, Shiseido, Dior</td>
                 <td style="font-size:10px;"><a href="#" style="color:var(--lr-gold);">q2-comp-deck.pdf</a></td>
                 <td><div class="toggle-switch on" onclick="this.classList.toggle('on')"></div></td>
@@ -825,7 +828,7 @@ body {
               </tr>
               <tr>
                 <td>Skincare Layering Protocol v3</td>
-                <td>Material (PDF)</td>
+                <td>Document Material</td>
                 <td style="font-size:11px; color:var(--lr-grey); max-width:180px;">Step-by-step layering routine for counter demonstrations</td>
                 <td style="font-size:10px;"><a href="#" style="color:var(--lr-gold);">layering-v3.pdf</a></td>
                 <td><div class="toggle-switch" onclick="this.classList.toggle('on')"></div></td>
@@ -1113,6 +1116,131 @@ body {
       </div>
     </div>
 
+    <!-- ==================== TAB 9: CHAT HISTORY ==================== -->
+    <div class="tab-page" id="tab-chathistory">
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="sc-label">Total Conversations This Month</div>
+          <div class="sc-value">6,847</div>
+          <div class="sc-change up">+24% from Feb</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Messages Exchanged</div>
+          <div class="sc-value">41,208</div>
+          <div class="sc-change up">Avg 6.0 messages per session</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Exportable Records</div>
+          <div class="sc-value">6,847</div>
+          <div class="sc-change neutral">CSV / JSON / PDF</div>
+        </div>
+        <div class="stat-card">
+          <div class="sc-label">Flagged for Review</div>
+          <div class="sc-value">12</div>
+          <div class="sc-change down">Low-confidence responses</div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <h3>Conversation Log</h3>
+          <div style="display:flex; gap:8px;">
+            <select style="font-family:'DM Sans',sans-serif; font-size:11px; padding:4px 10px; border:1px solid var(--lr-grey-light); border-radius:3px; outline:none;">
+              <option>All Airports</option>
+              <option selected>Changi (SIN)</option>
+              <option>Incheon (ICN)</option>
+              <option>Narita (NRT)</option>
+              <option>KLIA (KUL)</option>
+            </select>
+            <select style="font-family:'DM Sans',sans-serif; font-size:11px; padding:4px 10px; border:1px solid var(--lr-grey-light); border-radius:3px; outline:none;">
+              <option selected>Last 7 days</option>
+              <option>Last 30 days</option>
+              <option>Last 90 days</option>
+              <option>Custom range</option>
+            </select>
+            <button class="btn btn-gold">Export Chat History</button>
+          </div>
+        </div>
+        <div class="section-body">
+          <table class="data-table">
+            <thead><tr><th>Date / Time</th><th>Beauty Advisor</th><th>Airport</th><th>Topic</th><th>Messages</th><th>Satisfaction</th><th>Actions</th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-size:11px;">31 Mar, 14:23</td>
+                <td><span class="ba-avatar">WL</span>Wei Ling</td>
+                <td>Changi T3</td>
+                <td>Revitalift ingredient comparison</td>
+                <td>8</td>
+                <td><span class="level-badge expert">Positive</span></td>
+                <td><a href="#" style="color:var(--lr-gold); font-size:11px; font-weight:500;">View</a></td>
+              </tr>
+              <tr>
+                <td style="font-size:11px;">31 Mar, 13:51</td>
+                <td><span class="ba-avatar">PK</span>Priya Kumar</td>
+                <td>Changi T1</td>
+                <td>YSL Libre vs competitor positioning</td>
+                <td>12</td>
+                <td><span class="level-badge expert">Positive</span></td>
+                <td><a href="#" style="color:var(--lr-gold); font-size:11px; font-weight:500;">View</a></td>
+              </tr>
+              <tr>
+                <td style="font-size:11px;">31 Mar, 11:08</td>
+                <td><span class="ba-avatar">JH</span>Jia Hui Tan</td>
+                <td>Changi T3</td>
+                <td>Colour theory for warm undertones</td>
+                <td>6</td>
+                <td><span class="level-badge advanced">Neutral</span></td>
+                <td><a href="#" style="color:var(--lr-gold); font-size:11px; font-weight:500;">View</a></td>
+              </tr>
+              <tr>
+                <td style="font-size:11px;">31 Mar, 09:42</td>
+                <td><span class="ba-avatar">SL</span>Siti Lim</td>
+                <td>Changi T1</td>
+                <td>Skincare layering routine for demo</td>
+                <td>4</td>
+                <td><span class="level-badge expert">Positive</span></td>
+                <td><a href="#" style="color:var(--lr-gold); font-size:11px; font-weight:500;">View</a></td>
+              </tr>
+              <tr style="background:rgba(224,85,85,0.04);">
+                <td style="font-size:11px;">30 Mar, 16:15</td>
+                <td><span class="ba-avatar">WL</span>Wei Ling</td>
+                <td>Changi T3</td>
+                <td>Duty-free pricing query (low confidence)</td>
+                <td>3</td>
+                <td><span class="level-badge" style="background:rgba(224,85,85,0.12); color:var(--red);">Flagged</span></td>
+                <td><a href="#" style="color:var(--lr-gold); font-size:11px; font-weight:500;">Review</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header">
+          <h3>Sample Conversation</h3>
+          <span class="section-tag live">Live Preview</span>
+        </div>
+        <div class="section-body">
+          <p style="font-size:11px; color:var(--lr-grey); margin-bottom:14px;">Showing conversation between Wei Ling (Changi T3) and the Knowledge Companion, 31 Mar 2026 at 14:23.</p>
+          <div style="max-width:500px;">
+            <div style="background:var(--lr-gold-pale); padding:10px 14px; border-radius:8px 8px 8px 2px; margin-bottom:8px; font-size:12px;">
+              <div style="font-size:9px; font-weight:600; color:var(--lr-gold); margin-bottom:4px;">KNOWLEDGE COMPANION</div>
+              Hi Wei Ling! I notice you&apos;ve been exploring skincare science this week. Would you like to dive deeper into the Revitalift range, or is there something else on your mind?
+            </div>
+            <div style="background:#f0efed; padding:10px 14px; border-radius:8px 8px 2px 8px; margin-bottom:8px; font-size:12px; margin-left:40px;">
+              <div style="font-size:9px; font-weight:600; color:var(--lr-grey); margin-bottom:4px;">WEI LING</div>
+              Yes, a customer asked me how Revitalift compares to the new G&eacute;nifique serum. I wasn&apos;t sure what to say.
+            </div>
+            <div style="background:var(--lr-gold-pale); padding:10px 14px; border-radius:8px 8px 8px 2px; margin-bottom:8px; font-size:12px;">
+              <div style="font-size:9px; font-weight:600; color:var(--lr-gold); margin-bottom:4px;">KNOWLEDGE COMPANION</div>
+              Great question. Both target signs of ageing, but they work differently. Revitalift uses pro-retinol for surface-level renewal, while G&eacute;nifique&apos;s microbiome science works at a deeper cellular level. Think of it this way: Revitalift is like resurfacing a road, G&eacute;nifique is like strengthening the foundation underneath.<br><br>
+              <span style="font-size:10px; color:var(--lr-grey);">Source: Lanc&ocirc;me Hero Products (eLearning module)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div><!-- /page-content -->
 </div><!-- /main -->
 
@@ -1135,7 +1263,8 @@ function showTab(id) {
     'sync': 'Sync Status',
     'config': 'Configuration',
     'challenges': 'Challenges',
-    'analytics': 'Usage Analytics'
+    'analytics': 'Usage Analytics',
+    'chathistory': 'Chat History'
   };
   var titleEl = document.getElementById('page-title');
   if (titleEl && titles[id]) titleEl.textContent = titles[id];
