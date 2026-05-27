@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SPS Academy · Discovery · UM6P</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --um6p-orange: #D7492A;
+  --um6p-orange-light: #ED6E47;
+  --um6p-orange-dark: #B8391E;
+  --um6p-charcoal: #3B3B3C;
+  --um6p-white: #FFFFFF;
+  --um6p-paper: #FAF8F5;
+  --um6p-line: #E9E3D8;
+  --um6p-muted: #6B6B6C;
+  --radius-lg: 16px; --radius-md: 10px; --radius-sm: 6px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--um6p-white); color: var(--um6p-charcoal); font-family: 'Poppins', sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.45; }
+
+/* Topbar + logo (shared with home) */
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; background: var(--um6p-white); border-bottom: 1px solid var(--um6p-line); position: sticky; top: 0; z-index: 10; }
+.um6p-logo { display: inline-flex; align-items: center; gap: 12px; }
+.um6p-blocks { display: inline-flex; gap: 3px; }
+.um6p-blocks span { width: 28px; height: 28px; background: var(--um6p-orange); color: var(--um6p-white); display: grid; place-items: center; font-weight: 700; font-size: 15px; line-height: 1; }
+.um6p-wordmark { font-weight: 400; font-size: 11px; line-height: 1.15; color: var(--um6p-charcoal); }
+.crumb { font-size: 13px; color: var(--um6p-muted); }
+.crumb a { color: var(--um6p-orange); text-decoration: none; font-weight: 500; }
+.crumb a:hover { text-decoration: underline; }
+.user-chip { display: flex; align-items: center; gap: 10px; padding: 5px 14px 5px 5px; border-radius: 999px; background: var(--um6p-paper); border: 1px solid var(--um6p-line); }
+.user-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--um6p-orange); color: var(--um6p-white); display: grid; place-items: center; font-size: 12px; font-weight: 600; }
+.user-name { font-size: 13px; font-weight: 500; }
+
+/* Stream banner */
+.stream-banner { background: var(--um6p-orange); color: var(--um6p-white); padding: 16px 40px; }
+.stream-banner-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
+.stream-banner .um6p-mini { display: inline-flex; gap: 2px; }
+.stream-banner .um6p-mini span { width: 20px; height: 20px; background: var(--um6p-white); color: var(--um6p-orange); display: grid; place-items: center; font-weight: 700; font-size: 11px; line-height: 1; }
+.stream-banner .divider { width: 1px; height: 18px; background: rgba(255,255,255,0.5); }
+.stream-banner .name { font-weight: 500; font-size: 14px; letter-spacing: 0.02em; }
+.stream-banner .domain { margin-left: auto; font-size: 12.5px; opacity: 0.9; }
+
+/* Discovery layout — sidebar on the LEFT like learn.zavmo.ai */
+.discovery { max-width: 1280px; margin: 0 auto; padding: 36px 40px 96px; display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start; }
+
+/* Panel */
+.panel { background: var(--um6p-white); border: 1px solid var(--um6p-line); border-radius: var(--radius-lg); padding: 40px 44px; min-height: 580px; display: flex; flex-direction: column; }
+.panel-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.panel-head .step-num { width: 30px; height: 30px; border-radius: 50%; background: var(--um6p-orange); color: var(--um6p-white); font-size: 12px; font-weight: 700; display: grid; place-items: center; }
+.panel-head .eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--um6p-orange); font-weight: 600; }
+
+h1.step-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--um6p-charcoal);
+  margin: 0 0 14px;
+}
+.step-intro { font-size: 15px; color: var(--um6p-charcoal); line-height: 1.6; margin: 0 0 28px; max-width: 640px; }
+.step-intro em { color: var(--um6p-orange); font-style: normal; font-weight: 500; }
+
+.why-note {
+  background: var(--um6p-paper);
+  border-left: 3px solid var(--um6p-orange);
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--um6p-charcoal);
+  margin-bottom: 24px;
+  line-height: 1.55;
+}
+.why-note strong { font-weight: 600; }
+
+/* Form controls */
+.field { margin-bottom: 24px; }
+.field-label { display: block; font-size: 13px; font-weight: 600; color: var(--um6p-charcoal); margin-bottom: 10px; }
+.field-help { font-size: 12.5px; color: var(--um6p-muted); margin-top: 6px; }
+.opt-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.opt-grid.three { grid-template-columns: repeat(3, 1fr); }
+.opt {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 14px;
+  border: 1px solid var(--um6p-line);
+  border-radius: var(--radius-md);
+  cursor: pointer; background: var(--um6p-white);
+  font-size: 13.5px; color: var(--um6p-charcoal);
+  transition: all 0.15s ease;
+}
+.opt:hover { border-color: var(--um6p-orange); background: var(--um6p-paper); }
+.opt.selected { border-color: var(--um6p-orange); background: rgba(215,73,42,0.06); color: var(--um6p-charcoal); }
+.opt .tick { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #cfc9b8; flex: none; display: grid; place-items: center; }
+.opt.selected .tick { border-color: var(--um6p-orange); background: var(--um6p-orange); color: var(--um6p-white); }
+.opt.selected .tick::after { content: '✓'; font-size: 10px; line-height: 1; }
+textarea, input[type=text] {
+  width: 100%; padding: 12px 14px;
+  font-family: inherit; font-size: 14px;
+  border: 1px solid var(--um6p-line);
+  border-radius: var(--radius-md);
+  background: var(--um6p-white);
+  color: var(--um6p-charcoal);
+  resize: vertical;
+}
+textarea:focus, input[type=text]:focus { outline: none; border-color: var(--um6p-orange); }
+textarea { min-height: 80px; }
+.example { font-size: 12px; color: var(--um6p-muted); font-style: italic; margin-top: 6px; }
+
+/* Skill rating */
+.skill-row { display: grid; grid-template-columns: 1fr 280px; gap: 18px; align-items: center; padding: 16px 0; border-bottom: 1px dashed var(--um6p-line); }
+.skill-row:last-of-type { border-bottom: 0; }
+.skill-row .label { font-size: 14px; color: var(--um6p-charcoal); font-weight: 600; }
+.skill-row .desc { font-size: 12.5px; color: var(--um6p-muted); line-height: 1.45; margin-top: 3px; }
+.scale { display: flex; gap: 6px; }
+.scale button { flex: 1; padding: 9px 6px; border: 1px solid var(--um6p-line); background: var(--um6p-white); border-radius: var(--radius-sm); font-size: 11px; color: var(--um6p-muted); cursor: pointer; font-family: inherit; }
+.scale button:hover { border-color: var(--um6p-orange); }
+.scale button.active { background: var(--um6p-orange); color: var(--um6p-white); border-color: var(--um6p-orange); font-weight: 600; }
+
+/* Buttons */
+.actions { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 32px; gap: 12px; }
+.btn { padding: 12px 24px; border-radius: var(--radius-md); font-size: 14px; font-weight: 600; cursor: pointer; border: 0; font-family: inherit; }
+.btn-primary { background: var(--um6p-orange); color: var(--um6p-white); }
+.btn-primary:hover { background: var(--um6p-orange-dark); }
+.btn-ghost { background: transparent; color: var(--um6p-muted); font-weight: 500; }
+.btn-ghost:hover { color: var(--um6p-orange); }
+
+/* Left sidebar — Zavmo Learn pattern */
+.sidebar { position: sticky; top: 130px; padding: 4px 4px 0; }
+.sidebar-progress { text-align: left; padding-bottom: 18px; border-bottom: 1px solid var(--um6p-line); margin-bottom: 16px; }
+.sidebar-progress .phase { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--um6p-muted); font-weight: 600; }
+.sidebar-progress .count { font-size: 13px; color: var(--um6p-charcoal); font-weight: 500; margin-top: 4px; }
+.sidebar-section-label { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--um6p-muted); font-weight: 600; margin: 18px 4px 8px; }
+
+.nav-item { display: grid; grid-template-columns: 44px 1fr 18px; gap: 12px; align-items: center; padding: 8px 8px; border-radius: var(--radius-md); margin-bottom: 2px; cursor: pointer; transition: background 0.15s ease; }
+.nav-item:hover:not(.locked) { background: var(--um6p-paper); }
+.nav-item .tile { width: 44px; height: 44px; border-radius: 10px; background: var(--um6p-charcoal); display: grid; place-items: center; color: var(--um6p-white); position: relative; flex: none; }
+.nav-item .tile svg { width: 22px; height: 22px; }
+.nav-item .tile .tick-badge { position: absolute; top: -5px; right: -5px; width: 18px; height: 18px; border-radius: 50%; background: var(--um6p-orange); display: none; place-items: center; color: var(--um6p-white); font-size: 11px; font-weight: 700; border: 2px solid var(--um6p-white); line-height: 1; }
+.nav-item .meta { min-width: 0; }
+.nav-item .meta .title { font-size: 13px; color: var(--um6p-charcoal); font-weight: 600; line-height: 1.25; }
+.nav-item .meta .status { font-size: 11.5px; color: var(--um6p-muted); margin-top: 2px; line-height: 1.3; }
+.nav-item .arrow { color: var(--um6p-muted); font-size: 16px; opacity: 0; text-align: center; }
+.nav-item.active .arrow { opacity: 1; color: var(--um6p-orange); }
+.nav-item.active .tile { background: var(--um6p-orange); }
+.nav-item.active .meta .title { color: var(--um6p-charcoal); }
+.nav-item.active .meta .status { color: var(--um6p-orange); font-weight: 600; }
+.nav-item.done .tile { background: var(--um6p-orange-light); }
+.nav-item.done .tile .tick-badge { display: grid; }
+.nav-item.done .meta .status { color: var(--um6p-orange); }
+.nav-item.locked { opacity: 0.55; cursor: default; }
+.nav-item.locked .tile { background: #bdb6a5; }
+.nav-item.locked .meta .status { color: var(--um6p-muted); font-style: italic; }
+
+.save-status { font-size: 12px; color: var(--um6p-orange); display: flex; align-items: center; gap: 8px; margin: 20px 4px 0; padding-top: 16px; border-top: 1px solid var(--um6p-line); font-weight: 500; }
+.save-status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--um6p-orange); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* Steps */
+.step { display: none; flex: 1; flex-direction: column; }
+.step.active { display: flex; }
+
+/* Teaching team */
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 12px; }
+.team-card { padding: 18px; border: 1px solid var(--um6p-line); border-radius: var(--radius-md); background: var(--um6p-white); text-align: left; }
+.team-avatar { width: 36px; height: 36px; border-radius: 8px; margin-bottom: 12px; display: grid; place-items: center; color: var(--um6p-white); font-family: 'Poppins'; font-weight: 700; font-size: 16px; background: var(--um6p-orange); }
+.team-card.alt .team-avatar { background: var(--um6p-orange-light); }
+.team-card.alt2 .team-avatar { background: var(--um6p-charcoal); }
+.team-card h4 { font-family: 'Poppins'; font-size: 14px; color: var(--um6p-charcoal); margin: 0 0 6px; font-weight: 700; }
+.team-card p { font-size: 12.5px; color: var(--um6p-muted); margin: 0; line-height: 1.5; }
+
+/* Path summary */
+.path-summary { background: var(--um6p-paper); border: 1px solid var(--um6p-line); border-radius: var(--radius-md); padding: 24px; margin-bottom: 24px; }
+.path-summary h4 { font-family: 'Poppins'; font-size: 16px; color: var(--um6p-charcoal); margin: 0 0 14px; font-weight: 700; }
+.path-stage { display: grid; grid-template-columns: 50px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px dashed var(--um6p-line); }
+.path-stage:last-child { border-bottom: 0; }
+.path-stage .stage-num { font-family: 'Poppins'; font-size: 26px; color: var(--um6p-orange); font-weight: 700; line-height: 1; }
+.path-stage h5 { font-size: 13.5px; font-weight: 600; color: var(--um6p-charcoal); margin: 4px 0 4px; }
+.path-stage p { font-size: 12.5px; color: var(--um6p-muted); margin: 0; line-height: 1.5; }
+.readiness { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--um6p-muted); margin-top: 10px; }
+.readiness .bar { flex: 1; height: 6px; background: var(--um6p-white); border: 1px solid var(--um6p-line); border-radius: 999px; overflow: hidden; }
+.readiness .bar i { display: block; height: 100%; background: var(--um6p-orange); border-radius: 999px; }
+
+@media (max-width: 1024px) {
+  .discovery { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="um6p-logo">
+    <div class="um6p-blocks"><span>U</span><span>M</span><span>6</span><span>P</span></div>
+    <div class="um6p-wordmark">University<br/>Mohammed VI<br/>Polytechnic</div>
+  </div>
+  <div class="crumb"><a href="home.html">← Home</a></div>
+  <div class="user-chip">
+    <div class="user-avatar">ZE</div>
+    <span class="user-name">Zahra El Alami</span>
+  </div>
+</header>
+
+<!-- Stream sub-brand banner (UM6P | SPS Academy format per p.54) -->
+<div class="stream-banner">
+  <div class="stream-banner-inner">
+    <span class="um6p-mini"><span>U</span><span>M</span><span>6</span><span>P</span></span>
+    <span class="divider"></span>
+    <span class="name">SPS Academy · Discovery Journey</span>
+    <span class="domain">Sustainability, Resource Systems &amp; Industrial Transformation</span>
+  </div>
+</div>
+
+<main class="discovery">
+
+  <!-- Left sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-progress">
+      <div class="phase">SPS Academy · Discovery</div>
+      <div class="count" id="progress-count">Step 1 of 12 · Welcome</div>
+    </div>
+
+    <div class="sidebar-section-label">Your journey</div>
+
+    <div class="nav-item active" data-nav="1" onclick="goStep(1)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2 4 4 8-8 4 4"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Welcome</div><div class="status">Begin journey</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="2" onclick="goStep(2)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 19c0-3 3-5 6-5s6 2 6 5"/><path d="M14 19c0-2 2-4 4.5-4s4.5 2 4.5 4"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Teaching team</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="3" onclick="goStep(3)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M4 12h7M4 17h12"/><circle cx="17" cy="7" r="2"/><circle cx="14" cy="12" r="2"/><circle cx="19" cy="17" r="2"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Learning preferences</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="4" onclick="goStep(4)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 5 5 .5-4 3.5 1.5 5L12 14.5 7.5 17 9 12 5 8.5 10 8z"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">What engages you</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="5" onclick="goStep(5)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a2 2 0 0 1 2 2v14l-7-3-7 3V6a2 2 0 0 1 1-2z"/><path d="M9 8h6M9 12h4"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Prior exposure</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="6" onclick="goStep(6)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6 7-6s7 2 7 6"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Role &amp; function</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="7" onclick="goStep(7)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M3 13h18"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Your work context</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="8" onclick="goStep(8)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Learning goals</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="sidebar-section-label">Calibration</div>
+
+    <div class="nav-item" data-nav="9" onclick="goStep(9)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Domain skill check</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="10" onclick="goStep(10)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.8 1 1.8 1 2.8V17h6v-.7c0-1 .3-2 1-2.8A6 6 0 0 0 12 3z"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Reasoning scenarios</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="sidebar-section-label">Outcome</div>
+
+    <div class="nav-item" data-nav="11" onclick="goStep(11)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Review &amp; save</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="12" onclick="goStep(12)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l4-4M14 4l6 6-9 9H5v-6z"/><path d="M14 8l2 2"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Your learning path</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="save-status">Autosaving to your profile</div>
+  </aside>
+
+  <section class="panel">
+
+    <!-- STEP 1 — Welcome -->
+    <div class="step active" data-step="1">
+      <div class="panel-head"><span class="step-num">1</span><span class="eyebrow">Welcome</span></div>
+      <h1 class="step-title">Hello, I'm Zavmo.</h1>
+      <p class="step-intro">I'll guide you through a personalised learning journey designed to strengthen your understanding, reasoning and ability to apply key concepts in real business and operational environments — anchored in Sustainability, Resource Systems &amp; Industrial Transformation.</p>
+      <div class="why-note"><strong>How this works:</strong> the Academy domain stays the anchor throughout. Your role, function and experience personalise <em>how</em> the content reaches you — not <em>what</em> the content is about.</div>
+      <div class="actions"><span></span><button class="btn btn-primary" onclick="goStep(2)">Begin the journey →</button></div>
+    </div>
+
+    <!-- STEP 2 — Teaching team -->
+    <div class="step" data-step="2">
+      <div class="panel-head"><span class="step-num">2</span><span class="eyebrow">Your teaching team</span></div>
+      <h1 class="step-title">You'll be supported by a team of AI learning characters.</h1>
+      <p class="step-intro">Each has a distinct specialty designed to guide different parts of your learning journey. They will appear when relevant to support understanding, application, reflection and progression.</p>
+      <div class="team-grid">
+        <div class="team-card"><div class="team-avatar">P</div><h4>The Practitioner</h4><p>Grounds concepts in real operational and industrial scenarios.</p></div>
+        <div class="team-card alt"><div class="team-avatar">S</div><h4>The Systems Thinker</h4><p>Helps you see interdependence across resource systems and supply chains.</p></div>
+        <div class="team-card alt2"><div class="team-avatar">R</div><h4>The Reflector</h4><p>Prompts deeper interpretation, judgement and metacognitive moments.</p></div>
+      </div>
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(1)">Back</button><button class="btn btn-primary" onclick="goStep(3)">Continue learning journey →</button></div>
+    </div>
+
+    <!-- STEP 3 — Learning preferences -->
+    <div class="step" data-step="3">
+      <div class="panel-head"><span class="step-num">3</span><span class="eyebrow">Learning preferences</span></div>
+      <h1 class="step-title">How do you prefer to learn?</h1>
+      <p class="step-intro">Select the formats that help you engage best, and I'll adapt the learning experience accordingly.</p>
+      <div class="opt-grid" data-multi>
+        <div class="opt"><span class="tick"></span><span>Case studies and real examples</span></div>
+        <div class="opt"><span class="tick"></span><span>Structured frameworks and models</span></div>
+        <div class="opt"><span class="tick"></span><span>Conversational dialogue with Zavmo</span></div>
+        <div class="opt"><span class="tick"></span><span>Diagrams and systems maps</span></div>
+        <div class="opt"><span class="tick"></span><span>Reading short articles</span></div>
+        <div class="opt"><span class="tick"></span><span>Video and audio explanations</span></div>
+        <div class="opt"><span class="tick"></span><span>Reflection and journalling</span></div>
+        <div class="opt"><span class="tick"></span><span>Applied challenges from my own work</span></div>
+      </div>
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(2)">Back</button><button class="btn btn-primary" onclick="goStep(4)">Save and continue →</button></div>
+    </div>
+
+    <!-- STEP 4 — Interests -->
+    <div class="step" data-step="4">
+      <div class="panel-head"><span class="step-num">4</span><span class="eyebrow">What engages you</span></div>
+      <h1 class="step-title">Tell us what kinds of stories, examples and real-world references make learning more engaging for you.</h1>
+      <p class="step-intro">We'll use this to personalise how concepts are explained throughout your journey.</p>
+      <div class="opt-grid three" data-multi>
+        <div class="opt"><span class="tick"></span><span>Global business stories</span></div>
+        <div class="opt"><span class="tick"></span><span>Cities and infrastructure</span></div>
+        <div class="opt"><span class="tick"></span><span>Technology and innovation</span></div>
+        <div class="opt"><span class="tick"></span><span>Climate and resource challenges</span></div>
+        <div class="opt"><span class="tick"></span><span>Food systems</span></div>
+        <div class="opt"><span class="tick"></span><span>Design and creativity</span></div>
+        <div class="opt"><span class="tick"></span><span>Markets and consumer trends</span></div>
+        <div class="opt"><span class="tick"></span><span>Real-world problem solving</span></div>
+        <div class="opt"><span class="tick"></span><span>Human behaviour &amp; decision-making</span></div>
+        <div class="opt"><span class="tick"></span><span>Future trends and big ideas</span></div>
+        <div class="opt"><span class="tick"></span><span>Strategy and competition</span></div>
+        <div class="opt"><span class="tick"></span><span>People, teams &amp; leadership dynamics</span></div>
+      </div>
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(3)">Back</button><button class="btn btn-primary" onclick="goStep(5)">Save and continue →</button></div>
+    </div>
+
+    <!-- STEP 5 — Prior exposure to the domain -->
+    <div class="step" data-step="5">
+      <div class="panel-head"><span class="step-num">5</span><span class="eyebrow">Prior exposure</span></div>
+      <h1 class="step-title">Before we build your path, tell us what prior exposure you have to this domain.</h1>
+      <p class="step-intro">Sustainability, Resource Systems &amp; Industrial Transformation. This helps us understand whether the topic has been part of your work, learning or professional development — and avoid unnecessary repetition.</p>
+      <div class="opt-grid" data-single>
+        <div class="opt"><span class="tick"></span><span>New to this domain</span></div>
+        <div class="opt"><span class="tick"></span><span>Exposure through my current work</span></div>
+        <div class="opt"><span class="tick"></span><span>Exposure through previous work or projects</span></div>
+        <div class="opt"><span class="tick"></span><span>Informal learning or self-study</span></div>
+        <div class="opt"><span class="tick"></span><span>Formal coursework or training</span></div>
+        <div class="opt"><span class="tick"></span><span>Professional certification or advanced experience</span></div>
+      </div>
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(4)">Back</button><button class="btn btn-primary" onclick="goStep(6)">Confirm and continue →</button></div>
+    </div>
+
+    <!-- STEP 6 — Role context -->
+    <div class="step" data-step="6">
+      <div class="panel-head"><span class="step-num">6</span><span class="eyebrow">Your role context</span></div>
+      <h1 class="step-title">First things first — let's understand your context.</h1>
+      <p class="step-intro">I'll ask a few questions to understand your role context, experience level and familiarity with this domain, then adapt the learning journey to your starting point.</p>
+
+      <div class="field">
+        <label class="field-label">Function or work environment</label>
+        <div class="opt-grid three" data-single>
+          <div class="opt"><span class="tick"></span>Operations</div>
+          <div class="opt"><span class="tick"></span>Commercial</div>
+          <div class="opt"><span class="tick"></span>Planning</div>
+          <div class="opt"><span class="tick"></span>Transformation</div>
+          <div class="opt"><span class="tick"></span>Strategy</div>
+          <div class="opt"><span class="tick"></span>Support function</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Experience level</label>
+        <div class="opt-grid" data-single>
+          <div class="opt"><span class="tick"></span>Less than 1 year</div>
+          <div class="opt"><span class="tick"></span>1–3 years</div>
+          <div class="opt"><span class="tick"></span>3–5 years</div>
+          <div class="opt"><span class="tick"></span>5+ years</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Current role type</label>
+        <div class="opt-grid" data-single>
+          <div class="opt"><span class="tick"></span>Individual contributor</div>
+          <div class="opt"><span class="tick"></span>Manager</div>
+          <div class="opt"><span class="tick"></span>Cross-functional coordinator</div>
+          <div class="opt"><span class="tick"></span>Strategy or transformation role</div>
+          <div class="opt"><span class="tick"></span>Customer-facing role</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Familiarity with sustainability, resource systems &amp; industrial transformation</label>
+        <div class="opt-grid" data-single>
+          <div class="opt"><span class="tick"></span>Beginner</div>
+          <div class="opt"><span class="tick"></span>Some exposure</div>
+          <div class="opt"><span class="tick"></span>Comfortable</div>
+          <div class="opt"><span class="tick"></span>Advanced</div>
+        </div>
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(5)">Back</button><button class="btn btn-primary" onclick="goStep(7)">Save and continue →</button></div>
+    </div>
+
+    <!-- STEP 7 — Work context -->
+    <div class="step" data-step="7">
+      <div class="panel-head"><span class="step-num">7</span><span class="eyebrow">Your work context</span></div>
+      <h1 class="step-title">Before the skill check, tell me a bit about your real work.</h1>
+      <p class="step-intro">I'll use this to connect the learning journey to your actual responsibilities, challenges and contribution environment. Describe it in your own words.</p>
+
+      <div class="field">
+        <label class="field-label">What project, responsibility or challenge are you currently focused on?</label>
+        <textarea placeholder="e.g. coordinating a transformation initiative, supporting customer discussions, managing a sustainability-related priority…"></textarea>
+        <div class="example">Examples: improving operational efficiency, supporting customer discussions, coordinating a transformation initiative, or managing a sustainability-related priority.</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">What is the hardest part right now?</label>
+        <div class="opt-grid" data-multi>
+          <div class="opt"><span class="tick"></span>Aligning stakeholders</div>
+          <div class="opt"><span class="tick"></span>Understanding trade-offs</div>
+          <div class="opt"><span class="tick"></span>Prioritising what matters most</div>
+          <div class="opt"><span class="tick"></span>Connecting concepts to real work</div>
+          <div class="opt"><span class="tick"></span>Making decisions with limited information</div>
+          <div class="opt"><span class="tick"></span>Explaining ideas to others</div>
+          <div class="opt"><span class="tick"></span>Managing complexity across teams</div>
+          <div class="opt"><span class="tick"></span>Turning ideas into action</div>
+        </div>
+        <input type="text" placeholder="Other — add your own…" style="margin-top:10px;" />
+      </div>
+
+      <div class="field">
+        <label class="field-label">If you could improve one thing about how your team works, what would it be?</label>
+        <textarea placeholder="Open response — anything from decision speed to data quality to stakeholder coordination."></textarea>
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(6)">Back</button><button class="btn btn-primary" onclick="goStep(8)">Save and continue →</button></div>
+    </div>
+
+    <!-- STEP 8 — Learning goals -->
+    <div class="step" data-step="8">
+      <div class="panel-head"><span class="step-num">8</span><span class="eyebrow">Your learning goals</span></div>
+      <h1 class="step-title">What do you want to get out of this learning journey?</h1>
+      <p class="step-intro">Pick everything that applies — your goals will shape how deep we go on each topic and where I focus your time.</p>
+      <div class="opt-grid" data-multi>
+        <div class="opt"><span class="tick"></span>Strengthen my understanding of the topic</div>
+        <div class="opt"><span class="tick"></span>Apply concepts to my current work</div>
+        <div class="opt"><span class="tick"></span>Improve decision-making and trade-off reasoning</div>
+        <div class="opt"><span class="tick"></span>Build confidence in sustainability &amp; transformation discussions</div>
+        <div class="opt"><span class="tick"></span>Understand how global industrial shifts affect my work</div>
+        <div class="opt"><span class="tick"></span>Strengthen my ability to contribute to my team or business unit</div>
+        <div class="opt"><span class="tick"></span>Prepare for broader responsibilities or future leadership</div>
+        <div class="opt"><span class="tick"></span>Strengthen my ability to lead or support a team</div>
+      </div>
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(7)">Back</button><button class="btn btn-primary" onclick="goStep(9)">Save and continue →</button></div>
+    </div>
+
+    <!-- STEP 9 — Skill check -->
+    <div class="step" data-step="9">
+      <div class="panel-head"><span class="step-num">9</span><span class="eyebrow">Quick skill check</span></div>
+      <h1 class="step-title">Rate your confidence in applying the following skills <em>within this domain</em>.</h1>
+      <p class="step-intro">Sustainability, Resource Systems &amp; Industrial Transformation. This helps us personalise your starting point. There are no wrong answers.</p>
+      <div class="why-note">Use the 1–5 scale: <strong>1 Novice · 2 Beginner · 3 Competent · 4 Proficient · 5 Expert</strong></div>
+
+      <div class="skill-row">
+        <div>
+          <div class="label">Technical knowledge</div>
+          <div class="desc">"I understand the core concepts, terminology and principles related to this domain."</div>
+        </div>
+        <div><div class="scale"><button>1</button><button>2</button><button class="active">3</button><button>4</button><button>5</button></div></div>
+      </div>
+      <div class="skill-row">
+        <div><div class="label">Practical application</div><div class="desc">"I can apply concepts from this domain to real work situations or operational scenarios."</div></div>
+        <div><div class="scale"><button>1</button><button class="active">2</button><button>3</button><button>4</button><button>5</button></div></div>
+      </div>
+      <div class="skill-row">
+        <div><div class="label">Problem solving</div><div class="desc">"I can analyse challenges, identify issues and reason through possible solutions within this domain."</div></div>
+        <div><div class="scale"><button>1</button><button>2</button><button class="active">3</button><button>4</button><button>5</button></div></div>
+      </div>
+      <div class="skill-row">
+        <div><div class="label">Communication (domain-framed)</div><div class="desc">"I can explain ideas from this domain clearly to colleagues, stakeholders or teams."</div></div>
+        <div><div class="scale"><button>1</button><button>2</button><button>3</button><button class="active">4</button><button>5</button></div></div>
+      </div>
+      <div class="skill-row">
+        <div><div class="label">Leadership &amp; mentoring (domain-framed)</div><div class="desc">"I can guide others, support team discussions or help others understand and apply concepts from this domain."</div></div>
+        <div><div class="scale"><button>1</button><button class="active">2</button><button>3</button><button>4</button><button>5</button></div></div>
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(8)">Back</button><button class="btn btn-primary" onclick="goStep(10)">Continue to scenarios →</button></div>
+    </div>
+
+    <!-- STEP 10 — Reasoning scenarios -->
+    <div class="step" data-step="10">
+      <div class="panel-head"><span class="step-num">10</span><span class="eyebrow">Reasoning scenarios</span></div>
+      <h1 class="step-title">A couple of short scenarios to understand how you reason.</h1>
+      <p class="step-intro">These aren't tests with right answers — I'm interested in <em>how</em> you think through trade-offs, not whether you pick the obvious option. Type as much or as little as feels natural.</p>
+
+      <div class="field">
+        <label class="field-label">Scenario A — Trade-off under uncertainty</label>
+        <p style="font-size:13.5px; color:var(--um6p-charcoal); line-height:1.55; margin:0 0 10px;">Your operation has two paths to reduce resource intensity. <strong>Path 1</strong> delivers a 15% reduction quickly but locks you into a single supplier. <strong>Path 2</strong> delivers 8% now with optionality to scale to 25% over two years, but needs cross-team alignment. How would you reason through the choice, and what would you want to know first?</p>
+        <textarea placeholder="Write in your own words — I'm interested in your reasoning, not a 'correct' answer."></textarea>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Scenario B — Connecting systems</label>
+        <p style="font-size:13.5px; color:var(--um6p-charcoal); line-height:1.55; margin:0 0 10px;">A colleague says: "Sustainability is a cost, not a capability." How would you respond, using something specific from your own work or context?</p>
+        <textarea placeholder="What angle would you take? What evidence or example would you draw on?"></textarea>
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(9)">Back</button><button class="btn btn-primary" onclick="goStep(11)">Save and continue →</button></div>
+    </div>
+
+    <!-- STEP 11 — Review -->
+    <div class="step" data-step="11">
+      <div class="panel-head"><span class="step-num">11</span><span class="eyebrow">Review &amp; save</span></div>
+      <h1 class="step-title">Here's the profile I've built with you.</h1>
+      <p class="step-intro">Take a moment to review. You can edit any answer — your responses save as you go, so coming back later (from your dashboard or Learn tab) won't lose anything.</p>
+      <div class="why-note"><strong>Saved to your profile</strong> — autosave is on. You can revise any answer from this panel at any time.</div>
+
+      <div class="path-summary">
+        <h4>Your captured profile</h4>
+        <div class="profile-row"><span class="k">Domain</span><span class="v">Sustainability, Resource Systems &amp; Industrial Transformation</span></div>
+        <div class="profile-row"><span class="k">Function</span><span class="v">Transformation</span></div>
+        <div class="profile-row"><span class="k">Experience</span><span class="v">3–5 years</span></div>
+        <div class="profile-row"><span class="k">Role type</span><span class="v">Cross-functional coordinator</span></div>
+        <div class="profile-row"><span class="k">Domain familiarity</span><span class="v">Some exposure</span></div>
+        <div class="profile-row"><span class="k">Prior exposure</span><span class="v">Through current work</span></div>
+        <div class="profile-row"><span class="k">Main goals</span><span class="v">Apply to current work · Improve decision-making</span></div>
+        <div class="profile-row"><span class="k">Hardest part</span><span class="v">Understanding trade-offs · Aligning stakeholders</span></div>
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(10)">Edit my answers</button><button class="btn btn-primary" onclick="goStep(12)">Confirm and generate my path →</button></div>
+    </div>
+
+    <!-- STEP 12 — Personalised path -->
+    <div class="step" data-step="12">
+      <div class="panel-head"><span class="step-num">12</span><span class="eyebrow">Your personalised path</span></div>
+      <h1 class="step-title">Your learning path through the SPS Academy.</h1>
+      <p class="step-intro">Anchored in the Academy domain. Your role, function and reasoning style shape <em>how</em> we go through it — pacing, examples, depth — but the destination stays the same: capability within Sustainability, Resource Systems &amp; Industrial Transformation.</p>
+
+      <div class="path-summary">
+        <h4>Five capability stages</h4>
+
+        <div class="path-stage">
+          <div class="stage-num">1</div>
+          <div>
+            <h5>Understand · Sustainability foundations &amp; resource interdependence</h5>
+            <p>Anchor concepts, terminology and the systems view. Examples will lean on transformation contexts familiar to you.</p>
+            <div class="readiness"><span>Readiness</span><div class="bar"><i style="width:55%"></i></div><span>55%</span></div>
+          </div>
+        </div>
+        <div class="path-stage">
+          <div class="stage-num">2</div>
+          <div>
+            <h5>Diagnose · Industrial competitiveness &amp; trade-off reasoning</h5>
+            <p>Map where capability, resource and operational systems interact. Bloom level: analyse.</p>
+            <div class="readiness"><span>Readiness</span><div class="bar"><i style="width:38%"></i></div><span>38%</span></div>
+          </div>
+        </div>
+        <div class="path-stage">
+          <div class="stage-num">3</div>
+          <div>
+            <h5>Apply · Operational application in your work context</h5>
+            <p>Connects to your current transformation work. Case-based throughout.</p>
+            <div class="readiness"><span>Readiness</span><div class="bar"><i style="width:28%"></i></div><span>28%</span></div>
+          </div>
+        </div>
+        <div class="path-stage">
+          <div class="stage-num">4</div>
+          <div>
+            <h5>Evaluate · Decision-making under uncertainty</h5>
+            <p>Trade-off reasoning, evidence weighing, judgement formation.</p>
+            <div class="readiness"><span>Readiness</span><div class="bar"><i style="width:15%"></i></div><span>15%</span></div>
+          </div>
+        </div>
+        <div class="path-stage">
+          <div class="stage-num">5</div>
+          <div>
+            <h5>Create · Contribution-oriented output</h5>
+            <p>Translate your learning into a recommendation or contribution within your team or business unit.</p>
+            <div class="readiness"><span>Readiness</span><div class="bar"><i style="width:5%"></i></div><span>5%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-note">
+        <strong>Note on readiness:</strong> these percentages reflect your reasoning evidence from the calibration scenarios, prior exposure, and domain-specific skill check — not generic role experience. They'll re-calibrate as we go.
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(11)">Edit my profile</button><button class="btn btn-primary">Start my learning journey →</button></div>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+const STEP_TITLES = {
+  1: 'Welcome', 2: 'Teaching team', 3: 'Learning preferences', 4: 'What engages you',
+  5: 'Prior exposure', 6: 'Role & function', 7: 'Your work context', 8: 'Learning goals',
+  9: 'Domain skill check', 10: 'Reasoning scenarios', 11: 'Review & save', 12: 'Your learning path'
+};
+const TOTAL_STEPS = 12;
+
+function goStep(n) {
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
+
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const idx = parseInt(item.dataset.nav, 10);
+    item.classList.remove('active','done','locked');
+    const status = item.querySelector('.meta .status');
+    if (idx < n) {
+      item.classList.add('done');
+      if (status) status.textContent = 'Saved';
+    } else if (idx === n) {
+      item.classList.add('active');
+      if (status) status.textContent = 'Current step';
+    } else {
+      item.classList.add('locked');
+      if (status) status.textContent = 'Locked';
+    }
+  });
+
+  const counter = document.getElementById('progress-count');
+  if (counter) counter.textContent = `Step ${n} of ${TOTAL_STEPS} · ${STEP_TITLES[n]}`;
+
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+// Initialise lock state for items past step 1 on page load
+document.querySelectorAll('.nav-item').forEach(item => {
+  const idx = parseInt(item.dataset.nav, 10);
+  if (idx > 1) item.classList.add('locked');
+});
+
+document.querySelectorAll('.opt-grid').forEach(grid => {
+  const single = grid.hasAttribute('data-single');
+  grid.querySelectorAll('.opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      if (single) grid.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      opt.classList.toggle('selected');
+    });
+  });
+});
+
+document.querySelectorAll('.scale').forEach(s => {
+  s.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', () => {
+      s.querySelectorAll('button').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  });
+});
+</script>
+</body>
+</html>

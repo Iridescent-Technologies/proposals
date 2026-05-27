@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Entrepreneurship &amp; Innovation · Discovery · UM6P</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --um6p-orange: #D7492A;
+  --um6p-orange-light: #ED6E47;
+  --um6p-orange-dark: #B8391E;
+  --um6p-charcoal: #3B3B3C;
+  --um6p-white: #FFFFFF;
+  --um6p-paper: #FAF8F5;
+  --um6p-line: #E9E3D8;
+  --um6p-muted: #6B6B6C;
+  --radius-lg: 16px; --radius-md: 10px; --radius-sm: 6px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--um6p-white); color: var(--um6p-charcoal); font-family: 'Poppins', sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.45; }
+
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 20px 40px; background: var(--um6p-white); border-bottom: 1px solid var(--um6p-line); position: sticky; top: 0; z-index: 10; }
+.um6p-logo { display: inline-flex; align-items: center; gap: 12px; }
+.um6p-blocks { display: inline-flex; gap: 3px; }
+.um6p-blocks span { width: 28px; height: 28px; background: var(--um6p-orange); color: var(--um6p-white); display: grid; place-items: center; font-weight: 700; font-size: 15px; line-height: 1; }
+.um6p-wordmark { font-weight: 400; font-size: 11px; line-height: 1.15; color: var(--um6p-charcoal); }
+.crumb { font-size: 13px; color: var(--um6p-muted); }
+.crumb a { color: var(--um6p-orange); text-decoration: none; font-weight: 500; }
+.user-chip { display: flex; align-items: center; gap: 10px; padding: 5px 14px 5px 5px; border-radius: 999px; background: var(--um6p-paper); border: 1px solid var(--um6p-line); }
+.user-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--um6p-orange); color: var(--um6p-white); display: grid; place-items: center; font-size: 12px; font-weight: 600; }
+.user-name { font-size: 13px; font-weight: 500; }
+
+/* Stream banner — light orange for E&I */
+.stream-banner { background: var(--um6p-orange-light); color: var(--um6p-white); padding: 16px 40px; }
+.stream-banner-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
+.stream-banner .um6p-mini { display: inline-flex; gap: 2px; }
+.stream-banner .um6p-mini span { width: 20px; height: 20px; background: var(--um6p-white); color: var(--um6p-orange-light); display: grid; place-items: center; font-weight: 700; font-size: 11px; line-height: 1; }
+.stream-banner .divider { width: 1px; height: 18px; background: rgba(255,255,255,0.5); }
+.stream-banner .name { font-weight: 500; font-size: 14px; }
+.stream-banner .domain { margin-left: auto; font-size: 12.5px; opacity: 0.95; }
+
+.discovery { max-width: 1280px; margin: 0 auto; padding: 36px 40px 96px; display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: start; }
+.panel { background: var(--um6p-white); border: 1px solid var(--um6p-line); border-radius: var(--radius-lg); padding: 40px 44px; min-height: 580px; display: flex; flex-direction: column; }
+.panel-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.panel-head .step-num { width: 30px; height: 30px; border-radius: 50%; background: var(--um6p-orange); color: var(--um6p-white); font-size: 12px; font-weight: 700; display: grid; place-items: center; }
+.panel-head .eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--um6p-orange); font-weight: 600; }
+
+h1.step-title { font-family: 'Poppins'; font-weight: 700; font-size: 30px; line-height: 1.15; letter-spacing: -0.01em; color: var(--um6p-charcoal); margin: 0 0 14px; }
+.step-intro { font-size: 15px; color: var(--um6p-charcoal); line-height: 1.6; margin: 0 0 28px; max-width: 640px; }
+.step-intro em { color: var(--um6p-orange); font-style: normal; font-weight: 500; }
+.why-note { background: var(--um6p-paper); border-left: 3px solid var(--um6p-orange); padding: 12px 16px; font-size: 13px; color: var(--um6p-charcoal); margin-bottom: 24px; line-height: 1.55; }
+
+.field { margin-bottom: 24px; }
+.field-label { display: block; font-size: 13px; font-weight: 600; color: var(--um6p-charcoal); margin-bottom: 10px; }
+.opt-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.opt-grid.three { grid-template-columns: repeat(3, 1fr); }
+.opt { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--um6p-line); border-radius: var(--radius-md); cursor: pointer; background: var(--um6p-white); font-size: 13.5px; color: var(--um6p-charcoal); transition: all 0.15s ease; }
+.opt:hover { border-color: var(--um6p-orange); background: var(--um6p-paper); }
+.opt.selected { border-color: var(--um6p-orange); background: rgba(215,73,42,0.06); }
+.opt .tick { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #cfc9b8; flex: none; display: grid; place-items: center; }
+.opt.selected .tick { border-color: var(--um6p-orange); background: var(--um6p-orange); color: var(--um6p-white); }
+.opt.selected .tick::after { content: '✓'; font-size: 10px; line-height: 1; }
+textarea, input[type=text] { width: 100%; padding: 12px 14px; font-family: inherit; font-size: 14px; border: 1px solid var(--um6p-line); border-radius: var(--radius-md); background: var(--um6p-white); color: var(--um6p-charcoal); resize: vertical; }
+textarea:focus, input[type=text]:focus { outline: none; border-color: var(--um6p-orange); }
+textarea { min-height: 80px; }
+.example { font-size: 12px; color: var(--um6p-muted); font-style: italic; margin-top: 6px; }
+
+.actions { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 32px; gap: 12px; }
+.btn { padding: 12px 24px; border-radius: var(--radius-md); font-size: 14px; font-weight: 600; cursor: pointer; border: 0; font-family: inherit; }
+.btn-primary { background: var(--um6p-orange); color: var(--um6p-white); }
+.btn-primary:hover { background: var(--um6p-orange-dark); }
+.btn-ghost { background: transparent; color: var(--um6p-muted); font-weight: 500; }
+
+/* Left sidebar — Zavmo Learn pattern */
+.sidebar { position: sticky; top: 130px; padding: 4px 4px 0; }
+.sidebar-progress { text-align: left; padding-bottom: 18px; border-bottom: 1px solid var(--um6p-line); margin-bottom: 16px; }
+.sidebar-progress .phase { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--um6p-muted); font-weight: 600; }
+.sidebar-progress .count { font-size: 13px; color: var(--um6p-charcoal); font-weight: 500; margin-top: 4px; }
+.sidebar-section-label { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--um6p-muted); font-weight: 600; margin: 18px 4px 8px; }
+
+.nav-item { display: grid; grid-template-columns: 44px 1fr 18px; gap: 12px; align-items: center; padding: 8px 8px; border-radius: var(--radius-md); margin-bottom: 2px; cursor: pointer; transition: background 0.15s ease; }
+.nav-item:hover:not(.locked) { background: var(--um6p-paper); }
+.nav-item .tile { width: 44px; height: 44px; border-radius: 10px; background: var(--um6p-charcoal); display: grid; place-items: center; color: var(--um6p-white); position: relative; flex: none; }
+.nav-item .tile svg { width: 22px; height: 22px; }
+.nav-item .tile .tick-badge { position: absolute; top: -5px; right: -5px; width: 18px; height: 18px; border-radius: 50%; background: var(--um6p-orange); display: none; place-items: center; color: var(--um6p-white); font-size: 11px; font-weight: 700; border: 2px solid var(--um6p-white); line-height: 1; }
+.nav-item .meta { min-width: 0; }
+.nav-item .meta .title { font-size: 13px; color: var(--um6p-charcoal); font-weight: 600; line-height: 1.25; }
+.nav-item .meta .status { font-size: 11.5px; color: var(--um6p-muted); margin-top: 2px; line-height: 1.3; }
+.nav-item .arrow { color: var(--um6p-muted); font-size: 16px; opacity: 0; text-align: center; }
+.nav-item.active .arrow { opacity: 1; color: var(--um6p-orange-light); }
+.nav-item.active .tile { background: var(--um6p-orange-light); }
+.nav-item.active .meta .title { color: var(--um6p-charcoal); }
+.nav-item.active .meta .status { color: var(--um6p-orange); font-weight: 600; }
+.nav-item.done .tile { background: var(--um6p-orange); }
+.nav-item.done .tile .tick-badge { display: grid; }
+.nav-item.done .meta .status { color: var(--um6p-orange); }
+.nav-item.locked { opacity: 0.55; cursor: default; }
+.nav-item.locked .tile { background: #bdb6a5; }
+.nav-item.locked .meta .status { color: var(--um6p-muted); font-style: italic; }
+
+.save-status { font-size: 12px; color: var(--um6p-orange); display: flex; align-items: center; gap: 8px; margin: 20px 4px 0; padding-top: 16px; border-top: 1px solid var(--um6p-line); font-weight: 500; }
+.save-status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--um6p-orange); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.step { display: none; flex: 1; flex-direction: column; }
+.step.active { display: flex; }
+
+/* Profile selection — three large cards per David's structure */
+.profile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.profile-card-pick { padding: 24px; border: 1px solid var(--um6p-line); border-radius: var(--radius-md); background: var(--um6p-white); cursor: pointer; transition: all 0.15s ease; display: flex; flex-direction: column; gap: 12px; }
+.profile-card-pick:hover { border-color: var(--um6p-orange); }
+.profile-card-pick.selected { border-color: var(--um6p-orange); background: rgba(215,73,42,0.04); }
+.profile-card-pick .badge { width: 40px; height: 40px; border-radius: 10px; background: var(--um6p-orange); color: var(--um6p-white); display: grid; place-items: center; font-family: 'Poppins'; font-weight: 700; font-size: 18px; }
+.profile-card-pick.alt .badge { background: var(--um6p-orange-light); }
+.profile-card-pick.alt2 .badge { background: var(--um6p-charcoal); }
+.profile-card-pick h5 { font-family: 'Poppins'; font-size: 16px; font-weight: 700; color: var(--um6p-charcoal); margin: 0; }
+.profile-card-pick p { font-size: 13px; color: var(--um6p-muted); margin: 0; line-height: 1.5; }
+.profile-card-pick .who { font-size: 11px; letter-spacing: 0.06em; color: var(--um6p-orange); text-transform: uppercase; font-weight: 600; }
+
+/* EMP sliders */
+.emp-row { display: grid; grid-template-columns: 220px 1fr 40px; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px dashed var(--um6p-line); }
+.emp-row:last-of-type { border-bottom: 0; }
+.emp-row .name { font-size: 13.5px; color: var(--um6p-charcoal); font-weight: 600; }
+.emp-row .desc { font-size: 11.5px; color: var(--um6p-muted); margin-top: 2px; }
+.slider { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; background: var(--um6p-paper); border-radius: 999px; outline: none; border: 1px solid var(--um6p-line); }
+.slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--um6p-orange); cursor: pointer; border: 2px solid var(--um6p-white); box-shadow: 0 1px 4px rgba(215,73,42,0.3); }
+.slider::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--um6p-orange); cursor: pointer; border: 2px solid var(--um6p-white); }
+.emp-val { font-size: 13px; font-weight: 700; color: var(--um6p-orange); text-align: center; }
+.emp-baseline-note { background: rgba(215,73,42,0.06); border: 1px solid rgba(215,73,42,0.18); border-radius: var(--radius-md); padding: 14px 18px; margin-bottom: 24px; font-size: 13px; line-height: 1.55; }
+.emp-baseline-note strong { color: var(--um6p-orange); font-weight: 700; }
+
+/* Path summary */
+.path-summary { background: var(--um6p-paper); border: 1px solid var(--um6p-line); border-radius: var(--radius-md); padding: 24px; margin-bottom: 24px; }
+.path-summary h4 { font-family: 'Poppins'; font-size: 16px; color: var(--um6p-charcoal); margin: 0 0 14px; font-weight: 700; }
+.path-stage { display: grid; grid-template-columns: 50px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px dashed var(--um6p-line); }
+.path-stage:last-child { border-bottom: 0; }
+.path-stage .stage-num { font-family: 'Poppins'; font-size: 26px; color: var(--um6p-orange); font-weight: 700; line-height: 1; }
+.path-stage h5 { font-size: 13.5px; font-weight: 600; color: var(--um6p-charcoal); margin: 4px 0 4px; }
+.path-stage p { font-size: 12.5px; color: var(--um6p-muted); margin: 0; line-height: 1.5; }
+.marker { display: inline-block; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; margin-right: 6px; font-weight: 600; }
+.marker-entry { background: rgba(215,73,42,0.15); color: var(--um6p-orange); }
+.marker-skip { background: var(--um6p-paper); color: var(--um6p-muted); border: 1px solid var(--um6p-line); }
+.marker-focus { background: rgba(237,110,71,0.18); color: var(--um6p-orange-dark); }
+
+@media (max-width: 1024px) {
+  .discovery { grid-template-columns: 1fr; }
+  .sidebar { position: static; }
+  .profile-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="um6p-logo">
+    <div class="um6p-blocks"><span>U</span><span>M</span><span>6</span><span>P</span></div>
+    <div class="um6p-wordmark">University<br/>Mohammed VI<br/>Polytechnic</div>
+  </div>
+  <div class="crumb"><a href="home.html">← Home</a></div>
+  <div class="user-chip">
+    <div class="user-avatar">ZE</div>
+    <span class="user-name">Zahra El Alami</span>
+  </div>
+</header>
+
+<div class="stream-banner">
+  <div class="stream-banner-inner">
+    <span class="um6p-mini"><span>U</span><span>M</span><span>6</span><span>P</span></span>
+    <span class="divider"></span>
+    <span class="name">Mindset to Action · Discovery Journey</span>
+    <span class="domain">Entrepreneurship &amp; Innovation Readiness → Action</span>
+  </div>
+</div>
+
+<main class="discovery">
+
+  <!-- Left sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-progress">
+      <div class="phase">E&amp;I · Mindset to Action</div>
+      <div class="count" id="progress-count">Step 1 of 8 · Welcome</div>
+    </div>
+
+    <div class="sidebar-section-label">Set the context</div>
+
+    <div class="nav-item active" data-nav="1" onclick="goStep(1)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2 4 4 8-8 4 4"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Welcome</div><div class="status">Begin journey</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="2" onclick="goStep(2)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6 7-6s7 2 7 6"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Your learner profile</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="3" onclick="goStep(3)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 12h10M7 12c2-2 5-6 10-6M7 12c2 2 5 6 10 6"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Differentiate your context</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="sidebar-section-label">EMP baseline (universal)</div>
+
+    <div class="nav-item" data-nav="6" onclick="goStep(6)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-11a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 6.5-7 11-7 11z"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">EMP — traits baseline</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="7" onclick="goStep(7)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">EMP — competencies</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="sidebar-section-label">Apply &amp; commit</div>
+
+    <div class="nav-item" data-nav="8" onclick="goStep(8)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Your challenge</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="9" onclick="goStep(9)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Review &amp; save</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="nav-item" data-nav="10" onclick="goStep(10)">
+      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l4-4M14 4l6 6-9 9H5v-6z"/><path d="M14 8l2 2"/></svg><span class="tick-badge">✓</span></div>
+      <div class="meta"><div class="title">Your learning path</div><div class="status">Locked</div></div>
+      <span class="arrow">→</span>
+    </div>
+
+    <div class="save-status">Autosaving to your profile</div>
+  </aside>
+
+  <section class="panel">
+
+    <!-- STEP 1 — Welcome -->
+    <div class="step active" data-step="1">
+      <div class="panel-head"><span class="step-num">1</span><span class="eyebrow">Welcome</span></div>
+      <h1 class="step-title">Hello, I'm Zavmo.</h1>
+      <p class="step-intro">This is a non-linear, adaptive pathway across <em>Understand → Diagnose → Develop → Apply → Evaluate → Create</em>. Before we shape your journey, we'll do two things: identify which kind of learner you are, then establish your individual entrepreneurial baseline through the EMP.</p>
+      <div class="why-note"><strong>Why both:</strong> the EMP baseline is universal — it tells us where you are individually regardless of profile, academic level or self-reported expertise. Your profile then tells us <em>which</em> applied pathway to build on top of that baseline.</div>
+      <div class="actions"><span></span><button class="btn btn-primary" onclick="goStep(2)">Begin →</button></div>
+    </div>
+
+    <!-- STEP 2 — Three-profile selection (David's feedback) -->
+    <div class="step" data-step="2">
+      <div class="panel-head"><span class="step-num">2</span><span class="eyebrow">Your learner profile</span></div>
+      <h1 class="step-title">Which best describes you?</h1>
+      <p class="step-intro">We've designed the pathway around three distinct learner contexts. Pick the one closest to your situation — we'll then ask profile-specific questions so the journey is built for your environment, not a generic role profile.</p>
+
+      <div class="profile-grid" data-single>
+        <div class="profile-card-pick opt" data-profile="student">
+          <div class="badge">S</div>
+          <div class="who">Profile 1</div>
+          <h5>Student</h5>
+          <p>Undergraduate, master's, PhD, or early-career — building entrepreneurial &amp; innovation capability for a future career.</p>
+        </div>
+        <div class="profile-card-pick opt alt" data-profile="venture">
+          <div class="badge">V</div>
+          <div class="who">Profile 2</div>
+          <h5>New venture creator</h5>
+          <p>Aspiring or active founder — somewhere between exploring an idea, actively building, or already running a venture.</p>
+        </div>
+        <div class="profile-card-pick opt alt2" data-profile="ocp">
+          <div class="badge">O</div>
+          <div class="who">Profile 3</div>
+          <h5>OCP employee</h5>
+          <p>Technical or corporate role contributing to OCP's broader innovation efforts — innovation isn't your day job, but you need to participate effectively.</p>
+        </div>
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(1)">Back</button><button class="btn btn-primary" onclick="goStep(3)">Confirm profile and continue →</button></div>
+    </div>
+
+    <!-- STEP 3 — Profile-specific differentiation: STUDENT -->
+    <div class="step" data-step="3">
+      <div class="panel-head"><span class="step-num">3</span><span class="eyebrow">Differentiate your context</span></div>
+      <h1 class="step-title">Tell us more about your student profile.</h1>
+      <p class="step-intro">These questions help us pitch examples, language and depth at the right level — not at a generic "industry / years of experience" level.</p>
+
+      <div class="field">
+        <label class="field-label">Academic level</label>
+        <div class="opt-grid" data-single>
+          <div class="opt"><span class="tick"></span>Undergraduate</div>
+          <div class="opt"><span class="tick"></span>Master's</div>
+          <div class="opt"><span class="tick"></span>PhD</div>
+          <div class="opt"><span class="tick"></span>Early-career / recent graduate</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Field of study or research</label>
+        <input type="text" placeholder="e.g. Industrial Engineering, Material Sciences, Business, Mathematics…" />
+      </div>
+
+      <div class="field">
+        <label class="field-label">Prior exposure to entrepreneurship and innovation</label>
+        <div class="opt-grid" data-single>
+          <div class="opt"><span class="tick"></span>None yet — curious to explore</div>
+          <div class="opt"><span class="tick"></span>A module or workshop here and there</div>
+          <div class="opt"><span class="tick"></span>An incubator, hackathon or competition</div>
+          <div class="opt"><span class="tick"></span>I've co-founded or run a student venture</div>
+          <div class="opt"><span class="tick"></span>I've done E&amp;I research or coursework in depth</div>
+          <div class="opt"><span class="tick"></span>I've worked or interned at a startup</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Where you see yourself heading</label>
+        <div class="opt-grid" data-multi>
+          <div class="opt"><span class="tick"></span>Joining a venture or scale-up</div>
+          <div class="opt"><span class="tick"></span>Founding my own venture</div>
+          <div class="opt"><span class="tick"></span>Corporate role with an innovation remit</div>
+          <div class="opt"><span class="tick"></span>Research or academia</div>
+          <div class="opt"><span class="tick"></span>Not sure yet — exploring</div>
+        </div>
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(2)">Back</button><button class="btn btn-primary" onclick="goStep(6)">Save and continue to EMP →</button></div>
+    </div>
+
+    <!-- STEP 4 — Profile-specific: NEW VENTURE CREATOR -->
+    <div class="step" data-step="4">
+      <div class="panel-head"><span class="step-num">3</span><span class="eyebrow">Differentiate your context</span></div>
+      <h1 class="step-title">Tell us about your venture readiness.</h1>
+      <p class="step-intro">There's a big difference between aspiring, actively building, and already operating. We'll match support to where you actually are.</p>
+
+      <div class="field">
+        <label class="field-label">Which stage best describes you right now?</label>
+        <div class="opt-grid" data-single>
+          <div class="opt"><span class="tick"></span>Aspiring — exploring whether to become a founder</div>
+          <div class="opt"><span class="tick"></span>Ideation — I have an idea and want to test it</div>
+          <div class="opt"><span class="tick"></span>Pre-revenue — building MVP, testing assumptions</div>
+          <div class="opt"><span class="tick"></span>Early traction — first customers, validating model</div>
+          <div class="opt"><span class="tick"></span>Scaling — established venture, growing</div>
+          <div class="opt"><span class="tick"></span>Serial founder — significant entrepreneurial experience</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">If you're working on a specific venture, describe it briefly</label>
+        <textarea placeholder="What's the venture? What problem does it solve? Where in Africa or beyond?"></textarea>
+      </div>
+
+      <div class="field">
+        <label class="field-label">What do you need most from this pathway?</label>
+        <div class="opt-grid" data-multi>
+          <div class="opt"><span class="tick"></span>Mindset and behaviour development</div>
+          <div class="opt"><span class="tick"></span>Frameworks for testing assumptions</div>
+          <div class="opt"><span class="tick"></span>Founder execution capability</div>
+          <div class="opt"><span class="tick"></span>Investor-readiness</div>
+          <div class="opt"><span class="tick"></span>Team building and capability design</div>
+          <div class="opt"><span class="tick"></span>Refining an existing venture</div>
+        </div>
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(2)">Back</button><button class="btn btn-primary" onclick="goStep(6)">Save and continue to EMP →</button></div>
+    </div>
+
+    <!-- STEP 5 — Profile-specific: OCP EMPLOYEE -->
+    <div class="step" data-step="5">
+      <div class="panel-head"><span class="step-num">3</span><span class="eyebrow">Differentiate your context</span></div>
+      <h1 class="step-title">Tell us about your OCP role.</h1>
+      <p class="step-intro">Innovation often isn't your day job — but you're expected to contribute to OCP's broader innovation efforts. Let's understand <em>where</em> you sit so the pathway lands inside your actual work, not as an abstract add-on.</p>
+
+      <div class="field">
+        <label class="field-label">Function or work environment</label>
+        <div class="opt-grid three" data-single>
+          <div class="opt"><span class="tick"></span>Technical / R&amp;D</div>
+          <div class="opt"><span class="tick"></span>Operations</div>
+          <div class="opt"><span class="tick"></span>Engineering</div>
+          <div class="opt"><span class="tick"></span>Commercial</div>
+          <div class="opt"><span class="tick"></span>Strategy</div>
+          <div class="opt"><span class="tick"></span>Transformation</div>
+          <div class="opt"><span class="tick"></span>Finance</div>
+          <div class="opt"><span class="tick"></span>HR / People</div>
+          <div class="opt"><span class="tick"></span>Support function</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Your current role / title</label>
+        <input type="text" placeholder="e.g. Process Engineer · Programme Manager · R&D Scientist · Commercial Analyst" />
+        <div class="example">In production, this field will match against OCP job-description data to pre-fill context and innovation-relevance for your specific role.</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">How does innovation currently fit into your day job?</label>
+        <div class="opt-grid" data-single>
+          <div class="opt"><span class="tick"></span>Not part of my routine work at all</div>
+          <div class="opt"><span class="tick"></span>Occasional contribution when asked</div>
+          <div class="opt"><span class="tick"></span>I support innovation projects when they touch my function</div>
+          <div class="opt"><span class="tick"></span>Innovation is part of my role explicitly</div>
+          <div class="opt"><span class="tick"></span>I lead or co-lead innovation initiatives</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">What do you need to be able to contribute to OCP's innovation efforts?</label>
+        <div class="opt-grid" data-multi>
+          <div class="opt"><span class="tick"></span>Shared language and concepts</div>
+          <div class="opt"><span class="tick"></span>Understanding of innovation as a system</div>
+          <div class="opt"><span class="tick"></span>Ability to spot opportunities in my function</div>
+          <div class="opt"><span class="tick"></span>Confidence to propose and challenge</div>
+          <div class="opt"><span class="tick"></span>Ability to collaborate across functions</div>
+          <div class="opt"><span class="tick"></span>Ability to support or sponsor initiatives</div>
+        </div>
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(2)">Back</button><button class="btn btn-primary" onclick="goStep(6)">Save and continue to EMP →</button></div>
+    </div>
+
+    <!-- STEP 6 — EMP traits (UNIVERSAL BASELINE) -->
+    <div class="step" data-step="6">
+      <div class="panel-head"><span class="step-num">4</span><span class="eyebrow">EMP — universal baseline</span></div>
+      <h1 class="step-title">Entrepreneurial Mindset Profile · personality traits.</h1>
+      <p class="step-intro">This is the baseline we run for <em>every</em> learner regardless of profile, academic level or self-reported expertise. Rate each trait based on how strongly it shows up in your day-to-day. It's a starting snapshot — the full diagnostic happens in Stage 2 of the pathway.</p>
+
+      <div class="emp-baseline-note"><strong>Why universal:</strong> the EMP gives us a real picture of individual competencies that doesn't depend on what you've said about yourself elsewhere. Two students at the same level can have very different action orientation, risk acceptance and execution profiles — and the EMP is what reveals that.</div>
+
+      <div class="emp-row">
+        <div><div class="name">Independence</div><div class="desc">Ability to take ownership without excessive external direction.</div></div>
+        <input type="range" class="slider" min="1" max="5" value="3" oninput="this.nextElementSibling.textContent=this.value" />
+        <div class="emp-val">3</div>
+      </div>
+      <div class="emp-row">
+        <div><div class="name">Preference for limited structure</div><div class="desc">Effectiveness in low-clarity, ambiguous environments.</div></div>
+        <input type="range" class="slider" min="1" max="5" value="2" oninput="this.nextElementSibling.textContent=this.value" />
+        <div class="emp-val">2</div>
+      </div>
+      <div class="emp-row">
+        <div><div class="name">Nonconformity</div><div class="desc">Willingness to challenge assumptions and propose alternatives.</div></div>
+        <input type="range" class="slider" min="1" max="5" value="3" oninput="this.nextElementSibling.textContent=this.value" />
+        <div class="emp-val">3</div>
+      </div>
+      <div class="emp-row">
+        <div><div class="name">Risk acceptance</div><div class="desc">Willingness to act under uncertainty using structured judgement.</div></div>
+        <input type="range" class="slider" min="1" max="5" value="2" oninput="this.nextElementSibling.textContent=this.value" />
+        <div class="emp-val">2</div>
+      </div>
+      <div class="emp-row">
+        <div><div class="name">Action orientation</div><div class="desc">Bias toward timely action — converting intention into movement.</div></div>
+        <input type="range" class="slider" min="1" max="5" value="4" oninput="this.nextElementSibling.textContent=this.value" />
+        <div class="emp-val">4</div>
+      </div>
+      <div class="emp-row">
+        <div><div class="name">Passion</div><div class="desc">Harnessing passion as a source of meaning and sustained effort.</div></div>
+        <input type="range" class="slider" min="1" max="5" value="4" oninput="this.nextElementSibling.textContent=this.value" />
+        <div class="emp-val">4</div>
+      </div>
+      <div class="emp-row">
+        <div><div class="name">Need to achieve</div><div class="desc">Drive to meet meaningful goals and standards.</div></div>
+        <input type="range" class="slider" min="1" max="5" value="4" oninput="this.nextElementSibling.textContent=this.value" />
+        <div class="emp-val">4</div>
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goBackFromEmp()">Back</button><button class="btn btn-primary" onclick="goStep(7)">Save and continue →</button></div>
+    </div>
+
+    <!-- STEP 7 — EMP competencies -->
+    <div class="step" data-step="7">
+      <div class="panel-head"><span class="step-num">5</span><span class="eyebrow">EMP — competencies</span></div>
+      <h1 class="step-title">EMP · competency variables.</h1>
+      <p class="step-intro">These are developed capabilities — distinct from traits. Same scale, same rules: no wrong answers.</p>
+
+      <div class="emp-row"><div><div class="name">Future focus</div><div class="desc">Orientation toward possibility and forward-looking thinking.</div></div><input type="range" class="slider" min="1" max="5" value="3" oninput="this.nextElementSibling.textContent=this.value" /><div class="emp-val">3</div></div>
+      <div class="emp-row"><div><div class="name">Idea generation</div><div class="desc">Generating and surfacing fresh, varied options.</div></div><input type="range" class="slider" min="1" max="5" value="3" oninput="this.nextElementSibling.textContent=this.value" /><div class="emp-val">3</div></div>
+      <div class="emp-row"><div><div class="name">Execution</div><div class="desc">Translating ideas into reliable delivery.</div></div><input type="range" class="slider" min="1" max="5" value="4" oninput="this.nextElementSibling.textContent=this.value" /><div class="emp-val">4</div></div>
+      <div class="emp-row"><div><div class="name">Self-confidence</div><div class="desc">Trust in your own judgement under pressure.</div></div><input type="range" class="slider" min="1" max="5" value="3" oninput="this.nextElementSibling.textContent=this.value" /><div class="emp-val">3</div></div>
+      <div class="emp-row"><div><div class="name">Optimism</div><div class="desc">Constructive expectation that effort will produce results.</div></div><input type="range" class="slider" min="1" max="5" value="4" oninput="this.nextElementSibling.textContent=this.value" /><div class="emp-val">4</div></div>
+      <div class="emp-row"><div><div class="name">Persistence</div><div class="desc">Sustained effort across setbacks.</div></div><input type="range" class="slider" min="1" max="5" value="4" oninput="this.nextElementSibling.textContent=this.value" /><div class="emp-val">4</div></div>
+      <div class="emp-row"><div><div class="name">Interpersonal sensitivity</div><div class="desc">Reading and adapting to others; building coalitions.</div></div><input type="range" class="slider" min="1" max="5" value="3" oninput="this.nextElementSibling.textContent=this.value" /><div class="emp-val">3</div></div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(6)">Back</button><button class="btn btn-primary" onclick="goStep(8)">Save and continue →</button></div>
+    </div>
+
+    <!-- STEP 8 — Bring your challenge -->
+    <div class="step" data-step="8">
+      <div class="panel-head"><span class="step-num">6</span><span class="eyebrow">Challenge-based learning</span></div>
+      <h1 class="step-title">Bring a real opportunity or challenge into your learning.</h1>
+      <p class="step-intro">This pathway is challenge-based by design. Pick an opportunity, venture idea or innovation initiative you'd like to work on — Zavmo will weave it through the journey. You can change it later.</p>
+
+      <div class="field">
+        <label class="field-label">Briefly describe your opportunity, idea or innovation challenge</label>
+        <textarea placeholder="It could be an existing project, a hypothetical venture, a transformation initiative inside your organisation, or an opportunity you're exploring."></textarea>
+        <div class="example">Examples: launching a new digital service inside my team · refining a venture concept I've been incubating · designing a capability uplift for my function · a sustainability initiative I'd like to scale.</div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">At what level does it live?</label>
+        <div class="opt-grid" data-multi>
+          <div class="opt"><span class="tick"></span>Individual</div>
+          <div class="opt"><span class="tick"></span>Team</div>
+          <div class="opt"><span class="tick"></span>Organisational</div>
+          <div class="opt"><span class="tick"></span>System / ecosystem</div>
+        </div>
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(7)">Back</button><button class="btn btn-primary" onclick="goStep(9)">Save and continue →</button></div>
+    </div>
+
+    <!-- STEP 9 — Review -->
+    <div class="step" data-step="9">
+      <div class="panel-head"><span class="step-num">7</span><span class="eyebrow">Review &amp; save</span></div>
+      <h1 class="step-title">Your readiness snapshot.</h1>
+      <p class="step-intro">All answers saved. Edit anything later from your profile panel.</p>
+      <div class="why-note"><strong>Saved to your profile</strong> — autosave is on. Revise any answer any time.</div>
+
+      <div class="path-summary">
+        <h4>Your starting profile</h4>
+        <div class="profile-row"><span class="k">Learner profile</span><span class="v">OCP employee · Technical / R&amp;D</span></div>
+        <div class="profile-row"><span class="k">Innovation in day job</span><span class="v">I support projects when they touch my function</span></div>
+        <div class="profile-row"><span class="k">Needs</span><span class="v">Shared language · Ability to spot opportunities</span></div>
+        <div class="profile-row"><span class="k">EMP — strongest traits</span><span class="v">Action orientation · Passion · Need to achieve</span></div>
+        <div class="profile-row"><span class="k">EMP — development priorities</span><span class="v">Risk acceptance · Limited structure tolerance</span></div>
+        <div class="profile-row"><span class="k">EMP — strongest competencies</span><span class="v">Execution · Persistence · Optimism</span></div>
+        <div class="profile-row"><span class="k">Suggested entry stage</span><span class="v">Stage 2 — Diagnose</span></div>
+        <div class="profile-row"><span class="k">Challenge focus</span><span class="v">A transformation initiative in my function</span></div>
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(8)">Edit my answers</button><button class="btn btn-primary" onclick="goStep(10)">Confirm and generate my path →</button></div>
+    </div>
+
+    <!-- STEP 10 — Personalised path -->
+    <div class="step" data-step="10">
+      <div class="panel-head"><span class="step-num">8</span><span class="eyebrow">Your personalised path</span></div>
+      <h1 class="step-title">Your adaptive, non-linear pathway.</h1>
+      <p class="step-intro">Built on two foundations: your <strong>EMP baseline</strong> (universal individual competencies) and your <strong>learner profile</strong> (OCP employee in a technical / R&amp;D function). Profile sets the applied context; EMP sets the developmental focus.</p>
+
+      <div class="path-summary">
+        <h4>Six stages — your tailored sequence</h4>
+
+        <div class="path-stage">
+          <div class="stage-num">1</div>
+          <div><h5><span class="marker marker-skip">Light touch</span>Understand · entrepreneurship &amp; innovation foundations</h5>
+          <p>Framed for technical / R&amp;D contributors in a corporate innovation setting — not for founders. Shared language first.</p></div>
+        </div>
+        <div class="path-stage">
+          <div class="stage-num">2</div>
+          <div><h5><span class="marker marker-entry">Your entry</span>Diagnose · EMP outputs, mindset, team &amp; org capability</h5>
+          <p>Builds on your EMP baseline. Adds mindset mapping and connects to OCP's organisational innovation system.</p></div>
+        </div>
+        <div class="path-stage">
+          <div class="stage-num">3</div>
+          <div><h5><span class="marker marker-focus">Focus</span>Develop · risk acceptance &amp; limited-structure tolerance</h5>
+          <p>Targeted work on your two EMP development priorities — scenario-based, practical, with reflection.</p></div>
+        </div>
+        <div class="path-stage">
+          <div class="stage-num">4</div>
+          <div><h5>Apply · your function-specific challenge</h5>
+          <p>Bring your transformation initiative through trade-off frameworks, stakeholder mapping, and innovation system thinking — specific to OCP's environment.</p></div>
+        </div>
+        <div class="path-stage">
+          <div class="stage-num">5</div>
+          <div><h5>Evaluate · assess outcomes &amp; refine</h5>
+          <p>Judgement under uncertainty in a corporate innovation context. What worked, what didn't, what to adjust.</p></div>
+        </div>
+        <div class="path-stage">
+          <div class="stage-num">6</div>
+          <div><h5>Create · a contribution to OCP's innovation effort</h5>
+          <p>A concrete recommendation, proposal or initiative artefact you can take into your team or function.</p></div>
+        </div>
+      </div>
+
+      <div class="why-note">The pathway recalibrates as evidence accumulates. You may revisit Diagnose after Apply, or move directly from Develop to Create on parallel tracks.</div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(9)">Edit my profile</button><button class="btn btn-primary">Start my learning journey →</button></div>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+let chosenProfile = null;
+
+// Maps panel step (1-10) → which nav-item to highlight, plus its title for the counter
+const NAV_MAP = {
+  1: { nav: 1,  title: 'Welcome',              pos: 1 },
+  2: { nav: 2,  title: 'Your learner profile', pos: 2 },
+  3: { nav: 3,  title: 'Differentiate your context · Student',         pos: 3 },
+  4: { nav: 3,  title: 'Differentiate your context · New Venture Creator', pos: 3 },
+  5: { nav: 3,  title: 'Differentiate your context · OCP Employee',    pos: 3 },
+  6: { nav: 6,  title: 'EMP — traits baseline',   pos: 4 },
+  7: { nav: 7,  title: 'EMP — competencies',      pos: 5 },
+  8: { nav: 8,  title: 'Your challenge',          pos: 6 },
+  9: { nav: 9,  title: 'Review & save',           pos: 7 },
+  10:{ nav: 10, title: 'Your learning path',      pos: 8 }
+};
+const TOTAL_POSITIONS = 8;
+
+function goStep(n) {
+  // Profile routing: step 3 branches into 3/4/5 based on profile choice
+  if (n === 3 && chosenProfile === 'venture') n = 4;
+  if (n === 3 && chosenProfile === 'ocp') n = 5;
+
+  document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+  document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
+
+  const current = NAV_MAP[n];
+  document.querySelectorAll('.nav-item').forEach(item => {
+    const navId = parseInt(item.dataset.nav, 10);
+    const map = NAV_MAP[navId] || { pos: 99 };
+    item.classList.remove('active','done','locked');
+    const status = item.querySelector('.meta .status');
+    if (map.pos < current.pos) {
+      item.classList.add('done');
+      if (status) status.textContent = 'Saved';
+    } else if (navId === current.nav) {
+      item.classList.add('active');
+      if (status) status.textContent = 'Current step';
+    } else {
+      item.classList.add('locked');
+      if (status) status.textContent = 'Locked';
+    }
+  });
+
+  const counter = document.getElementById('progress-count');
+  if (counter) counter.textContent = `Step ${current.pos} of ${TOTAL_POSITIONS} · ${current.title}`;
+
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function goBackFromEmp() {
+  // From EMP (step 6), go back to whichever profile-specific step the learner came from
+  if (chosenProfile === 'venture') goStep(4);
+  else if (chosenProfile === 'ocp') goStep(5);
+  else goStep(3);
+}
+
+// Initialise lock state
+document.querySelectorAll('.nav-item').forEach(item => {
+  if (parseInt(item.dataset.nav, 10) > 1) item.classList.add('locked');
+});
+
+// Wire up profile cards to set chosenProfile
+document.querySelectorAll('.profile-card-pick').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.profile-card-pick').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    chosenProfile = card.dataset.profile;
+  });
+});
+
+document.querySelectorAll('.opt-grid').forEach(grid => {
+  const single = grid.hasAttribute('data-single');
+  grid.querySelectorAll('.opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      if (single) grid.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      opt.classList.toggle('selected');
+    });
+  });
+});
+</script>
+</body>
+</html>

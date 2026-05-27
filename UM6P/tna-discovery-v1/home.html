@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UM6P Learning Pilot · Empowering Minds</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   UM6P brand tokens (verified against UM6P Brand Guidelines 3.0)
+   - Primary Orange #D7492A (Pantone 173)
+   - Light Orange   #ED6E47 (Pantone 1645)
+   - Charcoal Black #3B3B3C (Pantone 440)
+   - White          #FFFFFF
+   - Typography: Gilmer (licensed); web fallback Poppins per p.124
+   - Tagline: "Empowering Minds."
+   - Sub-brand format: UM6P block | course/school name (p.54)
+   - Placement: always top-left; never centre, never right-align
+   ============================================================ */
+:root {
+  --um6p-orange: #D7492A;
+  --um6p-orange-light: #ED6E47;
+  --um6p-orange-dark: #B8391E;
+  --um6p-charcoal: #3B3B3C;
+  --um6p-white: #FFFFFF;
+  --um6p-paper: #FAF8F5;
+  --um6p-line: #E9E3D8;
+  --um6p-muted: #6B6B6C;
+  --um6p-locked: #EFEBE2;
+  --um6p-locked-ink: #A6A29A;
+
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+  --tile-gap: 3px;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  background: var(--um6p-white);
+  color: var(--um6p-charcoal);
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.45;
+}
+
+/* ============== UM6P LOGOTYPE COMPONENT ============== */
+/* Block-tile UM6P with 4 squares (U|M|6|P) — Brand Identity 2.0 */
+.um6p-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.um6p-blocks {
+  display: inline-flex;
+  gap: var(--tile-gap);
+}
+.um6p-blocks span {
+  width: 28px; height: 28px;
+  background: var(--um6p-orange);
+  color: var(--um6p-white);
+  display: grid; place-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 1;
+}
+.um6p-wordmark {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.15;
+  color: var(--um6p-charcoal);
+}
+/* Larger version for hero/footer */
+.um6p-logo--lg .um6p-blocks span { width: 36px; height: 36px; font-size: 19px; }
+.um6p-logo--lg .um6p-wordmark { font-size: 12px; }
+
+/* Sub-brand lockup: UM6P block | course name (p.54) */
+.um6p-sublock {
+  display: inline-flex; align-items: center; gap: 14px;
+}
+.um6p-sublock-divider {
+  width: 1px; height: 28px; background: var(--um6p-charcoal); opacity: 0.35;
+}
+.um6p-sublock-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--um6p-charcoal);
+  line-height: 1.2;
+}
+
+/* ============== TOPBAR ============== */
+/* Logo placement: always top-left per UM6P guidelines 2.41 p.67 */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 40px;
+  background: var(--um6p-white);
+  border-bottom: 1px solid var(--um6p-line);
+  position: sticky; top: 0; z-index: 10;
+}
+.topnav {
+  display: flex; gap: 28px; align-items: center;
+}
+.topnav a {
+  color: var(--um6p-charcoal);
+  opacity: 0.65;
+  text-decoration: none;
+  font-size: 14px; font-weight: 500;
+  padding: 6px 0;
+  border-bottom: 2px solid transparent;
+}
+.topnav a.active { opacity: 1; border-bottom-color: var(--um6p-orange); }
+.topnav a:hover { opacity: 1; }
+
+.user-chip {
+  display: flex; align-items: center; gap: 10px;
+  padding: 5px 14px 5px 5px;
+  border-radius: 999px;
+  background: var(--um6p-paper);
+  border: 1px solid var(--um6p-line);
+}
+.user-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--um6p-orange);
+  color: var(--um6p-white);
+  display: grid; place-items: center;
+  font-size: 12px; font-weight: 600;
+}
+.user-name { font-size: 13px; font-weight: 500; color: var(--um6p-charcoal); }
+
+/* ============== PAGE ============== */
+.page { max-width: 1240px; margin: 0 auto; padding: 48px 40px 96px; }
+
+/* Hero: left-aligned per brand rules; "Empowering Minds." treatment */
+.hero { margin-bottom: 48px; max-width: 800px; }
+.hero .eyebrow {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
+  color: var(--um6p-orange);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--um6p-charcoal);
+  margin: 0 0 8px;
+}
+.hero h1 .accent { color: var(--um6p-orange); }
+.hero .tagline {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--um6p-orange);
+  margin: 16px 0 16px;
+}
+.hero .sub {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--um6p-charcoal);
+  max-width: 640px;
+  margin: 0;
+}
+
+.progress-strip {
+  display: inline-flex; align-items: center; gap: 18px;
+  background: var(--um6p-paper);
+  border: 1px solid var(--um6p-line);
+  border-radius: var(--radius-md);
+  padding: 14px 20px;
+  margin-top: 32px;
+}
+.progress-strip .label {
+  font-size: 11px; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--um6p-muted);
+}
+.progress-strip .value {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  color: var(--um6p-orange);
+}
+
+/* ============== SECTION HEADERS ============== */
+.section-head {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin: 52px 0 22px;
+  border-bottom: 1px solid var(--um6p-line);
+  padding-bottom: 14px;
+}
+.section-head h2 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--um6p-charcoal);
+  margin: 0;
+}
+.section-head .hint {
+  font-size: 13px;
+  color: var(--um6p-muted);
+}
+
+/* ============== COURSE CARDS ============== */
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.course-card {
+  background: var(--um6p-white);
+  border: 1px solid var(--um6p-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  text-decoration: none; color: inherit;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  cursor: pointer;
+}
+.course-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(215,73,42,0.10), 0 18px 40px rgba(59,59,60,0.06);
+  border-color: var(--um6p-orange);
+}
+.course-cover {
+  height: 140px;
+  background: var(--um6p-orange);
+  position: relative;
+  padding: 20px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  color: var(--um6p-white);
+}
+/* Architectural block-grid pattern (p.12 — inspired by Bofill's lattice) */
+.course-cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.10) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: top right;
+  mask-image: linear-gradient(135deg, transparent 40%, black 100%);
+  -webkit-mask-image: linear-gradient(135deg, transparent 40%, black 100%);
+  pointer-events: none;
+}
+.course-cover.cover-light { background: var(--um6p-orange-light); }
+.course-cover.cover-charcoal { background: var(--um6p-charcoal); }
+
+.course-cover .sublock {
+  position: relative; z-index: 1;
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.course-cover .sublock .um6p-mini {
+  display: inline-flex; gap: 2px;
+}
+.course-cover .sublock .um6p-mini span {
+  width: 18px; height: 18px;
+  background: var(--um6p-white);
+  color: var(--um6p-orange);
+  display: grid; place-items: center;
+  font-family: 'Poppins'; font-weight: 700; font-size: 10px;
+  line-height: 1;
+}
+.course-cover.cover-light .sublock .um6p-mini span { color: var(--um6p-orange-light); }
+.course-cover.cover-charcoal .sublock .um6p-mini span { color: var(--um6p-charcoal); }
+.course-cover .divider { width: 1px; height: 16px; background: rgba(255,255,255,0.5); }
+.course-cover .sub-label {
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;
+  position: relative; z-index: 1;
+}
+.course-cover .badge {
+  align-self: flex-start;
+  position: relative; z-index: 1;
+  font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase;
+  background: rgba(255,255,255,0.16);
+  border: 1px solid rgba(255,255,255,0.32);
+  padding: 4px 10px; border-radius: 999px;
+}
+
+.course-body {
+  padding: 22px;
+  display: flex; flex-direction: column; gap: 14px; flex: 1;
+}
+.course-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.3;
+  color: var(--um6p-charcoal);
+  margin: 0;
+}
+.course-desc {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--um6p-muted);
+  margin: 0;
+  flex: 1;
+}
+.course-meta {
+  display: flex; gap: 14px; align-items: center;
+  font-size: 12px; color: var(--um6p-muted);
+}
+.course-meta .dot { width: 3px; height: 3px; background: var(--um6p-muted); border-radius: 50%; opacity: 0.5; }
+.course-progress {
+  height: 5px;
+  background: var(--um6p-paper);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.course-progress > i {
+  display: block; height: 100%;
+  background: var(--um6p-orange);
+  border-radius: 999px;
+}
+.course-cta {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 6px;
+}
+.course-cta .stage {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--um6p-orange);
+}
+.course-cta .arrow {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--um6p-orange);
+  color: var(--um6p-white);
+  display: grid; place-items: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.course-card:hover .course-cta .arrow {
+  transform: translateX(4px);
+  background: var(--um6p-orange-dark);
+}
+
+/* ============== SHAPE-YOUR-PATH (greyed tiles) ============== */
+.shape-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.shape-tile {
+  background: var(--um6p-locked);
+  border: 1px dashed #cdc7b8;
+  border-radius: var(--radius-md);
+  padding: 22px 22px 20px;
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative;
+  cursor: not-allowed;
+  min-height: 170px;
+}
+.shape-tile .lock {
+  position: absolute; top: 16px; right: 16px;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--um6p-white);
+  border: 1px solid #d6cfbf;
+  display: grid; place-items: center;
+}
+.shape-tile .lock svg { width: 12px; height: 12px; color: var(--um6p-locked-ink); }
+.shape-tile .icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: var(--um6p-white); border: 1px solid #d6cfbf;
+  display: grid; place-items: center;
+}
+.shape-tile .icon svg { width: 18px; height: 18px; color: var(--um6p-locked-ink); }
+.shape-tile h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--um6p-locked-ink);
+  margin: 4px 0 0;
+}
+.shape-tile p {
+  font-size: 13px;
+  color: var(--um6p-locked-ink);
+  margin: 0;
+  line-height: 1.5;
+}
+.shape-tile .coming {
+  margin-top: auto;
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--um6p-locked-ink);
+  font-weight: 600;
+}
+
+/* ============== COMPANION REFLECTION ============== */
+.reflection {
+  margin-top: 48px;
+  background: var(--um6p-paper);
+  border: 1px solid var(--um6p-line);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 20px;
+  align-items: center;
+}
+.coach-avatar {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--um6p-orange);
+  color: var(--um6p-white);
+  display: grid; place-items: center;
+  font-family: 'Poppins'; font-weight: 700; font-size: 22px;
+}
+.reflection .who {
+  font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--um6p-muted);
+  margin-bottom: 6px;
+}
+.reflection .what {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--um6p-charcoal);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Footer note */
+.footnote {
+  margin-top: 48px; padding: 16px 18px;
+  background: var(--um6p-paper);
+  border-left: 3px solid var(--um6p-orange);
+  font-size: 12.5px;
+  color: var(--um6p-charcoal);
+  line-height: 1.5;
+}
+.footnote strong { font-weight: 600; }
+
+@media (max-width: 980px) {
+  .courses-grid, .shape-grid { grid-template-columns: 1fr; }
+  .topnav { display: none; }
+  .hero h1 { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============== TOPBAR — UM6P logotype top-left per p.67 ============== -->
+<header class="topbar">
+  <div class="um6p-logo">
+    <div class="um6p-blocks">
+      <span>U</span><span>M</span><span>6</span><span>P</span>
+    </div>
+    <div class="um6p-wordmark">
+      University<br/>Mohammed VI<br/>Polytechnic
+    </div>
+  </div>
+  <nav class="topnav">
+    <a href="home.html" class="active">Home</a>
+    <a href="#">Learn</a>
+    <a href="#">My profile</a>
+    <a href="#">Help</a>
+  </nav>
+  <div class="user-chip">
+    <div class="user-avatar">ZE</div>
+    <span class="user-name">Zahra El Alami</span>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- ============== HERO — left-aligned per brand 2.21 ============== -->
+  <section class="hero">
+    <div class="eyebrow">Zavmo Learning Pilot · UM6P</div>
+    <h1>Welcome back, Zahra.<br/>Your <span class="accent">capability journey</span> continues here.</h1>
+    <p class="tagline">Empowering Minds.</p>
+    <p class="sub">I'm Zavmo. I'll guide you through three programmes designed to strengthen your understanding, reasoning and ability to apply key concepts in real business and operational environments — each anchored in its own domain, each personalised to you.</p>
+
+    <div class="progress-strip">
+      <span class="label">Across all programmes</span>
+      <span class="value">42% complete</span>
+    </div>
+  </section>
+
+  <!-- ============== ACTIVE COURSES ============== -->
+  <div class="section-head">
+    <h2>Your three programmes</h2>
+    <span class="hint">Tap a programme to continue your personalised path</span>
+  </div>
+
+  <div class="courses-grid">
+
+    <!-- SPS Academy — Primary orange -->
+    <a class="course-card" href="tna-sps.html">
+      <div class="course-cover">
+        <div class="sublock">
+          <span class="um6p-mini"><span>U</span><span>M</span><span>6</span><span>P</span></span>
+          <span class="divider"></span>
+          <span class="sub-label">SPS Academy</span>
+        </div>
+        <span class="badge">Pilot cohort</span>
+      </div>
+      <div class="course-body">
+        <h3 class="course-title">Sustainability, Resource Systems &amp; Industrial Transformation</h3>
+        <p class="course-desc">Build the understanding, reasoning and judgement to contribute to industrial transformation across the OCP / SPS context.</p>
+        <div class="course-meta">
+          <span>9 modules</span><span class="dot"></span>
+          <span>~12 hours</span><span class="dot"></span>
+          <span>Domain-anchored</span>
+        </div>
+        <div class="course-progress"><i style="width:18%"></i></div>
+        <div class="course-cta">
+          <span class="stage">Start your discovery →</span>
+          <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Entrepreneurial & Innovation — Light orange -->
+    <a class="course-card" href="tna-ei.html">
+      <div class="course-cover cover-light">
+        <div class="sublock">
+          <span class="um6p-mini"><span>U</span><span>M</span><span>6</span><span>P</span></span>
+          <span class="divider"></span>
+          <span class="sub-label">Mindset to Action</span>
+        </div>
+        <span class="badge">Non-linear pathway</span>
+      </div>
+      <div class="course-body">
+        <h3 class="course-title">Entrepreneurial &amp; Innovation Readiness → Action</h3>
+        <p class="course-desc">An adaptive pathway across Understand → Diagnose → Develop → Apply → Evaluate → Create, using the Entrepreneurial Mindset Profile (EMP).</p>
+        <div class="course-meta">
+          <span>6 stages</span><span class="dot"></span>
+          <span>EMP diagnostic</span><span class="dot"></span>
+          <span>Adaptive</span>
+        </div>
+        <div class="course-progress"><i style="width:34%"></i></div>
+        <div class="course-cta">
+          <span class="stage">Continue diagnosis →</span>
+          <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+    <!-- OCA Impact Investing — Charcoal -->
+    <a class="course-card" href="tna-oca.html">
+      <div class="course-cover cover-charcoal">
+        <div class="sublock">
+          <span class="um6p-mini"><span>U</span><span>M</span><span>6</span><span>P</span></span>
+          <span class="divider"></span>
+          <span class="sub-label">One Court Africa</span>
+        </div>
+        <span class="badge">Experiential</span>
+      </div>
+      <div class="course-body">
+        <h3 class="course-title">Impact Investment in Africa</h3>
+        <p class="course-desc">An experience-based journey from awareness of impact investing toward evaluating, engaging and acting within African innovation ecosystems.</p>
+        <div class="course-meta">
+          <span>6 stages</span><span class="dot"></span>
+          <span>Venture sims</span><span class="dot"></span>
+          <span>Ecosystem exposure</span>
+        </div>
+        <div class="course-progress"><i style="width:8%"></i></div>
+        <div class="course-cta">
+          <span class="stage">Begin your discovery →</span>
+          <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- ============== COMPANION REFLECTION ============== -->
+  <section class="reflection">
+    <div class="coach-avatar">Z</div>
+    <div>
+      <div class="who">Zavmo · Companion reflection</div>
+      <p class="what">"I've noticed you reason most strongly through real-world cases. I'll lean on more case-based examples and trade-off conversations as you continue across all three programmes."</p>
+    </div>
+  </section>
+
+  <!-- ============== SHAPE YOUR PATH (greyed) ============== -->
+  <div class="section-head">
+    <h2>Shape your path</h2>
+    <span class="hint">These unlock once you've progressed further in your active programmes</span>
+  </div>
+
+  <div class="shape-grid">
+    <div class="shape-tile" aria-disabled="true">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg>
+      </div>
+      <span class="lock"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 9V7a5 5 0 0 0-10 0v2H5v12h14V9zM9 7a3 3 0 1 1 6 0v2H9z"/></svg></span>
+      <h3>Find my next role</h3>
+      <p>Map where you could grow next within the OCP/SPS context and beyond.</p>
+      <span class="coming">Unlocks soon</span>
+    </div>
+
+    <div class="shape-tile" aria-disabled="true">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16v3H4zM4 11h16v3H4zM4 17h10v3H4z"/></svg>
+      </div>
+      <span class="lock"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 9V7a5 5 0 0 0-10 0v2H5v12h14V9zM9 7a3 3 0 1 1 6 0v2H9z"/></svg></span>
+      <h3>Find my next course</h3>
+      <p>Browse the wider UM6P catalogue and choose what to take on once your current journey is complete.</p>
+      <span class="coming">Unlocks soon</span>
+    </div>
+
+    <div class="shape-tile" aria-disabled="true">
+      <div class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+      </div>
+      <span class="lock"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 9V7a5 5 0 0 0-10 0v2H5v12h14V9zM9 7a3 3 0 1 1 6 0v2H9z"/></svg></span>
+      <h3>Develop a skill</h3>
+      <p>Pick a specific capability to strengthen — communication, analytical reasoning, systems thinking, decision-making.</p>
+      <span class="coming">Unlocks soon</span>
+    </div>
+  </div>
+
+  <p class="footnote">
+    <strong>Brand compliance:</strong> Built to the UM6P Brand Guidelines 3.0 — Primary Orange #D7492A (Pantone 173), Light Orange #ED6E47 (Pantone 1645), Charcoal Black #3B3B3C (Pantone 440). Typography uses Poppins, the system fallback for Gilmer (per Typography 5.0 p.124). Logo placement top-left per Usage Rules p.67. Sub-brand format follows Education Clusters p.54.
+  </p>
+
+</main>
+
+</body>
+</html>
