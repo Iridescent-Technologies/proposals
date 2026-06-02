@@ -6,17 +6,7 @@
 <title>One Court Africa · Discovery · UM6P</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-:root {
-  --um6p-orange: #D7492A;
-  --um6p-orange-light: #ED6E47;
-  --um6p-orange-dark: #B8391E;
-  --um6p-charcoal: #3B3B3C;
-  --um6p-white: #FFFFFF;
-  --um6p-paper: #FAF8F5;
-  --um6p-line: #E9E3D8;
-  --um6p-muted: #6B6B6C;
-  --radius-lg: 16px; --radius-md: 10px; --radius-sm: 6px;
-}
+:root { --um6p-orange: #D7492A; --um6p-orange-light: #ED6E47; --um6p-orange-dark: #B8391E; --um6p-charcoal: #3B3B3C; --um6p-white: #FFFFFF; --um6p-paper: #FAF8F5; --um6p-line: #E9E3D8; --um6p-muted: #6B6B6C; --radius-lg: 16px; --radius-md: 10px; --radius-sm: 6px; }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background: var(--um6p-white); color: var(--um6p-charcoal); font-family: 'Poppins', sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.45; }
 
@@ -31,7 +21,6 @@ html, body { margin: 0; padding: 0; background: var(--um6p-white); color: var(--
 .user-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--um6p-orange); color: var(--um6p-white); display: grid; place-items: center; font-size: 12px; font-weight: 600; }
 .user-name { font-size: 13px; font-weight: 500; }
 
-/* Stream banner — charcoal for OCA */
 .stream-banner { background: var(--um6p-charcoal); color: var(--um6p-white); padding: 16px 40px; }
 .stream-banner-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
 .stream-banner .um6p-mini { display: inline-flex; gap: 2px; }
@@ -45,40 +34,54 @@ html, body { margin: 0; padding: 0; background: var(--um6p-white); color: var(--
 .panel-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
 .panel-head .step-num { width: 30px; height: 30px; border-radius: 50%; background: var(--um6p-orange); color: var(--um6p-white); font-size: 12px; font-weight: 700; display: grid; place-items: center; }
 .panel-head .eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--um6p-orange); font-weight: 600; }
+.panel-head .layer-tag { display: none; }
 
-h1.step-title { font-family: 'Poppins'; font-weight: 700; font-size: 30px; line-height: 1.15; letter-spacing: -0.01em; color: var(--um6p-charcoal); margin: 0 0 14px; }
-.step-intro { font-size: 15px; color: var(--um6p-charcoal); line-height: 1.6; margin: 0 0 28px; max-width: 640px; }
+h1.step-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 30px; line-height: 1.15; letter-spacing: -0.01em; color: var(--um6p-charcoal); margin: 0 0 14px; }
+.step-intro { font-size: 14.5px; color: var(--um6p-charcoal); line-height: 1.6; margin: 0 0 24px; max-width: 660px; }
 .step-intro em { color: var(--um6p-orange); font-style: normal; font-weight: 500; }
-.why-note { background: var(--um6p-paper); border-left: 3px solid var(--um6p-orange); padding: 12px 16px; font-size: 13px; color: var(--um6p-charcoal); margin-bottom: 24px; line-height: 1.55; }
+.why-note { background: var(--um6p-paper); border-left: 3px solid var(--um6p-orange); padding: 12px 16px; font-size: 13px; color: var(--um6p-charcoal); margin-bottom: 22px; line-height: 1.55; }
 
-.field { margin-bottom: 24px; }
-.field-label { display: block; font-size: 13px; font-weight: 600; color: var(--um6p-charcoal); margin-bottom: 10px; }
-.opt-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.field { margin-bottom: 20px; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.field-label { display: block; font-size: 13px; font-weight: 600; color: var(--um6p-charcoal); margin-bottom: 8px; }
+.field-help { font-size: 12px; color: var(--um6p-muted); margin-top: 6px; font-style: italic; }
+.opt-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
 .opt-grid.three { grid-template-columns: repeat(3, 1fr); }
-.opt { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1px solid var(--um6p-line); border-radius: var(--radius-md); cursor: pointer; background: var(--um6p-white); font-size: 13.5px; color: var(--um6p-charcoal); transition: all 0.15s ease; }
+.opt-grid.four { grid-template-columns: repeat(4, 1fr); }
+.opt-grid.five { grid-template-columns: repeat(5, 1fr); }
+.opt { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--um6p-line); border-radius: var(--radius-md); cursor: pointer; background: var(--um6p-white); font-size: 13px; color: var(--um6p-charcoal); transition: all 0.15s ease; }
 .opt:hover { border-color: var(--um6p-orange); background: var(--um6p-paper); }
 .opt.selected { border-color: var(--um6p-orange); background: rgba(215,73,42,0.06); }
-.opt .tick { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #cfc9b8; flex: none; display: grid; place-items: center; }
+.opt .tick { width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid #cfc9b8; flex: none; display: grid; place-items: center; }
 .opt.selected .tick { border-color: var(--um6p-orange); background: var(--um6p-orange); color: var(--um6p-white); }
-.opt.selected .tick::after { content: '✓'; font-size: 10px; line-height: 1; }
-textarea, input[type=text] { width: 100%; padding: 12px 14px; font-family: inherit; font-size: 14px; border: 1px solid var(--um6p-line); border-radius: var(--radius-md); background: var(--um6p-white); color: var(--um6p-charcoal); resize: vertical; }
-textarea:focus, input[type=text]:focus { outline: none; border-color: var(--um6p-orange); }
-textarea { min-height: 80px; }
-.example { font-size: 12px; color: var(--um6p-muted); font-style: italic; margin-top: 6px; }
+.opt.selected .tick::after { content: '✓'; font-size: 9px; line-height: 1; }
+.opt-radio .tick { border-radius: 50%; }
+input[type=text], input[type=email], select, textarea { width: 100%; padding: 11px 13px; font-family: inherit; font-size: 14px; border: 1px solid var(--um6p-line); border-radius: var(--radius-md); background: var(--um6p-white); color: var(--um6p-charcoal); }
+textarea { resize: vertical; min-height: 78px; }
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--um6p-orange); }
 
-.actions { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 32px; gap: 12px; }
-.btn { padding: 12px 24px; border-radius: var(--radius-md); font-size: 14px; font-weight: 600; cursor: pointer; border: 0; font-family: inherit; }
+.slider-row { display: grid; grid-template-columns: 220px 1fr 40px; gap: 16px; align-items: center; padding: 11px 0; border-bottom: 1px dashed var(--um6p-line); }
+.slider-row:last-of-type { border-bottom: 0; }
+.slider-row .name { font-size: 13px; color: var(--um6p-charcoal); font-weight: 500; }
+.slider { -webkit-appearance: none; width: 100%; height: 5px; background: var(--um6p-paper); border-radius: 999px; outline: none; border: 1px solid var(--um6p-line); }
+.slider::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--um6p-orange); cursor: pointer; border: 2px solid var(--um6p-white); box-shadow: 0 1px 3px rgba(215,73,42,0.3); }
+.slider::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--um6p-orange); cursor: pointer; border: 2px solid var(--um6p-white); }
+.slider-val { font-size: 13px; font-weight: 700; color: var(--um6p-orange); text-align: center; }
+.spectrum-row { padding: 12px 0; border-bottom: 1px dashed var(--um6p-line); }
+.spectrum-row:last-of-type { border-bottom: 0; }
+.spectrum-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--um6p-charcoal); margin-bottom: 8px; }
+
+.actions { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 28px; gap: 12px; }
+.btn { padding: 11px 22px; border-radius: var(--radius-md); font-size: 13.5px; font-weight: 600; cursor: pointer; border: 0; font-family: inherit; }
 .btn-primary { background: var(--um6p-orange); color: var(--um6p-white); }
 .btn-primary:hover { background: var(--um6p-orange-dark); }
 .btn-ghost { background: transparent; color: var(--um6p-muted); font-weight: 500; }
 
-/* Left sidebar — Zavmo Learn pattern */
 .sidebar { position: sticky; top: 130px; padding: 4px 4px 0; }
 .sidebar-progress { text-align: left; padding-bottom: 18px; border-bottom: 1px solid var(--um6p-line); margin-bottom: 16px; }
 .sidebar-progress .phase { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--um6p-muted); font-weight: 600; }
 .sidebar-progress .count { font-size: 13px; color: var(--um6p-charcoal); font-weight: 500; margin-top: 4px; }
 .sidebar-section-label { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--um6p-muted); font-weight: 600; margin: 18px 4px 8px; }
-
 .nav-item { display: grid; grid-template-columns: 44px 1fr 18px; gap: 12px; align-items: center; padding: 8px 8px; border-radius: var(--radius-md); margin-bottom: 2px; cursor: pointer; transition: background 0.15s ease; }
 .nav-item:hover:not(.locked) { background: var(--um6p-paper); }
 .nav-item .tile { width: 44px; height: 44px; border-radius: 10px; background: var(--um6p-charcoal); display: grid; place-items: center; color: var(--um6p-white); position: relative; flex: none; }
@@ -90,7 +93,6 @@ textarea { min-height: 80px; }
 .nav-item .arrow { color: var(--um6p-muted); font-size: 16px; opacity: 0; text-align: center; }
 .nav-item.active .arrow { opacity: 1; color: var(--um6p-orange); }
 .nav-item.active .tile { background: var(--um6p-orange); }
-.nav-item.active .meta .title { color: var(--um6p-charcoal); }
 .nav-item.active .meta .status { color: var(--um6p-orange); font-weight: 600; }
 .nav-item.done .tile { background: var(--um6p-orange-light); }
 .nav-item.done .tile .tick-badge { display: grid; }
@@ -98,54 +100,42 @@ textarea { min-height: 80px; }
 .nav-item.locked { opacity: 0.55; cursor: default; }
 .nav-item.locked .tile { background: #bdb6a5; }
 .nav-item.locked .meta .status { color: var(--um6p-muted); font-style: italic; }
-
-.save-status { font-size: 12px; color: var(--um6p-orange); display: flex; align-items: center; gap: 8px; margin: 20px 4px 0; padding-top: 16px; border-top: 1px solid var(--um6p-line); font-weight: 500; }
+.save-status { font-size: 12px; color: var(--um6p-orange); display: flex; align-items: center; gap: 8px; margin: 18px 4px 0; padding-top: 14px; border-top: 1px solid var(--um6p-line); font-weight: 500; }
 .save-status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--um6p-orange); animation: pulse 2s ease-in-out infinite; }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
 .step { display: none; flex: 1; flex-direction: column; }
 .step.active { display: flex; }
 
-/* Identity picker */
 .identity-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
 .identity-card { padding: 18px; border: 1px solid var(--um6p-line); border-radius: var(--radius-md); background: var(--um6p-white); cursor: pointer; transition: all 0.15s ease; }
 .identity-card:hover { border-color: var(--um6p-orange); }
 .identity-card.selected { border-color: var(--um6p-orange); background: rgba(215,73,42,0.04); }
-.identity-card .icon { width: 36px; height: 36px; border-radius: 8px; background: var(--um6p-orange); display: grid; place-items: center; color: var(--um6p-white); font-family: 'Poppins'; font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+.identity-card .icon { width: 32px; height: 32px; border-radius: 8px; background: var(--um6p-orange); display: grid; place-items: center; color: var(--um6p-white); font-weight: 700; font-size: 14px; margin-bottom: 10px; }
 .identity-card h5 { font-size: 14px; font-weight: 700; color: var(--um6p-charcoal); margin: 0 0 4px; }
-.identity-card p { font-size: 12.5px; color: var(--um6p-muted); line-height: 1.5; margin: 0; }
+.identity-card p { font-size: 12px; color: var(--um6p-muted); line-height: 1.5; margin: 0; }
 
-/* Role aspiration */
-.role-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-.role-card { padding: 16px; border: 1px solid var(--um6p-line); border-radius: var(--radius-md); background: var(--um6p-white); cursor: pointer; transition: all 0.15s ease; }
-.role-card:hover { border-color: var(--um6p-orange); }
-.role-card.selected { border-color: var(--um6p-orange); background: rgba(215,73,42,0.04); }
-.role-card h5 { font-size: 14px; font-weight: 700; color: var(--um6p-charcoal); margin: 0 0 4px; }
-.role-card p { font-size: 12px; color: var(--um6p-muted); margin: 0; line-height: 1.45; }
-
-/* Capital cards */
-.capital-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.capital-card { padding: 14px; border: 1px solid var(--um6p-line); border-radius: var(--radius-md); background: var(--um6p-white); cursor: pointer; text-align: center; transition: all 0.15s ease; }
+.capital-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.capital-card { padding: 12px; border: 1px solid var(--um6p-line); border-radius: var(--radius-md); background: var(--um6p-white); cursor: pointer; text-align: center; transition: all 0.15s ease; }
 .capital-card:hover { border-color: var(--um6p-orange); }
 .capital-card.selected { border-color: var(--um6p-orange); background: rgba(215,73,42,0.04); }
-.capital-card .glyph { font-family: 'Poppins'; font-size: 22px; color: var(--um6p-orange); margin-bottom: 4px; font-weight: 700; }
-.capital-card h5 { font-size: 13px; color: var(--um6p-charcoal); margin: 0 0 2px; font-weight: 600; }
+.capital-card .glyph { font-family: 'Poppins', sans-serif; font-size: 20px; color: var(--um6p-orange); margin-bottom: 2px; font-weight: 700; }
+.capital-card h5 { font-size: 12.5px; color: var(--um6p-charcoal); margin: 0 0 2px; font-weight: 600; }
 .capital-card p { font-size: 11px; color: var(--um6p-muted); margin: 0; }
 
-/* Path summary */
-.path-summary { background: var(--um6p-paper); border: 1px solid var(--um6p-line); border-radius: var(--radius-md); padding: 24px; margin-bottom: 24px; }
-.path-summary h4 { font-family: 'Poppins'; font-size: 16px; color: var(--um6p-charcoal); margin: 0 0 14px; font-weight: 700; }
-.path-stage { display: grid; grid-template-columns: 50px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px dashed var(--um6p-line); }
+.path-summary { background: var(--um6p-paper); border: 1px solid var(--um6p-line); border-radius: var(--radius-md); padding: 22px; margin-bottom: 22px; }
+.path-summary h4 { font-family: 'Poppins', sans-serif; font-size: 15px; color: var(--um6p-charcoal); margin: 0 0 12px; font-weight: 700; }
+.path-stage { display: grid; grid-template-columns: 50px 1fr; gap: 16px; padding: 11px 0; border-bottom: 1px dashed var(--um6p-line); }
 .path-stage:last-child { border-bottom: 0; }
-.path-stage .stage-num { font-family: 'Poppins'; font-size: 26px; color: var(--um6p-orange); font-weight: 700; line-height: 1; }
-.path-stage h5 { font-size: 13.5px; font-weight: 600; color: var(--um6p-charcoal); margin: 4px 0 4px; }
-.path-stage p { font-size: 12.5px; color: var(--um6p-muted); margin: 0; line-height: 1.5; }
+.path-stage .stage-num { font-family: 'Poppins', sans-serif; font-size: 24px; color: var(--um6p-orange); font-weight: 700; line-height: 1; }
+.path-stage h5 { font-size: 13px; font-weight: 600; color: var(--um6p-charcoal); margin: 3px 0 4px; }
+.path-stage p { font-size: 12px; color: var(--um6p-muted); margin: 0; line-height: 1.45; }
+.profile-row { display: flex; justify-content: space-between; gap: 8px; padding: 5px 0; font-size: 12.5px; border-bottom: 1px dashed var(--um6p-line); }
+.profile-row:last-child { border-bottom: 0; }
+.profile-row .k { color: var(--um6p-muted); }
+.profile-row .v { color: var(--um6p-charcoal); font-weight: 500; text-align: right; }
 
-@media (max-width: 1024px) {
-  .discovery { grid-template-columns: 1fr; }
-  .sidebar { position: static; }
-  .identity-grid, .role-grid { grid-template-columns: 1fr; }
-}
+@media (max-width: 1024px) { .discovery { grid-template-columns: 1fr; } .sidebar { position: static; } .field-row, .identity-grid, .capital-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -156,365 +146,285 @@ textarea { min-height: 80px; }
     <div class="um6p-wordmark">University<br/>Mohammed VI<br/>Polytechnic</div>
   </div>
   <div class="crumb"><a href="home.html">← Home</a></div>
-  <div class="user-chip">
-    <div class="user-avatar">ZE</div>
-    <span class="user-name">Zahra El Alami</span>
-  </div>
+  <div class="user-chip"><div class="user-avatar">ZE</div><span class="user-name">Zahra El Alami</span></div>
 </header>
 
 <div class="stream-banner">
   <div class="stream-banner-inner">
     <span class="um6p-mini"><span>U</span><span>M</span><span>6</span><span>P</span></span>
     <span class="divider"></span>
-    <span class="name">One Court Africa · Discovery Journey</span>
+    <span class="name">One Court Africa · Standardised Onboarding</span>
     <span class="domain">Impact Investment in Africa</span>
   </div>
 </div>
 
 <main class="discovery">
 
-  <!-- Left sidebar -->
   <aside class="sidebar">
     <div class="sidebar-progress">
-      <div class="phase">One Court Africa · Discovery</div>
-      <div class="count" id="progress-count">Step 1 of 10 · Welcome</div>
+      <div class="phase">OCA · Discovery</div>
+      <div class="count" id="progress-count">Step 1 of 12 · Welcome</div>
     </div>
 
-    <div class="sidebar-section-label">Set the context</div>
+    <div class="sidebar-section-label">Layer 1 · About you</div>
+    <div class="nav-item active" data-nav="1" onclick="goStep(1)"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2 4 4 8-8 4 4"/></svg><span class="tick-badge">✓</span></div><div class="meta"><div class="title">Welcome</div><div class="status">Active</div></div><span class="arrow">→</span></div>
+    <div class="nav-item" data-nav="2" onclick="goStep(2)"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg><span class="tick-badge">✓</span></div><div class="meta"><div class="title">Your details</div><div class="status">Locked</div></div><span class="arrow">→</span></div>
+    <div class="nav-item" data-nav="3" onclick="goStep(3)"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg><span class="tick-badge">✓</span></div><div class="meta"><div class="title">Interests &amp; intent</div><div class="status">Locked</div></div><span class="arrow">→</span></div>
 
-    <div class="nav-item active" data-nav="1" onclick="goStep(1)">
-      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2 4 4 8-8 4 4"/></svg><span class="tick-badge">✓</span></div>
-      <div class="meta"><div class="title">Welcome</div><div class="status">Begin journey</div></div>
-      <span class="arrow">→</span>
-    </div>
+    <div class="sidebar-section-label">Layer 2 · How you learn</div>
+    <div class="nav-item" data-nav="4" onclick="goStep(4)"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg><span class="tick-badge">✓</span></div><div class="meta"><div class="title">Goals &amp; direction</div><div class="status">Locked</div></div><span class="arrow">→</span></div>
+    <div class="nav-item" data-nav="5" onclick="goStep(5)"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="9" cy="7" r="2.5" fill="white"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="15" cy="12" r="2.5" fill="white"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="11" cy="17" r="2.5" fill="white"/></svg><span class="tick-badge">✓</span></div><div class="meta"><div class="title">Style &amp; preferences</div><div class="status">Locked</div></div><span class="arrow">→</span></div>
+    <div class="nav-item" data-nav="6" onclick="goStep(6)"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-8M22 20V14"/></svg><span class="tick-badge">✓</span></div><div class="meta"><div class="title">Capability confidence</div><div class="status">Locked</div></div><span class="arrow">→</span></div>
+    <div class="nav-item" data-nav="7" onclick="goStep(7)"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12c0 4.4-4 8-9 8a10 10 0 0 1-4-.8L3 21l1.8-4.5A8 8 0 0 1 3 12c0-4.4 4-8 9-8s9 3.6 9 8z"/></svg><span class="tick-badge">✓</span></div><div class="meta"><div class="title">Work style &amp; reflection</div><div class="status">Locked</div></div><span class="arrow">→</span></div>
 
-    <div class="nav-item" data-nav="2" onclick="goStep(2)">
-      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6 7-6s7 2 7 6"/></svg><span class="tick-badge">✓</span></div>
-      <div class="meta"><div class="title">Who you are</div><div class="status">Locked</div></div>
-      <span class="arrow">→</span>
-    </div>
-
-    <div class="nav-item" data-nav="3" onclick="goStep(3)">
-      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h11a2 2 0 0 1 2 2v14l-7-3-7 3V6a2 2 0 0 1 1-2z"/><path d="M9 8h6M9 12h4"/></svg><span class="tick-badge">✓</span></div>
-      <div class="meta"><div class="title">Prior exposure</div><div class="status">Locked</div></div>
-      <span class="arrow">→</span>
-    </div>
-
-    <div class="sidebar-section-label">Frame impact</div>
-
-    <div class="nav-item" data-nav="4" onclick="goStep(4)">
-      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><span class="tick-badge">✓</span></div>
-      <div class="meta"><div class="title">What "impact" means</div><div class="status">Locked</div></div>
-      <span class="arrow">→</span>
-    </div>
-
-    <div class="nav-item" data-nav="5" onclick="goStep(5)">
-      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V9M12 9l-4 4M12 9l4 4M5 4h14"/></svg><span class="tick-badge">✓</span></div>
-      <div class="meta"><div class="title">Beyond capital</div><div class="status">Locked</div></div>
-      <span class="arrow">→</span>
-    </div>
-
-    <div class="nav-item" data-nav="6" onclick="goStep(6)">
-      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 .8-4.5 4.4 1 6.3L12 16.8 6.5 19.5l1-6.3L3 8.8 9 8z"/></svg><span class="tick-badge">✓</span></div>
-      <div class="meta"><div class="title">Your future role</div><div class="status">Locked</div></div>
-      <span class="arrow">→</span>
-    </div>
-
-    <div class="sidebar-section-label">Calibration</div>
-
-    <div class="nav-item" data-nav="7" onclick="goStep(7)">
-      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.8 1 1.8 1 2.8V17h6v-.7c0-1 .3-2 1-2.8A6 6 0 0 0 12 3z"/></svg><span class="tick-badge">✓</span></div>
-      <div class="meta"><div class="title">Venture reasoning</div><div class="status">Locked</div></div>
-      <span class="arrow">→</span>
-    </div>
-
-    <div class="nav-item" data-nav="8" onclick="goStep(8)">
-      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c0-5 4-9 9-9s9 4 9 9-4 9-9 9c-2 0-4-.7-5.5-1.8L3 21l1.8-3.5C3.7 16 3 14 3 12z"/></svg><span class="tick-badge">✓</span></div>
-      <div class="meta"><div class="title">Engagement comfort</div><div class="status">Locked</div></div>
-      <span class="arrow">→</span>
-    </div>
+    <div class="sidebar-section-label">Layer 3 · This programme</div>
+    <div class="nav-item" data-nav="8" onclick="goStep(8)"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"/></svg><span class="tick-badge">✓</span></div><div class="meta"><div class="title">Identity &amp; exposure</div><div class="status">Locked</div></div><span class="arrow">→</span></div>
+    <div class="nav-item" data-nav="9" onclick="goStep(9)"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v15l-7-3-8 3z"/><line x1="8" y1="8" x2="15" y2="8"/><line x1="8" y1="12" x2="13" y2="12"/></svg><span class="tick-badge">✓</span></div><div class="meta"><div class="title">Knowledge &amp; challenges</div><div class="status">Locked</div></div><span class="arrow">→</span></div>
+    <div class="nav-item" data-nav="10" onclick="goStep(10)"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4l8-1 8 3v8l-8-3-8 1"/><line x1="5" y1="21" x2="5" y2="14"/></svg><span class="tick-badge">✓</span></div><div class="meta"><div class="title">Goals, capital &amp; application</div><div class="status">Locked</div></div><span class="arrow">→</span></div>
+    <div class="nav-item" data-nav="11" onclick="goStep(11)"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="15 9 11 11 9 15 13 13" fill="currentColor"/></svg><span class="tick-badge">✓</span></div><div class="meta"><div class="title">Domain baseline</div><div class="status">Locked</div></div><span class="arrow">→</span></div>
 
     <div class="sidebar-section-label">Outcome</div>
-
-    <div class="nav-item" data-nav="9" onclick="goStep(9)">
-      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg><span class="tick-badge">✓</span></div>
-      <div class="meta"><div class="title">Review &amp; save</div><div class="status">Locked</div></div>
-      <span class="arrow">→</span>
-    </div>
-
-    <div class="nav-item" data-nav="10" onclick="goStep(10)">
-      <div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19l4-4M14 4l6 6-9 9H5v-6z"/><path d="M14 8l2 2"/></svg><span class="tick-badge">✓</span></div>
-      <div class="meta"><div class="title">Your journey</div><div class="status">Locked</div></div>
-      <span class="arrow">→</span>
-    </div>
+    <div class="nav-item" data-nav="12" onclick="goStep(12)"><div class="tile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18s2-7 7-7 7 7 7 7"/><circle cx="5" cy="20" r="2"/><circle cx="19" cy="20" r="2"/><path d="M12 11V4M9 7l3-3 3 3"/></svg><span class="tick-badge">✓</span></div><div class="meta"><div class="title">Personalised path</div><div class="status">Locked</div></div><span class="arrow">→</span></div>
 
     <div class="save-status">Autosaving to your profile</div>
   </aside>
 
   <section class="panel">
 
-    <!-- 1 — Welcome -->
     <div class="step active" data-step="1">
-      <div class="panel-head"><span class="step-num">1</span><span class="eyebrow">Welcome</span></div>
+      <div class="panel-head"><span class="step-num">1</span><span class="eyebrow">Welcome</span><span class="layer-tag">Layer 1</span></div>
       <h1 class="step-title">Welcome to One Court Africa.</h1>
-      <p class="step-intro">An experience-based learning journey designed to move you from awareness and inspiration to active engagement in impact entrepreneurship and investment across Africa. I'm Zavmo — I'll guide your discovery.</p>
-      <div class="why-note"><strong>The journey:</strong> Understanding → Interpretation → Application → Evaluation → Strategic creation. Experience-driven and real-world over theoretical.</div>
+      <p class="step-intro">An experience-based learning journey designed to move you from awareness toward active engagement in impact entrepreneurship and investment across Africa. I'll guide you through three layers: <em>who you are</em>, <em>how you learn</em>, then <em>what you need from this specific programme</em>.</p>
+      <div class="why-note"><strong>Three-layer onboarding:</strong> Layers 1 &amp; 2 are standardised across UM6P programmes — you won't be asked twice. Layer 3 is anchored in impact investing and Africa.</div>
       <div class="actions"><span></span><button class="btn btn-primary" onclick="goStep(2)">Begin →</button></div>
     </div>
 
-    <!-- 2 — Identity -->
     <div class="step" data-step="2">
-      <div class="panel-head"><span class="step-num">2</span><span class="eyebrow">Who you are</span></div>
-      <h1 class="step-title">Which best reflects how you're stepping into this programme?</h1>
-      <p class="step-intro">This helps shape the depth of investment learning, the framing of cases, and the level of jargon — accessible but sophisticated either way.</p>
-
-      <div class="identity-grid" data-single>
-        <div class="identity-card opt"><div class="icon">A</div><h5>Athlete or active/former NBA player</h5><p>Looking to expand impact beyond the court — investing, partnerships, ecosystem engagement, legacy.</p></div>
-        <div class="identity-card opt"><div class="icon">I</div><h5>High-influence talent or public figure</h5><p>Visibility across sports, entertainment or culture — translating influence into meaningful value creation.</p></div>
-        <div class="identity-card opt"><div class="icon">E</div><h5>Emerging impact investor</h5><p>Non-traditional background, curious about deploying capital for financial return <em>and</em> impact.</p></div>
-        <div class="identity-card opt"><div class="icon">B</div><h5>Ecosystem builder or executive learner</h5><p>Mentoring, partnerships, acceleration, corporate innovation — understanding the African landscape.</p></div>
+      <div class="panel-head"><span class="step-num">2</span><span class="eyebrow">Your details</span><span class="layer-tag">Layer 1</span></div>
+      <h1 class="step-title">Tell us a little about yourself.</h1>
+      <p class="step-intro">Quick basics — these power your account, cohort placement and how we tailor language.</p>
+      <div class="field-row"><div><label class="field-label">First name</label><input type="text" value="Zahra" /></div><div><label class="field-label">Last name</label><input type="text" value="El Alami" /></div></div>
+      <div class="field"><label class="field-label">Email address</label><input type="email" placeholder="you@organisation.com" /></div>
+      <div class="field-row"><div><label class="field-label">Country / region</label><select><option>Morocco</option><option>United States</option><option>Nigeria</option><option>Kenya</option><option>South Africa</option><option>France</option><option>United Kingdom</option><option>Other</option></select></div><div><label class="field-label">Organisation / affiliation</label><input type="text" placeholder="e.g. NBPA, your fund, your platform" /></div></div>
+      <div class="field-row"><div><label class="field-label">Current role / title</label><input type="text" placeholder="e.g. Active NBA player, Founder, Partner" /></div><div><label class="field-label">Industry / sector</label><input type="text" placeholder="e.g. Sports, Entertainment, Finance, Venture" /></div></div>
+      <div class="field"><label class="field-label">Functional area</label>
+        <div class="opt-grid four">
+          <div class="opt"><span class="tick"></span>Athlete / player</div><div class="opt"><span class="tick"></span>Public figure</div><div class="opt"><span class="tick"></span>Investing</div><div class="opt"><span class="tick"></span>Founder / venture</div><div class="opt"><span class="tick"></span>Corporate</div><div class="opt"><span class="tick"></span>Foundation / philanthropy</div><div class="opt"><span class="tick"></span>Advisory / partnerships</div><div class="opt"><span class="tick"></span>Academic / learning</div>
+        </div>
       </div>
-
-      <div class="actions"><button class="btn btn-ghost" onclick="goStep(1)">Back</button><button class="btn btn-primary" onclick="goStep(3)">Confirm and continue →</button></div>
+      <div class="field"><label class="field-label">Years of professional experience</label>
+        <div class="opt-grid five">
+          <div class="opt opt-radio" data-single-group="yoe"><span class="tick"></span>0–3</div><div class="opt opt-radio" data-single-group="yoe"><span class="tick"></span>4–7</div><div class="opt opt-radio" data-single-group="yoe"><span class="tick"></span>8–15</div><div class="opt opt-radio" data-single-group="yoe"><span class="tick"></span>16–25</div><div class="opt opt-radio" data-single-group="yoe"><span class="tick"></span>25+</div>
+        </div>
+      </div>
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(1)">Back</button><button class="btn btn-primary" onclick="goStep(3)">Save and continue →</button></div>
     </div>
 
-    <!-- 3 — Prior exposure -->
     <div class="step" data-step="3">
-      <div class="panel-head"><span class="step-num">3</span><span class="eyebrow">Prior exposure</span></div>
-      <h1 class="step-title">Let's get a sense of where you're starting from.</h1>
-      <p class="step-intro">Two short questions — one about investing, one about Africa. No wrong answers; this is where I calibrate from.</p>
-
-      <div class="field">
-        <label class="field-label">Your exposure to investing</label>
-        <div class="opt-grid" data-single>
-          <div class="opt"><span class="tick"></span>New — never invested directly</div>
-          <div class="opt"><span class="tick"></span>I invest passively (funds, index, advisors)</div>
-          <div class="opt"><span class="tick"></span>I've made direct investments (angel, real estate, ventures)</div>
-          <div class="opt"><span class="tick"></span>I've evaluated or built an investment thesis</div>
-          <div class="opt"><span class="tick"></span>I've led capital deployment or fund decisions</div>
-          <div class="opt"><span class="tick"></span>Professional investor</div>
+      <div class="panel-head"><span class="step-num">3</span><span class="eyebrow">Interests &amp; intent</span><span class="layer-tag">Layer 1</span></div>
+      <h1 class="step-title">What draws you here?</h1>
+      <p class="step-intro">Two quick questions to help us segment relevant content and frame your journey.</p>
+      <div class="field"><label class="field-label">Which areas interest you most? <span style="color:var(--um6p-muted);font-weight:400;">(select up to 5)</span></label>
+        <div class="opt-grid three">
+          <div class="opt"><span class="tick"></span>Sustainability</div><div class="opt"><span class="tick"></span>Industrial Transformation</div><div class="opt"><span class="tick"></span>Leadership</div><div class="opt"><span class="tick"></span>Entrepreneurship</div><div class="opt"><span class="tick"></span>Innovation</div><div class="opt"><span class="tick"></span>AI &amp; Digital Transformation</div><div class="opt"><span class="tick"></span>Supply Chain</div><div class="opt"><span class="tick"></span>Energy</div><div class="opt"><span class="tick"></span>Water</div><div class="opt"><span class="tick"></span>Mining</div><div class="opt"><span class="tick"></span>Agriculture</div><div class="opt"><span class="tick"></span>Health</div>
+        </div>
+        <input type="text" placeholder="Other / fun interest…" style="margin-top:8px;" />
+      </div>
+      <div class="field"><label class="field-label">What brings you here today? <span style="color:var(--um6p-muted);font-weight:400;">(select all that apply)</span></label>
+        <div class="opt-grid">
+          <div class="opt"><span class="tick"></span>Explore available learning opportunities</div><div class="opt"><span class="tick"></span>Build skills for my current role</div><div class="opt"><span class="tick"></span>Career advancement</div><div class="opt"><span class="tick"></span>Explore new topics</div><div class="opt"><span class="tick"></span>Organisational training</div><div class="opt"><span class="tick"></span>Personal / professional curiosity</div><div class="opt"><span class="tick"></span>Participate in an assigned programme</div>
         </div>
       </div>
-
-      <div class="field">
-        <label class="field-label">Your exposure to Africa — businesses, ventures, or ecosystems</label>
-        <div class="opt-grid" data-single>
-          <div class="opt"><span class="tick"></span>New to Africa as a venture context</div>
-          <div class="opt"><span class="tick"></span>I follow African news, founders or markets</div>
-          <div class="opt"><span class="tick"></span>I've travelled or worked in Africa</div>
-          <div class="opt"><span class="tick"></span>I have personal or family connections to the continent</div>
-          <div class="opt"><span class="tick"></span>I've engaged commercially with African ventures or partners</div>
-          <div class="opt"><span class="tick"></span>I'm African or have deep regional context</div>
-        </div>
-      </div>
-
       <div class="actions"><button class="btn btn-ghost" onclick="goStep(2)">Back</button><button class="btn btn-primary" onclick="goStep(4)">Save and continue →</button></div>
     </div>
 
-    <!-- 4 — Meaning of impact -->
     <div class="step" data-step="4">
-      <div class="panel-head"><span class="step-num">4</span><span class="eyebrow">Your meaning of impact</span></div>
-      <h1 class="step-title">What does "impact" mean for you, in your own words?</h1>
-      <p class="step-intro">Impact investing means different things to different people. I'll use your interpretation to frame the cases and trade-offs we explore together.</p>
-
-      <div class="field">
-        <label class="field-label">In your own words — what makes something "impactful" for you?</label>
-        <textarea placeholder="Could be social, environmental, generational, community-rooted, legacy-driven, economic mobility, climate, gender equity, founder representation, or something else."></textarea>
-      </div>
-
-      <div class="field">
-        <label class="field-label">Which dimensions feel most important to you? <span style="color:var(--um6p-muted);font-weight:400;">(pick up to four)</span></label>
-        <div class="opt-grid three" data-multi>
-          <div class="opt"><span class="tick"></span>Climate &amp; resource</div>
-          <div class="opt"><span class="tick"></span>Health &amp; wellbeing</div>
-          <div class="opt"><span class="tick"></span>Education &amp; skills</div>
-          <div class="opt"><span class="tick"></span>Economic mobility &amp; jobs</div>
-          <div class="opt"><span class="tick"></span>Gender equity</div>
-          <div class="opt"><span class="tick"></span>Youth &amp; sport</div>
-          <div class="opt"><span class="tick"></span>Food &amp; agriculture</div>
-          <div class="opt"><span class="tick"></span>Financial inclusion</div>
-          <div class="opt"><span class="tick"></span>Technology access</div>
-          <div class="opt"><span class="tick"></span>Cultural &amp; creative industries</div>
-          <div class="opt"><span class="tick"></span>Infrastructure &amp; cities</div>
-          <div class="opt"><span class="tick"></span>Founder representation</div>
+      <div class="panel-head"><span class="step-num">4</span><span class="eyebrow">Goals &amp; direction</span><span class="layer-tag">Layer 2</span></div>
+      <h1 class="step-title">What are you hoping to strengthen?</h1>
+      <div class="field"><label class="field-label">Learning goals <span style="color:var(--um6p-muted);font-weight:400;">(choose up to 3)</span></label>
+        <div class="opt-grid three">
+          <div class="opt"><span class="tick"></span>Leadership</div><div class="opt"><span class="tick"></span>Strategic Thinking</div><div class="opt"><span class="tick"></span>Communication</div><div class="opt"><span class="tick"></span>Innovation</div><div class="opt"><span class="tick"></span>Problem Solving</div><div class="opt"><span class="tick"></span>Decision Making</div><div class="opt"><span class="tick"></span>Data / Digital Fluency</div><div class="opt"><span class="tick"></span>Technical Expertise</div><div class="opt"><span class="tick"></span>Entrepreneurship</div>
         </div>
       </div>
-
+      <div class="field"><label class="field-label">Growth direction</label>
+        <div class="opt-grid">
+          <div class="opt"><span class="tick"></span>Deepen expertise in my current field</div><div class="opt"><span class="tick"></span>Build broader leadership responsibility</div><div class="opt"><span class="tick"></span>Gain cross-functional exposure</div><div class="opt"><span class="tick"></span>Transition into a new area</div><div class="opt"><span class="tick"></span>Become more strategic</div><div class="opt"><span class="tick"></span>Explore future possibilities</div><div class="opt"><span class="tick"></span>Prepare for executive readiness</div>
+        </div>
+      </div>
       <div class="actions"><button class="btn btn-ghost" onclick="goStep(3)">Back</button><button class="btn btn-primary" onclick="goStep(5)">Save and continue →</button></div>
     </div>
 
-    <!-- 5 — Beyond capital -->
     <div class="step" data-step="5">
-      <div class="panel-head"><span class="step-num">5</span><span class="eyebrow">Beyond capital</span></div>
-      <h1 class="step-title">What do you bring to an ecosystem beyond money?</h1>
-      <p class="step-intro">The programme recognises that participants — especially athletes — bring forms of capital that go far beyond cheques: influence, networks, brand, mentorship. Select everything you'd be willing to deploy.</p>
-
-      <div class="capital-grid" data-multi>
-        <div class="capital-card opt"><div class="glyph">◇</div><h5>Visibility</h5><p>Amplify a venture's story</p></div>
-        <div class="capital-card opt"><div class="glyph">◈</div><h5>Network</h5><p>Open doors to partners</p></div>
-        <div class="capital-card opt"><div class="glyph">◉</div><h5>Brand</h5><p>Lend credibility &amp; reach</p></div>
-        <div class="capital-card opt"><div class="glyph">◎</div><h5>Mentorship</h5><p>Coach founders</p></div>
-        <div class="capital-card opt"><div class="glyph">◊</div><h5>Partnerships</h5><p>Attract commercial deals</p></div>
-        <div class="capital-card opt"><div class="glyph">○</div><h5>Capital</h5><p>Direct investment</p></div>
-        <div class="capital-card opt"><div class="glyph">⬣</div><h5>Advocacy</h5><p>Champion the ecosystem</p></div>
-        <div class="capital-card opt"><div class="glyph">⬢</div><h5>Time</h5><p>Show up — boards, panels, visits</p></div>
-        <div class="capital-card opt"><div class="glyph">✦</div><h5>Strategic insight</h5><p>Help shape direction</p></div>
+      <div class="panel-head"><span class="step-num">5</span><span class="eyebrow">Style &amp; preferences</span><span class="layer-tag">Layer 2</span></div>
+      <h1 class="step-title">How do you learn best?</h1>
+      <div class="field"><label class="field-label">Learning style <span style="color:var(--um6p-muted);font-weight:400;">(select up to 3)</span></label>
+        <div class="opt-grid four">
+          <div class="opt"><span class="tick"></span>Short videos</div><div class="opt"><span class="tick"></span>Reading</div><div class="opt"><span class="tick"></span>Simulations</div><div class="opt"><span class="tick"></span>Projects</div><div class="opt"><span class="tick"></span>Peer discussion</div><div class="opt"><span class="tick"></span>Case studies</div><div class="opt"><span class="tick"></span>Coaching / feedback</div><div class="opt"><span class="tick"></span>Reflection exercises</div>
+        </div>
       </div>
-
+      <div class="field"><label class="field-label">Learning preferences <span style="color:var(--um6p-muted);font-weight:400;">(1–10 scale)</span></label>
+        <div class="spectrum-row"><div class="spectrum-labels"><span>Independent learning</span><span>Collaborative learning</span></div><input type="range" class="slider" min="1" max="10" value="7" /></div>
+        <div class="spectrum-row"><div class="spectrum-labels"><span>Structured pathways</span><span>Flexible exploration</span></div><input type="range" class="slider" min="1" max="10" value="6" /></div>
+        <div class="spectrum-row"><div class="spectrum-labels"><span>Conceptual learning</span><span>Hands-on application</span></div><input type="range" class="slider" min="1" max="10" value="9" /></div>
+        <div class="spectrum-row"><div class="spectrum-labels"><span>Short / light activities</span><span>Deep immersive work</span></div><input type="range" class="slider" min="1" max="10" value="6" /></div>
+      </div>
       <div class="actions"><button class="btn btn-ghost" onclick="goStep(4)">Back</button><button class="btn btn-primary" onclick="goStep(6)">Save and continue →</button></div>
     </div>
 
-    <!-- 6 — Future role -->
     <div class="step" data-step="6">
-      <div class="panel-head"><span class="step-num">6</span><span class="eyebrow">Your future role</span></div>
-      <h1 class="step-title">How do you see yourself engaging by the end of this journey?</h1>
-      <p class="step-intro">Pick everything that resonates. The pathway supports a range of futures — informed observer to active investor to ecosystem partner.</p>
-
-      <div class="role-grid" data-multi>
-        <div class="role-card opt"><h5>Informed observer</h5><p>I want to understand the landscape clearly — even if I don't act yet.</p></div>
-        <div class="role-card opt"><h5>Active investor</h5><p>I want to evaluate and back ventures directly.</p></div>
-        <div class="role-card opt"><h5>Strategic partner</h5><p>I want to engage in partnerships, mentorship and ecosystem support.</p></div>
-        <div class="role-card opt"><h5>Advocate &amp; amplifier</h5><p>I want to use my platform to champion founders and ventures.</p></div>
-        <div class="role-card opt"><h5>Builder &amp; convener</h5><p>I want to help shape or build infrastructure for the ecosystem.</p></div>
-        <div class="role-card opt"><h5>Legacy contributor</h5><p>I want to define a long-term contribution aligned with my identity.</p></div>
-      </div>
-
+      <div class="panel-head"><span class="step-num">6</span><span class="eyebrow">Capability confidence</span><span class="layer-tag">Layer 2</span></div>
+      <h1 class="step-title">How confident do you feel today?</h1>
+      <div class="slider-row"><div><div class="name">Leadership</div></div><input type="range" class="slider" min="1" max="10" value="8" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">8</div></div>
+      <div class="slider-row"><div><div class="name">Strategic Thinking</div></div><input type="range" class="slider" min="1" max="10" value="6" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">6</div></div>
+      <div class="slider-row"><div><div class="name">Problem Solving</div></div><input type="range" class="slider" min="1" max="10" value="7" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">7</div></div>
+      <div class="slider-row"><div><div class="name">Communication</div></div><input type="range" class="slider" min="1" max="10" value="9" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">9</div></div>
+      <div class="slider-row"><div><div class="name">Innovation</div></div><input type="range" class="slider" min="1" max="10" value="6" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">6</div></div>
+      <div class="slider-row"><div><div class="name">Data / Digital Fluency</div></div><input type="range" class="slider" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">5</div></div>
+      <div class="slider-row"><div><div class="name">Change Management</div></div><input type="range" class="slider" min="1" max="10" value="6" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">6</div></div>
+      <div class="slider-row"><div><div class="name">Working Across Teams</div></div><input type="range" class="slider" min="1" max="10" value="8" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">8</div></div>
       <div class="actions"><button class="btn btn-ghost" onclick="goStep(5)">Back</button><button class="btn btn-primary" onclick="goStep(7)">Save and continue →</button></div>
     </div>
 
-    <!-- 7 — Venture reasoning -->
     <div class="step" data-step="7">
-      <div class="panel-head"><span class="step-num">7</span><span class="eyebrow">How you reason about ventures</span></div>
-      <h1 class="step-title">A short reasoning scenario.</h1>
-      <p class="step-intro">No right answer — this is to see how you weigh trade-offs. We'll revisit it as your judgement develops.</p>
-
-      <div class="field">
-        <label class="field-label">Scenario</label>
-        <p style="font-size:13.5px; color: var(--um6p-charcoal); line-height:1.55; margin: 0 0 10px;">A Lagos-based fintech serves underbanked traders. Strong unit economics, charismatic founder, 30% month-on-month growth. But: dependency on a single regulator-sensitive payment rail, and a competing well-funded startup is six months behind.<br/><strong>Would you back them — and what would you need to know first?</strong></p>
-        <textarea placeholder="Write as much or as little as feels natural. Reasoning matters more than terminology."></textarea>
-      </div>
-
-      <div class="field">
-        <label class="field-label">When you assess a venture, what do you weigh most? <span style="color:var(--um6p-muted);font-weight:400;">(pick your top three)</span></label>
-        <div class="opt-grid three" data-multi>
-          <div class="opt"><span class="tick"></span>Founder &amp; team</div>
-          <div class="opt"><span class="tick"></span>Market size</div>
-          <div class="opt"><span class="tick"></span>Unit economics</div>
-          <div class="opt"><span class="tick"></span>Defensibility</div>
-          <div class="opt"><span class="tick"></span>Impact theory of change</div>
-          <div class="opt"><span class="tick"></span>Regulatory landscape</div>
-          <div class="opt"><span class="tick"></span>Scalability</div>
-          <div class="opt"><span class="tick"></span>Founder representation</div>
-          <div class="opt"><span class="tick"></span>Local relevance</div>
-        </div>
-      </div>
-
+      <div class="panel-head"><span class="step-num">7</span><span class="eyebrow">Work style &amp; reflection</span><span class="layer-tag">Layer 2</span></div>
+      <h1 class="step-title">How do you decide and work?</h1>
+      <div class="slider-row"><div><div class="name">I'm comfortable making decisions with incomplete information.</div></div><input type="range" class="slider" min="1" max="10" value="7" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">7</div></div>
+      <div class="slider-row"><div><div class="name">I enjoy working through ambiguous problems.</div></div><input type="range" class="slider" min="1" max="10" value="7" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">7</div></div>
+      <div class="slider-row"><div><div class="name">I prefer data-driven decisions.</div></div><input type="range" class="slider" min="1" max="10" value="6" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">6</div></div>
+      <div class="slider-row"><div><div class="name">I am comfortable receiving feedback.</div></div><input type="range" class="slider" min="1" max="10" value="9" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">9</div></div>
+      <div class="slider-row"><div><div class="name">I am open to being challenged in how I think.</div></div><input type="range" class="slider" min="1" max="10" value="9" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">9</div></div>
+      <div class="field" style="margin-top:24px;"><label class="field-label">What is one professional challenge you are currently facing?</label><textarea placeholder="Short response…"></textarea></div>
+      <div class="field"><label class="field-label">If this learning is successful, what would be different for you in 6–12 months?</label><textarea placeholder="Short response…"></textarea></div>
       <div class="actions"><button class="btn btn-ghost" onclick="goStep(6)">Back</button><button class="btn btn-primary" onclick="goStep(8)">Save and continue →</button></div>
     </div>
 
-    <!-- 8 — Engagement comfort -->
-    <div class="step" data-step="8">
-      <div class="panel-head"><span class="step-num">8</span><span class="eyebrow">Engagement comfort</span></div>
-      <h1 class="step-title">How comfortable are you with each kind of engagement?</h1>
-      <p class="step-intro">This helps me sequence your experiential moments — coaching circles, founder conversations, investment simulations, ecosystem visits. We'll build comfort progressively.</p>
+    <!-- ============== LAYER 3 — OCA-SPECIFIC ============== -->
 
-      <div class="field">
-        <label class="field-label">Coaching or mentoring an early-stage founder</label>
-        <div class="opt-grid three" data-single>
-          <div class="opt"><span class="tick"></span>Not yet</div>
-          <div class="opt"><span class="tick"></span>With support</div>
-          <div class="opt"><span class="tick"></span>Confident</div>
+    <div class="step" data-step="8">
+      <div class="panel-head"><span class="step-num">8</span><span class="eyebrow">Identity &amp; exposure</span><span class="layer-tag">Layer 3 · OCA</span></div>
+      <h1 class="step-title">How are you stepping into this programme?</h1>
+      <p class="step-intro">OCA serves a range of participants. Pick the framing closest to your situation, then tell us about your prior exposure.</p>
+
+      <div class="field"><label class="field-label">Your identity for this programme</label>
+        <div class="identity-grid" data-identity-group>
+          <div class="identity-card opt-radio" data-single-group="id"><div class="icon">A</div><h5>Athlete or active/former NBA player</h5><p>Expanding impact beyond the court — investing, partnerships, legacy.</p></div>
+          <div class="identity-card opt-radio" data-single-group="id"><div class="icon">I</div><h5>High-influence talent or public figure</h5><p>Translating visibility into meaningful value creation.</p></div>
+          <div class="identity-card opt-radio" data-single-group="id"><div class="icon">E</div><h5>Emerging impact investor</h5><p>Non-traditional background, curious about deploying capital for return <em>and</em> impact.</p></div>
+          <div class="identity-card opt-radio" data-single-group="id"><div class="icon">B</div><h5>Ecosystem builder or executive learner</h5><p>Mentoring, partnerships, acceleration, corporate innovation in African contexts.</p></div>
         </div>
       </div>
-      <div class="field">
-        <label class="field-label">Participating in an investment simulation or live pitch evaluation</label>
-        <div class="opt-grid three" data-single>
-          <div class="opt"><span class="tick"></span>Not yet</div>
-          <div class="opt"><span class="tick"></span>With support</div>
-          <div class="opt"><span class="tick"></span>Confident</div>
+
+      <div class="field"><label class="field-label">Your exposure to investing</label>
+        <div class="opt-grid">
+          <div class="opt opt-radio" data-single-group="invest"><span class="tick"></span>New — never invested directly</div><div class="opt opt-radio" data-single-group="invest"><span class="tick"></span>Passive investing (funds, advisors)</div><div class="opt opt-radio" data-single-group="invest"><span class="tick"></span>Made direct investments</div><div class="opt opt-radio" data-single-group="invest"><span class="tick"></span>Evaluated or built an investment thesis</div><div class="opt opt-radio" data-single-group="invest"><span class="tick"></span>Led capital deployment / fund decisions</div><div class="opt opt-radio" data-single-group="invest"><span class="tick"></span>Professional investor</div>
         </div>
       </div>
-      <div class="field">
-        <label class="field-label">Engaging publicly — interviews, panels, social — about a venture you back</label>
-        <div class="opt-grid three" data-single>
-          <div class="opt"><span class="tick"></span>Not yet</div>
-          <div class="opt"><span class="tick"></span>With support</div>
-          <div class="opt"><span class="tick"></span>Confident</div>
-        </div>
-      </div>
-      <div class="field">
-        <label class="field-label">Forming your own investment thesis and sharing it</label>
-        <div class="opt-grid three" data-single>
-          <div class="opt"><span class="tick"></span>Not yet</div>
-          <div class="opt"><span class="tick"></span>With support</div>
-          <div class="opt"><span class="tick"></span>Confident</div>
+
+      <div class="field"><label class="field-label">Your exposure to Africa</label>
+        <div class="opt-grid">
+          <div class="opt opt-radio" data-single-group="africa"><span class="tick"></span>New to Africa as a venture context</div><div class="opt opt-radio" data-single-group="africa"><span class="tick"></span>Follow African news, founders or markets</div><div class="opt opt-radio" data-single-group="africa"><span class="tick"></span>Travelled or worked in Africa</div><div class="opt opt-radio" data-single-group="africa"><span class="tick"></span>Personal or family connections</div><div class="opt opt-radio" data-single-group="africa"><span class="tick"></span>Commercial engagement with African ventures</div><div class="opt opt-radio" data-single-group="africa"><span class="tick"></span>African or deep regional context</div>
         </div>
       </div>
 
       <div class="actions"><button class="btn btn-ghost" onclick="goStep(7)">Back</button><button class="btn btn-primary" onclick="goStep(9)">Save and continue →</button></div>
     </div>
 
-    <!-- 9 — Review -->
     <div class="step" data-step="9">
-      <div class="panel-head"><span class="step-num">9</span><span class="eyebrow">Review &amp; save</span></div>
-      <h1 class="step-title">Here's the profile I've built with you.</h1>
-      <p class="step-intro">Saved as you went. Return and edit any answer from your dashboard any time.</p>
-      <div class="why-note"><strong>Saved to your profile</strong> — autosave is on. Profile is persistent across sessions, devices and browser refreshes.</div>
+      <div class="panel-head"><span class="step-num">9</span><span class="eyebrow">Knowledge &amp; challenges</span><span class="layer-tag">Layer 3 · OCA</span></div>
+      <h1 class="step-title">Where do you stand within impact investing in Africa?</h1>
+      <p class="step-intro">Familiarity with seven topics, then the challenges most relevant for you.</p>
 
-      <div class="path-summary">
-        <h4>Your starting profile</h4>
-        <div class="profile-row"><span class="k">Identity</span><span class="v">Active NBA player · expanding impact beyond the court</span></div>
-        <div class="profile-row"><span class="k">Investing exposure</span><span class="v">Made direct investments</span></div>
-        <div class="profile-row"><span class="k">Africa exposure</span><span class="v">Travelled &amp; worked in Africa</span></div>
-        <div class="profile-row"><span class="k">Impact priorities</span><span class="v">Youth &amp; sport · Education · Economic mobility · Founder representation</span></div>
-        <div class="profile-row"><span class="k">Capital you bring</span><span class="v">Visibility · Network · Brand · Mentorship · Capital</span></div>
-        <div class="profile-row"><span class="k">Future role</span><span class="v">Active investor · Strategic partner · Legacy contributor</span></div>
-        <div class="profile-row"><span class="k">Top venture weights</span><span class="v">Founder &amp; team · Impact theory of change · Local relevance</span></div>
-        <div class="profile-row"><span class="k">Strongest comfort</span><span class="v">Public engagement (confident)</span></div>
-        <div class="profile-row"><span class="k">Growth edge</span><span class="v">Thesis formation (with support)</span></div>
+      <div class="field"><label class="field-label">Programme-relevant knowledge <span style="color:var(--um6p-muted);font-weight:400;">(1–10 scale)</span></label>
+        <div class="slider-row"><div><div class="name">Impact investing principles</div></div><input type="range" class="slider" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">5</div></div>
+        <div class="slider-row"><div><div class="name">African investment ecosystems</div></div><input type="range" class="slider" min="1" max="10" value="4" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">4</div></div>
+        <div class="slider-row"><div><div class="name">Venture analysis frameworks</div></div><input type="range" class="slider" min="1" max="10" value="4" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">4</div></div>
+        <div class="slider-row"><div><div class="name">Investment decision-making</div></div><input type="range" class="slider" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">5</div></div>
+        <div class="slider-row"><div><div class="name">Founder &amp; ecosystem dynamics</div></div><input type="range" class="slider" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">5</div></div>
+        <div class="slider-row"><div><div class="name">Risk &amp; opportunity assessment</div></div><input type="range" class="slider" min="1" max="10" value="6" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">6</div></div>
+        <div class="slider-row"><div><div class="name">Strategic engagement models</div></div><input type="range" class="slider" min="1" max="10" value="6" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">6</div></div>
       </div>
 
-      <div class="actions"><button class="btn btn-ghost" onclick="goStep(8)">Edit my answers</button><button class="btn btn-primary" onclick="goStep(10)">Confirm and generate my journey →</button></div>
+      <div class="field" style="margin-top:24px;"><label class="field-label">Which challenges feel most relevant to your situation? <span style="color:var(--um6p-muted);font-weight:400;">(select up to 5)</span></label>
+        <div class="opt-grid three">
+          <div class="opt"><span class="tick"></span>Understanding African market dynamics</div><div class="opt"><span class="tick"></span>Evaluating ventures with limited data</div><div class="opt"><span class="tick"></span>Translating influence into impact</div><div class="opt"><span class="tick"></span>Building an investment thesis</div><div class="opt"><span class="tick"></span>Founder selection &amp; trust</div><div class="opt"><span class="tick"></span>Cross-border / regulatory complexity</div><div class="opt"><span class="tick"></span>Balancing return and impact</div><div class="opt"><span class="tick"></span>Public engagement on ventures I back</div><div class="opt"><span class="tick"></span>Coaching or supporting founders</div><div class="opt"><span class="tick"></span>Defining my long-term legacy</div>
+        </div>
+        <input type="text" placeholder="Other…" style="margin-top:8px;" />
+      </div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(8)">Back</button><button class="btn btn-primary" onclick="goStep(10)">Save and continue →</button></div>
     </div>
 
-    <!-- 10 — Personalised path -->
     <div class="step" data-step="10">
-      <div class="panel-head"><span class="step-num">10</span><span class="eyebrow">Your personalised journey</span></div>
+      <div class="panel-head"><span class="step-num">10</span><span class="eyebrow">Goals, capital &amp; application</span><span class="layer-tag">Layer 3 · OCA</span></div>
+      <h1 class="step-title">What you want, what you bring, and where you'd like to apply it.</h1>
+
+      <div class="field"><label class="field-label">Programme goals <span style="color:var(--um6p-muted);font-weight:400;">(select up to 3)</span></label>
+        <div class="opt-grid">
+          <div class="opt"><span class="tick"></span>Understand impact investing in Africa</div><div class="opt"><span class="tick"></span>Develop venture analysis capability</div><div class="opt"><span class="tick"></span>Build my own investment thesis</div><div class="opt"><span class="tick"></span>Engage with founders &amp; ventures</div><div class="opt"><span class="tick"></span>Translate visibility into impact</div><div class="opt"><span class="tick"></span>Build partnerships &amp; mentorship</div><div class="opt"><span class="tick"></span>Define my long-term legacy</div><div class="opt"><span class="tick"></span>Support strategic capital deployment</div>
+        </div>
+      </div>
+
+      <div class="field"><label class="field-label">What you bring beyond capital <span style="color:var(--um6p-muted);font-weight:400;">(select all that apply)</span></label>
+        <div class="capital-grid">
+          <div class="capital-card opt"><div class="glyph">◇</div><h5>Visibility</h5><p>Amplify story</p></div>
+          <div class="capital-card opt"><div class="glyph">◈</div><h5>Network</h5><p>Open doors</p></div>
+          <div class="capital-card opt"><div class="glyph">◉</div><h5>Brand</h5><p>Lend credibility</p></div>
+          <div class="capital-card opt"><div class="glyph">◎</div><h5>Mentorship</h5><p>Coach founders</p></div>
+          <div class="capital-card opt"><div class="glyph">◊</div><h5>Partnerships</h5><p>Commercial deals</p></div>
+          <div class="capital-card opt"><div class="glyph">○</div><h5>Capital</h5><p>Direct investment</p></div>
+          <div class="capital-card opt"><div class="glyph">⬣</div><h5>Advocacy</h5><p>Champion the ecosystem</p></div>
+          <div class="capital-card opt"><div class="glyph">⬢</div><h5>Time</h5><p>Boards, panels, visits</p></div>
+          <div class="capital-card opt"><div class="glyph">✦</div><h5>Insight</h5><p>Shape direction</p></div>
+        </div>
+      </div>
+
+      <div class="field"><label class="field-label">What real challenge, decision or opportunity would you like to connect this programme to?</label><textarea placeholder="A venture you're considering, a region or sector you're curious about, a decision you'd like to inform with this learning…"></textarea></div>
+      <div class="field"><label class="field-label">Is there a specific founder, fund, partnership or business situation where this programme could help?</label><textarea placeholder="Short response…"></textarea></div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(9)">Back</button><button class="btn btn-primary" onclick="goStep(11)">Save and continue →</button></div>
+    </div>
+
+    <div class="step" data-step="11">
+      <div class="panel-head"><span class="step-num">11</span><span class="eyebrow">Domain baseline</span><span class="layer-tag">Layer 3 · OCA</span></div>
+      <h1 class="step-title">Your starting point within impact investing.</h1>
+      <p class="step-intro">Rate how strongly each statement describes your current ability — anchored in this domain.</p>
+
+      <div class="slider-row"><div><div class="name">I understand the core principles of impact investing.</div></div><input type="range" class="slider" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">5</div></div>
+      <div class="slider-row"><div><div class="name">I can read the dynamics of African investment ecosystems.</div></div><input type="range" class="slider" min="1" max="10" value="4" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">4</div></div>
+      <div class="slider-row"><div><div class="name">I can analyse a venture and form a view.</div></div><input type="range" class="slider" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">5</div></div>
+      <div class="slider-row"><div><div class="name">I can evaluate trade-offs between return and impact.</div></div><input type="range" class="slider" min="1" max="10" value="5" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">5</div></div>
+      <div class="slider-row"><div><div class="name">I can articulate an engagement thesis to others.</div></div><input type="range" class="slider" min="1" max="10" value="4" oninput="this.nextElementSibling.textContent=this.value" /><div class="slider-val">4</div></div>
+
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(10)">Back</button><button class="btn btn-primary" onclick="goStep(12)">Confirm and generate my journey →</button></div>
+    </div>
+
+    <div class="step" data-step="12">
+      <div class="panel-head"><span class="step-num">12</span><span class="eyebrow">Your personalised path</span><span class="layer-tag">Outcome</span></div>
       <h1 class="step-title">Your One Court Africa journey.</h1>
-      <p class="step-intro">Anchored in the impact-investment domain, sequenced to your starting profile, with experiential moments paced to your engagement comfort.</p>
+      <p class="step-intro">Built on your Layer 1 &amp; 2 profile (style, capability, work-style) and your Layer 3 identity, exposure and capital — sequenced to your engagement comfort.</p>
+
+      <div class="path-summary">
+        <h4>Captured across three layers</h4>
+        <div class="profile-row"><span class="k">Layer 1 · Identity</span><span class="v">Athlete · 4–7 years professional</span></div>
+        <div class="profile-row"><span class="k">Layer 2 · Style</span><span class="v">Case studies · Peer · Hands-on · Collaborative</span></div>
+        <div class="profile-row"><span class="k">Layer 3 · OCA identity</span><span class="v">Active NBA player</span></div>
+        <div class="profile-row"><span class="k">Layer 3 · Africa exposure</span><span class="v">Travelled &amp; worked in Africa</span></div>
+        <div class="profile-row"><span class="k">Layer 3 · Investing exposure</span><span class="v">Made direct investments</span></div>
+        <div class="profile-row"><span class="k">Layer 3 · Capital you bring</span><span class="v">Visibility · Network · Brand · Mentorship</span></div>
+        <div class="profile-row"><span class="k">Layer 3 · Programme goals</span><span class="v">Build own thesis · Engage founders · Define legacy</span></div>
+      </div>
 
       <div class="path-summary">
         <h4>Six progression stages</h4>
-
-        <div class="path-stage">
-          <div class="stage-num">1</div>
-          <div><h5>Understand · foundations of impact investing</h5><p>Concepts, vocabulary and the African investment landscape. HBS-style cases tied to your impact priorities (youth &amp; sport, founder representation).</p></div>
-        </div>
-        <div class="path-stage">
-          <div class="stage-num">2</div>
-          <div><h5>Interpret · ecosystem analysis</h5><p>Read patterns across founders, ventures and capital flows. Lagos, Nairobi, Cape Town, Cairo, Casablanca case explorations.</p></div>
-        </div>
-        <div class="path-stage">
-          <div class="stage-num">3</div>
-          <div><h5>Apply · venture analysis frameworks</h5><p>Trade-off tools, due-diligence shortcuts for non-finance backgrounds, founder/team assessment. Hands-on with two live ventures.</p></div>
-        </div>
-        <div class="path-stage">
-          <div class="stage-num">4</div>
-          <div><h5>Engage · founders &amp; coaching circles</h5><p>Live conversations with African founders. Coaching circles paced to your engagement comfort — supported first, then progressively independent.</p></div>
-        </div>
-        <div class="path-stage">
-          <div class="stage-num">5</div>
-          <div><h5>Evaluate · investment simulations</h5><p>Run-throughs of pitch evaluation, capital allocation under uncertainty, and judgement formation. Reflective debrief after each.</p></div>
-        </div>
-        <div class="path-stage">
-          <div class="stage-num">6</div>
-          <div><h5>Create · your engagement thesis &amp; action plan</h5><p>Define your perspective on where you invest, how, and why. Output: a personal engagement strategy and a concrete 12-month action plan.</p></div>
-        </div>
+        <div class="path-stage"><div class="stage-num">1</div><div><h5>Understand · foundations of impact investing</h5><p>Concepts, vocabulary, African investment landscape. Case-based, tied to your interests.</p></div></div>
+        <div class="path-stage"><div class="stage-num">2</div><div><h5>Interpret · ecosystem analysis</h5><p>Patterns across founders, ventures and capital flows in Lagos, Nairobi, Cape Town, Cairo, Casablanca.</p></div></div>
+        <div class="path-stage"><div class="stage-num">3</div><div><h5>Apply · venture analysis frameworks</h5><p>Trade-off tools and due-diligence shortcuts for non-finance backgrounds.</p></div></div>
+        <div class="path-stage"><div class="stage-num">4</div><div><h5>Engage · founders &amp; coaching circles</h5><p>Live conversations with African founders, paced to your comfort.</p></div></div>
+        <div class="path-stage"><div class="stage-num">5</div><div><h5>Evaluate · investment simulations</h5><p>Pitch evaluation, capital allocation under uncertainty, reflective debrief.</p></div></div>
+        <div class="path-stage"><div class="stage-num">6</div><div><h5>Create · your engagement thesis &amp; 12-month plan</h5><p>Personal engagement strategy and a concrete action plan.</p></div></div>
       </div>
 
-      <div class="why-note">The programme is experience-driven by design — you'll move from passive content into active engagement. Reflection moments are built in to translate insight into commitment.</div>
-
-      <div class="actions"><button class="btn btn-ghost" onclick="goStep(9)">Edit my profile</button><button class="btn btn-primary">Start my journey →</button></div>
+      <div class="actions"><button class="btn btn-ghost" onclick="goStep(11)">Edit my profile</button><button class="btn btn-primary">Start my journey →</button></div>
     </div>
 
   </section>
@@ -522,49 +432,42 @@ textarea { min-height: 80px; }
 </main>
 
 <script>
-const STEP_TITLES = {
-  1: 'Welcome', 2: 'Who you are', 3: 'Prior exposure', 4: 'What "impact" means',
-  5: 'Beyond capital', 6: 'Your future role', 7: 'Venture reasoning',
-  8: 'Engagement comfort', 9: 'Review & save', 10: 'Your journey'
-};
-const TOTAL_STEPS = 10;
+const stepLabels = {1:'Welcome',2:'Your details',3:'Interests & intent',4:'Goals & direction',5:'Style & preferences',6:'Capability confidence',7:'Work style & reflection',8:'Identity & exposure',9:'Knowledge & challenges',10:'Goals, capital & application',11:'Domain baseline',12:'Personalised path'};
+const totalSteps = 12;
 
 function goStep(n) {
   document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
   document.querySelector(`.step[data-step="${n}"]`).classList.add('active');
-
-  document.querySelectorAll('.nav-item').forEach(item => {
-    const idx = parseInt(item.dataset.nav, 10);
+  document.querySelectorAll('.nav-item').forEach((item, i) => {
+    const idx = i + 1;
     item.classList.remove('active','done','locked');
     const status = item.querySelector('.meta .status');
-    if (idx < n) {
-      item.classList.add('done');
-      if (status) status.textContent = 'Saved';
-    } else if (idx === n) {
-      item.classList.add('active');
-      if (status) status.textContent = 'Current step';
-    } else {
-      item.classList.add('locked');
-      if (status) status.textContent = 'Locked';
-    }
+    if (idx < n) { item.classList.add('done'); if (status) status.textContent = 'Saved'; }
+    else if (idx === n) { item.classList.add('active'); if (status) status.textContent = 'Current step'; }
+    else { item.classList.add('locked'); if (status) status.textContent = 'Locked'; }
   });
-
-  const counter = document.getElementById('progress-count');
-  if (counter) counter.textContent = `Step ${n} of ${TOTAL_STEPS} · ${STEP_TITLES[n]}`;
-
+  document.getElementById('progress-count').textContent = `Step ${n} of ${totalSteps} · ${stepLabels[n]}`;
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-// Initialise lock state
+// Initialise lock state on page load (matches live v1 behaviour)
 document.querySelectorAll('.nav-item').forEach(item => {
   if (parseInt(item.dataset.nav, 10) > 1) item.classList.add('locked');
 });
 
-document.querySelectorAll('.opt-grid, .identity-grid, .role-grid, .capital-grid').forEach(grid => {
-  const single = grid.hasAttribute('data-single');
-  grid.querySelectorAll('.opt, .identity-card, .role-card, .capital-card').forEach(opt => {
+// Identity cards behave like radio buttons
+document.querySelectorAll('.identity-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.identity-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+  });
+});
+
+document.querySelectorAll('.opt-grid, .capital-grid').forEach(grid => {
+  grid.querySelectorAll('.opt, .capital-card').forEach(opt => {
     opt.addEventListener('click', () => {
-      if (single) grid.querySelectorAll('.opt, .identity-card, .role-card, .capital-card').forEach(o => o.classList.remove('selected'));
+      const group = opt.dataset.singleGroup;
+      if (group) document.querySelectorAll(`.opt[data-single-group="${group}"]`).forEach(o => o.classList.remove('selected'));
       opt.classList.toggle('selected');
     });
   });
