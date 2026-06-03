@@ -42,6 +42,13 @@
   .sectiondiv .stitle{font-size:50px;font-weight:600;letter-spacing:-.02em;max-width:18ch}
   .sectiondiv .ssub{margin-top:18px;font-size:18px;color:#cdd9e7;font-weight:300;max-width:48ch;line-height:1.6}
   .sectiondiv .srule{width:54px;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-soft));border-radius:2px;margin:28px auto 0}
+  .statementdiv{flex-direction:column;gap:0;text-align:center;padding:0 7vw}
+  .statementdiv .seyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:22px}
+  .statementdiv .sbig{font-size:52px;line-height:1.09;font-weight:600;letter-spacing:-.02em;max-width:22ch}
+  .statementdiv .sbig em{font-style:normal;color:var(--teal)}
+  .statementdiv .sbody{margin-top:26px;font-size:19.5px;line-height:1.62;color:#d4e0ec;font-weight:300;max-width:62ch}
+  .statementdiv .sbody b{color:#fff;font-weight:500}
+  .statementdiv .scredit{margin-top:26px;font-size:13px;letter-spacing:.04em;color:var(--muted)}
   .progress{height:3px;background:rgba(255,255,255,.08)}
   .progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-soft));transition:width .35s cubic-bezier(.4,0,.2,1)}
   .dots{display:flex;gap:5px;justify-content:center;padding:12px 0 16px;flex-wrap:wrap}
@@ -103,8 +110,15 @@
 
 <script>
 const S=[
-  { cover:true, big:'The Zavmo<br><em>learner journey</em>',
-    sub:'From first sign-up to a personalised qualification — a walk-through of the live product at learn.zavmo.ai.' },
+  { cover:true, big:'Learning as unique<br>as <em>you are</em>',
+    sub:'A walk-through of the Zavmo learner journey — and the learning revolution behind it.' },
+
+  { statement:true, eyebrow:'Why this matters', big:'What if <em>everyone</em> had a tutor?',
+    body:'In 1984, Benjamin Bloom proved something extraordinary. A learner with a one-to-one tutor, taught to mastery, outperforms <b>98% of a conventional classroom</b> — two full standard deviations. The catch nobody could crack: you cannot give every person their own expert tutor. For forty years, that has been the holy grail of education — the <b>“two-sigma problem.”</b>',
+    credit:'Bloom, B. (1984). The 2 Sigma Problem.' },
+
+  { statement:true, eyebrow:'The Zavmo answer', big:'Now everyone can.',
+    body:'Zavmo is a personal tutor for every single learner. It learns <b>how you learn</b>, teaches only what <b>you</b> need, in <b>your</b> world, at <b>your</b> pace — to genuine mastery, against a real national standard. The two-sigma result, for everyone. Here is how it feels.' },
 
   { section:true, num:'PART 1', title:'Getting started', sub:'Sign-up to first conversation.' },
   { img:'01.png', eyebrow:'Getting started', title:'Sign up', caption:'A learner arrives. No jargon — just a name, an email, and a conversation about to begin.' },
@@ -156,6 +170,9 @@ const S=[
   { img:'31.png', darkframe:true, eyebrow:'Mind Palace · Taking shape', title:'The first stars appear', caption:'A few outcomes in, the constellation starts to form — each star a learning outcome mastered, each line a connection between ideas, clustered by module. The brighter the star, the stronger the evidence.' },
   { img:'32.png', darkframe:true, eyebrow:'Mind Palace · Growing', title:'A map of everything you know', caption:'As the learner progresses, the palace fills in — here, seventeen outcomes across five clusters, reaching Evaluate-level (Bloom 5), two earned just today. Progress becomes something you can see, feel and come back to.' },
   { img:'34.png', darkframe:true, eyebrow:'Gamification · Rewards', title:'Moments you earn', caption:'Eight signature milestone badges — First Lesson, First Insight, First Week, Bloom’s Climb, Comeback Kid, First Qualification — each unlocked with a warm, character-voiced celebration. Alongside daily streaks, weekly challenges and a live score in every check, they turn progress into momentum the learner can feel.' },
+
+  { statement:true, eyebrow:'The revolution', big:'This isn’t a better course.<br>It’s a <em>different world</em>.',
+    body:'Not content pushed at a crowd and a quiz at the end. A companion that knows you, teaches to your level, proves you can actually do the work, and benchmarks it to a real national standard. The two-sigma result — <b>at the scale of everyone</b>. Learning, finally, as unique as you are.' },
 ];
 
 let i=0;
@@ -164,9 +181,10 @@ const contentCount=S.filter(s=>s.img).length;
 function contentIndexOf(n){return S.slice(0,n+1).filter(s=>s.img).length;}
 function render(){
   const s=S[i];
-  slide.className='slide fade'+(s.cover?' cover':'')+(s.section?' sectiondiv':'');
+  slide.className='slide fade'+(s.cover?' cover':'')+(s.section?' sectiondiv':'')+(s.statement?' statementdiv':'');
   if(s.cover){slide.innerHTML=`<span class="zmark zbig"><span>Z</span></span><div class="big">${s.big}</div><div class="sub">${s.sub}</div><div class="meta">Live product walk-through</div><div class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or click to move · <kbd>M</kbd> sections · <kbd>G</kbd> overview · <kbd>F</kbd> fullscreen</div>`;}
   else if(s.section){slide.innerHTML=`<div class="snum">${s.num}</div><div class="stitle">${s.title}</div><div class="ssub">${s.sub}</div><div class="srule"></div>`;}
+  else if(s.statement){slide.innerHTML=`${s.eyebrow?`<div class="seyebrow">${s.eyebrow}</div>`:''}<div class="sbig">${s.big}</div>${s.body?`<div class="sbody">${s.body}</div>`:''}${s.credit?`<div class="scredit">${s.credit}</div>`:''}`;}
   else{const ci=contentIndexOf(i);slide.innerHTML=`<div class="copy"><div class="eyebrow">${s.eyebrow}</div><div class="title">${s.title}</div><div class="caption">${s.caption}</div><div class="step-no">${ci} / ${contentCount}</div></div><div class="shotwrap"><div class="shot${s.darkframe?' dark':''}"><img src="images/${s.img}" alt="${s.title}"></div></div>`;}
   counter.textContent=(i+1)+' / '+S.length;
   bar.style.width=(i/(S.length-1)*100)+'%';
@@ -175,7 +193,7 @@ function render(){
 }
 function go(n){i=Math.max(0,Math.min(S.length-1,n));render();}
 function next(){if(i<S.length-1)go(i+1);}function prev(){if(i>0)go(i-1);}
-S.forEach((s,k)=>{const b=document.createElement('b');if(s.section)b.className='sec';b.onclick=()=>go(k);dots.appendChild(b);});
+S.forEach((s,k)=>{const b=document.createElement('b');if(s.section||s.statement)b.className='sec';b.onclick=()=>go(k);dots.appendChild(b);});
 document.getElementById('zr').onclick=next;document.getElementById('zl').onclick=prev;
 document.getElementById('ar').onclick=next;document.getElementById('al').onclick=prev;
 

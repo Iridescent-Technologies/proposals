@@ -40,6 +40,13 @@
   .sectiondiv .stitle{font-size:50px;font-weight:600;letter-spacing:-.02em;max-width:18ch}
   .sectiondiv .ssub{margin-top:18px;font-size:18px;color:#cdd9e7;font-weight:300;max-width:48ch;line-height:1.6}
   .sectiondiv .srule{width:54px;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-soft));border-radius:2px;margin:30px auto 0}
+  .statementdiv{flex-direction:column;gap:0;text-align:center;padding:0 7vw}
+  .statementdiv .seyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:22px}
+  .statementdiv .sbig{font-size:52px;line-height:1.09;font-weight:600;letter-spacing:-.02em;max-width:22ch}
+  .statementdiv .sbig em{font-style:normal;color:var(--teal)}
+  .statementdiv .sbody{margin-top:26px;font-size:19.5px;line-height:1.62;color:#d4e0ec;font-weight:300;max-width:62ch}
+  .statementdiv .sbody b{color:#fff;font-weight:500}
+  .statementdiv .scredit{margin-top:26px;font-size:13px;letter-spacing:.04em;color:var(--muted)}
   .progress{height:3px;background:rgba(255,255,255,.08)}
   .progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-soft));transition:width .35s cubic-bezier(.4,0,.2,1)}
   .dots{display:flex;gap:6px;justify-content:center;padding:12px 0 16px;flex-wrap:wrap}
@@ -87,8 +94,11 @@
 
 <script>
 const S=[
-  { cover:true, big:'The Zavmo<br><em>admin console</em>',
-    sub:'How a learning leader runs Zavmo — set up a workspace, build pathways, track every learner, and ask the platform anything. A walk-through of admin.zavmo.ai.' },
+  { cover:true, big:'The Jarvis<br>of <em>learning</em>',
+    sub:'How Zavmo makes running an entire learning programme feel light — a walk-through of the admin console.' },
+
+  { statement:true, eyebrow:'The real question', big:'What can Zavmo tell you<br>that an <em>LMS can’t?</em>',
+    body:'An LMS counts logins, hours and ticks. It cannot tell you whether your people can actually <b>do</b> the work. Zavmo can. It reads every moment of learning as evidence, scores it against Bloom’s taxonomy, and shows you the <b>mindset of your whole organisation</b> — capability, not attendance. And it does the running for you.' },
 
   { section:true, num:'PART 1', title:'Getting in', sub:'One console for the whole platform.' },
   { img:'01.png', eyebrow:'Admin console', title:'Sign in',
@@ -117,6 +127,10 @@ const S=[
   { section:true, num:'PART 5', title:'Intelligence', sub:'Reporting without dashboards — and a live map of everything your people know.' },
   { img:'06.png', eyebrow:'Reports · The xAPI difference', title:'Every moment is evidence',
     caption:'This is what sets Zavmo apart: every click, answer, reflection and Bloom’s climb a learner makes is captured as an xAPI statement — 184,000+ and counting — in a native cmi5 Learning Record Store. So you don’t build dashboards, you just ask. Zavmo reads all of it against your skills graph and hands back the answer as a summary, evidence pack, PDF, CSV, a Looker push, or a scheduled weekly.' },
+  { img:'14.png', eyebrow:'Reports · The report no LMS can write', title:'Mindset, and Bloom’s efficiency',
+    caption:'Ask the questions a traditional LMS can’t even frame — “what’s the mindset of my organisation?”, “how efficient is our learning against Bloom’s taxonomy?” Zavmo reads the evidence and answers: your people are growth-oriented, and 62% of completed outcomes reach genuine capability (Apply or above) — not just a tick. An LMS would have marked all of it “complete”. Zavmo shows you where the learning is real.' },
+  { img:'13.png', eyebrow:'Reports · The evidence layer', title:'What your instance is actually doing',
+    caption:'Under every answer sits the raw truth — 179 canonical learning events, 184,612 statements observed. Not just “completed”, but “mastered at Apply level”, “reflected”, “answered a TNA question”, “progressed a Bloom level”. Every meaningful moment of learning, captured as evidence the instant it happens.' },
   { img:'12.png', eyebrow:'Intelligence · Mind Palace', title:'The skills — and the mindset — of your people',
     caption:'Rolled up across every active learner: each star is a learning outcome, sized by how many are working it and coloured by the Bloom’s level they’ve reached. So you see not just what your people have done, but how deeply they understand it — the cognitive depth behind the numbers. Zavmo names the gravity wells (“Coaching Conversations”) and the stuck, lonely outcomes, across 404 learners and 184k xAPI statements.' },
 
@@ -125,6 +139,9 @@ const S=[
     caption:'Neo4j skills graph, learn.zavmo.ai, the SLM specification service, a native cmi5 xAPI LRS (184k+ statements) and Microsoft Teams — all wired in and syncing.' },
   { img:'08.png', eyebrow:'Settings · Branding', title:'Make it yours',
     caption:'White-label the entire learner experience — your colours, logo and favicon — with a live preview, in a couple of clicks.' },
+
+  { statement:true, eyebrow:'The revolution, for leaders', big:'You lead.<br>Zavmo <em>administers</em>.',
+    body:'It briefs you every morning, drafts every pathway, reads every signal, scores every learner against Bloom’s, and answers anything you ask — in plain language, with the evidence behind it. The Jarvis of learning, so your time goes to <b>your people</b>, not paperwork. This is the learning revolution — and it runs itself.' },
 ];
 
 let i=0;
@@ -133,9 +150,10 @@ const contentCount=S.filter(s=>s.img).length;
 function contentIndexOf(n){return S.slice(0,n+1).filter(s=>s.img).length;}
 function render(){
   const s=S[i];
-  slide.className='slide fade'+(s.cover?' cover':'')+(s.section?' sectiondiv':'');
+  slide.className='slide fade'+(s.cover?' cover':'')+(s.section?' sectiondiv':'')+(s.statement?' statementdiv':'');
   if(s.cover){slide.innerHTML=`<span class="zmark zbig"><span>Z</span></span><div class="big">${s.big}</div><div class="sub">${s.sub}</div><div class="meta">Live product walk-through</div><div class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or click to move · <kbd>G</kbd> overview · <kbd>F</kbd> fullscreen</div>`;}
   else if(s.section){slide.innerHTML=`<div class="snum">${s.num}</div><div class="stitle">${s.title}</div><div class="ssub">${s.sub}</div><div class="srule"></div>`;}
+  else if(s.statement){slide.innerHTML=`${s.eyebrow?`<div class="seyebrow">${s.eyebrow}</div>`:''}<div class="sbig">${s.big}</div>${s.body?`<div class="sbody">${s.body}</div>`:''}${s.credit?`<div class="scredit">${s.credit}</div>`:''}`;}
   else{const ci=contentIndexOf(i);slide.innerHTML=`<div class="copy"><div class="eyebrow">${s.eyebrow}</div><div class="title">${s.title}</div><div class="caption">${s.caption}</div><div class="step-no">${ci} / ${contentCount}</div></div><div class="shotwrap"><div class="shot"><img src="images/${s.img}" alt="${s.title}"></div></div>`;}
   counter.textContent=(i+1)+' / '+S.length;
   bar.style.width=(i/(S.length-1)*100)+'%';
@@ -144,7 +162,7 @@ function render(){
 }
 function go(n){i=Math.max(0,Math.min(S.length-1,n));render();}
 function next(){if(i<S.length-1)go(i+1);}function prev(){if(i>0)go(i-1);}
-S.forEach((s,k)=>{const b=document.createElement('b');if(s.section)b.className='sec';b.onclick=()=>go(k);dots.appendChild(b);});
+S.forEach((s,k)=>{const b=document.createElement('b');if(s.section||s.statement)b.className='sec';b.onclick=()=>go(k);dots.appendChild(b);});
 document.getElementById('zr').onclick=next;document.getElementById('zl').onclick=prev;
 document.getElementById('ar').onclick=next;document.getElementById('al').onclick=prev;
 addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next();}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev();}else if(e.key==='Home')go(0);else if(e.key==='End')go(S.length-1);else if(e.key.toLowerCase()==='f')toggleFs();else if(e.key.toLowerCase()==='g')toggleGrid();else if(e.key==='Escape')grid.classList.remove('show');});
