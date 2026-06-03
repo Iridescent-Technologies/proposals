@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zavmo — The Learner Journey</title>
+<style>
+  :root{
+    --navy:#0a1b2e; --navy-2:#0f2540; --ink:#0a1b2e;
+    --teal:#22c7a9; --teal-soft:#9fe8da; --mint:#d9f5ee;
+    --paper:#f4f7fb; --line:rgba(255,255,255,.12); --muted:rgba(255,255,255,.62);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+    background:radial-gradient(120% 120% at 80% 0%, #12graph 0%, transparent 60%), linear-gradient(160deg,#0a1b2e 0%,#0f2540 55%,#0a1b2e 100%);
+    background-color:#0a1b2e; color:#fff; overflow:hidden; height:100vh;
+  }
+  /* fix accidental token */
+  body{background:linear-gradient(160deg,#0a1b2e 0%,#102a49 55%,#0a1b2e 100%);}
+
+  .stage{position:fixed;inset:0;display:flex;flex-direction:column;}
+
+  /* top bar */
+  .bar{display:flex;align-items:center;gap:14px;padding:18px 26px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.14em;font-size:13px;text-transform:uppercase;color:#fff}
+  .zmark{width:30px;height:30px;border-radius:9px;background:linear-gradient(150deg,#16324f,#0a1b2e);display:grid;place-items:center;border:1px solid rgba(255,255,255,.16);box-shadow:0 4px 14px rgba(0,0,0,.35)}
+  .zmark span{font-weight:700;color:#fff;font-size:15px;letter-spacing:0}
+  .bar .spacer{flex:1}
+  .counter{font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);letter-spacing:.04em}
+  .btn{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#dfe9f4;
+    font-size:12px;letter-spacing:.04em;padding:7px 12px;border-radius:8px;cursor:pointer;transition:.15s}
+  .btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
+
+  /* slide area */
+  .slide{flex:1;display:flex;align-items:center;justify-content:center;gap:46px;padding:6px 56px 30px;min-height:0}
+  .copy{width:330px;flex:none}
+  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:14px}
+  .title{font-size:34px;line-height:1.12;font-weight:600;letter-spacing:-.01em;margin-bottom:16px}
+  .caption{font-size:16.5px;line-height:1.6;color:#cdd9e7;font-weight:300}
+  .step-no{margin-top:22px;font-size:13px;color:var(--muted);letter-spacing:.04em}
+
+  .shotwrap{flex:1;height:100%;display:flex;align-items:center;justify-content:center;min-width:0}
+  .shot{
+    max-width:100%;max-height:100%;border-radius:14px;
+    box-shadow:0 30px 70px -22px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08);
+    background:#fff;
+  }
+  .shot img{display:block;max-width:100%;max-height:78vh;border-radius:14px}
+
+  /* cover */
+  .cover{flex-direction:column;gap:0;text-align:center}
+  .cover .big{font-size:64px;line-height:1.04;font-weight:600;letter-spacing:-.02em;max-width:14ch}
+  .cover .big em{font-style:normal;color:var(--teal)}
+  .cover .sub{margin-top:22px;font-size:19px;color:#cdd9e7;font-weight:300;max-width:48ch;line-height:1.6}
+  .cover .meta{margin-top:40px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .cover .zbig{width:74px;height:74px;border-radius:20px;margin-bottom:30px}
+  .cover .zbig span{font-size:36px}
+  .hint{margin-top:34px;font-size:13px;color:var(--muted)}
+  .hint kbd{font-family:inherit;background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:6px;padding:2px 8px;margin:0 2px;font-size:12px}
+
+  /* progress */
+  .progress{height:3px;background:rgba(255,255,255,.08)}
+  .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-soft));transition:width .35s cubic-bezier(.4,0,.2,1)}
+
+  /* dots */
+  .dots{display:flex;gap:7px;justify-content:center;padding:14px 0 18px;flex-wrap:wrap}
+  .dots b{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:.2s}
+  .dots b.on{background:var(--teal);transform:scale(1.35)}
+  .dots b:hover{background:rgba(255,255,255,.5)}
+
+  /* edge click zones */
+  .zone{position:fixed;top:64px;bottom:60px;width:22%;z-index:5;cursor:pointer}
+  .zone.l{left:0} .zone.r{right:0}
+  .nav-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:6;width:46px;height:46px;border-radius:50%;
+    background:rgba(255,255,255,.06);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;opacity:0;transition:.2s}
+  .stage:hover .nav-arrow{opacity:.65}
+  .nav-arrow:hover{opacity:1!important;background:rgba(255,255,255,.16)}
+  .nav-arrow.l{left:18px} .nav-arrow.r{right:18px}
+  .nav-arrow svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  /* overview grid */
+  .grid{position:fixed;inset:0;background:rgba(8,17,29,.97);z-index:30;display:none;grid-template-columns:repeat(4,1fr);
+    gap:18px;padding:60px;overflow:auto;align-content:start}
+  .grid.show{display:grid}
+  .grid figure{cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#0f2540;transition:.18s}
+  .grid figure:hover{border-color:var(--teal);transform:translateY(-3px)}
+  .grid img{width:100%;display:block}
+  .grid figcaption{font-size:12px;color:#cdd9e7;padding:9px 11px;letter-spacing:.02em}
+  .grid .gclose{position:fixed;top:22px;right:28px;color:var(--muted);font-size:13px;letter-spacing:.1em;cursor:pointer}
+
+  @media (max-width:1024px){
+    .slide{flex-direction:column;gap:20px;padding:10px 24px 20px}
+    .copy{width:100%;max-width:680px;text-align:center}
+    .shot img{max-height:54vh}
+  }
+  .fade{animation:fade .4s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="bar">
+    <div class="brand"><span class="zmark"><span>Z</span></span> Zavmo</div>
+    <div class="spacer"></div>
+    <div class="counter" id="counter"></div>
+    <button class="btn" id="gridBtn" title="Overview (G)">Overview</button>
+    <button class="btn" id="fsBtn" title="Fullscreen (F)">Fullscreen</button>
+  </div>
+
+  <div class="slide" id="slide"></div>
+
+  <div class="dots" id="dots"></div>
+  <div class="progress"><i id="bar"></i></div>
+</div>
+
+<div class="zone l" id="zl"></div>
+<div class="zone r" id="zr"></div>
+<div class="nav-arrow l" id="al"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
+<div class="nav-arrow r" id="ar"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+
+<div class="grid" id="grid"><div class="gclose" id="gclose">CLOSE ✕</div></div>
+
+<script>
+const SLIDES = [
+  { cover:true,
+    big:'The Zavmo<br><em>learner journey</em>',
+    sub:'From first sign-up to a personalised learning path — a walk-through of the live product, learn.zavmo.ai.' },
+
+  { img:'images/01.png', eyebrow:'Getting started', title:'Sign up',
+    caption:'A learner arrives. No jargon, no setup — just a name, an email, and a conversation about to begin.' },
+
+  { img:'images/02.png', eyebrow:'Getting started', title:'Create an account',
+    caption:'Sign-up takes seconds and flows straight into onboarding — no email-verification friction in the way of the first experience.' },
+
+  { img:'images/03.png', eyebrow:'Onboarding · Chapter 1', title:'Who you are',
+    caption:'Zavmo introduces itself and learns the basics — conversationally, one gentle question at a time, with a progress rail on the right.' },
+
+  { img:'images/04.png', eyebrow:'Onboarding · Chapter 2', title:'What you’re doing now',
+    caption:'Role, industry and experience — and an honest picture of the working week. The role is matched to a shared role library to keep language consistent.' },
+
+  { img:'images/05.png', eyebrow:'Onboarding · Chapter 3', title:'What you’ve already studied',
+    caption:'Prior qualifications, matched to the OFQUAL register — so Zavmo never wastes time teaching what you already know.' },
+
+  { img:'images/06.png', eyebrow:'Onboarding · Chapter 4', title:'Where you’re heading',
+    caption:'Goals at six months, two years and five years. This is the heart of it — Zavmo designs the learning path backwards from where you want to be.' },
+
+  { img:'images/07.png', eyebrow:'Onboarding', title:'A halfway pulse-check',
+    caption:'The required chapters are done. The next three are optional and more personal — the learner stays in control of how far to go.' },
+
+  { img:'images/08.png', eyebrow:'Onboarding · Chapter 5', title:'How you feel about it',
+    caption:'When you’re most yourself, and where the wobble shows up. Zavmo gets to know the person, not the CV.' },
+
+  { img:'images/09.png', eyebrow:'Onboarding · Chapter 6', title:'Things you love',
+    caption:'Books, films and music — so the examples, language and stories are yours, never generic corporate speak.' },
+
+  { img:'images/10.png', eyebrow:'Onboarding · Chapter 7', title:'How you learn',
+    caption:'Time of day, session length, pace and teaching style — the practical shape of learning that fits around a real life.' },
+
+  { img:'images/11.png', eyebrow:'The payoff', title:'Your portrait',
+    caption:'Zavmo reflects back everything it heard — “here’s who I see” — turning a profile into a recognisable person before suggesting a single thing.' },
+
+  { img:'images/12.png', eyebrow:'In the app', title:'Home',
+    caption:'A personalised dashboard: where you are today, where you’re heading, and a clear next best step — with Zavmo narrating what it has noticed.' },
+
+  { img:'images/13.png', eyebrow:'In the app', title:'Discover your path',
+    caption:'Current role, a future goal, and an OFQUAL-regulated qualification — three ways in, each shaping what comes next.' },
+
+  { img:'images/14.png', eyebrow:'Discover · Qualification', title:'Real, regulated qualifications',
+    caption:'Search the live OFQUAL register — every result is a genuine, regulated qualification with its real credits, units and awarding body. No invented content.' },
+
+  { img:'images/15.png', eyebrow:'Discover · Your path', title:'A path, assembled',
+    caption:'Current role plus a Level 5 leadership qualification — the destination is set, and Zavmo can now work backwards from it.' },
+
+  { img:'images/16.png', eyebrow:'Discover · Confidence check', title:'An assessment that thinks',
+    caption:'Zavmo writes a bespoke, role-specific Level 5 scenario on the spot — a real management dilemma with no clean answer — to find where you genuinely stand, not where a quiz says you do.' },
+];
+
+let i = 0;
+const slide=document.getElementById('slide');
+const counter=document.getElementById('counter');
+const dots=document.getElementById('dots');
+const bar=document.getElementById('bar');
+
+function render(){
+  const s=SLIDES[i];
+  slide.className='slide fade'+(s.cover?' cover':'');
+  if(s.cover){
+    slide.innerHTML=`
+      <span class="zmark zbig"><span>Z</span></span>
+      <div class="big">${s.big}</div>
+      <div class="sub">${s.sub}</div>
+      <div class="meta">Live product walk-through</div>
+      <div class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or click to move &nbsp;·&nbsp; <kbd>G</kbd> overview &nbsp;·&nbsp; <kbd>F</kbd> fullscreen</div>`;
+  } else {
+    slide.innerHTML=`
+      <div class="copy">
+        <div class="eyebrow">${s.eyebrow}</div>
+        <div class="title">${s.title}</div>
+        <div class="caption">${s.caption}</div>
+        <div class="step-no">${i} / ${SLIDES.length-1}</div>
+      </div>
+      <div class="shotwrap"><div class="shot"><img src="${s.img}" alt="${s.title}"></div></div>`;
+  }
+  counter.textContent = (i+1)+' / '+SLIDES.length;
+  bar.style.width = ((i)/(SLIDES.length-1)*100)+'%';
+  [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
+  // void to restart animation
+  void slide.offsetWidth;
+}
+function go(n){ i=Math.max(0,Math.min(SLIDES.length-1,n)); render(); }
+function next(){ if(i<SLIDES.length-1) go(i+1); }
+function prev(){ if(i>0) go(i-1); }
+
+// dots
+SLIDES.forEach((_,k)=>{const b=document.createElement('b');b.onclick=()=>go(k);dots.appendChild(b);});
+
+// click zones + arrows
+document.getElementById('zr').onclick=next;
+document.getElementById('zl').onclick=prev;
+document.getElementById('ar').onclick=next;
+document.getElementById('al').onclick=prev;
+
+// keyboard
+addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();next();}
+  else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();prev();}
+  else if(e.key==='Home'){go(0);}
+  else if(e.key==='End'){go(SLIDES.length-1);}
+  else if(e.key.toLowerCase()==='f'){toggleFs();}
+  else if(e.key.toLowerCase()==='g'){toggleGrid();}
+  else if(e.key==='Escape'){grid.classList.remove('show');}
+});
+
+// touch swipe
+let tx=0;
+addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>50){dx<0?next():prev();}});
+
+// fullscreen
+function toggleFs(){ if(!document.fullscreenElement){document.documentElement.requestFullscreen?.();}else{document.exitFullscreen?.();} }
+document.getElementById('fsBtn').onclick=toggleFs;
+
+// overview grid
+const grid=document.getElementById('grid');
+SLIDES.forEach((s,k)=>{
+  if(s.cover) return;
+  const fig=document.createElement('figure');
+  fig.innerHTML=`<img src="${s.img}" alt=""><figcaption>${k}. ${s.title}</figcaption>`;
+  fig.onclick=()=>{go(k);grid.classList.remove('show');};
+  grid.appendChild(fig);
+});
+function toggleGrid(){ grid.classList.toggle('show'); }
+document.getElementById('gridBtn').onclick=toggleGrid;
+document.getElementById('gclose').onclick=()=>grid.classList.remove('show');
+
+render();
+</script>
+</body>
+</html>
