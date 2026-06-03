@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Zavmo — The Admin Console</title>
+<style>
+  :root{--teal:#22c7a9;--teal-soft:#9fe8da;--muted:rgba(255,255,255,.62);--line:rgba(255,255,255,.12)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(160deg,#0a1b2e 0%,#102a49 55%,#0a1b2e 100%);color:#fff;overflow:hidden;height:100vh}
+  .stage{position:fixed;inset:0;display:flex;flex-direction:column}
+  .bar{display:flex;align-items:center;gap:14px;padding:18px 26px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.14em;font-size:13px;text-transform:uppercase}
+  .zmark{width:30px;height:30px;border-radius:9px;background:linear-gradient(150deg,#16324f,#0a1b2e);display:grid;place-items:center;border:1px solid rgba(255,255,255,.16);box-shadow:0 4px 14px rgba(0,0,0,.35)}
+  .zmark span{font-weight:700;font-size:15px}
+  .bar .spacer{flex:1}
+  .counter{font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);letter-spacing:.04em}
+  .btn{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#dfe9f4;font-size:12px;letter-spacing:.04em;padding:7px 12px;border-radius:8px;cursor:pointer;transition:.15s}
+  .btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
+  .slide{flex:1;display:flex;align-items:center;justify-content:center;gap:46px;padding:6px 56px 26px;min-height:0}
+  .copy{width:330px;flex:none}
+  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:14px}
+  .title{font-size:33px;line-height:1.12;font-weight:600;letter-spacing:-.01em;margin-bottom:16px}
+  .caption{font-size:16px;line-height:1.6;color:#cdd9e7;font-weight:300}
+  .step-no{margin-top:22px;font-size:13px;color:var(--muted)}
+  .shotwrap{flex:1;height:100%;display:flex;align-items:center;justify-content:center;min-width:0}
+  .shot{max-width:100%;max-height:100%;border-radius:14px;box-shadow:0 30px 70px -22px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08);background:#fff}
+  .shot img{display:block;max-width:100%;max-height:80vh;border-radius:14px}
+  .cover,.sectiondiv{flex-direction:column;gap:0;text-align:center}
+  .cover .zbig{width:74px;height:74px;border-radius:20px;margin-bottom:30px}
+  .cover .zbig span{font-size:36px}
+  .cover .big{font-size:60px;line-height:1.05;font-weight:600;letter-spacing:-.02em}
+  .cover .big em{font-style:normal;color:var(--teal)}
+  .cover .sub{margin-top:22px;font-size:19px;color:#cdd9e7;font-weight:300;max-width:52ch;line-height:1.6}
+  .cover .meta{margin-top:38px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .hint{margin-top:32px;font-size:13px;color:var(--muted)}
+  .hint kbd{background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:6px;padding:2px 8px;margin:0 2px;font-size:12px}
+  .sectiondiv .snum{font-size:15px;letter-spacing:.3em;color:var(--teal);font-weight:600;margin-bottom:20px}
+  .sectiondiv .stitle{font-size:50px;font-weight:600;letter-spacing:-.02em;max-width:18ch}
+  .sectiondiv .ssub{margin-top:18px;font-size:18px;color:#cdd9e7;font-weight:300;max-width:48ch;line-height:1.6}
+  .sectiondiv .srule{width:54px;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-soft));border-radius:2px;margin:30px auto 0}
+  .progress{height:3px;background:rgba(255,255,255,.08)}
+  .progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-soft));transition:width .35s cubic-bezier(.4,0,.2,1)}
+  .dots{display:flex;gap:6px;justify-content:center;padding:12px 0 16px;flex-wrap:wrap}
+  .dots b{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:.2s}
+  .dots b.on{background:var(--teal);transform:scale(1.35)}
+  .dots b.sec{width:5px;height:5px;background:rgba(34,199,169,.45);border-radius:1px;transform:rotate(45deg)}
+  .dots b.sec.on{background:var(--teal)}
+  .zone{position:fixed;top:64px;bottom:56px;width:22%;z-index:5;cursor:pointer}
+  .zone.l{left:0}.zone.r{right:0}
+  .nav-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:6;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;opacity:0;transition:.2s}
+  .stage:hover .nav-arrow{opacity:.6}
+  .nav-arrow:hover{opacity:1!important;background:rgba(255,255,255,.16)}
+  .nav-arrow.l{left:18px}.nav-arrow.r{right:18px}
+  .nav-arrow svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .grid{position:fixed;inset:0;background:rgba(8,17,29,.97);z-index:30;display:none;grid-template-columns:repeat(4,1fr);gap:16px;padding:56px;overflow:auto;align-content:start}
+  .grid.show{display:grid}
+  .grid .ghead{grid-column:1/-1;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-top:10px}
+  .grid figure{cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#0f2540;transition:.18s}
+  .grid figure:hover{border-color:var(--teal);transform:translateY(-3px)}
+  .grid img{width:100%;display:block}
+  .grid figcaption{font-size:12px;color:#cdd9e7;padding:8px 10px}
+  .grid .gclose{position:fixed;top:20px;right:26px;color:var(--muted);font-size:13px;letter-spacing:.1em;cursor:pointer}
+  @media (max-width:1024px){.slide{flex-direction:column;gap:18px;padding:10px 22px 18px}.copy{width:100%;max-width:680px;text-align:center}.shot img{max-height:52vh}}
+  .fade{animation:fade .4s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="bar">
+    <div class="brand"><span class="zmark"><span>Z</span></span> Zavmo · Admin</div>
+    <div class="spacer"></div>
+    <div class="counter" id="counter"></div>
+    <button class="btn" id="gridBtn">Overview</button>
+    <button class="btn" id="fsBtn">Fullscreen</button>
+  </div>
+  <div class="slide" id="slide"></div>
+  <div class="dots" id="dots"></div>
+  <div class="progress"><i id="bar"></i></div>
+</div>
+<div class="zone l" id="zl"></div><div class="zone r" id="zr"></div>
+<div class="nav-arrow l" id="al"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
+<div class="nav-arrow r" id="ar"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="grid" id="grid"><div class="gclose" id="gclose">CLOSE ✕</div></div>
+
+<script>
+const S=[
+  { cover:true, big:'The Zavmo<br><em>admin console</em>',
+    sub:'How a learning leader runs Zavmo — set up a workspace, build pathways, track every learner, and ask the platform anything. A walk-through of admin.zavmo.ai.' },
+
+  { section:true, num:'PART 1', title:'Getting in', sub:'One console for the whole platform.' },
+  { img:'01.png', eyebrow:'Admin console', title:'Sign in',
+    caption:'Learn, content, people and reporting all sit behind a single secure login to the admin console.' },
+  { img:'02.png', eyebrow:'Set-up', title:'Set up your workspace',
+    caption:'Zavmo guides a new admin through setup conversationally — organisation, first pathway, first cohort, integrations — and you can leave and resume at any point.' },
+
+  { section:true, num:'PART 2', title:'The command centre', sub:'Your platform, every morning, at a glance.' },
+  { img:'03.png', eyebrow:'Dashboard', title:'Ask Zavmo anything',
+    caption:'An “Ask Zavmo” bar sits at the centre — ask about a learner, a cohort or a skill, or have it draft a board update — above an AI morning briefing and a live activity feed across the platform.' },
+
+  { section:true, num:'PART 3', title:'Content & people', sub:'Everything you teach, and everyone you teach it to.' },
+  { img:'04.png', eyebrow:'Content', title:'Pathways & content',
+    caption:'Every learning pathway, the OFQUAL specifications they’re built from, the skills graph, job descriptions, certificates and the xAPI catalogue — managed in one place.' },
+  { img:'05.png', eyebrow:'Users', title:'The learner directory',
+    caption:'Live status for every learner, sourced from learn.zavmo.ai — progress, current stage (Discover → Deliver), cohort and pathway — with Zavmo flagging risks before they slip. (Names shown here are demo data.)' },
+
+  { section:true, num:'PART 4', title:'Intelligence', sub:'Reporting without dashboards.' },
+  { img:'06.png', eyebrow:'Reports', title:'Reporting, by conversation',
+    caption:'No dashboards to configure — just ask. Zavmo pulls from your xAPI LRS and Neo4j skills graph, clarifies if it needs to, and returns the answer as a summary, evidence, PDF, CSV, a Looker push, or a scheduled weekly.' },
+
+  { section:true, num:'PART 5', title:'Configure & white-label', sub:'Wired into your stack, branded as yours.' },
+  { img:'07.png', eyebrow:'Settings · Integrations', title:'Connected to your stack',
+    caption:'Neo4j skills graph, learn.zavmo.ai, the SLM specification service, a native cmi5 xAPI LRS (184k+ statements) and Microsoft Teams — all wired in and syncing.' },
+  { img:'08.png', eyebrow:'Settings · Branding', title:'Make it yours',
+    caption:'White-label the entire learner experience — your colours, logo and favicon — with a live preview, in a couple of clicks.' },
+];
+
+let i=0;
+const slide=document.getElementById('slide'),counter=document.getElementById('counter'),dots=document.getElementById('dots'),bar=document.getElementById('bar');
+const contentCount=S.filter(s=>s.img).length;
+function contentIndexOf(n){return S.slice(0,n+1).filter(s=>s.img).length;}
+function render(){
+  const s=S[i];
+  slide.className='slide fade'+(s.cover?' cover':'')+(s.section?' sectiondiv':'');
+  if(s.cover){slide.innerHTML=`<span class="zmark zbig"><span>Z</span></span><div class="big">${s.big}</div><div class="sub">${s.sub}</div><div class="meta">Live product walk-through</div><div class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or click to move · <kbd>G</kbd> overview · <kbd>F</kbd> fullscreen</div>`;}
+  else if(s.section){slide.innerHTML=`<div class="snum">${s.num}</div><div class="stitle">${s.title}</div><div class="ssub">${s.sub}</div><div class="srule"></div>`;}
+  else{const ci=contentIndexOf(i);slide.innerHTML=`<div class="copy"><div class="eyebrow">${s.eyebrow}</div><div class="title">${s.title}</div><div class="caption">${s.caption}</div><div class="step-no">${ci} / ${contentCount}</div></div><div class="shotwrap"><div class="shot"><img src="images/${s.img}" alt="${s.title}"></div></div>`;}
+  counter.textContent=(i+1)+' / '+S.length;
+  bar.style.width=(i/(S.length-1)*100)+'%';
+  [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
+  void slide.offsetWidth;
+}
+function go(n){i=Math.max(0,Math.min(S.length-1,n));render();}
+function next(){if(i<S.length-1)go(i+1);}function prev(){if(i>0)go(i-1);}
+S.forEach((s,k)=>{const b=document.createElement('b');if(s.section)b.className='sec';b.onclick=()=>go(k);dots.appendChild(b);});
+document.getElementById('zr').onclick=next;document.getElementById('zl').onclick=prev;
+document.getElementById('ar').onclick=next;document.getElementById('al').onclick=prev;
+addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next();}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev();}else if(e.key==='Home')go(0);else if(e.key==='End')go(S.length-1);else if(e.key.toLowerCase()==='f')toggleFs();else if(e.key.toLowerCase()==='g')toggleGrid();else if(e.key==='Escape')grid.classList.remove('show');});
+let tx=0;addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)dx<0?next():prev();});
+function toggleFs(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
+document.getElementById('fsBtn').onclick=toggleFs;
+const grid=document.getElementById('grid');
+S.forEach((s,k)=>{if(s.section){const h=document.createElement('div');h.className='ghead';h.textContent=s.num+' · '+s.title;grid.appendChild(h);return;}if(!s.img)return;const fig=document.createElement('figure');fig.innerHTML=`<img src="images/${s.img}"><figcaption>${s.title}</figcaption>`;fig.onclick=()=>{go(k);grid.classList.remove('show');};grid.appendChild(fig);});
+function toggleGrid(){grid.classList.toggle('show');}
+document.getElementById('gridBtn').onclick=toggleGrid;
+document.getElementById('gclose').onclick=()=>grid.classList.remove('show');
+render();
+</script>
+</body>
+</html>
