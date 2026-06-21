@@ -4,11 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Zavmo — The Learner Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" />
 <style>
-  :root{--teal:#22c7a9;--teal-soft:#9fe8da;--muted:rgba(255,255,255,.62);--line:rgba(255,255,255,.12)}
+  :root{--teal:#19b899;--teal-soft:#7fe6d2;--teal-bright:#2fcfa8;--muted:rgba(255,255,255,.6);--line:rgba(255,255,255,.11)}
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(160deg,#0a1b2e 0%,#102a49 55%,#0a1b2e 100%);color:#fff;overflow:hidden;height:100vh}
+  body{font-family:"DM Sans","Noto Sans Armenian",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;background:linear-gradient(162deg,#0a1b2e 0%,#11304f 55%,#0a1b2e 100%);color:#fff;overflow:hidden;height:100vh}
   .stars{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.9;transition:opacity .5s}
   .stars.dim{opacity:.32}
   .stage{position:fixed;inset:0;display:flex;flex-direction:column;z-index:1}
@@ -20,15 +23,16 @@
   .counter{font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);letter-spacing:.04em;margin-right:4px}
   .btn{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#dfe9f4;font-size:12px;letter-spacing:.04em;padding:7px 12px;border-radius:8px;cursor:pointer;transition:.15s}
   .btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
-  .btn.accent{border-color:rgba(34,199,169,.5);color:#bff0e5}
+  .btn.accent{border-color:rgba(25,184,153,.5);background:rgba(25,184,153,.1);color:var(--teal-soft);font-weight:500}
+  .btn.accent:hover{background:rgba(25,184,153,.2);border-color:var(--teal)}
   .slide{flex:1;display:flex;align-items:center;justify-content:center;gap:46px;padding:6px 56px 26px;min-height:0}
   .copy{width:340px;flex:none}
-  .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:14px}
-  .title{font-size:32px;line-height:1.13;font-weight:600;letter-spacing:-.01em;margin-bottom:16px}
-  .caption{font-size:15.5px;line-height:1.62;color:#cdd9e7;font-weight:300}
+  .eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:14px}
+  .title{font-size:32px;line-height:1.14;font-weight:500;letter-spacing:-.015em;margin-bottom:16px}
+  .caption{font-size:15.5px;line-height:1.65;color:#d2dde9;font-weight:300}
   .step-no{margin-top:22px;font-size:13px;color:var(--muted)}
   .shotwrap{flex:1;height:100%;display:flex;align-items:center;justify-content:center;min-width:0}
-  .shot{max-width:100%;max-height:100%;border-radius:13px;box-shadow:0 30px 70px -22px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08);background:#fff;overflow:hidden;display:flex;flex-direction:column}
+  .shot{max-width:100%;max-height:100%;border-radius:13px;box-shadow:0 2px 8px rgba(0,0,0,.3),0 34px 80px -24px rgba(0,0,0,.72),0 0 0 1px rgba(255,255,255,.07);background:#fff;overflow:hidden;display:flex;flex-direction:column}
   .shot img{display:block;max-width:100%;max-height:74vh;border-radius:0}
   .shot.dark{background:#0a1422}
   .browser-bar{display:flex;align-items:center;gap:7px;padding:9px 14px;background:#eef2f7;flex:none}
@@ -39,32 +43,43 @@
   .browser-url svg{width:11px;height:11px;opacity:.6}
   .shot.dark .browser-url{background:rgba(255,255,255,.06);color:#9fb3c8}
   .cover,.sectiondiv{flex-direction:column;gap:0;text-align:center}
-  .cover .zbig{width:74px;height:74px;border-radius:20px;margin-bottom:30px}
+  .cover .zbig{width:74px;height:74px;border-radius:20px;margin-bottom:26px}
   .cover .zbig span{font-size:36px}
-  .cover .big{font-size:60px;line-height:1.05;font-weight:600;letter-spacing:-.02em}
-  .cover .big em{font-style:normal;color:var(--teal)}
-  .cover .sub{margin-top:22px;font-size:19px;color:#cdd9e7;font-weight:300;max-width:52ch;line-height:1.6}
-  .cover .meta{margin-top:36px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .cover-kicker{display:inline-flex;align-items:center;gap:9px;margin-bottom:26px;padding:8px 16px;border-radius:999px;border:1px solid rgba(25,184,153,.4);background:rgba(25,184,153,.1);color:var(--teal-soft);font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+  .cover-kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--teal-bright);box-shadow:0 0 0 0 rgba(47,207,168,.7);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,207,168,.55)}70%{box-shadow:0 0 0 7px rgba(47,207,168,0)}100%{box-shadow:0 0 0 0 rgba(47,207,168,0)}}
+  .cover .big{font-size:60px;line-height:1.06;font-weight:500;letter-spacing:-.025em}
+  .cover .big em{font-style:normal;font-weight:500;color:var(--teal)}
+  .cover .sub{margin-top:24px;font-size:19px;color:#d2dde9;font-weight:300;max-width:52ch;line-height:1.62}
+  .cover .meta{margin-top:36px;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
   .hint{margin-top:30px;font-size:13px;color:var(--muted)}
   .hint kbd{background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:6px;padding:2px 8px;margin:0 2px;font-size:12px}
-  .sectiondiv .snum{font-size:15px;letter-spacing:.3em;color:var(--teal);font-weight:600;margin-bottom:18px}
-  .sectiondiv .stitle{font-size:50px;font-weight:600;letter-spacing:-.02em;max-width:18ch}
-  .sectiondiv .ssub{margin-top:18px;font-size:18px;color:#cdd9e7;font-weight:300;max-width:48ch;line-height:1.6}
+  .sectiondiv .snum{font-size:13px;letter-spacing:.32em;color:var(--teal);font-weight:600;margin-bottom:20px}
+  .sectiondiv .stitle{font-size:50px;font-weight:400;letter-spacing:-.025em;line-height:1.08;max-width:18ch}
+  .sectiondiv .ssub{margin-top:20px;font-size:18px;color:#d2dde9;font-weight:300;max-width:48ch;line-height:1.62}
   .sectiondiv .srule{width:54px;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-soft));border-radius:2px;margin:28px auto 0}
   .statementdiv{flex-direction:column;gap:0;text-align:center;padding:0 7vw}
-  .statementdiv .seyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:22px}
-  .statementdiv .sbig{font-size:52px;line-height:1.09;font-weight:600;letter-spacing:-.02em;max-width:22ch}
-  .statementdiv .sbig em{font-style:normal;color:var(--teal)}
-  .statementdiv .sbody{margin-top:26px;font-size:19.5px;line-height:1.62;color:#d4e0ec;font-weight:300;max-width:62ch}
+  .statementdiv .seyebrow{font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:24px}
+  .statementdiv .sbig{font-size:52px;line-height:1.1;font-weight:400;letter-spacing:-.025em;max-width:22ch}
+  .statementdiv .sbig em{font-style:normal;font-weight:500;color:var(--teal)}
+  .statementdiv .sbody{margin-top:28px;font-size:19.5px;line-height:1.64;color:#d8e2ee;font-weight:300;max-width:62ch}
   .statementdiv .sbody b{color:#fff;font-weight:500}
-  .statementdiv .scredit{margin-top:26px;font-size:13px;letter-spacing:.04em;color:var(--muted)}
+  .statementdiv .scredit{margin-top:28px;font-size:12.5px;letter-spacing:.06em;color:var(--muted)}
   .progress{height:3px;background:rgba(255,255,255,.08)}
   .progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-soft));transition:width .35s cubic-bezier(.4,0,.2,1)}
-  .dots{display:flex;gap:5px;justify-content:center;padding:12px 0 16px;flex-wrap:wrap}
-  .dots b{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:.2s}
-  .dots b.on{background:var(--teal);transform:scale(1.35)}
-  .dots b.sec{width:5px;height:5px;background:rgba(34,199,169,.45);border-radius:1px;transform:rotate(45deg)}
-  .dots b.sec.on{background:var(--teal)}
+  /* segmented chapter navigation — one pill per section, with sub-progress */
+  .chapters{display:flex;gap:6px;justify-content:center;align-items:center;padding:10px 18px 14px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+  .chapters .chap{position:relative;display:flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;border:1px solid transparent;background:rgba(255,255,255,.05);cursor:pointer;transition:.18s;overflow:hidden;white-space:nowrap}
+  .chapters .chap:hover{background:rgba(255,255,255,.1)}
+  .chapters .chap .clabel{position:relative;z-index:1;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:.18s;max-width:0;opacity:0;overflow:hidden;transition:max-width .25s ease,opacity .2s ease,color .18s}
+  .chapters .chap .cdot{position:relative;z-index:1;width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);flex:none;transition:.18s}
+  .chapters .chap:hover .clabel{max-width:200px;opacity:1;color:#dfe9f4}
+  .chapters .chap.done .cdot{background:var(--teal)}
+  .chapters .chap.on{background:rgba(25,184,153,.14);border-color:rgba(25,184,153,.4)}
+  .chapters .chap.on .clabel{max-width:200px;opacity:1;color:var(--teal-soft);font-weight:600}
+  .chapters .chap.on .cdot{background:var(--teal-bright);box-shadow:0 0 7px rgba(47,207,168,.7)}
+  /* sub-progress fill inside the active chapter pill */
+  .chapters .chap .cfill{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(25,184,153,.22);z-index:0;transition:width .35s cubic-bezier(.4,0,.2,1)}
   .zone{position:fixed;top:64px;bottom:56px;width:20%;z-index:5;cursor:pointer}
   .zone.l{left:0}.zone.r{right:0}
   .nav-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:6;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;opacity:0;transition:.2s}
@@ -79,29 +94,34 @@
   .menu-title{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:600;text-align:center;margin-bottom:24px}
   .menu-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .menu-item{display:flex;align-items:baseline;gap:12px;padding:16px 18px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03);cursor:pointer;transition:.15s}
-  .menu-item:hover{border-color:var(--teal);background:rgba(34,199,169,.08);transform:translateY(-2px)}
+  .menu-item:hover{border-color:var(--teal);background:rgba(25,184,153,.08);transform:translateY(-2px)}
   .menu-item .mnum{font-size:12px;letter-spacing:.16em;color:var(--teal);font-weight:600;white-space:nowrap}
   .menu-item .mtit{font-size:18px;font-weight:600}
   .menu-item .msub{font-size:13px;color:var(--muted);font-weight:300;margin-top:2px}
   .menu-close{position:fixed;top:22px;right:28px;color:var(--muted);font-size:13px;letter-spacing:.1em;cursor:pointer}
-  .grid{position:fixed;inset:0;background:rgba(8,17,29,.97);z-index:30;display:none;grid-template-columns:repeat(4,1fr);gap:15px;padding:54px;overflow:auto;align-content:start}
+  .grid{position:fixed;inset:0;background:rgba(8,17,29,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:30;display:none;grid-template-columns:repeat(4,1fr);gap:18px;padding:30px 54px 54px;overflow:auto;align-content:start}
   .grid.show{display:grid}
-  .grid .ghead{grid-column:1/-1;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-top:8px}
-  .grid figure{cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#0f2540;transition:.18s}
-  .grid figure:hover{border-color:var(--teal);transform:translateY(-3px)}
+  .grid .gtitle{grid-column:1/-1;position:sticky;top:-30px;z-index:2;margin:0 -54px;padding:26px 54px 16px;background:linear-gradient(180deg,rgba(8,17,29,.96) 60%,rgba(8,17,29,0));text-align:center}
+  .grid .gtitle .gt-eyebrow{font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:600}
+  .grid .gtitle .gt-big{font-size:26px;font-weight:500;letter-spacing:-.02em;margin-top:6px}
+  .grid .gtitle .gt-sub{font-size:13.5px;color:var(--muted);font-weight:300;margin-top:5px}
+  .grid .ghead{grid-column:1/-1;display:flex;align-items:center;gap:14px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-top:18px}
+  .grid .ghead:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(25,184,153,.4),transparent)}
+  .grid figure{cursor:pointer;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#0f2540;transition:.2s;box-shadow:0 8px 24px -12px rgba(0,0,0,.5)}
+  .grid figure:hover{border-color:var(--teal);transform:translateY(-4px);box-shadow:0 16px 34px -14px rgba(0,0,0,.6),0 0 0 1px rgba(25,184,153,.3)}
   .grid img{width:100%;display:block}
-  .grid figcaption{font-size:12px;color:#cdd9e7;padding:8px 10px}
+  .grid figcaption{font-size:12px;color:#d2dde9;font-weight:400;padding:9px 12px;border-top:1px solid rgba(255,255,255,.06)}
   .grid .gclose{position:fixed;top:20px;right:26px;color:var(--muted);font-size:13px;letter-spacing:.1em;cursor:pointer}
   /* hub — 2x2 persona-journey grid */
   .hubdiv{flex-direction:column;gap:0;text-align:center;padding:0 4vw}
   .hubdiv .heyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:8px}
-  .hubdiv .hbig{font-size:27px;line-height:1.12;font-weight:600;letter-spacing:-.01em;max-width:24ch}
-  .hubdiv .hbig em{font-style:normal;color:var(--teal)}
-  .hubdiv .hsub{margin-top:9px;font-size:14.5px;color:#cdd9e7;font-weight:300;max-width:64ch;line-height:1.5}
+  .hubdiv .hbig{font-size:27px;line-height:1.14;font-weight:500;letter-spacing:-.02em;max-width:24ch}
+  .hubdiv .hbig em{font-style:normal;font-weight:500;color:var(--teal)}
+  .hubdiv .hsub{margin-top:10px;font-size:14.5px;color:#d2dde9;font-weight:300;max-width:64ch;line-height:1.5}
   .hubgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:min(880px,92vw);margin:20px auto 0}
   .hubcard{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:5px;padding:18px 22px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.035);cursor:pointer;transition:.18s;position:relative;overflow:hidden}
   .hubcard:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--teal),var(--teal-soft));opacity:.85}
-  .hubcard:hover{border-color:var(--teal);background:rgba(34,199,169,.09);transform:translateY(-3px)}
+  .hubcard:hover{border-color:var(--teal);background:rgba(25,184,153,.09);transform:translateY(-3px)}
   .hubcard .hctag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:600}
   .hubcard .hcname{font-size:21px;font-weight:600;letter-spacing:-.01em}
   .hubcard .hcname b{color:var(--teal-soft);font-weight:600}
@@ -110,7 +130,7 @@
   .hubcard .hcmeta svg{width:13px;height:13px;stroke:var(--teal);fill:none;stroke-width:2.2}
   /* the engine — a slim secondary strip along the bottom, distinct from the 4 learner cards */
   .hubengine{display:flex;align-items:center;gap:14px;width:min(880px,92vw);margin:14px auto 0;padding:13px 22px;border:1px dashed rgba(255,255,255,.18);border-radius:13px;background:rgba(255,255,255,.025);cursor:pointer;transition:.18s;text-align:left}
-  .hubengine:hover{border-color:var(--teal);background:rgba(34,199,169,.07)}
+  .hubengine:hover{border-color:var(--teal);background:rgba(25,184,153,.07)}
   .hubengine .heicon{width:30px;height:30px;flex:none;border-radius:8px;display:grid;place-items:center;border:1px solid var(--line);background:rgba(255,255,255,.04)}
   .hubengine .heicon svg{width:16px;height:16px;stroke:var(--teal);fill:none;stroke-width:2}
   .hubengine .hetag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:600}
@@ -118,13 +138,76 @@
   .hubengine .hename b{color:var(--teal-soft);font-weight:600}
   .hubengine .hegoal{flex:1;font-size:13px;color:#cdd9e7;font-weight:300;line-height:1.4;border-left:1px solid var(--line);padding-left:14px;margin-left:4px}
   .hubengine .hearrow{flex:none;width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2.2}
-  @media (max-width:1024px){.slide{flex-direction:column;gap:18px;padding:10px 22px 18px}.copy{width:100%;max-width:680px;text-align:center}.shot img{max-height:50vh}.menu-list{grid-template-columns:1fr}.hubgrid{grid-template-columns:1fr;grid-template-rows:none}.hubdiv .hbig{font-size:30px}}
+  @media (max-width:1024px){.slide{flex-direction:column;gap:18px;padding:10px 22px 18px}.copy{width:100%;max-width:680px;text-align:center}.shot img{max-height:50vh}.menu-list{grid-template-columns:1fr}.hubgrid{grid-template-columns:1fr;grid-template-rows:none}.hubdiv .hbig{font-size:30px}.grid{grid-template-columns:repeat(3,1fr)}}
+  /* phones */
+  @media (max-width:640px){
+    .bar{padding:12px 16px;gap:8px}
+    .brand{font-size:11px;letter-spacing:.1em}
+    .zmark{width:26px;height:26px}.zmark span{font-size:13px}
+    .counter{display:none}
+    .btn{padding:6px 9px;font-size:11px}
+    .slide{gap:14px;padding:8px 18px 14px}
+    .copy{max-width:none}
+    .eyebrow{font-size:11px;letter-spacing:.18em;margin-bottom:10px}
+    .title{font-size:23px;margin-bottom:11px}
+    .caption{font-size:14px;line-height:1.6}
+    .step-no{margin-top:14px;font-size:12px}
+    .shot img{max-height:42vh}
+    .browser-url{font-size:10px;max-width:180px}
+    .cover .zbig{width:58px;height:58px;border-radius:16px;margin-bottom:18px}
+    .cover .zbig span{font-size:28px}
+    .cover-kicker{font-size:11px;letter-spacing:.14em;padding:7px 13px;margin-bottom:20px}
+    .cover .big{font-size:34px;letter-spacing:-.02em}
+    .cover .sub{font-size:15.5px;margin-top:16px}
+    .hint{font-size:11px;margin-top:20px}.hint kbd{display:none}
+    .sectiondiv .snum{font-size:11px;letter-spacing:.24em;margin-bottom:12px}
+    .sectiondiv .stitle{font-size:30px}
+    .sectiondiv .ssub{font-size:15px;margin-top:14px}
+    .statementdiv{padding:0 6vw}
+    .statementdiv .seyebrow{font-size:11px;letter-spacing:.2em;margin-bottom:16px}
+    .statementdiv .sbig{font-size:29px;line-height:1.14}
+    .statementdiv .sbody{font-size:15.5px;margin-top:18px;line-height:1.6}
+    .hubdiv{padding:0 5vw}
+    .hubdiv .hbig{font-size:22px}
+    .hubdiv .hsub{font-size:13px}
+    .hubgrid{gap:11px;margin-top:14px}
+    .hubcard{padding:14px 16px}
+    .hubcard .hcname{font-size:18px}
+    .hubcard .hcgoal{font-size:13px}
+    .hubcard .hcmeta{font-size:11.5px}
+    .hubengine{flex-wrap:wrap;gap:10px;padding:12px 16px}
+    .hubengine .hegoal{flex-basis:100%;border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:9px;margin-left:0}
+    /* touch: zones smaller, arrows always visible */
+    .zone{width:16%}
+    .nav-arrow{opacity:.5;width:38px;height:38px}
+    .nav-arrow.l{left:8px}.nav-arrow.r{right:8px}
+    .grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:20px 16px 40px}
+    .grid .gtitle{margin:0 -16px;padding:18px 16px 12px;top:-20px}
+    .grid .gtitle .gt-big{font-size:20px}
+    .grid figcaption{font-size:11px;padding:7px 9px}
+    .menu-inner{width:92vw}
+    .menu-item{padding:13px 14px}
+    .menu-item .mtit{font-size:16px}
+    .routeend{bottom:52px;font-size:12px;padding:8px 14px}
+    .chapters{gap:5px;padding:8px 10px 12px}
+    .chapters .chap{padding:5px 9px}
+    .chapters .chap .clabel{font-size:10px}
+    /* on phones, only the active pill expands (hover doesn't exist) */
+    .chapters .chap:hover .clabel{max-width:0;opacity:0}
+    .chapters .chap.on .clabel{max-width:160px;opacity:1}
+  }
+  /* let tall narrow phones scroll a slide if a screenshot + copy don't fit */
+  @media (max-width:640px) and (max-height:560px){
+    body{overflow:auto}
+    .stage{position:relative;min-height:100vh}
+    .slide{min-height:0}
+  }
   .fade{animation:fade .4s ease}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   /* end-of-route cue — appears on the last slide of a learner journey */
-  .routeend{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:7;display:none;align-items:center;gap:9px;padding:9px 18px;border-radius:999px;border:1px solid rgba(34,199,169,.5);background:rgba(34,199,169,.12);color:#bff0e5;font-size:13px;letter-spacing:.04em;cursor:pointer;transition:.16s;backdrop-filter:blur(4px)}
+  .routeend{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:7;display:none;align-items:center;gap:9px;padding:9px 18px;border-radius:999px;border:1px solid rgba(25,184,153,.5);background:rgba(25,184,153,.12);color:#bff0e5;font-size:13px;letter-spacing:.04em;cursor:pointer;transition:.16s;backdrop-filter:blur(4px)}
   .routeend.show{display:flex;animation:fade .4s ease}
-  .routeend:hover{background:rgba(34,199,169,.22);border-color:var(--teal)}
+  .routeend:hover{background:rgba(25,184,153,.22);border-color:var(--teal)}
   .routeend svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 </style>
 </head>
@@ -140,7 +223,7 @@
     <button class="btn" id="fsBtn" title="Fullscreen (F)">Fullscreen</button>
   </div>
   <div class="slide" id="slide"></div>
-  <div class="dots" id="dots"></div>
+  <div class="chapters" id="chapters"></div>
   <div class="progress"><i id="bar"></i></div>
 </div>
 <div class="zone l" id="zl"></div><div class="zone r" id="zr"></div>
@@ -283,8 +366,20 @@ const S=[
 
 let i=0;
 const BRAND_URL='learn.zavmo.ai';
-const slide=document.getElementById('slide'),counter=document.getElementById('counter'),dots=document.getElementById('dots'),bar=document.getElementById('bar');
+const slide=document.getElementById('slide'),counter=document.getElementById('counter'),chaptersEl=document.getElementById('chapters'),bar=document.getElementById('bar');
 const contentCount=S.filter(s=>s.img).length;
+// Build chapters: an "Intro" group for everything before the first section,
+// then one chapter per section:true slide, each running until the next section.
+const CHAPTERS=(function(){
+  const short={ 'NICK · A NEW SKILL':'Nick','ALICE · A QUALIFICATION':'Alice','STEVE · YOUR CURRENT ROLE':'Steve','FLURE · A FUTURE GOAL':'Flure','THE SHARED SPINE':'The engine','ONBOARDING':'Onboarding','THE DASHBOARD':'Dashboard','DISCOVER & ASSESS':'Discover','LESSON DELIVERY':'Delivery','YOUR PROFILE':'Profile','MIND PALACE':'Mind Palace','YOUR LIFE, BY DESIGN':'By design' };
+  const ch=[];let firstSection=S.findIndex(s=>s.section);
+  if(firstSection>0)ch.push({label:'Intro',start:0});
+  S.forEach((s,k)=>{if(s.section)ch.push({label:short[s.num]||s.num,start:k});});
+  // end index of each chapter = start of the next, or end of deck
+  ch.forEach((c,k)=>{c.end=(k+1<ch.length?ch[k+1].start:S.length)-1;});
+  return ch;
+})();
+function chapterOf(n){let r=0;for(let k=0;k<CHAPTERS.length;k++){if(n>=CHAPTERS[k].start)r=k;}return r;}
 function contentIndexOf(n){return S.slice(0,n+1).filter(s=>s.img).length;}
 function indexOfSection(id){return S.findIndex(s=>s.id===id);}
 // Each slide's route is carried forward from the last slide that declared one.
@@ -295,15 +390,15 @@ function routeOf(n){return S[n]?S[n]._route:null;}
 function render(){
   const s=S[i];
   slide.className='slide fade'+(s.cover?' cover':'')+(s.section?' sectiondiv':'')+(s.statement?' statementdiv':'')+(s.hub?' hubdiv':'');
-  if(s.cover){slide.innerHTML=`<span class="zmark zbig"><span>Z</span></span><div class="big">${s.big}</div><div class="sub">${s.sub}</div><div class="meta">Live product walk-through</div><div class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or click · <kbd>P</kbd> autoplay · <kbd>M</kbd> sections · <kbd>G</kbd> overview · <kbd>F</kbd> fullscreen</div>`;}
+  if(s.cover){slide.innerHTML=`<span class="zmark zbig"><span>Z</span></span><div class="cover-kicker"><span class="dot"></span>Live product walk-through</div><div class="big">${s.big}</div><div class="sub">${s.sub}</div><div class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or click · <kbd>P</kbd> autoplay · <kbd>M</kbd> sections · <kbd>G</kbd> overview · <kbd>F</kbd> fullscreen</div>`;}
   else if(s.hub){const arrow='<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>';const cog='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';const e=s.engine;slide.innerHTML=`<div class="heyebrow">${s.eyebrow}</div><div class="hbig">${s.big}</div><div class="hsub">${s.sub}</div><div class="hubgrid">${s.cards.map(c=>`<div class="hubcard" data-go="${c.go}"><div class="hctag">${c.tag}</div><div class="hcname">${c.name}</div><div class="hcgoal">${c.goal}</div><div class="hcmeta">${c.meta} ${arrow}</div></div>`).join('')}</div>${e?`<div class="hubengine" data-go="${e.go}"><div class="heicon">${cog}</div><div><div class="hetag">${e.tag}</div><div class="hename">${e.name}</div></div><div class="hegoal">${e.goal}</div><svg class="hearrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>`:''}`;[...slide.querySelectorAll('.hubcard,.hubengine')].forEach(el=>{el.onclick=()=>{const t=indexOfSection(el.dataset.go);if(t>=0)go(t);};});}
   else if(s.section){slide.innerHTML=`<div class="snum">${s.num}</div><div class="stitle">${s.title}</div><div class="ssub">${s.sub}</div><div class="srule"></div>`;}
-  else if(s.chart==='twosigma'){const yb=360,amp=240,sd=92,mu1=320,mu2=660,bell=(mu)=>{let p='';for(let x=70;x<=930;x+=10.75){const y=yb-amp*Math.exp(-((x-mu)*(x-mu))/(2*sd*sd));p+=(p?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)+' ';}return p;};slide.innerHTML=`<div style="text-align:center;width:100%;max-width:1000px"><div class="seyebrow">${s.eyebrow}</div><div class="sbig" style="font-size:38px;margin-bottom:4px">${s.title}</div><svg viewBox="0 0 1000 430" style="width:100%;max-width:900px;margin-top:6px"><defs><marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#22c7a9"/></marker></defs><line x1="60" y1="${yb}" x2="940" y2="${yb}" stroke="rgba(255,255,255,.16)" stroke-width="1.5"/><path d="${bell(mu2)}L930 ${yb} L70 ${yb} Z" fill="rgba(34,199,169,.13)"/><path d="${bell(mu1)}" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2.5"/><path d="${bell(mu2)}" fill="none" stroke="#22c7a9" stroke-width="3.5"/><circle cx="${mu1}" cy="${yb-amp}" r="5" fill="#fff"/><circle cx="${mu2}" cy="${yb-amp}" r="6.5" fill="#22c7a9"/><line x1="${mu1+10}" y1="${yb-amp-26}" x2="${mu2-14}" y2="${yb-amp-26}" stroke="#22c7a9" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah)"/><text x="${(mu1+mu2)/2}" y="${yb-amp-36}" text-anchor="middle" fill="#9fe8da" font-size="22" font-weight="600">+2σ</text><text x="${mu1}" y="${yb+32}" text-anchor="middle" fill="rgba(255,255,255,.62)" font-size="17">Average classroom</text><text x="${mu1}" y="${yb+54}" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="14">50th percentile</text><text x="${mu2}" y="${yb+32}" text-anchor="middle" fill="#9fe8da" font-size="17" font-weight="500">With a personal tutor</text><text x="${mu2}" y="${yb+54}" text-anchor="middle" fill="rgba(159,232,218,.7)" font-size="14">98th percentile</text></svg>${s.body?`<div class="sbody" style="margin:14px auto 0">${s.body}</div>`:''}</div>`;}
+  else if(s.chart==='twosigma'){const yb=360,amp=240,sd=92,mu1=320,mu2=660,bell=(mu)=>{let p='';for(let x=70;x<=930;x+=10.75){const y=yb-amp*Math.exp(-((x-mu)*(x-mu))/(2*sd*sd));p+=(p?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)+' ';}return p;};slide.innerHTML=`<div style="text-align:center;width:100%;max-width:1000px"><div class="seyebrow">${s.eyebrow}</div><div class="sbig" style="font-size:38px;margin-bottom:4px">${s.title}</div><svg viewBox="0 0 1000 430" style="width:100%;max-width:900px;margin-top:6px"><defs><marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#19b899"/></marker></defs><line x1="60" y1="${yb}" x2="940" y2="${yb}" stroke="rgba(255,255,255,.16)" stroke-width="1.5"/><path d="${bell(mu2)}L930 ${yb} L70 ${yb} Z" fill="rgba(25,184,153,.13)"/><path d="${bell(mu1)}" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2.5"/><path d="${bell(mu2)}" fill="none" stroke="#19b899" stroke-width="3.5"/><circle cx="${mu1}" cy="${yb-amp}" r="5" fill="#fff"/><circle cx="${mu2}" cy="${yb-amp}" r="6.5" fill="#19b899"/><line x1="${mu1+10}" y1="${yb-amp-26}" x2="${mu2-14}" y2="${yb-amp-26}" stroke="#19b899" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah)"/><text x="${(mu1+mu2)/2}" y="${yb-amp-36}" text-anchor="middle" fill="#7fe6d2" font-size="22" font-weight="600">+2σ</text><text x="${mu1}" y="${yb+32}" text-anchor="middle" fill="rgba(255,255,255,.62)" font-size="17">Average classroom</text><text x="${mu1}" y="${yb+54}" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="14">50th percentile</text><text x="${mu2}" y="${yb+32}" text-anchor="middle" fill="#7fe6d2" font-size="17" font-weight="500">With a personal tutor</text><text x="${mu2}" y="${yb+54}" text-anchor="middle" fill="rgba(127,230,210,.7)" font-size="14">98th percentile</text></svg>${s.body?`<div class="sbody" style="margin:14px auto 0">${s.body}</div>`:''}</div>`;}
   else if(s.statement){slide.innerHTML=`${s.eyebrow?`<div class="seyebrow">${s.eyebrow}</div>`:''}<div class="sbig">${s.big}</div>${s.body?`<div class="sbody">${s.body}</div>`:''}${s.credit?`<div class="scredit">${s.credit}</div>`:''}`;}
   else{const ci=contentIndexOf(i);slide.innerHTML=`<div class="copy"><div class="eyebrow">${s.eyebrow}</div><div class="title">${s.title}</div><div class="caption">${s.caption}</div><div class="step-no">${ci} / ${contentCount}</div></div><div class="shotwrap"><div class="shot${s.darkframe?' dark':''}"><div class="browser-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>${BRAND_URL}</span></div><img src="images/${s.img}" alt="${s.title}"></div></div>`;}
   counter.textContent=(i+1)+' / '+S.length;
   bar.style.width=(i/(S.length-1)*100)+'%';
-  [...dots.children].forEach((d,k)=>d.classList.toggle('on',k===i));
+  updateChapters();
   try{document.getElementById('stars').classList.toggle('dim',!!s.img)}catch(e){}
   // Show the "back to the four journeys" cue on the last slide of any route.
   const here=routeOf(i),atRouteEnd=!!here&&(i+1>=S.length||routeOf(i+1)!==here);
@@ -316,8 +411,8 @@ function init(){const n=Math.min(110,Math.round((innerWidth*innerHeight)/15000))
 function resize(){DPR=Math.min(2,window.devicePixelRatio||1);W=c.width=innerWidth*DPR;H=c.height=innerHeight*DPR;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';init();}
 const MAX=130*Math.min(2,window.devicePixelRatio||1);
 function frame(){ctx.clearRect(0,0,W,H);for(const s of stars){s.x+=s.vx;s.y+=s.vy;if(s.x<0)s.x=W;if(s.x>W)s.x=0;if(s.y<0)s.y=H;if(s.y>H)s.y=0;s.tw+=s.sp;}
-ctx.lineWidth=DPR;for(let a=0;a<stars.length;a++){for(let b=a+1;b<stars.length;b++){const s1=stars[a],s2=stars[b],dx=s1.x-s2.x,dy=s1.y-s2.y,d2=dx*dx+dy*dy,mx=MAX*MAX;if(d2<mx){ctx.strokeStyle='rgba(34,199,169,'+((1-d2/mx)*0.09)+')';ctx.beginPath();ctx.moveTo(s1.x,s1.y);ctx.lineTo(s2.x,s2.y);ctx.stroke();}}}
-for(const s of stars){const al=s.a*(0.55+0.45*Math.sin(s.tw));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.3);ctx.fillStyle='rgba(159,232,218,'+al+')';ctx.fill();}
+ctx.lineWidth=DPR;for(let a=0;a<stars.length;a++){for(let b=a+1;b<stars.length;b++){const s1=stars[a],s2=stars[b],dx=s1.x-s2.x,dy=s1.y-s2.y,d2=dx*dx+dy*dy,mx=MAX*MAX;if(d2<mx){ctx.strokeStyle='rgba(25,184,153,'+((1-d2/mx)*0.09)+')';ctx.beginPath();ctx.moveTo(s1.x,s1.y);ctx.lineTo(s2.x,s2.y);ctx.stroke();}}}
+for(const s of stars){const al=s.a*(0.55+0.45*Math.sin(s.tw));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.3);ctx.fillStyle='rgba(127,230,210,'+al+')';ctx.fill();}
 requestAnimationFrame(frame);}
 addEventListener('resize',resize);resize();frame();})();
 function go(n){i=Math.max(0,Math.min(S.length-1,n));render();}
@@ -336,7 +431,9 @@ function prev(){
   if(i>0)go(i-1);
 }
 let autoTimer=null;function toggleAuto(){if(autoTimer){clearInterval(autoTimer);autoTimer=null;document.body.classList.remove('playing');}else{document.body.classList.add('playing');autoTimer=setInterval(()=>go(i<S.length-1?i+1:0),6500);}}
-S.forEach((s,k)=>{const b=document.createElement('b');if(s.section||s.statement)b.className='sec';b.onclick=()=>go(k);dots.appendChild(b);});
+// Build one pill per chapter; clicking jumps to the chapter's first slide.
+CHAPTERS.forEach((c,k)=>{const el=document.createElement('div');el.className='chap';el.title=c.label;el.innerHTML=`<span class="cfill"></span><span class="cdot"></span><span class="clabel">${c.label}</span>`;el.onclick=()=>go(c.start);chaptersEl.appendChild(el);});
+function updateChapters(){const cur=chapterOf(i);[...chaptersEl.children].forEach((el,k)=>{const c=CHAPTERS[k];el.classList.toggle('on',k===cur);el.classList.toggle('done',k<cur);const fill=el.querySelector('.cfill');if(k===cur){const span=Math.max(1,c.end-c.start);fill.style.width=(((i-c.start)/span)*100)+'%';}else{fill.style.width=k<cur?'100%':'0';}});}
 document.getElementById('zr').onclick=next;document.getElementById('zl').onclick=prev;
 document.getElementById('ar').onclick=next;document.getElementById('al').onclick=prev;
 document.getElementById('routeEnd').onclick=()=>go(HUB_INDEX);
@@ -354,7 +451,8 @@ let tx=0;addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true}
 function toggleFs(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
 document.getElementById('fsBtn').onclick=toggleFs;
 const grid=document.getElementById('grid');
-S.forEach((s,k)=>{if(s.section){const h=document.createElement('div');h.className='ghead';h.textContent=s.num+' · '+s.title;grid.appendChild(h);return;}if(!s.img)return;const fig=document.createElement('figure');fig.innerHTML=`<img src="images/${s.img}"><figcaption>${s.title}</figcaption>`;fig.onclick=()=>{go(k);grid.classList.remove('show');};grid.appendChild(fig);});
+const gtitle=document.createElement('div');gtitle.className='gtitle';gtitle.innerHTML='<div class="gt-eyebrow">Overview</div><div class="gt-big">Every screen, at a glance</div><div class="gt-sub">Tap any screen to jump straight to it.</div>';grid.appendChild(gtitle);
+S.forEach((s,k)=>{if(s.section){const h=document.createElement('div');h.className='ghead';h.textContent=s.num+' · '+s.title;grid.appendChild(h);return;}if(!s.img)return;const fig=document.createElement('figure');fig.innerHTML=`<img src="images/${s.img}" loading="lazy"><figcaption>${s.title}</figcaption>`;fig.onclick=()=>{go(k);grid.classList.remove('show');};grid.appendChild(fig);});
 function toggleGrid(){grid.classList.toggle('show');menu.classList.remove('show');}
 document.getElementById('gridBtn').onclick=toggleGrid;
 document.getElementById('gclose').onclick=()=>grid.classList.remove('show');
