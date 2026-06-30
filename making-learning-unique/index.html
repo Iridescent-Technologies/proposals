@@ -161,6 +161,20 @@ p.lead{font-size:18px;line-height:1.6;color:var(--cream-80);max-width:620px}
 
 footer{border-top:1px solid var(--hair-2);padding:30px 0;text-align:center;color:var(--cream-45);font-size:12.5px}
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--hair),transparent);margin:0 auto;max-width:980px}
+
+/* ── Unified centered alignment down the whole walkthrough ──────────────── */
+.eyebrow{display:flex;justify-content:center}
+h2,h3{text-align:center}
+p.lead,.muted{text-align:center;margin-left:auto;margin-right:auto}
+.stats{justify-content:center}
+.chips{justify-content:center}
+/* structured modules: center their internal text too, for one consistent spine */
+.famcard,.loop-step{text-align:center}
+.famcard .ft{justify-content:center;gap:9px}
+.persona-card{text-align:center}
+.persona-head{flex-direction:column;text-align:center;gap:12px}
+.persona-card .declared li{padding-left:0}
+.persona-card .declared li::before{display:none}
 </style>
 </head>
 <body>
