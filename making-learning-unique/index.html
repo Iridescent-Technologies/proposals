@@ -144,18 +144,28 @@ p.lead{font-size:18px;line-height:1.75;color:var(--cream-80);max-width:620px}
 .netwrap{margin-top:20px;border:1px solid var(--hair);border-radius:var(--radius-lg);
   background:radial-gradient(120% 95% at 50% -10%,rgba(20,168,139,.12),transparent 62%),rgba(255,255,255,.015);
   padding:30px 24px 22px}
-.netviz{width:100%;max-width:740px;margin:0 auto;display:block;overflow:visible}
-.netviz .edge{stroke:rgba(47,207,168,.30);stroke-width:1.4;fill:none;stroke-dasharray:430;stroke-dashoffset:430}
+.netviz{width:100%;max-width:880px;margin:0 auto;display:block;overflow:visible}
+.netviz .edge{stroke:rgba(47,207,168,.30);stroke-width:1.4;fill:none;stroke-dasharray:520;stroke-dashoffset:520}
 .netviz .node{fill:url(#netgrad);transform-box:fill-box;transform-origin:center;opacity:0}
 .netviz .node.glow{filter:drop-shadow(0 0 5px rgba(47,207,168,.55))}
 .netviz .node.core{filter:drop-shadow(0 0 12px rgba(63,228,188,.9))}
+.netviz .nlabel{fill:rgba(234,251,244,.8);font-family:'DM Sans',sans-serif;font-size:12.5px;opacity:0;letter-spacing:.005em}
 .netviz .netpulse{fill:none;stroke:#3FE4BC;stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center}
 .reveal.in .netviz .edge{animation:edgeDraw 1.1s ease forwards}
 .reveal.in .netviz .node{animation:nodeIn .55s cubic-bezier(.22,1,.36,1) forwards}
+.reveal.in .netviz .node.dim{animation:nodeInDim .55s cubic-bezier(.22,1,.36,1) forwards}
+.reveal.in .netviz .nlabel{animation:labelIn .5s ease forwards}
 .reveal.in .netviz .netpulse{animation:netPulse 2.8s ease-out 2.6s infinite}
 @keyframes edgeDraw{to{stroke-dashoffset:0}}
 @keyframes nodeIn{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+@keyframes nodeInDim{from{opacity:0;transform:scale(0)}to{opacity:.5;transform:scale(1)}}
+@keyframes labelIn{to{opacity:1}}
 @keyframes netPulse{0%{opacity:.65;transform:scale(1)}100%{opacity:0;transform:scale(3.6)}}
+.netlegend{display:flex;justify-content:center;flex-wrap:wrap;gap:20px;margin-top:14px;font-size:12px;color:var(--cream-62)}
+.netlegend span{display:inline-flex;align-items:center;gap:7px}
+.netlegend i{width:9px;height:9px;border-radius:50%;background:#3FE4BC;display:inline-block}
+.netlegend i.f{opacity:.45}
+.netlegend i.ln{width:16px;height:0;border-top:1.4px solid rgba(47,207,168,.6);border-radius:0}
 
 /* faculty — the teaching characters + Agent 13 */
 .faculty{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:32px}
@@ -557,58 +567,57 @@ p.lead,.muted{text-align:center;margin-left:auto;margin-right:auto}
   <div class="shot-cap"><span style="color:var(--coral)">●</span> Donna's Learning Journal — real Zavmo-written entries and her own session signals, captured live</div>
 
   <!-- mind palace — the growing network -->
-  <h3 style="margin-top:64px">And it all becomes one picture: a network that grows with her.</h3>
-  <p class="muted" style="margin-top:10px;max-width:660px">In her <strong style="color:var(--cream)">Mind Palace</strong>, every concept Donna meets becomes a node and every link she makes becomes a connection — a living map of her knowledge that gets richer with every lesson. The same signals that personalise her teaching are hers to see, and to own.</p>
+  <h3 style="margin-top:64px">Her knowledge becomes a network — and it grows with her.</h3>
+  <p class="muted" style="margin-top:10px;max-width:700px">This is the part no two learners share. In her <strong style="color:var(--cream)">Mind Palace</strong>, every idea Donna meets becomes a node, and every connection is a link she made — <strong style="color:var(--cream)">what she's learned</strong>, and <strong style="color:var(--cream)">how she's applied it</strong>. Brighter nodes are concepts she's mastered; fainter ones are still forming. It's as unique as she is, it grows richer with every session, and it's hers to explore and own.</p>
   <div class="netwrap reveal">
-    <svg class="netviz" viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg" aria-label="A learner's knowledge network growing">
+    <svg class="netviz" viewBox="0 0 880 470" xmlns="http://www.w3.org/2000/svg" aria-label="Donna's knowledge network">
       <defs><radialGradient id="netgrad" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#99f0e6"/><stop offset=".5" stop-color="#3FE4BC"/><stop offset="1" stop-color="#14A88B"/></radialGradient></defs>
-      <line class="edge" x1="380" y1="212" x2="258" y2="150" style="animation-delay:0.00s"/>
-      <line class="edge" x1="380" y1="212" x2="500" y2="150" style="animation-delay:0.10s"/>
-      <line class="edge" x1="380" y1="212" x2="436" y2="300" style="animation-delay:0.20s"/>
-      <line class="edge" x1="380" y1="212" x2="330" y2="330" style="animation-delay:0.30s"/>
-      <line class="edge" x1="380" y1="212" x2="520" y2="250" style="animation-delay:0.40s"/>
-      <line class="edge" x1="380" y1="212" x2="300" y2="200" style="animation-delay:0.50s"/>
-      <line class="edge" x1="380" y1="212" x2="470" y2="210" style="animation-delay:0.60s"/>
-      <line class="edge" x1="258" y1="150" x2="312" y2="98" style="animation-delay:0.70s"/>
-      <line class="edge" x1="258" y1="150" x2="180" y2="205" style="animation-delay:0.80s"/>
-      <line class="edge" x1="180" y1="205" x2="224" y2="300" style="animation-delay:0.90s"/>
-      <line class="edge" x1="224" y1="300" x2="330" y2="330" style="animation-delay:1.00s"/>
-      <line class="edge" x1="330" y1="330" x2="436" y2="300" style="animation-delay:1.10s"/>
-      <line class="edge" x1="436" y1="300" x2="520" y2="250" style="animation-delay:1.20s"/>
-      <line class="edge" x1="520" y1="250" x2="500" y2="150" style="animation-delay:1.30s"/>
-      <line class="edge" x1="500" y1="150" x2="430" y2="120" style="animation-delay:1.40s"/>
-      <line class="edge" x1="430" y1="120" x2="312" y2="98" style="animation-delay:1.50s"/>
-      <line class="edge" x1="520" y1="250" x2="602" y2="180" style="animation-delay:1.60s"/>
-      <line class="edge" x1="602" y1="180" x2="612" y2="298" style="animation-delay:1.70s"/>
-      <line class="edge" x1="612" y1="298" x2="560" y2="360" style="animation-delay:1.80s"/>
-      <line class="edge" x1="560" y1="360" x2="436" y2="300" style="animation-delay:1.90s"/>
-      <line class="edge" x1="180" y1="205" x2="140" y2="128" style="animation-delay:2.00s"/>
-      <line class="edge" x1="224" y1="300" x2="160" y2="332" style="animation-delay:2.10s"/>
-      <line class="edge" x1="330" y1="330" x2="382" y2="382" style="animation-delay:2.20s"/>
-      <line class="edge" x1="602" y1="180" x2="500" y2="150" style="animation-delay:2.30s"/>
-      <line class="edge" x1="300" y1="200" x2="180" y2="205" style="animation-delay:2.40s"/>
-      <line class="edge" x1="470" y1="210" x2="520" y2="250" style="animation-delay:2.50s"/>
-      <circle class="node core" cx="380" cy="212" r="10" style="animation-delay:0.50s"/>
-      <circle class="node glow" cx="258" cy="150" r="6.5" style="animation-delay:0.59s"/>
-      <circle class="node" cx="312" cy="98" r="5.5" style="animation-delay:0.68s"/>
-      <circle class="node glow" cx="180" cy="205" r="6.5" style="animation-delay:0.77s"/>
-      <circle class="node" cx="224" cy="300" r="5.5" style="animation-delay:0.86s"/>
-      <circle class="node glow" cx="330" cy="330" r="6.5" style="animation-delay:0.95s"/>
-      <circle class="node" cx="436" cy="300" r="5.5" style="animation-delay:1.04s"/>
-      <circle class="node glow" cx="520" cy="250" r="6.5" style="animation-delay:1.13s"/>
-      <circle class="node glow" cx="500" cy="150" r="6.5" style="animation-delay:1.22s"/>
-      <circle class="node" cx="430" cy="120" r="5.5" style="animation-delay:1.31s"/>
-      <circle class="node" cx="140" cy="128" r="4.5" style="animation-delay:1.40s"/>
-      <circle class="node" cx="602" cy="180" r="5.5" style="animation-delay:1.49s"/>
-      <circle class="node" cx="612" cy="298" r="4.5" style="animation-delay:1.58s"/>
-      <circle class="node" cx="560" cy="360" r="4.5" style="animation-delay:1.67s"/>
-      <circle class="node" cx="160" cy="332" r="4.5" style="animation-delay:1.76s"/>
-      <circle class="node" cx="382" cy="382" r="4.5" style="animation-delay:1.85s"/>
-      <circle class="node" cx="300" cy="200" r="4" style="animation-delay:1.94s"/>
-      <circle class="node" cx="470" cy="210" r="4" style="animation-delay:2.03s"/>
-      <circle class="netpulse" cx="380" cy="212" r="10"/>
+      <line class="edge" x1="430" y1="250" x2="285" y2="150" style="animation-delay:0.00s"/>
+      <line class="edge" x1="430" y1="250" x2="600" y2="355" style="animation-delay:0.09s"/>
+      <line class="edge" x1="430" y1="250" x2="640" y2="240" style="animation-delay:0.18s"/>
+      <line class="edge" x1="430" y1="250" x2="150" y2="150" style="animation-delay:0.27s"/>
+      <line class="edge" x1="430" y1="250" x2="440" y2="95" style="animation-delay:0.36s"/>
+      <line class="edge" x1="285" y1="150" x2="185" y2="250" style="animation-delay:0.45s"/>
+      <line class="edge" x1="285" y1="150" x2="255" y2="360" style="animation-delay:0.54s"/>
+      <line class="edge" x1="285" y1="150" x2="420" y2="415" style="animation-delay:0.63s"/>
+      <line class="edge" x1="600" y1="355" x2="185" y2="250" style="animation-delay:0.72s"/>
+      <line class="edge" x1="600" y1="355" x2="255" y2="360" style="animation-delay:0.81s"/>
+      <line class="edge" x1="600" y1="355" x2="420" y2="415" style="animation-delay:0.90s"/>
+      <line class="edge" x1="640" y1="240" x2="600" y2="130" style="animation-delay:0.99s"/>
+      <line class="edge" x1="640" y1="240" x2="440" y2="95" style="animation-delay:1.08s"/>
+      <line class="edge" x1="640" y1="240" x2="690" y2="330" style="animation-delay:1.17s"/>
+      <line class="edge" x1="600" y1="130" x2="440" y2="95" style="animation-delay:1.26s"/>
+      <line class="edge" x1="150" y1="150" x2="135" y2="410" style="animation-delay:1.35s"/>
+      <line class="edge" x1="150" y1="150" x2="285" y2="150" style="animation-delay:1.44s"/>
+      <line class="edge" x1="135" y1="410" x2="640" y2="240" style="animation-delay:1.53s"/>
+      <circle class="node core" cx="430" cy="250" r="10" style="animation-delay:0.60s"/>
+      <text class="nlabel" x="430" y="278" text-anchor="middle" style="font-weight:600;animation-delay:0.85s">The customer service experience</text>
+      <circle class="node glow" cx="285" cy="150" r="7" style="animation-delay:0.68s"/>
+      <text class="nlabel" x="269" y="154" text-anchor="end" style="font-weight:600;animation-delay:0.93s">Customer journey</text>
+      <circle class="node dim" cx="185" cy="250" r="5" style="animation-delay:0.76s"/>
+      <text class="nlabel" x="171" y="254" text-anchor="end" style="font-weight:400;animation-delay:1.01s">Initial contact</text>
+      <circle class="node glow" cx="255" cy="360" r="7" style="animation-delay:0.84s"/>
+      <text class="nlabel" x="239" y="364" text-anchor="end" style="font-weight:600;animation-delay:1.09s">Service delivery</text>
+      <circle class="node dim" cx="420" cy="415" r="5" style="animation-delay:0.92s"/>
+      <text class="nlabel" x="420" y="438" text-anchor="middle" style="font-weight:400;animation-delay:1.17s">Follow-up</text>
+      <circle class="node glow" cx="600" cy="355" r="7" style="animation-delay:1.00s"/>
+      <text class="nlabel" x="616" y="359" text-anchor="start" style="font-weight:600;animation-delay:1.25s">Touchpoints</text>
+      <circle class="node glow" cx="640" cy="240" r="7" style="animation-delay:1.08s"/>
+      <text class="nlabel" x="656" y="244" text-anchor="start" style="font-weight:600;animation-delay:1.33s">Customer satisfaction</text>
+      <circle class="node dim" cx="600" cy="130" r="5" style="animation-delay:1.16s"/>
+      <text class="nlabel" x="614" y="134" text-anchor="start" style="font-weight:400;animation-delay:1.41s">Handling complaints</text>
+      <circle class="node dim" cx="440" cy="95" r="5" style="animation-delay:1.24s"/>
+      <text class="nlabel" x="440" y="81" text-anchor="middle" style="font-weight:400;animation-delay:1.49s">Active listening</text>
+      <circle class="node dim" cx="135" cy="410" r="5" style="animation-delay:1.32s"/>
+      <text class="nlabel" x="121" y="414" text-anchor="end" style="font-weight:400;animation-delay:1.57s">Service metrics</text>
+      <circle class="node glow" cx="150" cy="150" r="7" style="animation-delay:1.40s"/>
+      <text class="nlabel" x="134" y="154" text-anchor="end" style="font-weight:600;animation-delay:1.65s">Team performance</text>
+      <circle class="node dim" cx="690" cy="330" r="5" style="animation-delay:1.48s"/>
+      <text class="nlabel" x="704" y="334" text-anchor="start" style="font-weight:400;animation-delay:1.73s">Continuous improvement</text>
+      <circle class="netpulse" cx="430" cy="250" r="10"/>
     </svg>
-    <div class="shot-cap" style="margin-top:6px"><span style="color:var(--coral)">●</span> Donna's knowledge network — each node a concept learned, each line a connection made, growing with every session</div>
+    <div class="netlegend"><span><i></i> Mastered</span><span><i class="f"></i> Forming</span><span><i class="ln"></i> A connection she made</span></div>
+    <div class="shot-cap" style="margin-top:10px"><span style="color:var(--coral)">●</span> Donna's knowledge network — what she's learned and how she's applied it, growing with every session</div>
   </div>
 </section>
 
