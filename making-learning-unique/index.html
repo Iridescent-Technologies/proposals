@@ -45,10 +45,13 @@ body{
 @media(max-width:720px){.nav-links{display:none}}
 
 /* Layout */
-.wrap{max-width:980px;margin:0 auto;padding:0 52px}
-@media(max-width:860px){.wrap{padding:0 28px}}
-@media(max-width:540px){.wrap{padding:0 18px}}
-section{padding:104px 0}
+/* horizontal padding only — vertical is owned by `section`/`.hero`/`.closer`
+   (using the `padding` shorthand here would zero their vertical padding) */
+.wrap{max-width:980px;margin:0 auto;padding-left:52px;padding-right:52px}
+@media(max-width:860px){.wrap{padding-left:28px;padding-right:28px}}
+@media(max-width:540px){.wrap{padding-left:18px;padding-right:18px}}
+section{padding-top:150px;padding-bottom:150px}
+@media(max-width:540px){section{padding-top:96px;padding-bottom:96px}}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:.14em;
   text-transform:uppercase;color:var(--teal-bright);margin-bottom:18px}
 .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 7px rgba(20,168,139,.8)}
@@ -61,7 +64,7 @@ p.lead{font-size:18px;line-height:1.6;color:var(--cream-80);max-width:620px}
 .kicker{font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--cream-45)}
 
 /* Hero */
-.hero{padding:120px 0 96px;text-align:center}
+.hero{padding-top:124px;padding-bottom:110px;text-align:center}
 .hero .eyebrow{justify-content:center}
 .hero h1{max-width:14ch;margin:0 auto}
 .hero h1 em{font-style:normal;color:transparent;background:linear-gradient(120deg,var(--teal-bright),var(--teal-glow));-webkit-background-clip:text;background-clip:text}
@@ -177,7 +180,7 @@ p.lead{font-size:18px;line-height:1.6;color:var(--cream-80);max-width:620px}
 .loop-step .ls-d{font-size:12.5px;color:var(--cream-62);margin-top:6px;line-height:1.5}
 
 /* Quote / closer */
-.closer{text-align:center;padding:120px 0}
+.closer{text-align:center;padding-top:150px;padding-bottom:140px}
 .closer h2{max-width:18ch;margin:0 auto}
 .closer p{max-width:560px;margin:22px auto 0;color:var(--cream-62);font-size:17px}
 .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(47,207,168,.3);border-radius:999px;
