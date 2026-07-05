@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Zavmo proposals and product walkthroughs — one place for every client deck, interactive demo, and platform overview.">
+<meta property="og:title" content="Zavmo — Proposals & Walkthroughs">
+<meta property="og:description" content="One place for every Zavmo proposal, interactive demo, and product walkthrough.">
+<title>Zavmo — Proposals &amp; Walkthroughs</title>
+<style>
+  :root{
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
+    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
+    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
+    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--navy-0)}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;
+    background:
+      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
+    background-repeat:no-repeat;background-size:100% 100%;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:clamp(40px,8vh,84px) clamp(22px,5vw,48px) 72px}
+  em{font-style:normal;color:var(--teal-glow)}
+  a{color:inherit;text-decoration:none}
+
+  /* header */
+  header{display:flex;align-items:center;gap:16px;margin-bottom:clamp(34px,7vh,58px)}
+  .logomark{width:46px;height:46px;flex:0 0 auto}
+  .brand-txt{display:flex;flex-direction:column;line-height:1}
+  .word{font-size:15px;font-weight:600;letter-spacing:.26em;color:var(--ink)}
+  .tag{font-size:11px;color:var(--teal);margin-top:6px;letter-spacing:.04em}
+
+  .hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+  h1{font-weight:200;letter-spacing:-.01em;line-height:1.05;font-size:clamp(34px,6vw,60px);margin:0 0 18px;text-wrap:balance}
+  .lede{font-size:clamp(15px,2vw,19px);line-height:1.55;color:var(--ink-2);max-width:56ch;margin:0 0 clamp(34px,6vh,52px);font-weight:300}
+
+  /* featured card */
+  .featured{
+    display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:26px;
+    background:rgba(47,207,168,.06);border:1px solid var(--border-2);border-radius:24px;
+    padding:26px 30px;margin-bottom:30px;transition:.22s;position:relative;overflow:hidden;
+  }
+  .featured:hover{background:rgba(47,207,168,.09);transform:translateY(-2px);box-shadow:0 24px 60px rgba(0,0,0,.36)}
+  .featured:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+  .atom-wrap{width:88px;height:88px;flex:0 0 auto}
+  .featured .f-body{min-width:0}
+  .f-chip{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--teal);background:rgba(47,207,168,.14);border-radius:100px;padding:4px 11px;margin-bottom:11px}
+  .f-title{font-size:clamp(21px,3vw,27px);font-weight:400;letter-spacing:-.01em;margin:0 0 8px}
+  .f-desc{font-size:14.5px;line-height:1.5;color:var(--ink-2);font-weight:300;margin:0;max-width:60ch}
+  .f-arrow{width:46px;height:46px;border-radius:50%;background:var(--teal);color:var(--navy-0);display:flex;align-items:center;justify-content:center;flex:0 0 auto;box-shadow:0 6px 22px rgba(47,207,168,.3);transition:.22s}
+  .featured:hover .f-arrow{transform:translateX(3px)}
+  .f-arrow svg{width:20px;height:20px}
+
+  .section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:30px 0 14px}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:16px}
+  .card{
+    display:flex;flex-direction:column;gap:10px;background:var(--surface);border:1px solid var(--border);
+    border-radius:18px;padding:22px 22px 20px;backdrop-filter:blur(18px);transition:.2s;position:relative;
+  }
+  .card:hover{background:var(--surface-2);border-color:var(--border-2);transform:translateY(-2px);box-shadow:0 18px 44px rgba(0,0,0,.32)}
+  .card:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+  .c-chip{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .c-chip.walk{color:var(--teal)}
+  .c-chip.client{color:#f5b544}
+  .c-chip.concept{color:#8fb8ff}
+  .c-title{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.3;margin:0;color:var(--ink)}
+  .c-desc{font-size:13px;line-height:1.5;color:var(--ink-2);font-weight:300;margin:0;flex:1}
+  .c-foot{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--teal);font-weight:500;margin-top:4px}
+  .c-foot svg{width:15px;height:15px;transition:.2s}
+  .card:hover .c-foot svg{transform:translateX(3px)}
+
+  footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:12.5px;color:var(--ink-3);line-height:1.6;font-weight:300}
+  footer a{color:var(--teal)}
+
+  @media (max-width:620px){
+    .featured{grid-template-columns:1fr;text-align:left;gap:18px}
+    .featured .f-arrow{position:absolute;top:24px;right:24px;width:40px;height:40px}
+    .atom-wrap{width:66px;height:66px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
+        <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
+        <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
+      <g id="halo"></g>
+      <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
+    </svg>
+    <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Proposals &amp; walkthroughs</span></div>
+  </header>
+
+  <div class="hero-eyebrow">One place for everything</div>
+  <h1>Zavmo proposals &amp; product walkthroughs.</h1>
+  <p class="lede">Every client deck, interactive demo and platform overview — bookmark this page and jump straight to any of them.</p>
+
+  <a class="featured" href="./little-zav/">
+    <span class="atom-wrap" id="atomWrap"></span>
+    <div class="f-body">
+      <span class="f-chip">Interactive · new</span>
+      <h2 class="f-title">Little Zav — Proactive Chatbot</h2>
+      <p class="f-desc">A playable Little Zav widget with four live interactions, all five admin pages rendered in the real admin theme, and the switch-on &amp; white-label story for Growth Engineering LMS clients.</p>
+    </div>
+    <span class="f-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </a>
+
+  <div class="section-label">Product walkthroughs</div>
+  <div class="grid">
+    <a class="card" href="./learner-journey/">
+      <span class="c-chip walk">Walkthrough</span>
+      <h3 class="c-title">The Learner Journey</h3>
+      <p class="c-desc">A click-through of the live learner experience, screen by screen.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./admin-journey/">
+      <span class="c-chip walk">Walkthrough</span>
+      <h3 class="c-title">The Admin Console</h3>
+      <p class="c-desc">A click-through of the live admin console and its reporting.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./making-learning-unique/">
+      <span class="c-chip concept">Concept</span>
+      <h3 class="c-title">Making learning as unique as you are</h3>
+      <p class="c-desc">The personalisation story — 2 Sigma, xAPI and three-persona adaptation.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </div>
+
+  <div class="section-label">Platform &amp; client proposals</div>
+  <div class="grid">
+    <a class="card" href="./zavmo-overview/">
+      <span class="c-chip">Overview</span>
+      <h3 class="c-title">Where Neuroscience Meets Learning</h3>
+      <p class="c-desc">An overview of the Zavmo platform and the thinking behind it.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./loreal-travel-retail/">
+      <span class="c-chip client">Client proposal</span>
+      <h3 class="c-title">L'Oréal Travel Retail Asia Pacific</h3>
+      <p class="c-desc">The Zavmo Knowledge Companion, proposed for L'Oréal Travel Retail.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./UM6P/">
+      <span class="c-chip client">Client proposal</span>
+      <h3 class="c-title">Global Hubs US × Zavmo</h3>
+      <p class="c-desc">A three-stream pilot proposal (UM6P).</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./armenia/">
+      <span class="c-chip client">Client proposal</span>
+      <h3 class="c-title">Zavmo for Armenia</h3>
+      <p class="c-desc">A briefing for Artashes Khurshudyan.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </div>
+
+  <footer>
+    Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
+    Each proposal is a self-contained folder. To add one, drop an <code style="color:var(--ink-2)">index.html</code> folder, push to <em>main</em>, and add a card here.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // halo of 12 dots around the logomark orb
+  var g=document.getElementById('halo'), n=12, cx=50, cy=50, r=38;
+  for(var i=0;i<n;i++){
+    var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
+    var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',x.toFixed(1)); c.setAttribute('cy',y.toFixed(1)); c.setAttribute('r','2.4');
+    c.setAttribute('fill','#3FE4BC'); c.setAttribute('opacity', i%2? '0.55':'0.9');
+    g.appendChild(c);
+  }
+  // atom-spark mascot for the featured card (nucleus + 3 orbiting electrons)
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var pd='M 22,80 a 58,22 0 1,0 116,0 a 58,22 0 1,0 -116,0', ang=[0,60,120], dur=['3s','2.4s','3.4s'];
+  var s='<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-label="Little Zav mascot" style="width:100%;height:100%">'
+    +'<defs><radialGradient id="nuc" cx="42%" cy="38%" r="65%"><stop offset="0%" stop-color="#f2fffb"/><stop offset="35%" stop-color="#6ee9db"/><stop offset="75%" stop-color="#04d9c1"/><stop offset="100%" stop-color="#04d9c1"/></radialGradient></defs>';
+  for(var j=0;j<3;j++){
+    s+='<g transform="rotate('+ang[j]+' 80 80)"><path d="'+pd+'" fill="none" stroke="rgba(47,207,168,.28)" stroke-width="1.2"/>'
+      +'<circle r="4" fill="#3FE4BC" style="filter:drop-shadow(0 0 5px rgba(63,228,188,.9))">'
+      + (reduce ? '' : '<animateMotion dur="'+dur[j]+'" repeatCount="indefinite" '+(j===1?'keyPoints="1;0" keyTimes="0;1" calcMode="linear" ':'')+'path="'+pd+'"/>')
+      +'</circle></g>';
+  }
+  s+='<circle cx="80" cy="80" r="14" fill="url(#nuc)" style="filter:drop-shadow(0 0 12px rgba(63,228,188,.75))"/></svg>';
+  document.getElementById('atomWrap').innerHTML=s;
+})();
+</script>
+</body>
+</html>
