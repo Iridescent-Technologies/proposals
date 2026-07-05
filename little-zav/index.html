@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Little Zav — the proactive learning chatbot. An interactive product & deployment deck: a playable widget, the admin panel, and white-label deployment for Growth Engineering LMS clients.">
+<meta property="og:title" content="Little Zav — Proactive Chatbot">
+<meta property="og:description" content="A proactive, playful learning companion that speaks first — interactive product & deployment deck.">
+<title>Little Zav — Proactive Chatbot</title>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M18 6l-2.5 2.5M8.5 15.5 6 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5zM3 13l9 5 9-5M3 18l9 5 9-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 12h4M12 12h8M4 17h12M20 17h0M14 5v4M8 10v4M16 15v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2 0-1.5 1-2 2-2h1a3 3 0 0 0 3-3c0-5-4-9-8-9z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="12" r="1.2" fill="currentColor"/><circle cx="9.5" cy="8" r="1.2" fill="currentColor"/><circle cx="14" cy="8" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6l-7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-4M4 5v4h4M4 13a8 8 0 0 0 14 4M20 19v-4h-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-key" viewBox="0 0 24 24"><circle cx="8" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="m11 11 8 8M16 16l2-2M18 18l2-2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 6 .5l2-2a4 4 0 0 0-6-6l-1 1M14 10a4 4 0 0 0-6-.5l-2 2a4 4 0 0 0 6 6l1-1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 5 5 9-11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 11V5a1.5 1.5 0 0 1 3 0v5M11 10V4a1.5 1.5 0 0 1 3 0v6M14 10V6a1.5 1.5 0 0 1 3 0v7c0 4-2 8-6 8s-6-3-6-6l-2-3a1.5 1.5 0 0 1 2.5-1.6L8 11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<div class="deck" id="deck">
+
+  <!-- 1 · COVER -->
+  <section class="slide cover">
+    <div class="cover-atom">__ATOM__</div>
+    <div class="eyebrow">Growth Engineering · Product &amp; Deployment</div>
+    <h1 class="display xl">Little&nbsp;Zav</h1>
+    <p class="lede">A standalone, playful learning companion that <em>speaks first</em> — making learners want to log in, learn a little every day, and light up as they go.</p>
+    <div class="cover-meta">
+      <span class="chip live"><span class="dot"></span>Live in the cloud</span>
+      <span class="chip">Own service · own database</span>
+      <span class="chip">Embeds on any LMS</span>
+    </div>
+    <div class="hint"><svg class="ic sm"><use href="#i-hand"/></svg> Slides 4 &amp; 9–13 are <strong style="color:var(--ink-2)">fully interactive</strong> — play them. Use <kbd>→</kbd> <kbd>←</kbd> or the dots.</div>
+  </section>
+
+  <!-- 2 · WHAT IT IS -->
+  <section class="slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-bolt"/></svg>The widget · what it is</div>
+    <h2 class="display">A companion that greets you before you ask.</h2>
+    <p class="lede">Little Zav is a small, proactive card that lives on the learner's home screen. Every time you return it has <strong>something new and personal</strong> for you — a 20-second game, a nudge, a reflection — all drawn from your own learning. One delightful treat per visit.</p>
+    <div class="grid two">
+      <div class="card"><div class="k">It speaks first</div><p>Not a search box waiting for input — a companion that greets you by name, remembers your last session, and changes every login. It creates the <em>"what's Little&nbsp;Zav got for me today?"</em> pull.</p></div>
+      <div class="card"><div class="k">Never punishes</div><p>Get it wrong and the card springs back and the mascot gives a little wobble — a cheeky nudge and a retry, never a hard red cross. It celebrates effort, not just correctness.</p></div>
+      <div class="card"><div class="k">Walled garden</div><p>It <em>reads</em> your learning signals to stay relevant but writes nothing back into your records. No grades, no mastery scoring — pure encouragement. That clean boundary is what lets it run anywhere.</p></div>
+      <div class="card"><div class="k">One playful character</div><p>A warmer, sillier little-sibling of the main Zavmo. The delight is in the copy, the motion, and the reward — never in clutter or emoji.</p></div>
+    </div>
+  </section>
+
+  <!-- 3 · WHY IT'S FUN -->
+  <section class="slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-spark"/></svg>The widget · why it's fun</div>
+    <h2 class="display">Fifteen ways to play, five moods, one reward.</h2>
+    <p class="lede">Learners swipe, tap, slide, sort and reflect through a catalogue of quick interactions. Every win earns a <strong>spark</strong> that lights one dot of the halo — collect twelve and you complete the full Zavmo mark. <em>Try them on the next slide.</em></p>
+    <div class="mood-row">
+      <div class="mood"><span class="mood-name">Sharpen</span><span class="mood-desc">Quiz · two-truths · odd-one-out · matching · put-in-order · fill-the-blank · myth-or-fact · sort-into-buckets · guess-the-number</span></div>
+      <div class="mood"><span class="mood-name">Play</span><span class="mood-desc">Would-you-rather · hot-take — no wrong answers, pure fun</span></div>
+      <div class="mood"><span class="mood-name">Care</span><span class="mood-desc">Tip of the day · time-aware reminder · badge celebration · check-in</span></div>
+      <div class="mood"><span class="mood-name">Reflect</span><span class="mood-desc">Mindset · this-is-me slider · scenario · mood check-in · confidence — the insight family</span></div>
+    </div>
+    <div class="spark-demo">
+      <div class="spark-ring" id="sparkRing" aria-label="Spark reward: 7 of 12 sparks lit"></div>
+      <div class="spark-copy"><div class="k">The spark reward loop</div><p>You never lose a spark — the shelf only grows. The reward ties straight to the Zavmo brand mark and its "learning connections" meaning. Rapid-fire, addictive, and always kind.</p></div>
+    </div>
+  </section>
+
+  <!-- 4 · LIVE WIDGET PLAYGROUND -->
+  <section class="slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-hand"/></svg>The widget · play it yourself</div>
+    <div class="play-wrap">
+      <div class="play-left">
+        <div class="lz-widget" id="lzWidget">
+          <div class="lz-head">
+            <span class="lz-mascot" id="lzMascot"></span>
+            <div class="lz-id"><span class="lz-name">Little Zav</span><span class="lz-status"><span class="dot"></span>here with you</span></div>
+            <div class="lz-sparks"><span class="lz-halo" id="lzHalo"></span><span class="lz-spk" id="lzSpk">6/12</span></div>
+          </div>
+          <div class="lz-greet" id="lzGreet"></div>
+          <div class="lz-body" id="lzBody"></div>
+          <div class="lz-toast" id="lzToast"><svg class="ic sm" style="color:#86efac"><use href="#i-spark"/></svg><span id="lzToastMsg"></span></div>
+          <div class="lz-input"><span>Say hi to Little Zav</span><span class="lz-send">→</span></div>
+        </div>
+      </div>
+      <div class="play-right">
+        <h2 class="display sm">This is the real widget. Have a go.</h2>
+        <p class="lede sm">Pick an interaction and answer it. Right answers light a spark; wrong ones just wobble and let you retry. Play and Reflect have no wrong answer at all.</p>
+        <div class="lz-picker" id="lzPicker">
+          <button data-k="myth" class="on">Myth or fact</button>
+          <button data-k="quiz">Quick quiz</button>
+          <button data-k="rather">Would you rather</button>
+          <button data-k="confidence">Confidence check</button>
+        </div>
+        <div class="play-note"><svg class="ic sm"><use href="#i-user"/></svg><span>On a real home screen this card is generated from <em>your</em> last lesson — here it's themed around a pricing lesson as an example.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · PERSONALISATION -->
+  <section class="slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-user"/></svg>The widget · how it gets personal</div>
+    <h2 class="display">Built from your data — different every single login.</h2>
+    <p class="lede">Little Zav reads a bundle of signals about each learner and generates a fresh, fitting interaction. Nothing is fabricated: a brand-new account gets an honest "nothing yet", never a fake game.</p>
+    <div class="grid two tight">
+      <div class="card"><div class="k">What it reads</div><p>Recent lessons and topics, flow state, emotional archetype, streak, and preferred learning time — the same personalisation bundle the rest of the platform uses.</p></div>
+      <div class="card"><div class="k">Freshness ledger</div><p>A "don't repeat" memory so you rarely see the same thing twice — plus the occasional deliberate callback: <em>"remember this from Tuesday?"</em></p></div>
+      <div class="card"><div class="k">Right time, right topic</div><p>It respects each learner's best time to learn and can space interactions along the forgetting curve, so a nudge lands when it'll actually stick.</p></div>
+      <div class="card"><div class="k">On a client LMS</div><p>For a Growth Engineering client, "your data" comes from <em>that</em> platform's learner-history API — so it's just as personal without any Zavmo account behind it.</p></div>
+    </div>
+    <div class="flowline"><span>Learner signals</span><svg class="arrow"><use href="#i-link"/></svg><span>Generator picks a fresh, fitting interaction</span><svg class="arrow"><use href="#i-link"/></svg><span class="accent">A personal card + a spark to earn</span></div>
+  </section>
+
+  <!-- 6 · CONNECTS TO LIBRARY -->
+  <section class="slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-layers"/></svg>The widget · connecting the content library</div>
+    <h2 class="display">It knows the client's own content — and cites it.</h2>
+    <p class="lede">Beyond each learner's history, Little Zav can draw on the organisation's whole content library. For Growth Engineering clients, the <strong>Growth Engineering LMS is a first-class connector</strong> — the same library that feeds builds like L'Oréal's "My Beauty Club".</p>
+    <div class="grid three">
+      <div class="card"><div class="k">Connect the library</div><p>Point Little Zav at the Growth Engineering LMS (or Go1, LinkedIn Learning, Google Drive, uploaded docs). It pulls the content in, chunks and embeds it.</p></div>
+      <div class="card"><div class="k">Stays in sync</div><p><svg class="ic sm"><use href="#i-refresh"/></svg> A live sync status shows last-synced, items pulled and errors. Turn a source on and it ingests; content that goes offline is auto-removed. Each item has a "Visible to Little Zav" toggle.</p></div>
+      <div class="card"><div class="k">Answers with citations</div><p>Its knowledge chat answers only from the connected library and names the source — "Source: <em>module / doc</em>". Anything out of remit gets a playful deflection, never a wrong guess.</p></div>
+    </div>
+    <div class="callout"><svg class="ic"><use href="#i-check"/></svg><span>Two personalisation inputs, one companion: <strong>the learner's history</strong> (how they learn) + <strong>the client's library</strong> (what there is to learn). Little Zav sits in the middle and makes it fun.</span></div>
+  </section>
+
+  <!-- 7 · INSIGHT INSTRUMENT -->
+  <section class="slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-chart"/></svg>The widget · the hero, quietly</div>
+    <h2 class="display">Delight on the surface, insight underneath.</h2>
+    <p class="lede">The <strong>Reflect</strong> family runs gentle, no-wrong-answer probes — growth mindset, confidence, innovation appetite, mood. To the learner it's a fun 10-second question. To the organisation it becomes anonymised, aggregate insight into <em>how people think and feel</em>.</p>
+    <div class="grid two tight">
+      <div class="card accent-card"><div class="k">Growth mindset index</div><p>Tracked as movement against each learner's onboarding baseline — are they trending more growth-oriented?</p></div>
+      <div class="card accent-card"><div class="k">Confidence &amp; innovation</div><p>Conversational confidence and curiosity/innovation signals, rolled up org-wide as a spectrum and a trend.</p></div>
+      <div class="card accent-card"><div class="k">Sentiment &amp; mood</div><p>A rolling sentiment line and this-week's mood distribution — an early read on how a cohort is doing.</p></div>
+      <div class="card accent-card"><div class="k">Feeds both ways</div><p>Every answer also personalises that learner's <em>own</em> next interaction — a fair exchange, not extraction.</p></div>
+    </div>
+    <div class="callout privacy"><svg class="ic"><use href="#i-shield"/></svg><span><strong>Insight, not surveillance.</strong> Org analytics are aggregate and anonymised, there are no "wrong" answers, sensitive dimensions carry a consent flag, and the whole family can be switched off in one click.</span></div>
+  </section>
+
+  <!-- 8 · ADMIN OVERVIEW (divider) -->
+  <section class="slide divider">
+    <div class="big-index">02</div>
+    <div class="eyebrow"><svg class="ic"><use href="#i-sliders"/></svg>The admin panel</div>
+    <h2 class="display">Everything an admin needs, on five tabs.</h2>
+    <p class="lede">Little Zav gets its own top-level area in the admin — its own product, sitting in the nav after <em>Content</em>. A master <strong>on / off</strong> switch and a live <strong>"Live · N learners"</strong> readout sit above the tabs; a "Preview" button sits below every one. The next five slides are the <strong>actual pages</strong>.</p>
+    <div class="browser slim">
+      <div class="br-bar"><span class="br-dot" style="background:#ff5f57"></span><span class="br-dot" style="background:#febc2e"></span><span class="br-dot" style="background:#28c840"></span><span class="br-url">admin.zavmo.ai/little-zav</span></div>
+      <div class="admin-app">
+        <div class="aa-nav">
+          <div class="aa-brand"><span class="aa-word">ZAVMO</span><span class="aa-tag">Learning intelligence</span></div>
+          <div class="aa-nav-items"><span class="aa-nav-item">Dashboard</span><span class="aa-nav-item">Mind Palace</span><span class="aa-nav-item">Content</span><span class="aa-nav-item active">Little Zav</span><span class="aa-nav-item">Users</span><span class="aa-nav-item">Reports</span><span class="aa-nav-item">Settings</span><span class="aa-acct"></span></div>
+        </div>
+        <div class="aa-strip"><span class="aa-crumb">Content › Little Zav</span><span class="aa-strip-right"><span class="aa-live"><span class="dot live"></span>Live · 318 learners</span><span class="aa-master"><span>Little Zav</span><span class="tog on"></span></span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · SETUP TAB -->
+  <section class="slide admin-slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-sliders"/></svg>Admin · tab 1 of 5 — Setup</div>
+    <div class="browser">
+      <div class="br-bar"><span class="br-dot" style="background:#ff5f57"></span><span class="br-dot" style="background:#febc2e"></span><span class="br-dot" style="background:#28c840"></span><span class="br-url">admin.zavmo.ai/little-zav</span></div>
+      <div class="admin-app" data-tab="setup"></div>
+    </div>
+  </section>
+
+  <!-- 10 · INTERACTIONS TAB -->
+  <section class="slide admin-slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-grid"/></svg>Admin · tab 2 of 5 — Interactions</div>
+    <div class="browser">
+      <div class="br-bar"><span class="br-dot" style="background:#ff5f57"></span><span class="br-dot" style="background:#febc2e"></span><span class="br-dot" style="background:#28c840"></span><span class="br-url">admin.zavmo.ai/little-zav</span></div>
+      <div class="admin-app" data-tab="interactions"></div>
+    </div>
+  </section>
+
+  <!-- 11 · SOURCES TAB -->
+  <section class="slide admin-slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-layers"/></svg>Admin · tab 3 of 5 — Sources</div>
+    <div class="browser">
+      <div class="br-bar"><span class="br-dot" style="background:#ff5f57"></span><span class="br-dot" style="background:#febc2e"></span><span class="br-dot" style="background:#28c840"></span><span class="br-url">admin.zavmo.ai/little-zav</span></div>
+      <div class="admin-app" data-tab="sources"></div>
+    </div>
+  </section>
+
+  <!-- 12 · BRANDING TAB -->
+  <section class="slide admin-slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-palette"/></svg>Admin · tab 4 of 5 — Branding <span class="built-pill">already built</span></div>
+    <div class="browser">
+      <div class="br-bar"><span class="br-dot" style="background:#ff5f57"></span><span class="br-dot" style="background:#febc2e"></span><span class="br-dot" style="background:#28c840"></span><span class="br-url">admin.zavmo.ai/little-zav</span></div>
+      <div class="admin-app" data-tab="branding"></div>
+    </div>
+  </section>
+
+  <!-- 13 · ANALYTICS TAB -->
+  <section class="slide admin-slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-chart"/></svg>Admin · tab 5 of 5 — Analytics <span class="built-pill hero">the hero tab</span></div>
+    <div class="browser">
+      <div class="br-bar"><span class="br-dot" style="background:#ff5f57"></span><span class="br-dot" style="background:#febc2e"></span><span class="br-dot" style="background:#28c840"></span><span class="br-url">admin.zavmo.ai/little-zav</span></div>
+      <div class="admin-app" data-tab="analytics"></div>
+    </div>
+  </section>
+
+  <!-- 14 · PREVIEW -->
+  <section class="slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-eye"/></svg>Admin · the trust-builder</div>
+    <h2 class="display">"Preview" — see exactly what it'll make.</h2>
+    <p class="lede">A button under every tab runs the <strong>real generator</strong> against the current, even unsaved, config and shows a representative example — plus a "why this" trace. No learner is picked (at thousands of learners that's the wrong model); it shows a labelled <em>Example</em>.</p>
+    <div class="preview-mock">
+      <div class="pm-card">
+        <div class="pm-head"><span class="pm-mascot">__ATOM_MINI__</span><span>Little Zav · Example</span></div>
+        <div class="pm-q">Myth or fact: <em>"Value-based pricing means charging whatever you like."</em></div>
+        <div class="pm-actions"><span class="pm-btn ghost">Myth</span><span class="pm-btn">Fact</span></div>
+      </div>
+      <div class="pm-why">
+        <div class="k">Why this</div>
+        <ul class="why-list">
+          <li><strong>Source</strong> — last lesson topic: <em>pricing strategy</em></li>
+          <li><strong>Interaction</strong> — myth-or-fact (from the enabled set)</li>
+          <li><strong>Fit</strong> — matches best-time, within cadence, "Sharpen" mood</li>
+        </ul>
+        <div class="muted">"Show another" re-rolls for variety across topics and types.</div>
+      </div>
+    </div>
+    <div class="note-strip"><svg class="ic sm"><use href="#i-check"/></svg> Read-only — the preview emits no xAPI and awards no spark. It's there so admins trust the selection logic before they save.</div>
+  </section>
+
+  <!-- 15 · SWITCH ON (divider) -->
+  <section class="slide divider">
+    <div class="big-index">03</div>
+    <div class="eyebrow"><svg class="ic"><use href="#i-key"/></svg>Deployment · switching it on</div>
+    <h2 class="display">One login, one handshake, no second sign-in.</h2>
+    <p class="lede">The client portal already knows who the learner is. Little Zav trusts that with a signed, short-lived token — so the learner never logs in twice.</p>
+    <div class="steps">
+      <div class="step"><span class="step-n">1</span><div><strong>Client mints a token</strong><p>The client's backend issues a short-lived RS256 JWT — learner id, tenant, role — signed with that tenant's private key.</p></div></div>
+      <div class="step"><span class="step-n">2</span><div><strong>Portal hands it to the widget</strong><p>The embedded widget receives the token via a <code>postMessage</code> handshake on load.</p></div></div>
+      <div class="step"><span class="step-n">3</span><div><strong>Little Zav verifies &amp; resolves</strong><p>It checks the token against that tenant's registered public key and resolves the learner. In and playing — no second login.</p></div></div>
+    </div>
+    <div class="note-strip"><svg class="ic sm"><use href="#i-shield"/></svg> Per-tenant keys: a token from tenant A is rejected by tenant B. The <code>role</code> claim gates the admin surface.</div>
+  </section>
+
+  <!-- 16 · INTEGRATION CONTRACT -->
+  <section class="slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-link"/></svg>Deployment · the four-part contract</div>
+    <h2 class="display">Four things any host implements. Zavmo built them first.</h2>
+    <p class="lede">Little Zav is a product, not a feature — so every host, Zavmo included, integrates the same way. Zavmo is tenant&nbsp;#1: the reference integration and the template for the client SDK.</p>
+    <div class="contract">
+      <div class="cx"><span class="cx-n">01</span><div><strong>Provision the tenant</strong><p>Register the SSO public key, allowed embed origins, branding, and content / history endpoints.</p></div></div>
+      <div class="cx"><span class="cx-n">02</span><div><strong>Mint an SSO token</strong><p>One backend endpoint returns a signed short-lived token for a logged-in learner. A thin SDK ships with it.</p></div></div>
+      <div class="cx"><span class="cx-n">03</span><div><strong>Embed the widget</strong><p>Drop a <code>&lt;script&gt;</code> / <code>&lt;iframe&gt;</code> on the learner portal (and admin), pass the token.</p></div></div>
+      <div class="cx"><span class="cx-n">04</span><div><strong>Provide content &amp; history</strong><p>A small read API: list content items and return a learner's history. GE wraps the Growth Engineering LMS.</p></div></div>
+    </div>
+    <div class="callout"><svg class="ic"><use href="#i-check"/></svg><span><strong>Little Zav provides</strong> the hosted service, database, widget + admin bundles, the API, tenant config, SSO verification and xAPI. The client provides four small pieces — and it's live.</span></div>
+  </section>
+
+  <!-- 17 · WHITE-LABEL FOR GE CLIENTS -->
+  <section class="slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-palette"/></svg>Deployment · for Growth Engineering clients</div>
+    <h2 class="display">One build. Many branded companions.</h2>
+    <p class="lede">A Growth Engineering client embeds the same Little Zav on their own portal, themed as their own product, fed by their own LMS — with no Zavmo account anywhere in sight. That's the "My Beauty Club" model, generalised.</p>
+    <div class="grid three">
+      <div class="card"><div class="k">Their brand</div><p>Client name, colours, font, welcome copy and logo — set on the Branding tab, live from the first frame.</p></div>
+      <div class="card"><div class="k">Their content</div><p>Fed from the Growth Engineering LMS connector plus their own docs and feeds. Personalised from their learner-history API.</p></div>
+      <div class="card"><div class="k">Their portal</div><p>Embedded on the client's learner and admin surfaces via the SSO handshake. Tenant-isolated data, per-tenant keys.</p></div>
+    </div>
+    <div class="tenant-strip">
+      <span class="tenant"><span class="t-dot lz"></span>Zavmo <span class="muted">tenant #1</span></span>
+      <span class="tenant"><span class="t-dot mbc"></span>L'Oréal · My Beauty Club</span>
+      <span class="tenant"><span class="t-dot ge"></span>Any GE client <span class="muted">next</span></span>
+    </div>
+  </section>
+
+  <!-- 18 · STATUS & ROADMAP -->
+  <section class="slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-check"/></svg>Where it stands</div>
+    <h2 class="display">Live in the cloud today — and phased from here.</h2>
+    <div class="status-grid">
+      <div class="st-col live-col">
+        <div class="st-head"><span class="dot live"></span>Live now</div>
+        <ul>
+          <li>Own repo, own Railway service + database, CI green</li>
+          <li>Generator, spark loop and learner API verified end-to-end in the cloud</li>
+          <li>Per-tenant SSO verification (RS256) + embeddable widget</li>
+          <li>White-label branding model + public endpoint</li>
+          <li>Zavmo embed wired (dormant &amp; safe until the key is set)</li>
+        </ul>
+      </div>
+      <div class="st-col next-col">
+        <div class="st-head"><span class="dot next"></span>Next</div>
+        <ul>
+          <li>Custom domain <code>littlezav.zavmo.ai</code></li>
+          <li>Admin app — the five tabs as a shipped UI</li>
+          <li>Content connectors + RAG (Growth Engineering LMS)</li>
+          <li>Reflect family + Analytics insight layer</li>
+          <li>Chat with citations + client provisioning</li>
+        </ul>
+      </div>
+    </div>
+    <div class="phase-line">
+      <span class="ph"><strong>P1</strong> personal MVP + sparks</span>
+      <span class="ph"><strong>P2</strong> org content · celebrations · insight</span>
+      <span class="ph"><strong>P3</strong> connectors · chat · shareable product</span>
+    </div>
+  </section>
+
+  <!-- 19 · CLOSE -->
+  <section class="slide cover close">
+    <div class="cover-atom small">__ATOM__</div>
+    <h2 class="display">The daily reason to come back.</h2>
+    <p class="lede">A companion that's fun on the surface and an insight instrument underneath — personalised from each learner's data, fed by the client's own library, and ready to wear any Growth Engineering client's brand.</p>
+    <div class="cover-meta">
+      <span class="chip">Fun &amp; personal for learners</span>
+      <span class="chip">Insightful for the organisation</span>
+      <span class="chip">White-label for every client</span>
+    </div>
+    <div class="hint muted">Little Zav · a standalone product · Zavmo is tenant #1</div>
+  </section>
+
+</div>
+
+<!-- CHROME -->
+<div class="chrome">
+  <button class="nav-btn" id="prevBtn" aria-label="Previous slide">‹</button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-btn" id="nextBtn" aria-label="Next slide">›</button>
+</div>
+<div class="counter"><span id="cur">1</span> / <span id="total">19</span></div>
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+<style>
+  :root{
+    --navy-0:#060e17; --navy-1:#0b1a2a; --navy-2:#0e2233;
+    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
+    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
+    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
+    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --green:#22c55e; --amber:#f5b544; --rose:#e11d48;
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --maxw:1000px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    font-family:var(--font);color:var(--ink);
+    background:
+      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
+    background-attachment:fixed;overflow:hidden;-webkit-font-smoothing:antialiased;
+  }
+  em{font-style:normal;color:var(--teal-glow)}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;background:rgba(47,207,168,.12);color:var(--teal-glow);padding:.1em .4em;border-radius:6px}
+  kbd{font-family:var(--font);font-size:.8em;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:.05em .45em;color:var(--ink-2)}
+
+  .deck{display:flex;height:100vh;width:100vw;transition:transform .55s cubic-bezier(.7,0,.2,1)}
+  .slide{min-width:100vw;height:100vh;flex:0 0 100vw;display:flex;flex-direction:column;justify-content:center;padding:clamp(26px,5vh,64px) clamp(24px,7vw,96px) 92px;overflow-y:auto}
+  .slide > *{max-width:var(--maxw);width:100%;margin-left:auto;margin-right:auto}
+  .admin-slide{justify-content:flex-start;padding-top:clamp(40px,7vh,84px)}
+  .admin-slide .eyebrow{flex:0 0 auto}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:clamp(10px,1.3vw,11.5px);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
+  .eyebrow .ic{width:15px;height:15px}
+  .built-pill{background:rgba(47,207,168,.14);color:var(--teal-glow);border-radius:100px;padding:3px 9px;font-size:9.5px;letter-spacing:.06em}
+  .built-pill.hero{background:rgba(245,181,68,.16);color:var(--amber)}
+  .display{font-weight:200;letter-spacing:-.01em;line-height:1.06;text-wrap:balance;font-size:clamp(30px,5.2vw,54px);margin:0 0 20px;color:var(--ink)}
+  .display.sm{font-size:clamp(24px,3.6vw,38px)}
+  .display.xl{font-size:clamp(52px,11vw,120px);margin:6px 0 18px}
+  .lede{font-size:clamp(16px,2vw,20px);line-height:1.55;color:var(--ink-2);max-width:62ch;margin:0 0 26px;font-weight:300}
+  .lede.sm{font-size:clamp(14px,1.6vw,16.5px);margin-bottom:20px}
+  .lede strong{color:var(--ink);font-weight:600}
+  .ic{width:18px;height:18px;fill:none;flex:0 0 auto}
+  .ic.sm{width:15px;height:15px;vertical-align:-2px;color:var(--teal)}
+
+  .grid{display:grid;gap:16px;margin:6px 0}
+  .grid.two{grid-template-columns:1fr 1fr}
+  .grid.three{grid-template-columns:repeat(3,1fr)}
+  .grid.tight{gap:14px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px;backdrop-filter:blur(18px)}
+  .card .k{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+  .card p{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink-2);font-weight:300}
+  .accent-card{background:rgba(47,207,168,.06);border-color:var(--border-2)}
+
+  .chip{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:8px 16px;font-size:13.5px;color:var(--ink-2)}
+  .chip.live{border-color:var(--border-2);color:var(--ink)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 9px var(--teal);animation:pulse 2.4s ease-in-out infinite}
+  .dot.live{background:var(--green);box-shadow:0 0 9px var(--green)}
+  .dot.next{background:var(--amber);box-shadow:0 0 9px var(--amber)}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .cover-meta{display:flex;flex-wrap:wrap;gap:12px;margin:6px 0 30px}
+
+  .cover{align-items:flex-start;text-align:left}
+  .cover-atom{margin-bottom:6px}
+  .cover-atom.small{transform:scale(.66);transform-origin:left center;margin-bottom:-6px}
+  .hint{font-size:13.5px;color:var(--ink-3);display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+  .close{justify-content:center}
+
+  .atom{width:140px;height:140px;display:block}
+  .atom .nucleus{filter:drop-shadow(0 0 14px rgba(63,228,188,.75))}
+  .atom .orbit{fill:none;stroke:rgba(47,207,168,.28);stroke-width:1.2}
+  .atom .electron{fill:var(--teal-glow);filter:drop-shadow(0 0 5px rgba(63,228,188,.9))}
+  .pm-mascot .atom{width:34px;height:34px}
+
+  .mood-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:4px 0 22px}
+  .mood{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:16px 15px}
+  .mood-name{display:block;font-weight:600;color:var(--teal);font-size:14px;margin-bottom:7px}
+  .mood-desc{font-size:12.5px;line-height:1.45;color:var(--ink-3);font-weight:300}
+
+  .spark-demo{display:flex;align-items:center;gap:26px;background:rgba(47,207,168,.06);border:1px solid var(--border-2);border-radius:20px;padding:22px 26px}
+  .spark-ring{width:96px;height:96px;flex:0 0 auto}
+  .spark-copy .k{font-weight:600;margin-bottom:6px;color:var(--ink)}
+  .spark-copy p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.5;font-weight:300;max-width:52ch}
+
+  /* ---- WIDGET PLAYGROUND ---- */
+  .play-wrap{display:grid;grid-template-columns:400px 1fr;gap:44px;align-items:center;max-width:var(--maxw)}
+  .lz-widget{width:100%;max-width:400px;background:rgba(47,207,168,.06);border:1px solid var(--border-2);border-radius:24px;padding:20px;backdrop-filter:blur(18px);box-shadow:0 30px 70px rgba(0,0,0,.42)}
+  .lz-widget.wobble{animation:wob .5s}
+  @keyframes wob{0%,100%{transform:rotate(0)}20%{transform:rotate(-1.4deg)}45%{transform:rotate(1.4deg)}70%{transform:rotate(-.7deg)}}
+  .lz-head{display:flex;align-items:center;gap:11px;margin-bottom:14px}
+  .lz-mascot{display:inline-flex}.lz-mascot .atom{width:40px;height:40px}
+  .lz-id{flex:1;display:flex;flex-direction:column;line-height:1.25}
+  .lz-name{font-size:14px;font-weight:600;color:var(--ink)}
+  .lz-status{font-size:11px;color:var(--ink-3);display:flex;align-items:center;gap:6px}
+  .lz-sparks{display:flex;align-items:center;gap:7px}
+  .lz-halo{width:28px;height:28px;display:inline-flex}
+  .lz-spk{font-size:12.5px;color:var(--teal);font-weight:600;font-variant-numeric:tabular-nums}
+  .lz-greet{font-size:13.5px;color:var(--ink-2);line-height:1.5;background:var(--surface);border:1px solid var(--border);border-radius:14px;border-top-left-radius:4px;padding:11px 14px;margin-bottom:16px;font-weight:300}
+  .lz-body{min-height:158px}
+  .lz-toast{margin-top:12px;font-size:13px;color:#86efac;display:flex;align-items:center;gap:8px;opacity:0;transform:translateY(4px);transition:.3s;font-weight:400;min-height:18px}
+  .lz-toast.show{opacity:1;transform:none}
+  .lz-input{display:flex;align-items:center;justify-content:space-between;margin-top:14px;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:10px 16px;font-size:12.5px;color:var(--ink-3)}
+  .lz-send{color:var(--teal);font-size:15px}
+
+  .q-tag{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+  .q-text{font-size:15.5px;line-height:1.45;color:var(--ink);font-weight:300;margin-bottom:16px}
+  .q-text em{color:var(--ink);font-style:normal}
+  .q-row{display:flex;gap:10px}
+  .q-list{display:flex;flex-direction:column;gap:9px}
+  .opt{font-family:var(--font);font-size:14px;font-weight:500;color:var(--ink);background:var(--surface-2);border:1px solid var(--border);border-radius:13px;padding:12px 16px;cursor:pointer;transition:.16s;text-align:left}
+  .opt:hover:not(:disabled){border-color:var(--border-2);background:rgba(47,207,168,.09)}
+  .opt.swipe{flex:1;text-align:center;font-weight:600}
+  .opt.correct{background:rgba(34,197,94,.16);border-color:rgba(34,197,94,.5);color:#bbf7d0}
+  .opt.wrong{background:rgba(225,29,72,.14);border-color:rgba(225,29,72,.45)}
+  .opt.chosen{background:rgba(47,207,168,.16);border-color:var(--border-2);color:var(--ink)}
+  .opt:disabled{cursor:default}
+  .opt:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .opt.shake{animation:shake .38s}
+  @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+  .q-fb{margin-top:14px;font-size:13.5px;line-height:1.45;min-height:20px;font-weight:300}
+  .q-fb.ok{color:#86efac}.q-fb.retry{color:var(--amber)}.q-fb.neutral{color:var(--ink-2)}
+  .q-slider{margin:6px 0 4px}
+  .q-slider input{width:100%;accent-color:var(--teal);height:4px}
+  .q-slabels{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3);margin-top:6px}
+  .q-submit{margin-top:16px;font-family:var(--font);font-size:14px;font-weight:600;color:var(--navy-0);background:var(--teal);border:none;border-radius:100px;padding:11px 22px;cursor:pointer;box-shadow:0 4px 18px rgba(47,207,168,.28)}
+  .q-submit:disabled{opacity:.5;cursor:default;box-shadow:none}
+  .q-val{font-size:22px;font-weight:200;color:var(--teal);font-variant-numeric:tabular-nums;text-align:center;margin-bottom:2px}
+
+  .play-right .lz-picker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .lz-picker button{font-family:var(--font);font-size:12.5px;font-weight:500;color:var(--ink-2);background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:8px 15px;cursor:pointer;transition:.16s}
+  .lz-picker button:hover{border-color:var(--border-2)}
+  .lz-picker button.on{background:var(--teal);color:var(--navy-0);font-weight:600;border-color:transparent}
+  .lz-picker button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .play-note{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--ink-3);line-height:1.5;font-weight:300;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px 16px}
+  .play-note .ic.sm{margin-top:2px}
+
+  .flowline{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:22px;padding:16px 20px;background:var(--surface);border:1px solid var(--border);border-radius:16px}
+  .flowline span{font-size:13.5px;color:var(--ink-2);font-weight:300}
+  .flowline .accent{color:var(--teal);font-weight:500}
+  .flowline .arrow{width:18px;height:18px;color:var(--teal-deep);opacity:.7}
+
+  .callout{display:flex;align-items:flex-start;gap:14px;margin-top:22px;padding:18px 22px;background:var(--surface);border:1px solid var(--border);border-radius:16px}
+  .callout .ic{color:var(--teal);margin-top:2px}
+  .callout span{font-size:14.5px;line-height:1.55;color:var(--ink-2);font-weight:300}
+  .callout.privacy{background:rgba(47,207,168,.05);border-color:var(--border-2)}
+  .note-strip{margin-top:18px;font-size:13px;color:var(--ink-3);line-height:1.5;font-weight:300;display:flex;align-items:baseline;gap:8px}
+  .note-strip .ic.sm{color:var(--teal-deep)}
+  .muted{color:var(--ink-3)}
+
+  .divider{position:relative}
+  .big-index{position:absolute;top:clamp(18px,5vh,52px);right:clamp(24px,7vw,96px);font-size:clamp(90px,20vw,220px);font-weight:200;color:rgba(47,207,168,.09);line-height:.8;letter-spacing:-.04em;pointer-events:none}
+
+  /* ---- BROWSER FRAME + ADMIN APP (light) ---- */
+  .browser{width:100%;max-width:var(--maxw);background:#0d1b29;border:1px solid rgba(234,251,244,.12);border-radius:14px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .browser.slim{max-width:900px}
+  .br-bar{height:38px;background:#132436;display:flex;align-items:center;gap:8px;padding:0 14px;border-bottom:1px solid rgba(234,251,244,.08)}
+  .br-dot{width:11px;height:11px;border-radius:50%;flex:0 0 auto}
+  .br-url{margin-left:12px;background:rgba(234,251,244,.08);border-radius:8px;font-size:11.5px;color:var(--ink-3);padding:5px 14px;flex:1;max-width:340px;font-family:ui-monospace,Menlo,monospace}
+
+  .admin-app{background:#f8f9fb;color:#0b1f33;font-family:var(--font)}
+  .aa-nav{height:46px;background:#fff;border-bottom:1px solid #ebeef2;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
+  .aa-brand{display:flex;flex-direction:column;line-height:1}
+  .aa-word{font-size:11px;font-weight:600;letter-spacing:.26em;color:#0b1f33}
+  .aa-tag{font-size:8.5px;color:#074d44;margin-top:3px;letter-spacing:.02em}
+  .aa-nav-items{display:flex;gap:3px;align-items:center}
+  .aa-nav-item{font-size:11.5px;color:#5b6b7a;padding:6px 10px;border-radius:100px}
+  .aa-nav-item.active{background:#e7f4f1;color:#0b1f33;font-weight:600}
+  .aa-acct{width:26px;height:26px;border-radius:50%;background:#074d44;margin-left:8px;flex:0 0 auto}
+  .aa-strip{display:flex;align-items:center;justify-content:space-between;padding:12px 26px;background:#fff;border-bottom:1px solid #ebeef2}
+  .aa-crumb{font-size:12px;color:#8a97a3}
+  .aa-strip-right{display:flex;align-items:center;gap:18px}
+  .aa-live{display:flex;align-items:center;gap:7px;font-size:12.5px;color:#0b1f33;font-weight:500}
+  .aa-master{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#0b1f33;font-weight:500}
+
+  .aa-page{padding:20px 26px 26px;max-width:860px;margin:0 auto}
+  .aa-eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#0a7d6b}
+  .aa-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:6px 0 2px}
+  .aa-title{font-size:21px;font-weight:500;color:#0b1f33;letter-spacing:-.01em;margin:0}
+  .aa-sub{font-size:12.5px;color:#5b6b7a;margin:4px 0 0}
+  .aa-header-master{display:flex;align-items:center;gap:14px;flex:0 0 auto;padding-top:4px}
+  .aa-tabs{display:flex;gap:4px;border-bottom:1px solid #ebeef2;margin:16px 0 0}
+  .aa-tab{font-size:12.5px;color:#5b6b7a;padding:10px 13px;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+  .aa-tab.active{color:#0a7d6b;border-bottom-color:#0a7d6b;font-weight:600}
+  .aa-panel{padding:18px 0 4px}
+  .aa-section-h{font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#8a97a3;margin:2px 0 8px}
+  .aa-section-h.mt{margin-top:20px}
+  .aa-card{background:#fff;border:1px solid #ebeef2;border-radius:14px;padding:2px 18px}
+  .aa-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid #f0f2f5}
+  .aa-row:last-child{border-bottom:none}
+  .aa-row-title{font-size:13.5px;font-weight:500;color:#0b1f33}
+  .aa-row-sub{font-size:11.5px;color:#5b6b7a;margin-top:2px;line-height:1.4}
+  .aa-mood{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:100px;margin-left:8px;vertical-align:1px}
+  .m-sharpen{background:#e7f4f1;color:#0a7d6b}.m-play{background:#eef0ff;color:#5b63c4}.m-care{background:#fff0e6;color:#c47a3a}.m-reflect{background:#f0e9ff;color:#8455c4}
+  .aa-count{font-size:12px;color:#0a7d6b;font-weight:600}
+  .aa-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid #ebeef2}
+  .aa-preview-btn{font-size:12.5px;font-weight:600;color:#0a7d6b;background:#e7f4f1;border:1px solid #cfe8e2;border-radius:100px;padding:9px 18px}
+  .aa-save{font-size:12.5px;font-weight:600;color:#fff;background:#0a7d6b;border-radius:100px;padding:9px 20px}
+  .aa-stepper{display:inline-flex;align-items:center;gap:0;border:1px solid #dce2e8;border-radius:9px;overflow:hidden}
+  .aa-stepper span{padding:6px 9px;font-size:13px;color:#5b6b7a;background:#fff}
+  .aa-stepper .aa-num{font-weight:600;color:#0b1f33;border-left:1px solid #eef1f4;border-right:1px solid #eef1f4;min-width:34px;text-align:center}
+
+  .tog{width:38px;height:22px;border-radius:100px;background:#d5dde3;position:relative;flex:0 0 auto;transition:.2s}
+  .tog.on{background:#0a7d6b}
+  .tog::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+  .tog.on::after{left:18px}
+  .tog.sm{width:32px;height:19px}.tog.sm::after{width:15px;height:15px}.tog.sm.on::after{left:15px}
+
+  /* sources */
+  .aa-src{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #f0f2f5}
+  .aa-src:last-child{border-bottom:none}
+  .aa-src-body{flex:1}
+  .aa-src-pill{font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 9px;border-radius:100px;flex:0 0 auto}
+  .p-personal{background:#e6f7ec;color:#1a8f4a}.p-api{background:#e7f4f1;color:#0a7d6b}.p-docs{background:#eef1f4;color:#5b6b7a}
+  .aa-sync{font-size:11px;color:#1a8f4a;display:inline-flex;align-items:center;gap:5px;flex:0 0 auto}
+  .aa-sync .ic{width:13px;height:13px;color:currentColor}
+  .aa-addbtn{margin-top:14px;font-size:12px;font-weight:600;color:#0a7d6b;background:none;border:1px dashed #b8d8d1;border-radius:10px;padding:11px;width:100%;text-align:center}
+
+  /* branding */
+  .aa-brand-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:20px}
+  .aa-field{margin-bottom:13px}
+  .aa-label{font-size:11px;font-weight:600;color:#5b6b7a;margin-bottom:5px;display:block}
+  .aa-input{font-size:12.5px;color:#0b1f33;background:#fff;border:1px solid #dce2e8;border-radius:9px;padding:8px 11px;width:100%}
+  .aa-swatches{display:flex;gap:10px;flex-wrap:wrap}
+  .aa-sw{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10px;color:#5b6b7a}
+  .aa-sw-chip{width:36px;height:36px;border-radius:9px;border:1px solid #dce2e8}
+  .aa-select{font-size:12.5px;color:#0b1f33;background:#fff;border:1px solid #dce2e8;border-radius:9px;padding:8px 11px;width:100%}
+  .aa-bpreview{background:#091522;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px}
+  .aa-bpreview .bp-h{display:flex;align-items:center;gap:8px}
+  .aa-bpreview .bp-dot{width:26px;height:26px;border-radius:50%;background:linear-gradient(145deg,#2FCFA8,#1aaa85)}
+  .aa-bpreview .bp-name{font-size:12px;font-weight:600;color:#eafbf4}
+  .aa-bpreview .bp-sub{font-size:9.5px;color:rgba(234,251,244,.55)}
+  .aa-bpreview .bp-msg{font-size:11px;color:rgba(234,251,244,.72);background:rgba(234,251,244,.05);border-radius:10px;padding:9px 11px;line-height:1.4}
+  .aa-bpreview .bp-btn{align-self:flex-start;font-size:11px;font-weight:600;color:#091522;background:#2FCFA8;border-radius:100px;padding:6px 15px}
+  .aa-preview-label{font-size:10px;color:#8a97a3;text-align:center;margin-top:8px}
+
+  /* analytics */
+  .aa-toggle-days{display:inline-flex;border:1px solid #dce2e8;border-radius:9px;overflow:hidden;font-size:11.5px}
+  .aa-toggle-days span{padding:6px 13px;color:#5b6b7a;background:#fff}
+  .aa-toggle-days span.on{background:#0a7d6b;color:#fff;font-weight:600}
+  .aa-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+  .aa-stat{background:#fff;border:1px solid #ebeef2;border-radius:12px;padding:14px 16px}
+  .aa-stat-n{font-size:24px;font-weight:600;color:#0b1f33;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  .aa-stat-l{font-size:11px;color:#5b6b7a;margin-top:3px}
+  .aa-stat-d{font-size:10.5px;color:#1a8f4a;margin-top:4px;font-weight:600}
+  .aa-two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px}
+  .aa-block{background:#fff;border:1px solid #ebeef2;border-radius:14px;padding:16px 18px}
+  .aa-block-h{font-size:12px;font-weight:600;color:#0b1f33;margin-bottom:14px}
+  .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:11.5px;color:#5b6b7a}
+  .bar-label{flex:0 0 108px}
+  .bar-track{flex:1;height:8px;background:#eef1f4;border-radius:100px;overflow:hidden;display:block}
+  .bar-fill{display:block;height:8px;background:linear-gradient(90deg,#14A88B,#2FCFA8);border-radius:100px}
+  .bar-val{flex:0 0 auto;font-variant-numeric:tabular-nums;color:#0b1f33;font-weight:600;font-size:11px}
+  .disp{margin-bottom:16px}
+  .disp:last-child{margin-bottom:0}
+  .disp-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:7px}
+  .disp-name{font-size:12px;color:#0b1f33;font-weight:500}
+  .disp-val{font-size:17px;font-weight:600;color:#0a7d6b;font-variant-numeric:tabular-nums}
+  .disp-val small{font-size:10.5px;color:#1a8f4a;margin-left:6px;font-weight:600}
+  .disp-bar{height:7px;background:#eef1f4;border-radius:100px;position:relative}
+  .disp-base{position:absolute;top:-3px;bottom:-3px;width:2px;background:#b8c2cc}
+  .disp-mark{position:absolute;top:-2.5px;width:12px;height:12px;border-radius:50%;background:#0a7d6b;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transform:translateX(-50%)}
+  .disp-scale{display:flex;justify-content:space-between;font-size:9.5px;color:#8a97a3;margin-top:5px}
+  .aa-spotlight{margin-top:14px;background:#e7f4f1;border:1px solid #cfe8e2;border-radius:12px;padding:13px 16px;font-size:12px;color:#0b4b40;line-height:1.5}
+  .aa-spotlight strong{color:#0a7d6b}
+  .aa-privacy{font-size:10.5px;color:#8a97a3;margin-top:12px;display:flex;align-items:center;gap:6px}
+  .aa-privacy .ic{width:12px;height:12px;color:#8a97a3}
+
+  /* preview mock */
+  .preview-mock{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;margin:4px 0}
+  .pm-card{background:rgba(47,207,168,.07);border:1px solid var(--border-2);border-radius:18px;padding:20px}
+  .pm-head{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--teal);font-weight:600;letter-spacing:.03em;margin-bottom:16px}
+  .pm-mascot{display:inline-flex}
+  .pm-q{font-size:15.5px;line-height:1.5;color:var(--ink);font-weight:300;margin-bottom:18px}
+  .pm-actions{display:flex;gap:10px}
+  .pm-btn{font-size:13.5px;font-weight:600;padding:9px 22px;border-radius:100px;background:var(--teal);color:var(--navy-0)}
+  .pm-btn.ghost{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--border)}
+  .pm-why{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:20px}
+  .pm-why .k{font-weight:600;color:var(--ink);margin-bottom:12px}
+  .why-list{margin:0 0 12px;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+  .why-list li{font-size:13.5px;color:var(--ink-2);font-weight:300;line-height:1.4}
+  .why-list strong{color:var(--teal);font-weight:600;margin-right:6px}
+  .pm-why .muted{font-size:12.5px}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:4px 0}
+  .step{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:14px}
+  .step-n{width:38px;height:38px;border-radius:50%;background:rgba(47,207,168,.12);border:1px solid var(--border-2);color:var(--teal);font-weight:600;font-size:17px;display:flex;align-items:center;justify-content:center}
+  .step strong{font-size:15px;color:var(--ink);display:block;margin-bottom:6px}
+  .step p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.5;font-weight:300}
+
+  .contract{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:4px 0}
+  .cx{display:flex;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:18px 20px}
+  .cx-n{font-size:22px;font-weight:200;color:var(--teal);font-variant-numeric:tabular-nums;flex:0 0 auto}
+  .cx strong{font-size:14.5px;color:var(--ink);display:block;margin-bottom:5px}
+  .cx p{margin:0;font-size:13px;color:var(--ink-2);line-height:1.45;font-weight:300}
+
+  .tenant-strip{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+  .tenant{display:inline-flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:9px 17px;font-size:13.5px;color:var(--ink);font-weight:500}
+  .tenant .muted{font-weight:300;font-size:12px}
+  .t-dot{width:11px;height:11px;border-radius:50%}
+  .t-dot.lz{background:#2FCFA8;box-shadow:0 0 8px rgba(47,207,168,.6)}
+  .t-dot.mbc{background:#C8A265}.t-dot.ge{background:var(--ink-3)}
+
+  .status-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:4px 0}
+  .st-col{border-radius:18px;padding:22px 24px;border:1px solid var(--border);background:var(--surface)}
+  .live-col{background:rgba(34,197,94,.05);border-color:rgba(34,197,94,.25)}
+  .next-col{background:rgba(245,181,68,.05);border-color:rgba(245,181,68,.22)}
+  .st-head{display:flex;align-items:center;gap:9px;font-weight:600;font-size:14px;color:var(--ink);margin-bottom:14px}
+  .st-col ul{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+  .st-col li{font-size:13.5px;color:var(--ink-2);line-height:1.45;font-weight:300;padding-left:18px;position:relative}
+  .st-col li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--teal-deep)}
+  .live-col li::before{background:var(--green)}.next-col li::before{background:var(--amber)}
+  .phase-line{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+  .ph{flex:1;min-width:180px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 16px;font-size:13px;color:var(--ink-2);font-weight:300}
+  .ph strong{color:var(--teal);font-weight:600;margin-right:6px}
+
+  .chrome{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:18px;z-index:40}
+  .nav-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--ink);font-size:22px;cursor:pointer;backdrop-filter:blur(18px);transition:.2s;display:flex;align-items:center;justify-content:center}
+  .nav-btn:hover{background:var(--surface-2);border-color:var(--border-2)}
+  .nav-btn:disabled{opacity:.3;cursor:default}
+  .nav-btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .dots{display:flex;gap:7px;align-items:center}
+  .dots button{width:8px;height:8px;border-radius:50%;border:none;background:var(--ink-3);opacity:.5;padding:0;cursor:pointer;transition:.25s}
+  .dots button:hover{opacity:.9}
+  .dots button.on{background:var(--teal);opacity:1;width:22px;border-radius:4px;box-shadow:0 0 8px rgba(47,207,168,.5)}
+  .dots button:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+  .counter{position:fixed;bottom:30px;right:28px;font-size:12.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;z-index:40;letter-spacing:.04em}
+  .progress{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(234,251,244,.06);z-index:40}
+  .progress-bar{height:100%;background:linear-gradient(90deg,var(--teal-deep),var(--teal-glow));width:0;transition:width .5s cubic-bezier(.7,0,.2,1);box-shadow:0 0 10px rgba(47,207,168,.6)}
+
+  @media (max-width:900px){
+    .grid.two,.grid.three,.mood-row,.steps,.contract,.status-grid,.preview-mock,.aa-two,.aa-brand-grid{grid-template-columns:1fr}
+    .mood-row{grid-template-columns:1fr 1fr}
+    .aa-stats{grid-template-columns:1fr 1fr}
+    .play-wrap{grid-template-columns:1fr;gap:28px}
+    .spark-demo{flex-direction:column;text-align:center}
+    .slide{padding:60px 22px 96px}
+    .aa-nav-items .aa-nav-item:not(.active){display:none}
+  }
+  @media (prefers-reduced-motion:reduce){.deck{transition:none}.dot,.progress-bar{animation:none;transition:none}}
+</style>
+
+<script>
+(function(){
+  /* ---------- atom mascot ---------- */
+  var ATOM = '<svg class="atom" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-label="Little Zav mascot">'
+    + '<defs><radialGradient id="nuc" cx="42%" cy="38%" r="65%"><stop offset="0%" stop-color="#f2fffb"/><stop offset="35%" stop-color="#6ee9db"/><stop offset="75%" stop-color="#04d9c1"/><stop offset="100%" stop-color="#04d9c1"/></radialGradient></defs>';
+  var ang=[0,60,120], durs=['3s','2.4s','3.4s'], pd='M 22,80 a 58,22 0 1,0 116,0 a 58,22 0 1,0 -116,0';
+  for(var i=0;i<3;i++){
+    ATOM += '<g transform="rotate('+ang[i]+' 80 80)"><path class="orbit" d="'+pd+'"/><circle class="electron" r="4"><animateMotion dur="'+durs[i]+'" repeatCount="indefinite" '+(i===1?'keyPoints="1;0" keyTimes="0;1" calcMode="linear" ':'')+'path="'+pd+'"/></circle></g>';
+  }
+  ATOM += '<circle class="nucleus" cx="80" cy="80" r="14" fill="url(#nuc)"/></svg>';
+  document.querySelectorAll('.cover-atom, .pm-mascot, #lzMascot').forEach(function(el){ el.innerHTML = ATOM; });
+
+  /* ---------- halo / spark ring drawer ---------- */
+  function halo(el,size,lit,n){
+    n=n||12; var c=size/2, r=size*0.40;
+    var s='<svg viewBox="0 0 '+size+' '+size+'" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="h'+size+'" cx="42%" cy="38%" r="65%"><stop offset="0%" stop-color="#f2fffb"/><stop offset="60%" stop-color="#04d9c1"/></radialGradient></defs>';
+    s+='<circle cx="'+c+'" cy="'+c+'" r="'+(size*0.13)+'" fill="url(#h'+size+')" style="filter:drop-shadow(0 0 '+(size*0.09)+'px rgba(63,228,188,.7))"/>';
+    for(var i=0;i<n;i++){
+      var a=(i/n)*2*Math.PI-Math.PI/2, x=c+r*Math.cos(a), y=c+r*Math.sin(a);
+      if(i<lit) s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+(size*0.045)+'" fill="#3FE4BC" style="filter:drop-shadow(0 0 '+(size*0.05)+'px rgba(63,228,188,.9))"/>';
+      else s+='<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+(size*0.037)+'" fill="none" stroke="rgba(234,251,244,.22)" stroke-width="1.2"/>';
+    }
+    return s+'</svg>';
+  }
+  var sr=document.getElementById('sparkRing'); if(sr) sr.innerHTML=halo(sr,96,7);
+
+  /* ---------- LIVE WIDGET ---------- */
+  var LZ={sparks:6,max:12,cur:'myth'};
+  var bodyEl=document.getElementById('lzBody'), greetEl=document.getElementById('lzGreet'),
+      spkEl=document.getElementById('lzSpk'), haloEl=document.getElementById('lzHalo'),
+      widgetEl=document.getElementById('lzWidget'), toastEl=document.getElementById('lzToast'),
+      toastMsg=document.getElementById('lzToastMsg');
+
+  function syncSparks(){ spkEl.textContent=LZ.sparks+'/'+LZ.max; haloEl.innerHTML=halo(haloEl,28,LZ.sparks); }
+  function wobble(){ widgetEl.classList.add('wobble'); setTimeout(function(){widgetEl.classList.remove('wobble');},520); }
+  function award(msg){ if(LZ.sparks<LZ.max)LZ.sparks++; syncSparks(); toastMsg.textContent=msg||'Spark earned — nice one.'; toastEl.classList.add('show'); }
+  function clearToast(){ toastEl.classList.remove('show'); }
+
+  var INT={
+    myth:{
+      greet:'Hey Juliette — quick gut-check from your pricing lesson.',
+      render:function(){
+        bodyEl.innerHTML='<div class="q-tag">Myth or fact · swipe</div>'
+          +'<div class="q-text">"Value-based pricing means charging <em>whatever you like</em>."</div>'
+          +'<div class="q-row"><button class="opt swipe" data-c="myth">Myth</button><button class="opt swipe" data-c="fact">Fact</button></div>'
+          +'<div class="q-fb" id="qfb"></div>';
+        var fb=bodyEl.querySelector('#qfb'), opts=bodyEl.querySelectorAll('.opt');
+        opts.forEach(function(b){ b.addEventListener('click',function(){
+          if(b.dataset.c==='myth'){ opts.forEach(function(o){o.disabled=true;}); b.classList.add('correct');
+            fb.className='q-fb ok'; fb.textContent='Right — it’s a myth. You price to the value the customer gets, not a number you fancy.'; award('Myth busted — spark earned.'); }
+          else{ b.classList.add('shake'); setTimeout(function(){b.classList.remove('shake');},400); wobble();
+            fb.className='q-fb retry'; fb.textContent='Not quite — give it another flick.'; }
+        }); });
+      }
+    },
+    quiz:{
+      greet:'One from what you covered on pricing — no pressure.',
+      render:function(){
+        var opts=['The outcome the customer gets','Your costs plus a margin','Whatever the cheapest rival charges','A nice round number'];
+        var html='<div class="q-tag">Quick quiz · tap</div><div class="q-text">What should anchor a value-based price?</div><div class="q-list">';
+        opts.forEach(function(o,i){ html+='<button class="opt" data-i="'+i+'">'+o+'</button>'; });
+        html+='</div><div class="q-fb" id="qfb"></div>';
+        bodyEl.innerHTML=html;
+        var fb=bodyEl.querySelector('#qfb'), btns=bodyEl.querySelectorAll('.opt');
+        btns.forEach(function(b){ b.addEventListener('click',function(){
+          if(b.dataset.i==='0'){ btns.forEach(function(o){o.disabled=true;}); b.classList.add('correct');
+            fb.className='q-fb ok'; fb.textContent='Exactly — value-based pricing starts from the customer’s outcome.'; award('Nailed it — spark earned.'); }
+          else{ b.classList.add('wrong','shake'); b.disabled=true; setTimeout(function(){b.classList.remove('shake');},400); wobble();
+            fb.className='q-fb retry'; fb.textContent='Close — that’s cost or competitor thinking. Try again.'; }
+        }); });
+      }
+    },
+    rather:{
+      greet:'Just for fun — there’s no wrong answer here.',
+      render:function(){
+        bodyEl.innerHTML='<div class="q-tag">Would you rather · play</div>'
+          +'<div class="q-text">Would you rather pitch the value story to the <em>whole board</em> — or write the one-page strategy memo?</div>'
+          +'<div class="q-list"><button class="opt" data-c="board">Pitch to the board</button><button class="opt" data-c="memo">Write the memo</button></div>'
+          +'<div class="q-fb" id="qfb"></div>';
+        var fb=bodyEl.querySelector('#qfb'), btns=bodyEl.querySelectorAll('.opt');
+        btns.forEach(function(b){ b.addEventListener('click',function(){
+          btns.forEach(function(o){o.disabled=true; o.classList.remove('chosen');}); b.classList.add('chosen');
+          fb.className='q-fb neutral';
+          fb.textContent = b.dataset.c==='board' ? 'Bold — a room full of eyes and you’re selling the vision. Love it.' : 'Smart — get it sharp on one page and it sells itself. Nice.';
+          award('Thanks for playing — spark earned.');
+        }); });
+      }
+    },
+    confidence:{
+      greet:'A tiny check-in — how are you feeling this week?',
+      render:function(){
+        bodyEl.innerHTML='<div class="q-tag">Confidence check · reflect</div>'
+          +'<div class="q-text">How confident do you feel pitching on value this week?</div>'
+          +'<div class="q-val" id="qval">3</div>'
+          +'<div class="q-slider"><input type="range" min="1" max="5" value="3" id="qrange" aria-label="Confidence 1 to 5"><div class="q-slabels"><span>Not yet</span><span>Getting there</span><span>Very</span></div></div>'
+          +'<button class="q-submit" id="qsub">Log it</button><div class="q-fb" id="qfb"></div>';
+        var range=bodyEl.querySelector('#qrange'), val=bodyEl.querySelector('#qval'),
+            sub=bodyEl.querySelector('#qsub'), fb=bodyEl.querySelector('#qfb');
+        range.addEventListener('input',function(){ val.textContent=range.value; });
+        sub.addEventListener('click',function(){ sub.disabled=true; range.disabled=true;
+          fb.className='q-fb ok'; fb.textContent='Logged — no wrong answer. This quietly personalises what I bring you next, and feeds the org’s anonymised mindset read.'; award('Thanks for reflecting — spark earned.'); });
+      }
+    }
+  };
+
+  function select(key){
+    LZ.cur=key; clearToast();
+    document.querySelectorAll('#lzPicker button').forEach(function(b){ b.classList.toggle('on',b.dataset.k===key); });
+    greetEl.textContent=INT[key].greet;
+    INT[key].render();
+  }
+  document.querySelectorAll('#lzPicker button').forEach(function(b){ b.addEventListener('click',function(){ select(b.dataset.k); }); });
+  syncSparks(); select('myth');
+
+  /* ---------- ADMIN PANELS ---------- */
+  var NAV='<div class="aa-nav"><div class="aa-brand"><span class="aa-word">ZAVMO</span><span class="aa-tag">Learning intelligence</span></div>'
+    +'<div class="aa-nav-items"><span class="aa-nav-item">Dashboard</span><span class="aa-nav-item">Mind Palace</span><span class="aa-nav-item">Content</span><span class="aa-nav-item active">Little Zav</span><span class="aa-nav-item">Users</span><span class="aa-nav-item">Reports</span><span class="aa-nav-item">Settings</span><span class="aa-acct"></span></div></div>';
+  function tabs(active){
+    var t=['Setup','Interactions','Sources','Branding','Analytics'];
+    return '<div class="aa-tabs">'+t.map(function(x){return '<span class="aa-tab'+(x.toLowerCase()===active?' active':'')+'">'+x+'</span>';}).join('')+'</div>';
+  }
+  function head(title,sub){
+    return '<div class="aa-eyebrow">Content › Little Zav</div><div class="aa-head"><div><h1 class="aa-title">'+title+'</h1><p class="aa-sub">'+sub+'</p></div>'
+      +'<div class="aa-header-master"><span class="aa-live" style="font-size:12px"><span class="dot live"></span>Live · 318 learners</span><span class="aa-master">On<span class="tog on"></span></span></div></div>';
+  }
+  function foot(){ return '<div class="aa-foot"><button class="aa-preview-btn">Preview on a learner</button><button class="aa-save">Save changes</button></div>'; }
+  function row(title,sub,on){ return '<div class="aa-row"><div><div class="aa-row-title">'+title+'</div>'+(sub?'<div class="aa-row-sub">'+sub+'</div>':'')+'</div><span class="tog'+(on?' on':'')+'"></span></div>'; }
+
+  var PANELS={
+    setup:function(){
+      return head('Setup','How Little Zav behaves for your learners.')+tabs('setup')+'<div class="aa-panel">'
+        +'<div class="aa-section-h">Behaviour</div><div class="aa-card">'
+        + row('Free chat','Let learners talk to Little Zav in its own remit.',true)
+        + row('Notifications','Home-bell dot and gentle nudges.',true)
+        +'</div>'
+        +'<div class="aa-section-h mt">Cadence</div><div class="aa-card">'
+        +'<div class="aa-row"><div><div class="aa-row-title">Max interactions per day</div><div class="aa-row-sub">Keeps it a treat, never a chore.</div></div><span class="aa-stepper"><span>−</span><span class="aa-num">3</span><span>+</span></span></div>'
+        + row('Respect each learner’s best time','Deliver around when they usually learn.',true)
+        + row('Spaced-retrieval scheduling','Time prompts to the forgetting curve.',true)
+        +'</div>'+foot()+'</div>';
+    },
+    interactions:function(){
+      var items=[
+        ['Quick quiz','sharpen',1],['Two-truths & a lie','sharpen',1],['Odd-one-out','sharpen',1],['Matching pairs','sharpen',1],
+        ['Myth-or-fact (swipe)','sharpen',1],['Sort-into-buckets (swipe)','sharpen',1],['Guess-the-number (slide)','sharpen',0],
+        ['Would-you-rather','play',1],['Hot-take','play',1],
+        ['Tip of the day','care',1],['Reminder','care',1],['Badge celebration','care',1],['Check-in','care',0],
+        ['Mindset agree/disagree','reflect',1],['Confidence rating','reflect',1]
+      ];
+      var on=items.filter(function(i){return i[2];}).length;
+      var rows=items.map(function(it){
+        return '<div class="aa-row"><div class="aa-row-title">'+it[0]+'<span class="aa-mood m-'+it[1]+'">'+it[1]+'</span></div><span class="tog'+(it[2]?' on':'')+'"></span></div>';
+      }).join('');
+      return head('Interactions','The one place that decides what Little Zav serves.')+tabs('interactions')+'<div class="aa-panel">'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="aa-section-h" style="margin:0">Catalogue · Sharpen / Play / Care / Reflect</div><span class="aa-count">'+on+' of 15 on</span></div>'
+        +'<div class="aa-card">'+rows+'</div>'
+        +'<p class="aa-sub" style="margin-top:12px">Reminders, tips and celebrations live here as <em>Care</em> types — not separate switches. New interaction types appear automatically.</p>'
+        +foot()+'</div>';
+    },
+    sources:function(){
+      function src(pill,pillCls,title,sub,sync,on){
+        return '<div class="aa-src"><span class="aa-src-pill '+pillCls+'">'+pill+'</span><div class="aa-src-body"><div class="aa-row-title">'+title+'</div><div class="aa-row-sub">'+sub+'</div></div>'
+          +(sync?'<span class="aa-sync"><svg class="ic"><use href="#i-refresh"/></svg>'+sync+'</span>':'')
+          +'<span class="tog sm'+(on?' on':'')+'"></span></div>';
+      }
+      return head('Sources','What Little Zav knows.')+tabs('sources')+'<div class="aa-panel"><div class="aa-card">'
+        + src('Always on','p-personal','Each learner’s own learning','Their history and signals — the personal layer. Locked on.','',1)
+        + src('Library · API','p-api','Growth Engineering LMS','First-class connector — pull → chunk → embed on a schedule. 214 modules.','Synced 2m ago',1)
+        + src('Library · API','p-api','LinkedIn Learning','Generic content-library connector via API key.','Synced 1h ago',1)
+        + src('Documents','p-docs','Brand & product docs','Drag-and-drop — 3 files. Offline content auto-removes.','3 items',1)
+        + src('Feed','p-docs','Google Drive folder','OAuth connector — not yet connected.','',0)
+        +'</div><button class="aa-addbtn">+ Add a source</button>'
+        +'<p class="aa-sub" style="margin-top:12px">API keys are stored server-side, never in the browser. Each item has its own “Visible to Little Zav” toggle.</p>'
+        +foot()+'</div>';
+    },
+    branding:function(){
+      return head('Branding','White-label the widget so it looks like the client’s product.')+tabs('branding')+'<div class="aa-panel"><div class="aa-brand-grid">'
+        +'<div><div class="aa-section-h">Identity</div>'
+        +'<div class="aa-field"><span class="aa-label">Display name</span><input class="aa-input" value="Little Zav" readonly></div>'
+        +'<div class="aa-field"><span class="aa-label">Subtitle</span><input class="aa-input" value="Your learning companion" readonly></div>'
+        +'<div class="aa-field"><span class="aa-label">Welcome message</span><input class="aa-input" value="Here’s a little something for you, {name}." readonly></div>'
+        +'<div class="aa-field"><span class="aa-label">Font family (Google Fonts)</span><select class="aa-select"><option>DM Sans</option><option>Inter</option><option>Poppins</option></select></div>'
+        +'<div class="aa-section-h mt">Colours</div><div class="aa-swatches">'
+        +'<div class="aa-sw"><span class="aa-sw-chip" style="background:#2FCFA8"></span>Accent</div>'
+        +'<div class="aa-sw"><span class="aa-sw-chip" style="background:#091522"></span>Background</div>'
+        +'<div class="aa-sw"><span class="aa-sw-chip" style="background:#EAFBF4"></span>Text</div>'
+        +'<div class="aa-sw"><span class="aa-sw-chip" style="background:linear-gradient(135deg,#0e2233,#132c3f)"></span>Surface</div>'
+        +'</div></div>'
+        +'<div><div class="aa-section-h">Live preview</div><div class="aa-bpreview"><div class="bp-h"><span class="bp-dot"></span><div><div class="bp-name">Little Zav</div><div class="bp-sub">Your learning companion</div></div></div>'
+        +'<div class="bp-msg">Here’s a little something for you, Juliette.</div><div class="bp-btn">Play today’s spark</div></div>'
+        +'<div class="aa-preview-label">Reads live from the public branding endpoint — themed before login.</div></div>'
+        +'</div>'+foot()+'</div>';
+    },
+    analytics:function(){
+      function bar(label,pct,val){ return '<div class="bar-row"><span class="bar-label">'+label+'</span><span class="bar-track"><span class="bar-fill" style="width:'+pct+'%"></span></span><span class="bar-val">'+val+'</span></div>'; }
+      function disp(name,val,delta,pos,base){
+        return '<div class="disp"><div class="disp-top"><span class="disp-name">'+name+'</span><span class="disp-val">'+val+'<small>'+delta+'</small></span></div>'
+          +'<div class="disp-bar"><span class="disp-base" style="left:'+base+'%"></span><span class="disp-mark" style="left:'+pos+'%"></span></div>'
+          +'<div class="disp-scale"><span>Fixed</span><span>Growth</span></div></div>';
+      }
+      // sentiment sparkline
+      var pts=[38,42,40,47,52,49,58,63], w=250,h=54, step=w/(pts.length-1);
+      var d=pts.map(function(p,i){return (i?'L':'M')+(i*step).toFixed(0)+' '+(h-(p/70*h)).toFixed(0);}).join(' ');
+      var area=d+' L'+w+' '+h+' L0 '+h+' Z';
+      var spark='<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none" style="width:100%;height:54px"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(47,207,168,.22)"/><stop offset="1" stop-color="rgba(47,207,168,0)"/></linearGradient></defs>'
+        +'<path d="'+area+'" fill="url(#sg)"/><path d="'+d+'" fill="none" stroke="#0a7d6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+        +'<circle cx="'+w+'" cy="'+(h-(pts[pts.length-1]/70*h)).toFixed(0)+'" r="3.5" fill="#0a7d6b"/></svg>';
+
+      return head('Analytics','Engagement and insight — aggregate and org-scoped.')+tabs('analytics')+'<div class="aa-panel">'
+        +'<div style="display:flex;justify-content:flex-end;margin-bottom:12px"><span class="aa-toggle-days"><span>7 days</span><span class="on">30 days</span></span></div>'
+        +'<div class="aa-stats">'
+        +'<div class="aa-stat"><div class="aa-stat-n">1,284</div><div class="aa-stat-l">Interactions served</div><div class="aa-stat-d">+18%</div></div>'
+        +'<div class="aa-stat"><div class="aa-stat-n">742</div><div class="aa-stat-l">Sparks lit</div><div class="aa-stat-d">+12%</div></div>'
+        +'<div class="aa-stat"><div class="aa-stat-n">318</div><div class="aa-stat-l">Learners engaged</div><div class="aa-stat-d">+9%</div></div>'
+        +'<div class="aa-stat"><div class="aa-stat-n">196</div><div class="aa-stat-l">Reflections given</div><div class="aa-stat-d">+24%</div></div>'
+        +'</div>'
+        +'<div class="aa-two">'
+        +'<div class="aa-block"><div class="aa-block-h">Most played</div>'
+        + bar('Myth-or-fact',92,'268')+ bar('Quick quiz',74,'214')+ bar('Would-you-rather',58,'168')+ bar('Confidence check',41,'119')+ bar('Tip of the day',30,'87')
+        +'</div>'
+        +'<div class="aa-block"><div class="aa-block-h">Dispositions <span style="font-weight:400;color:#8a97a3;font-size:10.5px">(from Reflect)</span></div>'
+        + disp('Growth mindset index','68%','+6 vs baseline',68,58)
+        + disp('Conversational confidence','3.9 / 5','+0.3',74,66)
+        + disp('Innovation appetite','54%','+4',54,46)
+        +'</div></div>'
+        +'<div class="aa-two" style="margin-top:14px">'
+        +'<div class="aa-block"><div class="aa-block-h">Sentiment trend</div>'+spark+'<div class="disp-scale" style="margin-top:6px"><span>4 wks ago</span><span>this week</span></div></div>'
+        +'<div class="aa-block"><div class="aa-block-h">Insight spotlight</div><div class="aa-spotlight"><strong>Compliance-pathway learners</strong> report lower confidence this week — worth a nudge of encouragement in that cohort.</div></div>'
+        +'</div>'
+        +'<div class="aa-privacy"><svg class="ic"><use href="#i-shield"/></svg>Every figure is aggregate-only and org-scoped — no individual’s answers are exposed.</div>'
+        + foot()+'</div>';
+    }
+  };
+  document.querySelectorAll('.admin-app[data-tab]').forEach(function(app){
+    var t=app.getAttribute('data-tab');
+    app.innerHTML = NAV + '<div class="aa-page">' + PANELS[t]() + '</div>';
+  });
+
+  /* ---------- reduced motion ---------- */
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    document.querySelectorAll('svg').forEach(function(s){ if(s.pauseAnimations) s.pauseAnimations(); });
+  }
+
+  /* ---------- deck nav ---------- */
+  var deck=document.getElementById('deck'), slides=[].slice.call(deck.querySelectorAll('.slide')), total=slides.length, idx=0;
+  document.getElementById('total').textContent=total;
+  var dotsWrap=document.getElementById('dots');
+  slides.forEach(function(_,i){ var b=document.createElement('button'); b.setAttribute('aria-label','Go to slide '+(i+1)); b.addEventListener('click',function(){go(i);}); dotsWrap.appendChild(b); });
+  var dots=[].slice.call(dotsWrap.children);
+  var prevBtn=document.getElementById('prevBtn'), nextBtn=document.getElementById('nextBtn'), curEl=document.getElementById('cur'), bar=document.getElementById('progressBar');
+  function go(n){ idx=Math.max(0,Math.min(total-1,n)); deck.style.transform='translateX(-'+(idx*100)+'vw)';
+    dots.forEach(function(d,i){d.classList.toggle('on',i===idx);}); curEl.textContent=idx+1; bar.style.width=((idx+1)/total*100)+'%';
+    prevBtn.disabled=idx===0; nextBtn.disabled=idx===total-1; slides[idx].scrollTop=0; }
+  prevBtn.addEventListener('click',function(){go(idx-1);}); nextBtn.addEventListener('click',function(){go(idx+1);});
+  document.addEventListener('keydown',function(e){
+    var tag=(e.target.tagName||'').toLowerCase(); if(tag==='input'||tag==='select'||tag==='textarea') return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'){e.preventDefault();go(idx+1);}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();go(idx-1);}
+    else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(total-1);}
+  });
+  var tx=0,ty=0;
+  deck.addEventListener('touchstart',function(e){tx=e.changedTouches[0].clientX;ty=e.changedTouches[0].clientY;},{passive:true});
+  deck.addEventListener('touchend',function(e){ var dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+    if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)){ go(idx+(dx<0?1:-1)); } },{passive:true});
+  go(0);
+})();
+</script>
+</body>
+</html>
