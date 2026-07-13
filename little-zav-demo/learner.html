@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The learner's view of Little Zav — the actual widget, live and playable.">
+<title>Little Zav — Learner view</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
+    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
+    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
+    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--navy-0)}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;
+    background:
+      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
+    background-repeat:no-repeat;background-size:100% 100%;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  em{font-style:normal;color:var(--teal-glow)}
+  .wrap{max-width:1140px;margin:0 auto;padding:clamp(24px,5vh,48px) clamp(22px,5vw,48px) 72px}
+
+  /* top bar */
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:clamp(30px,6vh,52px)}
+  .brand{display:flex;align-items:center;gap:13px}
+  .logomark{width:40px;height:40px;flex:0 0 auto}
+  .brand-txt{display:flex;flex-direction:column;line-height:1}
+  .word{font-size:13px;font-weight:600;letter-spacing:.26em}
+  .tag{font-size:10.5px;color:var(--teal);margin-top:5px;letter-spacing:.04em}
+  .back{font-size:13px;color:var(--ink-2);display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border:1px solid var(--border);border-radius:100px;transition:.18s}
+  .back:hover{border-color:var(--border-2);color:var(--ink);background:var(--surface)}
+  .back svg{width:14px;height:14px}
+
+  /* layout */
+  .stage{display:grid;grid-template-columns:minmax(0,1fr) 460px;gap:clamp(30px,5vw,64px);align-items:center}
+
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:15px}
+  h1{font-weight:200;letter-spacing:-.01em;line-height:1.06;font-size:clamp(30px,4.6vw,50px);margin:0 0 18px;text-wrap:balance}
+  .lede{font-size:clamp(15px,1.6vw,18px);line-height:1.6;color:var(--ink-2);max-width:48ch;margin:0 0 26px;font-weight:300}
+  .points{list-style:none;padding:0;margin:0 0 30px;display:flex;flex-direction:column;gap:12px}
+  .points li{display:flex;gap:11px;align-items:flex-start;font-size:14px;line-height:1.5;color:var(--ink-2);font-weight:300}
+  .points svg{width:17px;height:17px;flex:0 0 auto;margin-top:1px;color:var(--teal)}
+  .points b{color:var(--ink);font-weight:500}
+
+  .controls{display:flex;flex-wrap:wrap;align-items:center;gap:13px}
+  .try-btn{cursor:pointer;display:inline-flex;align-items:center;gap:9px;background:var(--teal);color:var(--navy-0);border:none;border-radius:100px;padding:13px 22px;font-family:inherit;font-size:14px;font-weight:600;box-shadow:0 8px 26px rgba(47,207,168,.28);transition:.18s}
+  .try-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(47,207,168,.36)}
+  .try-btn svg{width:16px;height:16px}
+  .now-playing{font-size:12.5px;color:var(--ink-3);font-weight:300}
+  .now-playing b{color:var(--ink-2);font-weight:500}
+
+  /* widget frame column */
+  .device{position:relative;justify-self:center;width:100%;max-width:460px}
+  .device-halo{position:absolute;inset:-14% -8% -10%;background:radial-gradient(60% 55% at 50% 34%,rgba(47,207,168,.20),transparent 70%);filter:blur(14px);z-index:0;pointer-events:none}
+  .lz-frame{position:relative;z-index:1;display:block;width:100%;height:600px;border:1px solid var(--border);border-radius:26px;background:var(--navy-0);box-shadow:0 30px 70px rgba(0,0,0,.5);}
+  .caption{position:relative;z-index:1;text-align:center;font-size:12px;color:var(--ink-3);margin-top:16px;font-weight:300}
+  .caption b{color:var(--teal);font-weight:500}
+
+  @media (max-width:900px){
+    .stage{grid-template-columns:1fr;gap:40px}
+    .device{order:-1;max-width:420px;margin:0 auto}
+    .lz-frame{height:560px}
+    h1{font-size:clamp(28px,7vw,40px)}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a class="brand" href="./index.html" aria-label="Little Zav demo home">
+      <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
+          <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
+          <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
+        <g id="halo"></g>
+        <circle cx="50" cy="50" r="14" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
+      </svg>
+      <span class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Little Zav · learner view</span></span>
+    </a>
+    <a class="back" href="./index.html">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Demo home
+    </a>
+  </div>
+
+  <div class="stage">
+    <div class="copy">
+      <div class="eyebrow">What the learner sees</div>
+      <h1>Little Zav <em>speaks first.</em></h1>
+      <p class="lede">This is the actual widget — the same code that greets a learner on their home screen. It brings a bite-sized thing to do, and lights a spark when they do it. Have a go on the right.</p>
+      <ul class="points">
+        <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>No searching, no blank page.</b> It arrives with something ready — different every login.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Fifteen ways to play.</b> Quizzes, myth-or-fact, scenarios, would-you-rather, reflections, tips.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Twelve sparks complete the Zav.</b> A tiny, honest reward loop that pulls learners back tomorrow.</span></li>
+      </ul>
+      <div class="controls">
+        <button class="try-btn" id="tryBtn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M21 2v6h-6M3 12a9 9 0 0115.5-6.4L21 8M3 22v-6h6M21 12a9 9 0 01-15.5 6.4L3 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Try another
+        </button>
+        <span class="now-playing">Showing: <b id="nowPlaying">Quick quiz</b></span>
+      </div>
+    </div>
+
+    <div class="device">
+      <div class="device-halo"></div>
+      <iframe class="lz-frame" id="lzFrame" title="Little Zav widget"
+              src="widget.html?token=demo&item=quiz&lit=5"
+              sandbox="allow-scripts allow-same-origin"></iframe>
+      <p class="caption">The real widget · running on <b>sample data</b> for this demo</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Draw the 12-dot spark halo on the header logomark (matches the proposals hub).
+  var halo=document.getElementById('halo'), n=12, c=50, r=39;
+  for(var i=0;i<n;i++){
+    var a=(i/n)*2*Math.PI-Math.PI/2, x=(c+r*Math.cos(a)).toFixed(1), y=(c+r*Math.sin(a)).toFixed(1);
+    halo.insertAdjacentHTML('beforeend', i%3===0
+      ? '<circle cx="'+x+'" cy="'+y+'" r="2.4" fill="#3FE4BC"/>'
+      : '<circle cx="'+x+'" cy="'+y+'" r="1.7" fill="none" stroke="rgba(234,251,244,.30)" stroke-width="1"/>');
+  }
+
+  // Cycle through the authored interaction types. Each swap advances the spark
+  // count a little so it reads as steady progress toward the full Zav.
+  var SEQ=[
+    {item:'quiz',            label:'Quick quiz'},
+    {item:'scenario_timed',  label:'Timed scenario'},
+    {item:'swipe_myth',      label:'Myth or fact'},
+    {item:'would_you_rather',label:'Would you rather'},
+    {item:'reflect_agree',   label:'Reflection'},
+    {item:'tip',             label:'Tip of the day'}
+  ];
+  var frame=document.getElementById('lzFrame'),
+      now=document.getElementById('nowPlaying'),
+      btn=document.getElementById('tryBtn'),
+      i=0, lit=5;
+  btn.addEventListener('click',function(){
+    i=(i+1)%SEQ.length;
+    lit=lit>=11?4:lit+1;
+    var s=SEQ[i];
+    frame.src='widget.html?token=demo&item='+s.item+'&lit='+lit;
+    now.textContent=s.label;
+  });
+})();
+</script>
+</body>
+</html>
