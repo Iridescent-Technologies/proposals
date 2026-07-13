@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The admin's view of Little Zav — switch it on, point it at your content, white-label it, and watch engagement.">
+<title>Little Zav — Admin view</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
+    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
+    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
+    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--navy-0)}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;
+    background:
+      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
+    background-repeat:no-repeat;background-size:100% 100%;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  em{font-style:normal;color:var(--teal-glow)}
+  .wrap{max-width:1040px;margin:0 auto;padding:clamp(24px,5vh,48px) clamp(22px,5vw,48px) 72px}
+
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:clamp(26px,5vh,42px)}
+  .brand{display:flex;align-items:center;gap:13px}
+  .logomark{width:40px;height:40px;flex:0 0 auto}
+  .brand-txt{display:flex;flex-direction:column;line-height:1}
+  .word{font-size:13px;font-weight:600;letter-spacing:.26em}
+  .tag{font-size:10.5px;color:var(--teal);margin-top:5px;letter-spacing:.04em}
+  .back{font-size:13px;color:var(--ink-2);display:inline-flex;align-items:center;gap:7px;padding:9px 15px;border:1px solid var(--border);border-radius:100px;transition:.18s}
+  .back:hover{border-color:var(--border-2);color:var(--ink);background:var(--surface)}
+  .back svg{width:14px;height:14px}
+
+  .intro{margin-bottom:26px;max-width:60ch}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:13px}
+  h1{font-weight:200;letter-spacing:-.01em;line-height:1.08;font-size:clamp(28px,4vw,44px);margin:0 0 14px;text-wrap:balance}
+  .lede{font-size:clamp(14.5px,1.5vw,17px);line-height:1.6;color:var(--ink-2);margin:0;font-weight:300}
+
+  .app-window{border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5);background:#f8f9fb}
+  .app-note{font-size:12px;color:var(--ink-3);text-align:center;margin-top:16px;font-weight:300}
+  .app-note b{color:var(--teal);font-weight:500}
+
+  /* ---- Admin console (light theme), reused from the live Little Zav deck ---- */
+  .admin-app{background:#f8f9fb;color:#0b1f33;font-family:var(--font)}
+  .ic{width:18px;height:18px;fill:none;flex:0 0 auto}
+  .aa-nav{height:46px;background:#fff;border-bottom:1px solid #ebeef2;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
+  .aa-brand{display:flex;flex-direction:column;line-height:1}
+  .aa-word{font-size:11px;font-weight:600;letter-spacing:.26em;color:#0b1f33}
+  .aa-tag{font-size:8.5px;color:#074d44;margin-top:3px;letter-spacing:.02em}
+  .aa-nav-items{display:flex;gap:3px;align-items:center}
+  .aa-nav-item{font-size:11.5px;color:#5b6b7a;padding:6px 10px;border-radius:100px}
+  .aa-nav-item.active{background:#e7f4f1;color:#0b1f33;font-weight:600}
+  .aa-acct{width:26px;height:26px;border-radius:50%;background:#074d44;margin-left:8px;flex:0 0 auto}
+
+  .aa-page{padding:20px 26px 26px;max-width:860px;margin:0 auto}
+  .aa-eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#0a7d6b}
+  .aa-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:6px 0 2px}
+  .aa-title{font-size:21px;font-weight:500;color:#0b1f33;letter-spacing:-.01em;margin:0}
+  .aa-sub{font-size:12.5px;color:#5b6b7a;margin:4px 0 0}
+  .aa-header-master{display:flex;align-items:center;gap:14px;flex:0 0 auto;padding-top:4px}
+  .aa-live{display:flex;align-items:center;gap:7px;font-size:12.5px;color:#0b1f33;font-weight:500}
+  .aa-live .dot{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 7px rgba(34,197,94,.7)}
+  .aa-master{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#0b1f33;font-weight:500}
+  .aa-tabs{display:flex;gap:4px;border-bottom:1px solid #ebeef2;margin:16px 0 0;overflow-x:auto}
+  .aa-tab{font-size:12.5px;color:#5b6b7a;padding:10px 13px;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;cursor:pointer;transition:.15s}
+  .aa-tab:hover{color:#0b1f33}
+  .aa-tab.active{color:#0a7d6b;border-bottom-color:#0a7d6b;font-weight:600}
+  .aa-panel{padding:18px 0 4px}
+  .aa-section-h{font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#8a97a3;margin:2px 0 8px}
+  .aa-section-h.mt{margin-top:20px}
+  .aa-card{background:#fff;border:1px solid #ebeef2;border-radius:14px;padding:2px 18px}
+  .aa-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid #f0f2f5}
+  .aa-row:last-child{border-bottom:none}
+  .aa-row-title{font-size:13.5px;font-weight:500;color:#0b1f33}
+  .aa-row-sub{font-size:11.5px;color:#5b6b7a;margin-top:2px;line-height:1.4}
+  .aa-mood{display:inline-block;font-size:9.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:100px;margin-left:8px;vertical-align:1px}
+  .m-sharpen{background:#e7f4f1;color:#0a7d6b}.m-play{background:#eef0ff;color:#5b63c4}.m-care{background:#fff0e6;color:#c47a3a}.m-reflect{background:#f0e9ff;color:#8455c4}
+  .aa-count{font-size:12px;color:#0a7d6b;font-weight:600}
+  .aa-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px;padding-top:16px;border-top:1px solid #ebeef2}
+  .aa-preview-btn{font-size:12.5px;font-weight:600;color:#0a7d6b;background:#e7f4f1;border:1px solid #cfe8e2;border-radius:100px;padding:9px 18px;cursor:pointer}
+  .aa-save{font-size:12.5px;font-weight:600;color:#fff;background:#0a7d6b;border:none;border-radius:100px;padding:9px 20px;cursor:pointer}
+  .aa-stepper{display:inline-flex;align-items:center;gap:0;border:1px solid #dce2e8;border-radius:9px;overflow:hidden}
+  .aa-stepper span{padding:6px 9px;font-size:13px;color:#5b6b7a;background:#fff}
+  .aa-stepper .aa-num{font-weight:600;color:#0b1f33;border-left:1px solid #eef1f4;border-right:1px solid #eef1f4;min-width:34px;text-align:center}
+
+  .tog{width:38px;height:22px;border-radius:100px;background:#d5dde3;position:relative;flex:0 0 auto;transition:.2s;cursor:pointer}
+  .tog.on{background:#0a7d6b}
+  .tog::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+  .tog.on::after{left:18px}
+  .tog.sm{width:32px;height:19px}.tog.sm::after{width:15px;height:15px}.tog.sm.on::after{left:15px}
+
+  .aa-src{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #f0f2f5}
+  .aa-src:last-child{border-bottom:none}
+  .aa-src-body{flex:1}
+  .aa-src-pill{font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 9px;border-radius:100px;flex:0 0 auto}
+  .p-personal{background:#e6f7ec;color:#1a8f4a}.p-api{background:#e7f4f1;color:#0a7d6b}.p-docs{background:#eef1f4;color:#5b6b7a}
+  .aa-sync{font-size:11px;color:#1a8f4a;display:inline-flex;align-items:center;gap:5px;flex:0 0 auto}
+  .aa-sync .ic{width:13px;height:13px;color:currentColor}
+  .aa-addbtn{margin-top:14px;font-size:12px;font-weight:600;color:#0a7d6b;background:none;border:1px dashed #b8d8d1;border-radius:10px;padding:11px;width:100%;text-align:center;cursor:pointer}
+
+  .aa-brand-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:20px}
+  .aa-field{margin-bottom:13px}
+  .aa-label{font-size:11px;font-weight:600;color:#5b6b7a;margin-bottom:5px;display:block}
+  .aa-input{font-size:12.5px;color:#0b1f33;background:#fff;border:1px solid #dce2e8;border-radius:9px;padding:8px 11px;width:100%;font-family:inherit}
+  .aa-swatches{display:flex;gap:10px;flex-wrap:wrap}
+  .aa-sw{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10px;color:#5b6b7a}
+  .aa-sw-chip{width:36px;height:36px;border-radius:9px;border:1px solid #dce2e8}
+  .aa-select{font-size:12.5px;color:#0b1f33;background:#fff;border:1px solid #dce2e8;border-radius:9px;padding:8px 11px;width:100%;font-family:inherit}
+  .aa-bpreview{background:#091522;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px}
+  .aa-bpreview .bp-h{display:flex;align-items:center;gap:8px}
+  .aa-bpreview .bp-dot{width:26px;height:26px;border-radius:50%;background:linear-gradient(145deg,#2FCFA8,#1aaa85)}
+  .aa-bpreview .bp-name{font-size:12px;font-weight:600;color:#eafbf4}
+  .aa-bpreview .bp-sub{font-size:9.5px;color:rgba(234,251,244,.55)}
+  .aa-bpreview .bp-msg{font-size:11px;color:rgba(234,251,244,.72);background:rgba(234,251,244,.05);border-radius:10px;padding:9px 11px;line-height:1.4}
+  .aa-bpreview .bp-btn{align-self:flex-start;font-size:11px;font-weight:600;color:#091522;background:#2FCFA8;border-radius:100px;padding:6px 15px}
+  .aa-preview-label{font-size:10px;color:#8a97a3;text-align:center;margin-top:8px}
+
+  .aa-toggle-days{display:inline-flex;border:1px solid #dce2e8;border-radius:9px;overflow:hidden;font-size:11.5px;cursor:pointer}
+  .aa-toggle-days span{padding:6px 13px;color:#5b6b7a;background:#fff}
+  .aa-toggle-days span.on{background:#0a7d6b;color:#fff;font-weight:600}
+  .aa-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+  .aa-stat{background:#fff;border:1px solid #ebeef2;border-radius:12px;padding:14px 16px}
+  .aa-stat-n{font-size:24px;font-weight:600;color:#0b1f33;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  .aa-stat-l{font-size:11px;color:#5b6b7a;margin-top:3px}
+  .aa-stat-d{font-size:10.5px;color:#1a8f4a;margin-top:4px;font-weight:600}
+  .aa-two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px}
+  .aa-block{background:#fff;border:1px solid #ebeef2;border-radius:14px;padding:16px 18px}
+  .aa-block-h{font-size:12px;font-weight:600;color:#0b1f33;margin-bottom:14px}
+  .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:11.5px;color:#5b6b7a}
+  .bar-label{flex:0 0 108px}
+  .bar-track{flex:1;height:8px;background:#eef1f4;border-radius:100px;overflow:hidden;display:block}
+  .bar-fill{display:block;height:8px;background:linear-gradient(90deg,#14A88B,#2FCFA8);border-radius:100px}
+  .bar-val{flex:0 0 auto;font-variant-numeric:tabular-nums;color:#0b1f33;font-weight:600;font-size:11px}
+  .disp{margin-bottom:16px}
+  .disp:last-child{margin-bottom:0}
+  .disp-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:7px}
+  .disp-name{font-size:12px;color:#0b1f33;font-weight:500}
+  .disp-val{font-size:17px;font-weight:600;color:#0a7d6b;font-variant-numeric:tabular-nums}
+  .disp-val small{font-size:10.5px;color:#1a8f4a;margin-left:6px;font-weight:600}
+  .disp-bar{height:7px;background:#eef1f4;border-radius:100px;position:relative}
+  .disp-base{position:absolute;top:-3px;bottom:-3px;width:2px;background:#b8c2cc}
+  .disp-mark{position:absolute;top:-2.5px;width:12px;height:12px;border-radius:50%;background:#0a7d6b;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transform:translateX(-50%)}
+  .disp-scale{display:flex;justify-content:space-between;font-size:9.5px;color:#8a97a3;margin-top:5px}
+  .aa-spotlight{margin-top:14px;background:#e7f4f1;border:1px solid #cfe8e2;border-radius:12px;padding:13px 16px;font-size:12px;color:#0b4b40;line-height:1.5}
+  .aa-spotlight strong{color:#0a7d6b}
+  .aa-privacy{font-size:10.5px;color:#8a97a3;margin-top:12px;display:flex;align-items:center;gap:6px}
+  .aa-privacy .ic{width:12px;height:12px;color:#8a97a3}
+
+  /* Connect tab — embed code + self-serve handshake */
+  .aa-connect-intro{font-size:13px;color:#5b6b7a;line-height:1.55;margin:0 0 22px;max-width:600px}
+  .aa-csec{margin-bottom:26px}
+  .aa-csec>h4{margin:0 0 3px;font-size:13.5px;color:#0b1f33;font-weight:600}
+  .aa-csec>p{margin:0 0 11px;font-size:12px;color:#5b6b7a}
+  .aa-code{position:relative;background:#0b1f33;color:#e7edf3;border-radius:10px;padding:14px 16px;margin:0;overflow-x:auto;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;line-height:1.6;white-space:pre}
+  .aa-copy{position:absolute;top:9px;right:9px;cursor:pointer;background:rgba(255,255,255,.08);color:#e7edf3;
+    border:1px solid rgba(255,255,255,.18);border-radius:6px;padding:4px 10px;font:inherit;font-size:11.5px}
+  .aa-copy:hover{background:rgba(255,255,255,.16)}
+  .aa-copy.done{background:#0a7d6b;border-color:#0a7d6b;color:#fff}
+  .aa-step{display:flex;gap:13px;padding:15px 0;border-top:1px solid #ebeef2}
+  .aa-step:first-of-type{border-top:none}
+  .aa-stepnum{flex:0 0 auto;width:25px;height:25px;border-radius:50%;background:#e7f4f1;color:#0a7d6b;font-weight:600;
+    font-size:12.5px;display:flex;align-items:center;justify-content:center}
+  .aa-step-body strong{display:block;margin-bottom:3px;font-size:13.5px}
+  .aa-step-body p{margin:0 0 9px;font-size:12.5px;color:#5b6b7a;line-height:1.5}
+  .aa-step-body code{background:#eef1f4;border-radius:4px;padding:1px 5px;font-size:11.5px}
+  .aa-test-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .aa-test-result{font-size:12.5px}
+  .aa-test-result.ok{color:#0a7d6b}
+
+  @media (max-width:820px){
+    .aa-brand-grid,.aa-two{grid-template-columns:1fr}
+    .aa-stats{grid-template-columns:1fr 1fr}
+    .aa-nav-items .aa-nav-item:not(.active){display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4 3 7 7 9 4-2 7-5 7-9V6l-7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 0 0-14-4M4 5v4h4M4 13a8 8 0 0 0 14 4M20 19v-4h-4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<div class="wrap">
+  <div class="topbar">
+    <a class="brand" href="./index.html" aria-label="Little Zav demo home">
+      <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
+          <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
+          <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
+        <g id="halo"></g>
+        <circle cx="50" cy="50" r="14" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
+      </svg>
+      <span class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Little Zav · admin view</span></span>
+    </a>
+    <a class="back" href="./index.html">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Demo home
+    </a>
+  </div>
+
+  <div class="intro">
+    <div class="eyebrow">What the admin sees</div>
+    <h1>Everything an admin needs, on <em>six tabs.</em></h1>
+    <p class="lede">The client's own team switches Little Zav on, points it at their content, white-labels it to their brand, and watches engagement — all in the admin they already use, no code required. Click the tabs to explore.</p>
+  </div>
+
+  <div class="app-window"><div class="admin-app" id="adminApp"></div></div>
+  <p class="app-note">The admin console · populated with <b>sample data</b> for this demo</p>
+</div>
+
+<script>
+(function(){
+  // Header logomark spark halo (matches the proposals hub + learner view).
+  var halo=document.getElementById('halo'), n=12, c=50, r=39;
+  for(var i=0;i<n;i++){
+    var a=(i/n)*2*Math.PI-Math.PI/2, x=(c+r*Math.cos(a)).toFixed(1), y=(c+r*Math.sin(a)).toFixed(1);
+    halo.insertAdjacentHTML('beforeend', i%3===0
+      ? '<circle cx="'+x+'" cy="'+y+'" r="2.4" fill="#3FE4BC"/>'
+      : '<circle cx="'+x+'" cy="'+y+'" r="1.7" fill="none" stroke="rgba(234,251,244,.30)" stroke-width="1"/>');
+  }
+
+  /* ---- Admin panels (reused from the live Little Zav deck) ---- */
+  var NAV='<div class="aa-nav"><div class="aa-brand"><span class="aa-word">ZAVMO</span><span class="aa-tag">Learning intelligence</span></div>'
+    +'<div class="aa-nav-items"><span class="aa-nav-item">Dashboard</span><span class="aa-nav-item">Mind Palace</span><span class="aa-nav-item">Content</span><span class="aa-nav-item active">Little Zav</span><span class="aa-nav-item">Users</span><span class="aa-nav-item">Reports</span><span class="aa-nav-item">Settings</span><span class="aa-acct"></span></div></div>';
+  var TABS=[['Setup','setup'],['Connect','connect'],['Interactions','interactions'],['Sources','sources'],['Branding','branding'],['Analytics','analytics']];
+  var DEMO_ORIGIN='https://littlezav.zavmo.ai', DEMO_SLUG='acme';
+  var EMBED_CODE=
+    '<iframe id="little-zav"\n'+
+    '        src="'+DEMO_ORIGIN+'/embed/?tenant='+DEMO_SLUG+'"\n'+
+    '        style="width:100%;max-width:420px;height:520px;border:0"\n'+
+    '        sandbox="allow-scripts allow-same-origin"></iframe>\n'+
+    '<script>\n'+
+    '  // Mint a short-lived token on your backend, then hand it to the widget.\n'+
+    '  var frame = document.getElementById("little-zav");\n'+
+    '  fetch("/your-app/littlezav-token")            // returns { "token": "<jwt>" }\n'+
+    '    .then(function (r) { return r.json(); })\n'+
+    '    .then(function (d) {\n'+
+    '      frame.contentWindow.postMessage(\n'+
+    '        { type: "littlezav:token", token: d.token }, "'+DEMO_ORIGIN+'");\n'+
+    '    });\n'+
+    '<\/script>';
+  var TOKEN_CODE=
+    '{\n'+
+    '  "sub":    "<your learner id>",\n'+
+    '  "tenant": "'+DEMO_SLUG+'",\n'+
+    '  "role":   "learner",              // or "admin" for this console\n'+
+    '  "exp":    <now + 300>             // short-lived, ~5 minutes\n'+
+    '}';
+  function escHtml(s){return String(s).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c];});}
+  function tabs(active){
+    return '<div class="aa-tabs">'+TABS.map(function(x){return '<span class="aa-tab'+(x[1]===active?' active':'')+'" data-t="'+x[1]+'">'+x[0]+'</span>';}).join('')+'</div>';
+  }
+  function head(title,sub){
+    return '<div class="aa-eyebrow">Content › Little Zav</div><div class="aa-head"><div><h1 class="aa-title">'+title+'</h1><p class="aa-sub">'+sub+'</p></div>'
+      +'<div class="aa-header-master"><span class="aa-live" style="font-size:12px"><span class="dot"></span>Live · 318 learners</span><span class="aa-master">On<span class="tog on"></span></span></div></div>';
+  }
+  function foot(){ return '<div class="aa-foot"><button class="aa-preview-btn">Preview on a learner</button><button class="aa-save">Save changes</button></div>'; }
+  function row(title,sub,on){ return '<div class="aa-row"><div><div class="aa-row-title">'+title+'</div>'+(sub?'<div class="aa-row-sub">'+sub+'</div>':'')+'</div><span class="tog'+(on?' on':'')+'"></span></div>'; }
+
+  var PANELS={
+    setup:function(){
+      return head('Setup','How Little Zav behaves for your learners.')+tabs('setup')+'<div class="aa-panel">'
+        +'<div class="aa-section-h">Behaviour</div><div class="aa-card">'
+        + row('Free chat','Let learners talk to Little Zav in its own remit.',true)
+        + row('Notifications','Home-bell dot and gentle nudges.',true)
+        +'</div>'
+        +'<div class="aa-section-h mt">Cadence</div><div class="aa-card">'
+        +'<div class="aa-row"><div><div class="aa-row-title">Max interactions per day</div><div class="aa-row-sub">Keeps it a treat, never a chore.</div></div><span class="aa-stepper"><span>−</span><span class="aa-num">3</span><span>+</span></span></div>'
+        + row('Respect each learner’s best time','Deliver around when they usually learn.',true)
+        + row('Spaced-retrieval scheduling','Time prompts to the forgetting curve.',true)
+        +'</div>'+foot()+'</div>';
+    },
+    connect:function(){
+      function code(id,raw){ return '<div style="position:relative"><button class="aa-copy" data-copy="'+id+'">Copy</button><pre class="aa-code">'+escHtml(raw)+'</pre></div>'; }
+      return head('Connect','Embed Little Zav and connect it to your platform.')+tabs('connect')+'<div class="aa-panel">'
+        +'<p class="aa-connect-intro">Little Zav embeds as an iframe and takes a short-lived token from your page — no second login. Everything below is pre-filled for <strong>'+DEMO_SLUG+'</strong>.</p>'
+        +'<div class="aa-csec"><h4>Embed code</h4><p>Drop this where you want Little Zav to appear on your learner portal.</p>'+code('embed',EMBED_CODE)+'</div>'
+        +'<div class="aa-csec"><h4>Set it up — four steps</h4>'
+          +'<div class="aa-step"><span class="aa-stepnum">1</span><div class="aa-step-body"><strong>Allow your embed origin</strong><p>The widget only loads on origins you list. Add yours under <button class="aa-tab" data-t="setup" style="all:unset;cursor:pointer;color:#0a7d6b;text-decoration:underline">Setup &rsaquo; Allowed embed origins</button>.</p></div></div>'
+          +'<div class="aa-step"><span class="aa-stepnum">2</span><div class="aa-step-body"><strong>Mint an SSO token on your backend</strong><p>Your learner is already signed in. Return a short-lived RS256 JWT signed with this tenant\'s private key (the matching public key is registered with Little Zav):</p>'+code('token',TOKEN_CODE)+'</div></div>'
+          +'<div class="aa-step"><span class="aa-stepnum">3</span><div class="aa-step-body"><strong>Embed the widget</strong><p>Add the embed code above to your page. It posts the token to the iframe via <code>postMessage</code> — that\'s the whole handshake.</p></div></div>'
+          +'<div class="aa-step"><span class="aa-stepnum">4</span><div class="aa-step-body"><strong>Serve content &amp; history</strong><p>Point Little Zav at a small read API so it can theme interactions from your content: <code>GET history(learner)</code> and <code>GET content</code>.</p></div></div>'
+        +'</div>'
+        +'<div class="aa-csec"><h4>Test the connection</h4><p>Checks that this tenant is provisioned and reachable.</p><div class="aa-test-row"><button class="aa-preview-btn" id="aa-test-conn">Test connection</button><span class="aa-test-result" id="aa-test-result"></span></div></div>'
+        +foot()+'</div>';
+    },
+    interactions:function(){
+      var items=[
+        ['Quick quiz','sharpen',1],['Two-truths & a lie','sharpen',1],['Odd-one-out','sharpen',1],['Matching pairs','sharpen',1],
+        ['Myth-or-fact (swipe)','sharpen',1],['Sort-into-buckets (swipe)','sharpen',1],['Guess-the-number (slide)','sharpen',0],
+        ['Would-you-rather','play',1],['Hot-take','play',1],
+        ['Tip of the day','care',1],['Reminder','care',1],['Badge celebration','care',1],['Check-in','care',0],
+        ['Mindset agree/disagree','reflect',1],['Confidence rating','reflect',1]
+      ];
+      var on=items.filter(function(i){return i[2];}).length;
+      var rows=items.map(function(it){
+        return '<div class="aa-row"><div class="aa-row-title">'+it[0]+'<span class="aa-mood m-'+it[1]+'">'+it[1]+'</span></div><span class="tog'+(it[2]?' on':'')+'"></span></div>';
+      }).join('');
+      return head('Interactions','The one place that decides what Little Zav serves.')+tabs('interactions')+'<div class="aa-panel">'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="aa-section-h" style="margin:0">Catalogue · Sharpen / Play / Care / Reflect</div><span class="aa-count">'+on+' of 15 on</span></div>'
+        +'<div class="aa-card">'+rows+'</div>'
+        +'<p class="aa-sub" style="margin-top:12px">Reminders, tips and celebrations live here as <em>Care</em> types — not separate switches. New interaction types appear automatically.</p>'
+        +foot()+'</div>';
+    },
+    sources:function(){
+      function src(pill,pillCls,title,sub,sync,on){
+        return '<div class="aa-src"><span class="aa-src-pill '+pillCls+'">'+pill+'</span><div class="aa-src-body"><div class="aa-row-title">'+title+'</div><div class="aa-row-sub">'+sub+'</div></div>'
+          +(sync?'<span class="aa-sync"><svg class="ic"><use href="#i-refresh"/></svg>'+sync+'</span>':'')
+          +'<span class="tog sm'+(on?' on':'')+'"></span></div>';
+      }
+      return head('Sources','What Little Zav knows.')+tabs('sources')+'<div class="aa-panel"><div class="aa-card">'
+        + src('Always on','p-personal','Each learner’s own learning','Their history and signals — the personal layer. Locked on.','',1)
+        + src('Library · API','p-api','Growth Engineering LMS','First-class connector — pull → chunk → embed on a schedule. 214 modules.','Synced 2m ago',1)
+        + src('Library · API','p-api','LinkedIn Learning','Generic content-library connector via API key.','Synced 1h ago',1)
+        + src('Documents','p-docs','Brand & product docs','Drag-and-drop — 3 files. Offline content auto-removes.','3 items',1)
+        + src('Feed','p-docs','Google Drive folder','OAuth connector — not yet connected.','',0)
+        +'</div><button class="aa-addbtn">+ Add a source</button>'
+        +'<p class="aa-sub" style="margin-top:12px">API keys are stored server-side, never in the browser. Each item has its own “Visible to Little Zav” toggle.</p>'
+        +foot()+'</div>';
+    },
+    branding:function(){
+      return head('Branding','White-label the widget so it looks like the client’s product.')+tabs('branding')+'<div class="aa-panel"><div class="aa-brand-grid">'
+        +'<div><div class="aa-section-h">Identity</div>'
+        +'<div class="aa-field"><span class="aa-label">Display name</span><input class="aa-input" value="Little Zav" readonly></div>'
+        +'<div class="aa-field"><span class="aa-label">Subtitle</span><input class="aa-input" value="Your learning companion" readonly></div>'
+        +'<div class="aa-field"><span class="aa-label">Welcome message</span><input class="aa-input" value="Here’s a little something for you, {name}." readonly></div>'
+        +'<div class="aa-field"><span class="aa-label">Font family (Google Fonts)</span><select class="aa-select"><option>DM Sans</option><option>Inter</option><option>Poppins</option></select></div>'
+        +'<div class="aa-section-h mt">Colours</div><div class="aa-swatches">'
+        +'<div class="aa-sw"><span class="aa-sw-chip" style="background:#2FCFA8"></span>Accent</div>'
+        +'<div class="aa-sw"><span class="aa-sw-chip" style="background:#091522"></span>Background</div>'
+        +'<div class="aa-sw"><span class="aa-sw-chip" style="background:#EAFBF4"></span>Text</div>'
+        +'<div class="aa-sw"><span class="aa-sw-chip" style="background:linear-gradient(135deg,#0e2233,#132c3f)"></span>Surface</div>'
+        +'</div></div>'
+        +'<div><div class="aa-section-h">Live preview</div><div class="aa-bpreview"><div class="bp-h"><span class="bp-dot"></span><div><div class="bp-name">Little Zav</div><div class="bp-sub">Your learning companion</div></div></div>'
+        +'<div class="bp-msg">Here’s a little something for you, Juliette.</div><div class="bp-btn">Play today’s spark</div></div>'
+        +'<div class="aa-preview-label">Reads live from the public branding endpoint — themed before login.</div></div>'
+        +'</div>'+foot()+'</div>';
+    },
+    analytics:function(){
+      function bar(label,pct,val){ return '<div class="bar-row"><span class="bar-label">'+label+'</span><span class="bar-track"><span class="bar-fill" style="width:'+pct+'%"></span></span><span class="bar-val">'+val+'</span></div>'; }
+      function disp(name,val,delta,pos,base){
+        return '<div class="disp"><div class="disp-top"><span class="disp-name">'+name+'</span><span class="disp-val">'+val+'<small>'+delta+'</small></span></div>'
+          +'<div class="disp-bar"><span class="disp-base" style="left:'+base+'%"></span><span class="disp-mark" style="left:'+pos+'%"></span></div>'
+          +'<div class="disp-scale"><span>Fixed</span><span>Growth</span></div></div>';
+      }
+      var pts=[38,42,40,47,52,49,58,63], w=250,h=54, step=w/(pts.length-1);
+      var d=pts.map(function(p,i){return (i?'L':'M')+(i*step).toFixed(0)+' '+(h-(p/70*h)).toFixed(0);}).join(' ');
+      var area=d+' L'+w+' '+h+' L0 '+h+' Z';
+      var spark='<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none" style="width:100%;height:54px"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(47,207,168,.22)"/><stop offset="1" stop-color="rgba(47,207,168,0)"/></linearGradient></defs>'
+        +'<path d="'+area+'" fill="url(#sg)"/><path d="'+d+'" fill="none" stroke="#0a7d6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+        +'<circle cx="'+w+'" cy="'+(h-(pts[pts.length-1]/70*h)).toFixed(0)+'" r="3.5" fill="#0a7d6b"/></svg>';
+
+      return head('Analytics','Engagement and insight — aggregate and org-scoped.')+tabs('analytics')+'<div class="aa-panel">'
+        +'<div style="display:flex;justify-content:flex-end;margin-bottom:12px"><span class="aa-toggle-days"><span>7 days</span><span class="on">30 days</span></span></div>'
+        +'<div class="aa-stats">'
+        +'<div class="aa-stat"><div class="aa-stat-n">1,284</div><div class="aa-stat-l">Interactions served</div><div class="aa-stat-d">+18%</div></div>'
+        +'<div class="aa-stat"><div class="aa-stat-n">742</div><div class="aa-stat-l">Sparks lit</div><div class="aa-stat-d">+12%</div></div>'
+        +'<div class="aa-stat"><div class="aa-stat-n">318</div><div class="aa-stat-l">Learners engaged</div><div class="aa-stat-d">+9%</div></div>'
+        +'<div class="aa-stat"><div class="aa-stat-n">196</div><div class="aa-stat-l">Reflections given</div><div class="aa-stat-d">+24%</div></div>'
+        +'</div>'
+        +'<div class="aa-two">'
+        +'<div class="aa-block"><div class="aa-block-h">Most played</div>'
+        + bar('Myth-or-fact',92,'268')+ bar('Quick quiz',74,'214')+ bar('Would-you-rather',58,'168')+ bar('Confidence check',41,'119')+ bar('Tip of the day',30,'87')
+        +'</div>'
+        +'<div class="aa-block"><div class="aa-block-h">Dispositions <span style="font-weight:400;color:#8a97a3;font-size:10.5px">(from Reflect)</span></div>'
+        + disp('Growth mindset index','68%','+6 vs baseline',68,58)
+        + disp('Conversational confidence','3.9 / 5','+0.3',74,66)
+        + disp('Innovation appetite','54%','+4',54,46)
+        +'</div></div>'
+        +'<div class="aa-two" style="margin-top:14px">'
+        +'<div class="aa-block"><div class="aa-block-h">Sentiment trend</div>'+spark+'<div class="disp-scale" style="margin-top:6px"><span>4 wks ago</span><span>this week</span></div></div>'
+        +'<div class="aa-block"><div class="aa-block-h">Insight spotlight</div><div class="aa-spotlight"><strong>Compliance-pathway learners</strong> report lower confidence this week — worth a nudge of encouragement in that cohort.</div></div>'
+        +'</div>'
+        +'<div class="aa-privacy"><svg class="ic"><use href="#i-shield"/></svg>Every figure is aggregate-only and org-scoped — no individual’s answers are exposed.</div>'
+        + foot()+'</div>';
+    }
+  };
+
+  var app=document.getElementById('adminApp'), current='setup';
+  function renderAdmin(){
+    app.innerHTML = NAV + '<div class="aa-page">' + PANELS[current]() + '</div>';
+    app.querySelectorAll('.aa-tab[data-t]').forEach(function(t){
+      t.addEventListener('click',function(){ current=t.getAttribute('data-t'); renderAdmin(); });
+    });
+    wireControls();
+  }
+  // Make the sample controls actually respond, so nothing reads as "broken":
+  // toggles flip, steppers count, the day-range switches.
+  function wireControls(){
+    app.querySelectorAll('.tog').forEach(function(t){
+      t.style.cursor='pointer';
+      t.addEventListener('click',function(){ t.classList.toggle('on'); });
+    });
+    app.querySelectorAll('.aa-stepper').forEach(function(st){
+      var spans=st.querySelectorAll('span'), num=st.querySelector('.aa-num');
+      if(spans.length===3 && num){
+        spans[0].style.cursor=spans[2].style.cursor='pointer';
+        spans[0].addEventListener('click',function(){ num.textContent=Math.max(1,(+num.textContent||1)-1); });
+        spans[2].addEventListener('click',function(){ num.textContent=Math.min(9,(+num.textContent||1)+1); });
+      }
+    });
+    app.querySelectorAll('.aa-toggle-days span').forEach(function(s){
+      s.addEventListener('click',function(){
+        s.parentNode.querySelectorAll('span').forEach(function(x){ x.classList.remove('on'); });
+        s.classList.add('on');
+      });
+    });
+    // Connect tab: copy buttons + (sample) test connection.
+    app.querySelectorAll('.aa-copy').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var raw = btn.getAttribute('data-copy')==='embed' ? EMBED_CODE : TOKEN_CODE;
+        var done=function(){ btn.textContent='Copied'; btn.classList.add('done'); setTimeout(function(){ btn.textContent='Copy'; btn.classList.remove('done'); },1400); };
+        if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(raw).then(done,done); else done();
+      });
+    });
+    var tb=document.getElementById('aa-test-conn'), tr=document.getElementById('aa-test-result');
+    if(tb) tb.addEventListener('click',function(){
+      tr.textContent='Checking…'; tr.className='aa-test-result';
+      setTimeout(function(){ tr.textContent='Reachable — this tenant is provisioned.'; tr.className='aa-test-result ok'; },600);
+    });
+  }
+  renderAdmin();
+})();
+</script>
+</body>
+</html>

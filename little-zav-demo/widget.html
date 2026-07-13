@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Little Zav</title>
+  <!-- Match the host exactly: load DM Sans (the widget was falling back to the
+       system font, so its weight/shape didn't line up with the main page). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --lz-accent: #2FCFA8; --lz-bg: #091522; --lz-text: #EAFBF4;
+      --lz-surface: rgba(234,251,244,0.06); --lz-line: rgba(255,255,255,0.14);
+    }
+    html, body { margin: 0; height: 100%; background: var(--lz-bg); color: var(--lz-text);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; }
+    /* Fill the host iframe exactly so the card can size to it and scroll inside,
+       rather than growing taller than the frame and spilling out. */
+    #little-zav { max-width: 420px; height: 100%; margin: 0 auto; padding: 16px; box-sizing: border-box; }
+    /* Cap the card to the host frame and scroll its contents inside, so a tall
+       interaction (or interaction + chat) fits the space rather than spilling out. */
+    .lz-card { border: 1px solid rgba(47,207,168,0.24); border-radius: 18px;
+      padding: 16px; background: var(--lz-surface); backdrop-filter: blur(18px);
+      box-sizing: border-box; max-height: 100%; overflow-y: auto; overscroll-behavior: contain; }
+    /* Question / scenario stem — sized and weighted to sit in line with the card's
+       body text (bubble + options are 14px), not the oversized 16px browser default. */
+    .lz-q { font-size: 14px; font-weight: 400; line-height: 1.5; margin-bottom: 9px; }
+    .lz-bubble { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 4px 13px 13px 13px; padding: 11px 13px; margin: 12px 0; line-height: 1.5; font-size: 14px; }
+    .lz-opt { cursor: pointer; border: 1px solid var(--lz-line); border-radius: 12px;
+      padding: 11px 13px; margin-bottom: 8px; font-size: 14px; transition: background .14s, border-color .14s; }
+    .lz-opt:hover { border-color: var(--lz-accent); background: rgba(47,207,168,0.10); }
+    .lz-opt.ok { background: rgba(34,197,94,0.16); border-color: rgba(34,197,94,0.5); }
+    .lz-opt.no { background: rgba(225,29,72,0.16); border-color: rgba(225,29,72,0.5); }
+    .lz-btn { cursor: pointer; background: var(--lz-accent); color: #0a1628; border: none;
+      border-radius: 100px; padding: 9px 16px; font-weight: 600; font-size: 13px; }
+    .lz-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--lz-accent);
+      background: rgba(47,207,168,0.10); border: 1px solid rgba(47,207,168,0.22); padding: 3px 8px; border-radius: 100px; }
+    .lz-muted { color: rgba(234,251,244,0.6); font-size: 12px; }
+    .lz-row { display: flex; gap: 9px; }
+    .lz-nuc { transform-box: fill-box; transform-origin: center; animation: lznuc 2.4s ease-in-out infinite; }
+    @keyframes lznuc { 0%,100% { transform: scale(1); } 50% { transform: scale(1.14); } }
+    @keyframes zavpop { 0% { transform: scale(1); } 30% { transform: scale(1.16) rotate(-4deg); }
+      60% { transform: scale(.95); } 100% { transform: scale(1); } }
+    /* Spark halo — the 12 dots fill toward the complete Zavmo logomark. */
+    .lz-sd { transition: fill .18s ease, stroke-opacity .18s ease; transform-box: fill-box; transform-origin: center; }
+    @keyframes lzsd { 0% { transform: scale(.2); } 55% { transform: scale(1.7); } 100% { transform: scale(1); } }
+    .lz-mascot.lz-celebrate { animation: lzcele 1s ease; }
+    @keyframes lzcele { 0% { transform: scale(1); } 25% { transform: scale(1.16); } 55% { transform: scale(.96); } 100% { transform: scale(1); } }
+    .lz-celebrate .lz-sd.on { animation: lzflash .55s ease 2; }
+    @keyframes lzflash { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
+    /* Chat — talk to Little Zav (proactive companion) */
+    #lz-chat { margin-top: 12px; }
+    #lz-chat-thread { display: flex; flex-direction: column; gap: 6px; max-height: 210px; overflow-y: auto; margin-bottom: 8px; }
+    .lz-msg { max-width: 82%; padding: 8px 11px; font-size: 13px; line-height: 1.45; }
+    .lz-msg.zav { align-self: flex-start; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.10); border-radius: 4px 13px 13px 13px; }
+    .lz-msg.me { align-self: flex-end; background: rgba(47,207,168,.14); border: 1px solid rgba(47,207,168,.30); border-radius: 13px 13px 4px 13px; }
+    .lz-msg.typing { opacity: .6; font-style: italic; }
+    .lz-chatbar { display: flex; gap: 7px; align-items: center; }
+    .lz-chatinput { flex: 1; min-width: 0; box-sizing: border-box; height: 38px; background: rgba(255,255,255,.05);
+      border: 1px solid var(--lz-line); border-radius: 100px; padding: 0 14px; color: var(--lz-text); font: inherit; font-size: 13px; }
+    .lz-chatinput::placeholder { color: rgba(234,251,244,.42); }
+    .lz-chatinput:focus { outline: none; border-color: var(--lz-accent); }
+    .lz-chatbar .lz-btn { box-sizing: border-box; height: 38px; padding: 0 16px; border: 1px solid transparent; }
+  </style>
+</head>
+<body>
+  <div id="little-zav"></div>
+  <!-- Demo-only: mock.js must load first so it can intercept the widget's API
+       calls. littlezav.js below is the real production widget, unmodified. -->
+  <script src="mock.js"></script>
+  <script src="littlezav.js"></script>
+</body>
+</html>

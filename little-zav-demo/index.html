@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Little Zav — an interactive demo. See it from both sides: the learner's playable widget and the admin console.">
+<meta property="og:title" content="Little Zav — Interactive demo">
+<meta property="og:description" content="See Little Zav from both sides — the learner's playable widget and the admin console.">
+<title>Little Zav — Interactive demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
+    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
+    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
+    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--navy-0)}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;
+    background:
+      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
+    background-repeat:no-repeat;background-size:100% 100%;-webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  em{font-style:normal;color:var(--teal-glow)}
+  .wrap{max-width:1000px;margin:0 auto;padding:clamp(40px,8vh,84px) clamp(22px,5vw,48px) 72px}
+
+  header{display:flex;align-items:center;gap:14px;margin-bottom:clamp(34px,7vh,56px)}
+  .logomark{width:46px;height:46px;flex:0 0 auto}
+  .brand-txt{display:flex;flex-direction:column;line-height:1}
+  .word{font-size:15px;font-weight:600;letter-spacing:.26em}
+  .tag{font-size:11px;color:var(--teal);margin-top:6px;letter-spacing:.04em}
+
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+  h1{font-weight:200;letter-spacing:-.01em;line-height:1.05;font-size:clamp(34px,6vw,58px);margin:0 0 18px;text-wrap:balance}
+  .lede{font-size:clamp(15px,2vw,19px);line-height:1.55;color:var(--ink-2);max-width:54ch;margin:0 0 clamp(34px,6vh,50px);font-weight:300}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .card{
+    position:relative;display:flex;flex-direction:column;gap:0;background:var(--surface);border:1px solid var(--border);
+    border-radius:22px;padding:0;overflow:hidden;transition:.22s;
+  }
+  .card:hover{border-color:var(--border-2);transform:translateY(-3px);box-shadow:0 26px 60px rgba(0,0,0,.4)}
+  .card:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+  .card-vis{height:172px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+  .card-vis.learner{background:radial-gradient(80% 90% at 50% 20%,rgba(47,207,168,.16),transparent 60%),#091522}
+  .card-vis.admin{background:linear-gradient(180deg,#fff,#eef2f5)}
+  .card-body{padding:22px 24px 24px}
+  .c-chip{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--teal);background:rgba(47,207,168,.14);border-radius:100px;padding:4px 11px;margin-bottom:12px}
+  .c-title{font-size:22px;font-weight:400;letter-spacing:-.01em;margin:0 0 8px}
+  .c-desc{font-size:14px;line-height:1.55;color:var(--ink-2);font-weight:300;margin:0 0 18px}
+  .c-foot{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:var(--teal);font-weight:600}
+  .c-foot svg{width:16px;height:16px;transition:.2s}
+  .card:hover .c-foot svg{transform:translateX(4px)}
+
+  /* mini learner widget preview */
+  .mini-lz{width:210px;background:rgba(234,251,244,.05);border:1px solid rgba(47,207,168,.22);border-radius:14px;padding:13px;transform:translateY(6px)}
+  .mini-h{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+  .mini-orb{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#99f0e6,#00d9c0);box-shadow:0 0 10px rgba(63,228,188,.6);flex:0 0 auto}
+  .mini-name{font-size:11px;font-weight:600;color:var(--ink)}
+  .mini-spk{font-size:9px;color:var(--ink-3)}
+  .mini-q{font-size:10.5px;color:var(--ink-2);line-height:1.4;margin-bottom:8px}
+  .mini-opt{font-size:9.5px;color:var(--ink-2);border:1px solid var(--border);border-radius:7px;padding:6px 8px;margin-bottom:5px}
+  .mini-opt.hot{border-color:var(--border-2);background:rgba(47,207,168,.08)}
+
+  /* mini admin preview */
+  .mini-admin{width:220px;background:#fff;border:1px solid #e4e8ed;border-radius:12px;overflow:hidden;transform:translateY(6px);box-shadow:0 12px 30px rgba(10,40,60,.14)}
+  .mini-anav{height:24px;background:#fff;border-bottom:1px solid #eef1f4;display:flex;align-items:center;padding:0 10px;gap:6px}
+  .mini-adot{width:5px;height:5px;border-radius:50%;background:#0a7d6b}
+  .mini-atabs{display:flex;gap:8px;padding:8px 12px 0;font-size:8.5px;color:#8a97a3}
+  .mini-atab.on{color:#0a7d6b;font-weight:700;border-bottom:2px solid #0a7d6b;padding-bottom:5px}
+  .mini-astats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:12px}
+  .mini-astat{background:#f6f8fa;border:1px solid #eef1f4;border-radius:7px;padding:7px 8px}
+  .mini-astat b{display:block;font-size:13px;color:#0b1f33;font-weight:700}
+  .mini-astat span{font-size:7px;color:#5b6b7a}
+
+  .also{margin-top:34px;display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-3);font-weight:300;flex-wrap:wrap}
+  .also a{color:var(--teal);font-weight:500}
+  .also .sep{opacity:.4}
+
+  footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--border);font-size:12.5px;color:var(--ink-3);line-height:1.6;font-weight:300}
+
+  @media (max-width:720px){ .grid{grid-template-columns:1fr} h1{font-size:clamp(32px,9vw,42px)} }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
+        <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
+        <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
+      <g id="halo"></g>
+      <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
+    </svg>
+    <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Little Zav · interactive demo</span></div>
+  </header>
+
+  <div class="eyebrow">See it from both sides</div>
+  <h1>Little Zav, <em>end to end.</em></h1>
+  <p class="lede">A playful learning companion that speaks first. Try the actual learner widget, then step into the admin console the client's own team runs it from. Two links — share either.</p>
+
+  <div class="grid">
+    <a class="card" href="./learner.html">
+      <div class="card-vis learner">
+        <div class="mini-lz">
+          <div class="mini-h"><span class="mini-orb"></span><div><div class="mini-name">Little Zav</div><div class="mini-spk">6 / 12 sparks</div></div></div>
+          <div class="mini-q">What makes feedback most likely to land?</div>
+          <div class="mini-opt">Save it for the annual review</div>
+          <div class="mini-opt hot">Tie it to a specific, recent example</div>
+          <div class="mini-opt">In front of the whole team</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="c-chip">The learner's view</span>
+        <h2 class="c-title">Play the widget</h2>
+        <p class="c-desc">The real widget, running live. Answer a spark and watch it light — then cycle through the ways to play: quizzes, timed scenarios, myth-or-fact, would-you-rather, reflections, tips.</p>
+        <span class="c-foot">Open the learner view
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a class="card" href="./admin.html">
+      <div class="card-vis admin">
+        <div class="mini-admin">
+          <div class="mini-anav"><span class="mini-adot"></span><span style="font-size:8px;font-weight:700;letter-spacing:.2em;color:#0b1f33">ZAVMO</span></div>
+          <div class="mini-atabs"><span class="mini-atab on">Analytics</span><span class="mini-atab">Sources</span><span class="mini-atab">Branding</span></div>
+          <div class="mini-astats">
+            <div class="mini-astat"><b>1,284</b><span>Served</span></div>
+            <div class="mini-astat"><b>742</b><span>Sparks</span></div>
+            <div class="mini-astat"><b>318</b><span>Learners</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <span class="c-chip">The admin's view</span>
+        <h2 class="c-title">Run the console</h2>
+        <p class="c-desc">Six tabs the client's team already knows: switch Little Zav on, connect &amp; embed it, point it at their content, white-label it, and watch aggregate, org-scoped engagement — no code.</p>
+        <span class="c-foot">Open the admin view
+          <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </div>
+    </a>
+  </div>
+
+  <div class="also">
+    <span>Prefer the guided story?</span>
+    <a href="../little-zav/">The full 19-slide walkthrough</a>
+    <span class="sep">·</span>
+    <a href="../">All Zavmo proposals</a>
+  </div>
+
+  <footer>
+    Little Zav is a standalone product — its own service and database — that embeds on any LMS.
+    This demo runs on sample data; nothing here is a live tenant.
+  </footer>
+</div>
+
+<script>
+(function(){
+  var halo=document.getElementById('halo'), n=12, c=50, r=39;
+  for(var i=0;i<n;i++){
+    var a=(i/n)*2*Math.PI-Math.PI/2, x=(c+r*Math.cos(a)).toFixed(1), y=(c+r*Math.sin(a)).toFixed(1);
+    halo.insertAdjacentHTML('beforeend', i%3===0
+      ? '<circle cx="'+x+'" cy="'+y+'" r="2.4" fill="#3FE4BC"/>'
+      : '<circle cx="'+x+'" cy="'+y+'" r="1.7" fill="none" stroke="rgba(234,251,244,.30)" stroke-width="1"/>');
+  }
+})();
+</script>
+</body>
+</html>
