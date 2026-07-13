@@ -334,6 +334,29 @@
     app.querySelectorAll('.aa-tab[data-t]').forEach(function(t){
       t.addEventListener('click',function(){ current=t.getAttribute('data-t'); renderAdmin(); });
     });
+    wireControls();
+  }
+  // Make the sample controls actually respond, so nothing reads as "broken":
+  // toggles flip, steppers count, the day-range switches.
+  function wireControls(){
+    app.querySelectorAll('.tog').forEach(function(t){
+      t.style.cursor='pointer';
+      t.addEventListener('click',function(){ t.classList.toggle('on'); });
+    });
+    app.querySelectorAll('.aa-stepper').forEach(function(st){
+      var spans=st.querySelectorAll('span'), num=st.querySelector('.aa-num');
+      if(spans.length===3 && num){
+        spans[0].style.cursor=spans[2].style.cursor='pointer';
+        spans[0].addEventListener('click',function(){ num.textContent=Math.max(1,(+num.textContent||1)-1); });
+        spans[2].addEventListener('click',function(){ num.textContent=Math.min(9,(+num.textContent||1)+1); });
+      }
+    });
+    app.querySelectorAll('.aa-toggle-days span').forEach(function(s){
+      s.addEventListener('click',function(){
+        s.parentNode.querySelectorAll('span').forEach(function(x){ x.classList.remove('on'); });
+        s.classList.add('on');
+      });
+    });
   }
   renderAdmin();
 })();
