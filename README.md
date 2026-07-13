@@ -15,6 +15,7 @@ Each proposal is a self-contained folder served at
 | **Zavmo — Where Neuroscience Meets Learning** | Overview of the Zavmo platform and its approach | [Open](https://iridescent-technologies.github.io/proposals/zavmo-overview/) |
 | **L'Oréal Travel Retail Asia Pacific** | Zavmo Knowledge Companion proposal for L'Oréal | [Open](https://iridescent-technologies.github.io/proposals/loreal-travel-retail/) |
 | **Global Hubs US × Zavmo** | Three-stream pilot proposal (UM6P) | [Open](https://iridescent-technologies.github.io/proposals/UM6P/) |
+| **UM6P — New Learner Welcome** | Learner onboarding click-through: how Zavmo works, the 4D journey, and how xAPI captures active learning against learning outcomes & assessment criteria (styled in the live UM6P app theme) | [Open](https://iridescent-technologies.github.io/proposals/um6p-learner-welcome/) |
 | **Zavmo for Armenia** | A briefing for Artashes Khurshudyan | [Open](https://iridescent-technologies.github.io/proposals/armenia/) |
 
 ## Adding a proposal
