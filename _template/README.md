@@ -12,7 +12,7 @@ The canonical starting point for every new Zavmo proposal or walkthrough. Copy i
 | `--ink` / `--ink-2` / `--ink-3` | white → 72% → 50% | Text: primary / body / muted |
 | `--surface` / `--border` | translucent ink | Cards, dividers |
 | `--amber` `#f5b544` / `--blue` `#8fb8ff` | chip accents | Client / concept categories |
-| Font | **DM Sans** (loaded via Google Fonts) | Everything |
+| Font | **DM Sans** declared, system-font fallback (not loaded as a webfont — matches the live site) | Everything |
 
 **Rules:** navy background, teal accent, DM Sans only. No new colours, no other fonts, no light backgrounds (the light aesthetic is the *product* brand; the *proposals* suite is navy). Weights lean light — `h1` is 200, `h2` is 300.
 
