@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Zavmo Is Built — Zavmo</title>
+<meta name="description" content="The architecture, the model, and the trust story behind Zavmo — for the people who need to know it's real, safe and integrable.">
+<meta property="og:title" content="How Zavmo Is Built — Zavmo">
+<meta property="og:description" content="The architecture, the model and the trust story behind Zavmo.">
+
+<!-- DM Sans is declared in --font but intentionally not loaded as a webfont,
+     so this renders in the system sans-serif fallback — matching the current live site. -->
+
+<style>
+  :root{
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
+    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
+    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
+    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --bg-primary:var(--navy-0); --bg-secondary:var(--navy-1); --bg-card:var(--surface);
+    --teal-subtle:rgba(47,207,168,.14); --teal-border:var(--border-2);
+    --text-primary:var(--ink); --text-secondary:var(--ink-2); --text-tertiary:var(--ink-3);
+    --amber:#f5b544; --blue:#8fb8ff;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--navy-0);scroll-behavior:smooth}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;line-height:1.55;
+    background:
+      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
+    background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  em{font-style:normal;color:var(--teal-glow)}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;color:var(--teal-glow);background:rgba(47,207,168,.08);padding:1px 6px;border-radius:5px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(22px,5vw,48px)}
+
+  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:14px clamp(22px,5vw,48px);
+    background:rgba(6,14,23,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+  .logomark{width:34px;height:34px;flex:0 0 auto}
+  .brand-txt{display:flex;flex-direction:column;line-height:1}
+  .word{font-size:13px;font-weight:600;letter-spacing:.26em}
+  .tag{font-size:10px;color:var(--teal);margin-top:5px;letter-spacing:.04em}
+  .nav-spacer{flex:1}
+  .nav-link{font-size:13px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;transition:.2s}
+  .nav-link:hover{color:var(--teal)}
+  .nav-link svg{width:15px;height:15px}
+  .nav-cta{background:var(--teal);color:var(--navy-0);padding:9px 20px;border-radius:100px;font-size:13px;font-weight:600;transition:.2s;margin-left:14px}
+  .nav-cta:hover{background:var(--teal-glow);box-shadow:0 0 20px rgba(47,207,168,.4)}
+
+  .hero{padding:clamp(56px,12vh,120px) 0 clamp(40px,8vh,72px)}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+  h1{font-weight:200;letter-spacing:-.015em;line-height:1.05;font-size:clamp(34px,6vw,60px);margin:0 0 20px;text-wrap:balance}
+  .lede{font-size:clamp(16px,2vw,20px);line-height:1.55;color:var(--ink-2);max-width:62ch;margin:0 0 32px;font-weight:300}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+  .btn-primary{background:var(--teal);color:var(--navy-0)}
+  .btn-primary:hover{background:var(--teal-glow);box-shadow:0 8px 28px rgba(47,207,168,.3)}
+  .btn-ghost{border:1px solid var(--border-2);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+
+  section{padding:clamp(40px,7vh,72px) 0}
+  .section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+  h2{font-weight:300;letter-spacing:-.01em;line-height:1.15;font-size:clamp(26px,4vw,40px);margin:0 0 16px;text-wrap:balance}
+  h3{font-weight:500;letter-spacing:-.01em;font-size:19px;margin:0 0 8px}
+  p{color:var(--ink-2);font-weight:300;max-width:66ch}
+  .muted{color:var(--ink-3)}
+  .lead-p{font-size:17px}
+
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;backdrop-filter:blur(18px)}
+  .stat-num{font-size:clamp(26px,4vw,38px);font-weight:200;color:var(--teal);letter-spacing:-.02em;line-height:1}
+  .stat-label{font-size:12.5px;color:var(--ink-2);font-weight:300;margin-top:10px;line-height:1.45}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .card{display:flex;flex-direction:column;gap:10px;background:var(--surface);border:1px solid var(--border);
+    border-radius:18px;padding:24px;backdrop-filter:blur(18px);transition:.2s}
+  .card:hover{background:var(--surface-2);border-color:var(--border-2);transform:translateY(-2px);box-shadow:0 18px 44px rgba(0,0,0,.32)}
+  .chip{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);width:max-content}
+  .chip.walk{color:var(--teal)}
+  .chip.client{color:var(--amber)}
+  .chip.concept{color:var(--blue)}
+  .card p{font-size:14px;line-height:1.5;margin:0}
+
+  .feature{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;padding:22px 0;border-top:1px solid var(--border)}
+  .feature:first-child{border-top:0}
+  .feature-num{width:44px;height:44px;border-radius:12px;background:var(--teal-subtle);border:1px solid var(--teal-border);
+    display:flex;align-items:center;justify-content:center;color:var(--teal);font-weight:600;font-size:15px;flex:0 0 auto}
+
+  .quote{border-left:2px solid var(--teal);padding:8px 0 8px 26px;margin:8px 0}
+  .quote p{font-size:clamp(20px,3vw,28px);font-weight:200;color:var(--ink);line-height:1.35;max-width:54ch}
+  .quote cite{display:block;margin-top:14px;font-size:13px;color:var(--ink-3);font-style:normal}
+  .callout{background:linear-gradient(135deg,rgba(47,207,168,.1),rgba(47,207,168,.04));border:1px solid var(--teal-border);border-radius:18px;padding:32px 34px}
+
+  /* ── layered architecture stack (deck-specific component) ──────────────── */
+  .stack{display:flex;flex-direction:column;gap:10px}
+  .layer{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center;
+    background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 22px;transition:.2s}
+  .layer:hover{border-color:var(--teal-border);background:var(--surface-2)}
+  .layer.accent{background:linear-gradient(135deg,rgba(47,207,168,.12),rgba(47,207,168,.04));border-color:var(--teal-border)}
+  .layer-name{font-size:14px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+  .layer-name small{display:block;font-weight:400;font-size:11px;color:var(--teal);letter-spacing:.02em;margin-top:4px}
+  .layer-desc{font-size:13.5px;color:var(--ink-2);font-weight:300;line-height:1.5;margin:0;max-width:none}
+  .flow-note{text-align:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:4px 0}
+
+  /* ── spec table ────────────────────────────────────────────────────────── */
+  .spec{width:100%;border-collapse:collapse;font-size:14px}
+  .spec td{padding:13px 0;border-top:1px solid var(--border);vertical-align:top;color:var(--ink-2);font-weight:300}
+  .spec tr:first-child td{border-top:0}
+  .spec td:first-child{color:var(--ink);font-weight:500;width:34%;padding-right:24px}
+
+  footer{margin-top:40px;padding:32px 0 56px;border-top:1px solid var(--border);font-size:12.5px;color:var(--ink-3);line-height:1.7;font-weight:300}
+  footer a{color:var(--teal)}
+
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:640px){
+    .feature{grid-template-columns:1fr}
+    .layer{grid-template-columns:1fr;gap:8px}
+    .spec td:first-child{width:auto;display:block;padding-bottom:2px}
+    .spec td{display:block;border-top:0;padding:4px 0}
+    .spec tr{display:block;border-top:1px solid var(--border);padding:12px 0}
+    .nav-cta{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
+      <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
+    <g id="halo"></g>
+    <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
+  </svg>
+  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">How it's built</span></div>
+  <span class="nav-spacer"></span>
+  <a class="nav-link" href="../">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    All proposals
+  </a>
+  <a class="nav-cta" href="https://zavmo.ai">Book a technical deep-dive</a>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">For the people who need to know it's real</div>
+    <h1>How Zavmo is <em>built</em>.</h1>
+    <p class="lede">Behind the coaching conversation is a deliberate architecture: a purpose-built learning model, a global standards graph, a personalisation engine, and a measurement spine that turns every interaction into evidence. Here's what's under the hood — and why it's safe to put in front of your people.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#stack">See the architecture</a>
+      <a class="btn btn-ghost" href="#trust">Jump to security &amp; governance</a>
+    </div>
+  </header>
+
+  <section>
+    <div class="stats reveal">
+      <div class="stat"><div class="stat-num">Phi-3</div><div class="stat-label">Purpose-tuned small model on an MIT licence — not a rented frontier LLM</div></div>
+      <div class="stat"><div class="stat-num">601k</div><div class="stat-label">Qualifications in the standards graph, across 150+ countries</div></div>
+      <div class="stat"><div class="stat-num">xAPI</div><div class="stat-label">1.0.3 &amp; 2.0.0 — every interaction captured as portable evidence</div></div>
+      <div class="stat"><div class="stat-num">ISO<br>27001&nbsp;·&nbsp;42001</div><div class="stat-label">Information-security and AI-management standards, by design</div></div>
+    </div>
+  </section>
+
+  <!-- ── ARCHITECTURE STACK ─────────────────────────────────────────────── -->
+  <section id="stack">
+    <div class="section-label">The architecture</div>
+    <h2>One stack, seven layers.</h2>
+    <p class="lead-p" style="margin-bottom:28px">Each layer does one job well and hands off cleanly to the next. A learner's message travels down for grounding and up for delivery — and everything it touches emits evidence.</p>
+    <div class="stack reveal">
+      <div class="layer"><div class="layer-name">Surfaces<small>learner · admin · Little Zav</small></div><p class="layer-desc">The learner app, the admin console, and the embeddable Little Zav widget — three front ends on one backend, each white-labelled per client.</p></div>
+      <div class="flow-note">▲ delivery&nbsp;&nbsp;&nbsp;grounding ▼</div>
+      <div class="layer accent"><div class="layer-name">Agent 13<small>flow-state orchestrator</small></div><p class="layer-desc">The invisible conductor. Reads a live flow-state signal each turn and chooses which teaching character responds, tuning challenge to ability in real time.</p></div>
+      <div class="layer"><div class="layer-name">Teaching characters<small>Bloom's-mapped specialists</small></div><p class="layer-desc">A roster of specialist coaches, each tuned to a level of Bloom's taxonomy — from building foundations to certifying competence.</p></div>
+      <div class="layer"><div class="layer-name">Personalisation<small>LearnerSignalBundle</small></div><p class="layer-desc">A retrieval layer that grounds every turn in who the learner is — role, prior signals, neurodiversity preferences, goals — so responses fit the person, not the average.</p></div>
+      <div class="layer accent"><div class="layer-name">Saraswati SLM<small>Phi-3 Mini + per-market LoRA</small></div><p class="layer-desc">The learning-science engine: a small, purpose-tuned model with a market-specific adapter for language, framework and cultural register.</p></div>
+      <div class="layer"><div class="layer-name">Standards graph<small>Neo4j knowledge base</small></div><p class="layer-desc">601k qualifications and their skills, mapped across 150+ countries — the ground truth every lesson is built against.</p></div>
+      <div class="layer"><div class="layer-name">Measurement spine<small>xAPI → LRS</small></div><p class="layer-desc">Every meaningful interaction becomes an xAPI statement in a self-hosted Learning Record Store, feeding reporting and — optionally — your own LRS.</p></div>
+    </div>
+  </section>
+
+  <!-- ── THE MODEL ──────────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">The model</div>
+    <h2>A small model, purpose-built for learning.</h2>
+    <p class="lead-p">Zavmo doesn't rent a general-purpose frontier LLM and hope it behaves. <em>Saraswati</em> is built on <strong>Microsoft Phi-3 Mini</strong> — small enough to run efficiently, tuned specifically for learning science, and on an MIT licence that's fully commercial-friendly.</p>
+    <div class="grid cols-2 reveal" style="margin-top:28px">
+      <div class="card"><span class="chip walk">Control</span><h3>Behaviour you can govern</h3><p>A model you tune is a model you can audit, test and constrain — not a black box whose behaviour changes when a vendor ships an update.</p></div>
+      <div class="card"><span class="chip walk">Per-market fit</span><h3>One base, many markets</h3><p>A lightweight LoRA adapter per market carries the local language register and qualification framework. UK is live; Ireland, Singapore and Australia follow the same pattern — no retraining from scratch.</p></div>
+      <div class="card"><span class="chip walk">Sustainability</span><h3>Small by design</h3><p>An SLM costs a fraction of a frontier LLM to run, per interaction — which is what makes one-to-one coaching affordable at organisational scale.</p></div>
+      <div class="card"><span class="chip walk">Grounded, not guessing</span><h3>Retrieval over recall</h3><p>Subject knowledge is retrieved at run time from the standards graph and character corpora, not baked into weights — so content stays current and traceable.</p></div>
+    </div>
+  </section>
+
+  <!-- ── STANDARDS GRAPH ────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">The knowledge foundation</div>
+    <h2>Every lesson is built against a real standard.</h2>
+    <p class="lead-p">The standards graph is a Neo4j knowledge base linking <strong>601,000+ qualifications</strong> and their underlying skills across more than 150 countries and 30+ frameworks. It's the difference between generic content and content mapped to the exact competency your role and jurisdiction require.</p>
+    <div class="reveal" style="margin-top:24px">
+      <div class="feature"><div class="feature-num">NOS</div><div><h3>Skills, from the framework</h3><p>National Occupational Standards define <em>what good looks like</em> for a role — the skills and behaviours a competent person demonstrates.</p></div></div>
+      <div class="feature"><div class="feature-num">OFQUAL</div><div><h3>Content, from the qualification</h3><p>Regulated qualifications supply the <em>learning content and assessment criteria</em> — the structured curriculum that leads to a credential.</p></div></div>
+      <div class="feature"><div class="feature-num">MAP</div><div><h3>Role → standard → lesson</h3><p>Zavmo maps a learner's role to the right skills, pulls the matching qualification content, and generates a bespoke path — grounded, not invented.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ── PERSONALISATION ────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">The personalisation engine</div>
+    <h2>Grounded in who the learner actually is.</h2>
+    <p class="lead-p">Before Saraswati generates a single word, the <code>LearnerSignalBundle</code> assembles what's known about the learner — their role, prior interactions, stated goals, confidence, and neurodiversity preferences — and grounds the response in it. Personalisation isn't a greeting with a first name; it's the model reasoning from the real person.</p>
+    <div class="quote reveal">
+      <p>The best way to learn has been known for forty years. The hard part was making it affordable for everyone.</p>
+      <cite>— The 2 Sigma problem, which this architecture exists to solve</cite>
+    </div>
+  </section>
+
+  <!-- ── CHARACTERS + AGENT 13 ──────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">Characters &amp; orchestration</div>
+    <h2>Specialists, conducted by an invisible thirteenth.</h2>
+    <p class="lead-p">Rather than one voice trying to do everything, Zavmo fields <em>seven</em> specialist teaching characters — each tuned to a level of Bloom's taxonomy — plus a group-work mode where <em>four</em> team-mate avatars simulate a real workplace team. <em>Agent 13</em> is the meta-agent above them: it reads a live flow-state signal each turn and picks the right specialist to keep the learner in the productive zone between boredom and overwhelm.</p>
+    <div class="grid reveal" style="margin-top:26px">
+      <div class="card"><span class="chip concept">Remember · Understand</span><h3>The Builder</h3><p>Patient mentor who lays solid foundations, step by step.</p></div>
+      <div class="card"><span class="chip concept">Apply</span><h3>The Coach</h3><p>Hands-on practice partner with immediate feedback.</p></div>
+      <div class="card"><span class="chip concept">Analyse</span><h3>The Analyst</h3><p>Precise thinker who surfaces patterns and connections.</p></div>
+      <div class="card"><span class="chip concept">Evaluate</span><h3>The Navigator</h3><p>Strategic guide who aligns learning to the career goal.</p></div>
+      <div class="card"><span class="chip concept">Apply · Create</span><h3>The Explorer</h3><p>Zero-judgement zone to try things and learn from failure.</p></div>
+      <div class="card"><span class="chip client">Group work · ×4</span><h3>The team room</h3><p>Four team-mate avatars, each a different workplace profile, for practising collaboration and judgement in a simulated team.</p></div>
+      <div class="card"><span class="chip walk">+ Agent 13</span><h3>The orchestrator</h3><p>Chooses who responds, turn by turn, from the live flow signal. <a href="../" style="color:var(--teal)">Full roster deck →</a></p></div>
+    </div>
+  </section>
+
+  <!-- ── MEASUREMENT ────────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">The measurement spine</div>
+    <h2>Every interaction becomes evidence.</h2>
+    <p class="lead-p">Learning that can't be measured can't be proven to the board. Zavmo emits <strong>xAPI statements</strong> — the open standard for learning data — for meaningful interactions, into a self-hosted <strong>yetanalytics lrsql</strong> Learning Record Store (Postgres-backed, Apache-2.0). It's wire-standard and vendor-neutral, so the same data can flow to <em>your</em> LRS too.</p>
+    <table class="spec reveal" style="margin-top:24px">
+      <tr><td>Standard</td><td>xAPI 1.0.3 and 2.0.0 — portable, future-proof, not a proprietary format</td></tr>
+      <tr><td>Store</td><td>Self-hosted yetanalytics <code>lrsql</code>, backed by Postgres — one service, actively maintained</td></tr>
+      <tr><td>Forwarding</td><td>Vendor-agnostic wire format; point statements at your own LRS via a single endpoint variable</td></tr>
+      <tr><td>Feeds</td><td>Admin reporting, learner insight (flow, learning personality), and market-level model improvement</td></tr>
+    </table>
+  </section>
+
+  <!-- ── SECURITY & GOVERNANCE ──────────────────────────────────────────── -->
+  <section id="trust">
+    <div class="section-label">Security &amp; governance</div>
+    <h2>Built to pass your security review.</h2>
+    <p class="lead-p">The features win the demo; this is the section that gets the deal signed. Zavmo is engineered against recognised standards from the start, not bolted on afterwards.</p>
+    <div class="grid cols-2 reveal" style="margin-top:26px">
+      <div class="card"><span class="chip walk">ISO 27001</span><h3>Information security</h3><p>Engineered to the international information-security management standard — access control, encryption, and auditability as first-class requirements.</p></div>
+      <div class="card"><span class="chip walk">ISO 42001</span><h3>Responsible AI</h3><p>Built to the AI-management standard: governed model behaviour, documented decisions, and accountability for how the AI is trained and used.</p></div>
+      <div class="card"><span class="chip walk">Data residency</span><h3>Your data, your region</h3><p>Architecture supports EU data residency, so learner data stays where your compliance team needs it to.</p></div>
+      <div class="card"><span class="chip walk">Tenant isolation</span><h3>Org-scoped by default</h3><p>Every query is scoped to the organisation. Admins see their people and no one else's — isolation is enforced in the data layer, not just the UI.</p></div>
+      <div class="card"><span class="chip walk">Your data isn't the training set</span><h3>Aggregate, not individual</h3><p>Model improvement uses aggregated, market-level learning signals — never individual records — and character knowledge is retrieved (RAG), not baked into weights.</p></div>
+      <div class="card"><span class="chip walk">Guardrails</span><h3>Grounded generation</h3><p>Responses are grounded in the standards graph and quality-scored; the admin Prompt Studio lets teams test prompt changes in simulation before they ever reach a learner.</p></div>
+    </div>
+  </section>
+
+  <!-- ── INTEGRATION & DEPLOYMENT ───────────────────────────────────────── -->
+  <section>
+    <div class="section-label">Integration &amp; deployment</div>
+    <h2>Fits your stack, not the other way round.</h2>
+    <table class="spec reveal">
+      <tr><td>Identity</td><td>SSO for learners and admins — Zavmo slots into your existing identity provider</td></tr>
+      <tr><td>Content standards</td><td>SCORM and xAPI interoperability for existing LMS/LXP estates</td></tr>
+      <tr><td>Data out</td><td>xAPI statement forwarding to your Learning Record Store or data warehouse</td></tr>
+      <tr><td>Embedding</td><td>Little Zav drops into a host LMS as a widget; full white-label theming per client</td></tr>
+      <tr><td>Delivery</td><td>Cloud-hosted, continuously deployed, with a protected release pipeline and automated quality gates on every change</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <div class="callout reveal">
+      <h2 style="margin-bottom:10px">Built to be trusted.</h2>
+      <p style="margin-bottom:22px;max-width:60ch">A purpose-built model, a real standards foundation, isolation and governance by design, and open, portable measurement. If your security, data or L&amp;D team has questions, we'd rather answer them in detail than gloss over them.</p>
+      <a class="btn btn-primary" href="https://zavmo.ai">Book a technical deep-dive</a>
+    </div>
+  </section>
+
+  <footer>
+    Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
+    Architecture overview for evaluation. Specifics — model versions, framework coverage, deployment topology — confirmed under NDA in a technical session.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var g=document.getElementById('halo'), n=12, cx=50, cy=50, r=38;
+  for(var i=0;i<n;i++){
+    var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
+    var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',x.toFixed(1)); c.setAttribute('cy',y.toFixed(1)); c.setAttribute('r','2.4');
+    c.setAttribute('fill','#3FE4BC'); c.setAttribute('opacity', i%2?'0.55':'0.9');
+    g.appendChild(c);
+  }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in')}); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {threshold:.12});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+</body>
+</html>
