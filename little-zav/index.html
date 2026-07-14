@@ -35,18 +35,33 @@
   <!-- 1 · COVER -->
   <section class="slide cover">
     <div class="cover-atom">__ATOM__</div>
-    <div class="eyebrow">Growth Engineering · Product &amp; Deployment</div>
-    <h1 class="display xl">Little&nbsp;Zav</h1>
-    <p class="lede">A standalone, playful learning companion that <em>speaks first</em> — making learners want to log in, learn a little every day, and light up as they go.</p>
+    <div class="eyebrow">Introducing: Little Zav</div>
+    <h1 class="display">The hardest problem in learning isn’t content. It’s getting people to <em>come back</em>.</h1>
+    <p class="lede">You’ve got the platform and the library. What’s missing is a daily reason to open it. Little Zav brings every learner one small, personal thing to do each day — turning learning into a habit.</p>
     <div class="cover-meta">
       <span class="chip live"><span class="dot"></span>Live in the cloud</span>
       <span class="chip">Own service · own database</span>
       <span class="chip">Embeds on any LMS</span>
     </div>
-    <div class="hint"><svg class="ic sm"><use href="#i-hand"/></svg> Slides 4 &amp; 9–13 are <strong style="color:var(--ink-2)">fully interactive</strong> — play them. Use <kbd>→</kbd> <kbd>←</kbd> or the dots.</div>
+    <div class="hint"><svg class="ic sm"><use href="#i-hand"/></svg> Slides 5 &amp; 10–14 are <strong style="color:var(--ink-2)">fully interactive</strong> — play them. Use <kbd>→</kbd> <kbd>←</kbd> or the dots.</div>
   </section>
 
-  <!-- 2 · WHAT IT IS -->
+  <!-- 2 · BENEFITS -->
+  <section class="slide">
+    <div class="eyebrow"><svg class="ic"><use href="#i-spark"/></svg>Why it matters</div>
+    <h2 class="display">A daily habit, not another thing to launch.</h2>
+    <p class="lede">Little Zav does one job well: it gives every learner a small, personal reason to come back — and gives you the insight and the brand fit to make it your own.</p>
+    <div class="grid three benefits">
+      <div class="card benefit"><svg class="ic"><use href="#i-refresh"/></svg><p>Learners come back on their own, day after day.</p></div>
+      <div class="card benefit"><svg class="ic"><use href="#i-hand"/></svg><p>It speaks first, so no one faces a blank page.</p></div>
+      <div class="card benefit"><svg class="ic"><use href="#i-spark"/></svg><p>Something new every login, built from their own learning.</p></div>
+      <div class="card benefit"><svg class="ic"><use href="#i-layers"/></svg><p>Works with the LMS you already have.</p></div>
+      <div class="card benefit"><svg class="ic"><use href="#i-palette"/></svg><p>Your brand, your content, your data. Live in a day, no code.</p></div>
+      <div class="card benefit"><svg class="ic"><use href="#i-chart"/></svg><p>Fun on the surface, real insight underneath.</p></div>
+    </div>
+  </section>
+
+  <!-- 3 · WHAT IT IS -->
   <section class="slide">
     <div class="eyebrow"><svg class="ic"><use href="#i-bolt"/></svg>The widget · what it is</div>
     <h2 class="display">A companion that greets you before you ask.</h2>
@@ -323,6 +338,10 @@
       <span class="chip">Insightful for the organisation</span>
       <span class="chip">White-label for every client</span>
     </div>
+    <div class="cta">
+      <a class="cta-btn" href="mailto:juliette.denny@growthengineering.co.uk?subject=Little%20Zav%20%E2%80%94%20let%E2%80%99s%20talk">Reply and we’ll get you set up<svg class="ic sm"><use href="#i-link"/></svg></a>
+      <span class="cta-note">Live in a day, no code. We’ll wire it to your LMS and brand it as yours.</span>
+    </div>
     <div class="hint muted">Little Zav · a standalone product · Zavmo is tenant #1</div>
   </section>
 
@@ -334,7 +353,7 @@
   <div class="dots" id="dots"></div>
   <button class="nav-btn" id="nextBtn" aria-label="Next slide">›</button>
 </div>
-<div class="counter"><span id="cur">1</span> / <span id="total">19</span></div>
+<div class="counter"><span id="cur">1</span> / <span id="total">20</span></div>
 <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
 
 <style>
@@ -363,9 +382,8 @@
   kbd{font-family:var(--font);font-size:.8em;background:var(--surface-2);border:1px solid var(--border);border-radius:6px;padding:.05em .45em;color:var(--ink-2)}
 
   .deck{display:flex;height:100vh;width:100vw;transition:transform .55s cubic-bezier(.7,0,.2,1)}
-  .slide{min-width:100vw;height:100vh;flex:0 0 100vw;display:flex;flex-direction:column;justify-content:center;padding:clamp(26px,5vh,64px) clamp(24px,7vw,96px) 92px;overflow-y:auto}
+  .slide{min-width:100vw;height:100vh;flex:0 0 100vw;display:flex;flex-direction:column;justify-content:safe center;padding:clamp(40px,7vh,84px) clamp(24px,7vw,96px);overflow-y:auto}
   .slide > *{max-width:var(--maxw);width:100%;margin-left:auto;margin-right:auto}
-  .admin-slide{justify-content:flex-start;padding-top:clamp(40px,7vh,84px)}
   .admin-slide .eyebrow{flex:0 0 auto}
 
   .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:clamp(10px,1.3vw,11.5px);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
@@ -398,11 +416,23 @@
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
   .cover-meta{display:flex;flex-wrap:wrap;gap:12px;margin:6px 0 30px}
 
+  .benefits{margin-top:10px}
+  .benefit{display:flex;flex-direction:column;gap:13px}
+  .benefit .ic{width:22px;height:22px;color:var(--teal)}
+  .benefit p{margin:0;font-size:15.5px;line-height:1.45;color:var(--ink);font-weight:400}
+
+  .cta{display:flex;flex-direction:column;align-items:flex-start;gap:11px;margin:2px 0 28px}
+  .cta-btn{display:inline-flex;align-items:center;gap:10px;font-size:15.5px;font-weight:600;color:var(--navy-0);background:var(--teal);border-radius:100px;padding:14px 26px;text-decoration:none;box-shadow:0 8px 26px rgba(47,207,168,.3);transition:.2s}
+  .cta-btn:hover{background:var(--teal-glow);transform:translateY(-1px)}
+  .cta-btn:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+  .cta-btn .ic{color:var(--navy-0)}
+  .cta-note{font-size:13px;color:var(--ink-3);font-weight:300}
+
   .cover{align-items:flex-start;text-align:left}
   .cover-atom{margin-bottom:6px}
   .cover-atom.small{transform:scale(.66);transform-origin:left center;margin-bottom:-6px}
   .hint{font-size:13.5px;color:var(--ink-3);display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-  .close{justify-content:center}
+  .close{justify-content:safe center}
 
   .atom{width:140px;height:140px;display:block}
   .atom .nucleus{filter:drop-shadow(0 0 14px rgba(63,228,188,.75))}
