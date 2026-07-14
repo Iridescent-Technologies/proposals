@@ -14,7 +14,7 @@ The canonical starting point for every new Zavmo proposal or walkthrough. Copy i
 | `--amber` `#f5b544` / `--blue` `#8fb8ff` | chip accents | Client / concept categories |
 | Font | **DM Sans** (loaded via Google Fonts) | Everything |
 
-**Rules:** navy background, teal accent, DM Sans only. No new colours, no other fonts, no light backgrounds (the light aesthetic is the *product* brand; the *proposals* suite is navy). Weights lean light — `h1` is 200, `h2` is 300.
+**Rules:** navy background, teal accent, DM Sans only. No new colours, no other fonts, no light backgrounds (the light aesthetic is the *product* brand; the *proposals* suite is navy). Weights lean **light and airy** — display headings (`h1`/`h2`) and `.stat-num` are weight 100, `.lede` is 200, body is 300; only small-caps labels (eyebrow, section-label) stay at 600 for legibility. DM Sans is loaded from weight 100.
 
 > Note: the two teal values in the wild differ — the hub uses `#2FCFA8`, the older `zavmo-overview` deck uses `#00d9c0`. **This template's `#2FCFA8` is canonical.** Older decks can be retrofitted over time.
 
