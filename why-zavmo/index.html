@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why Zavmo — The business case</title>
+<meta name="description" content="Why Zavmo: the learning efficiency flywheel that turns better learning into faster organisational impact — the business case for L&D and the board.">
+<meta property="og:title" content="Why Zavmo — The business case">
+<meta property="og:description" content="The learning efficiency flywheel — better learning, straight to the bottom line.">
+
+<!-- DM Sans is declared in --font but intentionally not loaded as a webfont,
+     so this renders in the system sans-serif fallback — matching the current live site. -->
+
+<style>
+  :root{
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
+    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
+    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
+    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --teal-subtle:rgba(47,207,168,.14); --teal-border:var(--border-2); --amber:#f5b544; --blue:#8fb8ff;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--navy-0);scroll-behavior:smooth}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;line-height:1.6;
+    background:linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 60%);
+    -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  em{font-style:normal;color:var(--teal-glow)}
+
+  /* ── ambient drifting orbs ─────────────────────────────────────────────── */
+  .bg{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+  .orb{position:absolute;border-radius:50%;filter:blur(72px);will-change:transform}
+  .orb-a{width:660px;height:660px;top:-220px;right:-160px;background:radial-gradient(circle,rgba(47,207,168,.20),transparent 68%);animation:floatA 24s ease-in-out infinite}
+  .orb-b{width:560px;height:560px;bottom:-220px;left:-180px;background:radial-gradient(circle,rgba(40,120,150,.20),transparent 66%);animation:floatB 30s ease-in-out infinite}
+  .orb-c{width:460px;height:460px;top:42%;left:50%;background:radial-gradient(circle,rgba(63,228,188,.12),transparent 70%);animation:floatC 34s ease-in-out infinite}
+  @keyframes floatA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-54px,46px) scale(1.12)}}
+  @keyframes floatB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(64px,-44px) scale(1.10)}}
+  @keyframes floatC{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(calc(-50% - 46px),calc(-50% - 52px)) scale(1.16)}}
+
+  .wrap{max-width:1060px;margin:0 auto;padding:0 clamp(22px,5vw,48px);position:relative;z-index:1}
+
+  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:14px clamp(22px,5vw,48px);
+    background:rgba(6,14,23,.6);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--border)}
+  .logomark{width:34px;height:34px;flex:0 0 auto}
+  .brand-txt{display:flex;flex-direction:column;line-height:1}
+  .word{font-size:13px;font-weight:600;letter-spacing:.26em}
+  .tag{font-size:10px;color:var(--teal);margin-top:5px;letter-spacing:.04em;font-weight:300}
+  .nav-spacer{flex:1}
+  .nav-link{font-size:13px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;transition:.2s;font-weight:300}
+  .nav-link:hover{color:var(--teal)}
+  .nav-link svg{width:15px;height:15px}
+  .nav-cta{background:var(--teal);color:var(--navy-0);padding:9px 20px;border-radius:100px;font-size:13px;font-weight:600;transition:.2s;margin-left:14px}
+  .nav-cta:hover{background:var(--teal-glow);box-shadow:0 0 22px rgba(47,207,168,.4)}
+
+  /* ── typography ───────────────────────────────────────────────────────── */
+  .hero{padding:clamp(56px,12vh,120px) 0 clamp(28px,6vh,56px)}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+  h1{font-weight:200;letter-spacing:-.015em;line-height:1.05;font-size:clamp(34px,6vw,60px);margin:0 0 20px;text-wrap:balance}
+  .lede{font-size:clamp(16px,2vw,20px);line-height:1.55;color:var(--ink-2);max-width:60ch;margin:0 0 32px;font-weight:300}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+  .btn-primary{background:var(--teal);color:var(--navy-0)}
+  .btn-primary:hover{background:var(--teal-glow);box-shadow:0 8px 30px rgba(47,207,168,.32)}
+  .btn-ghost{border:1px solid var(--border-2);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+
+  section{padding:clamp(44px,8vh,84px) 0}
+  .section-label{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin-bottom:16px}
+  h2{font-weight:300;letter-spacing:-.01em;line-height:1.15;font-size:clamp(26px,4vw,40px);margin:0 0 18px;text-wrap:balance}
+  h3{font-weight:500;letter-spacing:-.01em;font-size:19px;margin:0 0 8px}
+  p{color:var(--ink-2);font-weight:300;max-width:64ch}
+  .lead-p{font-size:17px;font-weight:300;color:var(--ink-2)}
+  .center{text-align:center;margin-left:auto;margin-right:auto}
+  .center p{margin-left:auto;margin-right:auto}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+  .card{display:flex;flex-direction:column;gap:9px;background:var(--surface);border:1px solid var(--border);
+    border-radius:18px;padding:26px;backdrop-filter:blur(18px);transition:.24s}
+  .card:hover{background:var(--surface-2);border-color:var(--border-2);transform:translateY(-3px);box-shadow:0 20px 48px rgba(0,0,0,.34)}
+  .card .k{font-size:clamp(30px,4vw,42px);font-weight:200;color:var(--teal);letter-spacing:-.02em;line-height:1}
+  .card p{font-size:14px;line-height:1.55;margin:0}
+  .card h3{font-weight:500}
+
+  /* two-gain split */
+  .split{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+  .gain{background:linear-gradient(150deg,rgba(47,207,168,.10),rgba(47,207,168,.02));border:1px solid var(--teal-border);
+    border-radius:22px;padding:34px}
+  .gain .k{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+  .gain h3{font-size:clamp(21px,2.6vw,27px);font-weight:300;margin-bottom:10px}
+
+  .quote{border-left:2px solid var(--teal);padding:6px 0 6px 28px;margin:8px 0;max-width:60ch}
+  .quote p{font-size:clamp(21px,3vw,30px);font-weight:200;color:var(--ink);line-height:1.32}
+  .quote cite{display:block;margin-top:16px;font-size:13px;color:var(--ink-3);font-style:normal;font-weight:300}
+  .callout{background:linear-gradient(135deg,rgba(47,207,168,.12),rgba(47,207,168,.03));border:1px solid var(--teal-border);
+    border-radius:24px;padding:clamp(30px,5vw,52px);text-align:center}
+
+  /* ── flywheel ──────────────────────────────────────────────────────────── */
+  .wheel-wrap{max-width:560px;margin:8px auto 0}
+  .flywheel{width:100%;height:auto;display:block}
+  .fw-arrows{opacity:.42}
+  @keyframes fwspin{to{transform:rotate(360deg)}}
+  @keyframes fwspinr{to{transform:rotate(-360deg)}}
+  @keyframes fwpulse{0%,100%{opacity:.9}50%{opacity:.5}}
+  .fw-ring{transform-box:fill-box;transform-origin:center;animation:fwspin 90s linear infinite}
+  .fw-orbit{transform-box:fill-box;transform-origin:center;animation:fwspin 22s linear infinite}
+  .fw-halo{transform-box:fill-box;transform-origin:center;animation:fwspinr 40s linear infinite}
+  .fw-core{transform-box:fill-box;transform-origin:center;animation:fwpulse 6s ease-in-out infinite}
+
+  /* ── evidence ──────────────────────────────────────────────────────────── */
+  .ev{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:24px 26px;backdrop-filter:blur(18px);transition:.24s}
+  .ev:hover{background:var(--surface-2);border-color:var(--border-2)}
+  .ev .tag-ev{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;display:block}
+  .ev p{font-size:14.5px;line-height:1.55;color:var(--ink-2);margin:0 0 14px;font-weight:300}
+  .ev .src{font-size:12px;line-height:1.5;color:var(--ink-3);font-weight:300}
+  .ev .src a{color:var(--teal)}
+  sup.ref{font-size:.62em;font-weight:400;line-height:0;vertical-align:super}
+  sup.ref a{color:var(--teal)}
+  .refs{margin-top:14px}
+  .refs ol{margin:0;padding-left:22px}
+  .refs li{margin-bottom:9px;font-size:12px;color:var(--ink-3);line-height:1.55;font-weight:300}
+  .refs li a{color:var(--teal)}
+  .refs em{color:var(--ink-2)}
+
+  footer{margin-top:24px;padding:34px 0 60px;border-top:1px solid var(--border);font-size:12.5px;color:var(--ink-3);line-height:1.7;font-weight:300}
+  footer a{color:var(--teal)}
+
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:600px){ .nav-cta{display:none} }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+    html{scroll-behavior:auto}.reveal{opacity:1;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <span class="orb orb-a"></span><span class="orb orb-b"></span><span class="orb orb-c"></span>
+</div>
+
+<nav>
+  <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
+      <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
+    <g id="halo"></g>
+    <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
+  </svg>
+  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">The business case</span></div>
+  <span class="nav-spacer"></span>
+  <a class="nav-link" href="../">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    All proposals
+  </a>
+  <a class="nav-cta" href="https://zavmo.ai">Book a demo</a>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Why Zavmo</div>
+    <h1>Where learning meets the <em>bottom line</em>.</h1>
+    <p class="lede">Most training is a cost that can't prove its worth. Zavmo turns learning into capability that shows up in the role — and impact you can put in front of the board.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#flywheel">See the flywheel</a>
+      <a class="btn btn-ghost" href="../how-zavmo-is-built/">How it's built</a>
+    </div>
+  </header>
+
+  <!-- ── THE PROBLEM ────────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">The problem</div>
+    <h2>Training that never reaches the job.</h2>
+    <p class="lead-p" style="margin-bottom:30px">Traditional learning teaches people to <em>remember</em> and <em>understand</em> — then hopes it sticks. It rarely does. The knowledge stays in the course, the behaviour never changes on the job, and L&amp;D is left unable to show what any of it was worth.</p>
+    <div class="grid reveal">
+      <div class="card"><div class="k">The gap</div><h3>Learning that doesn't transfer</h3><p>Skills practised in the abstract don't survive contact with real work. The transfer gap is where most training budget quietly disappears.</p></div>
+      <div class="card"><div class="k">The drift</div><h3>Generic, and out of date</h3><p>One-size content ignores the role, the market and the standard — and is stale before it ships.</p></div>
+      <div class="card"><div class="k">The silence</div><h3>No proof for the board</h3><p>Completion rates aren't impact. When the CFO asks what changed, most L&amp;D has nothing to point to.</p></div>
+    </div>
+  </section>
+
+  <!-- ── THE FLYWHEEL ───────────────────────────────────────────────────── -->
+  <section id="flywheel" class="center">
+    <div class="section-label">The idea</div>
+    <h2 style="max-width:20ch;margin-left:auto;margin-right:auto">The learning efficiency flywheel.</h2>
+    <p class="lead-p" style="max-width:58ch;margin-bottom:8px">When people learn more <em>effectively</em>, impact arrives sooner — and each turn of the wheel makes the next one faster.</p>
+
+    <div class="wheel-wrap reveal">
+      <svg class="flywheel" viewBox="0 0 720 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="fwt fwd">
+        <title id="fwt">The learning efficiency flywheel</title>
+        <desc id="fwd">A five-stage loop: learn on real work scenarios, practise higher-order thinking, competence lands in the role, organisational impact comes faster, evidence sharpens the next cycle.</desc>
+        <defs>
+          <marker id="ah" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2FCFA8"/></marker>
+          <radialGradient id="core" cx="42%" cy="38%" r="66%"><stop offset="0%" stop-color="#c7fff4"/><stop offset="42%" stop-color="#3FE4BC"/><stop offset="100%" stop-color="#14A88B"/></radialGradient>
+        </defs>
+
+        <!-- slowly rotating dashed ring -->
+        <circle class="fw-ring" cx="360" cy="360" r="272" fill="none" stroke="#2FCFA8" stroke-opacity=".22" stroke-width="1.4" stroke-dasharray="2 12" stroke-linecap="round"/>
+
+        <!-- direction arrows -->
+        <g class="fw-arrows" fill="none" stroke="#2FCFA8" stroke-width="2.2" marker-end="url(#ah)">
+          <path d="M423.3,165 A205,205 0 0 1 525.8,239.5"/>
+          <path d="M565,360 A205,205 0 0 1 525.8,480.5"/>
+          <path d="M423.3,555 A205,205 0 0 1 296.7,555"/>
+          <path d="M194.2,480.5 A205,205 0 0 1 155,360"/>
+          <path d="M194.2,239.5 A205,205 0 0 1 296.7,165"/>
+        </g>
+
+        <!-- orbiting spark -->
+        <g class="fw-orbit"><circle cx="360" cy="155" r="6" fill="#3FE4BC" style="filter:drop-shadow(0 0 7px rgba(63,228,188,.95))"/></g>
+
+        <!-- centre orb -->
+        <g class="fw-halo">
+          <circle cx="360" cy="284" r="2.4" fill="#3FE4BC" opacity=".9"/><circle cx="360" cy="436" r="2.4" fill="#3FE4BC" opacity=".55"/>
+          <circle cx="284" cy="360" r="2.4" fill="#3FE4BC" opacity=".7"/><circle cx="436" cy="360" r="2.4" fill="#3FE4BC" opacity=".7"/>
+        </g>
+        <circle cx="360" cy="360" r="70" fill="#06202a" stroke="#3FE4BC" stroke-width="1.5" opacity=".95"/>
+        <circle class="fw-core" cx="360" cy="360" r="70" fill="none" stroke="#2FCFA8" stroke-width="9" opacity=".12"/>
+        <text x="360" y="350" text-anchor="middle" fill="#EAFBF4" font-size="15" font-weight="400" letter-spacing=".4" font-family="var(--font)">LEARNING</text>
+        <text x="360" y="371" text-anchor="middle" fill="#EAFBF4" font-size="15" font-weight="400" letter-spacing=".4" font-family="var(--font)">EFFICIENCY</text>
+        <text x="360" y="392" text-anchor="middle" fill="#2FCFA8" font-size="11" font-weight="500" letter-spacing="1.4" font-family="var(--font)">the flywheel</text>
+
+        <!-- nodes -->
+        <g font-family="var(--font)">
+          <!-- 1 top -->
+          <circle cx="360" cy="155" r="60" fill="#2FCFA8" fill-opacity=".09" stroke="#2FCFA8" stroke-opacity=".5" stroke-width="1.4"/>
+          <circle cx="360" cy="103" r="14" fill="#2FCFA8"/><text x="360" y="108" text-anchor="middle" fill="#06202a" font-size="13" font-weight="600">1</text>
+          <text x="360" y="152" text-anchor="middle" fill="#EAFBF4" font-size="13" font-weight="300">Learn on real</text>
+          <text x="360" y="170" text-anchor="middle" fill="#EAFBF4" font-size="13" font-weight="300">work scenarios</text>
+          <!-- 2 -->
+          <circle cx="555" cy="297" r="60" fill="#2FCFA8" fill-opacity=".09" stroke="#2FCFA8" stroke-opacity=".5" stroke-width="1.4"/>
+          <circle cx="555" cy="245" r="14" fill="#2FCFA8"/><text x="555" y="250" text-anchor="middle" fill="#06202a" font-size="13" font-weight="600">2</text>
+          <text x="555" y="294" text-anchor="middle" fill="#EAFBF4" font-size="13" font-weight="300">Practise Apply,</text>
+          <text x="555" y="312" text-anchor="middle" fill="#EAFBF4" font-size="13" font-weight="300">Analyse, Evaluate</text>
+          <!-- 3 -->
+          <circle cx="480.5" cy="525.8" r="60" fill="#2FCFA8" fill-opacity=".09" stroke="#2FCFA8" stroke-opacity=".5" stroke-width="1.4"/>
+          <circle cx="480.5" cy="473.8" r="14" fill="#2FCFA8"/><text x="480.5" y="478.8" text-anchor="middle" fill="#06202a" font-size="13" font-weight="600">3</text>
+          <text x="480.5" y="522.8" text-anchor="middle" fill="#EAFBF4" font-size="13" font-weight="300">Competence lands</text>
+          <text x="480.5" y="540.8" text-anchor="middle" fill="#EAFBF4" font-size="13" font-weight="300">in the role</text>
+          <!-- 4 emphasised -->
+          <circle cx="239.5" cy="525.8" r="60" fill="#2FCFA8" fill-opacity=".18" stroke="#3FE4BC" stroke-opacity=".75" stroke-width="1.8"/>
+          <circle cx="239.5" cy="473.8" r="14" fill="#3FE4BC"/><text x="239.5" y="478.8" text-anchor="middle" fill="#06202a" font-size="13" font-weight="600">4</text>
+          <text x="239.5" y="522.8" text-anchor="middle" fill="#EAFBF4" font-size="13" font-weight="500">Organisational</text>
+          <text x="239.5" y="540.8" text-anchor="middle" fill="#EAFBF4" font-size="13" font-weight="500">impact, faster</text>
+          <!-- 5 -->
+          <circle cx="165" cy="297" r="60" fill="#2FCFA8" fill-opacity=".09" stroke="#2FCFA8" stroke-opacity=".5" stroke-width="1.4"/>
+          <circle cx="165" cy="245" r="14" fill="#2FCFA8"/><text x="165" y="250" text-anchor="middle" fill="#06202a" font-size="13" font-weight="600">5</text>
+          <text x="165" y="294" text-anchor="middle" fill="#EAFBF4" font-size="13" font-weight="300">Evidence sharpens</text>
+          <text x="165" y="312" text-anchor="middle" fill="#EAFBF4" font-size="13" font-weight="300">the next cycle</text>
+        </g>
+      </svg>
+    </div>
+    <p class="muted center" style="max-width:56ch;color:var(--ink-3);font-size:13.5px;margin-top:18px">Accelerant: xAPI evidence + personalisation — every turn makes the next one more efficient.</p>
+  </section>
+
+  <!-- ── TWO GAINS ──────────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">Why it's efficient</div>
+    <h2>Two gains, at the same time.</h2>
+    <p class="lead-p" style="margin-bottom:28px">"Efficiency" isn't doing the same training faster. It's two compounding wins from the same learning hours.</p>
+    <div class="split reveal">
+      <div class="gain"><div class="k">Gain one</div><h3>Time-to-competence shrinks</h3><p style="max-width:none">Personalised, grounded coaching gets each learner to capable in less time — no wasted hours on what they already know, no gaps left unfilled.</p></div>
+      <div class="gain"><div class="k">Gain two</div><h3>Transfer tightens</h3><p style="max-width:none">Because they practise on real work at the level the job demands, the capability lands <em>in the role</em> — not in a certificate. Less leaks away.<sup class="ref"><a href="#r5" title="Baldwin &amp; Ford (1988)">5</a></sup></p></div>
+    </div>
+  </section>
+
+  <!-- ── HIGHER-ORDER + GROUP WORK ──────────────────────────────────────── -->
+  <section>
+    <div class="section-label">How the wheel turns faster</div>
+    <h2>Learning that behaves like the job.</h2>
+    <p class="lead-p">The wheel spins on <em>higher-order</em> learning. Zavmo's specialist teaching characters coach each learner up Bloom's taxonomy — from remembering, to applying, analysing and evaluating real workplace scenarios. That's the level at which knowledge actually transfers.<sup class="ref"><a href="#r2" title="Freeman et al. (2014)">2</a></sup></p>
+    <div class="grid reveal" style="margin-top:26px">
+      <div class="card"><div class="k">7</div><h3>Specialist coaches</h3><p>A team of teaching characters, each tuned to a level of Bloom's — so learners are always met at the right cognitive depth.</p></div>
+      <div class="card"><div class="k">4</div><h3>A virtual team room</h3><p>Four team-mate avatars, each with a different workplace profile, let learners practise collaboration and judgement in a simulated team — the closest thing to on-the-job experience before the job.</p></div>
+      <div class="card"><div class="k">13</div><h3>An invisible conductor</h3><p>Agent 13 reads a live flow signal and keeps each learner in the productive zone between boredom and overwhelm.<sup class="ref"><a href="#r6" title="Csikszentmihalyi (1990)">6</a></sup></p></div>
+    </div>
+  </section>
+
+  <!-- ── PROOF ──────────────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">Proof for the board</div>
+    <h2>Impact you can actually show.</h2>
+    <p class="lead-p">Every meaningful interaction becomes an <em>xAPI statement</em> — the open standard for learning data. That turns coaching into evidence: not "who finished the course," but what people can now do, how behaviour is changing, and where capability is building across the organisation.</p>
+    <div class="quote reveal" style="margin-top:26px">
+      <p>The best way to learn has been known for forty years. The hard part was making it affordable for everyone.</p>
+      <cite>— Bloom's 2 Sigma problem, which this whole model exists to solve<sup class="ref"><a href="#r1" title="Bloom (1984)">1</a></sup></cite>
+    </div>
+  </section>
+
+  <!-- ── OUTCOMES ───────────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">What the organisation gets</div>
+    <h2>The return.</h2>
+    <div class="grid reveal" style="margin-top:8px">
+      <div class="card"><h3>Faster capability</h3><p>People become effective in the role sooner — the single biggest lever on productivity.</p></div>
+      <div class="card"><h3>Higher engagement</h3><p>Coaching that adapts to the person keeps learners in the flow, not clicking Next.</p></div>
+      <div class="card"><h3>Compliance, covered</h3><p>Content mapped to the right standard for the role and the market, kept current automatically.</p></div>
+      <div class="card"><h3>Evidence, on demand</h3><p>Portable xAPI data your L&amp;D team can put in front of the board — and your own systems.</p></div>
+    </div>
+  </section>
+
+  <!-- ── EVIDENCE ───────────────────────────────────────────────────────── -->
+  <section id="evidence">
+    <div class="section-label">The evidence</div>
+    <h2>Not a hunch — decades of research.</h2>
+    <p class="lead-p" style="margin-bottom:30px">Every turn of the flywheel rests on established learning science. The findings below are the ones Zavmo is built to operationalise.</p>
+    <div class="grid reveal">
+      <div class="ev"><span class="tag-ev">The 2 Sigma benchmark</span><p>One-to-one tutoring with mastery learning moved the average student above <em>98%</em> of a conventionally-taught class — the north star this whole model chases.</p><div class="src">Bloom (1984), <em>Educational Researcher</em>. <a href="https://doi.org/10.3102/0013189X013006004" target="_blank" rel="noopener">doi</a></div></div>
+      <div class="ev"><span class="tag-ev">Active learning</span><p>Across <em>225</em> controlled studies, active learning raised exam performance by ~0.47 SD and made students roughly 1.5× less likely to fail than lecturing.</p><div class="src">Freeman et al. (2014), <em>PNAS</em>. <a href="https://doi.org/10.1073/pnas.1319030111" target="_blank" rel="noopener">doi</a></div></div>
+      <div class="ev"><span class="tag-ev">Retrieval practice</span><p>Actively recalling material — being tested on it — produces markedly better long-term retention than simply re-reading it.</p><div class="src">Roediger &amp; Karpicke (2006), <em>Psychological Science</em>. <a href="https://doi.org/10.1111/j.1467-9280.2006.01693.x" target="_blank" rel="noopener">doi</a></div></div>
+      <div class="ev"><span class="tag-ev">Spaced practice</span><p>A synthesis of <em>317</em> experiments: spreading learning across time dramatically outperforms cramming it into one session.</p><div class="src">Cepeda et al. (2006), <em>Psychological Bulletin</em>. <a href="https://doi.org/10.1037/0033-2909.132.3.354" target="_blank" rel="noopener">doi</a></div></div>
+      <div class="ev"><span class="tag-ev">Transfer to the job</span><p>Learning only creates value when it transfers to work — and transfer depends on practising in job-like conditions, not just acquiring knowledge.</p><div class="src">Baldwin &amp; Ford (1988), <em>Personnel Psychology</em>. <a href="https://doi.org/10.1111/j.1744-6570.1988.tb00632.x" target="_blank" rel="noopener">doi</a></div></div>
+      <div class="ev"><span class="tag-ev">Flow</span><p>People learn and perform best in <em>flow</em> — the state reached when challenge is matched to skill. It's exactly what Agent 13 tunes for.</p><div class="src">Csikszentmihalyi (1990), <em>Flow</em>.</div></div>
+    </div>
+
+    <div class="refs reveal" style="margin-top:34px">
+      <div class="section-label" style="margin-bottom:10px">References</div>
+      <ol>
+        <li id="r1">Bloom, B. S. (1984). The 2 Sigma Problem: The Search for Methods of Group Instruction as Effective as One-to-One Tutoring. <em>Educational Researcher</em>, 13(6), 4–16. <a href="https://doi.org/10.3102/0013189X013006004" target="_blank" rel="noopener">https://doi.org/10.3102/0013189X013006004</a></li>
+        <li id="r2">Freeman, S., Eddy, S. L., McDonough, M., et al. (2014). Active learning increases student performance in science, engineering, and mathematics. <em>PNAS</em>, 111(23), 8410–8415. <a href="https://doi.org/10.1073/pnas.1319030111" target="_blank" rel="noopener">https://doi.org/10.1073/pnas.1319030111</a></li>
+        <li id="r3">Roediger, H. L., &amp; Karpicke, J. D. (2006). Test-Enhanced Learning: Taking Memory Tests Improves Long-Term Retention. <em>Psychological Science</em>, 17(3), 249–255. <a href="https://doi.org/10.1111/j.1467-9280.2006.01693.x" target="_blank" rel="noopener">https://doi.org/10.1111/j.1467-9280.2006.01693.x</a></li>
+        <li id="r4">Cepeda, N. J., Pashler, H., Vul, E., Wixted, J. T., &amp; Rohrer, D. (2006). Distributed Practice in Verbal Recall Tasks: A Review and Quantitative Synthesis. <em>Psychological Bulletin</em>, 132(3), 354–380. <a href="https://doi.org/10.1037/0033-2909.132.3.354" target="_blank" rel="noopener">https://doi.org/10.1037/0033-2909.132.3.354</a></li>
+        <li id="r5">Baldwin, T. T., &amp; Ford, J. K. (1988). Transfer of Training: A Review and Directions for Future Research. <em>Personnel Psychology</em>, 41(1), 63–105. <a href="https://doi.org/10.1111/j.1744-6570.1988.tb00632.x" target="_blank" rel="noopener">https://doi.org/10.1111/j.1744-6570.1988.tb00632.x</a></li>
+        <li id="r6">Csikszentmihalyi, M. (1990). <em>Flow: The Psychology of Optimal Experience</em>. Harper &amp; Row.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ── CLOSE ──────────────────────────────────────────────────────────── -->
+  <section>
+    <div class="callout reveal">
+      <h2 style="max-width:22ch;margin:0 auto 12px">The best way to learn, finally affordable.</h2>
+      <p class="center" style="max-width:56ch;margin-bottom:24px">One-to-one coaching used to be the privilege of a few. Zavmo makes it the default for everyone — and turns it into impact your organisation can measure.</p>
+      <a class="btn btn-primary" href="https://zavmo.ai">Book a demo</a>
+    </div>
+  </section>
+
+  <footer>
+    Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
+    The business case for Zavmo. For the architecture behind it, see <a href="../how-zavmo-is-built/">How Zavmo Is Built</a>.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var g=document.getElementById('halo'), n=12, cx=50, cy=50, r=38;
+  for(var i=0;i<n;i++){
+    var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
+    var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',x.toFixed(1)); c.setAttribute('cy',y.toFixed(1)); c.setAttribute('r','2.4');
+    c.setAttribute('fill','#3FE4BC'); c.setAttribute('opacity', i%2?'0.55':'0.9');
+    g.appendChild(c);
+  }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in')}); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {threshold:.1});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+</body>
+</html>
