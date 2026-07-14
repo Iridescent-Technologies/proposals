@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The ROI of Personalised Learning — Zavmo</title>
+<meta name="description" content="An interactive model of the return on personalised learning — run on your own numbers, with transparent, evidence-informed assumptions.">
+<meta property="og:title" content="The ROI of Personalised Learning — Zavmo">
+<meta property="og:description" content="Model the return on your own numbers — transparent assumptions, no black box.">
+
+<!-- DM Sans is declared in --font but intentionally not loaded as a webfont,
+     so this renders in the system sans-serif fallback — matching the current live site. -->
+
+<style>
+  :root{
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
+    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
+    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
+    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --teal-subtle:rgba(47,207,168,.14); --teal-border:var(--border-2); --amber:#f5b544;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--navy-0);scroll-behavior:smooth}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;line-height:1.55;
+    background:
+      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
+    background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  em{font-style:normal;color:var(--teal-glow)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(22px,5vw,48px)}
+
+  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:14px clamp(22px,5vw,48px);
+    background:rgba(6,14,23,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+  .logomark{width:34px;height:34px;flex:0 0 auto}
+  .brand-txt{display:flex;flex-direction:column;line-height:1}
+  .word{font-size:13px;font-weight:600;letter-spacing:.26em}
+  .tag{font-size:10px;color:var(--teal);margin-top:5px;letter-spacing:.04em}
+  .nav-spacer{flex:1}
+  .nav-link{font-size:13px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;transition:.2s}
+  .nav-link:hover{color:var(--teal)}
+  .nav-link svg{width:15px;height:15px}
+  .nav-cta{background:var(--teal);color:var(--navy-0);padding:9px 20px;border-radius:100px;font-size:13px;font-weight:600;transition:.2s;margin-left:14px}
+  .nav-cta:hover{background:var(--teal-glow);box-shadow:0 0 20px rgba(47,207,168,.4)}
+
+  .hero{padding:clamp(56px,12vh,110px) 0 clamp(28px,5vh,44px)}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+  h1{font-weight:200;letter-spacing:-.015em;line-height:1.05;font-size:clamp(34px,6vw,60px);margin:0 0 20px;text-wrap:balance}
+  .lede{font-size:clamp(16px,2vw,20px);line-height:1.55;color:var(--ink-2);max-width:62ch;margin:0 0 8px;font-weight:300}
+
+  section{padding:clamp(36px,6vh,64px) 0}
+  .section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+  h2{font-weight:300;letter-spacing:-.01em;line-height:1.15;font-size:clamp(24px,3.6vw,36px);margin:0 0 16px;text-wrap:balance}
+  h3{font-weight:500;letter-spacing:-.01em;font-size:18px;margin:0 0 8px}
+  p{color:var(--ink-2);font-weight:300;max-width:66ch}
+  .lead-p{font-size:16.5px}
+
+  /* ── calculator ────────────────────────────────────────────────────────── */
+  .calc{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+  .panel{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;backdrop-filter:blur(18px)}
+  .panel h3{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin:0 0 20px}
+  .field{margin-bottom:20px}
+  .field:last-child{margin-bottom:0}
+  .field label{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;color:var(--ink-2);font-weight:300;margin-bottom:8px}
+  .field label b{color:var(--ink);font-weight:600;font-size:14px}
+  .in-money,.in-num{position:relative}
+  .in-money::before{content:"£";position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink-3);font-size:15px;pointer-events:none}
+  input[type=number]{width:100%;background:rgba(6,14,23,.5);border:1px solid var(--border);border-radius:11px;
+    color:var(--ink);font-family:inherit;font-size:15px;font-weight:400;padding:11px 14px;transition:.15s;-moz-appearance:textfield}
+  .in-money input[type=number]{padding-left:26px}
+  input[type=number]:focus{outline:none;border-color:var(--teal);background:rgba(6,14,23,.7)}
+  input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:5px;border-radius:5px;
+    background:linear-gradient(90deg,var(--teal) var(--fill,30%),rgba(234,251,244,.14) var(--fill,30%));margin:6px 0 2px}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--teal);
+    cursor:pointer;box-shadow:0 2px 8px rgba(47,207,168,.4);border:0}
+  input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--teal);cursor:pointer;border:0}
+  .lever-note{font-size:11.5px;color:var(--ink-3);font-weight:300;margin-top:6px;line-height:1.45}
+
+  .results{display:flex;flex-direction:column;gap:16px}
+  .headline{background:linear-gradient(135deg,rgba(47,207,168,.14),rgba(47,207,168,.03));border:1px solid var(--teal-border);
+    border-radius:18px;padding:26px 28px}
+  .headline .lbl{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+  .headline .big{font-size:clamp(34px,6vw,50px);font-weight:200;letter-spacing:-.02em;line-height:1;color:var(--ink)}
+  .headline .sub{font-size:13px;color:var(--ink-2);font-weight:300;margin-top:10px}
+  .rgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .rcell{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px}
+  .rcell .n{font-size:clamp(20px,3vw,26px);font-weight:200;color:var(--teal);letter-spacing:-.01em;line-height:1.05}
+  .rcell .l{font-size:12px;color:var(--ink-2);font-weight:300;margin-top:7px;line-height:1.4}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:24px;backdrop-filter:blur(18px)}
+  .card h3{font-weight:500}
+  .card p{font-size:14px;line-height:1.55;margin:0}
+  .callout{background:linear-gradient(135deg,rgba(47,207,168,.1),rgba(47,207,168,.04));border:1px solid var(--teal-border);border-radius:18px;padding:30px 32px}
+  .callout.plain{background:var(--surface);border-color:var(--border)}
+  .callout.plain h3{color:var(--teal);font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+
+  footer{margin-top:40px;padding:32px 0 56px;border-top:1px solid var(--border);font-size:12.5px;color:var(--ink-3);line-height:1.7;font-weight:300}
+  footer a{color:var(--teal)}
+
+  @media (max-width:800px){ .calc{grid-template-columns:1fr} }
+  @media (max-width:640px){ .nav-cta{display:none} }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav>
+  <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
+      <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
+    <g id="halo"></g>
+    <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
+  </svg>
+  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">ROI model</span></div>
+  <span class="nav-spacer"></span>
+  <a class="nav-link" href="../">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    All proposals
+  </a>
+  <a class="nav-cta" href="https://zavmo.ai">Book a demo</a>
+</nav>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">The business case · ROI model</div>
+    <h1>The return on personalised learning.</h1>
+    <p class="lede">Not our claims — <em>your</em> numbers. Enter your workforce below and this models the value, using transparent, adjustable assumptions grounded in learning-science research. Every lever is yours to change.</p>
+  </header>
+
+  <!-- ── CALCULATOR ─────────────────────────────────────────────────────── -->
+  <section id="calc" style="padding-top:8px">
+    <div class="calc">
+      <div class="panel">
+        <h3>Your organisation</h3>
+        <div class="field">
+          <label for="learners"><span>Learners</span><b id="learners_v">500</b></label>
+          <div class="in-num"><input type="number" id="learners" value="500" min="1" step="10"></div>
+        </div>
+        <div class="field">
+          <label for="salary"><span>Average salary</span><b id="salary_v">£35,000</b></label>
+          <div class="in-money"><input type="number" id="salary" value="35000" min="1" step="1000"></div>
+        </div>
+        <div class="field">
+          <label for="hours"><span>Training hours / learner / year</span><b id="hours_v">40</b></label>
+          <div class="in-num"><input type="number" id="hours" value="40" min="0" step="5"></div>
+        </div>
+        <div class="field">
+          <label for="ttc"><span>Time to competence (weeks)</span><b id="ttc_v">12</b></label>
+          <div class="in-num"><input type="number" id="ttc" value="12" min="0" step="1"></div>
+        </div>
+        <div class="field">
+          <label for="price"><span>Zavmo investment / learner / year <span style="color:var(--ink-3)">(your estimate)</span></span><b id="price_v">£150</b></label>
+          <div class="in-money"><input type="number" id="price" value="150" min="0" step="10"></div>
+        </div>
+
+        <h3 style="margin-top:28px">The assumptions <span style="color:var(--ink-3);font-weight:400;text-transform:none;letter-spacing:0">— adjust freely</span></h3>
+        <div class="field">
+          <label for="eff"><span>Training time saved (less time on the already-known)</span><b id="eff_v">30%</b></label>
+          <input type="range" id="eff" value="30" min="0" max="60" step="1">
+          <div class="lever-note">Personalised, grounded coaching skips what the learner already knows. Grounded in active-learning &amp; personalisation research.</div>
+        </div>
+        <div class="field">
+          <label for="ttccut"><span>Time-to-competence reduction</span><b id="ttccut_v">25%</b></label>
+          <input type="range" id="ttccut" value="25" min="0" max="60" step="1">
+          <div class="lever-note">How much sooner people reach competence with adaptive coaching.</div>
+        </div>
+        <div class="field">
+          <label for="contrib"><span>Value captured during ramp-up</span><b id="contrib_v">40%</b></label>
+          <input type="range" id="contrib" value="40" min="0" max="100" step="1">
+          <div class="lever-note">Share of a person's salary value recovered by reaching full productivity sooner (conservative default).</div>
+        </div>
+      </div>
+
+      <div class="results">
+        <div class="headline">
+          <div class="lbl">Modelled annual value</div>
+          <div class="big" id="r_total">£520,000</div>
+          <div class="sub" id="r_net">Net of Zavmo investment: £445,000</div>
+        </div>
+        <div class="rgrid">
+          <div class="rcell"><div class="n" id="r_roi">£6.90</div><div class="l">returned for every £1 invested</div></div>
+          <div class="rcell"><div class="n" id="r_perlearner">£1,041</div><div class="l">value per learner / year</div></div>
+          <div class="rcell"><div class="n" id="r_hours">6,000</div><div class="l">learning hours saved / year</div></div>
+          <div class="rcell"><div class="n" id="r_weeks">3.0</div><div class="l">weeks faster to competence, each</div></div>
+        </div>
+        <div class="callout plain" style="padding:20px 22px">
+          <p style="font-size:13px;margin:0;color:var(--ink-3)">A model, not a quote. Figures update live from your inputs and the sliders above — they're an estimate to frame the conversation, not a guarantee.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW WE MODEL IT ────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">How the model works</div>
+    <h2>Two value drivers — the same two gains, in pounds.</h2>
+    <p class="lead-p">This mirrors the <a href="../why-zavmo/" style="color:var(--teal)">learning efficiency flywheel</a>: the same two gains, quantified on your numbers.</p>
+    <div class="grid" style="margin-top:24px">
+      <div class="card"><h3>1 · Training time saved</h3><p>Learners spend fewer hours reaching the same competence because personalised coaching skips what they already know. Valued at their time: <em>hours saved × fully-costed hourly rate</em>.</p></div>
+      <div class="card"><h3>2 · Faster to competence</h3><p>People become fully productive sooner. Valued as the salary-value recovered across the weeks of ramp-up you no longer pay for: <em>weeks saved × weekly cost × value-captured</em>.</p></div>
+      <div class="card"><h3>Deliberately conservative</h3><p>It leaves out engagement, retention, compliance-risk reduction and content-production savings — all real, all harder to pin to a single number. The figure is a floor, not a ceiling.</p></div>
+    </div>
+  </section>
+
+  <!-- ── EVIDENCE LINK ──────────────────────────────────────────────────── -->
+  <section>
+    <div class="callout plain">
+      <h3>Where the defaults come from</h3>
+      <p style="max-width:66ch;font-size:16px">The starting values for each lever are informed by the published learning-science evidence — Bloom's 2 Sigma, the active-learning meta-analyses, and the transfer-of-training literature — set deliberately toward the conservative end. See the sources on the <a href="../why-zavmo/#evidence" style="color:var(--teal)">Why Zavmo</a> deck. As Zavmo pilots produce real outcome data, we replace these defaults with measured results.</p>
+    </div>
+  </section>
+
+  <!-- ── CLOSE ──────────────────────────────────────────────────────────── -->
+  <section>
+    <div class="callout">
+      <h2 style="margin-bottom:10px">Pressure-test it with your real data.</h2>
+      <p style="margin-bottom:22px;max-width:60ch">The honest next step is to run this against your actual figures — headcount, salaries, current time-to-competence — and, in a pilot, measure the levers rather than estimate them.</p>
+      <a class="nav-cta" style="margin-left:0;padding:13px 28px;font-size:14px" href="https://zavmo.ai">Book a working session</a>
+    </div>
+  </section>
+
+  <footer>
+    Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
+    Illustrative model for evaluation — assumptions are adjustable and shown in full. Not a financial guarantee. See <a href="../why-zavmo/">Why Zavmo</a> for the underlying evidence.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // logomark halo
+  var g=document.getElementById('halo'), n=12, cx=50, cy=50, r=38;
+  for(var i=0;i<n;i++){
+    var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
+    var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',x.toFixed(1)); c.setAttribute('cy',y.toFixed(1)); c.setAttribute('r','2.4');
+    c.setAttribute('fill','#3FE4BC'); c.setAttribute('opacity', i%2?'0.55':'0.9');
+    g.appendChild(c);
+  }
+
+  var $=function(id){return document.getElementById(id);};
+  var ids=['learners','salary','hours','ttc','price','eff','ttccut','contrib'];
+  var HOURS_PER_YEAR=1800; // fully-costed working hours
+
+  function gbp(v){return '£'+Math.round(v).toLocaleString('en-GB');}
+  function num(id){var v=parseFloat($(id).value);return isNaN(v)?0:Math.max(0,v);}
+
+  function calc(){
+    var L=num('learners'), S=num('salary'), H=num('hours'), TTC=num('ttc'), price=num('price');
+    var eff=num('eff')/100, ttccut=num('ttccut')/100, contrib=num('contrib')/100;
+
+    var hourly=S/HOURS_PER_YEAR, weekly=S/52;
+    var hoursSaved=L*H*eff;
+    var valEff=hoursSaved*hourly;
+    var weeksSaved=TTC*ttccut;
+    var valTTC=L*weeksSaved*weekly*contrib;
+    var total=valEff+valTTC;
+    var cost=L*price;
+    var net=total-cost;
+    var roi=cost>0?(total/cost):0;
+    var perLearner=L>0?(total/L):0;
+
+    // labels
+    $('learners_v').textContent=Math.round(L).toLocaleString('en-GB');
+    $('salary_v').textContent=gbp(S);
+    $('hours_v').textContent=Math.round(H);
+    $('ttc_v').textContent=Math.round(TTC);
+    $('price_v').textContent=gbp(price);
+    $('eff_v').textContent=Math.round(eff*100)+'%';
+    $('ttccut_v').textContent=Math.round(ttccut*100)+'%';
+    $('contrib_v').textContent=Math.round(contrib*100)+'%';
+
+    // slider fill
+    ['eff','ttccut','contrib'].forEach(function(k){
+      var el=$(k), pct=(el.value-el.min)/(el.max-el.min)*100;
+      el.style.setProperty('--fill', pct+'%');
+    });
+
+    // results
+    $('r_total').textContent=gbp(total);
+    $('r_net').textContent='Net of Zavmo investment: '+gbp(net);
+    $('r_roi').textContent=(cost>0? '£'+roi.toFixed(2) : '—');
+    $('r_perlearner').textContent=gbp(perLearner);
+    $('r_hours').textContent=Math.round(hoursSaved).toLocaleString('en-GB');
+    $('r_weeks').textContent=weeksSaved.toFixed(1);
+  }
+  ids.forEach(function(id){ $(id).addEventListener('input',calc); });
+  calc();
+})();
+</script>
+</body>
+</html>
