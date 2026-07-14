@@ -217,12 +217,12 @@
     </div>
   </section>
 
-  <!-- 13 · ANALYTICS TAB -->
+  <!-- 13 · IMPACT TAB -->
   <section class="slide admin-slide">
-    <div class="eyebrow"><svg class="ic"><use href="#i-chart"/></svg>Admin · tab 5 of 5 — Analytics <span class="built-pill hero">the hero tab</span></div>
+    <div class="eyebrow"><svg class="ic"><use href="#i-chart"/></svg>Admin · tab 5 of 5 — Impact <span class="built-pill hero">the hero tab</span></div>
     <div class="browser">
       <div class="br-bar"><span class="br-dot" style="background:#ff5f57"></span><span class="br-dot" style="background:#febc2e"></span><span class="br-dot" style="background:#28c840"></span><span class="br-url">admin.zavmo.ai/little-zav</span></div>
-      <div class="admin-app" data-tab="analytics"></div>
+      <div class="admin-app" data-tab="impact"></div>
     </div>
   </section>
 
@@ -316,7 +316,7 @@
           <li>Custom domain <code>littlezav.zavmo.ai</code></li>
           <li>Admin app — the five tabs as a shipped UI</li>
           <li>Content connectors + RAG (Growth Engineering LMS)</li>
-          <li>Reflect family + Analytics insight layer</li>
+          <li>Reflect family + Impact insight layer (Kirkpatrick · 2-sigma · ROI)</li>
           <li>Chat with citations + client provisioning</li>
         </ul>
       </div>
@@ -634,6 +634,46 @@
   .aa-privacy{font-size:10.5px;color:#8a97a3;margin-top:12px;display:flex;align-items:center;gap:6px}
   .aa-privacy .ic{width:12px;height:12px;color:#8a97a3}
 
+  /* impact tab */
+  .imp-hero{background:linear-gradient(135deg,#e7f4f1,#f4fbf9);border:1px solid #cfe8e2;border-radius:14px;padding:16px 20px;margin-bottom:14px}
+  .imp-eyebrow{font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#0a7d6b;margin-bottom:6px}
+  .imp-line{font-size:19px;font-weight:600;color:#0b1f33;letter-spacing:-.01em;line-height:1.25}
+  .imp-line em{color:#0a7d6b;font-style:normal}
+  .imp-sub{font-size:11.5px;color:#5b6b7a;margin-top:7px;line-height:1.45}
+  .imp-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+  .imp-tile{background:#fff;border:1px solid #ebeef2;border-radius:12px;padding:15px 16px}
+  .imp-tile-n{font-size:29px;font-weight:600;color:#0a7d6b;letter-spacing:-.02em;line-height:1;font-variant-numeric:tabular-nums}
+  .imp-tile-l{font-size:11px;color:#5b6b7a;margin-top:7px;line-height:1.35}
+  .imp-tile-s{font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#0a7d6b;margin-top:8px}
+  .krk-row{padding:11px 0;border-bottom:1px solid #f0f2f5}
+  .krk-row:last-child{border-bottom:none}
+  .krk-head{display:flex;align-items:center;gap:11px;margin-bottom:8px}
+  .krk-lvl{font-size:9.5px;font-weight:700;color:#0a7d6b;background:#e7f4f1;border-radius:6px;padding:3px 7px;flex:0 0 auto;letter-spacing:.03em}
+  .krk-id{flex:1;display:flex;flex-direction:column;line-height:1.3}
+  .krk-name{font-size:12.5px;font-weight:600;color:#0b1f33}
+  .krk-desc{font-size:10.5px;color:#8a97a3}
+  .krk-val{font-size:13px;font-weight:600;color:#0b1f33;font-variant-numeric:tabular-nums}
+  .krk-track{position:relative;height:8px;background:#eef1f4;border-radius:100px}
+  .krk-fill{position:absolute;left:0;top:0;height:8px;border-radius:100px;background:linear-gradient(90deg,#14A88B,#2FCFA8)}
+  .krk-bench{position:absolute;top:-3px;width:2px;height:14px;background:#0b1f33;opacity:.32}
+  .krk-cliff{margin-top:13px;background:#fff4e6;border:1px solid #f3dcc0;border-radius:10px;padding:11px 14px;font-size:11px;color:#8a5a1e;line-height:1.45}
+  .krk-cliff strong{color:#c47a3a}
+  .imp-sigma-svg{width:100%;height:118px;display:block}
+  .imp-legend{display:flex;gap:16px;margin-top:6px;font-size:10px;color:#5b6b7a}
+  .imp-legend span{display:inline-flex;align-items:center;gap:6px}
+  .imp-legend i{width:14px;height:3px;border-radius:2px;display:inline-block}
+  .imp-copilot .cop-q{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:#0b1f33;margin-bottom:10px}
+  .cop-dot{width:20px;height:20px;border-radius:50%;background:linear-gradient(145deg,#2FCFA8,#0a7d6b);flex:0 0 auto}
+  .cop-a{font-size:11.5px;color:#3a4a58;line-height:1.55}
+  .cop-a em{color:#0a7d6b;font-style:normal;font-weight:600}
+  .cop-src{display:block;margin-top:8px;font-size:9.5px;color:#8a97a3}
+  .imp-actstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .imp-act{background:#fff;border:1px solid #ebeef2;border-radius:10px;padding:10px 13px}
+  .imp-act-n{font-size:16px;font-weight:600;color:#0b1f33;font-variant-numeric:tabular-nums}
+  .imp-act-l{font-size:10px;color:#8a97a3;margin-top:2px}
+  .imp-illus{font-size:10px;color:#8a97a3;margin-top:12px;display:flex;align-items:flex-start;gap:6px;line-height:1.45}
+  .imp-illus .ic{width:12px;height:12px;color:#8a97a3;flex:0 0 auto;margin-top:1px}
+
   /* preview mock */
   .preview-mock{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;margin:4px 0}
   .pm-card{background:rgba(47,207,168,.07);border:1px solid var(--border-2);border-radius:18px;padding:20px}
@@ -826,7 +866,7 @@
   var NAV='<div class="aa-nav"><div class="aa-brand"><span class="aa-word">ZAVMO</span><span class="aa-tag">Learning intelligence</span></div>'
     +'<div class="aa-nav-items"><span class="aa-nav-item">Dashboard</span><span class="aa-nav-item">Mind Palace</span><span class="aa-nav-item">Content</span><span class="aa-nav-item active">Little Zav</span><span class="aa-nav-item">Users</span><span class="aa-nav-item">Reports</span><span class="aa-nav-item">Settings</span><span class="aa-acct"></span></div></div>';
   function tabs(active){
-    var t=['Setup','Interactions','Sources','Branding','Analytics'];
+    var t=['Setup','Interactions','Sources','Branding','Impact'];
     return '<div class="aa-tabs">'+t.map(function(x){return '<span class="aa-tab'+(x.toLowerCase()===active?' active':'')+'">'+x+'</span>';}).join('')+'</div>';
   }
   function head(title,sub){
@@ -901,43 +941,47 @@
         +'<div class="aa-preview-label">Reads live from the public branding endpoint — themed before login.</div></div>'
         +'</div>'+foot()+'</div>';
     },
-    analytics:function(){
-      function bar(label,pct,val){ return '<div class="bar-row"><span class="bar-label">'+label+'</span><span class="bar-track"><span class="bar-fill" style="width:'+pct+'%"></span></span><span class="bar-val">'+val+'</span></div>'; }
-      function disp(name,val,delta,pos,base){
-        return '<div class="disp"><div class="disp-top"><span class="disp-name">'+name+'</span><span class="disp-val">'+val+'<small>'+delta+'</small></span></div>'
-          +'<div class="disp-bar"><span class="disp-base" style="left:'+base+'%"></span><span class="disp-mark" style="left:'+pos+'%"></span></div>'
-          +'<div class="disp-scale"><span>Fixed</span><span>Growth</span></div></div>';
+    impact:function(){
+      function tile(n,l,s){ return '<div class="imp-tile"><div class="imp-tile-n">'+n+'</div><div class="imp-tile-l">'+l+'</div><div class="imp-tile-s">'+s+'</div></div>'; }
+      function krk(lvl,name,desc,val,bench){
+        return '<div class="krk-row"><div class="krk-head"><span class="krk-lvl">'+lvl+'</span><div class="krk-id"><span class="krk-name">'+name+'</span><span class="krk-desc">'+desc+'</span></div><span class="krk-val">'+val+'%</span></div>'
+          +'<div class="krk-track"><span class="krk-fill" style="width:'+val+'%"></span><span class="krk-bench" style="left:'+bench+'%" title="Industry benchmark"></span></div></div>';
       }
-      // sentiment sparkline
-      var pts=[38,42,40,47,52,49,58,63], w=250,h=54, step=w/(pts.length-1);
-      var d=pts.map(function(p,i){return (i?'L':'M')+(i*step).toFixed(0)+' '+(h-(p/70*h)).toFixed(0);}).join(' ');
-      var area=d+' L'+w+' '+h+' L0 '+h+' Z';
-      var spark='<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none" style="width:100%;height:54px"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(47,207,168,.22)"/><stop offset="1" stop-color="rgba(47,207,168,0)"/></linearGradient></defs>'
-        +'<path d="'+area+'" fill="url(#sg)"/><path d="'+d+'" fill="none" stroke="#0a7d6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
-        +'<circle cx="'+w+'" cy="'+(h-(pts[pts.length-1]/70*h)).toFixed(0)+'" r="3.5" fill="#0a7d6b"/></svg>';
+      function act(n,l){ return '<div class="imp-act"><div class="imp-act-n">'+n+'</div><div class="imp-act-l">'+l+'</div></div>'; }
+      // Bloom's 2-sigma bell-curve shift — two gaussians, ~1.9σ apart
+      var W=360,H=118, base=H-16, amp=H-30;
+      function curve(mu){ var d=''; for(var i=0;i<=W;i+=3){ var x=(i/W)*8-4, y=Math.exp(-((x-mu)*(x-mu))/2); d+=(i===0?'M':'L')+i+' '+(base-amp*y).toFixed(1)+' '; } return d; }
+      var before=curve(-0.95), after=curve(0.95);
+      var sigma='<svg viewBox="0 0 '+W+' '+H+'" class="imp-sigma-svg" preserveAspectRatio="none"><defs><linearGradient id="sig" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(47,207,168,.28)"/><stop offset="1" stop-color="rgba(47,207,168,0)"/></linearGradient></defs>'
+        +'<path d="'+after+' L'+W+' '+base+' L0 '+base+' Z" fill="url(#sig)"/>'
+        +'<path d="'+before+'" fill="none" stroke="#b8c2cc" stroke-width="1.6" stroke-dasharray="4 3"/>'
+        +'<path d="'+after+'" fill="none" stroke="#0a7d6b" stroke-width="2.2"/></svg>';
 
-      return head('Analytics','Engagement and insight — aggregate and org-scoped.')+tabs('analytics')+'<div class="aa-panel">'
-        +'<div style="display:flex;justify-content:flex-end;margin-bottom:12px"><span class="aa-toggle-days"><span>7 days</span><span class="on">30 days</span></span></div>'
-        +'<div class="aa-stats">'
-        +'<div class="aa-stat"><div class="aa-stat-n">1,284</div><div class="aa-stat-l">Interactions served</div><div class="aa-stat-d">+18%</div></div>'
-        +'<div class="aa-stat"><div class="aa-stat-n">742</div><div class="aa-stat-l">Sparks lit</div><div class="aa-stat-d">+12%</div></div>'
-        +'<div class="aa-stat"><div class="aa-stat-n">318</div><div class="aa-stat-l">Learners engaged</div><div class="aa-stat-d">+9%</div></div>'
-        +'<div class="aa-stat"><div class="aa-stat-n">196</div><div class="aa-stat-l">Reflections given</div><div class="aa-stat-d">+24%</div></div>'
+      return head('Impact','Grounded in learning science — what Little Zav actually moved.')+tabs('impact')+'<div class="aa-panel">'
+        +'<div class="imp-hero"><div class="imp-eyebrow">Grounded in learning science</div>'
+        +'<div class="imp-line">Learning didn’t just happen. <em>It transferred.</em></div>'
+        +'<div class="imp-sub">Little Zav’s daily return habit is the engine behind it — the small, personal nudge that brings learners back often enough for the learning to stick and show up in the work.</div></div>'
+        +'<div class="imp-tiles">'
+        + tile('6.2×','estimated return on the learning spend Little Zav re-activates','ROI')
+        + tile('76%','of engaged learners showed the behaviour change at work','Kirkpatrick L3')
+        + tile('+1.9σ','shift toward mastery &amp; growth mindset vs baseline','Bloom / disposition')
         +'</div>'
-        +'<div class="aa-two">'
-        +'<div class="aa-block"><div class="aa-block-h">Most played</div>'
-        + bar('Myth-or-fact',92,'268')+ bar('Quick quiz',74,'214')+ bar('Would-you-rather',58,'168')+ bar('Confidence check',41,'119')+ bar('Tip of the day',30,'87')
+        +'<div class="aa-block"><div class="aa-block-h">The learning-transfer chain <span style="font-weight:400;color:#8a97a3;font-size:10.5px">Kirkpatrick L1–L4 · bar = your learners, tick = industry benchmark</span></div>'
+        + krk('L1','Reaction','They came back — and enjoyed it',91,70)
+        + krk('L2','Learning','Retrieval through daily games &amp; recall',78,55)
+        + krk('L3','Behaviour','Did it change what they do at work',76,34)
+        + krk('L4','Results','Contribution to completion &amp; outcomes',63,28)
+        +'<div class="krk-cliff"><strong>The transfer cliff.</strong> Most learning dies in the drop from <em>knowing</em> (L2) to <em>doing</em> (L3) — industry loses ~40 points there. Little Zav’s return habit is what carries learners across it.</div>'
         +'</div>'
-        +'<div class="aa-block"><div class="aa-block-h">Dispositions <span style="font-weight:400;color:#8a97a3;font-size:10.5px">(from Reflect)</span></div>'
-        + disp('Growth mindset index','68%','+6 vs baseline',68,58)
-        + disp('Conversational confidence','3.9 / 5','+0.3',74,66)
-        + disp('Innovation appetite','54%','+4',54,46)
-        +'</div></div>'
         +'<div class="aa-two" style="margin-top:14px">'
-        +'<div class="aa-block"><div class="aa-block-h">Sentiment trend</div>'+spark+'<div class="disp-scale" style="margin-top:6px"><span>4 wks ago</span><span>this week</span></div></div>'
-        +'<div class="aa-block"><div class="aa-block-h">Insight spotlight</div><div class="aa-spotlight"><strong>Compliance-pathway learners</strong> report lower confidence this week — worth a nudge of encouragement in that cohort.</div></div>'
+        +'<div class="aa-block"><div class="aa-block-h">Bloom’s 2-sigma shift <span style="font-weight:400;color:#8a97a3;font-size:10.5px">where learners sit</span></div>'+sigma
+        +'<div class="imp-legend"><span><i style="background:#b8c2cc"></i>Before</span><span><i style="background:#0a7d6b"></i>With Little Zav · +1.9σ</span></div></div>'
+        +'<div class="imp-copilot aa-block"><div class="cop-q"><span class="cop-dot"></span>“What’s Little Zav’s ROI?”</div>'
+        +'<div class="cop-a">Learners with Little Zav return <em>3.4×</em> more often. That habit lifts course completion an estimated <em>21%</em> — which against your L&amp;D spend models to about <em>6.2×</em> return.<span class="cop-src">Answered live by the Co-pilot from your engagement × completion economics.</span></div></div>'
         +'</div>'
-        +'<div class="aa-privacy"><svg class="ic"><use href="#i-shield"/></svg>Every figure is aggregate-only and org-scoped — no individual’s answers are exposed.</div>'
+        +'<div class="aa-section-h mt">Activity <span style="font-weight:400;color:#b8c2cc">— the engagement underneath</span></div>'
+        +'<div class="imp-actstrip">'+ act('1,284','Interactions served')+ act('742','Sparks lit')+ act('318','Learners engaged')+ act('196','Reflections given')+'</div>'
+        +'<div class="imp-illus"><svg class="ic"><use href="#i-shield"/></svg>Numbers illustrative. Aggregate and org-scoped — no individual’s answers are exposed. L1–L2 and disposition come straight from Little Zav; L3–L4 and ROI combine its engagement with your outcome and completion data.</div>'
         + foot()+'</div>';
     }
   };
