@@ -10,10 +10,10 @@
      three-layer framework, the ten Fluencies, the evidence loop and the gap.
      DRAFT collateral — for review before publication.
      ───────────────────────────────────────────────────────────────────────── -->
-<title>The Fluency Framework — three layers, one honest loop · Zavmo</title>
-<meta name="description" content="The Fluency Framework — Zavmo's three-layer model for growing people in the AI economy. Layer 1 is the gate, the Fluencies are the map, your degree is your position.">
-<meta property="og:title" content="The Fluency Framework — three layers, one honest loop">
-<meta property="og:description" content="Every question a growing person asks is really about a capability. Three layers sit over that idea.">
+<title>Active learning, measured — not attendance · Zavmo</title>
+<meta name="description" content="Zavmo measures active learning — what a learner did and how deeply — not SCORM completions or time-in-seat.">
+<meta property="og:title" content="Active learning, measured — not attendance">
+<meta property="og:description" content="SCORM and video measure the content. Zavmo measures the mind at work.">
 <style>
   :root{
     --navy-0:#060e17; --navy-1:#0b1a2a;
@@ -251,6 +251,34 @@
     html{scroll-behavior:auto}.reveal{opacity:1;transform:none}
     .layer::before{transform:scaleY(1)}.gap-fill{opacity:1}.draw{stroke-dashoffset:0}
   }
+
+  /* measurement decks — passive vs active comparison */
+  .vs{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch;margin-top:8px}
+  @media(max-width:760px){.vs{grid-template-columns:1fr}}
+  .vs-col{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px}
+  .vs-col.active{background:linear-gradient(135deg,rgba(47,207,168,.1),rgba(47,207,168,.03));border-color:var(--teal-border)}
+  .vs-k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;display:block;font-weight:600}
+  .vs-col.passive .vs-k{color:var(--amber)}
+  .vs-col.active .vs-k{color:var(--teal)}
+  .vs-col h3{margin:0 0 16px;font-size:18px;font-weight:600;letter-spacing:-.01em}
+  .vs-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+  .vs-list li{font-size:13.5px;color:var(--ink-2);padding-left:22px;position:relative;line-height:1.45}
+  .vs-col.passive .vs-list li::before{content:"×";position:absolute;left:0;top:-1px;color:var(--amber);font-weight:700}
+  .vs-col.active .vs-list li::before{content:"→";position:absolute;left:0;top:-1px;color:var(--teal);font-weight:700}
+  .vs-mid{display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--ink-3);font-weight:600;letter-spacing:.14em}
+  @media(max-width:760px){.vs-mid{padding:4px 0}}
+
+  /* measurement decks — cognitive-depth ladder */
+  .ladder{display:flex;flex-direction:column;gap:8px}
+  .rung{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;transition:.2s}
+  .rung:hover{border-color:var(--teal-border);background:var(--surface-2);transform:translateX(3px)}
+  .rung.deep{background:linear-gradient(135deg,rgba(47,207,168,.12),rgba(47,207,168,.04));border-color:var(--teal-border)}
+  .rung .lvl{width:30px;height:30px;border-radius:8px;background:var(--teal-subtle);border:1px solid var(--teal-border);color:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;flex:0 0 auto}
+  .rung h4{margin:0 0 2px;font-size:15px;font-weight:600;color:var(--ink)}
+  .rung h4 span{color:var(--ink-2);font-weight:300;font-size:13px}
+  .gap-legend{display:flex;gap:20px;flex-wrap:wrap;font-size:11.5px;color:var(--ink-3);margin:14px 0 4px}
+  .gap-legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:middle}
+
 </style>
 </head>
 <body>
@@ -263,7 +291,7 @@
     <g id="halo"></g>
     <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
   </svg>
-  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">The Fluency Framework</span></div>
+  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Active Learning</span></div>
   <span class="nav-spacer"></span>
   <a class="nav-link" href="../">
     <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -273,92 +301,92 @@
 </nav>
 
 <div class="wrap">
-
   <!-- HERO -->
   <header class="hero" style="grid-template-columns:1fr">
     <div>
-      <div class="eyebrow">The framework · our IP</div>
-      <h1>Three layers, one honest <em>loop</em>.</h1>
-      <p class="lede">Most "future skills" frameworks are a list. The Fluency Framework is a system, built on one idea: every question a growing person asks is really about a capability — something you can actually do. Three layers sit over that idea.</p>
+      <div class="eyebrow">How we measure</div>
+      <h1>Measure the learning, <em>not the attendance</em>.</h1>
+      <p class="lede">SCORM tells you a video ended. A quiz tells you someone guessed right once. Neither tells you whether anyone actually learned. Zavmo measures the active learning itself — what a person did, how deeply, and whether it stuck — captured continuously as they work, not bolted on at the end.</p>
       <div class="hero-ctas">
-        <a class="btn btn-primary" href="#layers">See the three layers</a>
+        <a class="btn btn-primary" href="#signal">What we capture</a>
         <a class="btn btn-ghost" href="../">Back to all proposals</a>
       </div>
     </div>
   </header>
 
-  <!-- THE THREE LAYERS -->
-  <section id="layers">
-    <div class="section-label">The three layers</div>
-    <h2>Layer 1 is the gate. The Fluencies are the map. Your degree is your position.</h2>
-    <div class="quote reveal">
-      <p>You are not <em>certified</em> in a Fluency. You are more or less <em>fluent</em> in it — exactly like a language.</p>
-    </div>
-    <div class="stack" style="margin-top:24px">
-      <div class="layer lreveal">
-        <div class="lname">Layer 1 — Capabilities<small>Can you grow?</small></div>
-        <div>
-          <p class="ldesc">Before we teach anyone anything, Future Fluency starts where real growth starts — mindset and the seven human capabilities that let someone acquire <em>any</em> new skill. Growth mindset is the gate; it conditions all the others.</p>
-          <span class="lq">Growth mindset · Cognition · Creativity · Freedom intelligence · Communication &amp; influence · Delivery · Risk &amp; resilience</span>
-        </div>
+  <!-- THE WEDGE: passive vs active -->
+  <section id="wedge" style="border-top:0;padding-top:8px">
+    <div class="section-label">The old way</div>
+    <h2>SCORM and video measure the content. Not the learner.</h2>
+    <p class="lead-p">A completion says the content ended. A quiz score says they matched a pattern once. In everyday training that passes for measurement — but it's an attendance record for the mind. It can't tell you what someone can now do, or where they're stuck.</p>
+    <div class="vs reveal" style="margin-top:22px">
+      <div class="vs-col passive">
+        <span class="vs-k">Passive · SCORM &amp; video</span>
+        <h3>The content ended</h3>
+        <ul class="vs-list">
+          <li>Marked complete</li>
+          <li>Time-in-seat logged</li>
+          <li>Passed or failed, once</li>
+          <li>A score with no story</li>
+          <li>Answers the question: <em>did they attend?</em></li>
+        </ul>
       </div>
-      <div class="flow-note">↓ sits over ↓</div>
-      <div class="layer lreveal accent" style="background:linear-gradient(135deg,rgba(47,207,168,.1),rgba(47,207,168,.03))">
-        <div class="lname">Layer 2 — the Fluencies<small>What is your future asking of you?</small></div>
-        <div>
-          <p class="ldesc">The capabilities the AI economy is beginning to demand of a role, mapped into <em>ten Fluencies</em> — the languages of the modern workplace. Fixed and universal: AI Fluency is AI Fluency for everyone.</p>
-          <span class="lq">A living map — validated against real market signal, not a fixed decree.</span>
-        </div>
+      <div class="vs-mid">vs</div>
+      <div class="vs-col active">
+        <span class="vs-k">Active · Zavmo</span>
+        <h3>The mind at work</h3>
+        <ul class="vs-list">
+          <li>Predicted, then revised</li>
+          <li>Explained their reasoning</li>
+          <li>Applied it to a new problem</li>
+          <li>Critiqued and defended a position</li>
+          <li>Answers the question: <em>can they do it — and how deeply?</em></li>
+        </ul>
       </div>
-      <div class="flow-note">↓ measured per person ↓</div>
-      <div class="layer lreveal">
-        <div class="lname">Layer 3 — Degree of fluency<small>Where do you stand?</small></div>
-        <div>
-          <p class="ldesc">For each Fluency, a person is somewhere on a path — from <em>foundational</em> (you have it) to <em>functional</em> (your role uses it now) to <em>future</em> (it's coming for you). The same skill is "future" for one person and "foundational" for another.</p>
-          <span class="lq">Personal by design — a relation between a Fluency and a person, never a folder.</span>
-        </div>
-      </div>
-    </div>
-    <p class="muted" style="font-size:12px;margin-top:18px">Layer 2 — the ten Fluencies — is Zavmo's own analysis, derived from a first-party reading of the UK role corpus and validated against live market signal. It is framed as <em>"the market appears to be converging on…"</em>, never "the market needs."</p>
-  </section>
-
-  <!-- LAYER 1 · THE SEVEN CAPABILITIES -->
-  <section id="capabilities">
-    <div class="section-label teal">Layer 1 · the human bedrock</div>
-    <h2>Before we teach anything: can you grow?</h2>
-    <p class="lead-p">Layer 1 is the seven independent capabilities that decide whether someone can acquire any new skill at all. Growth mindset is the gate — it conditions all the others.</p>
-    <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:30px">
-      <div class="stat reveal"><h3 style="color:var(--teal)">Growth mindset</h3><p style="font-size:13px;margin:0">Can you change? (the gate — it conditions all the others)</p></div>
-      <div class="stat reveal"><h3 style="color:var(--teal)">Cognition</h3><p style="font-size:13px;margin:0">What can you think?</p></div>
-      <div class="stat reveal"><h3 style="color:var(--teal)">Creativity</h3><p style="font-size:13px;margin:0">What can you originate — can you make jumps?</p></div>
-      <div class="stat reveal"><h3 style="color:var(--teal)">Freedom intelligence</h3><p style="font-size:13px;margin:0">May you? Do you believe you may?</p></div>
-      <div class="stat reveal"><h3 style="color:var(--teal)">Communication &amp; influence</h3><p style="font-size:13px;margin:0">Can you bring others?</p></div>
-      <div class="stat reveal"><h3 style="color:var(--teal)">Delivery</h3><p style="font-size:13px;margin:0">Do you ship?</p></div>
-      <div class="stat reveal"><h3 style="color:var(--teal)">Risk &amp; resilience</h3><p style="font-size:13px;margin:0">Can you act under uncertainty, and recover?</p></div>
     </div>
   </section>
 
-  <!-- LAYER 3 · DEGREE OF FLUENCY -->
-  <section id="degree">
-    <div class="section-label teal">Layer 3 · your degree of fluency</div>
-    <h2>The same Fluency is "future" for one person and "foundational" for another.</h2>
-    <p class="lead-p">Degree of fluency is not a folder a skill lives in — it is a property of the relationship between a Fluency and a person. Take AI Fluency and the skill of prompt engineering inside it:</p>
-    <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:30px">
-      <div class="stat reveal"><h3>Finance director</h3><p style="font-size:13px;margin:0"><em>future</em> — not yet fluent; a growth edge coming for them.</p></div>
-      <div class="stat reveal"><h3>Data analyst</h3><p style="font-size:13px;margin:0"><em>functional</em> — working fluency; part of doing the job now.</p></div>
-      <div class="stat reveal"><h3>New graduate / digital native</h3><p style="font-size:13px;margin:0"><em>foundational</em> — already fluent; an assumed baseline they arrived with.</p></div>
+  <!-- THE SIGNAL, IN FAMILIES -->
+  <section id="signal">
+    <div class="section-label teal">What we capture</div>
+    <h2>Grouped into families — not a wall of events.</h2>
+    <p class="lead-p">Every exchange in a Zavmo conversation throws off signal about how someone is learning. We don't drown you in raw events — we organise them into meaningful families, each grounded in cognitive depth, so what you see is insight, not a firehose.</p>
+    <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:24px">
+      <div class="stat reveal"><h3 style="font-size:16px">Engagement</h3><p style="font-size:12.5px;margin:0">Are they leaning in, or drifting? The energy behind the learning.</p></div>
+      <div class="stat reveal"><h3 style="font-size:16px">Cognition &amp; load</h3><p style="font-size:12.5px;margin:0">How hard are they working — and exactly where do they struggle?</p></div>
+      <div class="stat reveal"><h3 style="font-size:16px">Cognitive depth</h3><p style="font-size:12.5px;margin:0">Recalling, applying, or creating? The Bloom level of every move.</p></div>
+      <div class="stat reveal"><h3 style="font-size:16px">Reasoning in conversation</h3><p style="font-size:12.5px;margin:0">How they think out loud, revise a wrong turn, and defend a position.</p></div>
+      <div class="stat reveal"><h3 style="font-size:16px">Growth mindset</h3><p style="font-size:12.5px;margin:0">The language of someone who believes they can grow — the gate to all of it.</p></div>
+      <div class="stat reveal"><h3 style="font-size:16px">How they learn best</h3><p style="font-size:12.5px;margin:0">The mix of intelligences that makes a concept finally land for this person.</p></div>
+      <div class="stat reveal"><h3 style="font-size:16px">Demonstration</h3><p style="font-size:12.5px;margin:0">Proof on applied work — the capability itself, assessed for depth.</p></div>
+      <div class="stat reveal"><h3 style="font-size:16px">Progression</h3><p style="font-size:12.5px;margin:0">Movement through the journey, and along a capability, on evidence.</p></div>
     </div>
-    <div class="callout reveal" style="margin-top:28px">
-      <p style="color:var(--ink);max-width:74ch"><strong style="color:var(--teal-glow)">Same Fluency, three degrees, one moment.</strong> There is no "future skills" folder — because "is this a future skill?" has no answer until you name whose future. You grow along a Fluency, from future → functional → foundational, the way you grow more fluent in a language.</p>
+    <p class="muted" style="font-size:12px;margin-top:16px">Zavmo's measurement catalogue spans around twenty such families of signal — versioned and governed, so it's consistent across every learner and tenant. Buyers see the families and the insight they produce, never the raw event stream underneath.</p>
+  </section>
+
+  <!-- THE DEPTH LADDER -->
+  <section id="depth">
+    <div class="section-label">How deep</div>
+    <h2>Not just what they did — <em>how deeply</em>.</h2>
+    <p class="lead-p">"Recalled a fact" and "critiqued an argument" are both active — but they are not the same, and the difference is everything. Zavmo places every signal on a ladder of cognitive depth, so learning is measured by quality, not just quantity.</p>
+    <div class="ladder reveal" style="margin-top:22px">
+      <div class="rung"><span class="lvl">1</span><div><h4>Remember <span>— recalls the fact</span></h4></div></div>
+      <div class="rung"><span class="lvl">2</span><div><h4>Understand <span>— explains it in their own words</span></h4></div></div>
+      <div class="rung"><span class="lvl">3</span><div><h4>Apply <span>— uses it on a new problem</span></h4></div></div>
+      <div class="rung"><span class="lvl">4</span><div><h4>Analyse <span>— breaks it down, compares, connects</span></h4></div></div>
+      <div class="rung deep"><span class="lvl">5</span><div><h4>Evaluate <span>— judges, critiques, defends</span></h4></div></div>
+      <div class="rung deep"><span class="lvl">6</span><div><h4>Create <span>— originates something new</span></h4></div></div>
     </div>
+    <p class="muted" style="font-size:12px;margin-top:16px">Active learning lives at the top of this ladder — and Zavmo teaches, and measures, one depth up from where each learner already is.</p>
   </section>
 
   <!-- CLOSE -->
   <section>
     <div class="callout reveal">
-      <h2 style="margin-bottom:10px">A framework you can build a workforce on.</h2>
-      <p style="margin-bottom:22px;color:var(--ink-2);max-width:64ch">Layer 1 is the gate every other framework skips. Layer 2 is the map. Layer 3 is personal and moving. Together they turn "grow your people" from a slogan into a system.</p>
-      <a class="btn btn-primary" href="https://zavmo.ai">Book a demo</a>
+      <h2 style="margin-bottom:10px">This is the evidence behind the evidence.</h2>
+      <p style="margin-bottom:22px;color:var(--ink-2);max-width:66ch">Active learning, assessed for depth, is exactly what moves a capability — and what rolls up into the skills-gap, impact and ROI picture your organisation acts on. Measure learning that sticks, not attendance that doesn't.</p>
+      <a class="btn btn-primary" href="../insight-and-impact/">See the insight &amp; impact</a>
+      <a class="btn btn-ghost" href="https://zavmo.ai" style="margin-left:12px">Book a demo</a>
     </div>
   </section>
 
