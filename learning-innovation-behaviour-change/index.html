@@ -106,6 +106,17 @@
 
   @media (max-width:640px){ .feature{grid-template-columns:1fr} .nav-cta{display:none} }
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}.reveal{opacity:1;transform:none}}
+
+  /* Product screenshots. The learner app is dark like this page, so these sit
+     naturally — but they still need a frame, or the app chrome bleeds into the
+     page background and the boundary of the product disappears. The caption
+     carries the argument; the image is evidence for it. */
+  .shots{display:grid;gap:26px;margin-top:10px}
+  .shot{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px;
+        backdrop-filter:blur(18px)}
+  .shot img{width:100%;display:block;border-radius:10px;border:1px solid rgba(6,14,23,.4)}
+  .shot-cap{font-size:14px;color:var(--ink-2);margin:14px 4px 2px;line-height:1.55;max-width:78ch}
+  .shot-cap b{color:var(--ink);font-weight:600}
 </style>
 </head>
 <body>
@@ -181,6 +192,28 @@
       <div class="card"><div class="tagk">Certification · 11</div><p class="muted">Assessment-criterion evidence and the certification decision itself.</p></div>
       <div class="card"><div class="tagk">Provenance · 14</div><p class="muted">Traceability back to National Occupational Standards and to Ofqual units, so any claim resolves to a published standard.</p></div>
       <div class="card"><div class="tagk">And four more · 32</div><p class="muted">Personalisation signals, consolidation, career signals, and celebration moments.</p></div>
+    </div>
+  </section>
+
+  <!-- WHAT THE LEARNER ACTUALLY SEES -->
+  <section>
+    <div class="section-label">Learning delivery</div>
+    <h2>Every statement on this page is written from here.</h2>
+    <p class="lead-p">None of this is a reporting layer bolted on afterwards. The record is written by the teaching itself, as it happens — which is why it can describe <em>how</em> someone learned rather than only what they scored. One learner, one path, three moments.</p>
+
+    <div class="shots reveal">
+      <div class="shot">
+        <img src="./img/path.jpg" alt="A learner's path, built from their own baseline">
+        <p class="shot-cap"><b>The path is built from a baseline, not a catalogue.</b> What the learner already knows is established before anything is taught, so two people on the same subject do not get the same route. This is where the skills-assessment family writes.</p>
+      </div>
+      <div class="shot">
+        <img src="./img/lesson.jpg" alt="A lesson in progress, showing the Bloom's ladder, live learning signals and assessment criteria">
+        <p class="shot-cap"><b>The measurement is visible to the learner, while it happens.</b> On the left, the thinking ladder — Remember and Understand complete, <em>Apply</em> current, Analyse next. Below it, <em>learning signals, live</em>: the statements being written as the lesson runs. On the right, the assessment criteria being evidenced, each with the evidence type it requires. Nothing here is inferred after the fact.</p>
+      </div>
+      <div class="shot">
+        <img src="./img/demonstrate.jpg" alt="Demonstrating against named assessment criteria">
+        <p class="shot-cap"><b>Evidence against named criteria, judged by a person.</b> Demonstration resolves to specific assessment criteria rather than a score. A qualified human assessor makes the decision and a second independently verifies it.</p>
+      </div>
     </div>
   </section>
 
