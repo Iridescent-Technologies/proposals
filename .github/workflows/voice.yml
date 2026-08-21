@@ -1,0 +1,42 @@
+# Check the decks against Juliette's voice rules.
+#
+# The canonical checker lives in juliettedenny-site. That repo is private and
+# this one is public, so CI here cannot fetch it. The script is therefore
+# vendored into scripts/, and the PRIVATE repo runs the drift check against
+# this public copy rather than the other way round. Drift is caught in exactly
+# one place, and the direction is the only one the permissions allow.
+#
+# What blocks and what does not is set in voice-targets.json, not here. The two
+# qualification specifications block. The older decks are counted as a backlog
+# and reported without failing, because a rule introduced to existing writing
+# should hold new work to the standard without failing a build on day one.
+
+name: voice
+
+on:
+  pull_request:
+    paths:
+      - '**/index.html'
+      - 'scripts/voice-check.mjs'
+      - 'voice-targets.json'
+  push:
+    branches: [main]
+    paths:
+      - '**/index.html'
+      - 'scripts/voice-check.mjs'
+      - 'voice-targets.json'
+
+jobs:
+  voice:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # No install step. The check is deliberately dependency-free, so it runs
+      # in seconds and cannot be broken by an unrelated package change.
+      - name: Voice check
+        run: node scripts/voice-check.mjs --root .

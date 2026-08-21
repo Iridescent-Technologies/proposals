@@ -1,0 +1,21 @@
+{
+  "_comment": "What the voice check reads, and whether it blocks. Every deck here is product copy, so the tier is always 'hard': the mechanical bans only, never the sentence rules. Shortening an assessment criterion to satisfy a linter would damage a regulated qualification. FIRST MATCHING TARGET WINS, so the blocking entries must stay above the catch-all. See scripts/voice-check.mjs.",
+  "targets": [
+    {
+      "dir": "qualifications-level-3",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
+      "dir": "qualifications-level-5",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
+      "dir": ".",
+      "tier": "hard",
+      "match": "^index\\.html$",
+      "warn": true
+    }
+  ]
+}
