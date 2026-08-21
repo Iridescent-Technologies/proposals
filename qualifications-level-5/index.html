@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+     LEVEL 5 DIPLOMA IN FUTURE FLUENCY  ·  Zavmo / Iridescent Technologies
+     Built from the canonical _template (navy + teal + DM Sans). Same token set,
+     same chrome, same scroll-reveal. Adds an assessor reading layer: sticky unit index, numbered criteria tables, per-unit criteria counts, print styles.
+     Self-contained. No external requests. Works offline.
+     DRAFT specification. Not submitted.
+-->
+<title>Level 5 Diploma in Future Fluency · specification · Zavmo</title>
+<meta name="description" content="The full Level 5 Diploma in Future Fluency specification: five units, 410 TQT, 41 credits, every learning outcome and assessment criterion, with the level check against the Ofqual Level 5 descriptor.">
+<meta property="og:title" content="Level 5 Diploma in Future Fluency · specification">
+<meta property="og:description" content="Five units, 410 TQT, 41 credits. Every outcome, every criterion, and the level check behind each one.">
+<script>
+  /* Gate the scroll-reveal on JS being present AND IntersectionObserver existing.
+     Set inline in the head so there is no flash. If anything below fails, the
+     content simply stays visible. */
+  if ('IntersectionObserver' in window) { document.documentElement.className += ' js'; }
+</script>
+<style>
+  :root{
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
+    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
+    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
+    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --bg-primary:var(--navy-0); --bg-secondary:var(--navy-1); --bg-card:var(--surface);
+    --teal-subtle:rgba(47,207,168,.14); --teal-border:var(--border-2);
+    --text-primary:var(--ink); --text-secondary:var(--ink-2); --text-tertiary:var(--ink-3);
+    --amber:#f5b544; --blue:#8fb8ff;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--navy-0);scroll-behavior:smooth}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;line-height:1.55;
+    background:var(--navy-0);
+    -webkit-font-smoothing:antialiased;
+  }
+  /* The page gradient sits on its own fixed layer rather than on the body with
+     background-attachment:fixed. This document is very long, and a fixed body
+     background forces a full-page repaint on every scroll frame. Same visual,
+     composited once. */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
+    background-repeat:no-repeat;background-size:100% 100%;
+  }
+  a{color:inherit;text-decoration:none}
+  em{font-style:normal;color:var(--teal-glow)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(22px,5vw,48px)}
+  [id]{scroll-margin-top:132px}
+
+  /* nav */
+  .chrome{position:sticky;top:0;z-index:60}
+  nav{display:flex;align-items:center;gap:14px;
+    padding:14px clamp(22px,5vw,48px);
+    background:rgba(6,14,23,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);}
+  .logomark{width:34px;height:34px;flex:0 0 auto}
+  .brand-txt{display:flex;flex-direction:column;line-height:1}
+  .word{font-size:13px;font-weight:600;letter-spacing:.26em}
+  .tag{font-size:10px;color:var(--teal);margin-top:5px;letter-spacing:.04em}
+  .nav-spacer{flex:1}
+  .nav-link{font-size:13px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;transition:.2s}
+  .nav-link:hover{color:var(--teal)}
+  .nav-link svg{width:15px;height:15px}
+  .nav-cta{background:var(--teal);color:var(--navy-0);padding:9px 20px;border-radius:100px;
+    font-size:13px;font-weight:600;transition:.2s;margin-left:14px;}
+  .nav-cta:hover{background:var(--teal-glow);box-shadow:0 0 20px rgba(47,207,168,.4)}
+
+  /* sticky unit index */
+  .jump{background:rgba(6,14,23,.9);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+  .jump-inner{max-width:1080px;margin:0 auto;padding:9px clamp(22px,5vw,48px);
+    display:flex;align-items:center;gap:8px;overflow-x:auto;scrollbar-width:thin}
+  .jump-inner::-webkit-scrollbar{height:5px}
+  .jump-inner::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:4px}
+  .jump-k{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);flex:0 0 auto;padding-right:4px}
+  .jump a{flex:0 0 auto;font-size:12px;font-weight:500;color:var(--ink-2);border:1px solid var(--border);
+    border-radius:100px;padding:5px 13px;transition:.18s;white-space:nowrap}
+  .jump a:hover{color:var(--teal);border-color:var(--teal-border);background:var(--teal-subtle)}
+  .jump a.on{color:var(--navy-0);background:var(--teal);border-color:var(--teal);font-weight:600}
+  .jump a b{font-weight:600}
+
+  /* hero */
+  .hero{padding:clamp(44px,9vh,92px) 0 clamp(30px,6vh,54px)}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+  h1{font-weight:200;letter-spacing:-.015em;line-height:1.05;font-size:clamp(32px,5.6vw,58px);margin:0 0 20px;text-wrap:balance}
+  .lede{font-size:clamp(16px,2vw,20px);line-height:1.55;color:var(--ink-2);max-width:60ch;margin:0 0 30px;font-weight:300}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+  .btn-primary{background:var(--teal);color:var(--navy-0)}
+  .btn-primary:hover{background:var(--teal-glow);box-shadow:0 8px 28px rgba(47,207,168,.3)}
+  .btn-ghost{border:1px solid var(--border-2);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+
+  /* sections */
+  section{padding:clamp(36px,6vh,68px) 0;border-top:1px solid var(--border)}
+  section:first-of-type{border-top:0}
+  .section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+  .section-label.teal{color:var(--teal)}
+  h2{font-weight:300;letter-spacing:-.01em;line-height:1.15;font-size:clamp(25px,3.6vw,38px);margin:0 0 16px;text-wrap:balance}
+  h3{font-weight:500;letter-spacing:-.01em;font-size:19px;margin:0 0 8px}
+  h4{font-weight:600;font-size:14px;margin:26px 0 10px;color:var(--ink);letter-spacing:.01em}
+  p{color:var(--ink-2);font-weight:300;max-width:68ch}
+  .lead-p{font-size:clamp(16px,1.8vw,18px);color:var(--ink-2)}
+  .muted{color:var(--ink-3)}
+  strong{font-weight:600;color:var(--ink)}
+  ul{color:var(--ink-2);font-weight:300;max-width:68ch;padding-left:20px}
+  li{margin-bottom:8px}
+
+  /* stat bar */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;backdrop-filter:blur(18px)}
+  .stat-num{font-size:clamp(28px,4.4vw,42px);font-weight:200;color:var(--teal);letter-spacing:-.02em;line-height:1}
+  .stat-label{font-size:12.5px;color:var(--ink-2);font-weight:300;margin-top:10px;line-height:1.4}
+
+  /* tables */
+  .tbl{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);
+    border-radius:14px;background:var(--surface);margin:14px 0 6px}
+  table{border-collapse:collapse;width:100%;min-width:480px}
+  caption{caption-side:top;text-align:left;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-3);padding:13px 18px 0}
+  th{text-align:left;font-weight:600;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--teal);padding:13px 18px;border-bottom:1px solid var(--border);white-space:nowrap}
+  td{padding:11px 18px;border-top:1px solid var(--border);color:var(--ink-2);
+    font-weight:300;font-size:14px;vertical-align:top;line-height:1.5}
+  tbody tr:first-child td{border-top:0}
+  tr.total td{color:var(--ink);font-weight:600;background:rgba(47,207,168,.07);border-top:1px solid var(--border-2)}
+  td.n{color:var(--teal);font-weight:600;font-size:12.5px;white-space:nowrap;width:1%;
+    font-variant-numeric:tabular-nums;letter-spacing:.02em;padding-top:12px}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  th.num{text-align:right}
+  .tbl.crit table{min-width:520px}
+  .tbl.check table{min-width:620px}
+  .scroll-hint{font-size:11px;color:var(--ink-3);margin:0 0 18px;display:none}
+
+  /* unit block */
+  .unit{background:var(--surface);border:1px solid var(--border);border-radius:20px;
+    padding:clamp(20px,3.4vw,34px);margin-top:18px}
+  .unit.new{border-color:var(--teal-border);background:linear-gradient(160deg,rgba(47,207,168,.07),rgba(234,251,244,.03))}
+  .unit-head{display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .unit-ref{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal)}
+  .unit h3{font-size:clamp(20px,2.6vw,27px);font-weight:400;letter-spacing:-.015em;margin:2px 0 14px;line-height:1.2}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+  .meta span{font-size:11.5px;color:var(--ink-2);background:rgba(234,251,244,.05);
+    border:1px solid var(--border);border-radius:100px;padding:5px 13px;font-weight:400}
+  .meta span b{color:var(--ink);font-weight:600}
+  .meta span.count{border-color:var(--teal-border);color:var(--teal)}
+  .meta span.count b{color:var(--teal)}
+  .flag{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    border-radius:100px;padding:4px 11px;flex:0 0 auto}
+  .flag.rewritten{background:var(--teal);color:var(--navy-0)}
+  .flag.asis{background:rgba(234,251,244,.07);color:var(--ink-3);border:1px solid var(--border)}
+  .lo{margin-top:26px;padding-top:22px;border-top:1px solid var(--border)}
+  .lo:first-of-type{border-top:0;padding-top:0}
+  .lo-h{display:flex;gap:12px;align-items:baseline}
+  .lo-n{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);flex:0 0 auto}
+  .lo-t{font-size:16px;font-weight:500;color:var(--ink);letter-spacing:-.005em;margin:0;max-width:64ch}
+  .lo-note{font-size:12.5px;color:var(--ink-3);font-style:italic;margin:8px 0 0}
+  .note{border-left:2px solid var(--teal);padding:2px 0 2px 20px;margin:18px 0}
+  .note p{font-size:14px;margin:0 0 8px}
+  .note p:last-child{margin-bottom:0}
+  .callout{background:linear-gradient(135deg,rgba(47,207,168,.1),rgba(47,207,168,.04));
+    border:1px solid var(--teal-border);border-radius:18px;padding:clamp(22px,3.4vw,34px)}
+  .callout.warn{background:linear-gradient(135deg,rgba(245,181,68,.11),rgba(245,181,68,.03));border-color:rgba(245,181,68,.32)}
+  .callout.warn .section-label{color:var(--amber)}
+  .rewrite-note{background:rgba(47,207,168,.08);border:1px solid var(--teal-border);
+    border-radius:14px;padding:20px 22px;margin:0 0 24px}
+  .rewrite-note h4{margin:0 0 10px;color:var(--teal);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+  .rewrite-note p{font-size:13.5px;margin:0 0 8px}
+  .rewrite-note p:last-child{margin-bottom:0}
+  .rewrite-note ul{font-size:13.5px;margin:0}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}
+  .card{display:flex;flex-direction:column;gap:9px;background:var(--surface);border:1px solid var(--border);
+    border-radius:18px;padding:22px;backdrop-filter:blur(18px);transition:.2s}
+  .card:hover{background:var(--surface-2);border-color:var(--border-2)}
+  .card h3{font-size:16px;margin:0 0 2px}
+  .card p{font-size:13.5px;line-height:1.5;margin:0}
+  .chip{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);width:max-content}
+  .feature{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start;padding:20px 0;border-top:1px solid var(--border)}
+  .feature:first-child{border-top:0}
+  .feature-num{width:40px;height:40px;border-radius:11px;background:var(--teal-subtle);border:1px solid var(--teal-border);
+    display:flex;align-items:center;justify-content:center;color:var(--teal);font-weight:600;font-size:15px;flex:0 0 auto}
+  .feature p{font-size:14px;margin:0}
+  .top{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-3);margin-top:24px;transition:.2s}
+  .top:hover{color:var(--teal)}
+
+  footer{margin-top:36px;padding:30px 0 56px;border-top:1px solid var(--border);
+    font-size:12.5px;color:var(--ink-3);line-height:1.7;font-weight:300}
+  footer a{color:var(--teal)}
+
+  .reveal{opacity:1;transform:none}
+  .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .js .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:760px){
+    .feature{grid-template-columns:1fr;gap:10px}
+    .nav-cta{display:none}
+    .scroll-hint{display:block}
+    .lo-h{flex-direction:column;gap:4px}
+  }
+  @media (max-width:420px){
+    .tag{display:none}
+    .brand-txt{justify-content:center}
+    td{padding:10px 13px;font-size:13.5px}
+    th{padding:11px 13px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none}
+  }
+
+  /* print: white paper, black text, no chrome, tables unclipped */
+  @media print{
+    @page{margin:15mm}
+    .chrome,nav,.jump,.hero-ctas,.top,.scroll-hint{display:none!important}
+    html,body{background:#fff!important;background-image:none!important;color:#000!important}
+    body::before{display:none!important}
+    .wrap{max-width:none;padding:0}
+    h1,h2,h3,h4,p,li,td,th,strong,em,caption,.lo-t,.lo-n,.unit-ref,.stat-num,.stat-label,.meta span,.meta span b{color:#000!important}
+    em{font-weight:600}
+    a{color:#000!important;text-decoration:underline}
+    .unit,.card,.stat,.callout,.callout.warn,.rewrite-note,.tbl,.unit.new{
+      background:#fff!important;background-image:none!important;border:1px solid #999!important;
+      box-shadow:none!important;backdrop-filter:none!important}
+    .tbl{overflow:visible!important}
+    table{min-width:0!important;font-size:9.5pt;width:100%!important}
+    .tbl.crit table,.tbl.check table{min-width:0!important}
+    th{border-bottom:1px solid #000!important;font-size:8.5pt}
+    td{border-top:1px solid #ccc!important;padding:6px 9px}
+    tr.total td{background:#eee!important;border-top:1px solid #000!important}
+    td.n{color:#000!important;font-weight:700}
+    .flag.rewritten{background:#000!important;color:#fff!important}
+    .flag.asis{border:1px solid #666!important}
+    section{padding:12pt 0;border-top:1px solid #ccc}
+    .hero{padding:0 0 12pt}
+    h1{font-size:22pt}h2{font-size:15pt}h3{font-size:12pt}
+    .reveal,.js .reveal{opacity:1!important;transform:none!important}
+    h2,h3,h4,.lo-h,caption{page-break-after:avoid;break-after:avoid}
+    tr,.lo,.rewrite-note,.stat{page-break-inside:avoid;break-inside:avoid}
+    .unit{page-break-before:auto}
+    footer{border-top:1px solid #999}
+  }
+</style>
+</head>
+<body>
+
+<div class="chrome">
+<nav>
+  <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
+      <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
+    <g id="halo"></g>
+    <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
+  </svg>
+  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Proposals &amp; walkthroughs</span></div>
+  <span class="nav-spacer"></span>
+  <a class="nav-link" href="../">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    All proposals
+  </a>
+  <a class="nav-cta" href="https://zavmo.ai">Book a demo</a>
+</nav>
+
+<div class="jump" id="jump">
+  <div class="jump-inner">
+    <span class="jump-k">Jump to</span>
+    <a href="#structure">Structure</a>
+    <a href="#level-rule">Level rule</a>
+    <a href="#gm05"><b>GM-05</b> Capability</a>
+    <a href="#ei05"><b>EI-05</b> Roles</a>
+    <a href="#au05"><b>AU-05</b> Automation</a>
+    <a href="#da05"><b>DA-05</b> Data</a>
+    <a href="#pj05"><b>PJ-05</b> Project</a>
+    <a href="#assessment">Assessment</a>
+    <a href="#open">Open items</a>
+  </div>
+</div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Specification · RQF regulated route · draft for review</div>
+    <h1>Level 5 Diploma in <em>Future Fluency</em>.</h1>
+    <p class="lede">Five mandatory units, 410 hours of Total Qualification Time, 41 credits. Every learning outcome, every assessment criterion, and the check that holds each one against the Ofqual Level 5 descriptor. Two of the five units have been rewritten and are marked where they appear.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#structure">Read the specification</a>
+      <a class="btn btn-ghost" href="#rewrite">What was rewritten</a>
+    </div>
+  </header>
+
+  <section id="summary">
+    <div class="stats reveal">
+      <div class="stat"><div class="stat-num">410</div><div class="stat-label">Total Qualification Time, in hours</div></div>
+      <div class="stat"><div class="stat-num">41</div><div class="stat-label">Credits, at 1 credit per 10 hours of TQT</div></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-label">Mandatory units, no optional pathway</div></div>
+      <div class="stat"><div class="stat-num">136</div><div class="stat-label">Assessment criteria across the Diploma</div></div>
+    </div>
+  </section>
+
+  <section id="what">
+    <div class="section-label teal">Section 1</div>
+    <h2>What Future Fluency is, and what changes at Level 5.</h2>
+    <p class="lead-p">Future Fluency is about working well alongside AI and automation. Not building the technology. Using it, checking it, and leading a team through what it changes.</p>
+    <p>The subject moves as the level rises, and it moves deliberately. At Level 3 the learner changes their own daily work. They use AI tools on real tasks, check what comes back, automate something they repeat, and review what changed. At Level 5 the learner leads a department through the same shift. Technical depth does not rise. Judgement, analysis and working with people does.</p>
+    <p>This matters for reviewing the specification. A reader expecting deeper AI content at Level 5 will think the units have gone soft. They have not. The level rises through the complexity of the problem, not the difficulty of the tool.</p>
+  </section>
+
+  <section id="structure">
+    <div class="section-label teal">Section 2</div>
+    <h2>Structure and size.</h2>
+    <p>Credit is calculated at the Ofqual convention of 1 credit per 10 hours of Total Qualification Time. Guided learning hours are indicative.</p>
+    <p class="scroll-hint muted">Tables scroll sideways on a narrow screen.</p>
+    <div class="tbl reveal">
+      <table>
+        <caption>Level 5 Diploma in Future Fluency · Level 5 · 5 mandatory units</caption>
+        <thead><tr><th>Ref</th><th>Unit</th><th class="num">TQT</th><th class="num">Credits</th><th class="num">GLH</th><th class="num">Criteria</th></tr></thead>
+        <tbody>
+          <tr><td class="n">ZFF-GM-05</td><td>Leading a Department Through a Change in Required Capability</td><td class="num">60</td><td class="num">6</td><td class="num">24</td><td class="num">28</td></tr>
+          <tr><td class="n">ZFF-EI-05</td><td>Working with the People Whose Roles Change</td><td class="num">60</td><td class="num">6</td><td class="num">24</td><td class="num">27</td></tr>
+          <tr><td class="n">ZFF-AU-05</td><td>Planning Automation Across a Department</td><td class="num">80</td><td class="num">8</td><td class="num">46</td><td class="num">26</td></tr>
+          <tr><td class="n">ZFF-DA-05</td><td>Using Data to Direct a Department's Priorities</td><td class="num">70</td><td class="num">7</td><td class="num">40</td><td class="num">25</td></tr>
+          <tr><td class="n">ZFF-PJ-05</td><td>Applied Project: Annual Automation Plan for Own Department</td><td class="num">140</td><td class="num">14</td><td class="num">10</td><td class="num">30</td></tr>
+          <tr class="total"><td class="n">Total</td><td>5 mandatory units</td><td class="num">410</td><td class="num">41</td><td class="num">144</td><td class="num">136</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="font-size:13px">410 TQT clears the 370 hour Diploma threshold with 40 hours of headroom. The criteria total was 97 before ZFF-GM-05 and ZFF-EI-05 were rewritten. Those two units carried 8 criteria each and now carry 28 and 27. TQT, credits and GLH are unchanged, so the size of the qualification is unaffected.</p>
+
+    <h4>Where the hours go</h4>
+    <div class="tbl reveal">
+      <table>
+        <thead><tr><th>&nbsp;</th><th class="num">Level 3 Diploma</th><th class="num">Level 5 Diploma</th></tr></thead>
+        <tbody>
+          <tr><td>Guided learning</td><td class="num">155 (40%)</td><td class="num">144 (35%)</td></tr>
+          <tr><td>Everything else</td><td class="num">235 (60%)</td><td class="num">266 (65%)</td></tr>
+          <tr class="total"><td>Total Qualification Time</td><td class="num">390</td><td class="num">410</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The share of guided learning falls as the level rises, and that is the descriptor doing its work. A Level 5 problem is only broadly defined. A large part of what the learner needs cannot be known in advance by anyone, including the tutor. The department, its systems and its people are the content, and they are found in the doing.</p>
+    <p>Two things are easy to misread in that table. <strong>Guided learning is not the same as time with Zavmo.</strong> It is the hours spent under direction. Tutoring is one part of that, not all of it. <strong>The other hours are not all project work.</strong> They are reflection, reading and personal investigation as well as the project, and most of it happens inside the learner's own job.</p>
+    <a class="top" href="#jump">Back to the unit index</a>
+  </section>
+
+  <section id="level-rule">
+    <div class="section-label teal">Section 3</div>
+    <h2>The level rule every criterion is written to.</h2>
+    <p>Every criterion in every unit below is held against the Ofqual RQF Level 5 descriptor.</p>
+    <div class="grid cols-2 reveal" style="margin-top:20px">
+      <div class="card">
+        <span class="chip">Knowledge</span>
+        <p>Practical, theoretical or technological knowledge and understanding of a subject or field of work to find ways forward in <strong>broadly defined, complex contexts</strong>. Can <strong>analyse, interpret and evaluate</strong> relevant information, concepts and ideas. Is aware of the nature and scope of the area. <strong>Understands different perspectives, approaches or schools of thought and the reasoning behind them.</strong></p>
+      </div>
+      <div class="card">
+        <span class="chip">Skills</span>
+        <p><strong>Determine, adapt and use</strong> appropriate methods, cognitive and practical skills to address <strong>broadly defined, complex</strong> problems. <strong>Use relevant research or development</strong> to inform actions. <strong>Evaluate</strong> actions, methods and results.</p>
+      </div>
+    </div>
+    <h4>Against Level 4</h4>
+    <p>Level 4 problems are complex and non-routine while normally <em>fairly well defined</em>. Level 5 problems are only <em>broadly</em> defined. The test applied throughout: has anybody told the learner what the problem is, what counts as a good answer, or which method to use? If any of the three is given, the criterion has dropped to Level 4. This is why <em>determine</em> appears so often. It is the descriptor's own word and it is load-bearing.</p>
+    <h4>Against Level 6 and above</h4>
+    <p>Deliberately absent from every unit: <em>critically analyse</em>, <em>design research</em>, <em>appraise</em>, and any outcome about evaluating implications. Also absent: <em>reformulate</em> and <em>synthesise</em>, which are Level 7. <em>Justify</em> does not appear either, because it appears nowhere in the three units this specification is levelled against.</p>
+    <p class="muted" style="font-size:13.5px">One exception is visible and is flagged rather than hidden. ZFF-AU-05 uses <em>appraise</em> in its LO3 stem and at 3.1, 3.4, 4.3, 4.4 and 5.5, in the ordinary sense of weighing candidate processes against criteria the learner has set. It is not carrying the Level 6 descriptor sense. The wording is reproduced here as it stands so that a reviewer sees it, and it is one of the things we would like a view on.</p>
+    <h4>Scope is departmental</h4>
+    <p>The change is happening to the learner's team or department and the learner leads a function through it. Level 3 was personal scope. The moment an outcome asks what the department is <em>for</em>, it has left Level 5 upward. The moment it takes only the learner's own tasks as its object, it has left Level 5 downward.</p>
+    <h4>The subject is leading people through change</h4>
+    <p>It is change management and working with people, applied to automation and data. It is explicitly not deep AI or dataset expertise. Technical depth peaks at Level 3 and does not rise up this ladder. Someone will eventually try to improve these units by adding AI content. That would mis-level them.</p>
+    <a class="top" href="#jump">Back to the unit index</a>
+  </section>
+
+  <section id="rewrite">
+    <div class="section-label teal">Section 4</div>
+    <h2>Two units have been rewritten.</h2>
+    <p class="lead-p">ZFF-GM-05 and ZFF-EI-05 were written earlier than the other three and to a different house style. They were not fit to submit. They have been rewritten in full and the replacements appear below, marked <span class="flag rewritten" style="display:inline-block;vertical-align:middle">Rewritten</span> wherever they occur.</p>
+    <div class="callout warn reveal" style="margin-top:22px">
+      <div class="section-label">What was wrong with the previous versions</div>
+      <div class="grid cols-2" style="margin-top:6px">
+        <div>
+          <h4 style="margin-top:0">1. Personal scope in a departmental qualification</h4>
+          <p style="font-size:14px">Every criterion took the learner's own mindset, own regulation or own relationships as its object. The level rule the other three units are written to says plainly that a Level 5 outcome taking only the learner's own tasks as its object has left Level 5 downward. As written, the two sat closer to Level 3, with no visible difference in scope from ZFF-GM-03.</p>
+          <h4>2. The wrong verb band</h4>
+          <p style="font-size:14px"><em>Appraise</em> is treated as Level 6 throughout the other units. <em>Formulate</em> is Level 7. <em>Justify</em> appeared in both and appears nowhere in the three departmental units. All three have been removed.</p>
+        </div>
+        <div>
+          <h4 style="margin-top:0">3. Far too thin</h4>
+          <p style="font-size:14px">Eight assessment criteria each, against 25 to 30 in the other three, and against 60 hours of Total Qualification Time each. That is not a small difference in a Diploma. It changes what an assessor has to evidence and it looks inconsistent to an External Quality Assurer reading the qualification whole.</p>
+          <h4>4. Some criteria were not assessable</h4>
+          <p style="font-size:14px">"Assess own mindset across defined domains" names no standard against which the assessment is made, and mindset is not directly observable. ZFF-GM-03 solves the same problem at Level 3 by assessing what the learner <em>does</em> rather than the attitude they report holding. That is the precedent the rewrites follow.</p>
+        </div>
+      </div>
+    </div>
+    <h4>What the rewrites changed</h4>
+    <div class="tbl reveal">
+      <table>
+        <thead><tr><th>&nbsp;</th><th>Previous version</th><th>Rewritten version</th></tr></thead>
+        <tbody>
+          <tr><td class="n">ZFF-GM-05</td><td>Growth Mindset. Understanding mindset theory, appraising own learning behaviours, applying growth practices to a self-identified challenge. 4 outcomes, 8 criteria.</td><td>Leading a Department Through a Change in Required Capability. 5 outcomes, 28 criteria.</td></tr>
+          <tr><td class="n">ZFF-EI-05</td><td>Emotional Intelligence. Understanding models of emotional intelligence, evaluating own self-awareness and regulation, applying empathy in a working relationship. 4 outcomes, 8 criteria.</td><td>Working with the People Whose Roles Change. 5 outcomes, 27 criteria.</td></tr>
+          <tr class="total"><td class="n">Effect on size</td><td>60 TQT, 6 credits, 24 GLH each</td><td>60 TQT, 6 credits, 24 GLH each. Unchanged</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>The subject matter is not lost. Mindset and emotional intelligence are what the two units build. What the learner <em>does</em> with them, at departmental scope, is what the units now assess. Both sit beside ZFF-AU-05 and ZFF-PJ-05, which already require consultation and a judgement about the skills a department holds.</p>
+    <a class="top" href="#jump">Back to the unit index</a>
+  </section>
+
+  <section id="units">
+    <div class="section-label teal">Section 5</div>
+    <h2>The five units in full.</h2>
+    <p>Each unit carries its reference, level, hours, credits, guided learning hours and status, its aim, every learning outcome, every assessment criterion, and a level check that maps each descriptor clause to the criteria that answer it.</p>
+    <p class="scroll-hint muted">Criteria tables scroll sideways on a narrow screen.</p>
+
+    <!-- UNIT 1 · ZFF-GM-05 -->
+    <div class="unit new reveal" id="gm05">
+      <div class="unit-head">
+        <div>
+          <div class="unit-ref">Unit 1 · ZFF-GM-05</div>
+          <h3>Leading a Department Through a Change in Required Capability</h3>
+        </div>
+        <span class="flag rewritten">Rewritten</span>
+      </div>
+      <div class="meta">
+        <span>Level <b>5</b></span><span>TQT <b>60</b></span><span>Credits <b>6</b></span>
+        <span>GLH <b>24</b></span><span>Status <b>Mandatory</b></span>
+        <span class="count">5 outcomes · <b>28 criteria</b></span>
+      </div>
+
+      <div class="rewrite-note">
+        <h4>Newly rewritten · what changed and why</h4>
+        <p>This unit replaces the previous ZFF-GM-05, titled Growth Mindset, which had four outcomes and eight criteria, all of them taking the learner's own mindset as their object.</p>
+        <ul>
+          <li><strong>Scope moved from personal to departmental.</strong> The object of every criterion is now the capability a department holds, the capability it will require, and the people whose expected capability changes.</li>
+          <li><strong>The verb band was corrected.</strong> <em>Appraise</em>, <em>formulate</em> and <em>justify</em> are gone. The unit now uses the descriptor's own verbs: determine, analyse, interpret, evaluate, adapt and use.</li>
+          <li><strong>Granularity was brought into line.</strong> Eight criteria became 28, matching the 25 to 30 carried by the other three units for comparable hours.</li>
+          <li><strong>Every criterion is now observable.</strong> Following the ZFF-GM-03 precedent, nothing asks the learner to demonstrate that they hold a growth mindset, and nothing asks an assessor to judge an attitude. The mindset is what the unit builds. The actions are what it assesses.</li>
+        </ul>
+        <p>TQT, credits and guided learning hours are unchanged, so the Diploma remains at 410 TQT and 41 credits.</p>
+      </div>
+
+      <h4 style="margin-top:0">Unit aim</h4>
+      <p>This unit gives the learner the skills to lead a department through a change in what its people are expected to be good at. The emphasis is on the judgement and the leading rather than on any particular skill being built. Learners establish what capability their department currently holds and what its work will require as its processes change, determine for themselves the criteria by which options for closing the difference will be evaluated, and evaluate those options using figures from their own systems and evidence of how comparable work has gone elsewhere. They then consult the people whose expected capability changes, adapt the recommendation in the light of what those conversations establish, set out what each person is expected to do and what support is available, and evaluate what the change produced in the department's work.</p>
+      <p>Scope is departmental. Keeping the learner's own skills current is ZFF-GM-03 and is outside this unit.</p>
+
+      <div class="note">
+        <p><strong>A design note that is load-bearing: this unit assesses what the learner does, not the attitude anyone reports holding.</strong> Every criterion is an observable action, a stated determination, or a judgement made against evidence that can be produced. No criterion asks the learner to demonstrate a growth mindset, and no criterion asks an assessor to judge a learner's or a colleague's attitude, resilience or confidence. Those would not be assessable.</p>
+      </div>
+
+      <h4>Learning outcomes and assessment criteria</h4>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO1</span><p class="lo-t">The learner will: Know how a change in required capability affects the work of a department.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">1.1</td><td>Analyse the effects on a department's work when the capabilities its roles require change, including the effect on people whose established competence is no longer what the work requires</td></tr>
+            <tr><td class="n">1.2</td><td>Compare different approaches to building capability in a department, and the reasoning behind each</td></tr>
+            <tr><td class="n">1.3</td><td>Evaluate the reasons capability-building programmes fail to change what people do at work</td></tr>
+            <tr><td class="n">1.4</td><td>Identify the constraints that limit what own department can change about the capability it holds, including time, budget, role definitions, agreements and the availability of learning</td></tr>
+            <tr><td class="n">1.5</td><td>Evaluate the different views held within own department about the change in what its people are expected to be good at, and the reasoning given for them</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO2</span><p class="lo-t">The learner will: Be able to establish what capability a department holds and what it will require.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">2.1</td><td>Determine the method used to establish what capability the department holds and what it will require, and state the reasons for choosing it</td></tr>
+            <tr><td class="n">2.2</td><td>Establish the capabilities the department's roles currently require, and the work each of those capabilities supports</td></tr>
+            <tr><td class="n">2.3</td><td>Establish the capability the department currently holds, using the department's own records and evidence from work already carried out</td></tr>
+            <tr><td class="n">2.4</td><td>Determine the capability the department will require as its processes change, and state the reasons</td></tr>
+            <tr><td class="n">2.5</td><td>Analyse the difference between the capability held and the capability required, and identify where that difference carries most cost to the department</td></tr>
+            <tr><td class="n">2.6</td><td>Evaluate the reliability of the evidence obtained, and state how gaps were handled</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO3</span><p class="lo-t">The learner will: Be able to determine how a department's capability difference will be closed.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">3.1</td><td>Determine the criteria against which options for closing the difference will be evaluated, and state the reasons for them</td></tr>
+            <tr><td class="n">3.2</td><td>Identify the options available for closing each part of the difference, including developing the people already in post, changing how work is allocated, recruiting, redeploying, and obtaining capability from outside the department</td></tr>
+            <tr><td class="n">3.3</td><td>Interpret the cost and the benefit of each option, using figures from the department's own systems</td></tr>
+            <tr><td class="n">3.4</td><td>Use relevant investigation of comparable work, inside or outside own organisation, to inform the choice between options</td></tr>
+            <tr><td class="n">3.5</td><td>Identify a capability the department should not attempt to build, and evaluate the reasons</td></tr>
+            <tr><td class="n">3.6</td><td>Evaluate the options against the criteria determined at 3.1, and state which are recommended</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO4</span><p class="lo-t">The learner will: Be able to lead a department through a change in what its people are expected to be good at.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">4.1</td><td>Identify the people whose expected capability changes, and state how it changes for each</td></tr>
+            <tr><td class="n">4.2</td><td>Consult those people about the change, and record what was raised</td></tr>
+            <tr><td class="n">4.3</td><td>Analyse the concerns raised, and evaluate which of them alter the recommended options</td></tr>
+            <tr><td class="n">4.4</td><td>Adapt the recommendation in response to what the consultation established, and state what changed</td></tr>
+            <tr><td class="n">4.5</td><td>State, for each person whose expected capability changes, the actions they are expected to take, the support available to them and the period over which the change applies</td></tr>
+            <tr><td class="n">4.6</td><td>Determine how the change in the department's capability will be evidenced in the work the department produces, and state what will count as evidence</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO5</span><p class="lo-t">The learner will: Be able to evaluate a change in a department's capability and own method.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">5.1</td><td>Evaluate the change in the department's capability against the requirement determined at 2.4, using the evidence determined at 4.6</td></tr>
+            <tr><td class="n">5.2</td><td>Evaluate the effect of the change on the work the department produces, using figures from the department's own systems</td></tr>
+            <tr><td class="n">5.3</td><td>Identify where the change did not take effect, and evaluate the reasons</td></tr>
+            <tr><td class="n">5.4</td><td>Evaluate how effective the method determined at 2.1 and the criteria determined at 3.1 were, giving reasons</td></tr>
+            <tr><td class="n">5.5</td><td>Identify what would be determined differently at the next change in the department's required capability, and the reasons</td></tr>
+          </tbody></table>
+        </div>
+        <p class="lo-note">5 learning outcomes, 28 assessment criteria.</p>
+      </div>
+
+      <h4>Level check</h4>
+      <div class="tbl check">
+        <table><thead><tr><th>Descriptor clause</th><th>Answered by</th></tr></thead><tbody>
+          <tr><td>Find ways forward in broadly defined, complex contexts</td><td>LO2 and LO3. Nobody states which capabilities matter, what the department should be able to do next, or how the difference should be closed. 2.1 and 3.1 require the learner to determine the method and the criteria before any option can be evaluated</td></tr>
+          <tr><td>Analyse, interpret and evaluate relevant information, concepts and ideas</td><td>1.1, 2.5 and 4.3 analyse; 3.3 interprets; 1.3, 1.5, 2.6, 3.5, 3.6, 5.1, 5.2, 5.3 and 5.4 evaluate</td></tr>
+          <tr><td>Is aware of the nature and scope of the area</td><td>1.4, 2.2, 2.3. The learner establishes what the department's roles require and what its people can already do before proposing anything</td></tr>
+          <tr><td>Understands different perspectives, approaches or schools of thought and the reasoning behind them</td><td>1.2 and 1.5. Both require the reasoning, not only the position</td></tr>
+          <tr><td>Determine, adapt and use appropriate methods to address broadly defined, complex problems</td><td>2.1, 2.4, 3.1 and 4.6 determine; 4.4 adapts; LO3 and LO4 use</td></tr>
+          <tr><td>Use relevant research or development to inform actions</td><td>3.4, which uses investigation of comparable work to inform the choice rather than to describe the field</td></tr>
+          <tr><td>Evaluate actions, methods and results</td><td>LO5 in full, and 4.3. 5.4 evaluates the method and the criteria the learner determined rather than ones they were given</td></tr>
+        </tbody></table>
+      </div>
+
+      <h4>Boundary against Level 3</h4>
+      <p>ZFF-GM-03 is the closest unit in the suite and the difference has to be visible in the wording. There the learner keeps their own skills current: they compare their own skills with what their own role will require, plan one piece of their own learning, and review what it changed. Here the learner establishes what a department can already do, determines what it will need, evaluates the options for closing the difference, and leads the people through the change. No criterion in this unit takes the learner's own skills as its object. <em>Determine</em>, <em>analyse</em> and <em>interpret</em> appear here and appear nowhere in ZFF-GM-03.</p>
+
+      <h4>Boundary against Level 4</h4>
+      <p>A Level 4 version would read: assess your team against the competency framework you have been given, and choose from the training options on the approved list, within the budget you have been set. Every one of those is a definition supplied from outside. Removing all three is what makes this Level 5. <strong>Watch 3.1 if the unit is ever edited.</strong> If the criteria for evaluating options are supplied as a competency framework or a template rather than determined by the learner, the unit becomes Level 4 and the qualification's level claim goes with it. The same applies to 2.1: supplying a skills-audit instrument drops the unit a level.</p>
+
+      <h4>Boundary against Level 6 and above</h4>
+      <p>No criterion asks the learner to <em>critically</em> analyse, to design research, or to evaluate implications beyond the department. 3.4 uses investigation that already exists. 5.2 evaluates the effect on the department's own work, which is scope-bounded. Two moves are above the level and are excluded: reconsidering what the department's roles are <em>for</em>, and changing what the organisation as a whole expects of its people. Where the recommendation genuinely requires an organisational change to proceed, the correct treatment is to record it at 1.4 as a constraint, not to widen the unit.</p>
+      <a class="top" href="#jump">Back to the unit index</a>
+    </div>
+
+    <!-- UNIT 2 · ZFF-EI-05 -->
+    <div class="unit new reveal" id="ei05">
+      <div class="unit-head">
+        <div>
+          <div class="unit-ref">Unit 2 · ZFF-EI-05</div>
+          <h3>Working with the People Whose Roles Change</h3>
+        </div>
+        <span class="flag rewritten">Rewritten</span>
+      </div>
+      <div class="meta">
+        <span>Level <b>5</b></span><span>TQT <b>60</b></span><span>Credits <b>6</b></span>
+        <span>GLH <b>24</b></span><span>Status <b>Mandatory</b></span>
+        <span class="count">5 outcomes · <b>27 criteria</b></span>
+      </div>
+
+      <div class="rewrite-note">
+        <h4>Newly rewritten · what changed and why</h4>
+        <p>This unit replaces the previous ZFF-EI-05, titled Emotional Intelligence, which had four outcomes and eight criteria, all of them taking the learner's own self-awareness, own regulation or a single working relationship as their object.</p>
+        <ul>
+          <li><strong>Scope moved from personal to departmental.</strong> One relationship is not a department. The object of every criterion is now the whole group of people whose roles change, the people whose work depends on those roles, and the department's own work.</li>
+          <li><strong>The verb band was corrected.</strong> <em>Justify</em> is gone, along with the assess-own-state constructions. The unit now uses the descriptor's own verbs: determine, analyse, interpret, evaluate, adapt and use.</li>
+          <li><strong>Granularity was brought into line.</strong> Eight criteria became 27, matching the 25 to 30 carried by the other three units for comparable hours.</li>
+          <li><strong>Every criterion is now observable.</strong> Nothing asks a learner to report their own emotional state and nothing asks an assessor to rate empathy. What is assessed is what the learner established, what they decided, what they said to whom, and what followed.</li>
+          <li><strong>The people who do not want the change are now in the unit.</strong> The previous version had no criterion covering disagreement that is not resolved. 2.6, 3.2, 3.6 and 4.3 cover it directly.</li>
+        </ul>
+        <p>TQT, credits and guided learning hours are unchanged, so the Diploma remains at 410 TQT and 41 credits.</p>
+      </div>
+
+      <h4 style="margin-top:0">Unit aim</h4>
+      <p>This unit gives the learner the skills to work with the people whose roles change when a department automates part of its work, including the people who do not want the change. The emphasis is on what the department establishes and what it then does, rather than on any single conversation. Learners establish who is affected and what changes for each of them, determine for themselves the method by which they will find out what those people raise, and analyse what is raised to separate objections to the change itself from objections to the way it is being made. They then determine the criteria by which the department's response will be evaluated, decide which points change the department's plans and which do not, work directly with the people concerned including those who continue not to accept the change, and evaluate what the whole of it produced in the department's work.</p>
+      <p>Scope is departmental. Strengthening one working relationship is not this unit. What the organisation as a whole should do about role change is set elsewhere and is outside it.</p>
+
+      <div class="note">
+        <p><strong>A design note that is load-bearing: this unit assesses what the learner does, not the emotional state anyone reports holding.</strong> Every criterion is an observable action, a stated determination, or a judgement made against recorded evidence. No criterion asks the learner to demonstrate empathy, and no criterion asks an assessor to rate a learner's self-awareness or regulation. Those would not be assessable. Emotional intelligence is what the unit builds. The conduct of a real change, and its record, are what it assesses.</p>
+      </div>
+
+      <h4>Learning outcomes and assessment criteria</h4>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO1</span><p class="lo-t">The learner will: Know how people in a department respond when their roles change.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">1.1</td><td>Analyse the effects on the work of a department when the roles within it change</td></tr>
+            <tr><td class="n">1.2</td><td>Evaluate what is at stake for different groups of people in a department when its roles change, and the reasoning behind the positions they take</td></tr>
+            <tr><td class="n">1.3</td><td>Compare different approaches to working with people through a change to their roles, and the reasoning behind each</td></tr>
+            <tr><td class="n">1.4</td><td>Evaluate the reasons changes to roles are agreed and then not carried through in practice</td></tr>
+            <tr><td class="n">1.5</td><td>Identify the obligations and constraints that govern how own department may work with people whose roles change, including consultation requirements, agreements and the organisation's own procedures</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO2</span><p class="lo-t">The learner will: Be able to establish how a change to roles affects the people in a department.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">2.1</td><td>Identify the people whose roles change and state what changes for each, and identify the people whose work depends on the roles that change</td></tr>
+            <tr><td class="n">2.2</td><td>Determine the method used to establish what those people raise about the change, and state the reasons for choosing it</td></tr>
+            <tr><td class="n">2.3</td><td>Establish, using that method, what each person or group raises about the change, and record it</td></tr>
+            <tr><td class="n">2.4</td><td>Analyse what was raised to establish which points concern the change itself and which concern the way it is being made</td></tr>
+            <tr><td class="n">2.5</td><td>Interpret what was raised to establish which parts of the change are least likely to be carried through in practice, and state the reasons</td></tr>
+            <tr><td class="n">2.6</td><td>Evaluate the reliability of what the method established, and state how the position of people who did not take part was handled</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO3</span><p class="lo-t">The learner will: Be able to determine how a department will respond to people who do not accept a change.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">3.1</td><td>Determine the criteria against which the department's response to each point raised will be evaluated, and state the reasons for them</td></tr>
+            <tr><td class="n">3.2</td><td>Analyse the points raised by people who do not accept the change, and evaluate which of them are supported by evidence</td></tr>
+            <tr><td class="n">3.3</td><td>Determine which points will change the department's plans and which will not, and state the reasons in each case</td></tr>
+            <tr><td class="n">3.4</td><td>Use relevant investigation of comparable changes, inside or outside own organisation, to inform the response</td></tr>
+            <tr><td class="n">3.5</td><td>Adapt the department's plans in response to what the consultation established, and state what changed</td></tr>
+            <tr><td class="n">3.6</td><td>Determine what the department will do where a person continues not to accept the change, within the obligations and constraints identified at 1.5</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO4</span><p class="lo-t">The learner will: Be able to work with the people whose roles change.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">4.1</td><td>State to each person whose role changes what is changing, when it changes, and what is expected of them</td></tr>
+            <tr><td class="n">4.2</td><td>Respond to each point raised, stating what the department will do about it and the reasons</td></tr>
+            <tr><td class="n">4.3</td><td>Conduct a discussion with a person who does not accept the change, and record what was agreed and what was not</td></tr>
+            <tr><td class="n">4.4</td><td>Determine the support each person requires to carry out the changed role, and state how and when it will be provided</td></tr>
+            <tr><td class="n">4.5</td><td>Determine how the department will keep the people whose roles change informed while the change proceeds, and how the effect on their work will be measured</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO5</span><p class="lo-t">The learner will: Be able to evaluate how a department worked with the people whose roles changed.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">5.1</td><td>Evaluate the effect of the change on the work of the people whose roles changed, against what was determined at 4.5</td></tr>
+            <tr><td class="n">5.2</td><td>Evaluate the effect of the change on the department's work, using figures from the department's own systems</td></tr>
+            <tr><td class="n">5.3</td><td>Evaluate how far the points recorded at 2.3 changed what the department did, giving reasons</td></tr>
+            <tr><td class="n">5.4</td><td>Evaluate how effective the method determined at 2.2 and the criteria determined at 3.1 were, giving reasons</td></tr>
+            <tr><td class="n">5.5</td><td>Identify what would be determined differently at the next change to the department's roles, and the reasons</td></tr>
+          </tbody></table>
+        </div>
+        <p class="lo-note">5 learning outcomes, 27 assessment criteria.</p>
+      </div>
+
+      <h4>Level check</h4>
+      <div class="tbl check">
+        <table><thead><tr><th>Descriptor clause</th><th>Answered by</th></tr></thead><tbody>
+          <tr><td>Find ways forward in broadly defined, complex contexts</td><td>LO2 and LO3. Nobody tells the learner how to find out what people think, what counts as a point worth acting on, or where the line falls between changing the plan and holding it. 2.2, 3.1 and 3.3 require the learner to determine all three</td></tr>
+          <tr><td>Analyse, interpret and evaluate relevant information, concepts and ideas</td><td>1.1, 2.4 and 3.2 analyse; 2.5 interprets; 1.2, 1.4, 2.6, 3.2, 5.1, 5.2, 5.3 and 5.4 evaluate. 2.3 to 2.5 run the descriptor's verbs in its own order across a single body of recorded evidence</td></tr>
+          <tr><td>Is aware of the nature and scope of the area</td><td>1.5, 2.1, 2.3. The learner establishes who is affected, who depends on them, and what the department is obliged to do, before deciding anything</td></tr>
+          <tr><td>Understands different perspectives, approaches or schools of thought and the reasoning behind them</td><td>1.2 and 1.3, and 2.4. 2.4 makes the learner separate the objection to the change from the objection to how it is being made, which are different positions with different reasoning</td></tr>
+          <tr><td>Determine, adapt and use appropriate methods to address broadly defined, complex problems</td><td>2.2, 3.1, 3.3, 3.6, 4.4 and 4.5 determine; 3.5 adapts; LO2 and LO4 use</td></tr>
+          <tr><td>Use relevant research or development to inform actions</td><td>3.4, which uses investigation of comparable changes to inform the response rather than to describe the field</td></tr>
+          <tr><td>Evaluate actions, methods and results</td><td>LO5 in full, and 3.2. 5.4 evaluates the method and the criteria the learner determined rather than ones they were given</td></tr>
+        </tbody></table>
+      </div>
+
+      <h4>Boundary against Level 3</h4>
+      <p>The previous version of this unit assessed the learner's own self-awareness and the effect of their practices on one working relationship. That is personal scope and it sat at or below Level 3. Nothing of that kind survives. Here the object is every person whose role changes, the people whose work depends on those roles, and the department's own output. The learner determines the method, sets the criteria, decides which objections move the plan, and answers for the result.</p>
+
+      <h4>Boundary against Level 4</h4>
+      <p>A Level 4 version would supply the list of people to consult, a briefing script to work from, and a decision already taken about which objections may be conceded. 2.2, 3.1 and 3.3 exist specifically to remove all three. <strong>Watch 3.1 and 3.3 if the unit is ever edited.</strong> A change-management template that fixes what counts as an acceptable response defines the problem for the learner and drops the unit a level. Supplying a template is exactly the kind of helpfulness a delivery team adds later without realising what it costs.</p>
+
+      <h4>Boundary against Level 6 and above</h4>
+      <p>No criterion asks the learner to <em>critically</em> analyse, to design research, or to evaluate implications beyond the department. 3.4 uses investigation that already exists. 5.2 evaluates the effect on the department's own work. Two moves are above the level and are excluded: reconsidering what the department's roles are <em>for</em>, and changing how the organisation as a whole handles role change. Where the response genuinely requires either, the correct treatment is to record it at 1.5 as a constraint the department is working within, not to widen the unit.</p>
+      <a class="top" href="#jump">Back to the unit index</a>
+    </div>
+
+    <!-- UNIT 3 · ZFF-AU-05 -->
+    <div class="unit reveal" id="au05">
+      <div class="unit-head">
+        <div>
+          <div class="unit-ref">Unit 3 · ZFF-AU-05</div>
+          <h3>Planning Automation Across a Department</h3>
+        </div>
+        <span class="flag asis">Unchanged</span>
+      </div>
+      <div class="meta">
+        <span>Level <b>5</b></span><span>TQT <b>80</b></span><span>Credits <b>8</b></span>
+        <span>GLH <b>46</b></span><span>Status <b>Mandatory</b></span>
+        <span class="count">5 outcomes · <b>26 criteria</b></span>
+      </div>
+
+      <h4 style="margin-top:0">Unit aim</h4>
+      <p>This unit gives the learner the skills to work out what in a department's work could be automated, what should not be, and what it would cost to find out. The emphasis is on the judgement rather than the tooling. Learners establish what their department actually does and where its effort goes, determine for themselves the criteria a candidate process has to meet, analyse individual processes against those criteria using figures from their own systems, and test the appraisal against how comparable work has gone elsewhere. They then consult the people whose work would change, adapt the appraisal in the light of what those conversations establish, and put a recommendation to whoever would decide.</p>
+      <p>Scope is departmental. The unit stops at a recommendation on a set of candidate processes. Turning that into a sequenced, resourced annual plan is ZFF-PJ-05.</p>
+
+      <h4>Learning outcomes and assessment criteria</h4>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO1</span><p class="lo-t">The learner will: Know how automation changes the work of a department.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">1.1</td><td>Analyse the effects that introducing automation has on the work of the people in a department</td></tr>
+            <tr><td class="n">1.2</td><td>Compare different approaches to introducing automation into a department, and the reasoning behind each</td></tr>
+            <tr><td class="n">1.3</td><td>Evaluate the reasons automation programmes fail to deliver what was expected of them</td></tr>
+            <tr><td class="n">1.4</td><td>Identify the constraints that limit what own department can automate, including systems, contracts, permissions and skills</td></tr>
+            <tr><td class="n">1.5</td><td>Evaluate the different views held within own department about automation, and the reasoning given for them</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO2</span><p class="lo-t">The learner will: Be able to establish what a department does and where its effort goes.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">2.1</td><td>Map the processes carried out by own department, showing inputs, outputs and the people involved</td></tr>
+            <tr><td class="n">2.2</td><td>Determine the method used to establish where the department's effort goes, and state the reasons for choosing it</td></tr>
+            <tr><td class="n">2.3</td><td>Establish the volume and the time cost of the department's main processes from the department's own systems</td></tr>
+            <tr><td class="n">2.4</td><td>Identify the processes that other teams depend on, and what they depend on them for</td></tr>
+            <tr><td class="n">2.5</td><td>Evaluate the reliability of the figures obtained, and state how gaps were handled</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO3</span><p class="lo-t">The learner will: Be able to appraise processes in a department as candidates for automation.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">3.1</td><td>Determine the criteria against which candidate processes will be appraised, and state the reasons for them</td></tr>
+            <tr><td class="n">3.2</td><td>Analyse a candidate process to establish which parts could be automated and which could not</td></tr>
+            <tr><td class="n">3.3</td><td>Interpret the costs and the benefits of automating a candidate process, using figures from the department's own systems</td></tr>
+            <tr><td class="n">3.4</td><td>Use relevant investigation of comparable work, inside or outside own organisation, to inform the appraisal</td></tr>
+            <tr><td class="n">3.5</td><td>Identify a process that should not be automated, and evaluate the reasons</td></tr>
+            <tr><td class="n">3.6</td><td>Evaluate the candidate processes against the criteria determined at 3.1, and state which are recommended</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO4</span><p class="lo-t">The learner will: Be able to work with the people whose work automation would change.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">4.1</td><td>Identify the people whose work would change, and how it would change for each</td></tr>
+            <tr><td class="n">4.2</td><td>Consult those people about the proposed change, and record what was raised</td></tr>
+            <tr><td class="n">4.3</td><td>Analyse the concerns raised, and evaluate which of them alter the appraisal</td></tr>
+            <tr><td class="n">4.4</td><td>Adapt the appraisal in response to what the consultation established, and state what changed</td></tr>
+            <tr><td class="n">4.5</td><td>Evaluate the skills the department would need that it does not currently hold</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO5</span><p class="lo-t">The learner will: Be able to recommend a course of action and evaluate own method.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">5.1</td><td>State the checks, the fallbacks and the points of human decision for each recommended process</td></tr>
+            <tr><td class="n">5.2</td><td>Evaluate the risks the recommendation carries for the department, and what would be done about each</td></tr>
+            <tr><td class="n">5.3</td><td>Present the recommendation, with the evidence, to the person who would decide</td></tr>
+            <tr><td class="n">5.4</td><td>Evaluate how effective the method determined at 2.2 and the criteria determined at 3.1 were, giving reasons</td></tr>
+            <tr><td class="n">5.5</td><td>Identify what would be determined differently in a further appraisal, and the reasons</td></tr>
+          </tbody></table>
+        </div>
+        <p class="lo-note">5 learning outcomes, 26 assessment criteria.</p>
+      </div>
+
+      <h4>Level check</h4>
+      <div class="tbl check">
+        <table><thead><tr><th>Descriptor clause</th><th>Answered by</th></tr></thead><tbody>
+          <tr><td>Find ways forward in broadly defined, complex contexts</td><td>LO2, LO3. Nobody states which processes to look at or what would make one worth automating. 2.2 and 3.1 require the learner to determine both before any appraisal can start</td></tr>
+          <tr><td>Analyse, interpret and evaluate</td><td>1.1, 3.2, 4.3 analyse; 3.3 interpret; 1.3, 1.5, 3.5, 3.6, 4.5, 5.2 evaluate</td></tr>
+          <tr><td>Aware of the nature and scope of the area</td><td>1.4, 2.1, 2.4</td></tr>
+          <tr><td>Understands different perspectives and the reasoning behind them</td><td>1.2 and 1.5. Both require the reasoning, not only the position</td></tr>
+          <tr><td>Determine, adapt and use appropriate methods</td><td>2.2, 3.1 determine; 4.4 adapt; LO2 and LO3 use</td></tr>
+          <tr><td>Use relevant research or development to inform actions</td><td>3.4</td></tr>
+          <tr><td>Evaluate actions, methods and results</td><td>LO5, and 4.3. 5.4 evaluates the method the learner determined rather than one they were given</td></tr>
+        </tbody></table>
+      </div>
+
+      <h4>Boundary against Level 4</h4>
+      <p>A Level 4 version would read: appraise the three processes your director has identified, against the business case template, within the budget you have been given. Every one of those is a definition supplied from outside. Removing all three is what makes this Level 5. <strong>Watch 3.1 if the unit is ever edited.</strong> If the criteria are supplied as a template rather than determined by the learner, the unit becomes Level 4 and the qualification's level claim goes with it.</p>
+
+      <h4>Boundary against Level 6</h4>
+      <p>No criterion asks the learner to <em>critically</em> analyse or to design research. 3.4 uses investigation that already exists. 5.2 evaluates risks to the department, which is scope-bounded.</p>
+      <a class="top" href="#jump">Back to the unit index</a>
+    </div>
+
+    <!-- UNIT 4 · ZFF-DA-05 -->
+    <div class="unit reveal" id="da05">
+      <div class="unit-head">
+        <div>
+          <div class="unit-ref">Unit 4 · ZFF-DA-05</div>
+          <h3>Using Data to Direct a Department's Priorities</h3>
+        </div>
+        <span class="flag asis">Unchanged</span>
+      </div>
+      <div class="meta">
+        <span>Level <b>5</b></span><span>TQT <b>70</b></span><span>Credits <b>7</b></span>
+        <span>GLH <b>40</b></span><span>Status <b>Mandatory</b></span>
+        <span class="count">5 outcomes · <b>25 criteria</b></span>
+      </div>
+
+      <h4 style="margin-top:0">Unit aim</h4>
+      <p>This unit gives the learner the skills to use the data their department already produces to decide where its effort should go. The emphasis is on the direction rather than the arithmetic. Learners establish what their department's measures actually count, what behaviour each one encourages in the people it reports on, and what they leave out. They then determine a question about the department's priorities that data could help settle, determine the method for answering it, analyse what the data indicates, and test that reading against an alternative one and against how comparable work behaves elsewhere.</p>
+      <p>Scope is departmental. The learner directs the priorities of a function, which includes changing what that function measures. What the department exists to achieve is set elsewhere and is outside this unit. <strong>The unit assumes no specialist statistical training and none is required to meet the criteria.</strong></p>
+
+      <h4>Learning outcomes and assessment criteria</h4>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO1</span><p class="lo-t">The learner will: Know what a department's measures show and what they drive.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">1.1</td><td>Analyse what the measures reported by own department actually count, and over what period</td></tr>
+            <tr><td class="n">1.2</td><td>Analyse the behaviour each measure encourages in the people whose work it reports on</td></tr>
+            <tr><td class="n">1.3</td><td>Evaluate what own department's current measures leave out</td></tr>
+            <tr><td class="n">1.4</td><td>Compare different approaches to measuring work of this kind, and the reasoning behind each</td></tr>
+            <tr><td class="n">1.5</td><td>Evaluate the different views held within own department about what its measures show, and the reasoning given for them</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO2</span><p class="lo-t">The learner will: Be able to determine a question about a department's priorities that data could help settle.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">2.1</td><td>State the question about own department's priorities that the work will address, and the reasons for selecting it</td></tr>
+            <tr><td class="n">2.2</td><td>Determine the data that bears on the question, and state the reasons for the selection</td></tr>
+            <tr><td class="n">2.3</td><td>Identify data that was available but set aside, and evaluate the effect of setting it aside</td></tr>
+            <tr><td class="n">2.4</td><td>Determine the method to be used to work with the data, and state the reasons for choosing it</td></tr>
+            <tr><td class="n">2.5</td><td>Evaluate the quality of the data obtained, and state how gaps and errors were handled</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO3</span><p class="lo-t">The learner will: Be able to analyse a department's data and interpret what it indicates.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">3.1</td><td>Analyse the selected data in relation to the question</td></tr>
+            <tr><td class="n">3.2</td><td>Interpret what the analysis indicates about where the department's effort is going</td></tr>
+            <tr><td class="n">3.3</td><td>Identify an interpretation the same data would also support, and evaluate which of the two it better supports</td></tr>
+            <tr><td class="n">3.4</td><td>Use relevant investigation, inside or outside own organisation, to test whether the interpretation holds</td></tr>
+            <tr><td class="n">3.5</td><td>Evaluate the limits of what the data can show, and what would be needed to settle the question</td></tr>
+            <tr><td class="n">3.6</td><td>Identify where an AI or automated tool was used in the analysis, and evaluate what was checked and why</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO4</span><p class="lo-t">The learner will: Be able to direct a department's priorities from what data indicates.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">4.1</td><td>Determine the changes to the department's priorities that follow from the interpretation</td></tr>
+            <tr><td class="n">4.2</td><td>Evaluate what the department would stop or reduce in order to make the changes possible</td></tr>
+            <tr><td class="n">4.3</td><td>Consult the people whose work the changes would affect, and record what was raised</td></tr>
+            <tr><td class="n">4.4</td><td>Adapt the proposed changes in response to what the consultation established, and state what changed</td></tr>
+            <tr><td class="n">4.5</td><td>Present the proposed priorities, with the evidence, to the person who decides them, and respond to challenge</td></tr>
+            <tr><td class="n">4.6</td><td>State how the effect of the changes will be measured, and over what period</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO5</span><p class="lo-t">The learner will: Be able to evaluate the effect of directing priorities from data.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">5.1</td><td>Evaluate the effect of the changed priorities against what was stated at 4.6, using evidence</td></tr>
+            <tr><td class="n">5.2</td><td>Evaluate how effective the method determined at 2.4 was, giving reasons</td></tr>
+            <tr><td class="n">5.3</td><td>Identify what would be determined differently next time, and the reasons</td></tr>
+          </tbody></table>
+        </div>
+        <p class="lo-note">5 learning outcomes, 25 assessment criteria.</p>
+      </div>
+
+      <h4>Level check</h4>
+      <div class="tbl check">
+        <table><thead><tr><th>Descriptor clause</th><th>Answered by</th></tr></thead><tbody>
+          <tr><td>Find ways forward in broadly defined, complex contexts</td><td>LO2. The question is not supplied. 2.1 requires the learner to state it and give reasons, 2.4 to determine how it will be answered</td></tr>
+          <tr><td>Analyse, interpret and evaluate</td><td>1.1, 1.2, 3.1 analyse; 3.2 interpret; 1.3, 1.5, 2.3, 2.5, 3.3, 3.5, 3.6, 4.2 evaluate. 3.1 to 3.3 run the three verbs in the descriptor's own order across a single body of data</td></tr>
+          <tr><td>Aware of the nature and scope of the area</td><td>1.1, 1.3, 3.5</td></tr>
+          <tr><td>Understands different perspectives and the reasoning behind them</td><td>1.4 and 1.5, and 3.3. 3.3 makes the learner hold two readings of the same data at once and choose between them on evidence</td></tr>
+          <tr><td>Determine, adapt and use appropriate methods</td><td>2.2, 2.4, 4.1 determine; 4.4 adapt; LO3 use</td></tr>
+          <tr><td>Use relevant research or development to inform actions</td><td>3.4</td></tr>
+          <tr><td>Evaluate actions, methods and results</td><td>LO5</td></tr>
+        </tbody></table>
+      </div>
+
+      <h4>Boundary against Level 3</h4>
+      <p>ZFF-DA-03 is the closest unit in the suite and the difference has to be visible in the wording. In ZFF-DA-03 the learner states a question about their own work and recommends to the person who decides. Here the learner determines a question about a department's priorities, determines the method, changes what the department measures, and consults the people affected. <em>Analyse</em> and <em>determine</em> appear here and appear nowhere in ZFF-DA-03.</p>
+
+      <h4>Boundary against Level 4</h4>
+      <p>A Level 4 version would supply the question and the reporting pack. 2.1 and 2.4 exist specifically to remove both.</p>
+
+      <h4>Boundary against Level 6</h4>
+      <p>Nothing asks the learner to critically analyse or to design research, to evaluate implications beyond the department, or to reconsider what the department is measuring <em>for</em>, which is the Level 7 move.</p>
+      <a class="top" href="#jump">Back to the unit index</a>
+    </div>
+
+    <!-- UNIT 5 · ZFF-PJ-05 -->
+    <div class="unit reveal" id="pj05">
+      <div class="unit-head">
+        <div>
+          <div class="unit-ref">Unit 5 · ZFF-PJ-05</div>
+          <h3>Applied Project: Annual Automation Plan for Own Department</h3>
+        </div>
+        <span class="flag asis">Unchanged</span>
+      </div>
+      <div class="meta">
+        <span>Level <b>5</b></span><span>TQT <b>140</b></span><span>Credits <b>14</b></span>
+        <span>GLH <b>10</b></span><span>Status <b>Mandatory</b></span>
+        <span class="count">5 outcomes · <b>30 criteria</b></span>
+      </div>
+
+      <h4 style="margin-top:0">Unit aim</h4>
+      <p>This unit is the applied project that carries the Diploma to its size, and it is the qualification's anchor. Over a period long enough for the department's own year to be visible in the figures, the learner maps what their department actually does, determines which processes are candidates for automation and which are not, costs the options with real numbers from real systems, consults the people whose work would change, sequences the work across a year, builds in the checks and the fallbacks, and presents the plan to whoever signs departmental plans off.</p>
+      <p>The deliverable is stated in the brief. Almost nothing else is: not which processes, not what counts as a benefit, not what a good sequence looks like, not whose agreement is needed, and not whether the answer is to automate much or little.</p>
+      <div class="note">
+        <p><strong>Delivery note.</strong> The 140 hours are almost entirely the learner's own work, carried out in their job. A departmental planning project run across a year generates continuous, time-stamped, real-work evidence. That is normally the hardest thing to produce for a qualification at this level, and the most expensive for a conventional provider to assess.</p>
+      </div>
+
+      <h4>Learning outcomes and assessment criteria</h4>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO1</span><p class="lo-t">The learner will: Be able to establish what own department does and what it costs.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">1.1</td><td>Determine the boundary of the department the plan will cover, and state the reasons for it</td></tr>
+            <tr><td class="n">1.2</td><td>Map the processes the department carries out across a year, including those that occur only occasionally</td></tr>
+            <tr><td class="n">1.3</td><td>Establish the volume, the time and the cost of each main process from the department's own systems</td></tr>
+            <tr><td class="n">1.4</td><td>Determine the method used to establish those figures, and state the reasons for choosing it</td></tr>
+            <tr><td class="n">1.5</td><td>Evaluate the reliability of the figures, and state how gaps and disputed figures were handled</td></tr>
+            <tr><td class="n">1.6</td><td>Identify the obligations and commitments the department must continue to meet whatever the plan changes</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO2</span><p class="lo-t">The learner will: Be able to analyse which of a department's processes are candidates for automation.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">2.1</td><td>Determine the criteria by which candidate processes will be selected, and state the reasons for them</td></tr>
+            <tr><td class="n">2.2</td><td>Analyse each main process against those criteria</td></tr>
+            <tr><td class="n">2.3</td><td>Interpret the cost and the benefit of automating each candidate, using the department's own figures</td></tr>
+            <tr><td class="n">2.4</td><td>Use relevant investigation of comparable work to inform the appraisal, and state what it established</td></tr>
+            <tr><td class="n">2.5</td><td>Identify the processes that should not be automated, and evaluate the reasons for each</td></tr>
+            <tr><td class="n">2.6</td><td>Evaluate the candidates against one another and state the order in which they are recommended</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO3</span><p class="lo-t">The learner will: Be able to consult the people whose work a plan would change.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">3.1</td><td>Identify the people whose work each recommended change would affect, and how it would affect them</td></tr>
+            <tr><td class="n">3.2</td><td>Consult those people, and record what was raised</td></tr>
+            <tr><td class="n">3.3</td><td>Analyse the concerns raised, and evaluate which of them change the plan</td></tr>
+            <tr><td class="n">3.4</td><td>Adapt the plan in response, and state what changed and the reasons</td></tr>
+            <tr><td class="n">3.5</td><td>Evaluate the skills the department will need that it does not currently hold, and state how they will be obtained</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO4</span><p class="lo-t">The learner will: Be able to produce a sequenced annual plan with checks and fallbacks.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">4.1</td><td>Sequence the recommended changes across the year, and state the reasons for the order</td></tr>
+            <tr><td class="n">4.2</td><td>Identify the dependencies between the changes, and between the changes and work outside the department</td></tr>
+            <tr><td class="n">4.3</td><td>State the resources each change requires, and when they are required</td></tr>
+            <tr><td class="n">4.4</td><td>State the checks that will be carried out on each change, by whom, and at what point</td></tr>
+            <tr><td class="n">4.5</td><td>State the fallback for each change, and the point at which the fallback would be used</td></tr>
+            <tr><td class="n">4.6</td><td>Evaluate the risks the plan carries for the department, and state what would be done about each</td></tr>
+            <tr><td class="n">4.7</td><td>Determine how the effect of each change will be measured, and against what starting figure</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+      <div class="lo">
+        <div class="lo-h"><span class="lo-n">LO5</span><p class="lo-t">The learner will: Be able to present a departmental plan and evaluate own method.</p></div>
+        <div class="tbl crit">
+          <table><thead><tr><th>Ref</th><th>The learner can</th></tr></thead><tbody>
+            <tr><td class="n">5.1</td><td>Present the plan to the person who signs off the department's plans, in a form suited to that decision</td></tr>
+            <tr><td class="n">5.2</td><td>Respond to challenge on the plan's figures, its sequence and its risks</td></tr>
+            <tr><td class="n">5.3</td><td>Record the decision taken and any conditions attached to it</td></tr>
+            <tr><td class="n">5.4</td><td>Evaluate how effective the method determined at 1.4 and the criteria determined at 2.1 were, giving reasons</td></tr>
+            <tr><td class="n">5.5</td><td>Evaluate how far the consultation changed the plan, giving reasons</td></tr>
+            <tr><td class="n">5.6</td><td>Identify what would be determined differently in the next annual plan, and the reasons</td></tr>
+          </tbody></table>
+        </div>
+        <p class="lo-note">5 learning outcomes, 30 assessment criteria.</p>
+      </div>
+
+      <h4>Level check</h4>
+      <p>This is the unit most likely to be challenged on level, in both directions. The challenge from below is that a stated deliverable makes the problem well defined. The challenge from above is that an annual plan for a department sounds strategic. Both are answered here rather than left to a review.</p>
+      <div class="tbl check">
+        <table><thead><tr><th>Descriptor clause</th><th>Answered by</th></tr></thead><tbody>
+          <tr><td>Find ways forward in broadly defined, complex contexts</td><td>LO1, LO2. See the paragraph below on what is and is not given</td></tr>
+          <tr><td>Analyse, interpret and evaluate</td><td>2.2, 3.3 analyse; 2.3 interpret; 1.5, 2.5, 2.6, 3.5, 4.6 evaluate</td></tr>
+          <tr><td>Aware of the nature and scope of the area</td><td>1.1, 1.2, 1.6, 4.2</td></tr>
+          <tr><td>Understands different perspectives and the reasoning behind them</td><td>3.2, 3.3. Carried mainly by ZFF-AU-05 1.2 and 1.5, which precede this unit</td></tr>
+          <tr><td>Determine, adapt and use appropriate methods</td><td>1.1, 1.4, 2.1, 4.7 determine; 3.4 adapt; LO2 and LO4 use. Four determinations, each of which would be supplied at Level 4</td></tr>
+          <tr><td>Use relevant research or development to inform actions</td><td>2.4, with a requirement to state what it established rather than merely that it was done</td></tr>
+          <tr><td>Evaluate actions, methods and results</td><td>LO5, and 4.6</td></tr>
+        </tbody></table>
+      </div>
+
+      <h4>What is given, and what is not</h4>
+      <p>The brief names the deliverable: an annual automation plan for your department. That is the whole of what is stated. It does not name the processes, the criteria, the method, the measure of benefit, the people who must agree, the shape of the year, or the answer. Two competent learners in the same department would produce different plans and both could be sound. That is the descriptor's <em>broadly defined</em>, and it is why the same brief at Level 3 is not the same kind of brief at all. There the object was named and only the instance was chosen.</p>
+
+      <h4>What would push it to Level 4</h4>
+      <p>Supplying the criteria at 2.1, supplying the process list at 1.2, or supplying a business case template that fixes what counts as a benefit. Any one defines the problem for the learner and drops the unit a level. The assessment guidance says so, because supplying a template is exactly the kind of helpfulness a delivery team adds later without realising what it costs.</p>
+
+      <h4>What would push it to Level 7</h4>
+      <p>Both exclusions are explicit. First, reframing what the department is <em>for</em>. Second, producing a plan that changes how the organisation as a whole operates. A learner who produces either has produced work above the level, and the criterion is still not met. Assessors find this counter-intuitive and need telling. Where a plan genuinely requires an organisational change to proceed, the correct treatment is to record it at 4.2 as a dependency outside the department, not to widen the plan.</p>
+
+      <h4>Not Level 6</h4>
+      <p>Nothing asks the learner to critically analyse, to design research, or to evaluate implications. 4.2 identifies dependencies. It does not place the learner in a context where many factors interact and none can be held constant.</p>
+      <a class="top" href="#jump">Back to the unit index</a>
+    </div>
+  </section>
+
+  <section id="assessment">
+    <div class="section-label teal">Section 6</div>
+    <h2>Assessment and quality assurance.</h2>
+    <p>The same model applies to every unit at both levels.</p>
+    <div class="reveal" style="margin-top:22px">
+      <div class="feature"><div class="feature-num">1</div><div><h3>Portfolio of evidence from real work</h3><p>Assessment is by portfolio drawn from work the learner is already responsible for, gathered over the period of the unit. There is no examination.</p></div></div>
+      <div class="feature"><div class="feature-num">2</div><div><h3>The AI teaches. A human assessor decides.</h3><p>Zavmo's AI tutors deliver the learning and prompt the learner to produce and submit evidence. <strong>The AI does not make the assessment decision.</strong> Every decision on every criterion is made by a named, occupationally competent, appropriately qualified human assessor, internally verified by a qualified IQA against a sampling plan, and sampled by the awarding organisation's External Quality Assurer.</p></div></div>
+      <div class="feature"><div class="feature-num">3</div><div><h3>How evidence is captured</h3><p>Learner activity in the platform is captured as xAPI statements and assembled into the portfolio: the tasks they selected, the instruction sets they wrote and rewrote, the outputs the tool returned, the checks they ran, the amendments they made and the reasons they gave. This gives the assessor a time-stamped record of the learner's process rather than only a finished artefact. <strong>The xAPI record is evidence presented to the assessor. It is not an assessment decision.</strong></p></div></div>
+      <div class="feature"><div class="feature-num">4</div><div><h3>Professional discussion is mandatory</h3><p>At least one recorded professional discussion per unit, conducted by the qualified assessor. This is the primary control for authenticating the learner at distance and confirming the portfolio is their own work.</p></div></div>
+      <div class="feature"><div class="feature-num">5</div><div><h3>Declared AI use</h3><p>Learners are expected to use AI in producing evidence, because that is the subject of the qualification. All AI use in evidence must be declared. The assessment decision rests on the learner's judgement about the AI output, not on the polish of the output itself, and that judgement is confirmed in live discussion.</p></div></div>
+      <div class="feature"><div class="feature-num">6</div><div><h3>Suggested evidence</h3><p>Records of professional discussion and oral questioning for the knowledge outcomes. Product evidence, annotated by the learner, for the skills outcomes. Witness testimony from a line manager where a criterion turns on something that happened in real work. Reflective accounts for the review outcomes. These are suggestions and centres could use other evidence, provided the criteria are covered and the evidence can be internally and externally verified.</p></div></div>
+      <div class="feature"><div class="feature-num">7</div><div><h3>Real-work grounding</h3><p>The tasks used must be tasks the learner is already responsible for. Simulated tasks should only be used where a learner's role genuinely offers no suitable real task, and the reason must be recorded.</p></div></div>
+    </div>
+    <a class="top" href="#jump">Back to the unit index</a>
+  </section>
+
+  <section id="open">
+    <div class="section-label teal">Section 7</div>
+    <h2>What we know is not yet right.</h2>
+    <p class="lead-p">Listed plainly, because we would rather you had this list than found it.</p>
+    <div class="grid cols-2 reveal" style="margin-top:22px">
+      <div class="card"><span class="chip">Open item 1</span><h3>The units have not been read by an assessor</h3><p>They are written to the descriptors and internally checked. Nobody with assessment experience has read them. This is the largest single gap.</p></div>
+      <div class="card"><span class="chip">Open item 2</span><h3>The two rewritten units are new and unreviewed</h3><p>ZFF-GM-05 and ZFF-EI-05 have been rewritten to departmental scope and to the house style of the other three. That answers the previous objection. It does not mean they are right, and they are the two units we would most like a view on.</p></div>
+      <div class="card"><span class="chip">Open item 3</span><h3>TQT is allocated, not measured</h3><p>The unit hours are judgements that produce a defensible total. If any unit's hours are revised down, the Diploma needs re-checking against the 370 hour threshold. This Diploma has 40 hours of headroom.</p></div>
+      <div class="card"><span class="chip">Open item 4</span><h3>Whether AI-led tutoring counts as guided learning is unresolved</h3><p>GLH is shown as indicative throughout. The taught and applied split in section 2 depends on the answer.</p></div>
+      <div class="card"><span class="chip">Open item 5</span><h3>How knowledge criteria may be evidenced is unresolved</h3><p>We have assumed recorded tutoring dialogue can evidence knowledge outcomes rather than written tests. That assumption is favourable to our model, so it should not be taken on our say-so. If written assessment is required, the hours split needs revisiting.</p></div>
+      <div class="card"><span class="chip">Open item 6</span><h3>The assessor layer does not exist yet</h3><p>We do not currently employ occupationally competent assessors or a qualified IQA. The model in section 6 describes what we will put in place, not what is running today.</p></div>
+      <div class="card"><span class="chip">Open item 7</span><h3>The Diploma has not been checked against the register</h3><p>It has not been compared with qualifications already regulated. That check has to happen before submission.</p></div>
+      <div class="card"><span class="chip">Open item 8</span><h3>Demand figures are excluded on purpose</h3><p>We hold internal estimates of which fluencies are most in demand. They are not evidence and they are not in this specification.</p></div>
+    </div>
+  </section>
+
+  <section id="close">
+    <div class="callout reveal">
+      <h2 style="margin-bottom:10px">Where this stands.</h2>
+      <p style="margin-bottom:18px">Five units, 410 hours, 41 credits, 136 assessment criteria, every one held against the Ofqual Level 5 descriptor and shown against it. Two units have been rewritten to departmental scope and are marked as such. The open items above are the honest list of what still has to be settled.</p>
+      <a class="btn btn-primary" href="#units">Read the units again</a>
+    </div>
+  </section>
+
+  <footer>
+    Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
+    Level 5 Diploma in Future Fluency · Zavmo / Iridescent Technologies. Built from the shared <code style="color:var(--ink-2)">_template</code>. Palette: navy + teal + DM Sans.<br>
+    <span class="muted">RQF regulated route. Credit calculated at 1 credit per 10 hours of Total Qualification Time. Guided learning hours are indicative.</span><br>
+    <span class="muted">Draft specification · for review before submission.</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // logomark halo, 12 dots, matches the hub chrome exactly
+  var g = document.getElementById('halo');
+  if(g){
+    var n=12, cx=50, cy=50, r=38;
+    for(var i=0;i<n;i++){
+      var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
+      var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('cx',x.toFixed(1)); c.setAttribute('cy',y.toFixed(1)); c.setAttribute('r','2.4');
+      c.setAttribute('fill','#3FE4BC'); c.setAttribute('opacity', i%2?'0.55':'0.9');
+      g.appendChild(c);
+    }
+  }
+
+  // scroll reveal
+  var els = document.querySelectorAll('.reveal');
+  function revealAll(){ els.forEach(function(e){ e.classList.add('in'); }); }
+  if(reduce || !('IntersectionObserver' in window)){
+    revealAll();
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    },{threshold:.06});
+    els.forEach(function(e){ io.observe(e); });
+    // Failsafe: a renderer that never issues frames never delivers observer
+    // callbacks, which would leave the specification blank. Show it regardless.
+    setTimeout(revealAll, 2000);
+  }
+
+  // unit index: highlight the section currently in view
+  var links = document.querySelectorAll('.jump a');
+  if(links.length && 'IntersectionObserver' in window){
+    var byId = {};
+    links.forEach(function(a){
+      var id = a.getAttribute('href');
+      if(id && id.charAt(0) === '#'){ byId[id.slice(1)] = a; }
+    });
+    var targets = [];
+    Object.keys(byId).forEach(function(id){
+      var t = document.getElementById(id);
+      if(t){ targets.push(t); }
+    });
+    if(targets.length){
+      var spy = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          var a = byId[en.target.id];
+          if(!a){ return; }
+          if(en.isIntersecting){
+            links.forEach(function(l){ l.classList.remove('on'); });
+            a.classList.add('on');
+          }
+        });
+      },{rootMargin:'-130px 0px -62% 0px',threshold:0});
+      targets.forEach(function(t){ spy.observe(t); });
+    }
+  }
+})();
+</script>
+</body>
+</html>
