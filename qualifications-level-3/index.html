@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ─────────────────────────────────────────────────────────────────────────
+     LEVEL 3 FUTURE FLUENCY QUALIFICATIONS  ·  Zavmo / Iridescent Technologies
+     Assessor-facing specification page. Built from the canonical _template
+     (navy + teal + DM Sans), with criteria tables, a unit jump bar and print
+     styles for moderation. Self-contained: no external requests.
+
+     Source: GATEWAY-L3-L5-SPECIFICATION-PACK.md, sections 1, 2.1, 2.2, 2.4,
+     3 (all six Level 3 units), 6 and 7. Every learning outcome and assessment
+     criterion is reproduced verbatim. RQF regulated route: 1 credit per 10
+     hours of Total Qualification Time.
+     DRAFT. Not submitted.
+     ───────────────────────────────────────────────────────────────────────── -->
+<title>Level 3 Future Fluency qualifications · Zavmo</title>
+<meta name="description" content="Full specifications for the Level 3 Award and Level 3 Diploma in Future Fluency: six units, every learning outcome and every assessment criterion, with the level checks.">
+<meta property="og:title" content="Level 3 Future Fluency qualifications">
+<meta property="og:description" content="Six units, 145 assessment criteria, in full. The Level 3 Award and Level 3 Diploma in Future Fluency, specified for assessment.">
+<style>
+  :root{
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
+    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
+    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
+    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    --bg-primary:var(--navy-0); --bg-secondary:var(--navy-1); --bg-card:var(--surface);
+    --teal-subtle:rgba(47,207,168,.14); --teal-border:var(--border-2);
+    --text-primary:var(--ink); --text-secondary:var(--ink-2); --text-tertiary:var(--ink-3);
+    --amber:#f5b544; --blue:#8fb8ff;
+    --navh:63px; --subh:56px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--navy-0);scroll-behavior:smooth}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;line-height:1.55;
+    background:
+      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
+    background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  em{font-style:normal;color:var(--teal-glow)}
+  em.it{font-style:italic;color:inherit}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,48px)}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--teal);color:var(--navy-0);
+    padding:10px 18px;border-radius:0 0 10px 0;font-size:13px;font-weight:600;z-index:200}
+  .skip:focus{left:0}
+  :focus-visible{outline:2px solid var(--teal-glow);outline-offset:3px;border-radius:4px}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:60;display:flex;align-items:center;gap:14px;
+    padding:14px clamp(18px,5vw,48px);
+    background:rgba(6,14,23,.82);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);}
+  .logomark{width:34px;height:34px;flex:0 0 auto}
+  .brand-txt{display:flex;flex-direction:column;line-height:1}
+  .word{font-size:13px;font-weight:600;letter-spacing:.26em}
+  .tag{font-size:10px;color:var(--teal);margin-top:5px;letter-spacing:.04em}
+  .nav-spacer{flex:1}
+  .nav-link{font-size:13px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;transition:.2s}
+  .nav-link:hover{color:var(--teal)}
+  .nav-link svg{width:15px;height:15px}
+
+  /* unit jump bar */
+  .unitnav{position:sticky;top:var(--navh);z-index:55;
+    background:rgba(6,14,23,.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border)}
+  .unitnav-in{max-width:1080px;margin:0 auto;padding:0 clamp(18px,5vw,48px);
+    display:flex;align-items:stretch;gap:6px;overflow-x:auto;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+  .unitnav-in::-webkit-scrollbar{height:4px}
+  .unitnav-in::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:4px}
+  .unitnav a{flex:0 0 auto;display:flex;flex-direction:column;justify-content:center;gap:2px;
+    padding:8px 12px;border-bottom:2px solid transparent;transition:.2s;white-space:nowrap}
+  .unitnav a b{font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--teal)}
+  .unitnav a span{font-size:11px;color:var(--ink-3);max-width:20ch;overflow:hidden;text-overflow:ellipsis}
+  .unitnav a:hover{background:var(--surface)}
+  .unitnav a.on{border-bottom-color:var(--teal)}
+  .unitnav a.on span{color:var(--ink-2)}
+
+  /* hero + sections */
+  .hero{padding:clamp(44px,9vh,96px) 0 clamp(28px,5vh,52px)}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+  h1{font-weight:200;letter-spacing:-.015em;line-height:1.05;font-size:clamp(30px,5.4vw,54px);margin:0 0 20px;text-wrap:balance}
+  .lede{font-size:clamp(15.5px,2vw,19px);line-height:1.55;color:var(--ink-2);max-width:62ch;margin:0 0 28px;font-weight:300}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:12px 26px;border-radius:100px;font-size:14px;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+  .btn-primary{background:var(--teal);color:var(--navy-0)}
+  .btn-primary:hover{background:var(--teal-glow);box-shadow:0 8px 28px rgba(47,207,168,.3)}
+  .btn-ghost{border:1px solid var(--border-2);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+  section{padding:clamp(34px,6vh,64px) 0;border-top:1px solid var(--border)}
+  section:first-of-type{border-top:0}
+  .section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+  h2{font-weight:300;letter-spacing:-.01em;line-height:1.15;font-size:clamp(24px,3.6vw,38px);margin:0 0 16px;text-wrap:balance}
+  h3{font-weight:500;letter-spacing:-.01em;font-size:18px;margin:0 0 8px}
+  p{color:var(--ink-2);font-weight:300;max-width:70ch}
+  .muted{color:var(--ink-3)}
+  .bul{color:var(--ink-2);font-weight:300;max-width:70ch;padding-left:20px}
+  .bul li{margin:6px 0}
+  .status-line{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 26px}
+  .sbit{font-size:11.5px;color:var(--ink-2);background:var(--surface);border:1px solid var(--border);
+    border-radius:100px;padding:6px 14px;font-weight:300}
+  .sbit b{color:var(--ink-3);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:10px;margin-right:7px}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px;backdrop-filter:blur(18px)}
+  .stat-num{font-size:clamp(26px,4vw,40px);font-weight:200;color:var(--teal);letter-spacing:-.02em;line-height:1}
+  .stat-label{font-size:12.5px;color:var(--ink-2);font-weight:300;margin-top:9px;line-height:1.4}
+
+  /* tables */
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0 22px;
+    border:1px solid var(--border);border-radius:14px;background:var(--surface)}
+  .tw::-webkit-scrollbar{height:6px}
+  .tw::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:6px}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14px}
+  thead th{text-align:left;font-weight:600;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);padding:12px 16px;border-bottom:1px solid var(--border);white-space:nowrap;
+    background:rgba(234,251,244,.03)}
+  tbody td{padding:11px 16px;border-top:1px solid var(--border);color:var(--ink-2);font-weight:300;vertical-align:top;line-height:1.5}
+  tbody tr:first-child td{border-top:0}
+  tbody tr:nth-child(even){background:rgba(234,251,244,.022)}
+  tbody tr:hover{background:rgba(47,207,168,.06)}
+  tbody strong{color:var(--ink);font-weight:600}
+  .tbl td:first-child{color:var(--ink);white-space:nowrap}
+  .tbl.free td:first-child{white-space:normal}
+  table.crit{min-width:480px}
+  table.crit td.cref{width:64px;color:var(--teal);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+  table.crit th:first-child{width:64px}
+  td.cref a{color:var(--teal);border-bottom:1px solid transparent}
+  td.cref a:hover{border-bottom-color:var(--teal)}
+  table.idx td{white-space:nowrap}
+  table.idx tfoot td{padding:12px 16px;border-top:1px solid var(--border-2);color:var(--ink);font-weight:600}
+
+  /* unit blocks */
+  .unit{scroll-margin-top:calc(var(--navh) + var(--subh) + 14px);border-top:1px solid var(--border)}
+  .unit-head{background:linear-gradient(135deg,rgba(47,207,168,.11),rgba(47,207,168,.03));
+    border:1px solid var(--teal-border);border-radius:18px;padding:clamp(20px,3vw,30px)}
+  .unit-ref{font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--teal);margin-bottom:10px}
+  .unit-title{font-size:clamp(21px,3.1vw,32px);font-weight:300;margin:0 0 16px;letter-spacing:-.01em}
+  .meta{display:flex;flex-wrap:wrap;gap:8px}
+  .mchip{font-size:12.5px;color:var(--ink);background:rgba(6,14,23,.42);border:1px solid var(--border);
+    border-radius:100px;padding:6px 14px;font-weight:400;white-space:nowrap}
+  .mchip b{color:var(--ink-3);font-weight:600;letter-spacing:.07em;text-transform:uppercase;font-size:10px;margin-right:7px}
+  .mchip.count{border-color:var(--border-2);color:var(--teal)}
+  .unit-body{padding-top:8px}
+  h3.sub{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);
+    margin:32px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+  .lo{border-left:2px solid var(--teal-deep);padding-left:clamp(14px,2.4vw,22px);margin:24px 0 0}
+  .lo-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;margin-bottom:4px}
+  .lo-badge{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--navy-0);background:var(--teal);
+    border-radius:100px;padding:3px 11px;flex:0 0 auto}
+  .lo-stem{font-size:16.5px;color:var(--ink);font-weight:400;flex:1 1 260px;line-height:1.4}
+  .lo-lead{color:var(--ink-3);font-weight:300}
+  .lo-count{font-size:11px;color:var(--ink-3);font-variant-numeric:tabular-nums;flex:0 0 auto}
+  .lo-note{font-size:13px;color:var(--ink-3);font-style:italic;margin:8px 0 0;max-width:70ch}
+  .tally{margin:22px 0 0;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--border-2);
+    border-radius:12px;padding:12px 18px;max-width:max-content}
+  .backtop{margin-top:26px;font-size:12.5px}
+  .backtop a{color:var(--teal);border-bottom:1px solid var(--border-2)}
+  .callout{background:linear-gradient(135deg,rgba(47,207,168,.1),rgba(47,207,168,.04));
+    border:1px solid var(--teal-border);border-radius:18px;padding:clamp(22px,3.4vw,34px)}
+  .callout p{max-width:66ch}
+  .honest{counter-reset:h}
+  .honest .hrow{display:grid;grid-template-columns:auto 1fr;gap:18px;padding:18px 0;border-top:1px solid var(--border)}
+  .honest .hrow:first-of-type{border-top:0}
+  .hnum{width:34px;height:34px;border-radius:10px;background:var(--surface);border:1px solid var(--border);
+    display:flex;align-items:center;justify-content:center;color:var(--ink-3);font-weight:600;font-size:13px;flex:0 0 auto}
+  .hrow p{margin:0}
+  footer{margin-top:36px;padding:30px 0 54px;border-top:1px solid var(--border);
+    font-size:12.5px;color:var(--ink-3);line-height:1.7;font-weight:300}
+  footer a{color:var(--teal)}
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:640px){
+    :root{--subh:39px}
+    .unitnav a{justify-content:center;padding:10px 11px}
+    .unitnav a span{display:none}
+    .lo{padding-left:12px}
+    .lo-stem{font-size:15.5px}
+    .tally{max-width:none}
+    /* Criteria are the reading matter, so let them wrap rather than scroll. */
+    table.crit{min-width:0}
+    table.crit td.cref,table.crit th:first-child{width:52px}
+    thead th,tbody td{padding-left:12px;padding-right:12px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none}
+  }
+
+  /* ── print: for the moderation meeting ─────────────────────────────────── */
+  @media print{
+    @page{margin:14mm}
+    html,body{background:#fff!important;color:#000!important}
+    body{font-size:10.5pt;line-height:1.42}
+    nav,.unitnav,.hero-ctas,.skip,.backtop,footer .noprint{display:none!important}
+    .wrap{max-width:none;padding:0}
+    a{color:#000!important;text-decoration:none}
+    h1,h2,h3,.unit-title,.lo-stem,.stat-num,tbody strong{color:#000!important}
+    p,.bul,tbody td,.lo-note,.stat-label,.muted{color:#1a1a1a!important}
+    section{border-top:1px solid #bbb;padding:14pt 0}
+    .unit{page-break-before:always;break-before:page;border-top:0}
+    .unit-head{background:#f2f2f2!important;border:1px solid #999;border-radius:0;padding:10pt}
+    .unit-ref{color:#000!important}
+    .mchip{background:#fff!important;border:1px solid #999;color:#000!important;border-radius:0}
+    .mchip b,.lo-lead,.lo-count,.section-label,h3.sub,.sbit b{color:#444!important}
+    .sbit{background:#fff!important;border:1px solid #999;border-radius:0;color:#000!important}
+    .lo{border-left:2px solid #000;page-break-inside:avoid;break-inside:avoid}
+    .lo-badge{background:#000!important;color:#fff!important;border-radius:0}
+    .tw{overflow:visible!important;border:0;border-radius:0;background:none}
+    table{min-width:0!important;width:100%;font-size:9.5pt}
+    thead{display:table-header-group}
+    tr{page-break-inside:avoid;break-inside:avoid}
+    thead th{background:#e8e8e8!important;color:#000!important;border-bottom:1px solid #666}
+    tbody td{border-top:1px solid #ccc}
+    tbody tr:nth-child(even){background:#fafafa!important}
+    tbody tr:hover{background:none!important}
+    table.crit td.cref{color:#000!important;font-weight:700}
+    .callout,.stat{background:#f7f7f7!important;border:1px solid #999;border-radius:0}
+    .tally{background:#fff!important;border:1px solid #000;border-radius:0;color:#000!important}
+    .honest .hrow{page-break-inside:avoid;break-inside:avoid}
+    .hnum{background:#fff!important;border:1px solid #666;color:#000!important;border-radius:0}
+    .reveal{opacity:1!important;transform:none!important}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#start">Skip to content</a>
+
+<nav>
+  <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
+      <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
+    <g id="halo"></g>
+    <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
+  </svg>
+  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Qualification specifications</span></div>
+  <span class="nav-spacer"></span>
+  <a class="nav-link" href="../">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    All proposals
+  </a>
+</nav>
+
+<div class="unitnav" role="navigation" aria-label="Jump to a unit">
+  <div class="unitnav-in">
+    <a href="#units"><b>Index</b><span>All six units</span></a>
+    <a href="#zff-ai-03"><b>ZFF-AI-03</b><span>Using and Checking AI Tools in Daily Work</span></a><a href="#zff-gm-03"><b>ZFF-GM-03</b><span>Developing a Growth Mindset for Changing Work</span></a><a href="#zff-da-03"><b>ZFF-DA-03</b><span>Turning Workplace Data into a Recommendation</span></a><a href="#zff-gv-03"><b>ZFF-GV-03</b><span>Working Safely and Responsibly with AI</span></a><a href="#zff-au-03"><b>ZFF-AU-03</b><span>Automating a Repeated Task in Own Work</span></a><a href="#zff-pj-03"><b>ZFF-PJ-03</b><span>Applied Project: Improving Own Work with AI</span></a>
+    <a href="#assessment"><b>Assessment</b><span>and quality assurance</span></a>
+    <a href="#open"><b>Open items</b><span>What is not yet right</span></a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Regulated route · RQF · Level 3</div>
+    <h1>Two Level 3 qualifications in <em>Future Fluency</em>, specified in full.</h1>
+    <p class="lede">A Level 3 Award of two units and a Level 3 Diploma of six. Every learning outcome and every assessment criterion is on this page, in full, with the level check that holds each unit against the Ofqual Level 3 descriptor.</p>
+    <div class="status-line">
+      <span class="sbit"><b>For</b>Gateway Qualifications</span>
+      <span class="sbit"><b>From</b>Zavmo (Growth Engineering Ltd)</span>
+      <span class="sbit"><b>Status</b>First draft for review. Not submitted</span>
+      <span class="sbit"><b>Date</b>21 August 2026</span>
+    </div>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#units">Go to the unit index</a>
+      <a class="btn btn-ghost" href="#open">Read the open items first</a>
+    </div>
+  </header>
+
+  <section id="start">
+    <div class="stats reveal">
+      <div class="stat"><div class="stat-num">2</div><div class="stat-label">Qualifications: an Award and a Diploma</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Mandatory units, all at Level 3</div></div>
+      <div class="stat"><div class="stat-num">145</div><div class="stat-label">Assessment criteria across the Diploma</div></div>
+      <div class="stat"><div class="stat-num">390</div><div class="stat-label">Total Qualification Time, in hours</div></div>
+      <div class="stat"><div class="stat-num">39</div><div class="stat-label">Credits, at 1 per 10 hours of TQT</div></div>
+    </div>
+    <p class="muted" style="margin-top:18px;font-size:13px">The Level 3 Award sits inside the Diploma as units 1 and 2, unchanged. It carries 120 TQT, 12 credits and 50 assessment criteria.</p>
+  </section>
+
+  <section id="what">
+    <div class="section-label">Section 1</div>
+    <h2>What Future Fluency is</h2>
+    <p>Future Fluency is about working well alongside AI and automation. Not building the technology. Using it, checking it, and leading a team through what it changes.</p>
+    <p>The subject moves as the level rises, and it moves deliberately.</p>
+    <ul class="bul">
+      <li><strong>At Level 3</strong> the learner changes their own daily work. They use AI tools on real tasks, check what comes back, automate something they repeat, and review what changed.</li>
+      <li><strong>At Level 5</strong> the learner leads a department through the same shift. Technical depth does not rise. Judgement, analysis and working with people does.</li>
+    </ul>
+    <p>This matters for reviewing the specifications. A reader expecting deeper AI content at Level 5 will think the units have gone soft. They have not. The level rises through the complexity of the problem, not the difficulty of the tool.</p>
+    <p class="muted" style="font-size:13px">This page specifies the Level 3 qualifications. The Level 5 Diploma is specified in the same pack and is not reproduced here.</p>
+  </section>
+
+  <section id="structure">
+    <div class="section-label">Section 2</div>
+    <h2>Structure and size</h2>
+    <p>Credit is calculated at the Ofqual convention of 1 credit per 10 hours of Total Qualification Time.</p>
+
+    <h3 style="margin-top:30px">2.1 Level 3 Award in Future Fluency</h3>
+    <p class="muted" style="font-size:13.5px">Level 3 · TQT 120 · 12 credits · 2 mandatory units</p>
+    <div class="tw"><table class="tbl free">
+      <thead><tr><th scope="col">Ref</th><th scope="col">Unit</th><th scope="col">TQT</th><th scope="col">Credits</th><th scope="col">GLH</th></tr></thead>
+      <tbody>
+        <tr><td class="cref"><a href="#zff-ai-03">ZFF-AI-03</a></td><td>Using and Checking AI Tools in Daily Work</td><td>70</td><td>7</td><td>35</td></tr>
+        <tr><td class="cref"><a href="#zff-gm-03">ZFF-GM-03</a></td><td>Developing a Growth Mindset for Changing Work</td><td>50</td><td>5</td><td>25</td></tr>
+        <tr><td></td><td><strong>Total</strong></td><td><strong>120</strong></td><td><strong>12</strong></td><td><strong>60</strong></td></tr>
+      </tbody>
+    </table></div>
+    <p>50 assessment criteria.</p>
+
+    <h3 style="margin-top:30px" id="units">2.2 Level 3 Diploma in Future Fluency</h3>
+    <p class="muted" style="font-size:13.5px">Level 3 · TQT 390 · 39 credits · 6 mandatory units. Select a reference to open that unit.</p>
+    <div class="tw"><table class="tbl idx">
+      <thead><tr><th scope="col">Ref</th><th scope="col">Unit</th><th scope="col">TQT</th><th scope="col">Credits</th><th scope="col">GLH</th><th scope="col">LOs</th><th scope="col">Criteria</th></tr></thead>
+      <tbody><tr><td class="cref"><a href="#zff-ai-03">ZFF-AI-03</a></td><td>Using and Checking AI Tools in Daily Work</td><td>70</td><td>7</td><td>35</td><td>5</td><td>28</td></tr><tr><td class="cref"><a href="#zff-gm-03">ZFF-GM-03</a></td><td>Developing a Growth Mindset for Changing Work</td><td>50</td><td>5</td><td>25</td><td>5</td><td>22</td></tr><tr><td class="cref"><a href="#zff-da-03">ZFF-DA-03</a></td><td>Turning Workplace Data into a Recommendation</td><td>60</td><td>6</td><td>30</td><td>5</td><td>24</td></tr><tr><td class="cref"><a href="#zff-gv-03">ZFF-GV-03</a></td><td>Working Safely and Responsibly with AI</td><td>50</td><td>5</td><td>30</td><td>5</td><td>21</td></tr><tr><td class="cref"><a href="#zff-au-03">ZFF-AU-03</a></td><td>Automating a Repeated Task in Own Work</td><td>60</td><td>6</td><td>25</td><td>5</td><td>24</td></tr><tr><td class="cref"><a href="#zff-pj-03">ZFF-PJ-03</a></td><td>Applied Project: Improving Own Work with AI</td><td>100</td><td>10</td><td>10</td><td>5</td><td>26</td></tr></tbody>
+      <tfoot><tr><td></td><td>Total</td><td>390</td><td>39</td><td>155</td><td>30</td><td>145</td></tr></tfoot>
+    </table></div>
+    <p>145 assessment criteria. 390 TQT clears the 370 Diploma threshold with 20 hours of headroom.</p>
+
+    <h3 style="margin-top:30px">2.4 Where the hours go</h3>
+    <div class="tw"><table class="tbl free">
+      <thead><tr><th scope="col"></th><th scope="col">Level 3 Diploma</th><th scope="col">Level 5 Diploma</th></tr></thead>
+      <tbody>
+        <tr><td>Guided learning</td><td>155 (40%)</td><td>144 (35%)</td></tr>
+        <tr><td>Everything else</td><td>235 (60%)</td><td>266 (65%)</td></tr>
+      </tbody>
+    </table></div>
+    <p>The share of guided learning falls as the level rises, and that is the descriptor doing its work. A Level 5 problem is only broadly defined. A large part of what the learner needs cannot be known in advance by anyone, including the tutor. The department, its systems and its people are the content, and they are found in the doing.</p>
+    <p>Two things are easy to misread in that table.</p>
+    <p><strong>Guided learning is not the same as time with Zavmo.</strong> It is the hours spent under direction. Tutoring is one part of that, not all of it.</p>
+    <p><strong>The other hours are not all project work.</strong> They are reflection, reading and personal investigation as well as the project, and most of it happens inside the learner's own job.</p>
+  </section>
+
+  <section id="levelrule">
+    <div class="section-label">Section 3</div>
+    <h2>The Level 3 units</h2>
+    <h3>The level rule these six are written to</h3>
+    <p>Every criterion is held against the Ofqual RQF Level 3 descriptor: problems that, <strong>while well defined, may be complex and non-routine</strong>; the learner can <strong>interpret and evaluate</strong> relevant information and ideas, is <strong>aware of different perspectives or approaches</strong>, uses <strong>appropriate investigation</strong> to inform actions, and <strong>reviews how effective</strong> methods and actions have been.</p>
+    <p>Deliberately absent throughout: <em class="it">analyse</em> (Level 4), <em class="it">critically analyse</em> and <em class="it">design</em> (Level 6), <em class="it">reformulate</em> (Level 7).</p>
+    <p><strong>Scope stays personal in every unit.</strong> The moment an outcome reaches a colleague, a team or a department, it has left Level 3.</p>
+  </section>
+
+<!-- ZFF-AI-03 -->
+<section class="unit" id="zff-ai-03">
+  <div class="unit-head">
+    <div class="unit-ref">ZFF-AI-03</div>
+    <h2 class="unit-title">Using and Checking AI Tools in Daily Work</h2>
+    <div class="meta"><span class="mchip"><b>Level</b>3</span><span class="mchip"><b>TQT</b>70 hours</span><span class="mchip"><b>Credits</b>7</span><span class="mchip"><b>GLH</b>35 indicative</span><span class="mchip"><b>Status</b>mandatory</span><span class="mchip count"><b>Criteria</b>28</span></div>
+  </div>
+  <div class="unit-body">
+    <h3 class="sub">Unit aim</h3>
+<p>This unit gives the learner the skills to use everyday AI tools on the tasks they already carry out in their own job, and to check what those tools produce before it is used. Learners find out what a large language model does when it answers a question, and why it can be wrong while reading as certain. They then select real tasks from their own working week, write and improve the instructions they give the tool, check the output against other sources, correct it, and review what has changed about the way they work. Scope is personal. All evidence comes from work the learner is already responsible for.</p>
+    <h3 class="sub">Learning outcomes and assessment criteria</h3>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO1</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Know how large language model tools produce their answers.</div><span class="lo-count">6 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">1.1</td><td>Describe, in everyday language, what a large language model does when it answers a question</td></tr>
+        <tr><td class="cref">1.2</td><td>Outline where the information a large language model draws on comes from, and how up to date that information is</td></tr>
+        <tr><td class="cref">1.3</td><td>Describe why a large language model can produce an answer that is incorrect but reads as certain</td></tr>
+        <tr><td class="cref">1.4</td><td>Identify the types of task in own area of work where a large language model is likely to be reliable, and the types where it is likely to be unreliable</td></tr>
+        <tr><td class="cref">1.5</td><td>Describe what happens to information that is entered into the AI tools used in own workplace</td></tr>
+        <tr><td class="cref">1.6</td><td>Describe the different views held by people in own area of work about the use of AI, and the reasons given for them</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO2</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to select tasks from own daily work to carry out with an AI tool.</div><span class="lo-count">4 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">2.1</td><td>Select a task carried out each day or each week in own role to complete with an AI tool, and state the reasons for the choice</td></tr>
+        <tr><td class="cref">2.2</td><td>Identify a task in own role that should not be given to an AI tool, and state the reasons</td></tr>
+        <tr><td class="cref">2.3</td><td>Identify the information handled in own role that must not be entered into an AI tool</td></tr>
+        <tr><td class="cref">2.4</td><td>State the requirements the finished task must meet, including the audience and the format</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO3</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to write and improve the instructions given to an AI tool.</div><span class="lo-count">6 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">3.1</td><td>Write instructions to an AI tool that set out the task, the audience, the format and any limits to be applied</td></tr>
+        <tr><td class="cref">3.2</td><td>Produce an output for a selected task in own role using those instructions</td></tr>
+        <tr><td class="cref">3.3</td><td>Change the instructions in response to the output produced, and state what was changed and the reasons for it</td></tr>
+        <tr><td class="cref">3.4</td><td>Compare the outputs produced by two different sets of instructions for the same task</td></tr>
+        <tr><td class="cref">3.5</td><td>State which output met the requirements set for the task, giving reasons</td></tr>
+        <tr><td class="cref">3.6</td><td>Produce a set of instructions that can be used again for a task that recurs in own work</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO4</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to interpret and evaluate the output of an AI tool.</div><span class="lo-count">7 criteria</span></div>
+      <p class="lo-note">This stem uses the Level 3 descriptor clause verbatim.</p>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">4.1</td><td>Describe what critical thinking means when it is applied to the output of an AI tool</td></tr>
+        <tr><td class="cref">4.2</td><td>Identify the statements within an AI output that must be checked before the output is used</td></tr>
+        <tr><td class="cref">4.3</td><td>Use at least two other sources to check facts contained in an AI output</td></tr>
+        <tr><td class="cref">4.4</td><td>Describe the errors found, including any information that was invented, out of date, one-sided or missing</td></tr>
+        <tr><td class="cref">4.5</td><td>Amend the output so that it meets the requirements set for the task</td></tr>
+        <tr><td class="cref">4.6</td><td>Explain the reasons for each amendment made</td></tr>
+        <tr><td class="cref">4.7</td><td>Describe an occasion in own work when an AI output was rejected, and the reasons for rejecting it</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO5</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to review the effect of AI tools on own daily tasks.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">5.1</td><td>Describe how a task in own role is carried out differently when an AI tool is used</td></tr>
+        <tr><td class="cref">5.2</td><td>Estimate the time added or saved by using an AI tool on that task</td></tr>
+        <tr><td class="cref">5.3</td><td>Identify the parts of the task that remain the responsibility of the person rather than the tool</td></tr>
+        <tr><td class="cref">5.4</td><td>State where AI has been used in own work, in line with own organisation's rules</td></tr>
+        <tr><td class="cref">5.5</td><td>Identify one change to make to own use of AI tools on the next similar task</td></tr>
+      </tbody></table></div>
+    </div>
+    <p class="tally"><strong>5 learning outcomes, 28 assessment criteria.</strong></p>
+    <h3 class="sub">Level check</h3>
+<div class="tw"><table class="tbl"><thead><tr><th>Descriptor clause</th><th>Answered by</th></tr></thead><tbody><tr><td>Knowledge to address problems that, while well defined, may be complex and non-routine</td><td>LO1, LO2. The task is well defined by 2.4. The non-routine element is the output that is confidently wrong</td></tr><tr><td>Can interpret and evaluate relevant information and ideas</td><td>LO4 in full, plus 3.4 and 3.5</td></tr><tr><td>Is aware of the nature of the area</td><td>1.1, 1.2, 1.4</td></tr><tr><td>Is aware of different perspectives or approaches</td><td>1.1 to 1.3, and 1.6</td></tr><tr><td>Identify, select and use appropriate skills, methods and procedures</td><td>LO2, LO3</td></tr><tr><td>Use appropriate investigation to inform actions</td><td>4.3, 4.4</td></tr><tr><td>Review how effective methods and actions have been</td><td>LO5 in full</td></tr></tbody></table></div>
+<p><strong>Not Level 2.</strong> Evaluation against evidence (4.3) and comparison of two methods against a standard (3.4, 3.5) sit past the Level 2 band, which stops at interpreting relevant information.</p>
+<p><strong>Not Level 4.</strong> No criterion requires the learner to <em class="it">analyse</em>, and every task carries a stated requirement set (2.4) against which the output is judged.</p>
+<p><strong>Not Level 6.</strong> Nothing asks the learner to critically analyse contested material, design research, or evaluate implications.</p>
+    <p class="backtop"><a href="#units">Back to the unit index</a></p>
+  </div>
+</section>
+
+<!-- ZFF-GM-03 -->
+<section class="unit" id="zff-gm-03">
+  <div class="unit-head">
+    <div class="unit-ref">ZFF-GM-03</div>
+    <h2 class="unit-title">Developing a Growth Mindset for Changing Work</h2>
+    <div class="meta"><span class="mchip"><b>Level</b>3</span><span class="mchip"><b>TQT</b>50 hours</span><span class="mchip"><b>Credits</b>5</span><span class="mchip"><b>GLH</b>25 indicative</span><span class="mchip"><b>Status</b>mandatory</span><span class="mchip count"><b>Criteria</b>22</span></div>
+  </div>
+  <div class="unit-body">
+    <h3 class="sub">Unit aim</h3>
+<p>This unit gives the learner the skills to keep their own working practices up to date as AI and automation change what their job involves. Learners describe what is changing in the tasks they carry out, compare that with the skills they hold, plan and carry out one piece of their own learning, apply the new skill to a real task, seek and act on feedback, and review what it changed.</p>
+<p><strong>A design note that is load-bearing: this unit assesses what the learner does, not the attitude they report holding.</strong> Every criterion is an observable action or a description of a real event. No criterion asks the learner to demonstrate that they hold a growth mindset, or asks an assessor to judge their attitude, resilience or confidence. Those would not be assessable. The mindset is what the unit builds. The actions are what it assesses.</p>
+    <h3 class="sub">Learning outcomes and assessment criteria</h3>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO1</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Know how AI and automation are changing the work carried out in own role.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">1.1</td><td>Describe the tasks in own role that are most likely to change as AI and automation are introduced</td></tr>
+        <tr><td class="cref">1.2</td><td>Describe the parts of own role that are least likely to be carried out by a machine, giving reasons</td></tr>
+        <tr><td class="cref">1.3</td><td>Outline the skills that are becoming more valuable in own area of work</td></tr>
+        <tr><td class="cref">1.4</td><td>Describe the different views held by people in own workplace about these changes, and the reasons given for them</td></tr>
+        <tr><td class="cref">1.5</td><td>Describe the difference between a fixed mindset and a growth mindset, using an example from own working experience</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO2</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to compare own current skills with the skills own role will require.</div><span class="lo-count">4 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">2.1</td><td>Identify own current strengths in relation to the changing tasks in own role</td></tr>
+        <tr><td class="cref">2.2</td><td>Identify the skills own role will require that are not yet held</td></tr>
+        <tr><td class="cref">2.3</td><td>Select one skill to develop, and state the reasons for the choice</td></tr>
+        <tr><td class="cref">2.4</td><td>Identify the sources of help available for developing that skill, inside and outside own workplace</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO3</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to plan and carry out a piece of own learning.</div><span class="lo-count">4 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">3.1</td><td>Produce a plan for developing the selected skill, stating the actions to be taken, the dates for them and how progress will be measured</td></tr>
+        <tr><td class="cref">3.2</td><td>Carry out the actions set out in the plan</td></tr>
+        <tr><td class="cref">3.3</td><td>Describe the difficulties met while carrying out the plan, and the actions taken in response</td></tr>
+        <tr><td class="cref">3.4</td><td>Adapt the plan in response to what was learned, and state what was changed</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO4</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to apply a newly developed skill to a task in own role.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">4.1</td><td>Use the newly developed skill to carry out a task in own role</td></tr>
+        <tr><td class="cref">4.2</td><td>Describe which parts of the task went as planned and which did not</td></tr>
+        <tr><td class="cref">4.3</td><td>Request feedback on the task from a person who saw the result of it</td></tr>
+        <tr><td class="cref">4.4</td><td>Describe the feedback received, and the changes made to own working practice in response</td></tr>
+        <tr><td class="cref">4.5</td><td>Describe an error or setback in own recent work, and the change it led to in how that work is now carried out</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO5</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to review own progress and set the next step.</div><span class="lo-count">4 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">5.1</td><td>Compare own skills at the end of the unit with those identified at the start</td></tr>
+        <tr><td class="cref">5.2</td><td>Review how far the actions taken changed own performance of a task in own role</td></tr>
+        <tr><td class="cref">5.3</td><td>Identify what would be done differently at the next change to own role</td></tr>
+        <tr><td class="cref">5.4</td><td>State the next skill to develop, and the reasons for the choice</td></tr>
+      </tbody></table></div>
+    </div>
+    <p class="tally"><strong>5 learning outcomes, 22 assessment criteria.</strong></p>
+    <h3 class="sub">Level check</h3>
+<p><em class="it">Well defined but may be complex and non-routine</em>: the brief is to keep own skills current, which is defined; the non-routine element is the difficulty met at 3.3. <em class="it">Interpret and evaluate</em>: 5.2. <em class="it">Aware of different perspectives</em>: 1.4. <em class="it">Review effectiveness</em>: LO5.</p>
+<p><strong>Boundary:</strong> the learner adapts their own work. Helping colleagues or a department to adapt is addressed at Level 5 and is outside this unit.</p>
+    <p class="backtop"><a href="#units">Back to the unit index</a></p>
+  </div>
+</section>
+
+<!-- ZFF-DA-03 -->
+<section class="unit" id="zff-da-03">
+  <div class="unit-head">
+    <div class="unit-ref">ZFF-DA-03</div>
+    <h2 class="unit-title">Turning Workplace Data into a Recommendation</h2>
+    <div class="meta"><span class="mchip"><b>Level</b>3</span><span class="mchip"><b>TQT</b>60 hours</span><span class="mchip"><b>Credits</b>6</span><span class="mchip"><b>GLH</b>30 indicative</span><span class="mchip"><b>Status</b>mandatory</span><span class="mchip count"><b>Criteria</b>24</span></div>
+  </div>
+  <div class="unit-body">
+    <h3 class="sub">Unit aim</h3>
+<p>This unit gives the learner the skills to take the data that already exists in their own work and turn it into a recommendation that someone will act on. The emphasis is on the telling rather than the crunching. Learners find out what the figures they see every week actually measure, what they leave out, and how the same numbers can support more than one reading. They then select a question from their own role, gather the data that bears on it, work out what it indicates, and put a recommendation to the person who decides. Scope is personal.</p>
+    <h3 class="sub">Learning outcomes and assessment criteria</h3>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO1</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Know what the data used in own work shows and does not show.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">1.1</td><td>Identify the sources of data available in own area of work</td></tr>
+        <tr><td class="cref">1.2</td><td>Describe what a routine measure used in own work actually counts, and over what period</td></tr>
+        <tr><td class="cref">1.3</td><td>Identify what a routine measure used in own work leaves out</td></tr>
+        <tr><td class="cref">1.4</td><td>Describe how the same set of figures can support more than one reading</td></tr>
+        <tr><td class="cref">1.5</td><td>Describe the ways in which data used in own work can be incomplete or out of date</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO2</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to select and prepare data to answer a question about own work.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">2.1</td><td>State a question about own work that data could help to answer</td></tr>
+        <tr><td class="cref">2.2</td><td>Select the data that bears on that question, and state the reasons for the selection</td></tr>
+        <tr><td class="cref">2.3</td><td>Identify data that was available but not used, and state why it was set aside</td></tr>
+        <tr><td class="cref">2.4</td><td>Prepare the selected data into a form that can be worked with</td></tr>
+        <tr><td class="cref">2.5</td><td>Identify any gaps or errors in the prepared data and state how each was handled</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO3</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to interpret and evaluate what data indicates.</div><span class="lo-count">6 criteria</span></div>
+      <p class="lo-note">This stem uses the Level 3 descriptor clause directly.</p>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">3.1</td><td>Interpret the prepared data and state what it indicates in relation to the question</td></tr>
+        <tr><td class="cref">3.2</td><td>Use appropriate investigation to test whether that reading holds</td></tr>
+        <tr><td class="cref">3.3</td><td>Identify an alternative reading of the same data</td></tr>
+        <tr><td class="cref">3.4</td><td>Evaluate which reading the data better supports, giving reasons</td></tr>
+        <tr><td class="cref">3.5</td><td>State the limits of what the data can show</td></tr>
+        <tr><td class="cref">3.6</td><td>Identify where an AI tool was used in working with the data, and what was checked</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO4</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to present a recommendation drawn from data.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">4.1</td><td>State a recommendation that follows from the interpretation</td></tr>
+        <tr><td class="cref">4.2</td><td>Present the recommendation in a form suited to the person who will decide</td></tr>
+        <tr><td class="cref">4.3</td><td>Select the figures that support the recommendation, and state why those were chosen</td></tr>
+        <tr><td class="cref">4.4</td><td>State the action being asked for, and by whom</td></tr>
+        <tr><td class="cref">4.5</td><td>Respond to a question or challenge about the recommendation</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO5</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to review the effect of a data-based recommendation.</div><span class="lo-count">3 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">5.1</td><td>Record what was decided following the recommendation</td></tr>
+        <tr><td class="cref">5.2</td><td>Review how effective the presentation of the data was in supporting the decision</td></tr>
+        <tr><td class="cref">5.3</td><td>Identify what would be done differently next time, giving reasons</td></tr>
+      </tbody></table></div>
+    </div>
+    <p class="tally"><strong>5 learning outcomes, 24 assessment criteria.</strong></p>
+    <h3 class="sub">Level check</h3>
+<p><em class="it">Well defined but may be complex and non-routine</em>: the question is stated by the learner from their own role, so the problem is defined; the complexity arrives in the data being incomplete and supporting more than one reading. <em class="it">Interpret and evaluate</em>: LO3. <em class="it">Aware of different perspectives</em>: 1.4 and 3.3. <em class="it">Use appropriate investigation</em>: 3.2. <em class="it">Review effectiveness</em>: LO5.</p>
+<p><strong>Boundary:</strong> 3.4 asks the learner to evaluate which reading the data better supports. It does not ask them to <em class="it">analyse</em> the dataset, which would be Level 4. Nothing here asks the learner to draw conclusions about anyone else's performance.</p>
+    <p class="backtop"><a href="#units">Back to the unit index</a></p>
+  </div>
+</section>
+
+<!-- ZFF-GV-03 -->
+<section class="unit" id="zff-gv-03">
+  <div class="unit-head">
+    <div class="unit-ref">ZFF-GV-03</div>
+    <h2 class="unit-title">Working Safely and Responsibly with AI</h2>
+    <div class="meta"><span class="mchip"><b>Level</b>3</span><span class="mchip"><b>TQT</b>50 hours</span><span class="mchip"><b>Credits</b>5</span><span class="mchip"><b>GLH</b>30 indicative</span><span class="mchip"><b>Status</b>mandatory</span><span class="mchip count"><b>Criteria</b>21</span></div>
+  </div>
+  <div class="unit-body">
+    <h3 class="sub">Unit aim</h3>
+<p>This unit gives the learner the knowledge and skills to use AI tools within the rules that apply to them, and to recognise when something has gone wrong. Learners find out what their workplace permits and forbids, what the law requires of them when handling other people's information, and how an AI system can produce a result that is unfair or harmful without anyone intending it. They then apply those rules to their own daily use of AI tools, record what they did, spot a risk in their own work and report it to the person responsible. Scope is personal, and the learner's duty ends at reporting. Deciding what to do about a risk sits above this level.</p>
+    <h3 class="sub">Learning outcomes and assessment criteria</h3>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO1</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Know the rules that apply to the use of AI in own workplace.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">1.1</td><td>Identify the workplace policies that apply to own use of AI tools</td></tr>
+        <tr><td class="cref">1.2</td><td>State which categories of information must not be entered into an AI tool, and why</td></tr>
+        <tr><td class="cref">1.3</td><td>Outline the duties that data protection law places on the learner when handling other people's information</td></tr>
+        <tr><td class="cref">1.4</td><td>Identify who is responsible for approving AI tools in own workplace</td></tr>
+        <tr><td class="cref">1.5</td><td>State what must be recorded or disclosed when AI has been used in a piece of work</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO2</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Know how the use of AI can produce unfair or harmful results.</div><span class="lo-count">4 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">2.1</td><td>Describe how an AI tool can produce a result that disadvantages a group of people</td></tr>
+        <tr><td class="cref">2.2</td><td>Describe how information entered into an AI tool can reach people it was not intended for</td></tr>
+        <tr><td class="cref">2.3</td><td>Identify the kinds of decision in own area of work that should not be left to an AI tool, and the reasons</td></tr>
+        <tr><td class="cref">2.4</td><td>Describe the different views held about the responsible use of AI in own area of work, and the reasons given for them</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO3</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to apply workplace rules when using AI tools.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">3.1</td><td>Check a proposed use of an AI tool against the applicable workplace policy before proceeding</td></tr>
+        <tr><td class="cref">3.2</td><td>Remove or withhold information that must not be entered into an AI tool</td></tr>
+        <tr><td class="cref">3.3</td><td>Record the use of an AI tool in a piece of own work in the manner the workplace requires</td></tr>
+        <tr><td class="cref">3.4</td><td>Select an approved tool for a task in own work, and state the reasons for the choice</td></tr>
+        <tr><td class="cref">3.5</td><td>Identify a situation in own work where the rules did not clearly apply, and state what was done</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO4</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to identify and report risks arising from AI use in own work.</div><span class="lo-count">4 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">4.1</td><td>Identify a risk arising from the use of an AI tool in own work</td></tr>
+        <tr><td class="cref">4.2</td><td>Use appropriate investigation to establish what happened</td></tr>
+        <tr><td class="cref">4.3</td><td>Report the risk to the person responsible, in the form the workplace requires</td></tr>
+        <tr><td class="cref">4.4</td><td>Record the response received and any action taken</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO5</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to review own practice against the applicable rules.</div><span class="lo-count">3 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">5.1</td><td>Review own recent use of AI tools against the applicable policies</td></tr>
+        <tr><td class="cref">5.2</td><td>Identify where own practice fell short, and state what has changed as a result</td></tr>
+        <tr><td class="cref">5.3</td><td>Evaluate how effective the workplace's rules were in the situations met, giving reasons</td></tr>
+      </tbody></table></div>
+    </div>
+    <p class="tally"><strong>5 learning outcomes, 21 assessment criteria.</strong></p>
+    <h3 class="sub">Level check</h3>
+<p><em class="it">Well defined but may be complex and non-routine</em>: the rules are given, which keeps the problem defined; 3.5 introduces the non-routine case where they do not clearly apply. <em class="it">Interpret and evaluate</em>: 5.3. <em class="it">Aware of different perspectives</em>: 2.4. <em class="it">Use appropriate investigation</em>: 4.2. <em class="it">Review effectiveness</em>: LO5.</p>
+<p><strong>Boundary:</strong> the learner reports a risk (4.3). They do not decide the response, write policy, or assess organisational exposure. All three would be Level 5 or above. <strong>This is the unit most likely to drift upward if edited</strong>, because governance language is naturally strategic. Watch 4.3 and 5.3.</p>
+    <p class="backtop"><a href="#units">Back to the unit index</a></p>
+  </div>
+</section>
+
+<!-- ZFF-AU-03 -->
+<section class="unit" id="zff-au-03">
+  <div class="unit-head">
+    <div class="unit-ref">ZFF-AU-03</div>
+    <h2 class="unit-title">Automating a Repeated Task in Own Work</h2>
+    <div class="meta"><span class="mchip"><b>Level</b>3</span><span class="mchip"><b>TQT</b>60 hours</span><span class="mchip"><b>Credits</b>6</span><span class="mchip"><b>GLH</b>25 indicative</span><span class="mchip"><b>Status</b>mandatory</span><span class="mchip count"><b>Criteria</b>24</span></div>
+  </div>
+  <div class="unit-body">
+    <h3 class="sub">Unit aim</h3>
+<p>This unit gives the learner the skills to take a task they repeat every week and automate the part of it that never changes. Learners find out which kinds of work automate well and which do not, and why an automation that works in testing can fail in use. They then select a repeated task from their own role, set it up using tools available to them, test it against cases they choose including ones designed to break it, run it alongside the manual method until it has been shown to be reliable, and review whether the time saved was real. Scope is personal: the learner automates their own work, not a colleague's, and not a process the team depends on.</p>
+    <h3 class="sub">Learning outcomes and assessment criteria</h3>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO1</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Know what can and cannot usefully be automated in own work.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">1.1</td><td>Describe the characteristics of a task that make it suitable for automation</td></tr>
+        <tr><td class="cref">1.2</td><td>Describe the characteristics of a task that make it unsuitable for automation</td></tr>
+        <tr><td class="cref">1.3</td><td>Identify the tools available in own workplace for automating routine work</td></tr>
+        <tr><td class="cref">1.4</td><td>Describe why an automation that works when tested can fail when in use</td></tr>
+        <tr><td class="cref">1.5</td><td>State what should happen when an automation fails</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO2</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to select a repeated task in own work to automate.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">2.1</td><td>Identify the tasks repeated each week in own role</td></tr>
+        <tr><td class="cref">2.2</td><td>Record how a selected task is carried out at present, step by step</td></tr>
+        <tr><td class="cref">2.3</td><td>Identify which steps of the task do not change between occurrences</td></tr>
+        <tr><td class="cref">2.4</td><td>Select the steps to be automated, and state the reasons for the selection</td></tr>
+        <tr><td class="cref">2.5</td><td>State the time the task takes at present, and how that was established</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO3</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to set up and test an automation for a selected task.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">3.1</td><td>Set up an automation for the selected steps using an available tool</td></tr>
+        <tr><td class="cref">3.2</td><td>Select test cases for the automation, including cases expected to fail</td></tr>
+        <tr><td class="cref">3.3</td><td>Run the automation against the selected test cases and record the results</td></tr>
+        <tr><td class="cref">3.4</td><td>Correct the automation in response to results that were not as expected</td></tr>
+        <tr><td class="cref">3.5</td><td>State the checks a person must still carry out, and at what point</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO4</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to run and maintain an automation in use.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">4.1</td><td>Run the automation alongside the manual method for an agreed period</td></tr>
+        <tr><td class="cref">4.2</td><td>Record occasions on which the automation produced an incorrect or unexpected result</td></tr>
+        <tr><td class="cref">4.3</td><td>Use appropriate investigation to establish the cause of an incorrect result</td></tr>
+        <tr><td class="cref">4.4</td><td>Correct the automation and record what was changed</td></tr>
+        <tr><td class="cref">4.5</td><td>State the point at which the automation was relied on without the manual method, and the evidence for that decision</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO5</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to review the effect of automating a task.</div><span class="lo-count">4 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">5.1</td><td>State the time the task takes following automation, and how that was established</td></tr>
+        <tr><td class="cref">5.2</td><td>Evaluate whether the time saved justified the effort of setting the automation up</td></tr>
+        <tr><td class="cref">5.3</td><td>Review how effective the testing was at finding problems before they occurred in use</td></tr>
+        <tr><td class="cref">5.4</td><td>Identify a further task in own work that the same approach could be applied to</td></tr>
+      </tbody></table></div>
+    </div>
+    <p class="tally"><strong>5 learning outcomes, 24 assessment criteria.</strong></p>
+    <h3 class="sub">Level check</h3>
+<p><em class="it">Well defined but may be complex and non-routine</em>: the brief is to automate a repeated task in own work; the non-routine element is the automation failing in ways the learner must establish the cause of (4.3). <em class="it">Interpret and evaluate</em>: 5.2. <em class="it">Use appropriate investigation</em>: 4.3. <em class="it">Review effectiveness</em>: LO5.</p>
+<p><strong>A deliberate word choice.</strong> The learner <strong>sets up</strong> an automation. They do not <strong>design</strong> one. Design is a Level 6 verb and using it here would mis-level the unit.</p>
+<p><strong>Boundary:</strong> nothing asks the learner to decide which of several processes the team should automate. That would be Level 4 or above.</p>
+    <p class="backtop"><a href="#units">Back to the unit index</a></p>
+  </div>
+</section>
+
+<!-- ZFF-PJ-03 -->
+<section class="unit" id="zff-pj-03">
+  <div class="unit-head">
+    <div class="unit-ref">ZFF-PJ-03</div>
+    <h2 class="unit-title">Applied Project: Improving Own Work with AI</h2>
+    <div class="meta"><span class="mchip"><b>Level</b>3</span><span class="mchip"><b>TQT</b>100 hours</span><span class="mchip"><b>Credits</b>10</span><span class="mchip"><b>GLH</b>10 indicative</span><span class="mchip"><b>Status</b>mandatory</span><span class="mchip count"><b>Criteria</b>26</span></div>
+  </div>
+  <div class="unit-body">
+    <h3 class="sub">Unit aim</h3>
+<p>This unit is the applied project that carries the Diploma to its size. Over a period long enough for things to go wrong, the learner takes one recurring process in their own work, records how it runs today and what it costs in time, redesigns it using the practices from the earlier units, runs the new version until it fails at least once, fixes what failed, measures the before and after, and reports to their manager with a recommendation about whether to keep it.</p>
+<p>The brief is given, and that is what holds the project at Level 3. What is not given is the process, the approach, the failures or the answer.</p>
+<p><strong>Delivery note.</strong> The 100 hours are almost entirely the learner's own work, carried out in their job. Guided hours are low by design.</p>
+    <h3 class="sub">Learning outcomes and assessment criteria</h3>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO1</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to establish how a recurring process in own work runs at present.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">1.1</td><td>Select a recurring process in own work to improve, within the project brief</td></tr>
+        <tr><td class="cref">1.2</td><td>Record how the process runs at present, step by step</td></tr>
+        <tr><td class="cref">1.3</td><td>Establish what the process costs in time at present, and state how that was established</td></tr>
+        <tr><td class="cref">1.4</td><td>Identify the points in the process where errors or delays occur</td></tr>
+        <tr><td class="cref">1.5</td><td>State the requirements the improved process must continue to meet</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO2</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to plan an improvement to a recurring process.</div><span class="lo-count">6 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">2.1</td><td>Identify the steps of the process that could be improved using AI or automation</td></tr>
+        <tr><td class="cref">2.2</td><td>Select the changes to be made, and state the reasons for the selection</td></tr>
+        <tr><td class="cref">2.3</td><td>Identify a change that was considered and set aside, and state why</td></tr>
+        <tr><td class="cref">2.4</td><td>State what is expected to improve, and how that will be measured</td></tr>
+        <tr><td class="cref">2.5</td><td>Identify what could go wrong, and state what will be done if it does</td></tr>
+        <tr><td class="cref">2.6</td><td>Check the planned changes against workplace rules on the use of AI</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO3</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to carry out a planned improvement and record what happens.</div><span class="lo-count">4 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">3.1</td><td>Carry out the planned changes to the process</td></tr>
+        <tr><td class="cref">3.2</td><td>Run the improved process over an agreed period</td></tr>
+        <tr><td class="cref">3.3</td><td>Keep a record of how the improved process performed, including occasions when it did not work</td></tr>
+        <tr><td class="cref">3.4</td><td>Record any point at which the original method had to be returned to, and the reasons</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO4</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to respond to problems arising during an improvement.</div><span class="lo-count">5 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">4.1</td><td>Identify a problem that arose during the period the improved process ran</td></tr>
+        <tr><td class="cref">4.2</td><td>Use appropriate investigation to establish its cause</td></tr>
+        <tr><td class="cref">4.3</td><td>Select and carry out a correction, and state the reasons for the choice</td></tr>
+        <tr><td class="cref">4.4</td><td>Record whether the correction resolved the problem</td></tr>
+        <tr><td class="cref">4.5</td><td>Identify a problem that was not resolved, and state what was done about it</td></tr>
+      </tbody></table></div>
+    </div>
+    <div class="lo">
+      <div class="lo-head"><span class="lo-badge">LO5</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Be able to measure and report the effect of an improvement.</div><span class="lo-count">6 criteria</span></div>
+      <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
+        <tr><td class="cref">5.1</td><td>Establish what the improved process costs in time, on the same basis as 1.3</td></tr>
+        <tr><td class="cref">5.2</td><td>Interpret the before and after measurements and state what they indicate</td></tr>
+        <tr><td class="cref">5.3</td><td>Evaluate whether the improvement met what was expected at 2.4, giving reasons</td></tr>
+        <tr><td class="cref">5.4</td><td>State a recommendation to own manager about whether to keep the improved process</td></tr>
+        <tr><td class="cref">5.5</td><td>Present the recommendation with the evidence that supports it</td></tr>
+        <tr><td class="cref">5.6</td><td>Review own approach to the project and identify what would be done differently</td></tr>
+      </tbody></table></div>
+    </div>
+    <p class="tally"><strong>5 learning outcomes, 26 assessment criteria.</strong></p>
+    <h3 class="sub">Level check</h3>
+<p>This is the unit most at risk of drifting above Level 3, because extended project work invites higher-order language. Three things hold it down.</p>
+<p><strong>The brief is given.</strong> "Improve one recurring process in your own work" is stated for the learner. They choose the instance, not the problem. The problem therefore remains <em class="it">well defined</em>, and the complexity comes from the process and its failures.</p>
+<p><strong>The verbs stay at level.</strong> Establish, record, identify, select, state, carry out, interpret, evaluate, review. Not <em class="it">analyse</em> (4), not <em class="it">design</em> or <em class="it">critically evaluate</em> (6), not <em class="it">reformulate</em> (7).</p>
+<p><strong>The scope stays personal.</strong> 5.4 recommends to the learner's own manager about the learner's own process. 5.3 evaluates against the learner's own stated expectation, not against organisational objectives.</p>
+<p><strong>What would push it to Level 4:</strong> letting the learner choose which of several processes to improve on comparative benefit, or asking them to evaluate the improvement's implications beyond their own role. The assessment guidance states both exclusions, because a motivated learner will drift into them and an assessor may not notice.</p>
+    <p class="backtop"><a href="#units">Back to the unit index</a></p>
+  </div>
+</section>
+
+  <section id="assessment">
+    <div class="section-label">Section 6</div>
+    <h2>Assessment and quality assurance</h2>
+    <p>The same model applies to every unit.</p>
+    <p><strong>Portfolio of evidence from real work.</strong> Assessment is by portfolio drawn from work the learner is already responsible for, gathered over the period of the unit. There is no examination.</p>
+    <p><strong>The AI teaches. A human assessor decides.</strong> Zavmo's AI tutors deliver the learning and prompt the learner to produce and submit evidence. <strong>The AI does not make the assessment decision.</strong> Every decision on every criterion is made by a named, occupationally competent, appropriately qualified human assessor, internally verified by a qualified IQA against a sampling plan, and sampled by Gateway's External Quality Assurer.</p>
+    <p><strong>How evidence is captured.</strong> Learner activity in the platform is captured as xAPI statements and assembled into the portfolio: the tasks they selected, the instruction sets they wrote and rewrote, the outputs the tool returned, the checks they ran, the amendments they made and the reasons they gave. This gives the assessor a time-stamped record of the learner's process rather than only a finished artefact. That is unusually strong evidence for criteria such as ZFF-AI-03 3.3 and 4.6. <strong>The xAPI record is evidence presented to the assessor. It is not an assessment decision.</strong></p>
+    <p><strong>Professional discussion is mandatory.</strong> At least one recorded professional discussion per unit, conducted by the qualified assessor. This is the primary control for authenticating the learner at distance and confirming the portfolio is their own work.</p>
+    <p><strong>Declared AI use.</strong> Learners are expected to use AI in producing evidence, because that is the subject of the qualification. All AI use in evidence must be declared. The assessment decision rests on the learner's judgement about the AI output, not on the polish of the output itself, and that judgement is confirmed in live discussion.</p>
+    <p><strong>Suggested evidence.</strong> Records of professional discussion and oral questioning for the knowledge outcomes. Product evidence, annotated by the learner, for the skills outcomes. Witness testimony from a line manager where a criterion turns on something that happened in real work. Reflective accounts for the review outcomes. These are suggestions and centres could use other evidence, provided the criteria are covered and the evidence can be internally and externally verified.</p>
+    <p><strong>Real-work grounding.</strong> The tasks used must be tasks the learner is already responsible for. Simulated tasks should only be used where a learner's role genuinely offers no suitable real task, and the reason must be recorded.</p>
+  </section>
+
+  <section id="open">
+    <div class="section-label">Section 7</div>
+    <h2>What we know is not yet right</h2>
+    <p>Listed plainly, because we would rather you had this list than found it. These are the items from the full pack that bear on Level 3. One further item in the pack concerns two Level 5 units and is not repeated here.</p>
+    <div class="honest">
+      <div class="hrow"><div class="hnum">1</div><p><strong>Nine of the eleven units are drafted but not reviewed by an assessor.</strong> They are written to the descriptors and internally checked. Nobody with assessment experience has read them. This is the largest single gap.</p></div>
+      <div class="hrow"><div class="hnum">2</div><p><strong>TQT is allocated, not measured.</strong> The unit hours are judgements that produce a defensible total. If any unit's hours are revised down, both Diplomas need re-checking against the 370 threshold. The Level 3 Diploma has only 20 hours of headroom.</p></div>
+      <div class="hrow"><div class="hnum">3</div><p><strong>Whether AI-led tutoring counts as guided learning is unresolved.</strong> We have shown GLH as indicative throughout. The taught and applied split in section 2.4 depends on the answer and we would like Gateway's view.</p></div>
+      <div class="hrow"><div class="hnum">4</div><p><strong>Whether knowledge criteria can be evidenced through recorded tutoring dialogue rather than written tests is unresolved.</strong> We have assumed they can, which is favourable to our model, so it should not be taken on our say-so. If written assessment is required for knowledge outcomes, section 2.4 needs revisiting.</p></div>
+      <div class="hrow"><div class="hnum">5</div><p><strong>The assessor layer does not exist yet.</strong> We do not currently employ occupationally competent assessors or a qualified IQA. The model in section 6 describes what we will put in place, not what is running today. We would like to talk about the sequence.</p></div>
+      <div class="hrow"><div class="hnum">6</div><p><strong>The two Diplomas have not been checked against qualifications already on the register.</strong> ZFF-DA-03 is the unit most likely to overlap something existing.</p></div>
+      <div class="hrow"><div class="hnum">7</div><p><strong>Demand figures are excluded on purpose.</strong> We hold internal estimates of which fluencies are most in demand. They are not evidence and they are not in this document.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="callout reveal">
+      <h2 style="margin-bottom:10px">What this page is for.</h2>
+      <p style="margin-bottom:0">It is the assessor's copy of the Level 3 specifications. Print it for moderation, or read it here. Every criterion an assessor will judge against is on this page, in the wording it will be judged in.</p>
+    </div>
+  </section>
+
+  <footer>
+    Level 3 Award and Level 3 Diploma in Future Fluency. First draft for review, 21 August 2026. Not submitted.<br>
+    RQF regulated route. Credit calculated at the Ofqual convention of 1 credit per 10 hours of Total Qualification Time.<br>
+    <span class="noprint">Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a> · built from the shared <code style="color:var(--ink-2)">_template</code>.</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // Logomark halo, copied from the shared template so the chrome matches.
+  var g=document.getElementById('halo'); if(g){
+    var n=12,cx=50,cy=50,r=38,i,a,x,y,c;
+    for(i=0;i<n;i++){
+      a=(i/n)*2*Math.PI-Math.PI/2; x=cx+r*Math.cos(a); y=cy+r*Math.sin(a);
+      c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('cx',x.toFixed(1)); c.setAttribute('cy',y.toFixed(1)); c.setAttribute('r','2.4');
+      c.setAttribute('fill','#3FE4BC'); c.setAttribute('opacity', i%2?'0.55':'0.9');
+      g.appendChild(c);
+    }
+  }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  // Scroll reveal.
+  var els = document.querySelectorAll('.reveal');
+  if(reduce || !('IntersectionObserver' in window)){
+    Array.prototype.forEach.call(els, function(e){ e.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {threshold:.12});
+    Array.prototype.forEach.call(els, function(e){ io.observe(e); });
+  }
+
+  // Highlight the unit currently in view in the jump bar.
+  var sections = document.querySelectorAll('section.unit');
+  var bar = document.querySelector('.unitnav-in');
+  if(!sections.length || !bar || !('IntersectionObserver' in window)) return;
+  var links = {};
+  Array.prototype.forEach.call(bar.querySelectorAll('a'), function(a){
+    var id = a.getAttribute('href'); if(id && id.charAt(0)==='#') links[id.slice(1)] = a;
+  });
+  var spy = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      var a = links[en.target.id]; if(!a) return;
+      if(en.isIntersecting){
+        Array.prototype.forEach.call(bar.querySelectorAll('a.on'), function(x){ x.classList.remove('on'); });
+        a.classList.add('on');
+      }
+    });
+  }, {rootMargin:'-120px 0px -60% 0px', threshold:0});
+  Array.prototype.forEach.call(sections, function(s){ spy.observe(s); });
+})();
+</script>
+</body>
+</html>
