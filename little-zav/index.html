@@ -783,12 +783,12 @@
 
   function syncSparks(){ spkEl.textContent=LZ.sparks+'/'+LZ.max; haloEl.innerHTML=halo(haloEl,28,LZ.sparks); }
   function wobble(){ widgetEl.classList.add('wobble'); setTimeout(function(){widgetEl.classList.remove('wobble');},520); }
-  function award(msg){ if(LZ.sparks<LZ.max)LZ.sparks++; syncSparks(); toastMsg.textContent=msg||'Spark earned — nice one.'; toastEl.classList.add('show'); }
+  function award(msg){ if(LZ.sparks<LZ.max)LZ.sparks++; syncSparks(); toastMsg.textContent=msg||'Spark earned. Nice one.'; toastEl.classList.add('show'); }
   function clearToast(){ toastEl.classList.remove('show'); }
 
   var INT={
     myth:{
-      greet:'Hey Juliette — quick gut-check from your pricing lesson.',
+      greet:'Hey Juliette. Quick gut-check from your pricing lesson.',
       render:function(){
         bodyEl.innerHTML='<div class="q-tag">Myth or fact · swipe</div>'
           +'<div class="q-text">"Value-based pricing means charging <em>whatever you like</em>."</div>'
@@ -797,14 +797,14 @@
         var fb=bodyEl.querySelector('#qfb'), opts=bodyEl.querySelectorAll('.opt');
         opts.forEach(function(b){ b.addEventListener('click',function(){
           if(b.dataset.c==='myth'){ opts.forEach(function(o){o.disabled=true;}); b.classList.add('correct');
-            fb.className='q-fb ok'; fb.textContent='Right — it’s a myth. You price to the value the customer gets, not a number you fancy.'; award('Myth busted — spark earned.'); }
+            fb.className='q-fb ok'; fb.textContent='Right. It’s a myth. You price to the value the customer gets, not a number you fancy.'; award('Myth busted. Spark earned.'); }
           else{ b.classList.add('shake'); setTimeout(function(){b.classList.remove('shake');},400); wobble();
-            fb.className='q-fb retry'; fb.textContent='Not quite — give it another flick.'; }
+            fb.className='q-fb retry'; fb.textContent='Not quite. Give it another flick.'; }
         }); });
       }
     },
     quiz:{
-      greet:'One from what you covered on pricing — no pressure.',
+      greet:'One from what you covered on pricing. No pressure.',
       render:function(){
         var opts=['The outcome the customer gets','Your costs plus a margin','Whatever the cheapest rival charges','A nice round number'];
         var html='<div class="q-tag">Quick quiz · tap</div><div class="q-text">What should anchor a value-based price?</div><div class="q-list">';
@@ -814,30 +814,30 @@
         var fb=bodyEl.querySelector('#qfb'), btns=bodyEl.querySelectorAll('.opt');
         btns.forEach(function(b){ b.addEventListener('click',function(){
           if(b.dataset.i==='0'){ btns.forEach(function(o){o.disabled=true;}); b.classList.add('correct');
-            fb.className='q-fb ok'; fb.textContent='Exactly — value-based pricing starts from the customer’s outcome.'; award('Nailed it — spark earned.'); }
+            fb.className='q-fb ok'; fb.textContent='Exactly. Value-based pricing starts from the customer’s outcome.'; award('Nailed it. Spark earned.'); }
           else{ b.classList.add('wrong','shake'); b.disabled=true; setTimeout(function(){b.classList.remove('shake');},400); wobble();
-            fb.className='q-fb retry'; fb.textContent='Close — that’s cost or competitor thinking. Try again.'; }
+            fb.className='q-fb retry'; fb.textContent='Close. That’s cost or competitor thinking. Try again.'; }
         }); });
       }
     },
     rather:{
-      greet:'Just for fun — there’s no wrong answer here.',
+      greet:'Just for fun. There’s no wrong answer here.',
       render:function(){
         bodyEl.innerHTML='<div class="q-tag">Would you rather · play</div>'
-          +'<div class="q-text">Would you rather pitch the value story to the <em>whole board</em> — or write the one-page strategy memo?</div>'
+          +'<div class="q-text">Would you rather pitch the value story to the <em>whole board</em>, or write the one-page strategy memo?</div>'
           +'<div class="q-list"><button class="opt" data-c="board">Pitch to the board</button><button class="opt" data-c="memo">Write the memo</button></div>'
           +'<div class="q-fb" id="qfb"></div>';
         var fb=bodyEl.querySelector('#qfb'), btns=bodyEl.querySelectorAll('.opt');
         btns.forEach(function(b){ b.addEventListener('click',function(){
           btns.forEach(function(o){o.disabled=true; o.classList.remove('chosen');}); b.classList.add('chosen');
           fb.className='q-fb neutral';
-          fb.textContent = b.dataset.c==='board' ? 'Bold — a room full of eyes and you’re selling the vision. Love it.' : 'Smart — get it sharp on one page and it sells itself. Nice.';
-          award('Thanks for playing — spark earned.');
+          fb.textContent = b.dataset.c==='board' ? 'Bold. A room full of eyes and you’re selling the vision. Love it.' : 'Smart. Get it sharp on one page and it sells itself. Nice.';
+          award('Thanks for playing. Spark earned.');
         }); });
       }
     },
     confidence:{
-      greet:'A tiny check-in — how are you feeling this week?',
+      greet:'A tiny check-in. How are you feeling this week?',
       render:function(){
         bodyEl.innerHTML='<div class="q-tag">Confidence check · reflect</div>'
           +'<div class="q-text">How confident do you feel pitching on value this week?</div>'
@@ -848,7 +848,7 @@
             sub=bodyEl.querySelector('#qsub'), fb=bodyEl.querySelector('#qfb');
         range.addEventListener('input',function(){ val.textContent=range.value; });
         sub.addEventListener('click',function(){ sub.disabled=true; range.disabled=true;
-          fb.className='q-fb ok'; fb.textContent='Logged — no wrong answer. This quietly personalises what I bring you next, and feeds the org’s anonymised mindset read.'; award('Thanks for reflecting — spark earned.'); });
+          fb.className='q-fb ok'; fb.textContent='Logged. No wrong answer. This quietly personalises what I bring you next, and feeds the org’s anonymised mindset read.'; award('Thanks for reflecting. Spark earned.'); });
       }
     }
   };
@@ -904,7 +904,7 @@
       return head('Interactions','The one place that decides what Little Zav serves.')+tabs('interactions')+'<div class="aa-panel">'
         +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="aa-section-h" style="margin:0">Catalogue · Sharpen / Play / Care / Reflect</div><span class="aa-count">'+on+' of 15 on</span></div>'
         +'<div class="aa-card">'+rows+'</div>'
-        +'<p class="aa-sub" style="margin-top:12px">Reminders, tips and celebrations live here as <em>Care</em> types — not separate switches. New interaction types appear automatically.</p>'
+        +'<p class="aa-sub" style="margin-top:12px">Reminders, tips and celebrations live here as <em>Care</em> types. They are not separate switches. New interaction types appear automatically.</p>'
         +foot()+'</div>';
     },
     sources:function(){
@@ -914,11 +914,11 @@
           +'<span class="tog sm'+(on?' on':'')+'"></span></div>';
       }
       return head('Sources','What Little Zav knows.')+tabs('sources')+'<div class="aa-panel"><div class="aa-card">'
-        + src('Always on','p-personal','Each learner’s own learning','Their history and signals — the personal layer. Locked on.','',1)
-        + src('Library · API','p-api','Growth Engineering LMS','First-class connector — pull → chunk → embed on a schedule. 214 modules.','Synced 2m ago',1)
+        + src('Always on','p-personal','Each learner’s own learning','Their history and signals. The personal layer, locked on.','',1)
+        + src('Library · API','p-api','Growth Engineering LMS','First-class connector. Pull → chunk → embed on a schedule. 214 modules.','Synced 2m ago',1)
         + src('Library · API','p-api','LinkedIn Learning','Generic content-library connector via API key.','Synced 1h ago',1)
-        + src('Documents','p-docs','Brand & product docs','Drag-and-drop — 3 files. Offline content auto-removes.','3 items',1)
-        + src('Feed','p-docs','Google Drive folder','OAuth connector — not yet connected.','',0)
+        + src('Documents','p-docs','Brand & product docs','Drag-and-drop, 3 files. Offline content auto-removes.','3 items',1)
+        + src('Feed','p-docs','Google Drive folder','OAuth connector. Not yet connected.','',0)
         +'</div><button class="aa-addbtn">+ Add a source</button>'
         +'<p class="aa-sub" style="margin-top:12px">API keys are stored server-side, never in the browser. Each item has its own “Visible to Little Zav” toggle.</p>'
         +foot()+'</div>';
@@ -938,7 +938,7 @@
         +'</div></div>'
         +'<div><div class="aa-section-h">Live preview</div><div class="aa-bpreview"><div class="bp-h"><span class="bp-dot"></span><div><div class="bp-name">Little Zav</div><div class="bp-sub">Your learning companion</div></div></div>'
         +'<div class="bp-msg">Here’s a little something for you, Juliette.</div><div class="bp-btn">Play today’s spark</div></div>'
-        +'<div class="aa-preview-label">Reads live from the public branding endpoint — themed before login.</div></div>'
+        +'<div class="aa-preview-label">Reads live from the public branding endpoint. Themed before login.</div></div>'
         +'</div>'+foot()+'</div>';
     },
     impact:function(){
@@ -948,7 +948,7 @@
           +'<div class="krk-track"><span class="krk-fill" style="width:'+val+'%"></span><span class="krk-bench" style="left:'+bench+'%" title="Industry benchmark"></span></div></div>';
       }
       function act(n,l){ return '<div class="imp-act"><div class="imp-act-n">'+n+'</div><div class="imp-act-l">'+l+'</div></div>'; }
-      // Bloom's 2-sigma bell-curve shift — two gaussians, ~1.9σ apart
+      // Bloom's 2-sigma bell-curve shift. Two gaussians, ~1.9σ apart
       var W=360,H=118, base=H-16, amp=H-30;
       function curve(mu){ var d=''; for(var i=0;i<=W;i+=3){ var x=(i/W)*8-4, y=Math.exp(-((x-mu)*(x-mu))/2); d+=(i===0?'M':'L')+i+' '+(base-amp*y).toFixed(1)+' '; } return d; }
       var before=curve(-0.95), after=curve(0.95);
@@ -957,31 +957,31 @@
         +'<path d="'+before+'" fill="none" stroke="#b8c2cc" stroke-width="1.6" stroke-dasharray="4 3"/>'
         +'<path d="'+after+'" fill="none" stroke="#0a7d6b" stroke-width="2.2"/></svg>';
 
-      return head('Impact','Grounded in learning science — what Little Zav actually moved.')+tabs('impact')+'<div class="aa-panel">'
+      return head('Impact','Grounded in learning science. What Little Zav actually moved.')+tabs('impact')+'<div class="aa-panel">'
         +'<div class="imp-hero"><div class="imp-eyebrow">Grounded in learning science</div>'
         +'<div class="imp-line">Learning didn’t just happen. <em>It transferred.</em></div>'
-        +'<div class="imp-sub">Little Zav’s daily return habit is the engine behind it — the small, personal nudge that brings learners back often enough for the learning to stick and show up in the work.</div></div>'
+        +'<div class="imp-sub">Little Zav’s daily return habit is the engine behind it. It is the small, personal nudge that brings learners back often enough for the learning to stick and show up in the work.</div></div>'
         +'<div class="imp-tiles">'
         + tile('6.2×','estimated return on the learning spend Little Zav re-activates','ROI')
         + tile('76%','of engaged learners showed the behaviour change at work','Kirkpatrick L3')
         + tile('+1.9σ','shift toward mastery &amp; growth mindset vs baseline','Bloom / disposition')
         +'</div>'
-        +'<div class="aa-block"><div class="aa-block-h">The learning-transfer chain <span style="font-weight:400;color:#8a97a3;font-size:10.5px">Kirkpatrick L1–L4 · bar = your learners, tick = industry benchmark</span></div>'
-        + krk('L1','Reaction','They came back — and enjoyed it',91,70)
+        +'<div class="aa-block"><div class="aa-block-h">The learning-transfer chain <span style="font-weight:400;color:#8a97a3;font-size:10.5px">Kirkpatrick L1 to L4 · bar = your learners, tick = industry benchmark</span></div>'
+        + krk('L1','Reaction','They came back and enjoyed it',91,70)
         + krk('L2','Learning','Retrieval through daily games &amp; recall',78,55)
         + krk('L3','Behaviour','Did it change what they do at work',76,34)
         + krk('L4','Results','Contribution to completion &amp; outcomes',63,28)
-        +'<div class="krk-cliff"><strong>The transfer cliff.</strong> Most learning dies in the drop from <em>knowing</em> (L2) to <em>doing</em> (L3) — industry loses ~40 points there. Little Zav’s return habit is what carries learners across it.</div>'
+        +'<div class="krk-cliff"><strong>The transfer cliff.</strong> Most learning dies in the drop from <em>knowing</em> (L2) to <em>doing</em> (L3). Industry loses ~40 points there. Little Zav’s return habit is what carries learners across it.</div>'
         +'</div>'
         +'<div class="aa-two" style="margin-top:14px">'
         +'<div class="aa-block"><div class="aa-block-h">Bloom’s 2-sigma shift <span style="font-weight:400;color:#8a97a3;font-size:10.5px">where learners sit</span></div>'+sigma
         +'<div class="imp-legend"><span><i style="background:#b8c2cc"></i>Before</span><span><i style="background:#0a7d6b"></i>With Little Zav · +1.9σ</span></div></div>'
         +'<div class="imp-copilot aa-block"><div class="cop-q"><span class="cop-dot"></span>“What’s Little Zav’s ROI?”</div>'
-        +'<div class="cop-a">Learners with Little Zav return <em>3.4×</em> more often. That habit lifts course completion an estimated <em>21%</em> — which against your L&amp;D spend models to about <em>6.2×</em> return.<span class="cop-src">Answered live by the Co-pilot from your engagement × completion economics.</span></div></div>'
+        +'<div class="cop-a">Learners with Little Zav return <em>3.4×</em> more often. That habit lifts course completion an estimated <em>21%</em>. Against your L&amp;D spend, that models to about <em>6.2×</em> return.<span class="cop-src">Answered live by the Co-pilot from your engagement × completion economics.</span></div></div>'
         +'</div>'
-        +'<div class="aa-section-h mt">Activity <span style="font-weight:400;color:#b8c2cc">— the engagement underneath</span></div>'
+        +'<div class="aa-section-h mt">Activity <span style="font-weight:400;color:#b8c2cc">· the engagement underneath</span></div>'
         +'<div class="imp-actstrip">'+ act('1,284','Interactions served')+ act('742','Sparks lit')+ act('318','Learners engaged')+ act('196','Reflections given')+'</div>'
-        +'<div class="imp-illus"><svg class="ic"><use href="#i-shield"/></svg>Numbers illustrative. Aggregate and org-scoped — no individual’s answers are exposed. L1–L2 and disposition come straight from Little Zav; L3–L4 and ROI combine its engagement with your outcome and completion data.</div>'
+        +'<div class="imp-illus"><svg class="ic"><use href="#i-shield"/></svg>Numbers illustrative. Aggregate and org-scoped. No individual’s answers are exposed. L1, L2 and disposition come straight from Little Zav; L3, L4 and ROI combine its engagement with your outcome and completion data.</div>'
         + foot()+'</div>';
     }
   };

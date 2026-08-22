@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="The admin's view of Little Zav — switch it on, point it at your content, white-label it, and watch engagement.">
-<title>Little Zav — Admin view</title>
+<meta name="description" content="The admin's view of Little Zav. Switch it on, point it at your content, white-label it, and watch engagement.">
+<title>Little Zav · Admin view</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
@@ -156,7 +156,7 @@
   .aa-privacy{font-size:10.5px;color:#8a97a3;margin-top:12px;display:flex;align-items:center;gap:6px}
   .aa-privacy .ic{width:12px;height:12px;color:#8a97a3}
 
-  /* Connect tab — embed code + self-serve handshake */
+  /* Connect tab: embed code + self-serve handshake */
   .aa-connect-intro{font-size:13px;color:#5b6b7a;line-height:1.55;margin:0 0 22px;max-width:600px}
   .aa-csec{margin-bottom:26px}
   .aa-csec>h4{margin:0 0 3px;font-size:13.5px;color:#0b1f33;font-weight:600}
@@ -193,7 +193,7 @@
   .aa-eg-why h4{margin:0 0 8px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8a97a3}
   .aa-eg-whyrow{display:flex;gap:8px;font-size:13px;margin-bottom:5px}
   .aa-eg-whyrow span:first-child{color:#5b6b7a;min-width:84px}
-  /* Footer — padded, with the "Show another" button kept on one line */
+  /* Footer: padded, with the "Show another" button kept on one line */
   .aa-modal-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 18px;border-top:1px solid #ebeef2}
   .aa-modal-foot .aa-hint{font-size:12px;color:#5b6b7a;margin:0}
   .aa-modal-foot .aa-showbtn{white-space:nowrap;flex-shrink:0;cursor:pointer;background:#fff;color:#0b1f33;border:1px solid #dce2e8;border-radius:6px;padding:7px 14px;font:inherit;font-size:13px;font-weight:500}
@@ -234,7 +234,7 @@
   <div class="intro">
     <div class="eyebrow">What the admin sees</div>
     <h1>Everything an admin needs, on <em>six tabs.</em></h1>
-    <p class="lede">The client's own team switches Little Zav on, points it at their content, white-labels it to their brand, and watches engagement — all in the admin they already use, no code required. Click the tabs to explore.</p>
+    <p class="lede">The client's own team switches Little Zav on, points it at their content, white-labels it to their brand, and watches engagement. All in the admin they already use, no code required. Click the tabs to explore.</p>
   </div>
 
   <div class="app-window"><div class="admin-app" id="adminApp"></div></div>
@@ -306,12 +306,12 @@
     connect:function(){
       function code(id,raw){ return '<div style="position:relative"><button class="aa-copy" data-copy="'+id+'">Copy</button><pre class="aa-code">'+escHtml(raw)+'</pre></div>'; }
       return head('Connect','Embed Little Zav and connect it to your platform.')+tabs('connect')+'<div class="aa-panel">'
-        +'<p class="aa-connect-intro">Little Zav embeds as an iframe and takes a short-lived token from your page — no second login. Everything below is pre-filled for <strong>'+DEMO_SLUG+'</strong>.</p>'
+        +'<p class="aa-connect-intro">Little Zav embeds as an iframe and takes a short-lived token from your page. No second login. Everything below is pre-filled for <strong>'+DEMO_SLUG+'</strong>.</p>'
         +'<div class="aa-csec"><h4>Embed code</h4><p>Drop this where you want Little Zav to appear on your learner portal.</p>'+code('embed',EMBED_CODE)+'</div>'
-        +'<div class="aa-csec"><h4>Set it up — four steps</h4>'
+        +'<div class="aa-csec"><h4>Set it up in four steps</h4>'
           +'<div class="aa-step"><span class="aa-stepnum">1</span><div class="aa-step-body"><strong>Allow your embed origin</strong><p>The widget only loads on origins you list. Add yours under <button class="aa-tab" data-t="setup" style="all:unset;cursor:pointer;color:#0a7d6b;text-decoration:underline">Setup &rsaquo; Allowed embed origins</button>.</p></div></div>'
           +'<div class="aa-step"><span class="aa-stepnum">2</span><div class="aa-step-body"><strong>Mint an SSO token on your backend</strong><p>Your learner is already signed in. Return a short-lived RS256 JWT signed with this tenant\'s private key (the matching public key is registered with Little Zav):</p>'+code('token',TOKEN_CODE)+'</div></div>'
-          +'<div class="aa-step"><span class="aa-stepnum">3</span><div class="aa-step-body"><strong>Embed the widget</strong><p>Add the embed code above to your page. It posts the token to the iframe via <code>postMessage</code> — that\'s the whole handshake.</p></div></div>'
+          +'<div class="aa-step"><span class="aa-stepnum">3</span><div class="aa-step-body"><strong>Embed the widget</strong><p>Add the embed code above to your page. It posts the token to the iframe via <code>postMessage</code>. That is the whole handshake.</p></div></div>'
           +'<div class="aa-step"><span class="aa-stepnum">4</span><div class="aa-step-body"><strong>Serve content &amp; history</strong><p>Point Little Zav at a small read API so it can theme interactions from your content: <code>GET history(learner)</code> and <code>GET content</code>.</p></div></div>'
         +'</div>'
         +'<div class="aa-csec"><h4>Test the connection</h4><p>Checks that this tenant is provisioned and reachable.</p><div class="aa-test-row"><button class="aa-preview-btn" id="aa-test-conn">Test connection</button><span class="aa-test-result" id="aa-test-result"></span></div></div>'
@@ -332,7 +332,7 @@
       return head('Interactions','The one place that decides what Little Zav serves.')+tabs('interactions')+'<div class="aa-panel">'
         +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="aa-section-h" style="margin:0">Catalogue · Sharpen / Play / Care / Reflect</div><span class="aa-count">'+on+' of 15 on</span></div>'
         +'<div class="aa-card">'+rows+'</div>'
-        +'<p class="aa-sub" style="margin-top:12px">Reminders, tips and celebrations live here as <em>Care</em> types — not separate switches. New interaction types appear automatically.</p>'
+        +'<p class="aa-sub" style="margin-top:12px">Reminders, tips and celebrations live here as <em>Care</em> types, not separate switches. New interaction types appear automatically.</p>'
         +foot()+'</div>';
     },
     sources:function(){
@@ -342,11 +342,11 @@
           +'<span class="tog sm'+(on?' on':'')+'"></span></div>';
       }
       return head('Sources','What Little Zav knows.')+tabs('sources')+'<div class="aa-panel"><div class="aa-card">'
-        + src('Always on','p-personal','Each learner’s own learning','Their history and signals — the personal layer. Locked on.','',1)
-        + src('Library · API','p-api','Growth Engineering LMS','First-class connector — pull → chunk → embed on a schedule. 214 modules.','Synced 2m ago',1)
+        + src('Always on','p-personal','Each learner’s own learning','Their history and signals: the personal layer. Locked on.','',1)
+        + src('Library · API','p-api','Growth Engineering LMS','First-class connector: pull → chunk → embed on a schedule. 214 modules.','Synced 2m ago',1)
         + src('Library · API','p-api','LinkedIn Learning','Generic content-library connector via API key.','Synced 1h ago',1)
-        + src('Documents','p-docs','Brand & product docs','Drag-and-drop — 3 files. Offline content auto-removes.','3 items',1)
-        + src('Feed','p-docs','Google Drive folder','OAuth connector — not yet connected.','',0)
+        + src('Documents','p-docs','Brand & product docs','Drag-and-drop: 3 files. Offline content auto-removes.','3 items',1)
+        + src('Feed','p-docs','Google Drive folder','OAuth connector. Not yet connected.','',0)
         +'</div><button class="aa-addbtn">+ Add a source</button>'
         +'<p class="aa-sub" style="margin-top:12px">API keys are stored server-side, never in the browser. Each item has its own “Visible to Little Zav” toggle.</p>'
         +foot()+'</div>';
@@ -366,7 +366,7 @@
         +'</div></div>'
         +'<div><div class="aa-section-h">Live preview</div><div class="aa-bpreview"><div class="bp-h"><span class="bp-dot"></span><div><div class="bp-name">Little Zav</div><div class="bp-sub">Your learning companion</div></div></div>'
         +'<div class="bp-msg">Here’s a little something for you, Juliette.</div><div class="bp-btn">Play today’s spark</div></div>'
-        +'<div class="aa-preview-label">Reads live from the public branding endpoint — themed before login.</div></div>'
+        +'<div class="aa-preview-label">Reads live from the public branding endpoint. Themed before login.</div></div>'
         +'</div>'+foot()+'</div>';
     },
     analytics:function(){
@@ -383,7 +383,7 @@
         +'<path d="'+area+'" fill="url(#sg)"/><path d="'+d+'" fill="none" stroke="#0a7d6b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
         +'<circle cx="'+w+'" cy="'+(h-(pts[pts.length-1]/70*h)).toFixed(0)+'" r="3.5" fill="#0a7d6b"/></svg>';
 
-      return head('Analytics','Engagement and insight — aggregate and org-scoped.')+tabs('analytics')+'<div class="aa-panel">'
+      return head('Analytics','Engagement and insight. Aggregate and org-scoped.')+tabs('analytics')+'<div class="aa-panel">'
         +'<div style="display:flex;justify-content:flex-end;margin-bottom:12px"><span class="aa-toggle-days"><span>7 days</span><span class="on">30 days</span></span></div>'
         +'<div class="aa-stats">'
         +'<div class="aa-stat"><div class="aa-stat-n">1,284</div><div class="aa-stat-l">Interactions served</div><div class="aa-stat-d">+18%</div></div>'
@@ -402,17 +402,17 @@
         +'</div></div>'
         +'<div class="aa-two" style="margin-top:14px">'
         +'<div class="aa-block"><div class="aa-block-h">Sentiment trend</div>'+spark+'<div class="disp-scale" style="margin-top:6px"><span>4 wks ago</span><span>this week</span></div></div>'
-        +'<div class="aa-block"><div class="aa-block-h">Insight spotlight</div><div class="aa-spotlight"><strong>Compliance-pathway learners</strong> report lower confidence this week — worth a nudge of encouragement in that cohort.</div></div>'
+        +'<div class="aa-block"><div class="aa-block-h">Insight spotlight</div><div class="aa-spotlight"><strong>Compliance-pathway learners</strong> report lower confidence this week. Worth a nudge of encouragement in that cohort.</div></div>'
         +'</div>'
-        +'<div class="aa-privacy"><svg class="ic"><use href="#i-shield"/></svg>Every figure is aggregate-only and org-scoped — no individual’s answers are exposed.</div>'
+        +'<div class="aa-privacy"><svg class="ic"><use href="#i-shield"/></svg>Every figure is aggregate-only and org-scoped. No individual’s answers are exposed.</div>'
         + foot()+'</div>';
     }
   };
 
-  // Preview modal (mock) — mirrors the real admin's "Preview on a learner".
+  // Preview modal (mock). Mirrors the real admin's "Preview on a learner".
   var PREVIEW_EGS=[
-    {q:'Quick check on your recent learning — which one is the odd one out?', opts:['Recall it','Explain it','Ignore it','Apply it'], src:'a recent lesson on your recent learning', interaction:'Quick quiz (sharpen)'},
-    {q:'Myth or fact — "a strong password is one you change every month."', opts:['Myth','Fact'], src:'your security-awareness module', interaction:'Myth-or-fact (sharpen)'},
+    {q:'Quick check on your recent learning. Which one is the odd one out?', opts:['Recall it','Explain it','Ignore it','Apply it'], src:'a recent lesson on your recent learning', interaction:'Quick quiz (sharpen)'},
+    {q:'Myth or fact: "a strong password is one you change every month."', opts:['Myth','Fact'], src:'your security-awareness module', interaction:'Myth-or-fact (sharpen)'},
     {q:'Would you rather present the idea live, or write it up first?', opts:['Present it live','Write it up first'], src:'your communication pathway', interaction:'Would-you-rather (play)'}
   ];
   var previewIdx=0;
@@ -434,7 +434,7 @@
     o.innerHTML='<div class="aa-modal" role="dialog" aria-label="Preview">'+
       '<div class="aa-modal-head"><h3>Preview</h3><button class="aa-modal-x" id="aa-pv-x" aria-label="Close">×</button></div>'+
       '<div class="aa-modal-body" id="aa-pv-body"></div>'+
-      '<div class="aa-modal-foot"><p class="aa-hint">A representative example — no learner, nothing recorded.</p><button class="aa-showbtn" id="aa-pv-another">Show another</button></div>'+
+      '<div class="aa-modal-foot"><p class="aa-hint">A representative example. No learner, nothing recorded.</p><button class="aa-showbtn" id="aa-pv-another">Show another</button></div>'+
       '</div>';
     document.body.appendChild(o);
     o.addEventListener('click',function(e){ if(e.target===o) o.remove(); });
@@ -483,7 +483,7 @@
     var tb=document.getElementById('aa-test-conn'), tr=document.getElementById('aa-test-result');
     if(tb) tb.addEventListener('click',function(){
       tr.textContent='Checking…'; tr.className='aa-test-result';
-      setTimeout(function(){ tr.textContent='Reachable — this tenant is provisioned.'; tr.className='aa-test-result ok'; },600);
+      setTimeout(function(){ tr.textContent='Reachable. This tenant is provisioned.'; tr.className='aa-test-result ok'; },600);
     });
     // "Preview on a learner" opens the mock preview modal.
     var pv=app.querySelector('.aa-preview-btn');

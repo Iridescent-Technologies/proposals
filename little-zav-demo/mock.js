@@ -3,7 +3,7 @@
  *
  * The real widget (index.html + littlezav.js, copied verbatim from the littlezav
  * repo) normally talks to a token-authenticated Django backend. For a static,
- * shareable customer demo there is no backend — so this shim overrides fetch()
+ * shareable customer demo there is no backend. So this shim overrides fetch()
  * and answers the three calls the widget makes with hand-authored sample data:
  *
  *   GET  /api/public/tenants/:t/branding/  -> 404 (widget falls back to the
@@ -26,7 +26,7 @@
   // contract in services/interactions.py.
   var ITEMS = {
     quiz: {
-      greeting: "Morning Jordan — one quick thing from your feedback lesson.",
+      greeting: "Morning Jordan. One quick thing from your feedback lesson.",
       item: { type: "quiz", topic: "Giving feedback", content: {
         q: "What makes feedback most likely to actually land?",
         options: [
@@ -39,13 +39,13 @@
       } }
     },
     scenario_timed: {
-      greeting: "You've got a few seconds — go with your gut.",
+      greeting: "You've got a few seconds. Go with your gut.",
       item: { type: "scenario_timed", topic: "Prioritising under pressure", content: {
         eyebrow: "Scenario · beat the timer",
         stem: "It's 9am and three things land at once: an angry client email, a teammate blocked and waiting on you, and a report due at noon. What do you touch first?",
         options: [
-          "The report — the deadline is fixed",
-          "Unblock your teammate — it frees two people up",
+          "The report: the deadline is fixed",
+          "Unblock your teammate: it frees two people up",
           "Fire back at the client while you're annoyed",
           "Make a coffee and think about it"
         ],
@@ -61,14 +61,14 @@
       } }
     },
     would_you_rather: {
-      greeting: "No wrong answer here — just curious.",
+      greeting: "No wrong answer here. Just curious.",
       item: { type: "would_you_rather", topic: "Ways of working", content: {
         a: "Own one big project end to end",
         b: "Move between lots of smaller ones"
       } }
     },
     reflect_agree: {
-      greeting: "A tiny check-in — how true does this feel today?",
+      greeting: "A tiny check-in. How true does this feel today?",
       item: { type: "reflect_agree", topic: "Mindset", content: {
         statement: "I find it easy to ask for help when I'm stuck."
       } }
@@ -76,7 +76,7 @@
     tip: {
       greeting: "Here's a little something for you.",
       item: { type: "tip", topic: "Focus", content: {
-        tip: "Before you start work, try a two-minute brain dump — get every open loop out of your head and onto paper, then pick the one that actually matters. It quietly clears the clutter that slows down your first hour."
+        tip: "Before you start work, try a two-minute brain dump. Get every open loop out of your head and onto paper, then pick the one that actually matters. It quietly clears the clutter that slows down your first hour."
       } }
     }
   };
@@ -104,7 +104,7 @@
   window.fetch = function (input, init) {
     var url = typeof input === "string" ? input : (input && input.url) || "";
 
-    // Branding is public and fails soft in the widget — 404 keeps the default
+    // Branding is public and fails soft in the widget. A 404 keeps the default
     // Zavmo teal/dark theme, which is exactly the look we want in the demo.
     if (url.indexOf("/branding/") !== -1) {
       return Promise.resolve(new Response("", { status: 404 }));
@@ -120,7 +120,7 @@
       return json({ sparks: { lit: lit, total: TOTAL, rings: 0 }, spark_awarded: awarded });
     }
     if (url.indexOf("/api/chat/") !== -1) {
-      return json({ reply: "I'm just a demo here — but in the real thing I'd pick this up from where you left off." });
+      return json({ reply: "I'm just a demo here. In the real thing I would pick this up from where you left off." });
     }
     // Anything else (e.g. the Google Fonts stylesheet) goes to the real network.
     return realFetch ? realFetch(input, init) : json({}, 200);
