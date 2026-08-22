@@ -2,17 +2,12 @@
   "_comment": "What the voice check reads, and whether it blocks. Every deck here is product copy, so the tier is always 'hard': the mechanical bans only, never the sentence rules. Shortening an assessment criterion to satisfy a linter would damage a regulated qualification. FIRST MATCHING TARGET WINS, so the blocking entries must stay above the catch-all. A page moves out of the backlog and into the blocking list the moment it is swept clean, so the backlog count only ever goes down. See scripts/voice-check.mjs.",
   "targets": [
     {
-      "dir": "qualifications-level-3",
-      "tier": "hard",
-      "match": "^index\\.html$"
-    },
-    {
-      "dir": "qualifications-level-5",
-      "tier": "hard",
-      "match": "^index\\.html$"
-    },
-    {
       "dir": "_template",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
+      "dir": "active-learning",
       "tier": "hard",
       "match": "^index\\.html$"
     },
@@ -22,12 +17,27 @@
       "match": "^index\\.html$"
     },
     {
+      "dir": "exec-summary",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
       "dir": "future-fluency",
       "tier": "hard",
       "match": "^index\\.html$"
     },
     {
+      "dir": "grounded-not-guessing",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
       "dir": "how-zavmo-is-built",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
+      "dir": "insight-and-impact",
       "tier": "hard",
       "match": "^index\\.html$"
     },
@@ -38,6 +48,31 @@
     },
     {
       "dir": "making-learning-unique",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
+      "dir": "proof-not-self-report",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
+      "dir": "qualifications-level-3",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
+      "dir": "qualifications-level-5",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
+      "dir": "the-fluency-framework",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
+      "dir": "why-zavmo",
       "tier": "hard",
       "match": "^index\\.html$"
     },
