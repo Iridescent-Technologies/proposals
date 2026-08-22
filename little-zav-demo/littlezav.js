@@ -13,7 +13,7 @@
   var TENANT = params.get("tenant") || "zavmo";
   var TOKEN = params.get("token") || null;
   // Two surfaces, one runtime (§0): the default companion card (activity-driven
-  // nudge/chat) vs the Play tile (?surface=play, content-driven authored games).
+  // nudge/chat) vs the Play tile (?surface=play — content-driven authored games).
   var SURFACE = params.get("surface") === "play" ? "play" : "companion";
   var root = document.getElementById("little-zav");
 
@@ -79,8 +79,8 @@
     });
   }
   function play(deliveryId, correct, response) {
-    // `response` (optional) is the learner's actual answer on a Reflect probe.
-    // It feeds the anonymised disposition analytics. Undefined keys drop out of
+    // `response` (optional) is the learner's actual answer on a Reflect probe —
+    // it feeds the anonymised disposition analytics. Undefined keys drop out of
     // the JSON, so a plain game sends exactly what it did before.
     return fetch(API + "/api/play/", {
       method: "POST",
@@ -159,7 +159,7 @@
       '<div style="flex:1;"><div style="font-size:15px;font-weight:500;">' + name + "</div>" +
       '<div id="lz-sparks" class="lz-muted">' + sparksText(data.sparks) + "</div></div>";
 
-    // Play tile at rest. No authored game live for this learner (§0): calm, not
+    // Play tile at rest — no authored game live for this learner (§0): calm, not
     // empty; never fabricates a game (that's the companion card's job).
     if (isPlay && data.resting) {
       root.innerHTML =
@@ -180,7 +180,7 @@
     if (!isPlay && data.chat_enabled) wireChat();
   }
 
-  // --- Chat: a proactive, in-character conversation ----------------------
+  // --- Chat — a proactive, in-character conversation ---------------------
   function chatSection() {
     return '<div id="lz-chat"><div id="lz-chat-thread"></div>' +
       '<div class="lz-chatbar">' +
@@ -219,7 +219,7 @@
           pushMsg("zav", reply);
         })
         .catch(function () {
-          if (typing) { typing.textContent = "I couldn't reply just then. Try again in a moment."; typing.className = "lz-msg zav"; }
+          if (typing) { typing.textContent = "I couldn't reply just then — try again in a moment."; typing.className = "lz-msg zav"; }
         })
         .then(function () { send.disabled = false; input.disabled = false; input.focus(); });
     }
@@ -232,8 +232,8 @@
   function drawMascot(lit, celebrate) { var w = document.getElementById("lz-mascot"); if (w) w.innerHTML = mascot(56, lit, celebrate); }
   function popDot(i) { var d = document.getElementById("lz-sd-" + i); if (d) d.style.animation = "lzsd .5s ease"; }
 
-  // Reflect the play result on the halo: light the newly earned dot. When the
-  // 12th spark closes the ring, fill it, celebrate, then reset to the fresh
+  // Reflect the play result on the halo: light the newly earned dot, or — when
+  // the 12th spark closes the ring — fill it, celebrate, then reset to the fresh
   // ring. `rings` going up is how we know a ring just completed (the server
   // resets `lit` to 0 in the same response).
   function applySparks(res, correct) {
@@ -242,7 +242,7 @@
     if (s.rings > sparks.rings) {
       drawMascot(12, true);
       setSparksText({ lit: 12, total: s.total, rings: sparks.rings });
-      setVoice("Ring complete. That's the whole Zav. Nice one.");
+      setVoice("Ring complete — that's the whole Zav. Nice one.");
       setTimeout(function () { drawMascot(s.lit); setSparksText(s); sparks = s; }, 1300);
       return;
     }
@@ -250,7 +250,7 @@
     setSparksText(s);
     if (res.spark_awarded && s.lit > 0) popDot(s.lit - 1);
     sparks = s;
-    setVoice(correct === false ? "Not quite. But nice try." : (res.spark_awarded ? "Spark lit." : "Got it."));
+    setVoice(correct === false ? "Not quite — but nice try." : (res.spark_awarded ? "Spark lit." : "Got it."));
     pop();
   }
 
@@ -317,7 +317,7 @@
               this.classList.add("no");
               var self = this;
               setTimeout(function () { self.classList.remove("no"); }, 400);
-              setVoice("Not that side. Have another look.");
+              setVoice("Not that side — have another look.");
             }
           };
         });
@@ -331,7 +331,7 @@
       g.querySelectorAll("[data-x]").forEach(function (el) {
         el.onclick = function () {
           if (d3) return; d3 = true; this.classList.add("ok");
-          finish(did, null, { choice: this.dataset.x });  // "a" | "b": learning preference
+          finish(did, null, { choice: this.dataset.x });  // "a" | "b" — learning preference
         };
       });
 
@@ -357,7 +357,7 @@
 
     } else if (item.type === "scenario_timed") {
       // Signature type: a timed judgement call. Wrong springs back (no punish);
-      // the countdown is gentle. Time running out never fails you, it just eases off.
+      // the countdown is gentle — time running out never fails you, it just eases off.
       var secs = Math.max(3, Math.min(30, +c.seconds || 8));
       g.innerHTML =
         (c.eyebrow ? '<div class="lz-muted" style="margin-bottom:4px;">' + esc(c.eyebrow) + "</div>" : "") +
@@ -374,7 +374,7 @@
             sdone = true; this.classList.add("ok"); if (sbar) sbar.style.transition = "none";
             finish(did, true, { switches: sswitch });
           } else {
-            sswitch++;  // a wrong reach before the right call: answer-switching signal
+            sswitch++;  // a wrong reach before the right call — answer-switching signal
             var self = this; self.classList.add("no");
             setTimeout(function () { self.classList.remove("no"); }, 480);  // spring back
           }
@@ -383,7 +383,7 @@
 
     } else if (item.type === "branch") {
       // Signature type: a short branching scenario. Pick the right move to go on;
-      // a wrong move springs back. Never a dead end. Spark on the final right call.
+      // a wrong move springs back — never a dead end. Spark on the final right call.
       var steps = c.steps || [], bidx = 0, bdone = false, bswitch = 0;
       var drawStep = function () {
         var s = steps[bidx] || {};
@@ -400,7 +400,7 @@
               if (bidx >= steps.length - 1) { bdone = true; finish(did, true, { switches: bswitch }); }
               else { bidx++; setTimeout(drawStep, 260); }
             } else {
-              bswitch++;  // a wrong reach at this step: answer-switching signal
+              bswitch++;  // a wrong reach at this step — answer-switching signal
               var self = this; self.classList.add("no");
               setTimeout(function () { self.classList.remove("no"); }, 480);  // spring back
             }
