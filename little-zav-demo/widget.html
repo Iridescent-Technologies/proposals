@@ -24,7 +24,7 @@
     .lz-card { border: 1px solid rgba(47,207,168,0.24); border-radius: 18px;
       padding: 16px; background: var(--lz-surface); backdrop-filter: blur(18px);
       box-sizing: border-box; max-height: 100%; overflow-y: auto; overscroll-behavior: contain; }
-    /* Question / scenario stem — sized and weighted to sit in line with the card's
+    /* Question / scenario stem. Sized and weighted to sit in line with the card's
        body text (bubble + options are 14px), not the oversized 16px browser default. */
     .lz-q { font-size: 14px; font-weight: 400; line-height: 1.5; margin-bottom: 9px; }
     .lz-bubble { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10);
@@ -45,14 +45,14 @@
     @keyframes lznuc { 0%,100% { transform: scale(1); } 50% { transform: scale(1.14); } }
     @keyframes zavpop { 0% { transform: scale(1); } 30% { transform: scale(1.16) rotate(-4deg); }
       60% { transform: scale(.95); } 100% { transform: scale(1); } }
-    /* Spark halo — the 12 dots fill toward the complete Zavmo logomark. */
+    /* Spark halo. The 12 dots fill toward the complete Zavmo logomark. */
     .lz-sd { transition: fill .18s ease, stroke-opacity .18s ease; transform-box: fill-box; transform-origin: center; }
     @keyframes lzsd { 0% { transform: scale(.2); } 55% { transform: scale(1.7); } 100% { transform: scale(1); } }
     .lz-mascot.lz-celebrate { animation: lzcele 1s ease; }
     @keyframes lzcele { 0% { transform: scale(1); } 25% { transform: scale(1.16); } 55% { transform: scale(.96); } 100% { transform: scale(1); } }
     .lz-celebrate .lz-sd.on { animation: lzflash .55s ease 2; }
     @keyframes lzflash { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
-    /* Chat — talk to Little Zav (proactive companion) */
+    /* Chat. Talk to Little Zav (proactive companion) */
     #lz-chat { margin-top: 12px; }
     #lz-chat-thread { display: flex; flex-direction: column; gap: 6px; max-height: 210px; overflow-y: auto; margin-bottom: 8px; }
     .lz-msg { max-width: 82%; padding: 8px 11px; font-size: 13px; line-height: 1.45; }
