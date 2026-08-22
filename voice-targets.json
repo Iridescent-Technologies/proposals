@@ -52,6 +52,11 @@
       "match": "^index\\.html$"
     },
     {
+      "dir": "little-zav-demo",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
       "dir": "making-learning-unique",
       "tier": "hard",
       "match": "^index\\.html$"
