@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  // Hiding a section is opt-in, and only when the thing that reveals it again
+  // is present. A reader with a blocked or broken script must still get the
+  // content, so the hidden state never applies unless JS is running.
+  if ('IntersectionObserver' in window) { document.documentElement.className += ' js'; }
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- ─────────────────────────────────────────────────────────────────────────
-     FUTURE FLUENCY — FLAGSHIP DECK  ·  Zavmo / Iridescent Technologies
+     FUTURE FLUENCY. FLAGSHIP DECK  ·  Zavmo / Iridescent Technologies
      Built from the canonical _template (navy + teal + DM Sans). Same token set,
      same chrome, same scroll-reveal. Adds bespoke animated SVG diagrams for the
      three-layer framework, the ten Fluencies, the evidence loop and the gap.
-     DRAFT collateral — for review before publication.
+     DRAFT collateral: for review before publication.
      ───────────────────────────────────────────────────────────────────────── -->
 <title>Future Fluency. The language of your future · Zavmo</title>
 <meta name="description" content="Future Fluency is Zavmo's framework for growing your workforce in the AI economy. Capability demonstrated, not boxes ticked.">
@@ -170,7 +177,7 @@
   .gap-fill{opacity:0;transition:opacity 1s ease .8s}
   .in .gap-fill{opacity:1}
 
-  /* grounded — three approved frameworks */
+  /* grounded: three approved frameworks */
   .converge{width:100%;max-width:640px;height:auto;margin:6px auto 4px;display:block}
   .fw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
   @media(max-width:760px){.fw-grid{grid-template-columns:1fr}}
@@ -242,7 +249,7 @@
   footer a{color:var(--teal)}
 
   /* scroll reveal */
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
   .reveal.in{opacity:1;transform:none}
 
   @media (max-width:640px){.feature{grid-template-columns:1fr}.layer{grid-template-columns:1fr;gap:8px}.nav-cta{display:none}}
@@ -631,7 +638,7 @@
 (function(){
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  // logomark halo — 12 dots (matches the hub chrome exactly)
+  // logomark halo. 12 dots (matches the hub chrome exactly)
   var g=document.getElementById('halo'), n=12, cx=50, cy=50, r=38;
   for(var i=0;i<n;i++){
     var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
@@ -641,7 +648,7 @@
     g.appendChild(c);
   }
 
-  // hero orb — the atom mascot (nucleus + 3 orbiting electrons), matches the hub featured card
+  // hero orb: the atom mascot (nucleus + 3 orbiting electrons), matches the hub featured card
   var pd='M 34,120 a 86,32 0 1,0 172,0 a 86,32 0 1,0 -172,0', ang=[0,60,120], dur=['5s','4s','5.6s'];
   var s='<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="Future Fluency mascot" style="width:100%;height:100%">'
     +'<defs><radialGradient id="nuc" cx="42%" cy="38%" r="65%"><stop offset="0%" stop-color="#f2fffb"/><stop offset="35%" stop-color="#6ee9db"/><stop offset="75%" stop-color="#04d9c1"/><stop offset="100%" stop-color="#04d9c1"/></radialGradient></defs>';
@@ -654,7 +661,7 @@
   s+='<circle cx="120" cy="120" r="20" fill="url(#nuc)" style="filter:drop-shadow(0 0 16px rgba(63,228,188,.72))"/></svg>';
   var ho=document.getElementById('heroOrb'); if(ho) ho.innerHTML=s;
 
-  // ten Fluencies orbit — 6 primary on outer ring, 4 emerging on inner ring
+  // ten Fluencies orbit. 6 primary on outer ring, 4 emerging on inner ring
   var outer=[
     {t:'AI', w:'~17%'},{t:'Data', w:'~17%'},{t:'AI Governance', w:'~16%'},
     {t:'Automation', w:'~11%'},{t:'Sustainability', w:'~9%'},{t:'Frontier', w:'~5%'}
@@ -684,7 +691,7 @@
   }
 
   // three-layer stack edge-draw on reveal
-  // scroll reveal (adds .in) — also drives .layer::before and gap/pyramid animations
+  // scroll reveal (adds .in): also drives .layer::before and gap/pyramid animations
   var revealEls = document.querySelectorAll('.reveal, .lreveal');
   function showAll(){ revealEls.forEach(function(e){ e.classList.add('in'); }); }
   if(reduce || !('IntersectionObserver' in window)){ showAll(); }

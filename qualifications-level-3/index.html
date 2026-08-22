@@ -19,6 +19,17 @@
      3 (all six Level 3 units), 6 and 7. Every learning outcome and assessment
      criterion is reproduced verbatim. RQF regulated route: 1 credit per 10
      hours of Total Qualification Time.
+
+     Two sections are NOT from the pack and are new material:
+       #evidence   the xAPI evidence trail, plus a per-unit block inside each
+                   unit. Event statuses (Observed / Wired / Catalogued) are
+                   derived from the Zavmo engineering audit measured 17 Jul
+                   2026: xapi-audit-status.json (217 catalogued, 187 wired)
+                   and xapi-prod-observed.json (67 observed). Do not restate
+                   a status without re-deriving it from those two files.
+       #readiness  the assessor readiness pass. Findings and proposals only.
+                   NO assessment criterion has been altered. 145 criteria
+                   remain exactly as sourced from the pack.
      DRAFT. Not submitted.
      ───────────────────────────────────────────────────────────────────────── -->
 <title>Level 3 Future Fluency qualifications · Zavmo</title>
@@ -185,6 +196,32 @@
   .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
   .reveal.in{opacity:1;transform:none}
 
+
+  /* xAPI evidence trail */
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em;
+    color:var(--ink);background:var(--surface-2);border:1px solid var(--border);border-radius:6px;
+    padding:1px 6px;overflow-wrap:anywhere}
+  .stat-label b{color:var(--ink);font-weight:600}
+  .st{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    border-radius:100px;padding:3px 9px;white-space:nowrap;border:1px solid}
+  .st-o{color:var(--teal);border-color:var(--border-2);background:rgba(47,207,168,.12)}
+  .st-w{color:var(--blue);border-color:rgba(143,184,255,.34);background:rgba(143,184,255,.10)}
+  .st-c{color:var(--amber);border-color:rgba(245,181,68,.34);background:rgba(245,181,68,.10)}
+  .st-act{color:var(--amber);border-color:rgba(245,181,68,.34);background:rgba(245,181,68,.10)}
+  .st-word{color:var(--blue);border-color:rgba(143,184,255,.34);background:rgba(143,184,255,.10)}
+  .st-keep{color:var(--teal);border-color:var(--border-2);background:rgba(47,207,168,.12)}
+  table.evt td:first-child{color:var(--teal);font-weight:600;white-space:normal}
+  table.evt td:nth-child(2){white-space:nowrap}
+  .ename{display:block;color:var(--ink-3);font-size:12px;font-weight:300;margin-top:2px}
+  .nots{border-left:2px solid var(--amber);padding-left:clamp(14px,2.4vw,22px);margin:24px 0 0}
+  .nots .nh{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--amber);margin:0 0 7px}
+  .nots p{margin:0}
+  .nots p + p{margin-top:9px}
+  .hbody p{margin:0}
+  .hbody p + p{margin-top:9px}
+  .srcnote{font-size:12.5px;color:var(--ink-3);font-weight:300;max-width:78ch;margin-top:16px}
+
   @media (max-width:640px){
     :root{--subh:39px}
     .unitnav a{justify-content:center;padding:10px 11px}
@@ -194,6 +231,7 @@
     .tally{max-width:none}
     /* Criteria are the reading matter, so let them wrap rather than scroll. */
     table.crit{min-width:0}
+    table.evt{min-width:0}
     table.crit td.cref,table.crit th:first-child{width:52px}
     thead th,tbody td{padding-left:12px;padding-right:12px}
   }
@@ -235,6 +273,14 @@
     .tally{background:#fff!important;border:1px solid #000;border-radius:0;color:#000!important}
     .honest .hrow{page-break-inside:avoid;break-inside:avoid}
     .hnum{background:#fff!important;border:1px solid #666;color:#000!important;border-radius:0}
+    code{background:#fff!important;border:1px solid #999;color:#000!important;border-radius:0}
+    .st{background:#fff!important;border:1px solid #666!important;color:#000!important;border-radius:0}
+    table.evt td:first-child{color:#000!important;font-weight:700}
+    .ename{color:#444!important}
+    .nots{border-left:2px solid #000;page-break-inside:avoid;break-inside:avoid}
+    .nots .nh{color:#000!important}
+    .stat-label b{color:#000!important}
+    .srcnote{color:#444!important}
     .reveal{opacity:1!important;transform:none!important}
   }
 </style>
@@ -261,8 +307,10 @@
 <div class="unitnav" role="navigation" aria-label="Jump to a unit">
   <div class="unitnav-in">
     <a href="#units"><b>Index</b><span>All six units</span></a>
+    <a href="#evidence"><b>Evidence</b><span>The xAPI trail</span></a>
     <a href="#zff-ai-03"><b>ZFF-AI-03</b><span>Using and Checking AI Tools in Daily Work</span></a><a href="#zff-gm-03"><b>ZFF-GM-03</b><span>Developing a Growth Mindset for Changing Work</span></a><a href="#zff-da-03"><b>ZFF-DA-03</b><span>Turning Workplace Data into a Recommendation</span></a><a href="#zff-gv-03"><b>ZFF-GV-03</b><span>Working Safely and Responsibly with AI</span></a><a href="#zff-au-03"><b>ZFF-AU-03</b><span>Automating a Repeated Task in Own Work</span></a><a href="#zff-pj-03"><b>ZFF-PJ-03</b><span>Applied Project: Improving Own Work with AI</span></a>
     <a href="#assessment"><b>Assessment</b><span>and quality assurance</span></a>
+    <a href="#readiness"><b>Readiness</b><span>Assessor findings</span></a>
     <a href="#open"><b>Open items</b><span>What is not yet right</span></a>
   </div>
 </div>
@@ -358,6 +406,60 @@
     <p><strong>Scope stays personal in every unit.</strong> The moment an outcome reaches a colleague, a team or a department, it has left Level 3.</p>
   </section>
 
+  <section id="evidence">
+    <div class="section-label">Evidence</div>
+    <h2>The xAPI evidence trail</h2>
+    <p>An assessor working at a distance from the learner has one hard problem. The portfolio arrives finished, and nothing in a finished artefact proves who made it, in what order, or whether the learner's account of producing it is true. Zavmo records what a learner did in the platform as time-stamped statements, and those statements can be put in front of the assessor alongside the portfolio.</p>
+    <p>This section sets out what that record holds, how a single statement is tied to a learning outcome and an assessment criterion, and what the record cannot show. Each unit then carries the same three things for its own outcomes.</p>
+
+    <h3 class="sub">Where the record lives</h3>
+    <p>Zavmo uses the xAPI vocabulary of actor, verb, object, context and result, but there is no external learning record store. Every statement is a row in one Postgres table inside the Zavmo API service. There is one store and nothing is mirrored outside the platform. For an awarding organisation that matters, because retention, access control and export of learner records are then properties of one system rather than of a chain of them.</p>
+
+    <h3 class="sub">How a statement is tied to a criterion</h3>
+    <p>Every statement built through Zavmo's statement builder carries ten mandatory context extensions. Two of them are the ones that matter to a regulated qualification:</p>
+    <ul class="bul">
+      <li><code>http://zavmo.ai/extensions/learning_outcome_id</code>, the learning outcome the activity was against</li>
+      <li><code>http://zavmo.ai/extensions/assessment_criteria_addressed</code>, the list of assessment criteria the activity bore on</li>
+    </ul>
+    <p>Both are required arguments of the builder. A statement cannot be constructed without them, so there is no route by which activity is recorded but left unattached to an outcome. When the platform records that a learning outcome has been met, the statement carries the outcome reference and the criteria references with it. That pair of extensions is the bridge between a time-stamped event and a line in a unit on this page.</p>
+
+    <h3 class="sub">Catalogued, wired, observed</h3>
+    <p>Three numbers describe the event catalogue and they mean three different things. Reading them as one number would give an inspector a false picture of what is running, so every event named on this page carries which of the three it is.</p>
+    <div class="stats reveal">
+      <div class="stat"><div class="stat-num">217</div><div class="stat-label"><b>Catalogued.</b> Event types defined in the registry</div></div>
+      <div class="stat"><div class="stat-num">187</div><div class="stat-label"><b>Wired.</b> Of those, the ones with a live emit call site in the code</div></div>
+      <div class="stat"><div class="stat-num">67</div><div class="stat-label"><b>Observed.</b> Of those, the ones that have actually fired in production</div></div>
+    </div>
+    <div class="tw"><table class="tbl free">
+      <thead><tr><th scope="col">Status</th><th scope="col">What it means</th><th scope="col">What an assessor should do with it</th></tr></thead>
+      <tbody>
+        <tr><td><span class="st st-o">Observed</span></td><td>The event has fired in the production system and the statements exist.</td><td>Treat as available evidence, subject to the limits below.</td></tr>
+        <tr><td><span class="st st-w">Wired</span></td><td>The code that emits it exists, but it has not been seen firing in production.</td><td>Treat as expected, not present. Ask for it to be demonstrated before relying on it.</td></tr>
+        <tr><td><span class="st st-c">Catalogued</span></td><td>The event is defined in the registry and nothing has been built.</td><td>Treat as absent. It is not evidence of anything.</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>150 catalogued events have never fired.</strong> An event that has never emitted is not evidence, and we would rather say so here than have it found in an external quality assurance visit. The gap between wired and observed is emitters sitting on code paths that production learners have not yet taken.</p>
+    <p class="srcnote">Counts measured on 17 July 2026. The catalogued and wired figures come from an audit that is regenerated from the code itself and fails the build if it drifts from it. The observed figure is a read only aggregate over the production statement table, covering 20,610 statements from 547 distinct learners between 13 February 2026 and 17 July 2026.</p>
+
+    <h3 class="sub">What the record cannot do</h3>
+    <div class="honest">
+      <div class="hrow"><div class="hnum">1</div><div class="hbody">
+        <p><strong>Roughly four statements in five carry no canonical event identifier.</strong> In the measured window only 19% of rows carried one. The rest are real activity recorded through the front-end path without a registry identifier, so they cannot be attributed to a named event. They are still statements, and they still carry a learner, a verb, an object and a time. They are simply not countable by event.</p></div></div>
+      <div class="hrow"><div class="hnum">2</div><div class="hbody">
+        <p><strong>The two extensions are populated from Zavmo's own identifiers, not from Gateway's.</strong> Today the outcome and criteria slots are filled from the learner's own outcome record inside the platform. They do not yet carry references in the form used on this page, such as ZFF-AI-03 3.3. Mapping these units into those slots is work to be done before first registration.</p>
+        <p>Until it is done, the tie between a statement and a criterion on this page is a mapping we intend rather than one the data already carries. The mechanism is built and proven. The mapping to these six units is not.</p></div></div>
+      <div class="hrow"><div class="hnum">3</div><div class="hbody">
+        <p><strong>A status is a measurement with a date on it.</strong> Eight events that were wired in July are not any more, because the feature that emitted them was deliberately removed. Two of those had already fired, so they stay in the observed snapshot permanently. A further six event identifiers have fired in production that are not in the registry at all. No status should be read without its date, and none of those retired or unregistered events is referenced in the unit sections below.</p></div></div>
+      <div class="hrow"><div class="hnum">4</div><div class="hbody">
+        <p><strong>xAPI records the platform, not the job.</strong> It has no sight of what a learner did in a spreadsheet, a workflow tool, a meeting or a conversation with their manager. At Level 3 most of the assessed activity is in the job, so for most criteria the platform record is corroboration around workplace evidence rather than the evidence itself. The unit sections say plainly where that line falls.</p></div></div>
+    </div>
+
+    <h3 class="sub">What this is, and what it is not</h3>
+    <p><strong>The AI teaches. A human assessor decides.</strong> The xAPI record is evidence put in front of the assessor. It is never an assessment decision. No criterion in this specification is met or not met because a statement exists, and where the platform runs its own validation checks those checks are formative: they inform the assessor and decide nothing. Every decision on every criterion is made by the named human assessor, internally verified, and sampled externally.</p>
+    <p class="muted" style="font-size:13px">Each unit lists the events most likely to bear on its outcomes. The record for a learner is not limited to those events.</p>
+    <p class="backtop"><a href="#units">Back to the unit index</a></p>
+  </section>
+
 <!-- ZFF-AI-03 -->
 <section class="unit" id="zff-ai-03">
   <div class="unit-head">
@@ -429,6 +531,31 @@
 <p><strong>Not Level 2.</strong> Evaluation against evidence (4.3) and comparison of two methods against a standard (3.4, 3.5) sit past the Level 2 band, which stops at interpreting relevant information.</p>
 <p><strong>Not Level 4.</strong> No criterion requires the learner to <em class="it">analyse</em>, and every task carries a stated requirement set (2.4) against which the output is judged.</p>
 <p><strong>Not Level 6.</strong> Nothing asks the learner to critically analyse contested material, design research, or evaluate implications.</p>
+    <h3 class="sub">The xAPI evidence trail</h3>
+<p>The knowledge outcomes in this unit are built in dialogue with a Zavmo character, and that dialogue is recorded. The platform can show an assessor when the learner was shown the criteria, which knowledge checks they answered and what they answered, when an outcome was recorded as met, and which questions the learner asked rather than waited to be told. For LO3 and LO4 it holds the submitted instruction sets and outputs, and the validation run against them.</p>
+    <div class="tw"><table class="tbl evt">
+      <thead><tr><th scope="col">Event</th><th scope="col">Status</th><th scope="col">What it can be put against</th></tr></thead>
+      <tbody>
+        <tr><td>ZAV-LRN-004<span class="ename">Assessment criteria viewed</span></td><td><span class="st st-o">Observed</span></td><td>The learner was shown the criteria for this unit before working to them. Context for the portfolio rather than evidence for any one criterion.</td></tr>
+        <tr><td>ZAV-LRN-031<span class="ename">Content delivered</span></td><td><span class="st st-o">Observed</span></td><td>The teaching that stands behind LO1. Shows what was covered and when.</td></tr>
+        <tr><td>ZAV-LRN-032<span class="ename">Knowledge check answered</span></td><td><span class="st st-o">Observed</span></td><td>Carries the learner's own answer. Bears on 1.1 to 1.6, read alongside the professional discussion.</td></tr>
+        <tr><td>ZAV-ENG-006<span class="ename">Learner-initiated question</span></td><td><span class="st st-o">Observed</span></td><td>The learner questioned an answer rather than accepting it. Supporting evidence for 4.1 and 4.2.</td></tr>
+        <tr><td>ZAV-LRN-050<span class="ename">Learning outcome met</span></td><td><span class="st st-o">Observed</span></td><td>Carries the outcome reference and the criteria references. This is the statement that ties the record to LO1 to LO5.</td></tr>
+        <tr><td>ZAV-LRN-052<span class="ename">Unit completed</span></td><td><span class="st st-o">Observed</span></td><td>All outcomes recorded as met for the unit.</td></tr>
+        <tr><td>ZAV-LRN-041<span class="ename">Demonstration submitted</span></td><td><span class="st st-w">Wired</span></td><td>The submitted instruction sets and amended outputs. Would bear on 3.1, 3.2, 3.6 and 4.5.</td></tr>
+        <tr><td>ZAV-LRN-042<span class="ename">Demonstration validated</span></td><td><span class="st st-w">Wired</span></td><td>The platform's own review of that submission. Formative. It informs the assessor and decides nothing.</td></tr>
+        <tr><td>ZAV-CRT-002<span class="ename">Assessment criterion attempted</span></td><td><span class="st st-w">Wired</span></td><td>Per-criterion attribution inside the platform's practice checks. Not seen firing in production.</td></tr>
+        <tr><td>ZAV-CRT-003<span class="ename">Assessment criterion passed</span></td><td><span class="st st-w">Wired</span></td><td>As above, and it records a practice result, not an assessment decision.</td></tr>
+        <tr><td>ZAV-OFQ-004<span class="ename">Ofqual assessment criterion passed</span></td><td><span class="st st-w">Wired</span></td><td>The regulated-route equivalent of the two above. Wired and never observed, so it cannot be relied on at first registration.</td></tr>
+        <tr><td>ZAV-LRN-021<span class="ename">Discuss turn</span></td><td><span class="st st-c">Catalogued</span></td><td>A per-turn record would be the strongest evidence for 3.3, because it would show each rewrite in order with its reason. It is defined and nothing has been built.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="nots">
+      <p class="nh">What xAPI does not evidence here</p>
+      <p>The whole of LO2 sits outside the platform. Nothing in the record shows that the task selected at 2.1 is genuinely one the learner is responsible for, or that the information identified at 2.3 is what their employer actually restricts.</p>
+      <p>The two sources used to check an output (4.3), the errors found in it (4.4) and the reasons for each amendment (4.6) exist as the learner's work, not as platform activity, unless the learner submits them. The record cannot show that the amended output was used in the job (5.1), that the time estimate at 5.2 is sound, or that AI use was declared in line with the employer's rules (5.4).</p>
+      <p>Those need product evidence annotated by the learner, witness testimony from the line manager for 5.1 and 5.4, and the recorded professional discussion for LO1 and 4.7.</p>
+    </div>
     <p class="backtop"><a href="#units">Back to the unit index</a></p>
   </div>
 </section>
@@ -496,6 +623,28 @@
     <h3 class="sub">Level check</h3>
 <p><em class="it">Well defined but may be complex and non-routine</em>: the brief is to keep own skills current, which is defined; the non-routine element is the difficulty met at 3.3. <em class="it">Interpret and evaluate</em>: 5.2. <em class="it">Aware of different perspectives</em>: 1.4. <em class="it">Review effectiveness</em>: LO5.</p>
 <p><strong>Boundary:</strong> the learner adapts their own work. Helping colleagues or a department to adapt is addressed at Level 5 and is outside this unit.</p>
+    <h3 class="sub">The xAPI evidence trail</h3>
+<p>This unit needs a particular kind of care. Zavmo emits mindset signals, and this unit deliberately does not assess mindset. The signals below that read on growth or fixed language are teaching signals: they tell the tutor how to respond next. They are not evidence for any criterion in this unit, because no criterion in this unit assesses an attitude. Putting them to an assessor as though they were would break the design note above and would be the wrong thing to do.</p>
+    <div class="tw"><table class="tbl evt">
+      <thead><tr><th scope="col">Event</th><th scope="col">Status</th><th scope="col">What it can be put against</th></tr></thead>
+      <tbody>
+        <tr><td>ZAV-LRN-001<span class="ename">Unit started</span></td><td><span class="st st-o">Observed</span></td><td>Fixes the start point that 5.1 compares back to.</td></tr>
+        <tr><td>ZAV-LRN-032<span class="ename">Knowledge check answered</span></td><td><span class="st st-o">Observed</span></td><td>The learner's answers behind 1.1 to 1.5, including the worked example at 1.5.</td></tr>
+        <tr><td>ZAV-LRN-050<span class="ename">Learning outcome met</span></td><td><span class="st st-o">Observed</span></td><td>Carries the outcome and criteria references for LO1 to LO5.</td></tr>
+        <tr><td>ZAV-MP-006<span class="ename">Reflection captured</span></td><td><span class="st st-w">Wired</span></td><td>The learner's written or spoken reflection. The natural home for 3.3, 4.2, 4.5 and 5.3. Not yet seen firing in production.</td></tr>
+        <tr><td>ZAV-KRK-005<span class="ename">Behaviour evidenced: self-report</span></td><td><span class="st st-w">Wired</span></td><td>The learner's own account of applying the skill at work. It is self-report and must be treated as such, which is why 4.3 asks for a person who saw the result.</td></tr>
+        <tr><td>ZAV-GM-001<span class="ename">Growth language detected</span></td><td><span class="st st-w">Wired</span></td><td>Teaching signal only. Not evidence for any criterion in this unit.</td></tr>
+        <tr><td>ZAV-GM-002<span class="ename">Fixed language detected</span></td><td><span class="st st-w">Wired</span></td><td>Teaching signal only. It must never be presented to an assessor as a judgement about a learner.</td></tr>
+        <tr><td>ZAV-GM-003<span class="ename">Setback response: persisted</span></td><td><span class="st st-w">Wired</span></td><td>Teaching signal only. 4.5 asks the learner to describe a setback and the change it led to. That description is the evidence, not this event.</td></tr>
+        <tr><td>ZAV-GM-007<span class="ename">Growth mindset score updated</span></td><td><span class="st st-c">Catalogued</span></td><td>A periodic recalculation. Defined only, nothing built, and it would not be assessment evidence in this unit if it were.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="nots">
+      <p class="nh">What xAPI does not evidence here</p>
+      <p>Almost all of LO3 and LO4 happens away from the platform. Carrying out the actions in the plan (3.2), using the new skill on a real task (4.1), asking a person who saw the result for feedback (4.3) and changing working practice in response (4.4) are workplace acts and leave no statement.</p>
+      <p>The platform can show that a plan was submitted. It cannot show that the actions in it were carried out, that the dates in it were met, or that the difficulties described at 3.3 are the ones that actually arose.</p>
+      <p>The assessor needs the plan itself as product evidence, witness testimony from the person who gave the feedback at 4.3, and professional discussion for 4.5 and the whole of LO5. Because the mindset signals are unusable here by design, this unit leans on discussion more than the others in the Award.</p>
+    </div>
     <p class="backtop"><a href="#units">Back to the unit index</a></p>
   </div>
 </section>
@@ -565,6 +714,27 @@
     <h3 class="sub">Level check</h3>
 <p><em class="it">Well defined but may be complex and non-routine</em>: the question is stated by the learner from their own role, so the problem is defined; the complexity arrives in the data being incomplete and supporting more than one reading. <em class="it">Interpret and evaluate</em>: LO3. <em class="it">Aware of different perspectives</em>: 1.4 and 3.3. <em class="it">Use appropriate investigation</em>: 3.2. <em class="it">Review effectiveness</em>: LO5.</p>
 <p><strong>Boundary:</strong> 3.4 asks the learner to evaluate which reading the data better supports. It does not ask them to <em class="it">analyse</em> the dataset, which would be Level 4. Nothing here asks the learner to draw conclusions about anyone else's performance.</p>
+    <h3 class="sub">The xAPI evidence trail</h3>
+<p>The platform holds the teaching for LO1 and, where the learner submits through Zavmo, the prepared data, the interpretation and the recommendation. The figures themselves, the meeting where the recommendation was put and the decision that followed all sit in the learner's workplace.</p>
+    <div class="tw"><table class="tbl evt">
+      <thead><tr><th scope="col">Event</th><th scope="col">Status</th><th scope="col">What it can be put against</th></tr></thead>
+      <tbody>
+        <tr><td>ZAV-LRN-003<span class="ename">Learning outcomes viewed</span></td><td><span class="st st-o">Observed</span></td><td>The learner was shown the outcomes for this unit. Context for the portfolio.</td></tr>
+        <tr><td>ZAV-LRN-032<span class="ename">Knowledge check answered</span></td><td><span class="st st-o">Observed</span></td><td>Carries the learner's answer. Bears on 1.1 to 1.5, particularly 1.4 where two readings are set out.</td></tr>
+        <tr><td>ZAV-LRN-050<span class="ename">Learning outcome met</span></td><td><span class="st st-o">Observed</span></td><td>Ties the record to LO1 to LO5 through the outcome and criteria extensions.</td></tr>
+        <tr><td>ZAV-LRN-052<span class="ename">Unit completed</span></td><td><span class="st st-o">Observed</span></td><td>All outcomes recorded as met for the unit.</td></tr>
+        <tr><td>ZAV-CRT-005<span class="ename">Evidence submitted</span></td><td><span class="st st-w">Wired</span></td><td>The prepared data, the interpretation and the recommendation as submitted. Would bear on 2.4, 3.1 and 4.1.</td></tr>
+        <tr><td>ZAV-CRT-006<span class="ename">Evidence validated</span></td><td><span class="st st-w">Wired</span></td><td>The platform's check on that submission. Formative, and it informs the assessor rather than deciding anything.</td></tr>
+        <tr><td>ZAV-BLM-005<span class="ename">Bloom evidence: Evaluate</span></td><td><span class="st st-w">Wired</span></td><td>A marker that evaluation took place, which is the LO3 clause. Supporting only, and never a substitute for reading 3.4.</td></tr>
+        <tr><td>ZAV-COG-007<span class="ename">Comprehension probe</span></td><td><span class="st st-c">Catalogued</span></td><td>Defined only. Nothing built, so it evidences nothing today.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="nots">
+      <p class="nh">What xAPI does not evidence here</p>
+      <p>1.2 and 1.3 turn on what a measure used in the learner's own workplace actually counts and leaves out. The platform has no sight of that measure and cannot verify the learner's account of it.</p>
+      <p>4.2, 4.4 and 4.5 happen in front of the person who decides. 5.1 depends on that person making a decision and the learner recording it, and 5.2 depends on the learner's read of how the presentation landed.</p>
+      <p>The assessor needs the prepared data set and the recommendation as product evidence, witness testimony from the person the recommendation was put to for 4.5 and 5.1, and professional discussion covering 1.2 to 1.5 and the whole of LO5.</p>
+    </div>
     <p class="backtop"><a href="#units">Back to the unit index</a></p>
   </div>
 </section>
@@ -630,6 +800,28 @@
     <h3 class="sub">Level check</h3>
 <p><em class="it">Well defined but may be complex and non-routine</em>: the rules are given, which keeps the problem defined; 3.5 introduces the non-routine case where they do not clearly apply. <em class="it">Interpret and evaluate</em>: 5.3. <em class="it">Aware of different perspectives</em>: 2.4. <em class="it">Use appropriate investigation</em>: 4.2. <em class="it">Review effectiveness</em>: LO5.</p>
 <p><strong>Boundary:</strong> the learner reports a risk (4.3). They do not decide the response, write policy, or assess organisational exposure. All three would be Level 5 or above. <strong>This is the unit most likely to drift upward if edited</strong>, because governance language is naturally strategic. Watch 4.3 and 5.3.</p>
+    <h3 class="sub">The xAPI evidence trail</h3>
+<p>This is the unit where the distance between what the platform sees and what the assessor must judge is widest. LO1 and LO2 are knowledge outcomes, taught and checked inside Zavmo. The whole of LO3 and LO4 is workplace conduct, and Zavmo has no sight of what a learner does in a tool that is not Zavmo. The record supports this unit at the front and falls silent at the back.</p>
+    <div class="tw"><table class="tbl evt">
+      <thead><tr><th scope="col">Event</th><th scope="col">Status</th><th scope="col">What it can be put against</th></tr></thead>
+      <tbody>
+        <tr><td>ZAV-LRN-004<span class="ename">Assessment criteria viewed</span></td><td><span class="st st-o">Observed</span></td><td>The learner was shown the criteria for this unit. Context for the portfolio.</td></tr>
+        <tr><td>ZAV-LRN-032<span class="ename">Knowledge check answered</span></td><td><span class="st st-o">Observed</span></td><td>Carries the learner's answer. Bears on 1.1 to 1.5 and 2.1 to 2.4.</td></tr>
+        <tr><td>ZAV-ENG-006<span class="ename">Learner-initiated question</span></td><td><span class="st st-o">Observed</span></td><td>Where the learner raised a rules question themselves. Supporting evidence for 3.5, which turns on noticing that the rules did not clearly apply.</td></tr>
+        <tr><td>ZAV-LRN-050<span class="ename">Learning outcome met</span></td><td><span class="st st-o">Observed</span></td><td>Carries the outcome and criteria references for LO1 to LO5.</td></tr>
+        <tr><td>ZAV-MP-006<span class="ename">Reflection captured</span></td><td><span class="st st-w">Wired</span></td><td>The learner's written or spoken account. The natural home for 3.5, 5.1 and 5.2. Not yet seen firing in production.</td></tr>
+        <tr><td>ZAV-CHA-022<span class="ename">Validation fail</span></td><td><span class="st st-w">Wired</span></td><td>A platform check the learner did not pass first time. Formative, and useful context for a discussion. Not an assessment decision.</td></tr>
+        <tr><td>ZAV-CHA-023<span class="ename">Validation appeal</span></td><td><span class="st st-w">Wired</span></td><td>The learner contested a platform validation outcome. Worth reading before a professional discussion on LO2.</td></tr>
+        <tr><td>ZAV-CRT-004<span class="ename">Assessment criterion failed</span></td><td><span class="st st-w">Wired</span></td><td>Per-criterion attribution inside the platform's practice checks. It records a practice result and nothing more.</td></tr>
+        <tr><td>ZAV-COG-008<span class="ename">Misconception detected</span></td><td><span class="st st-c">Catalogued</span></td><td>Defined only. Nothing built.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="nots">
+      <p class="nh">What xAPI does not evidence here</p>
+      <p>Zavmo cannot see a policy check made before proceeding (3.1). It cannot see information that was withheld (3.2), because withholding leaves no artefact anywhere, in any system. It cannot see the workplace record of AI use (3.3), the report of a risk to the person responsible (4.3), or the response that came back (4.4).</p>
+      <p>Most importantly, it cannot see what a learner typed into a tool that is not Zavmo, which is exactly the conduct 1.2 and 3.2 are about. Any claim that the platform record demonstrates safe handling of restricted information would be false.</p>
+      <p>This unit rests on witness testimony from the person named at 4.3, the workplace's own records for 3.3 and 4.4, and a professional discussion that goes criterion by criterion through LO3 and LO4. The platform's contribution is to the knowledge outcomes, and the assessor should expect nothing more from it.</p>
+    </div>
     <p class="backtop"><a href="#units">Back to the unit index</a></p>
   </div>
 </section>
@@ -699,6 +891,27 @@
 <p><em class="it">Well defined but may be complex and non-routine</em>: the brief is to automate a repeated task in own work; the non-routine element is the automation failing in ways the learner must establish the cause of (4.3). <em class="it">Interpret and evaluate</em>: 5.2. <em class="it">Use appropriate investigation</em>: 4.3. <em class="it">Review effectiveness</em>: LO5.</p>
 <p><strong>A deliberate word choice.</strong> The learner <strong>sets up</strong> an automation. They do not <strong>design</strong> one. Design is a Level 6 verb and using it here would mis-level the unit.</p>
 <p><strong>Boundary:</strong> nothing asks the learner to decide which of several processes the team should automate. That would be Level 4 or above.</p>
+    <h3 class="sub">The xAPI evidence trail</h3>
+<p>The teaching for LO1 is in the platform. The automation is not. Everything from LO2 to LO5 is built, tested and run in the learner's own workplace tools, and none of that work emits an xAPI statement. What the record adds here is a reliable timeline: when the learner was taught what, and when each piece of work was submitted.</p>
+    <div class="tw"><table class="tbl evt">
+      <thead><tr><th scope="col">Event</th><th scope="col">Status</th><th scope="col">What it can be put against</th></tr></thead>
+      <tbody>
+        <tr><td>ZAV-LRN-001<span class="ename">Unit started</span></td><td><span class="st st-o">Observed</span></td><td>Fixes the start of the unit, which matters for 4.1 where a period has to be agreed and run.</td></tr>
+        <tr><td>ZAV-LRN-031<span class="ename">Content delivered</span></td><td><span class="st st-o">Observed</span></td><td>The teaching behind 1.1 to 1.5, including what was covered on failure modes.</td></tr>
+        <tr><td>ZAV-LRN-032<span class="ename">Knowledge check answered</span></td><td><span class="st st-o">Observed</span></td><td>Carries the learner's answer. Bears on 1.1 to 1.5.</td></tr>
+        <tr><td>ZAV-LRN-050<span class="ename">Learning outcome met</span></td><td><span class="st st-o">Observed</span></td><td>Carries the outcome and criteria references for LO1 to LO5.</td></tr>
+        <tr><td>ZAV-LRN-055<span class="ename">Lesson session completed</span></td><td><span class="st st-w">Wired</span></td><td>Session boundaries. Useful for the guided hours record and for pacing. Not evidence of any criterion.</td></tr>
+        <tr><td>ZAV-CRT-005<span class="ename">Evidence submitted</span></td><td><span class="st st-w">Wired</span></td><td>The step record, the test log and the timing record as submitted. Would bear on 2.2, 3.3 and 5.1.</td></tr>
+        <tr><td>ZAV-LRN-041<span class="ename">Demonstration submitted</span></td><td><span class="st st-w">Wired</span></td><td>The same work where it is submitted through the demonstrate route rather than as evidence.</td></tr>
+        <tr><td>ZAV-LRN-062<span class="ename">Learning modality attempted</span></td><td><span class="st st-c">Catalogued</span></td><td>Rehearsing test-case selection through a case study would sit here. Defined only, nothing built.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="nots">
+      <p class="nh">What xAPI does not evidence here</p>
+      <p>The automation itself, the test cases and their results (3.2, 3.3), the corrections made to it (3.4, 4.4), the parallel running period (4.1), the occasions it produced a wrong result (4.2) and the timings before and after (2.5, 5.1) are all workplace artefacts. The platform sees a submission, not the thing submitted working.</p>
+      <p>The assessor needs the automation itself or a demonstration of it, the learner's test log, the timing record on the same basis at 2.5 and 5.1, and witness testimony that the parallel running actually happened over the period claimed.</p>
+      <p>Professional discussion should cover 4.5 in particular. Deciding to stop running the manual method is a judgement, the record of it is the learner's own, and nothing in the platform corroborates it.</p>
+    </div>
     <p class="backtop"><a href="#units">Back to the unit index</a></p>
   </div>
 </section>
@@ -774,6 +987,28 @@
 <p><strong>The verbs stay at level.</strong> Establish, record, identify, select, state, carry out, interpret, evaluate, review. Not <em class="it">analyse</em> (4), not <em class="it">design</em> or <em class="it">critically evaluate</em> (6), not <em class="it">reformulate</em> (7).</p>
 <p><strong>The scope stays personal.</strong> 5.4 recommends to the learner's own manager about the learner's own process. 5.3 evaluates against the learner's own stated expectation, not against organisational objectives.</p>
 <p><strong>What would push it to Level 4:</strong> letting the learner choose which of several processes to improve on comparative benefit, or asking them to evaluate the improvement's implications beyond their own role. The assessment guidance states both exclusions, because a motivated learner will drift into them and an assessor may not notice.</p>
+    <h3 class="sub">The xAPI evidence trail</h3>
+<p>Of this unit's 100 hours, 10 are guided. The project runs in the learner's job over a period long enough for it to go wrong. The platform record here is thin by design and an assessor should expect it to be. What it does give is the one thing a long project needs most: dated submissions, so that the sequence the learner describes can be checked against the sequence that was recorded.</p>
+    <div class="tw"><table class="tbl evt">
+      <thead><tr><th scope="col">Event</th><th scope="col">Status</th><th scope="col">What it can be put against</th></tr></thead>
+      <tbody>
+        <tr><td>ZAV-LRN-001<span class="ename">Unit started</span></td><td><span class="st st-o">Observed</span></td><td>Fixes the start of the project period.</td></tr>
+        <tr><td>ZAV-LRN-050<span class="ename">Learning outcome met</span></td><td><span class="st st-o">Observed</span></td><td>Carries the outcome and criteria references for LO1 to LO5.</td></tr>
+        <tr><td>ZAV-LRN-052<span class="ename">Unit completed</span></td><td><span class="st st-o">Observed</span></td><td>All outcomes recorded as met for the unit.</td></tr>
+        <tr><td>ZAV-MP-006<span class="ename">Reflection captured</span></td><td><span class="st st-w">Wired</span></td><td>5.6 asks the learner to review their own approach to the project. This is where that would sit. Not yet seen firing in production.</td></tr>
+        <tr><td>ZAV-CRT-005<span class="ename">Evidence submitted</span></td><td><span class="st st-w">Wired</span></td><td>The process record, the plan, the measurements and the recommendation, each dated as submitted.</td></tr>
+        <tr><td>ZAV-CRT-006<span class="ename">Evidence validated</span></td><td><span class="st st-w">Wired</span></td><td>The platform's check on those submissions. Formative only.</td></tr>
+        <tr><td>ZAV-OFQ-005<span class="ename">Ofqual unit completed</span></td><td><span class="st st-w">Wired</span></td><td>The regulated-route completion statement for a unit. Wired and never observed.</td></tr>
+        <tr><td>ZAV-OFQ-006<span class="ename">Ofqual qualification completed</span></td><td><span class="st st-w">Wired</span></td><td>The same for the Diploma. Wired and never observed, so at first registration the completion record should be verified rather than relied on.</td></tr>
+        <tr><td>ZAV-CRT-010<span class="ename">Certificate generated</span></td><td><span class="st st-c">Catalogued</span></td><td>Defined only. Nothing built.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="nots">
+      <p class="nh">What xAPI does not evidence here</p>
+      <p>Almost all of it. The record of how the process runs and what it costs (1.2, 1.3), the running of the improved version (3.1 to 3.4), the problems and the corrections (4.1 to 4.5) and the after measurement (5.1) all happen in the job.</p>
+      <p>The dated submissions do real work for authentication, because a project claimed to have run over three months and submitted in one sitting is visible as such. That is a check on plausibility, not proof of the work.</p>
+      <p>This unit is carried by product evidence, by witness testimony from the manager the recommendation goes to at 5.4, and by a substantial professional discussion covering LO3 and LO4. Given the size of this unit, the discussion should be planned as more than one session.</p>
+    </div>
     <p class="backtop"><a href="#units">Back to the unit index</a></p>
   </div>
 </section>
@@ -804,6 +1039,100 @@
       <div class="hrow"><div class="hnum">6</div><p><strong>The two Diplomas have not been checked against qualifications already on the register.</strong> ZFF-DA-03 is the unit most likely to overlap something existing.</p></div>
       <div class="hrow"><div class="hnum">7</div><p><strong>Demand figures are excluded on purpose.</strong> We hold internal estimates of which fluencies are most in demand. They are not evidence and they are not in this document.</p></div>
     </div>
+  </section>
+
+  <section id="readiness">
+    <div class="section-label">Assessor readiness</div>
+    <h2>What the readiness pass found</h2>
+    <p>All 145 criteria were tested on four questions. Could an assessor see whether the criterion was met, or does it require judging an attitude. Is it at Level 3 against the descriptor in section 3. Does it contradict anything the unit itself states. Could a learner in a real job produce evidence for it.</p>
+    <p><strong>No criterion has been changed.</strong> Every item below is a finding and a proposal, for the assessor of record to accept, amend or reject. Two of them were already known and are repeated so that the list is complete: the guided learning share in ZFF-GV-03, and the condensed unit aims.</p>
+    <p class="muted" style="font-size:13.5px">Chips show what each proposal would require. <span class="st st-act">Change proposed</span> means an edit to the specification. <span class="st st-word">Guidance only</span> means the criteria stand and the assessment guidance carries the answer. <span class="st st-keep">No change</span> means it was tested and it holds.</p>
+    <div class="honest">
+
+      <div class="hrow"><div class="hnum">1</div><div class="hbody">
+        <p><strong>The scope rule in section 3 is stated absolutely, and three units cross it.</strong> Section 3 says that the moment an outcome reaches a colleague, a team or a department, it has left Level 3. But ZFF-DA-03 4.2, 4.4 and 4.5 require the learner to present a recommendation to the person who decides and answer a challenge to it, ZFF-PJ-03 5.4 and 5.5 recommend to the learner's manager, and ZFF-GM-03 4.3 requires feedback from a person who saw the result. Those are right, and the rule as written appears to forbid them.</p>
+        <p>The rule is really about whose work is being changed, not about who is in the room. As stated it does not say so, and that is the kind of internal contradiction an external quality assurer reads first.</p>
+        <p><span class="st st-act">Change proposed</span> Reword the section 3 sentence to separate the two: the work under improvement stays the learner's own, while the audience for a recommendation or a piece of feedback may be another person. No criterion changes.</p></div></div>
+
+      <div class="hrow"><div class="hnum">2</div><div class="hbody">
+        <p><strong>ZFF-GV-03 gives 60% of its hours to guided learning, against 50% or less everywhere else.</strong> The unit shows 30 guided hours against 50 TQT. The comparison across the Diploma is ZFF-AI-03 at 50%, ZFF-GM-03 at 50%, ZFF-DA-03 at 50%, ZFF-AU-03 at 42% and ZFF-PJ-03 at 10%. ZFF-GV-03 is the only unit above half, and it is a unit whose skills outcomes are almost entirely workplace conduct, which argues for fewer guided hours rather than more.</p>
+        <p><span class="st st-act">Change proposed</span> Reduce to 25 guided hours, matching the other 50 TQT unit. The knock-on is small and needs to be carried through: the Diploma total falls from 155 to 150 guided hours in the unit index and in section 2.4, and the guided share in section 2.4 moves from 40% to 38%. TQT, credits and the Award are unaffected.</p></div></div>
+
+      <div class="hrow"><div class="hnum">3</div><div class="hbody">
+        <p><strong>Some unit aims were condensed and lost their trailing scope clause.</strong> ZFF-DA-03's aim now ends "Scope is personal." The fuller original ended by saying what the recommendation is not about, namely a department's performance. ZFF-GM-03 and ZFF-PJ-03 carry no scope sentence in their aims at all, while ZFF-AI-03, ZFF-GV-03 and ZFF-AU-03 each carry a full one.</p>
+        <p>Scope is what holds these units at Level 3. The aim is the first thing a reviewer reads and the last thing a centre reads before writing an assessment plan, so it is the wrong place to be terse.</p>
+        <p><span class="st st-act">Change proposed</span> Reinstate the fuller wording in ZFF-DA-03, and add matching clauses to ZFF-GM-03 and ZFF-PJ-03 so that all six aims state the boundary in the same shape.</p></div></div>
+
+      <div class="hrow"><div class="hnum">4</div><div class="hbody">
+        <p><strong>ZFF-PJ-03's aim uses a verb its own level check rules out.</strong> The aim says the learner "redesigns" the process. The same unit's level check states that the verbs stay at level and that design is not among them, and ZFF-AU-03's level check says plainly that design is a Level 6 verb and using it would mis-level the unit. No criterion uses it, so this is confined to the aim, but it is the sentence a reviewer reads before the criteria.</p>
+        <p><span class="st st-act">Change proposed</span> Replace "redesigns it" with "changes it" or "sets up an improved version of it". ZFF-AU-03's aim also contains "designed to break it", which describes the test cases rather than an act of the learner; that one is defensible and we suggest leaving it.</p></div></div>
+
+      <div class="hrow"><div class="hnum">5</div><div class="hbody">
+        <p><strong>Nine criteria presuppose an event that may not happen.</strong> They are assessable when the event occurs and unachievable when it does not, and nothing currently tells a centre what to do in the second case.</p>
+        <p>ZFF-GM-03 4.3 needs a person willing to give feedback. ZFF-DA-03 5.1 needs a decision to be made and communicated. ZFF-GV-03 3.5 needs a situation where the rules did not clearly apply, 4.4 needs a response to a reported risk, and 5.2 is worded so that the learner's practice must have fallen short. ZFF-AU-03 4.2 and 4.3 need the automation to produce a wrong result. ZFF-PJ-03 4.1 needs a problem to arise and 4.5 needs one to remain unresolved.</p>
+        <p>Two of the unit aims lean into this, saying the learner runs the automation until it is shown reliable and runs the new process until it fails at least once. A qualification should not depend on a failure arriving to order.</p>
+        <p><span class="st st-word">Guidance only</span> The criteria are sound. Add a nil case to the assessment guidance for each: what the learner records instead, and how the assessor tests the same underlying skill. For ZFF-AU-03 the fallback is already present in the unit, since 3.2 requires test cases expected to fail.</p></div></div>
+
+      <div class="hrow"><div class="hnum">6</div><div class="hbody">
+        <p><strong>ZFF-AI-03 4.1 is a knowledge criterion under a skills outcome.</strong> LO4 reads "Be able to interpret and evaluate the output of an AI tool", and 4.1 asks the learner to describe what critical thinking means when applied to an AI output. Describing a concept is knowledge. The other six criteria in LO4 are all acts on a real output.</p>
+        <p>It is a small thing and it is exactly the kind of small thing an external quality assurer picks up, because the convention that "be able to" outcomes carry skills criteria is well established.</p>
+        <p><span class="st st-act">Change proposed</span> Move it into LO1 as a seventh criterion, where the other knowledge sits. The alternative, leaving it and noting the reason in the assessment guidance, is defensible but weaker.</p></div></div>
+
+      <div class="hrow"><div class="hnum">7</div><div class="hbody">
+        <p><strong>ZFF-GM-03 LO2's stem verb is not discharged by any of its criteria.</strong> The outcome is "Be able to compare own current skills with the skills own role will require", and its four criteria ask the learner to identify strengths, identify missing skills, select one and identify sources of help. None of them asks for a comparison. The comparing happens at 5.1, under LO5.</p>
+        <p>The same pattern appears in a milder form at ZFF-PJ-03 LO2, where no criterion says "plan", although 2.1 to 2.6 taken together plainly constitute planning. We would leave that one.</p>
+        <p><span class="st st-act">Change proposed</span> Either restem LO2 to match what its criteria do, for example "Be able to identify the skills own role will require", or add a comparison criterion. Restemming is the smaller change and does not touch a criterion.</p></div></div>
+
+      <div class="hrow"><div class="hnum">8</div><div class="hbody">
+        <p><strong>ZFF-AI-03's level check claims more than its criteria support.</strong> It maps the descriptor clause on being aware of different perspectives or approaches to "1.1 to 1.3, and 1.6". Criteria 1.1 to 1.3 describe how a language model produces answers and why it can be wrong. That is the nature of the area, not a set of perspectives, and 1.1 and 1.2 are already claimed against that clause in the row above. Only 1.6 genuinely answers it.</p>
+        <p><span class="st st-act">Change proposed</span> Narrow the mapping to 1.6, and add 2.2 if a second reference is wanted, since identifying a task that should not be given to an AI tool and giving reasons carries a competing approach. The claim is weaker and it is true.</p></div></div>
+
+      <div class="hrow"><div class="hnum">9</div><div class="hbody">
+        <p><strong>ZFF-GM-03's level check maps "interpret and evaluate" to a criterion that reviews.</strong> The check cites 5.2, whose wording is "Review how far the actions taken changed own performance of a task in own role". Review is a different descriptor clause, and LO5 is already claimed against it in the same sentence. Nothing in the unit uses the verb evaluate.</p>
+        <p>This is the same class of problem as the one already known on the Level 5 page, where a verb is used in one place and ruled out in another. Here it is a mapping the wording does not carry.</p>
+        <p><span class="st st-act">Change proposed</span> Cite 5.1, which compares skills at the end against those identified at the start, and 4.4, where feedback is weighed and acted on. If neither is thought sufficient, the honest course is to say the clause is met at qualification level rather than in this unit.</p></div></div>
+
+      <div class="hrow"><div class="hnum">10</div><div class="hbody">
+        <p><strong>ZFF-GM-03's level check does not map "use appropriate investigation to inform actions" at all.</strong> Every other unit maps it: ZFF-AI-03 at 4.3 and 4.4, ZFF-DA-03 at 3.2, ZFF-GV-03 at 4.2, ZFF-AU-03 at 4.3 and ZFF-PJ-03 at 4.2. ZFF-GM-03 is one of the two Award units, so between them ZFF-AI-03 and ZFF-GM-03 must carry the descriptor for the Award, and the omission is visible.</p>
+        <p><span class="st st-act">Change proposed</span> Cite 2.4, which requires the learner to identify sources of help inside and outside their workplace. That is investigation informing an action, and it needs no criterion change.</p></div></div>
+
+      <div class="hrow"><div class="hnum">11</div><div class="hbody">
+        <p><strong>ZFF-AU-03's level check does not map "aware of different perspectives or approaches".</strong> The unit does contain the material: 1.1 and 1.2 set out what makes a task suitable and unsuitable for automation, and 2.4 requires reasons for the steps selected. The clause is simply not claimed.</p>
+        <p>A descriptor clause does not have to be met by every unit individually, only by the qualification. If that is the intended reading it should be stated, because at present five units map the clause and one silently does not.</p>
+        <p><span class="st st-act">Change proposed</span> Either cite 1.1 and 1.2 in the level check, or add a line to section 3 saying the descriptor is evidenced across the qualification rather than unit by unit.</p></div></div>
+
+      <div class="hrow"><div class="hnum">12</div><div class="hbody">
+        <p><strong>Four criteria repeat in substance across units, and one learner could satisfy them all with one piece of evidence.</strong> The "different views held by people in own area of work" criterion appears three times, at ZFF-AI-03 1.6, ZFF-GM-03 1.4 and ZFF-GV-03 2.4. The restricted information criterion appears at ZFF-AI-03 2.3 and again at ZFF-GV-03 1.2. Declaring AI use appears at ZFF-AI-03 5.4 and again at ZFF-GV-03 1.5 and 3.3. What happens to information entered into a tool appears at ZFF-AI-03 1.5 and ZFF-GV-03 2.2.</p>
+        <p>Each is properly placed in its own unit and the subject differs slightly each time. The risk is not the duplication, it is a portfolio in which the same paragraph is submitted three times and passed three times.</p>
+        <p><span class="st st-word">Guidance only</span> Keep the criteria. State in the assessment guidance that the same piece of evidence may not be counted against more than one of these, and say what the distinct focus of each is.</p></div></div>
+
+      <div class="hrow"><div class="hnum">13</div><div class="hbody">
+        <p><strong>ZFF-GV-03 4.1 and 4.2 do not agree about whether something has happened.</strong> 4.1 asks the learner to identify a risk arising from the use of an AI tool, which reads as prospective. 4.2 asks them to use appropriate investigation to establish what happened, which reads as an incident after the fact. A risk that has not materialised has no "what happened", and a learner will be told two different things by the two criteria.</p>
+        <p><span class="st st-act">Change proposed</span> Align 4.2 to the prospective reading at the next revision, for example establishing how the risk arises and what it could affect. Until then, guidance should say that either reading is acceptable and the assessor should record which one the learner took.</p></div></div>
+
+      <div class="hrow"><div class="hnum">14</div><div class="hbody">
+        <p><strong>Two units measure time to different standards.</strong> ZFF-AU-03 2.5 and 5.1 both require the learner to state the time a task takes "and how that was established". ZFF-PJ-03 1.3 and 5.1 do the same. ZFF-AI-03 5.2 asks the learner to "estimate the time added or saved" with no basis clause at all, which makes it the one time criterion in the Diploma that an assessor cannot test.</p>
+        <p>ZFF-AI-03 5.2 also sits in the Award, so it is likely to be the first time criterion any learner meets.</p>
+        <p><span class="st st-act">Change proposed</span> Add the same basis clause to ZFF-AI-03 5.2 at the next revision so that all four read alike. Until then, guidance should require the basis of the estimate to be recorded.</p></div></div>
+
+      <div class="hrow"><div class="hnum">15</div><div class="hbody">
+        <p><strong>Three criteria assess an act that leaves no artefact.</strong> ZFF-GV-03 3.1 requires a policy check made before proceeding, and the checking is a moment, not a document. ZFF-GV-03 3.2 requires information to be removed or withheld, and an absence cannot be shown. ZFF-AI-03 1.5 requires the learner to describe what happens to information entered into the AI tools their workplace uses, which many learners cannot establish because the vendor does not say and the employer has not written it down.</p>
+        <p>These are the right things to assess. They are the three where a centre is most likely to accept a bare assertion.</p>
+        <p><span class="st st-word">Guidance only</span> Name the evidence route for each. For 3.1 and 3.2, a contemporaneous record made by the learner plus targeted oral questioning in the professional discussion. For ZFF-AI-03 1.5, the tool's own published terms and the workplace policy, with the learner recording where the answer could not be found and what they did about it.</p></div></div>
+
+      <div class="hrow"><div class="hnum">16</div><div class="hbody">
+        <p><strong>ZFF-GV-03 5.3 judges the workplace's rules rather than the learner's own work.</strong> It asks the learner to evaluate how effective the workplace's rules were in the situations met. The unit's own boundary note already says to watch this one, and the unit aim says the learner's duty ends at reporting.</p>
+        <p>On balance it holds, because "in the situations met" ties the judgement to cases the learner personally encountered rather than to the policy as a whole. That is a review of the learner's own experience of a rule, which is at level. It is a fine distinction and it is not written down anywhere.</p>
+        <p><span class="st st-keep">No change</span> Keep 5.3 as worded, and state the reasoning in the assessment guidance so that a centre does not read it as an invitation to appraise organisational policy.</p></div></div>
+
+      <div class="hrow"><div class="hnum">17</div><div class="hbody">
+        <p><strong>Tested and holding.</strong> Three things were looked for across all 145 criteria and not found, and they are worth recording as checked.</p>
+        <p>No criterion asks an assessor to judge an attitude, a level of confidence or a state of mind. ZFF-GM-03 is the unit most at risk of it and its design note is doing real work. No criterion uses analyse, critically analyse, design or reformulate, and the only appearances of those words are in the level checks that rule them out and in the ZFF-PJ-03 aim at item 4 above. Scope stays personal in every criterion, subject to item 1.</p>
+        <p>A small cluster of criteria are bare acts and would sit below Level 3 if read alone: ZFF-AI-03 3.2, ZFF-GM-03 3.2 and ZFF-PJ-03 3.1 all simply require the learner to do the thing. Each is the load-bearing step that a later criterion in the same outcome reviews or evaluates, which is how a Level 3 outcome is properly built.</p>
+        <p><span class="st st-keep">No change</span> Recorded as checked.</p></div></div>
+
+    </div>
+    <p class="backtop"><a href="#units">Back to the unit index</a></p>
   </section>
 
   <section>

@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  // Hiding a section is opt-in, and only when the thing that reveals it again
+  // is present. A reader with a blocked or broken script must still get the
+  // content, so the hidden state never applies unless JS is running.
+  if ('IntersectionObserver' in window) { document.documentElement.className += ' js'; }
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- ─────────────────────────────────────────────────────────────────────────
-     FUTURE FLUENCY — FLAGSHIP DECK  ·  Zavmo / Iridescent Technologies
+     FUTURE FLUENCY FLAGSHIP DECK  ·  Zavmo / Iridescent Technologies
      Built from the canonical _template (navy + teal + DM Sans). Same token set,
      same chrome, same scroll-reveal. Adds bespoke animated SVG diagrams for the
      three-layer framework, the ten Fluencies, the evidence loop and the gap.
-     DRAFT collateral — for review before publication.
+     DRAFT collateral. For review before publication.
      ───────────────────────────────────────────────────────────────────────── -->
-<title>Certified isn't the same as capable · Zavmo</title>
+<title>Certified is not the same as capable · Zavmo</title>
 <meta name="description" content="Your people hold the certificates. But can they do the work the next two years will ask of them? Future Fluency measures capability, not completions.">
-<meta property="og:title" content="Certified isn't the same as capable">
-<meta property="og:description" content="Completions, quiz scores and self-assessments measure the wrong thing. Future Fluency proves capability with evidence — and keeps it current.">
+<meta property="og:title" content="Certified is not the same as capable">
+<meta property="og:description" content="Completions, quiz scores and self-assessments measure the wrong thing. Future Fluency proves capability with evidence. Then it keeps that proof current.">
 <style>
   :root{
     --navy-0:#060e17; --navy-1:#0b1a2a;
@@ -170,7 +177,7 @@
   .gap-fill{opacity:0;transition:opacity 1s ease .8s}
   .in .gap-fill{opacity:1}
 
-  /* grounded — three approved frameworks */
+  /* grounded: three approved frameworks */
   .converge{width:100%;max-width:640px;height:auto;margin:6px auto 4px;display:block}
   .fw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:8px}
   @media(max-width:760px){.fw-grid{grid-template-columns:1fr}}
@@ -242,7 +249,7 @@
   footer a{color:var(--teal)}
 
   /* scroll reveal */
-  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
   .reveal.in{opacity:1;transform:none}
 
   @media (max-width:640px){.feature{grid-template-columns:1fr}.layer{grid-template-columns:1fr;gap:8px}.nav-cta{display:none}}
@@ -263,7 +270,7 @@
     <g id="halo"></g>
     <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
   </svg>
-  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Certified vs Capable</span></div>
+  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Certified vs capable</span></div>
   <span class="nav-spacer"></span>
   <a class="nav-link" href="../">
     <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -278,8 +285,8 @@
   <header class="hero" style="grid-template-columns:1fr">
     <div>
       <div class="eyebrow">The problem</div>
-      <h1>Certified isn't the same as <em>capable</em>.</h1>
-      <p class="lede">Your people hold the certificates. Compliance is green. Completion rates look healthy. And none of it tells you the one thing that matters: can they actually do the work the next two years will ask of them?</p>
+      <h1>Certified is not the same as <em>capable</em>.</h1>
+      <p class="lede">Your people hold the certificates. Compliance is green. Completion rates look healthy. And none of it tells you the one thing that matters: can they do the work the next two years will ask of them?</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#gap">See the gap</a>
         <a class="btn btn-ghost" href="../">Back to all proposals</a>
@@ -289,12 +296,12 @@
 
   <!-- THE GAP -->
   <section id="gap">
-    <div class="section-label">The gap you can't see</div>
+    <div class="section-label">The gap you cannot see</div>
     <h2>A completion is an attendance record. A quiz score is a memory test.</h2>
     <div class="two-col" style="margin-top:12px">
       <div>
-        <p class="lead-p">A self-assessment is a feeling. None of them is evidence of capability — and all of them go stale the moment the role changes.</p>
-        <p>That gap — between what someone is certified for and what they can demonstrably do — is invisible to almost every learning system in the world, because they measure the wrong thing.</p>
+        <p class="lead-p">A self-assessment is a feeling. None of them is evidence of capability. And all of them go stale the moment the role changes.</p>
+        <p>The gap sits between what someone is certified for and what they can demonstrably do. It is invisible to almost every learning system in the world, because they measure the wrong thing.</p>
       </div>
       <div class="reveal" id="gapBlock">
         <svg class="gap-svg" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" aria-label="Widening gap between what a role demands and what a certificate proves">
@@ -312,18 +319,18 @@
           <text x="388" y="42" text-anchor="end" fill="var(--teal)" font-size="11.5" font-family="sans-serif" font-weight="600">what the role demands</text>
           <text x="388" y="170" text-anchor="end" fill="var(--amber)" font-size="11.5" font-family="sans-serif" font-weight="600">what the cert proves</text>
         </svg>
-        <p class="muted" style="font-size:12px;margin-top:6px">The distance between the two is invisible to almost every learning system — because they measure the wrong thing.</p>
+        <p class="muted" style="font-size:12px;margin-top:6px">The distance between the two is invisible to almost every learning system. They measure the wrong thing.</p>
       </div>
     </div>
   </section>
 
   <!-- WHY THE FRAMEWORKS CAN'T HELP -->
   <section id="frameworks">
-    <div class="section-label">Why the frameworks can't help</div>
-    <h2>Built for a world that's already moved on.</h2>
+    <div class="section-label">Why the frameworks cannot help</div>
+    <h2>Built for a world that has already moved on.</h2>
     <div class="grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:24px">
-      <div class="stat reveal"><div class="stat-num" style="font-size:26px">2030</div><div class="stat-label">The UK's national occupational classification was finalised <em>before ChatGPT existed</em>, on a ~10-year cycle — its next update isn't expected until around 2030. By design, a snapshot of a world that's already moved on.</div></div>
-      <div class="stat reveal"><div class="stat-num" style="font-size:26px">safety ≫ uncertainty</div><div class="stat-label">In our analysis of the UK's national occupational standards, safety and correct procedure are addressed <em>dozens of times more often</em> than working under uncertainty — near-silent on the skill your people most need.</div></div>
+      <div class="stat reveal"><div class="stat-num" style="font-size:26px">2030</div><div class="stat-label">The UK's national occupational classification was finalised <em>before ChatGPT existed</em>. It runs on a ~10-year cycle, so the next update is not expected until around 2030. By design, a snapshot of a world that has already moved on.</div></div>
+      <div class="stat reveal"><div class="stat-num" style="font-size:26px">safety ≫ uncertainty</div><div class="stat-label">In our analysis of the UK's national occupational standards, safety and correct procedure are addressed <em>dozens of times more often</em> than working under uncertainty. They are near-silent on the skill your people most need.</div></div>
     </div>
   </section>
 
@@ -333,11 +340,11 @@
     <h2>Most platforms stop at recall.</h2>
     <div class="two-col" style="margin-top:12px">
       <div>
-        <p class="lead-p">The classic model of training evaluation (Kirkpatrick) describes four levels. Most platforms stop at the first two — reactions and recall. Completion rates and quiz scores live there: the easiest things to measure, and the least worth knowing. Future Fluency is built to operate where it actually matters — at <em>capability</em>.</p>
+        <p class="lead-p">The classic model of training evaluation (Kirkpatrick) describes four levels. Most platforms stop at the first two. Reactions and recall. Completion rates and quiz scores live there: the easiest things to measure, and the least worth knowing. Future Fluency is built to operate where it matters, at <em>capability</em>.</p>
       </div>
       <div class="reveal">
         <div class="pyramid">
-          <div class="ktier peak" style="width:60%"><span class="kside">Future Fluency operates here →</span>Capability — demonstrated</div>
+          <div class="ktier peak" style="width:60%"><span class="kside">Future Fluency operates here →</span>Capability · demonstrated</div>
           <div class="ktier" style="width:74%">L3 · Behaviour change</div>
           <div class="ktier stop" style="width:88%"><span class="kside">most platforms stop here →</span>L2 · Learning / recall</div>
           <div class="ktier" style="width:100%">L1 · Reaction</div>
@@ -349,15 +356,15 @@
   <!-- CLOSE -->
   <section>
     <div class="callout reveal">
-      <h2 style="margin-bottom:10px">Close the gap the others can't see.</h2>
-      <p style="margin-bottom:22px;color:var(--ink-2);max-width:64ch">Future Fluency measures capability at the level a role actually needs, proves it with evidence rather than self-report, and keeps it current as the work evolves — so 'certified' and 'capable' finally become the same word.</p>
+      <h2 style="margin-bottom:10px">Close the gap the others cannot see.</h2>
+      <p style="margin-bottom:22px;color:var(--ink-2);max-width:64ch">Future Fluency measures capability at the level a role needs. It proves that with evidence rather than self-report. And it keeps the evidence current as the work evolves. So 'certified' and 'capable' finally become the same word.</p>
       <a class="btn btn-primary" href="https://zavmo.ai">Book a demo</a>
     </div>
   </section>
 
   <footer>
     Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
-    Future Fluency — Zavmo / Iridescent Technologies. Built from the shared <code style="color:var(--ink-2)">_template</code>. Palette: navy + teal + DM Sans.<br>
+    Future Fluency · Zavmo / Iridescent Technologies. Built from the shared <code style="color:var(--ink-2)">_template</code>. Palette: navy + teal + DM Sans.<br>
     <span style="color:var(--ink-3)">Draft collateral · for review before publication.</span>
   </footer>
 
@@ -367,7 +374,7 @@
 (function(){
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-  // logomark halo — 12 dots (matches the hub chrome exactly)
+  // logomark halo: 12 dots (matches the hub chrome exactly)
   var g=document.getElementById('halo'), n=12, cx=50, cy=50, r=38;
   for(var i=0;i<n;i++){
     var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
@@ -377,7 +384,7 @@
     g.appendChild(c);
   }
 
-  // hero orb — the atom mascot (nucleus + 3 orbiting electrons), matches the hub featured card
+  // hero orb: the atom mascot (nucleus + 3 orbiting electrons), matches the hub featured card
   var pd='M 34,120 a 86,32 0 1,0 172,0 a 86,32 0 1,0 -172,0', ang=[0,60,120], dur=['5s','4s','5.6s'];
   var s='<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="Future Fluency mascot" style="width:100%;height:100%">'
     +'<defs><radialGradient id="nuc" cx="42%" cy="38%" r="65%"><stop offset="0%" stop-color="#f2fffb"/><stop offset="35%" stop-color="#6ee9db"/><stop offset="75%" stop-color="#04d9c1"/><stop offset="100%" stop-color="#04d9c1"/></radialGradient></defs>';
@@ -390,7 +397,7 @@
   s+='<circle cx="120" cy="120" r="20" fill="url(#nuc)" style="filter:drop-shadow(0 0 16px rgba(63,228,188,.72))"/></svg>';
   var ho=document.getElementById('heroOrb'); if(ho) ho.innerHTML=s;
 
-  // ten Fluencies orbit — 6 primary on outer ring, 4 emerging on inner ring
+  // ten Fluencies orbit: 6 primary on outer ring, 4 emerging on inner ring
   var outer=[
     {t:'AI', w:'~17%'},{t:'Data', w:'~17%'},{t:'AI Governance', w:'~16%'},
     {t:'Automation', w:'~11%'},{t:'Sustainability', w:'~9%'},{t:'Frontier', w:'~5%'}
@@ -420,7 +427,7 @@
   }
 
   // three-layer stack edge-draw on reveal
-  // scroll reveal (adds .in) — also drives .layer::before and gap/pyramid animations
+  // scroll reveal (adds .in). Also drives .layer::before and gap/pyramid animations
   var revealEls = document.querySelectorAll('.reveal, .lreveal');
   function showAll(){ revealEls.forEach(function(e){ e.classList.add('in'); }); }
   if(reduce || !('IntersectionObserver' in window)){ showAll(); }
