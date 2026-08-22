@@ -4,27 +4,33 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- ─────────────────────────────────────────────────────────────────────────
-     ZAVMO PROPOSAL / WALKTHROUGH — CANONICAL STARTER TEMPLATE
+     ZAVMO PROPOSAL / WALKTHROUGH · CANONICAL STARTER TEMPLATE
      Copy this whole folder, rename it (e.g. how-zavmo-is-built/), edit the
      content, then add a matching card to the root index.html and push to main.
 
-     Design system: navy + teal + DM Sans. This is the single source of truth —
-     it reconciles the hub (index.html) and the older decks onto ONE token set.
+     Design system: navy + teal + DM Sans. This is the single source of truth.
+     It reconciles the hub (index.html) and the older decks onto one token set.
      Do not introduce new colours or fonts; use the CSS variables in :root.
+
+     House voice: no em dashes, sentence case headings, British spelling, no
+     puffery. Say it plainly and stop. The placeholders below are written that
+     way, so keep them that way. Full guide: JULIETTE-VOICE.md in the
+     juliettedenny-site repo.
      ───────────────────────────────────────────────────────────────────────── -->
-<title>Deck title — Zavmo</title>
+<title>Deck title · Zavmo</title>
 <meta name="description" content="One-line description of this deck (also used on the hub card).">
-<meta property="og:title" content="Deck title — Zavmo">
+<meta property="og:title" content="Deck title · Zavmo">
 <meta property="og:description" content="One-line description of this deck.">
 
-<!-- DM Sans is declared in --font but intentionally NOT loaded as a webfont,
-     so pages render in the system sans-serif fallback — matching the current live
-     site (the hub declares DM Sans but never links it). To switch the whole suite to
-     real DM Sans later, add a Google Fonts <link> to every page, including the hub. -->
+<!-- DM Sans is declared in --font but not loaded as a webfont, and that is on
+     purpose. Pages render in the system sans-serif fallback. That matches the
+     current live site, where the hub declares DM Sans but never links it. To
+     switch the whole suite to real DM Sans later, add a Google Fonts <link> to
+     every page, including the hub. -->
 
 <style>
   :root{
-    /* ── canonical tokens (from the hub — the source of truth) ───────────── */
+    /* ── canonical tokens (from the hub, the source of truth) ───────────── */
     --navy-0:#060e17; --navy-1:#0b1a2a;
     --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
     --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
@@ -175,7 +181,7 @@
   <header class="hero">
     <div class="eyebrow">Section eyebrow</div>
     <h1>The deck's one-sentence promise goes <em>here</em>.</h1>
-    <p class="lede">A short standfirst that frames what this deck is and who it's for. Keep it to two lines — the buyer decides in seconds whether to keep scrolling.</p>
+    <p class="lede">A short standfirst that frames what this deck is and who it's for. Keep it to two lines. The buyer decides in seconds whether to keep scrolling.</p>
     <div class="hero-ctas">
       <a class="btn btn-primary" href="#start">Start reading</a>
       <a class="btn btn-ghost" href="../">Back to all proposals</a>
@@ -196,10 +202,10 @@
   <section>
     <div class="section-label">A section</div>
     <h2>A heading that states the point, not the topic.</h2>
-    <p>Body copy stays lean and specific. One idea per paragraph, evidence over adjectives. Link a live surface or a real number wherever you can — proof beats persuasion with L&amp;D buyers.</p>
+    <p>Body copy stays lean and specific. One idea per paragraph, evidence over adjectives. Link a live surface or a real number wherever you can. Proof beats persuasion with L&amp;D buyers.</p>
     <div class="quote reveal">
-      <p>A single memorable line — the sentence you want the buyer to repeat to their boss.</p>
-      <cite>— Attribution, if any</cite>
+      <p>The one line you want the buyer to repeat to their boss.</p>
+      <cite>Attribution, if any</cite>
     </div>
   </section>
 
@@ -243,7 +249,7 @@
 
 <script>
 (function(){
-  // Logomark halo — 12 dots (copied from the hub so chrome matches exactly)
+  // Logomark halo: 12 dots, copied from the hub so chrome matches exactly.
   var g=document.getElementById('halo'), n=12, cx=50, cy=50, r=38;
   for(var i=0;i<n;i++){
     var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
