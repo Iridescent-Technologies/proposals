@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>
+  // Hiding a section is opt-in, and only when the thing that reveals it again
+  // is present. A reader with a blocked or broken script must still get the
+  // content, so the hidden state never applies unless JS is running.
+  if ('IntersectionObserver' in window) { document.documentElement.className += ' js'; }
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zavmo — Making learning as unique as you are</title>
@@ -39,7 +46,7 @@ body{
   color:var(--cream-80); font-size:15px; line-height:1.8; -webkit-font-smoothing:antialiased;
 }
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.reveal{transition:none}}
 
