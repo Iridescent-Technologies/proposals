@@ -42,6 +42,11 @@
       "match": "^index\\.html$"
     },
     {
+      "dir": "learning-innovation-behaviour-change",
+      "tier": "hard",
+      "match": "^index\\.html$"
+    },
+    {
       "dir": "little-zav",
       "tier": "hard",
       "match": "^index\\.html$"
