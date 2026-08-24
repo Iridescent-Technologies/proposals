@@ -117,6 +117,133 @@ const MAX_EXCLAMATIONS = 3;      // she uses them, sparingly
 // JavaScript rather than prose and that is where the JSON-LD lives.
 const SCHEMA_VOCAB = /['"]@(type|context)['"]\s*:\s*['"][^'"]*['"]/g;
 
+// ---------------------------------------------------------------------------
+// SCRIPTS
+// ---------------------------------------------------------------------------
+//
+// A .js file is not a document, and the rest of this file assumes documents.
+// Pointing prose() at one would measure class names, log lines and selectors as
+// English. So scripts are not stripped down to prose. The prose is pulled OUT
+// of them.
+//
+// WHY THIS EXISTS. tracker.js writes a large share of the language Juliette
+// actually reads on her board: every empty state, every count, every briefing
+// sentence. None of it appears in any built page, because it is composed at
+// runtime, so checking dist/**/*.html proves nothing about it. Two em dashes
+// sat on that board while the site verified clean.
+//
+// WHAT COUNTS AS PROSE HERE. Only two things:
+//
+//   1. A string literal in a position that reaches a person.
+//   2. The STATIC parts of a template literal in one of those positions.
+//
+// Everything else is data. `text: label` is a variable and carries whatever the
+// board holds; the authored English is the bit around it. That distinction is
+// the whole design: in `${m.ref}: ${m.from} to ${m.to} — ` the interpolations
+// are data and ": ", " to " and " — " are the writing. That em dash is exactly
+// what used to be invisible.
+
+// Where a string becomes something a person reads. Property names rather than a
+// hardcoded `el(...)`, so this keeps working if the DOM helper is renamed.
+// \b matters: it stops `context:` matching `text:` and `subtitle:` matching
+// `title:`.
+const SCRIPT_SINKS = [
+  /\btext\s*:\s*/,                  // el(tag, { text: ... }), the main one
+  /\.textContent\s*=\s*/,
+  /\.innerHTML\s*=\s*/,
+  /\btitle\s*:\s*/,                 // hover titles on chips and buttons
+  /\bplaceholder\s*:\s*/,
+  /['"]aria-label['"]\s*:\s*/,
+  /\balt\s*:\s*/,
+  /\btoast\s*\(\s*/,                // the board's own notifications
+  /\bconfirm\s*\(\s*/,
+  // The same names as VARIABLES, because the DOM helper takes shorthand:
+  // `const title = ...` then `el('a', { href, title })`. There is no `title:`
+  // to match at the point the words are written. `(?![=>])` keeps `===` and
+  // `=>` out; the quote check below would reject them anyway, but being wrong
+  // for a cheaper reason is worth a character.
+  /\b(?:text|title|label|message|placeholder)\s*=\s*(?![=>])/,
+];
+
+/**
+ * Read one string literal starting at `src[i]`, which must be a quote.
+ *
+ * Returns the AUTHORED text and where the literal ends, or null if this was not
+ * a literal after all. For a template literal the interpolations are skipped,
+ * because they are data: each one becomes a single space so the static chunks
+ * either side stay separate words rather than being run together.
+ */
+function readLiteral(src, i) {
+  const quote = src[i];
+  let out = '';
+  let j = i + 1;
+  while (j < src.length) {
+    const c = src[j];
+    if (c === '\\') { j += 2; continue; }
+    if (c === quote) return { text: out, end: j + 1 };
+    if (quote === '`' && c === '$' && src[j + 1] === '{') {
+      // Step over the interpolation. Depth-tracked, because one can hold an
+      // object or another template literal, and a naive scan to the next `}`
+      // would end the literal early and spill code into the prose.
+      //
+      // Its nested literals are KEPT, not discarded. That looks wrong for a
+      // moment (an interpolation is data) and is not: authored English hides in
+      // there constantly, because a conditional is how a sentence gets its
+      // optional half. The real example this was written against:
+      //
+      //   `${pr.repo}#${pr.number}${live.stale ? ' (last known state)' : ''}` +
+      //   `${live.reason ? ` — ${live.reason}` : ''}`
+      //
+      // " (last known state)" is writing a person reads, and the em dash was
+      // inside a nested template inside a ternary inside an interpolation.
+      // Discarding nested literals would have kept it invisible.
+      let depth = 1;
+      j += 2;
+      while (j < src.length && depth > 0) {
+        const d = src[j];
+        if (d === '\\') { j += 2; continue; }
+        if (d === '"' || d === "'" || d === '`') {
+          const nested = readLiteral(src, j);
+          if (!nested) return null;
+          if (nested.text.trim()) out += ` ${nested.text} `;
+          j = nested.end;
+          continue;
+        }
+        if (d === '{') depth++;
+        else if (d === '}') depth--;
+        j++;
+      }
+      out += ' ';
+      continue;
+    }
+    // A quoted string cannot span a line. Hitting one means the opening quote
+    // was an apostrophe in a comment, not a literal, so this is not prose.
+    if (quote !== '`' && c === '\n') return null;
+    out += c;
+    j++;
+  }
+  return null;
+}
+
+/** Pull the human-readable strings out of a script, in source order. */
+function scriptProse(raw) {
+  const found = [];
+  for (const sink of SCRIPT_SINKS) {
+    const re = new RegExp(sink.source, 'g');
+    let m;
+    while ((m = re.exec(raw)) !== null) {
+      const start = m.index + m[0].length;
+      const c = raw[start];
+      if (c !== '"' && c !== "'" && c !== '`') continue;  // a variable, not prose
+      const lit = readLiteral(raw, start);
+      if (lit && lit.text.trim()) found.push([start, lit.text]);
+    }
+  }
+  return found.sort((a, b) => a[0] - b[0]).map(([, t]) => t).join('\n');
+}
+
+const isScript = (path) => /\.(m|c)?js$/i.test(path);
+
 /**
  * Strip frontmatter, code, markup and links so PROSE is measured, not markup.
  *
@@ -164,11 +291,15 @@ function sentences(text) {
 function checkFile(path, tier) {
   const raw = readFileSync(path, 'utf8');
   const isHtml = /\.(html?|astro)$/i.test(path);
+  // A script is inverted: prose is pulled OUT of it rather than markup being
+  // stripped off it. See SCRIPT_SINKS above for why.
+  const script = isScript(path);
+
   // Two readings of the same file. `body` keeps headings and list items, so a
   // banned character cannot hide in a bullet. `measurable` drops them, because
   // a fragment is not a sentence and must not be measured as one.
-  const body = prose(raw, isHtml, { dropFragments: false });
-  const measurable = prose(raw, isHtml);
+  const body = script ? scriptProse(raw) : prose(raw, isHtml, { dropFragments: false });
+  const measurable = script ? '' : prose(raw, isHtml);
   const errors = [];
   const warnings = [];
   let stats = null;
@@ -179,7 +310,11 @@ function checkFile(path, tier) {
     // The frontmatter is read raw because prose() strips it, and for an .astro
     // file that fence carries real page copy (BaseLayout builds every page's
     // <title> in there). It also carries JSON-LD, hence the vocabulary strip.
-    const frontmatter = (raw.match(/^---[\s\S]*?\n---\n/)?.[0] ?? '').replace(SCHEMA_VOCAB, ' ');
+    // A script has no frontmatter, and a `---` in one is a horizontal rule in a
+    // string, not a fence.
+    const frontmatter = script
+      ? ''
+      : (raw.match(/^---[\s\S]*?\n---\n/)?.[0] ?? '').replace(SCHEMA_VOCAB, ' ');
     const fmHits = [...frontmatter.matchAll(re)];
     const all = [...hits, ...fmHits];
     if (all.length) {
@@ -196,7 +331,10 @@ function checkFile(path, tier) {
   // Everything below is the "speaking as herself" tier. Applying it to a
   // specification would fail correct writing, which is the whole reason the
   // tiers exist. See the note at the top of this file.
-  if (tier === 'juliette') {
+  // Scripts are bans-only, whatever the target says. UI microcopy is fragments
+  // by nature ("Save", "Search", "13 more in Next up") and measuring it for
+  // sentence length would be measuring the wrong thing entirely.
+  if (tier === 'juliette' && !script) {
     const sents = sentences(measurable);
     if (sents.length) {
       const lengths = sents.map((s) => s.split(/\s+/).filter(Boolean).length);
@@ -266,6 +404,68 @@ const files = jobs.filter((j) => !drafts.includes(j));
 if (!files.length) {
   console.error('voice-check: no files found. Did the content move, or is voice-targets.json wrong?');
   process.exit(1);
+}
+
+// ---------------------------------------------------------------------------
+// SELF-TEST
+// ---------------------------------------------------------------------------
+//
+// `node scripts/voice-check.mjs --self-test`
+//
+// The extractor is the one part of this file whose behaviour is not obvious
+// from reading it, and the repo has no test runner, so it carries its own. The
+// cases are not invented: 1 and 3 are the two em dashes that were live on the
+// board in tracker.js, and 3 is the shape that made one of them invisible for
+// months. Case 4 is the line above it in the same file, which must stay quiet.
+const SELF_TESTS = [
+  {
+    name: 'a literal in a plain sink is prose',
+    src: `toast('Saved — nothing else to do.');`,
+    expect: 1,
+  },
+  {
+    name: 'the static parts of a template are prose, the interpolations are not',
+    src: "el('span', { text: `${m.ref}: ${m.from} to ${m.to} — ` })",
+    expect: 1,
+  },
+  {
+    name: 'a nested literal inside an interpolation is still prose',
+    src: "const title = `${pr.n}${live.reason ? ` — ${live.reason}` : ''}`;",
+    expect: 1,
+  },
+  {
+    name: 'a code comment is not prose',
+    src: '// "14 Aug 06:17" — for anything that runs more than once a day.',
+    expect: 0,
+  },
+  {
+    name: 'a variable in a sink carries data, not writing',
+    src: "el('span', { text: someLabel })",
+    expect: 0,
+  },
+  {
+    name: 'a non-sink string is left alone',
+    src: "const cls = 'tk-btn — modifier';",
+    expect: 0,
+  },
+];
+
+if (process.argv.includes('--self-test')) {
+  const emDash = /—/g;
+  let bad = 0;
+  console.log('Voice check self-test\n');
+  for (const t of SELF_TESTS) {
+    const got = (scriptProse(t.src).match(emDash) ?? []).length;
+    const ok = got === t.expect;
+    if (!ok) bad++;
+    console.log(`  ${ok ? 'pass' : 'FAIL'}  ${t.name}  (expected ${t.expect}, got ${got})`);
+  }
+  if (bad) {
+    console.error(`\n${bad} self-test failure(s). The extractor no longer does what it says.`);
+    process.exit(1);
+  }
+  console.log('\nAll self-tests pass.');
+  process.exit(0);
 }
 
 let failed = 0;
