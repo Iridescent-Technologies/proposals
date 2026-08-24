@@ -165,6 +165,30 @@ const SCRIPT_SINKS = [
   /\b(?:text|title|label|message|placeholder)\s*=\s*(?![=>])/,
 ];
 
+// The same names again, as PARAMETERS. A script builds its own small helpers on
+// top of the DOM helper, and hands them the writing positionally:
+//
+//   function field(label, control, hint) { ... }
+//   field('Complete by', date, 'Leave empty to clear the deadline.')
+//
+// By the time those words reach a `text:` they are variables, so the sinks
+// above see nothing. Naming the helpers here would work and would rot: it is
+// the same hardcoding the property-name rule exists to avoid. So the helpers
+// are DERIVED from the file instead. A parameter named like a sink makes that
+// argument position a sink, wherever the helper is called.
+//
+// It reads the call site the way a person does. In
+//
+//   line('tk-item__next', 'Next', item.nextStep, 'Say what happens next', save)
+//
+// `label` and `placeholder` are positions 1 and 3, so those two are writing.
+// Position 0 is a class name and position 2 is data, and neither is a sink, so
+// neither is read as English.
+//
+// `name` is deliberately absent. `icon(name)` is called with 'trash' and
+// 'folder', which are keys into an icon table, not words anyone reads.
+const SINK_PARAM = /^(?:text|title|label|message|placeholder|hint|lede|alt|caption|heading)$/;
+
 /**
  * Read one string literal starting at `src[i]`, which must be a quote.
  *
@@ -225,21 +249,161 @@ function readLiteral(src, i) {
   return null;
 }
 
+const isQuote = (c) => c === '"' || c === "'" || c === '`';
+
+/**
+ * Harvest the literals from a CONDITIONAL sitting in a sink, and say where the
+ * value ends.
+ *
+ *   text: filtered ? 'Nothing matches that filter.' : bare
+ *
+ * A sink whose value is not a quote used to be dropped whole, on the grounds
+ * that it must be a variable. Usually it is. But a ternary is how a line gets
+ * its other wording, and the branches are as written as any plain literal. Six
+ * empty states, the signed-out message and both halves of every toggle were
+ * being skipped for this reason alone.
+ *
+ * The rule is the one already used for interpolations, one level up: the TEST
+ * is data and the BRANCHES are writing. So nothing is collected until a `?` has
+ * been passed, and a literal being COMPARED against is skipped even after that.
+ * Both halves are needed, and the second one is the one that is easy to miss.
+ * Chains are how this file lists its filters:
+ *
+ *   : f.type === 'waitingMe'  ? 'Yours to unblock'
+ *   : f.type === 'waitingOther' ? 'With someone else'
+ *
+ * Only the first test sits before any `?`. Every test after it is inside the
+ * previous alternative, so passing a `?` once is not enough to tell a sentinel
+ * from a sentence. Reading what precedes the quote is. It is also what keeps
+ *
+ *   err.message === 'unauthorised' ? 'Sign in to see the tracker.' : ...
+ *
+ * from reporting the sentinel as English while still reading the sentence.
+ *
+ * Depth 0 only, for the same reason: an argument to some other call is that
+ * call's business, and `fmt('short')` is not a sentence.
+ */
+const COMPARED = /(?:[=!]==?|[<>]=?)\s*$/;
+
+function readConditional(raw, i) {
+  const out = [];
+  let depth = 0;
+  let armed = false;               // have we passed the `?` yet
+  let j = i;
+  // A value is bounded, and an unterminated scan must not run to end of file
+  // harvesting the rest of the program.
+  const limit = Math.min(raw.length, i + 2000);
+  while (j < limit) {
+    const c = raw[j];
+    if (isQuote(c)) {
+      const lit = readLiteral(raw, j);
+      if (!lit) return out;        // an apostrophe in a comment, not a literal
+      const test = COMPARED.test(raw.slice(Math.max(0, j - 4), j));
+      if (armed && !test && depth === 0 && lit.text.trim()) out.push([j, lit.text]);
+      j = lit.end;
+      continue;
+    }
+    if (c === '(' || c === '[' || c === '{') { depth++; j++; continue; }
+    if (c === ')' || c === ']' || c === '}') {
+      if (depth === 0) return out; // the value ended with its container
+      depth--; j++; continue;
+    }
+    if (depth === 0) {
+      if (c === ',' || c === ';') return out;
+      if (c === '?' && raw[j + 1] !== '.') armed = true;
+    }
+    j++;
+  }
+  return out;
+}
+
+/**
+ * Which argument positions of which local helpers carry writing.
+ *
+ * Read off the declarations in the file itself, so renaming a helper cannot
+ * quietly switch the check off, and adding one turns it on with no edit here.
+ */
+function sinkParams(raw) {
+  const helpers = new Map();
+  const decl = /(?:function\s+([A-Za-z_$][\w$]*)\s*\(([^)]*)\)|(?:const|let|var)\s+([A-Za-z_$][\w$]*)\s*=\s*(?:async\s+)?\(([^)]*)\)\s*=>)/g;
+  let m;
+  while ((m = decl.exec(raw)) !== null) {
+    const name = m[1] ?? m[3];
+    const params = (m[2] ?? m[4]).split(',');
+    const slots = new Set();
+    params.forEach((p, idx) => {
+      const bare = p.trim().replace(/[=:].*$/s, '').trim();
+      if (SINK_PARAM.test(bare)) slots.add(idx);
+    });
+    if (slots.size) helpers.set(name, slots);
+  }
+  return helpers;
+}
+
+/** The literals a helper is handed in its sink positions. */
+function readCallArgs(raw, i, slots) {
+  const out = [];
+  let depth = 0;
+  let arg = 0;
+  let j = i;
+  const limit = Math.min(raw.length, i + 4000);
+  while (j < limit) {
+    const c = raw[j];
+    if (isQuote(c)) {
+      const lit = readLiteral(raw, j);
+      if (!lit) return out;
+      // Only the first thing in the argument counts, so a literal buried in an
+      // expression is left to whatever rule owns it.
+      if (depth === 0 && slots.has(arg) && lit.text.trim()) out.push([j, lit.text]);
+      j = lit.end;
+      // Anything after it in the same argument is not this position's writing.
+      slots = new Set([...slots].filter((s) => s !== arg));
+      continue;
+    }
+    if (c === '(' || c === '[' || c === '{') { depth++; j++; continue; }
+    if (c === ')' || c === ']' || c === '}') {
+      if (depth === 0) return out; // end of the argument list
+      depth--; j++; continue;
+    }
+    if (depth === 0 && c === ',') arg++;
+    j++;
+  }
+  return out;
+}
+
 /** Pull the human-readable strings out of a script, in source order. */
 function scriptProse(raw) {
-  const found = [];
+  // Keyed by position, because one string can sit in two sinks at once and an
+  // em dash counted twice reads as two em dashes.
+  const found = new Map();
+  const keep = ([at, text]) => found.set(at, text);
+
   for (const sink of SCRIPT_SINKS) {
     const re = new RegExp(sink.source, 'g');
     let m;
     while ((m = re.exec(raw)) !== null) {
       const start = m.index + m[0].length;
-      const c = raw[start];
-      if (c !== '"' && c !== "'" && c !== '`') continue;  // a variable, not prose
-      const lit = readLiteral(raw, start);
-      if (lit && lit.text.trim()) found.push([start, lit.text]);
+      if (isQuote(raw[start])) {
+        const lit = readLiteral(raw, start);
+        if (lit && lit.text.trim()) keep([start, lit.text]);
+      } else {
+        readConditional(raw, start).forEach(keep);
+      }
     }
   }
-  return found.sort((a, b) => a[0] - b[0]).map(([, t]) => t).join('\n');
+
+  const helpers = sinkParams(raw);
+  if (helpers.size) {
+    const names = [...helpers.keys()].map((n) => n.replace(/[$]/g, '\\$&')).join('|');
+    // `(?<![.\w$])` so `obj.field(...)` is somebody else's method, not this one.
+    const call = new RegExp(`(?<![.\\w$])(${names})\\s*\\(`, 'g');
+    let m;
+    while ((m = call.exec(raw)) !== null) {
+      readCallArgs(raw, m.index + m[0].length, new Set(helpers.get(m[1]))).forEach(keep);
+    }
+  }
+
+  return [...found.entries()].sort((a, b) => a[0] - b[0]).map(([, t]) => t).join('\n');
 }
 
 const isScript = (path) => /\.(m|c)?js$/i.test(path);
@@ -417,6 +581,10 @@ if (!files.length) {
 // cases are not invented: 1 and 3 are the two em dashes that were live on the
 // board in tracker.js, and 3 is the shape that made one of them invisible for
 // months. Case 4 is the line above it in the same file, which must stay quiet.
+//
+// Every case is a pair. Each thing the extractor must READ is followed by the
+// neighbouring thing it must IGNORE, because on its own "it found the string"
+// only proves the extractor is wide, and wide is the failure that matters here.
 const SELF_TESTS = [
   {
     name: 'a literal in a plain sink is prose',
@@ -446,6 +614,32 @@ const SELF_TESTS = [
   {
     name: 'a non-sink string is left alone',
     src: "const cls = 'tk-btn — modifier';",
+    expect: 0,
+  },
+  // 7 to 10 cover the two positions the first version could not see. The
+  // shapes are lifted from tracker.js unchanged; only the em dash is planted,
+  // because that is the character the harness counts.
+  {
+    name: 'a branch of a ternary in a sink is prose',
+    src: "el('p', { text: filtered ? 'Nothing matches that filter — try another.' : bare })",
+    expect: 1,
+  },
+  {
+    name: 'what a ternary TESTS is data, however long the chain',
+    // activeFilterBar(), trimmed. The sentinel sits AFTER a `?`, which is the
+    // whole point: by then "have we passed a question mark" answers yes and
+    // only reading back to the `===` still says data.
+    src: "const label = !f ? null\n  : f.type === 'waiting—Me' ? 'Yours to unblock'\n  : f.type === 'waitingOther' ? 'With someone else'\n  : null;",
+    expect: 0,
+  },
+  {
+    name: 'a parameter named like a sink makes that argument prose',
+    src: "function field(label, control, hint) {}\nfield('Complete by', date, 'Leave empty — it clears.');",
+    expect: 1,
+  },
+  {
+    name: 'the argument positions either side of it are not',
+    src: "const line = (cls, label, value, placeholder) => {};\nline('tk-item—next', 'Next', item.next—Step, 'Say what happens next');",
     expect: 0,
   },
 ];
