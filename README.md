@@ -18,6 +18,7 @@ Each one is a self-contained folder served at
 | **The Learner Journey** | Click-through walkthrough of the live learner experience | [Open](https://iridescent-technologies.github.io/proposals/learner-journey/) |
 | **The Admin Console** | Click-through walkthrough of the live admin console and its reporting | [Open](https://iridescent-technologies.github.io/proposals/admin-journey/) |
 | **Making learning as unique as you are** | The personalisation story. 2 Sigma, xAPI, and three-persona adaptation | [Open](https://iridescent-technologies.github.io/proposals/making-learning-unique/) |
+| **A class of one** | Eleven ways a lesson adapts to the learner, shown on the live product, with expert tester feedback | [Open](https://iridescent-technologies.github.io/proposals/a-class-of-one/) |
 | **Why Zavmo** | The learning efficiency flywheel. the business case | [Open](https://iridescent-technologies.github.io/proposals/why-zavmo/) |
 | **Zavmo. Where Neuroscience Meets Learning** | Overview of the Zavmo platform and its approach | [Open](https://iridescent-technologies.github.io/proposals/zavmo-overview/) |
 | **How Zavmo Is Built** | Architecture, model and trust story. for technical, security and L&D buyers | [Open](https://iridescent-technologies.github.io/proposals/how-zavmo-is-built/) |
