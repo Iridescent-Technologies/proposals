@@ -110,28 +110,48 @@ const MAX_EXCLAMATIONS = 3;      // she uses them, sparingly
 
 // ---------------------------------------------------------------------------
 
+// schema.org vocabulary is a fixed identifier, not a spelling choice.
+// '@type': 'Organization' is spelled that way by Google, and "correcting" it to
+// Organisation breaks the structured data. Applied to BOTH readings below: the
+// prose body AND the raw frontmatter, because an .astro file's `---` fence is
+// JavaScript rather than prose and that is where the JSON-LD lives.
+const SCHEMA_VOCAB = /['"]@(type|context)['"]\s*:\s*['"][^'"]*['"]/g;
+
 /**
  * Strip frontmatter, code, markup and links so PROSE is measured, not markup.
  *
  * Script and style bodies go first, and whole. Without that a page's own
  * JavaScript gets measured as English, and one minified line becomes a
  * four-hundred-word sentence failing a rule it was never subject to.
+ *
+ * `dropFragments` removes headings and list items. They ARE fragments by
+ * design, so measuring them for sentence length would fail correct writing.
+ *
+ * But that exemption used to apply to the mechanical bans too, and it should
+ * never have. An em dash inside a bullet is exactly as banned as one in a
+ * paragraph, and it was invisible: week-one.mdx reported clean on the strictest
+ * tier while carrying two, both inside list items. So the bans now read a body
+ * that KEEPS the fragments, and only the length rules read one without them.
  */
-function prose(raw, isHtml) {
+function prose(raw, isHtml, { dropFragments = true } = {}) {
   let s = raw;
   if (isHtml) {
     s = s.replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, ' ');
   }
-  return s
+  s = s
     .replace(/^---[\s\S]*?\n---\n/, '')        // frontmatter
     .replace(/```[\s\S]*?```/g, '')            // fenced code
     .replace(/<[^>]+>/g, ' ')                  // html/jsx tags incl. figures
     .replace(/&[a-z]+;|&#\d+;/gi, ' ')         // entities, once the tags are gone
     .replace(/!\[[^\]]*\]\([^)]*\)/g, ' ')     // images
     .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')   // links, keep the text
-    .replace(/^#{1,6}\s.*$/gm, '')             // headings: fragments by design
-    .replace(/^[-*]\s.*$/gm, '')               // list items: also fragments
-    .replace(/[*_`>]/g, '');
+    .replace(SCHEMA_VOCAB, ' ');
+  if (dropFragments) {
+    s = s
+      .replace(/^#{1,6}\s.*$/gm, '')           // headings: fragments by design
+      .replace(/^[-*]\s.*$/gm, '');            // list items: also fragments
+  }
+  return s.replace(/[*_`>]/g, '');
 }
 
 function sentences(text) {
@@ -144,7 +164,11 @@ function sentences(text) {
 function checkFile(path, tier) {
   const raw = readFileSync(path, 'utf8');
   const isHtml = /\.(html?|astro)$/i.test(path);
-  const body = prose(raw, isHtml);
+  // Two readings of the same file. `body` keeps headings and list items, so a
+  // banned character cannot hide in a bullet. `measurable` drops them, because
+  // a fragment is not a sentence and must not be measured as one.
+  const body = prose(raw, isHtml, { dropFragments: false });
+  const measurable = prose(raw, isHtml);
   const errors = [];
   const warnings = [];
   let stats = null;
@@ -152,7 +176,11 @@ function checkFile(path, tier) {
   for (const { re, msg } of BANNED) {
     const hits = [...body.matchAll(re)];
     // The frontmatter is checked separately for bans that matter there too.
-    const fmHits = [...(raw.match(/^---[\s\S]*?\n---\n/)?.[0] ?? '').matchAll(re)];
+    // The frontmatter is read raw because prose() strips it, and for an .astro
+    // file that fence carries real page copy (BaseLayout builds every page's
+    // <title> in there). It also carries JSON-LD, hence the vocabulary strip.
+    const frontmatter = (raw.match(/^---[\s\S]*?\n---\n/)?.[0] ?? '').replace(SCHEMA_VOCAB, ' ');
+    const fmHits = [...frontmatter.matchAll(re)];
     const all = [...hits, ...fmHits];
     if (all.length) {
       const sample = all.slice(0, 3).map((m) => `"${m[0]}"`).join(', ');
@@ -169,7 +197,7 @@ function checkFile(path, tier) {
   // specification would fail correct writing, which is the whole reason the
   // tiers exist. See the note at the top of this file.
   if (tier === 'juliette') {
-    const sents = sentences(body);
+    const sents = sentences(measurable);
     if (sents.length) {
       const lengths = sents.map((s) => s.split(/\s+/).filter(Boolean).length);
       const avg = lengths.reduce((a, b) => a + b, 0) / lengths.length;
