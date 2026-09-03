@@ -6,12 +6,10 @@ Two specifications, written in full, unit by unit, with every learning outcome a
 assessment criterion. Both are **draft for review** and neither is submitted.
 Never describe either as approved or accredited.
 
-- **Level 3** — an Award of two units and a Diploma of six. 390 hours, 39 credits,
-  145 assessment criteria.
+- **Level 3** — an Award of two units and a Diploma of six. 390 hours, 39 credits.
   <https://iridescent-technologies.github.io/proposals/qualifications-level-3/>
   Units: ZFF-AI-03, ZFF-GM-03, ZFF-DA-03, ZFF-GV-03, ZFF-AU-03, ZFF-PJ-03
-- **Level 5 Diploma** — five mandatory units. 410 hours, 41 credits, 136
-  assessment criteria.
+- **Level 5 Diploma** — five mandatory units. 410 hours, 41 credits.
   <https://iridescent-technologies.github.io/proposals/qualifications-level-5/>
   Units: ZFF-GM-05, ZFF-EI-05, ZFF-AU-05, ZFF-DA-05, ZFF-PJ-05
 
@@ -22,23 +20,34 @@ Level 5 they lead a department through the same shift. Their own job is the
 evidence, not a case study about somebody else's. The level rises through the
 complexity of the problem, not the difficulty of the tool.
 
-### The graph does not use these codes
+### The graph holds TWO parallel sets, and only one of them is connected
 
-Neo4j `FutureFluencyUnit` nodes carry an older, parallel set. Measured
-3 September 2026:
+Probed whole-graph on 3 September 2026. 40 `FutureFluencyUnit` nodes, in two
+families, and the difference decides what you may claim.
 
-- `ZFF-DF-05` "Data Fluency" is the specification's **`ZFF-DA-05`** "Using Data to
-  Direct a Department's Priorities" (6 credits in the graph, 7 in the spec).
-- `ZFF-AU-06` "Automation Fluency" is the specification's **`ZFF-AU-05`**
-  "Planning Automation Across a Department".
-- Only `ZFF-GM-05` and `ZFF-EI-05` match by reference.
-- `ZFF-PJ-05`, the applied project and the largest unit at 14 credits, is **not in
-  the graph at all**, and neither is anything at Level 3.
-- Nine graph units are in no qualification: AI, Sustainability, Systems, Frontier,
-  Change, AI Governance and others.
+**The curriculum.** The 11 units above, `qualification` = "Zavmo Future Fluency,
+Level 3" or "... Level 5". **Nine of the eleven have ZERO `BUILDS_FLUENCY` edges.**
+Only `ZFF-GM-05` (697 edges) and `ZFF-EI-05` (1,023) reach any role at all.
+`ZFF-PJ-05`, the largest unit at 14 credits, has none. No Level 3 unit has any.
 
-So a `BUILDS_FLUENCY` edge is a **demand signal**, telling you which fluency a role
-needs. It is not a thing anybody can buy. Never quote a graph unit as a
-purchasable unit, and never quote a credit value off one.
+**The taxonomy.** `qualification` = "Zavmo Future Fluency", families like Data
+Fluency, AI Fluency, AI Governance Fluency, at levels 2 to 7. These carry **all
+93,798 edges** and reach 56,800 of 59,277 roles.
 
-**If the graph and the specification disagree, the specification pages win.**
+So there are two very different coverage numbers, and they must never be swapped:
+
+| | Roles covered |
+|---|---|
+| Any unit in the taxonomy | 82% to 99% by sector |
+| A unit that is IN one of the two qualifications | **1% to 8% by sector** |
+
+**They are not the same units under drifted codes.** `ZFF-DF-05` and `ZFF-DA-05`
+are two nodes with different aims: DF-05 is "interrogate data and judge its
+quality", DA-05 is "use the data their department already produces to decide where
+its effort should go". Same domain, different scope. Same for `ZFF-AU-06` against
+`ZFF-AU-05`.
+
+**How to apply.** A `BUILDS_FLUENCY` edge is a demand signal. Before calling it a
+unit somebody can enrol on, check the `unit_uid` is one of the eleven above. Never
+quote the taxonomy coverage figure as coverage of the qualification. If the graph
+and the specification disagree, the specification wins.
