@@ -1,0 +1,25 @@
+# These are proposal and demo pages. They are written to be SENT to a named
+# person, not found by a stranger.
+#
+# WHY THIS MATTERS MORE THAN IT LOOKS. Several of them carry titles like
+# "Level 5 Diploma in Future Fluency · specification" and name Gateway
+# Qualifications beside a draft that has not been submitted. The body copy
+# hedges properly. A search result does not show the body copy, it shows the
+# title, and Zavmo is mid-application with three awarding bodies who can search.
+#
+# Note what this file deliberately does NOT say: "Disallow: /".
+#
+# Blocking the crawl and asking to be de-indexed are different things, and doing
+# the first prevents the second. A URL blocked here is never fetched, so the
+# noindex meta tag on every page is never read, and anything already indexed
+# stays there with no way to remove it. Google's own guidance is to allow the
+# crawl so the noindex can be seen.
+#
+# So: crawling is allowed, indexing is refused by the meta tag on each page. If
+# you are tempted to tighten this to "Disallow: /", that is the trap. Don't.
+#
+# None of this stops anyone opening a link she sends them. It only stops the
+# pages turning up in a search nobody intended.
+
+User-agent: *
+Allow: /
