@@ -271,6 +271,7 @@
     tbody td{border-top:1px solid #ccc}
     tbody tr:nth-child(even){background:#fafafa!important}
     tbody tr:hover{background:none!important}
+    tfoot td{color:#000!important;font-weight:700;border-top:1px solid #666}
     table.crit td.cref{color:#000!important;font-weight:700}
     .callout,.stat{background:#f7f7f7!important;border:1px solid #999;border-radius:0}
     .tally{background:#fff!important;border:1px solid #000;border-radius:0;color:#000!important}
@@ -325,7 +326,7 @@
     <h1>Two Level 3 qualifications in <em>Future Fluency</em>, specified in full.</h1>
     <p class="lede">A Level 3 Award of two units and a Level 3 Diploma of six. Every learning outcome and every assessment criterion is on this page, in full, with the level check that holds each unit against the Ofqual Level 3 descriptor.</p>
     <div class="status-line">
-      <span class="sbit"><b>For</b>Gateway Qualifications</span>
+      <span class="sbit"><b>For</b>Awarding organisation review</span>
       <span class="sbit"><b>From</b>Zavmo (Growth Engineering Ltd)</span>
       <span class="sbit"><b>Status</b>First draft for review. Not submitted</span>
       <span class="sbit"><b>Date</b>21 August 2026</span>
@@ -449,7 +450,7 @@
       <div class="hrow"><div class="hnum">1</div><div class="hbody">
         <p><strong>Roughly four statements in five carry no canonical event identifier.</strong> In the measured window only 19% of rows carried one. The rest are real activity recorded through the front-end path without a registry identifier, so they cannot be attributed to a named event. They are still statements, and they still carry a learner, a verb, an object and a time. They are simply not countable by event.</p></div></div>
       <div class="hrow"><div class="hnum">2</div><div class="hbody">
-        <p><strong>The two extensions are populated from Zavmo's own identifiers, not from Gateway's.</strong> Today the outcome and criteria slots are filled from the learner's own outcome record inside the platform. They do not yet carry references in the form used on this page, such as ZFF-AI-03 3.3. Mapping these units into those slots is work to be done before first registration.</p>
+        <p><strong>The two extensions are populated from Zavmo's own identifiers, not from the awarding organisation's.</strong> Today the outcome and criteria slots are filled from the learner's own outcome record inside the platform. They do not yet carry references in the form used on this page, such as ZFF-AI-03 3.3. Mapping these units into those slots is work to be done before first registration.</p>
         <p>Until it is done, the tie between a statement and a criterion on this page is a mapping we intend rather than one the data already carries. The mechanism is built and proven. The mapping to these six units is not.</p></div></div>
       <div class="hrow"><div class="hnum">3</div><div class="hbody">
         <p><strong>A status is a measurement with a date on it.</strong> Eight events that were wired in July are not any more, because the feature that emitted them was deliberately removed. Two of those had already fired, so they stay in the observed snapshot permanently. A further six event identifiers have fired in production that are not in the registry at all. No status should be read without its date, and none of those retired or unregistered events is referenced in the unit sections below.</p></div></div>
@@ -1021,7 +1022,7 @@
     <h2>Assessment and quality assurance</h2>
     <p>The same model applies to every unit.</p>
     <p><strong>Portfolio of evidence from real work.</strong> Assessment is by portfolio drawn from work the learner is already responsible for, gathered over the period of the unit. There is no examination.</p>
-    <p><strong>The AI teaches. A human assessor decides.</strong> Zavmo's AI tutors deliver the learning and prompt the learner to produce and submit evidence. <strong>The AI does not make the assessment decision.</strong> Every decision on every criterion is made by a named, occupationally competent, appropriately qualified human assessor, internally verified by a qualified IQA against a sampling plan, and sampled by Gateway's External Quality Assurer.</p>
+    <p><strong>The AI teaches. A human assessor decides.</strong> Zavmo's AI tutors deliver the learning and prompt the learner to produce and submit evidence. <strong>The AI does not make the assessment decision.</strong> Every decision on every criterion is made by a named, occupationally competent, appropriately qualified human assessor, internally verified by a qualified IQA against a sampling plan, and sampled by the awarding organisation's External Quality Assurer.</p>
     <p><strong>How evidence is captured.</strong> Learner activity in the platform is captured as xAPI statements and assembled into the portfolio: the tasks they selected, the instruction sets they wrote and rewrote, the outputs the tool returned, the checks they ran, the amendments they made and the reasons they gave. This gives the assessor a time-stamped record of the learner's process rather than only a finished artefact. That is unusually strong evidence for criteria such as ZFF-AI-03 3.3 and 4.6. <strong>The xAPI record is evidence presented to the assessor. It is not an assessment decision.</strong></p>
     <p><strong>Professional discussion is mandatory.</strong> At least one recorded professional discussion per unit, conducted by the qualified assessor. This is the primary control for authenticating the learner at distance and confirming the portfolio is their own work.</p>
     <p><strong>Declared AI use.</strong> Learners are expected to use AI in producing evidence, because that is the subject of the qualification. All AI use in evidence must be declared. The assessment decision rests on the learner's judgement about the AI output, not on the polish of the output itself, and that judgement is confirmed in live discussion.</p>
@@ -1036,7 +1037,7 @@
     <div class="honest">
       <div class="hrow"><div class="hnum">1</div><p><strong>Nine of the eleven units are drafted but not reviewed by an assessor.</strong> They are written to the descriptors and internally checked. Nobody with assessment experience has read them. This is the largest single gap.</p></div>
       <div class="hrow"><div class="hnum">2</div><p><strong>TQT is allocated, not measured.</strong> The unit hours are judgements that produce a defensible total. If any unit's hours are revised down, both Diplomas need re-checking against the 370 threshold. The Level 3 Diploma has only 20 hours of headroom.</p></div>
-      <div class="hrow"><div class="hnum">3</div><p><strong>Whether AI-led tutoring counts as guided learning is unresolved.</strong> We have shown GLH as indicative throughout. The taught and applied split in section 2.4 depends on the answer and we would like Gateway's view.</p></div>
+      <div class="hrow"><div class="hnum">3</div><p><strong>Whether AI-led tutoring counts as guided learning is unresolved.</strong> We have shown GLH as indicative throughout. The taught and applied split in section 2.4 depends on the answer and we would like the awarding organisation's view.</p></div>
       <div class="hrow"><div class="hnum">4</div><p><strong>Whether knowledge criteria can be evidenced through recorded tutoring dialogue rather than written tests is unresolved.</strong> We have assumed they can, which is favourable to our model, so it should not be taken on our say-so. If written assessment is required for knowledge outcomes, section 2.4 needs revisiting.</p></div>
       <div class="hrow"><div class="hnum">5</div><p><strong>The assessor layer does not exist yet.</strong> We do not currently employ occupationally competent assessors or a qualified IQA. The model in section 6 describes what we will put in place, not what is running today. We would like to talk about the sequence.</p></div>
       <div class="hrow"><div class="hnum">6</div><p><strong>The two Diplomas have not been checked against qualifications already on the register.</strong> ZFF-DA-03 is the unit most likely to overlap something existing.</p></div>
