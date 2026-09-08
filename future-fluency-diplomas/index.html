@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  // Hiding a section is opt-in, and only when the thing that reveals it again
+  // is present. A reader with a blocked or broken script must still get the
+  // content, so the hidden state never applies unless JS is running.
+  if ('IntersectionObserver' in window) { document.documentElement.className += ' js'; }
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Future Fluency Diplomas &middot; Zavmo</title>
+<meta name="description" content="A learner briefing on the Level 3 and Level 5 Diplomas in Future Fluency: why it is graded, what each unit asks you to produce, and what the hours really are.">
+<meta property="og:title" content="The Future Fluency Diplomas &middot; Zavmo">
+<meta property="og:description" content="Why it is graded, what each unit asks you to produce, and what the hours really are. Level 3 and Level 5.">
+
+<style>
+  :root{
+    /* ── canonical tokens (from the hub, the source of truth) ───────────── */
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
+    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
+    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
+    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+    /* ── deck-oriented aliases (map cleanly to the tokens above) ─────────── */
+    --bg-primary:var(--navy-0); --bg-secondary:var(--navy-1); --bg-card:var(--surface);
+    --teal-subtle:rgba(47,207,168,.14); --teal-border:var(--border-2);
+    --text-primary:var(--ink); --text-secondary:var(--ink-2); --text-tertiary:var(--ink-3);
+
+    /* ── accent chips for categorising content (match the hub) ───────────── */
+    --amber:#f5b544; --blue:#8fb8ff;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--navy-0);scroll-behavior:smooth}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;line-height:1.55;
+    background:
+      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
+    background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  em{font-style:normal;color:var(--teal-glow)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(22px,5vw,48px)}
+
+  /* ── top nav: logomark + wordmark left, back-to-hub + CTA right ───────── */
+  nav{
+    position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;
+    padding:14px clamp(22px,5vw,48px);
+    background:rgba(6,14,23,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+  }
+  .logomark{width:34px;height:34px;flex:0 0 auto}
+  .brand-txt{display:flex;flex-direction:column;line-height:1}
+  .word{font-size:13px;font-weight:600;letter-spacing:.26em}
+  .tag{font-size:10px;color:var(--teal);margin-top:5px;letter-spacing:.04em}
+  .nav-spacer{flex:1}
+  .nav-link{font-size:13px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;transition:.2s}
+  .nav-link:hover{color:var(--teal)}
+  .nav-link svg{width:15px;height:15px}
+  .nav-cta{
+    background:var(--teal);color:var(--navy-0);padding:9px 20px;border-radius:100px;
+    font-size:13px;font-weight:600;transition:.2s;margin-left:14px;
+  }
+  .nav-cta:hover{background:var(--teal-glow);box-shadow:0 0 20px rgba(47,207,168,.4)}
+
+  /* ── hero ─────────────────────────────────────────────────────────────── */
+  .hero{padding:clamp(56px,12vh,120px) 0 clamp(40px,8vh,72px)}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+  h1{font-weight:200;letter-spacing:-.015em;line-height:1.05;font-size:clamp(34px,6vw,60px);margin:0 0 20px;text-wrap:balance}
+  .lede{font-size:clamp(16px,2vw,20px);line-height:1.55;color:var(--ink-2);max-width:60ch;margin:0 0 32px;font-weight:300}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+  .btn-primary{background:var(--teal);color:var(--navy-0)}
+  .btn-primary:hover{background:var(--teal-glow);box-shadow:0 8px 28px rgba(47,207,168,.3)}
+  .btn-ghost{border:1px solid var(--border-2);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+
+  /* ── section rhythm ───────────────────────────────────────────────────── */
+  section{padding:clamp(40px,7vh,72px) 0}
+  .section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+  h2{font-weight:300;letter-spacing:-.01em;line-height:1.15;font-size:clamp(26px,4vw,40px);margin:0 0 16px;text-wrap:balance}
+  h3{font-weight:500;letter-spacing:-.01em;font-size:19px;margin:0 0 8px}
+  p{color:var(--ink-2);font-weight:300;max-width:64ch}
+  .muted{color:var(--ink-3)}
+
+  /* ── stat bar ─────────────────────────────────────────────────────────── */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;backdrop-filter:blur(18px)}
+  .stat-num{font-size:clamp(30px,5vw,44px);font-weight:200;color:var(--teal);letter-spacing:-.02em;line-height:1}
+  .stat-label{font-size:13px;color:var(--ink-2);font-weight:300;margin-top:10px;line-height:1.4}
+
+  /* ── glass card grid ──────────────────────────────────────────────────── */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .card{
+    display:flex;flex-direction:column;gap:10px;background:var(--surface);border:1px solid var(--border);
+    border-radius:18px;padding:24px;backdrop-filter:blur(18px);transition:.2s;
+  }
+  .card:hover{background:var(--surface-2);border-color:var(--border-2);transform:translateY(-2px);box-shadow:0 18px 44px rgba(0,0,0,.32)}
+  .chip{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);width:max-content}
+  .chip.walk{color:var(--teal)}
+  .chip.client{color:var(--amber)}
+  .chip.concept{color:var(--blue)}
+  .card p{font-size:14px;line-height:1.5;margin:0}
+
+  /* ── feature row (icon/number + text, alternating) ────────────────────── */
+  .feature{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;padding:22px 0;border-top:1px solid var(--border)}
+  .feature:first-child{border-top:0}
+  .feature-num{width:44px;height:44px;border-radius:12px;background:var(--teal-subtle);border:1px solid var(--teal-border);
+    display:flex;align-items:center;justify-content:center;color:var(--teal);font-weight:600;font-size:16px;flex:0 0 auto}
+
+  /* ── pull-quote / callout ─────────────────────────────────────────────── */
+  .quote{border-left:2px solid var(--teal);padding:8px 0 8px 26px;margin:8px 0}
+  .quote p{font-size:clamp(20px,3vw,28px);font-weight:200;color:var(--ink);line-height:1.35;max-width:52ch}
+  .quote cite{display:block;margin-top:14px;font-size:13px;color:var(--ink-3);font-style:normal}
+  .callout{background:linear-gradient(135deg,rgba(47,207,168,.1),rgba(47,207,168,.04));
+    border:1px solid var(--teal-border);border-radius:18px;padding:28px 30px}
+
+  /* ── footer ───────────────────────────────────────────────────────────── */
+  footer{margin-top:40px;padding:32px 0 56px;border-top:1px solid var(--border);
+    font-size:12.5px;color:var(--ink-3);line-height:1.7;font-weight:300}
+  footer a{color:var(--teal)}
+
+  /* ── scroll reveal (respects reduced-motion) ──────────────────────────── */
+  .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:640px){
+    .feature{grid-template-columns:1fr}
+    .nav-cta{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none}
+  }
+</style>
+<style>
+  /* deck-local additions. tokens only, no new colours or fonts. */
+  .track-switch{display:inline-flex;gap:6px;background:var(--surface);border:1px solid var(--border);
+    border-radius:100px;padding:5px;margin-bottom:26px;flex-wrap:wrap}
+  .track-btn{appearance:none;border:0;background:transparent;color:var(--ink-2);font:inherit;font-size:13.5px;
+    font-weight:500;padding:9px 20px;border-radius:100px;cursor:pointer;transition:.2s}
+  .track-btn:hover{color:var(--ink)}
+  .track-btn[aria-selected="true"]{background:var(--teal);color:var(--navy-0);font-weight:600}
+  .track-btn:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .js .track-panel[hidden]{display:none}
+  .track-panel h3.panel-h{font-size:17px;font-weight:500;margin:0 0 4px}
+  .panel-sub{font-size:13.5px;color:var(--ink-3);margin:0 0 20px;font-weight:300}
+
+  .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--border);
+    border-radius:18px;background:var(--surface);backdrop-filter:blur(18px)}
+  table{border-collapse:collapse;width:100%;min-width:660px;font-size:13.5px}
+  caption{text-align:left;font-size:12px;color:var(--ink-3);padding:16px 20px 0;font-weight:400}
+  th,td{padding:12px 16px;text-align:left;border-top:1px solid var(--border);vertical-align:top;font-weight:300;color:var(--ink-2)}
+  thead th{border-top:0;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600;white-space:nowrap}
+  td.n{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--teal);white-space:nowrap}
+  td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+  td.u{color:var(--ink);font-weight:400}
+  tfoot td{border-top:1px solid var(--border-2);color:var(--ink);font-weight:500}
+
+  .split{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+  .mini{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px 22px}
+  .mini .k{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:9px}
+  .mini p{font-size:13.5px;line-height:1.55;margin:0}
+  .mini .big{font-size:30px;font-weight:200;color:var(--ink);letter-spacing:-.02em;line-height:1;margin-bottom:8px}
+
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .step{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px}
+  .step .sk{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600;
+    display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .step .sk b{width:22px;height:22px;border-radius:7px;background:var(--teal-subtle);border:1px solid var(--teal-border);
+    color:var(--teal);display:flex;align-items:center;justify-content:center;font-size:11px}
+  .step h4{margin:0 0 7px;font-size:15px;font-weight:500;color:var(--ink)}
+  .step p{font-size:13px;line-height:1.55;margin:0}
+  .step .ev{display:block;margin-top:11px;padding-top:11px;border-top:1px solid var(--border);
+    font-size:12px;color:var(--teal);font-weight:500}
+
+  ul.plain{margin:0;padding-left:20px;color:var(--ink-2);font-weight:300;max-width:64ch}
+  ul.plain li{margin-bottom:9px;line-height:1.55;font-size:14.5px}
+  ul.plain li::marker{color:var(--teal)}
+  .note{font-size:13px;color:var(--ink-3);font-weight:300;margin-top:14px;max-width:70ch}
+  @media (max-width:640px){ caption{padding:14px 16px 0} th,td{padding:10px 13px} }
+</style>
+
+</head>
+<body>
+
+<!-- ── TOP NAV (keep on every deck for consistent chrome) ─────────────────── -->
+<nav>
+  <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
+      <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
+    <g id="halo"></g>
+    <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
+  </svg>
+  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Proposals &amp; walkthroughs</span></div>
+  <span class="nav-spacer"></span>
+  <a class="nav-link" href="../">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    All proposals
+  </a>
+  <a class="nav-cta" href="https://zavmo.ai">Book a demo</a>
+</nav>
+
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Level 3 and Level 5 Diplomas &middot; learner briefing</div>
+    <h1>You are going to be graded on the work you are <em>already doing</em>.</h1>
+    <p class="lede">This is the Future Fluency Diploma, at Level 3 and at Level 5. It is not a course you sit through. It is a record of what you can do, built out of your own job, and signed off by a human assessor.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#why">Start reading</a>
+      <a class="btn btn-ghost" href="#time">Skip to the time it takes</a>
+    </div>
+  </header>
+
+  <section id="why">
+    <div class="stats reveal">
+      <div class="stat"><div class="stat-num">6 or 5</div><div class="stat-label">Units. Six at Level 3, five at Level 5</div></div>
+      <div class="stat"><div class="stat-num">390</div><div class="stat-label">Hours for the Level 3 Diploma. 410 at Level 5</div></div>
+      <div class="stat"><div class="stat-num">145</div><div class="stat-label">Assessment criteria at Level 3. 136 at Level 5</div></div>
+      <div class="stat"><div class="stat-num">0</div><div class="stat-label">Exams. All of it is portfolio from real work</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">Why we graded it</div>
+    <h2>Training you finish is a tick. A qualification you earn is portable.</h2>
+    <p>We could have built Future Fluency as a course. Courses end with a completion record, and a completion record only means you were present. It does not travel to your next role, and it does not tell anyone what you can actually do.</p>
+    <p>So we levelled it instead. Every learning outcome in these two Diplomas is written against the Ofqual descriptors for its level, and every criterion is checked against them. That is what makes the difference between saying you are good with AI and having it assessed.</p>
+    <div class="quote reveal">
+      <p>The evidence is your own work. The qualification is what happens when someone independent agrees.</p>
+    </div>
+    <p class="note">A note on wording. These are customised qualifications carrying a level equivalence, benchmarked against the Ofqual Level 3 and Level 5 descriptors. That is not the same as an Ofqual-regulated listing, and we do not claim it is. Centre approval with the awarding organisation is in progress.</p>
+  </section>
+
+  <section>
+    <div class="section-label">What it actually does</div>
+    <h2>It takes the two years everyone is worried about and makes them countable.</h2>
+    <div class="split reveal">
+      <div class="mini"><div class="k">The subject</div><p>Working with AI, data, automation and the governance around all three. Plus the two human ones: keeping your skills current, and handling the people whose roles change.</p></div>
+      <div class="mini"><div class="k">The method</div><p>You do it inside your real job. Every unit ends with something you produced at work, not an essay about producing it.</p></div>
+      <div class="mini"><div class="k">The output</div><p>A portfolio, a recorded professional discussion per unit, and a level. Assessed by a qualified human, internally verified, then sampled externally.</p></div>
+    </div>
+  </section>
+
+  <section id="which">
+    <div class="section-label">Which one you are on</div>
+    <h2>The difference between Level 3 and Level 5 is scope, not difficulty.</h2>
+    <p>This is the thing worth getting straight before anything else, because it decides which units you get.</p>
+    <div class="reveal">
+      <div class="feature"><div class="feature-num">3</div><div>
+        <h3>Level 3 stays with you</h3>
+        <p>You answer a question about your own work. You automate a task in your own work. The moment an outcome reaches a team or a department, it has left Level 3. Problems here are well defined, and may still be complex and non-routine.</p>
+      </div></div>
+      <div class="feature"><div class="feature-num">5</div><div>
+        <h3>Level 5 reaches a department</h3>
+        <p>You plan automation across a department, and you direct its priorities with data. Problems here are broadly defined, which means part of your job is working out what the problem is. You also lead the people whose roles change because of it.</p>
+      </div></div>
+    </div>
+    <p class="note">Length does not set the level. A long project on a well-defined problem is still Level 3. Only the definition of the problem sets the level.</p>
+  </section>
+
+  <section id="time">
+    <div class="section-label">The time</div>
+    <h2>Most of the hours are work you were doing anyway.</h2>
+    <p>Total Qualification Time is every hour, including the ones you would have spent on the job regardless. Only the guided share is time under direction. Here is the split, and the honest arithmetic on what it means per week.</p>
+
+    <div class="track-switch" role="tablist" aria-label="Choose your level">
+      <button class="track-btn" id="tab-l3" role="tab" aria-selected="true" aria-controls="panel-l3" type="button">Level 3 Diploma</button>
+      <button class="track-btn" id="tab-l5" role="tab" aria-selected="false" aria-controls="panel-l5" type="button">Level 5 Diploma</button>
+    </div>
+
+    <div class="track-panel" id="panel-l3" role="tabpanel" aria-labelledby="tab-l3">
+      <div class="split reveal" style="margin-bottom:22px">
+        <div class="mini"><div class="big">390</div><div class="k">Total hours</div><p>The whole qualification, across six units.</p></div>
+        <div class="mini"><div class="big">155</div><div class="k">Guided hours</div><p>Two fifths of it. Time under direction, including tutoring.</p></div>
+        <div class="mini"><div class="big">7&ndash;8</div><div class="k">Hours a week</div><p>If you take twelve months. Around ten a week over nine.</p></div>
+      </div>
+      <div class="tw reveal">
+        <table>
+          <caption>Level 3 Diploma in Future Fluency. Six mandatory units, all at Level 3.</caption>
+          <thead><tr><th>Ref</th><th>Unit</th><th class="num">Hours</th><th class="num">Guided</th><th class="num">Criteria</th></tr></thead>
+          <tbody>
+            <tr><td class="n">ZFF-AI-03</td><td class="u">Using and Checking AI Tools in Daily Work</td><td class="num">70</td><td class="num">35</td><td class="num">28</td></tr>
+            <tr><td class="n">ZFF-GM-03</td><td class="u">Developing a Growth Mindset for Changing Work</td><td class="num">50</td><td class="num">25</td><td class="num">22</td></tr>
+            <tr><td class="n">ZFF-DA-03</td><td class="u">Turning Workplace Data into a Recommendation</td><td class="num">60</td><td class="num">30</td><td class="num">24</td></tr>
+            <tr><td class="n">ZFF-GV-03</td><td class="u">Working Safely and Responsibly with AI</td><td class="num">50</td><td class="num">30</td><td class="num">21</td></tr>
+            <tr><td class="n">ZFF-AU-03</td><td class="u">Automating a Repeated Task in Own Work</td><td class="num">60</td><td class="num">25</td><td class="num">24</td></tr>
+            <tr><td class="n">ZFF-PJ-03</td><td class="u">Applied Project: Improving Own Work with AI</td><td class="num">100</td><td class="num">10</td><td class="num">26</td></tr>
+          </tbody>
+          <tfoot><tr><td class="n">Total</td><td class="u">Six mandatory units</td><td class="num">390</td><td class="num">155</td><td class="num">145</td></tr></tfoot>
+        </table>
+      </div>
+      <p class="note">The project unit is a quarter of the qualification on its own. It carries ten guided hours, so almost all of it is you, at work, doing the thing.</p>
+    </div>
+
+    <div class="track-panel" id="panel-l5" role="tabpanel" aria-labelledby="tab-l5" hidden>
+      <div class="split reveal" style="margin-bottom:22px">
+        <div class="mini"><div class="big">410</div><div class="k">Total hours</div><p>The whole qualification, across five units.</p></div>
+        <div class="mini"><div class="big">144</div><div class="k">Guided hours</div><p>About a third. The rest is departmental work you own.</p></div>
+        <div class="mini"><div class="big">8</div><div class="k">Hours a week</div><p>If you take twelve months. Around eleven a week over nine.</p></div>
+      </div>
+      <div class="tw reveal">
+        <table>
+          <caption>Level 5 Diploma in Future Fluency. Five mandatory units, all at Level 5.</caption>
+          <thead><tr><th>Ref</th><th>Unit</th><th class="num">Hours</th><th class="num">Guided</th><th class="num">Criteria</th></tr></thead>
+          <tbody>
+            <tr><td class="n">ZFF-GM-05</td><td class="u">Leading a Department Through a Change in Required Capability</td><td class="num">60</td><td class="num">24</td><td class="num">28</td></tr>
+            <tr><td class="n">ZFF-EI-05</td><td class="u">Working with the People Whose Roles Change</td><td class="num">60</td><td class="num">24</td><td class="num">27</td></tr>
+            <tr><td class="n">ZFF-AU-05</td><td class="u">Planning Automation Across a Department</td><td class="num">80</td><td class="num">46</td><td class="num">26</td></tr>
+            <tr><td class="n">ZFF-DA-05</td><td class="u">Using Data to Direct a Department's Priorities</td><td class="num">70</td><td class="num">40</td><td class="num">25</td></tr>
+            <tr><td class="n">ZFF-PJ-05</td><td class="u">Applied Project: Annual Automation Plan for Own Department</td><td class="num">140</td><td class="num">10</td><td class="num">30</td></tr>
+          </tbody>
+          <tfoot><tr><td class="n">Total</td><td class="u">Five mandatory units</td><td class="num">410</td><td class="num">144</td><td class="num">136</td></tr></tfoot>
+        </table>
+      </div>
+      <p class="note">Two of these units need other people. You will consult colleagues whose roles change, and you will present to a decision maker. Book that time early, because it is the part that slips.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">How Zavmo works</div>
+    <h2>Four steps, and the fourth one is why the hours count.</h2>
+    <p>Zavmo runs every journey through the same loop. What matters here is that the loop was built to produce evidence, not to produce completions.</p>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="sk"><b>1</b>Discover</div>
+        <h4>Work out where you actually are</h4>
+        <p>Zavmo compares what you can already do against what the unit requires. You skip what you have, so the 390 hours are not spent proving things twice.</p>
+        <span class="ev">Sets your starting point</span>
+      </div>
+      <div class="step">
+        <div class="sk"><b>2</b>Discuss</div>
+        <h4>Agree the route</h4>
+        <p>You and Zavmo settle the path through the units, against your real role and sector. Your manager can see it. Every criterion is tickable before you start.</p>
+        <span class="ev">Names the criteria up front</span>
+      </div>
+      <div class="step">
+        <div class="sk"><b>3</b>Deliver</div>
+        <h4>Learn by talking, not by reading slides</h4>
+        <p>You learn in conversation with a tutor that adapts to your pace. It keeps pushing you up from remembering toward evaluating and creating, which is where the level lives.</p>
+        <span class="ev">Climbs the thinking ladder</span>
+      </div>
+      <div class="step">
+        <div class="sk"><b>4</b>Demonstrate</div>
+        <h4>End with proof, not a completion tick</h4>
+        <p>Your tasks, reflections and real examples are captured and mapped to criteria as you go. You are not assembling a portfolio at the end. It builds while you work.</p>
+        <span class="ev">Becomes your portfolio</span>
+      </div>
+    </div>
+    <p class="note">One thing to be straight about. Zavmo teaches and it prompts you for evidence. It does not decide whether you passed. Every criterion is decided by a named human assessor, internally verified, and sampled by the awarding organisation.</p>
+  </section>
+
+  <section>
+    <div class="section-label">Applying it</div>
+    <h2>What each unit asks you to actually go and do.</h2>
+    <p>This is the part that makes the time pay back. Every unit ends in something real, produced at work, that exists whether or not you were studying.</p>
+
+    <div class="track-switch" role="tablist" aria-label="Choose your level">
+      <button class="track-btn" id="tab-a3" role="tab" aria-selected="true" aria-controls="panel-a3" type="button">Level 3 Diploma</button>
+      <button class="track-btn" id="tab-a5" role="tab" aria-selected="false" aria-controls="panel-a5" type="button">Level 5 Diploma</button>
+    </div>
+
+    <div class="track-panel" id="panel-a3" role="tabpanel" aria-labelledby="tab-a3">
+      <h3 class="panel-h">Level 3. Everything stays inside your own work.</h3>
+      <p class="panel-sub">Six units, six things you will have made by the end.</p>
+      <div class="grid cols-2 reveal">
+        <div class="card"><span class="chip walk">ZFF-AI-03</span><h3>An AI output you checked, with the check on record</h3><p>Use a tool on a real task. Show what you verified, what you changed, and where the tool was wrong. Declaring your AI use is part of the criteria, not a confession.</p></div>
+        <div class="card"><span class="chip walk">ZFF-GM-03</span><h3>A skill you rebuilt because the work moved</h3><p>Pick something in your role that changed. Show how you learned it, and review honestly how well the method worked.</p></div>
+        <div class="card"><span class="chip walk">ZFF-DA-03</span><h3>A recommendation put to the person who decides</h3><p>Take a question about your own work. Choose the data, say what you left out and why, then present it and answer the challenge back.</p></div>
+        <div class="card"><span class="chip walk">ZFF-GV-03</span><h3>Your own work, made safe to do with AI</h3><p>Where the data goes, what you are not allowed to put in, what to do when the tool gets it wrong. Applied to your job, not to a policy in general.</p></div>
+        <div class="card"><span class="chip walk">ZFF-AU-03</span><h3>One repeated task, automated</h3><p>Find something you do every week. Automate it, run it, and show what it now costs you instead.</p></div>
+        <div class="card"><span class="chip concept">ZFF-PJ-03</span><h3>The applied project. A hundred hours of your real job</h3><p>Improve your own work with AI, end to end. Ten guided hours out of a hundred. This is the unit the assessor will spend the longest on.</p></div>
+      </div>
+    </div>
+
+    <div class="track-panel" id="panel-a5" role="tabpanel" aria-labelledby="tab-a5" hidden>
+      <h3 class="panel-h">Level 5. Everything reaches a department.</h3>
+      <p class="panel-sub">Five units, and three of them involve other people's time.</p>
+      <div class="grid cols-2 reveal">
+        <div class="card"><span class="chip walk">ZFF-GM-05</span><h3>A department taken through a capability change</h3><p>Work out what your people will need to be able to do next. Then lead the shift, and evaluate whether your approach worked.</p></div>
+        <div class="card"><span class="chip walk">ZFF-EI-05</span><h3>The conversations with people whose roles change</h3><p>You will consult them, tell each of them what is expected, and say what support exists. Witness testimony carries this, so plan the meetings.</p></div>
+        <div class="card"><span class="chip walk">ZFF-AU-05</span><h3>An automation plan across the department</h3><p>Not one task. The set of them, sequenced, with the trade-offs stated and the reasoning behind the order you chose.</p></div>
+        <div class="card"><span class="chip walk">ZFF-DA-05</span><h3>Priorities directed by data, and defended</h3><p>Analyse, interpret and evaluate. Present it to a real decision maker, with the alternative reading of the same figures on the table.</p></div>
+        <div class="card"><span class="chip concept">ZFF-PJ-05</span><h3>The applied project. Your department's annual automation plan</h3><p>A hundred and forty hours, ten of them guided. This is a document your organisation could act on, and that is the standard it is held to.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">The return</div>
+    <h2>What you get for the hours.</h2>
+    <ul class="plain reveal">
+      <li>A level that travels. It is benchmarked against the national descriptors, so it means something outside this company.</li>
+      <li>Work you would have done anyway, counted. The project units alone are a quarter to a third of the qualification, and they are your own job.</li>
+      <li>Automation you keep. Whatever you automate in the applied units stays automated after the assessment.</li>
+      <li>A defensible answer on AI. You will have evidence that you check outputs, declare your use, and know what not to put into a tool.</li>
+      <li>A record built as you go. No scramble at the end to assemble a portfolio you should have been keeping.</li>
+    </ul>
+    <p class="note">What we are not promising: a pay rise, a promotion, or a percentage figure for productivity. Anyone quoting you one of those has made it up.</p>
+  </section>
+
+  <section>
+    <div class="section-label">Being straight with you</div>
+    <h2>Three things worth knowing before you say yes.</h2>
+    <div class="reveal">
+      <div class="feature"><div class="feature-num">1</div><div>
+        <h3>The hours are allocated, not measured</h3>
+        <p>390 and 410 are our estimates of the time a typical learner needs. Nobody has run a full cohort yet. If it turns out to be wrong, we will say so and change the figure.</p>
+      </div></div>
+      <div class="feature"><div class="feature-num">2</div><div>
+        <h3>Some criteria need other people</h3>
+        <p>At Level 5 in particular, a few criteria depend on a colleague or a manager giving you their time. Those are the ones that stall. Get them in the diary in the first month.</p>
+      </div></div>
+      <div class="feature"><div class="feature-num">3</div><div>
+        <h3>A human decides, and a human can say no</h3>
+        <p>Every criterion is judged by a qualified assessor and sampled externally. That is what makes it worth having. It also means the AI cannot pass you.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="callout reveal">
+      <h2 style="margin-bottom:10px">Pick your level, then pick your project.</h2>
+      <p style="margin-bottom:20px">The project unit is the largest thing in either Diploma. Choosing it well is the single decision that makes the rest of the hours worth spending. Bring one idea to the next session.</p>
+      <a class="btn btn-primary" href="../qualifications-level-3/">Level 3 units in full</a>
+      <a class="btn btn-ghost" href="../qualifications-level-5/" style="margin-left:10px">Level 5 units in full</a>
+    </div>
+  </section>
+
+  <footer>
+    Hosted on GitHub Pages &middot; <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
+    Unit references, hours and criteria counts are taken from the Level 3 and Level 5 unit specifications. Level equivalence is benchmarked against the Ofqual descriptors and is not an Ofqual-regulated listing.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // Logomark halo: 12 dots, copied from the hub so chrome matches exactly.
+  var g=document.getElementById('halo'), n=12, cx=50, cy=50, r=38;
+  for(var i=0;i<n;i++){
+    var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
+    var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',x.toFixed(1)); c.setAttribute('cy',y.toFixed(1)); c.setAttribute('r','2.4');
+    c.setAttribute('fill','#3FE4BC'); c.setAttribute('opacity', i%2?'0.55':'0.9');
+    g.appendChild(c);
+  }
+  // Scroll reveal
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in')}); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {threshold:.12});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+
+<script>
+(function(){
+  // Level switcher. Pairs of tabs, both switching together so the two sections
+  // always agree on which level the reader is on. Without JS both panels show.
+  var pairs = [['tab-l3','panel-l3','tab-l5','panel-l5'],['tab-a3','panel-a3','tab-a5','panel-a5']];
+  function setLevel(level){
+    pairs.forEach(function(p){
+      var t3=document.getElementById(p[0]), n3=document.getElementById(p[1]);
+      var t5=document.getElementById(p[2]), n5=document.getElementById(p[3]);
+      if(!t3||!n3||!t5||!n5) return;
+      var three = level==='3';
+      t3.setAttribute('aria-selected', three?'true':'false');
+      t5.setAttribute('aria-selected', three?'false':'true');
+      n3.hidden = !three; n5.hidden = three;
+    });
+  }
+  pairs.forEach(function(p){
+    var t3=document.getElementById(p[0]), t5=document.getElementById(p[2]);
+    if(t3) t3.addEventListener('click', function(){ setLevel('3'); });
+    if(t5) t5.addEventListener('click', function(){ setLevel('5'); });
+  });
+  setLevel('3');
+})();
+</script>
+
+</body>
+</html>
