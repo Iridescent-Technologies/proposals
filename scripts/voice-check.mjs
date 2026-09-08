@@ -140,18 +140,29 @@ const MAX_EXCLAMATIONS = 3;      // she uses them, sparingly
 // "open with the person, not the business", and this is the whitelist of moves
 // that clear it. Thanking somebody for reading a newsletter does not: that is a
 // metric wearing a pleasantry, and it is the business talking.
-const HUMAN_OPENERS = /\b(how are you|hope (this|you|things|it)|good to (see|hear|speak)|lovely to (see|meet|hear)|it was (good|great|lovely) to|thanks for your (note|reply|time)|thank you for your (note|reply|time))/i;
+const HUMAN_OPENERS = /\b(how are you|hope (this|you|things|it)|good to (see|hear|speak)|lovely to (see|meet|hear)|it was (good|great|lovely) to|thanks for your (note|reply|time)|thank you for your (note|reply|time)|congratulations|well done on)/i;
 
 // "Make it easy to say no." She does this instinctively, and the guide is
 // explicit that it is respect for the other person's time rather than
 // self-deprecation.
-const EASY_EXIT = /\b(bin (this|it)|easy to ignore|ignore (this|it)|no need to (reply|respond)|delete this|say no|not interested)/i;
+const EASY_EXIT = /\b(bin (this|it|if)|easy to (ignore|bin)|ignore (this|it)|no need to (reply|respond)|delete this|say no|not interested|leave it there)/i;
 
 // "Close on a specific next step and a date." A time-bound ask, not a feeling.
 const SPECIFIC_ASK = /\b(half an hour|twenty minutes|thirty minutes|fifteen minutes|\d+ ?(?:minutes|mins)|this week|next week|this month|next month|before (the end of )?(january|february|march|april|may|june|july|august|september|october|november|december)|on (monday|tuesday|wednesday|thursday|friday)|w\/c|week commencing)/i;
 
 // The closes she names as the ones to never write. "Never 'let me know your
 // thoughts'."
+// The length ceiling, and it is the rule she actually asked for. Her complaint on
+// 7 Sep 2026 was that the outreach mail "seems a bit wordy", and she was right:
+// the 58 drafts averaged 228 words. The guide's own test is "could you cut a
+// third of the words and lose nothing? Then it is not finished." A third off 228
+// is 152. After that pass the drafts average 161 and the longest is 182, so 185
+// is the ceiling that band sits under rather than a number picked from the air.
+//
+// Counted from "Subject:" to the sign-off, so the frontmatter and the send-time
+// footer comment are not charged to the writing.
+const MAX_EMAIL_WORDS = 185;
+
 const VAGUE_CLOSE = /\b(let me know your thoughts|would welcome the conversation|welcome your thoughts|keen to hear your thoughts|how are you thinking about|interested in your (view|perspective)|explore synergies|touch base|circle back|any thoughts\??)/i;
 
 // ---------------------------------------------------------------------------
@@ -586,6 +597,13 @@ function checkFile(path, tier) {
 
     if (!SPECIFIC_ASK.test(body)) {
       errors.push('no specific next step and no date. Ask for something small and time-bound: half an hour, a view, this week.');
+    }
+
+    const email = body.slice(body.indexOf('Subject:'));
+    const upto = email.search(/\bAll the best\b|\bJuliette\s*$/);
+    const wordCount = (upto === -1 ? email : email.slice(0, upto)).split(/\s+/).filter(Boolean).length;
+    if (wordCount > MAX_EMAIL_WORDS) {
+      errors.push(`${wordCount} words, ceiling ${MAX_EMAIL_WORDS}. Cut a third and see what is lost. Usually it is the second paragraph of research.`);
     }
 
     const vague = body.match(VAGUE_CLOSE);
