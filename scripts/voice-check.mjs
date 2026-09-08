@@ -42,6 +42,10 @@
 //   tier "juliette"  the bans PLUS sentence length, average length and
 //                    exclamations. Only where she is speaking as herself.
 //
+//   tier "email"     everything in "juliette" PLUS the shape of an email. Only
+//                    for one-to-one mail she sends. See the block below for why
+//                    these four are errors rather than warnings.
+//
 // Targets come from voice-targets.json in the repo being checked, so one script
 // serves several repos without knowing anything about them. If that file is
 // absent the defaults below apply, which keeps this repo behaving as it did.
@@ -90,6 +94,12 @@ const BANNED = [
   { re: /\b(multifaceted|nuanced|robust|holistic|seamless|cutting-edge)\b/gi, msg: 'AI lexicon' },
   { re: /\b(leverage|foster|streamline)\b/gi, msg: 'AI lexicon: say "use", "build", "simplify"' },
   { re: /\bempower\b/gi, msg: 'AI lexicon: say what actually changes for the person' },
+  // "navigate to the root" is a real instruction about moving around a
+  // filesystem, and banning it would fail correct technical writing. The lexicon
+  // sense is the metaphor: navigating a merger, a landscape, complexity.
+  { re: /\bnavigat(?:e|ing|es|ed)\b(?! to\b)/gi, msg: 'AI lexicon: say what they are actually dealing with' },
+  { re: /\bunlock(ing|s|ed)?\b/gi, msg: 'AI lexicon: say what becomes possible' },
+  { re: /\bcomprehensive\b/gi, msg: 'AI lexicon: say what it covers' },
   { re: /it'?s important to note/gi, msg: 'If it is important, just say it' },
   { re: /\b(recognize|organiz(e|ed|ation)|color|behavior|analyze)\b/gi, msg: 'American spelling. British English throughout.' },
   { re: /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, msg: 'emoji. Fine in chat, not in published writing.' },
@@ -107,6 +117,42 @@ const WARNINGS = [
 const MAX_SENTENCE_WORDS = 34;   // one long sentence is fine, a 40-word one is not
 const MAX_AVERAGE_WORDS = 14;    // her entries land around 10-11
 const MAX_EXCLAMATIONS = 3;      // she uses them, sparingly
+
+// ---------------------------------------------------------------------------
+// THE SHAPE OF AN EMAIL
+// ---------------------------------------------------------------------------
+//
+// From the guide's section "The shape of an email, and it applies to all of
+// them", which carries her own instruction: *that is the way I communicate, and
+// I understand it better as well.*
+//
+// WHY THESE ARE ERRORS AND NOT WARNINGS. On 7 Sep 2026 all 55 outreach drafts
+// passed this checker clean, and all 55 broke every one of these four. The
+// checker measured sentence length, and every fault sat above that line. A
+// warning would have been read the same way the silence was.
+//
+// WHY THEY ARE THEIR OWN TIER. Two of them are wrong outside one-to-one mail.
+// The guide says the easy exit "belongs in a one-to-one email and reads as wet"
+// in a company announcement, and her note on a draft that had it was *you're too
+// nice*. So a repo opts in per target, and nothing gets these by default.
+
+// Her openers, from the guide and from mail she actually sent. The rule is
+// "open with the person, not the business", and this is the whitelist of moves
+// that clear it. Thanking somebody for reading a newsletter does not: that is a
+// metric wearing a pleasantry, and it is the business talking.
+const HUMAN_OPENERS = /\b(how are you|hope (this|you|things|it)|good to (see|hear|speak)|lovely to (see|meet|hear)|it was (good|great|lovely) to|thanks for your (note|reply|time)|thank you for your (note|reply|time))/i;
+
+// "Make it easy to say no." She does this instinctively, and the guide is
+// explicit that it is respect for the other person's time rather than
+// self-deprecation.
+const EASY_EXIT = /\b(bin (this|it)|easy to ignore|ignore (this|it)|no need to (reply|respond)|delete this|say no|not interested)/i;
+
+// "Close on a specific next step and a date." A time-bound ask, not a feeling.
+const SPECIFIC_ASK = /\b(half an hour|twenty minutes|thirty minutes|fifteen minutes|\d+ ?(?:minutes|mins)|this week|next week|this month|next month|before (the end of )?(january|february|march|april|may|june|july|august|september|october|november|december)|on (monday|tuesday|wednesday|thursday|friday)|w\/c|week commencing)/i;
+
+// The closes she names as the ones to never write. "Never 'let me know your
+// thoughts'."
+const VAGUE_CLOSE = /\b(let me know your thoughts|would welcome the conversation|welcome your thoughts|keen to hear your thoughts|how are you thinking about|interested in your (view|perspective)|explore synergies|touch base|circle back|any thoughts\??)/i;
 
 // ---------------------------------------------------------------------------
 
@@ -498,7 +544,7 @@ function checkFile(path, tier) {
   // Scripts are bans-only, whatever the target says. UI microcopy is fragments
   // by nature ("Save", "Search", "13 more in Next up") and measuring it for
   // sentence length would be measuring the wrong thing entirely.
-  if (tier === 'juliette' && !script) {
+  if ((tier === 'juliette' || tier === 'email') && !script) {
     const sents = sentences(measurable);
     if (sents.length) {
       const lengths = sents.map((s) => s.split(/\s+/).filter(Boolean).length);
@@ -517,6 +563,46 @@ function checkFile(path, tier) {
 
     const bangs = (body.match(/!/g) ?? []).length;
     if (bangs > MAX_EXCLAMATIONS) warnings.push(`${bangs} exclamation marks. She uses them, but sparingly.`);
+  }
+
+  // The shape of an email. Only for one-to-one mail, because two of these four
+  // are actively wrong in a company announcement. See the block above.
+  if (tier === 'email' && !script) {
+    // The opening is what follows the greeting. Everything before "Hi <name>,"
+    // is a subject line and routing, and the guide's rule is about the first
+    // thing she says to the person, not the first thing in the file.
+    const greeting = body.match(/\b(hi|hello|dear)\b[^\n.!?]{0,40}[,\n]/i);
+    const afterGreeting = greeting
+      ? body.slice(body.indexOf(greeting[0]) + greeting[0].length)
+      : body;
+    const opening = sentences(afterGreeting).slice(0, 2).join(' ');
+    if (!HUMAN_OPENERS.test(opening)) {
+      errors.push('opens with the business, not the person. Her rule: their name, then a human line, and the reason for writing comes after.');
+    }
+
+    if (!EASY_EXIT.test(body)) {
+      errors.push('no easy exit. She always gives one: "feel free to bin this", "treat this as easy to ignore". It is respect for their time, not self-deprecation.');
+    }
+
+    if (!SPECIFIC_ASK.test(body)) {
+      errors.push('no specific next step and no date. Ask for something small and time-bound: half an hour, a view, this week.');
+    }
+
+    const vague = body.match(VAGUE_CLOSE);
+    if (vague) {
+      errors.push(`vague close: "${vague[0]}". Her rule is a specific next step, never "let me know your thoughts".`);
+    }
+
+    // One ask, one sentence. Two questions means the reader has to choose which
+    // to answer, and most choose neither.
+    //
+    // The opening is excluded, because "How are you?" is a question and it is
+    // the rule immediately above this one. Counting it would make the two rules
+    // contradict each other, which is how a checker teaches people to ignore it.
+    const asks = (afterGreeting.slice(opening.length).match(/\?/g) ?? []).length;
+    if (asks > 1) {
+      warnings.push(`${asks} questions. One ask, one sentence. The guide is explicit that it is not repeated, not softened, not built up to.`);
+    }
   }
 
   return { errors, warnings, stats };
