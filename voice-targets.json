@@ -57,6 +57,11 @@
       "match": "\\.html$"
     },
     {
+      "dir": "one-outcome-many-roads",
+      "tier": "hard",
+      "match": "\\.html$"
+    },
+    {
       "dir": "making-learning-unique",
       "tier": "hard",
       "match": "\\.html$"
