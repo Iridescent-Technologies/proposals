@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  // Hiding a section is opt-in, and only when the thing that reveals it again
+  // is present. A reader with a blocked or broken script must still get the
+  // content, so the hidden state never applies unless JS is running.
+  if ('IntersectionObserver' in window) { document.documentElement.className += ' js'; }
+</script>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The argument for xAPI as the future of learning technologies · Zavmo</title>
+<meta name="description" content="A white paper on why the industry is leaving completion tracking, what the evidence says adaptive systems should adapt to, and how a free route and a fixed learning outcome are compatible.">
+<meta property="og:title" content="The argument for xAPI as the future of learning technologies · Zavmo">
+<meta property="og:description" content="A white paper on why the industry is leaving completion tracking, what the evidence says adaptive systems should adapt to, and how a free route and a fixed learning outcome are compatible.">
+
+<!-- DM Sans is declared in --font but not loaded as a webfont, and that is on
+     purpose. Pages render in the system sans-serif fallback. That matches the
+     current live site, where the hub declares DM Sans but never links it. To
+     switch the whole suite to real DM Sans later, add a Google Fonts <link> to
+     every page, including the hub. -->
+
+<style>
+  :root{
+    /* ── canonical tokens (from the hub, the source of truth) ───────────── */
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
+    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
+    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
+    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+
+    /* ── deck-oriented aliases (map cleanly to the tokens above) ─────────── */
+    --bg-primary:var(--navy-0); --bg-secondary:var(--navy-1); --bg-card:var(--surface);
+    --teal-subtle:rgba(47,207,168,.14); --teal-border:var(--border-2);
+    --text-primary:var(--ink); --text-secondary:var(--ink-2); --text-tertiary:var(--ink-3);
+
+    /* ── accent chips for categorising content (match the hub) ───────────── */
+    --amber:#f5b544; --blue:#8fb8ff;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--navy-0);scroll-behavior:smooth}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;line-height:1.55;
+    background:
+      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
+    background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  em{font-style:normal;color:var(--teal-glow)}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(22px,5vw,48px)}
+
+  /* ── top nav: logomark + wordmark left, back-to-hub + CTA right ───────── */
+  nav{
+    position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;
+    padding:14px clamp(22px,5vw,48px);
+    background:rgba(6,14,23,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    border-bottom:1px solid var(--border);
+  }
+  .logomark{width:34px;height:34px;flex:0 0 auto}
+  .brand-txt{display:flex;flex-direction:column;line-height:1}
+  .word{font-size:13px;font-weight:600;letter-spacing:.26em}
+  .tag{font-size:10px;color:var(--teal);margin-top:5px;letter-spacing:.04em}
+  .nav-spacer{flex:1}
+  .nav-link{font-size:13px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px;transition:.2s}
+  .nav-link:hover{color:var(--teal)}
+  .nav-link svg{width:15px;height:15px}
+  .nav-cta{
+    background:var(--teal);color:var(--navy-0);padding:9px 20px;border-radius:100px;
+    font-size:13px;font-weight:600;transition:.2s;margin-left:14px;
+  }
+  .nav-cta:hover{background:var(--teal-glow);box-shadow:0 0 20px rgba(47,207,168,.4)}
+
+  /* ── hero ─────────────────────────────────────────────────────────────── */
+  .hero{padding:clamp(56px,12vh,120px) 0 clamp(40px,8vh,72px)}
+  .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+  h1{font-weight:200;letter-spacing:-.015em;line-height:1.05;font-size:clamp(34px,6vw,60px);margin:0 0 20px;text-wrap:balance}
+  .lede{font-size:clamp(16px,2vw,20px);line-height:1.55;color:var(--ink-2);max-width:60ch;margin:0 0 32px;font-weight:300}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:8px}
+  .btn-primary{background:var(--teal);color:var(--navy-0)}
+  .btn-primary:hover{background:var(--teal-glow);box-shadow:0 8px 28px rgba(47,207,168,.3)}
+  .btn-ghost{border:1px solid var(--border-2);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
+
+  /* ── section rhythm ───────────────────────────────────────────────────── */
+  section{padding:clamp(40px,7vh,72px) 0}
+  .section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:14px}
+  h2{font-weight:300;letter-spacing:-.01em;line-height:1.15;font-size:clamp(26px,4vw,40px);margin:0 0 16px;text-wrap:balance}
+  h3{font-weight:500;letter-spacing:-.01em;font-size:19px;margin:0 0 8px}
+  p{color:var(--ink-2);font-weight:300;max-width:64ch}
+  .muted{color:var(--ink-3)}
+
+  /* ── stat bar ─────────────────────────────────────────────────────────── */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;backdrop-filter:blur(18px)}
+  .stat-num{font-size:clamp(30px,5vw,44px);font-weight:200;color:var(--teal);letter-spacing:-.02em;line-height:1}
+  .stat-label{font-size:13px;color:var(--ink-2);font-weight:300;margin-top:10px;line-height:1.4}
+
+  /* ── glass card grid ──────────────────────────────────────────────────── */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+  .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+  .card{
+    display:flex;flex-direction:column;gap:10px;background:var(--surface);border:1px solid var(--border);
+    border-radius:18px;padding:24px;backdrop-filter:blur(18px);transition:.2s;
+  }
+  .card:hover{background:var(--surface-2);border-color:var(--border-2);transform:translateY(-2px);box-shadow:0 18px 44px rgba(0,0,0,.32)}
+  .chip{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);width:max-content}
+  .chip.walk{color:var(--teal)}
+  .chip.client{color:var(--amber)}
+  .chip.concept{color:var(--blue)}
+  .card p{font-size:14px;line-height:1.5;margin:0}
+
+  /* ── feature row (icon/number + text, alternating) ────────────────────── */
+  .feature{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start;padding:22px 0;border-top:1px solid var(--border)}
+  .feature:first-child{border-top:0}
+  .feature-num{width:44px;height:44px;border-radius:12px;background:var(--teal-subtle);border:1px solid var(--teal-border);
+    display:flex;align-items:center;justify-content:center;color:var(--teal);font-weight:600;font-size:16px;flex:0 0 auto}
+
+  /* ── pull-quote / callout ─────────────────────────────────────────────── */
+  .quote{border-left:2px solid var(--teal);padding:8px 0 8px 26px;margin:8px 0}
+  .quote p{font-size:clamp(20px,3vw,28px);font-weight:200;color:var(--ink);line-height:1.35;max-width:52ch}
+  .quote cite{display:block;margin-top:14px;font-size:13px;color:var(--ink-3);font-style:normal}
+  .callout{background:linear-gradient(135deg,rgba(47,207,168,.1),rgba(47,207,168,.04));
+    border:1px solid var(--teal-border);border-radius:18px;padding:28px 30px}
+
+  /* ── footer ───────────────────────────────────────────────────────────── */
+  footer{margin-top:40px;padding:32px 0 56px;border-top:1px solid var(--border);
+    font-size:12.5px;color:var(--ink-3);line-height:1.7;font-weight:300}
+  footer a{color:var(--teal)}
+
+  /* ── scroll reveal (respects reduced-motion) ──────────────────────────── */
+  .js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:640px){
+    .feature{grid-template-columns:1fr}
+    .nav-cta{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;animation:none!important}
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none}
+  }
+
+  /* ── white paper additions: footnote marks, reference list, notes ─────── */
+  h3{font-size:17px;font-weight:500;letter-spacing:-.005em;margin:30px 0 10px;color:var(--ink)}
+  sup.fn{font-size:10px;font-weight:600;color:var(--teal);margin-left:2px;letter-spacing:.02em}
+  .note{font-size:13px;line-height:1.6;color:var(--ink-3);max-width:66ch;margin-top:22px;font-weight:300}
+  ol.refs{counter-reset:r;list-style:none;padding:0;margin:22px 0 0;max-width:74ch}
+  ol.refs li{counter-increment:r;position:relative;padding:0 0 0 40px;margin-bottom:16px;
+             font-size:14px;line-height:1.62;color:var(--ink-2);font-weight:300}
+  ol.refs li::before{content:counter(r);position:absolute;left:0;top:1px;width:26px;height:26px;
+             border-radius:50%;background:var(--surface-2);border:1px solid var(--border);
+             color:var(--teal);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
+  ol.refs a{color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(47,207,168,.3)}
+  ol.refs a:hover{color:var(--teal-glow)}
+  .callout h3{margin-top:0}
+
+  /* ── interactive blocks ───────────────────────────────────────────────── */
+  .ix{background:var(--surface);border:1px solid var(--border);border-radius:20px;
+      padding:clamp(20px,3vw,30px);margin:30px 0}
+  .ix-label{font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+      color:var(--teal);margin-bottom:6px}
+  .ix-hint{font-size:13px;color:var(--ink-3);margin:0 0 20px;font-weight:300}
+  .ix-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .ix-tab{font:inherit;font-size:13px;font-weight:500;color:var(--ink-2);cursor:pointer;
+      background:var(--surface-2);border:1px solid var(--border);border-radius:100px;
+      padding:9px 18px;transition:.18s}
+  .ix-tab:hover{color:var(--ink);border-color:var(--border-2)}
+  .ix-tab[aria-selected="true"]{background:var(--teal);color:var(--navy-0);border-color:var(--teal);font-weight:600}
+  .ix-tab:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .ix-panel[hidden]{display:none}
+  .ix-panel h4{font-size:15px;font-weight:500;margin:0 0 4px;color:var(--ink)}
+  .ix-panel p{font-size:14px;line-height:1.6;color:var(--ink-2);margin:0 0 16px;font-weight:300}
+  .rec{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
+      line-height:1.9;background:rgba(6,14,23,.55);border:1px solid var(--border);
+      border-radius:12px;padding:16px 18px;overflow-x:auto;color:var(--ink-2)}
+  .rec .k{color:var(--ink-3)}
+  .rec .v{color:var(--teal-glow)}
+  .rec .muted{color:rgba(234,251,244,.28)}
+  .verdict{display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:14px 16px;
+      border-radius:12px;border:1px solid var(--border-2);background:rgba(47,207,168,.07)}
+  .verdict.bad{border-color:rgba(245,181,68,.3);background:rgba(245,181,68,.06)}
+  .verdict p{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink-2);font-weight:300}
+  .verdict b{color:var(--ink);font-weight:600}
+  .claim{margin-top:20px;padding:16px 18px;border-radius:12px;border:1px dashed var(--border-2);
+      background:rgba(47,207,168,.05)}
+  .claim .claim-l{font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+      color:var(--teal);margin-bottom:6px}
+  .claim p{margin:0;font-size:14px;line-height:1.55;color:var(--ink);font-weight:300}
+  /* timeline */
+  .tl{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:6px 0 22px;position:relative}
+  .tl::before{content:"";position:absolute;left:6%;right:6%;top:19px;height:1px;background:var(--border)}
+  .tl-dot{font:inherit;cursor:pointer;background:none;border:0;padding:0;display:flex;
+      flex-direction:column;align-items:center;gap:10px;position:relative;color:var(--ink-3);transition:.18s}
+  .tl-dot span.d{width:14px;height:14px;border-radius:50%;background:var(--navy-1);
+      border:2px solid var(--border);transition:.18s;margin-top:12px}
+  .tl-dot span.y{font-size:13px;font-weight:500;letter-spacing:.02em}
+  .tl-dot:hover{color:var(--ink-2)}
+  .tl-dot:hover span.d{border-color:var(--border-2)}
+  .tl-dot[aria-selected="true"]{color:var(--teal)}
+  .tl-dot[aria-selected="true"] span.d{background:var(--teal);border-color:var(--teal);
+      box-shadow:0 0 0 5px rgba(47,207,168,.16)}
+  .tl-dot:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:8px}
+  @media(max-width:560px){
+    .tl{grid-template-columns:repeat(2,1fr);gap:18px 0}
+    .tl::before{display:none}
+    .ix-tab{flex:1 1 auto;text-align:center}
+  }
+
+  /* ── figures ──────────────────────────────────────────────────────────── */
+  figure.shot{margin:30px 0}
+  figure.shot img{width:100%;height:auto;display:block;border-radius:16px;
+      border:1px solid var(--border);box-shadow:0 24px 60px rgba(0,0,0,.42)}
+  figure.shot figcaption{font-size:13px;line-height:1.6;color:var(--ink-3);
+      margin-top:14px;font-weight:300;max-width:66ch}
+  figure.shot figcaption b{color:var(--ink-2);font-weight:600}
+  /* ── checklist ────────────────────────────────────────────────────────── */
+  .chk{display:grid;gap:2px;margin:0 0 18px}
+  .chk label{display:flex;gap:13px;align-items:flex-start;padding:11px 13px;border-radius:10px;
+      cursor:pointer;transition:.15s;font-size:14px;line-height:1.5;color:var(--ink-2);font-weight:300}
+  .chk label:hover{background:var(--surface-2)}
+  .chk input{appearance:none;flex:0 0 auto;width:18px;height:18px;margin:1px 0 0;border-radius:5px;
+      border:1.5px solid var(--border-2);background:transparent;cursor:pointer;transition:.15s;position:relative}
+  .chk input:checked{background:var(--teal);border-color:var(--teal)}
+  .chk input:checked::after{content:"";position:absolute;left:5px;top:1.5px;width:4px;height:9px;
+      border:solid var(--navy-0);border-width:0 2px 2px 0;transform:rotate(45deg)}
+  .chk input:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .tally{display:flex;align-items:baseline;gap:12px;padding:16px 18px;border-radius:12px;
+      border:1px solid var(--border-2);background:rgba(47,207,168,.07);flex-wrap:wrap}
+  .tally .n{font-size:30px;font-weight:200;color:var(--teal);line-height:1}
+  .tally p{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink-2);font-weight:300;flex:1;min-width:220px}
+  /* ── verb explorer ────────────────────────────────────────────────────── */
+  .verbs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+  .verb{font:inherit;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;
+      cursor:pointer;background:var(--surface-2);border:1px solid var(--border);border-radius:8px;
+      padding:7px 12px;color:var(--ink-2);transition:.15s}
+  .verb:hover{color:var(--ink);border-color:var(--border-2)}
+  .verb[aria-pressed="true"]{background:var(--teal);color:var(--navy-0);border-color:var(--teal);font-weight:600}
+  .verb:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .vb-out{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+  .vb-box{padding:15px 17px;border-radius:12px;border:1px solid var(--border);background:rgba(6,14,23,.45)}
+  .vb-box .h{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+  .vb-box.x .h{color:var(--teal)}
+  .vb-box.s .h{color:rgba(245,181,68,.85)}
+  .vb-box p{margin:0;font-size:13.5px;line-height:1.6;color:var(--ink-2);font-weight:300}
+  .vb-box.x p{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--teal-glow)}
+  @media(max-width:560px){.vb-out{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ── TOP NAV ───────────────────────────────────────────────────────────── -->
+<nav>
+  <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
+      <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
+      <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
+    <g id="halo"></g>
+    <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
+  </svg>
+  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Proposals &amp; walkthroughs</span></div>
+  <span class="nav-spacer"></span>
+  <a class="nav-link" href="../">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    All proposals
+  </a>
+  <a class="nav-cta" href="https://zavmo.ai">Try Zavmo</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- ── HERO ────────────────────────────────────────────────────────────── -->
+  <header class="hero">
+    <div class="eyebrow">White paper · September 2026</div>
+    <h1>The argument for xAPI as the future of <em>learning technologies</em>.</h1>
+    <p class="lede">The industry is moving off completion tracking, and the reason is structural rather than fashionable. This paper sets out what the move is and what the evidence says adaptive systems should adapt to. Then it answers the hard question. How can a learner take a route nobody designed and still be assessed against a fixed criterion.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#start">Start reading</a>
+      <a class="btn btn-ghost" href="https://zavmo.ai">Experience it on Zavmo.ai</a>
+    </div>
+  </header>
+
+  <!-- ── STAT BAR ────────────────────────────────────────────────────────── -->
+  <section id="start">
+    <div class="stats reveal">
+      <div class="stat"><div class="stat-num">2009</div><div class="stat-label">Last edition of SCORM, the standard most corporate e&#8209;learning still ships in<sup class="fn">1</sup></div></div>
+      <div class="stat"><div class="stat-num">2023</div><div class="stat-label">Year xAPI became an IEEE standard, 9274.1.1<sup class="fn">2</sup></div></div>
+      <div class="stat"><div class="stat-num">0.76</div><div class="stat-label">Effect size for intelligent tutoring, against 0.79 for human tutors<sup class="fn">6</sup></div></div>
+      <div class="stat"><div class="stat-num">217</div><div class="stat-label">Learning events catalogued in Zavmo. 67 have fired in production</div></div>
+    </div>
+    <p class="note">A note on the numbers in this paper. Every figure is attributed in the references. Where a source could not be checked directly, it is not quoted as a figure. Our own numbers are dated and come from a code audit, including the ones that do not flatter us.</p>
+  </section>
+
+  <!-- ── 01 WHY THE INDUSTRY MOVES ───────────────────────────────────────── -->
+  <section>
+    <div class="section-label">01 · Why this is the way the industry moves</div>
+    <h2>A specification does not get handed to IEEE because it is fashionable.</h2>
+
+    <p>The strongest argument for what follows is not pedagogical. It is administrative, and it is on the public record.</p>
+
+    <p>SCORM is the packaging and run&#8209;time standard that most corporate e&#8209;learning still ships in. Its last edition, SCORM 2004 4th Edition, was released in March 2009.<sup class="fn">1</sup> There has been no fifth edition. The standard that carries the majority of the world's workplace training content stopped being developed seventeen years ago.</p>
+
+    <p>Its successor did not stall. The Experience API was published by Advanced Distributed Learning, the same US defence research programme that produced SCORM.<sup class="fn">3</sup> In 2023 it left that programme and became a formal international standard: IEEE 9274.1.1&#8209;2023, <em>IEEE Standard for Learning Technology, JavaScript Object Notation (JSON) Data Model Format and Representational State Transfer (RESTful) Web Service for Learner Experience Data Tracking and Access</em>. The IEEE Standards Association board approved it on 30 March 2023 and published it on 6 October 2023. It is built directly on the xAPI 1.0.3 specification.<sup class="fn">2</sup></p>
+
+    <p>Two supporting moves sit either side of it. cmi5, released in 2016, is the profile that lets an ordinary LMS launch and authorise xAPI content. An organisation can move without abandoning the system it already runs.<sup class="fn">4</sup> In education rather than corporate training, 1EdTech's Caliper Analytics is doing the same job with a different vocabulary, now at version 1.2.<sup class="fn">5</sup></p>
+
+
+    <div class="ix reveal">
+      <div class="ix-label">The record, in four dates</div>
+      <p class="ix-hint">Select a year. Every date here is checkable against the publisher's own page.</p>
+      <div class="tl" role="tablist" aria-label="Standards timeline">
+        <button class="tl-dot" role="tab" id="tl-t0" aria-controls="tl-p0" aria-selected="true"><span class="y">2009</span><span class="d"></span></button>
+        <button class="tl-dot" role="tab" id="tl-t1" aria-controls="tl-p1" aria-selected="false" tabindex="-1"><span class="y">2013</span><span class="d"></span></button>
+        <button class="tl-dot" role="tab" id="tl-t2" aria-controls="tl-p2" aria-selected="false" tabindex="-1"><span class="y">2016</span><span class="d"></span></button>
+        <button class="tl-dot" role="tab" id="tl-t3" aria-controls="tl-p3" aria-selected="false" tabindex="-1"><span class="y">2023</span><span class="d"></span></button>
+      </div>
+      <div class="ix-panel" role="tabpanel" id="tl-p0" aria-labelledby="tl-t0">
+        <h4>March 2009. SCORM stops.</h4>
+        <p>SCORM 2004 4th Edition is released. It is still the final edition. There has never been a fifth, and most corporate e-learning in the world still ships in this format.<sup class="fn">1</sup></p>
+      </div>
+      <div class="ix-panel" role="tabpanel" id="tl-p1" aria-labelledby="tl-t1" hidden>
+        <h4>2013. xAPI 1.0.</h4>
+        <p>Advanced Distributed Learning publishes the Experience API, out of the work known as Project Tin Can. Learning becomes a statement written to a record store rather than a status reported to an LMS.<sup class="fn">3</sup></p>
+      </div>
+      <div class="ix-panel" role="tabpanel" id="tl-p2" aria-labelledby="tl-t2" hidden>
+        <h4>June 2016. cmi5.</h4>
+        <p>The profile that lets an ordinary LMS launch and authorise xAPI content. This is the reason the move does not have to be all or nothing, and why you can keep the system you already run.<sup class="fn">4</sup></p>
+      </div>
+      <div class="ix-panel" role="tabpanel" id="tl-p3" aria-labelledby="tl-t3" hidden>
+        <h4>30 March 2023. It becomes an IEEE standard.</h4>
+        <p>The IEEE Standards Association board approves IEEE 9274.1.1-2023, built directly on xAPI 1.0.3, published that October. A specification does not make that journey because it is fashionable.<sup class="fn">2</sup></p>
+      </div>
+    </div>
+
+    <div class="quote reveal">
+      <p>One standard stopped in 2009. The other became an IEEE standard in 2023. That is not a trend. That is an industry finishing an argument.</p>
+    </div>
+
+    <p>There is a second force, and it is newer than any of the standards work. Adaptive systems built on large language models need a signal to adapt to. The quality of a tutoring system is bounded by the quality of what it can observe. A data model that records four facts at the end of a course cannot feed a system that is trying to make a decision every ninety seconds.</p>
+
+    <p>So the pull and the push arrive together. The old standard is frozen. The new one is ratified. And the thing everyone now wants to build cannot run on the old one.</p>
+  </section>
+
+  <!-- ── 02 WHAT SCORM CAN REPRESENT ─────────────────────────────────────── -->
+  <section>
+    <div class="section-label">02 · The constraint, stated precisely</div>
+    <h2>SCORM can branch. It cannot represent a road nobody drew.</h2>
+
+    <p>It is worth being fair to SCORM, because the usual criticism is lazy and the real limitation is more interesting.</p>
+
+    <p>SCORM's run&#8209;time data model reports a small set of values from content back to an LMS. Completion status. Success status. A scaled score. Session time. A bounded set of interaction records.<sup class="fn">1</sup> That is the working vocabulary, and everything an LMS knows about a learner's experience arrives through it.</p>
+
+    <p>SCORM 2004 also added Sequencing and Navigation, which is a genuine adaptivity mechanism. An author declares rules over an activity tree, and the LMS decides what the learner sees next. So the criticism that SCORM cannot adapt at all is wrong.</p>
+
+    <p>The limitation is narrower and much harder to work around. Sequencing operates over an activity tree that the author enumerated in advance, inside a single package, in a single launch session, reported to a single LMS. Every route a learner can take must already exist as a node someone drew.</p>
+
+    <p>That is the constraint that matters. A system that generates a response to a learner in the moment is, by definition, producing an activity nobody enumerated. There is no node for it. There is no completion flag that describes it. The record has nowhere to put it.</p>
+
+    <div class="callout reveal" style="text-align:left">
+      <h3 style="margin:0 0 10px">The consequence nobody planned</h3>
+      <p style="margin:0">Because the record could only hold a completion, content was built to produce completions. One route, one order, a quiz at the end because a quiz produces a score. Linear courses were not a finding about how people learn. They were the shape that fitted the record.</p>
+    </div>
+  </section>
+
+  <!-- ── 03 WHAT XAPI REPRESENTS ─────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">03 · What replaces it</div>
+    <h2>A statement is an assertion about a person, not a field in a form.</h2>
+
+    <p>xAPI records learning as statements with the shape actor, verb, object, with optional result and context. Statements are written to a Learning Record Store and are immutable once accepted.<sup class="fn">2,3</sup></p>
+
+    <p>Four properties matter for what follows.</p>
+
+    <div class="reveal">
+      <div class="feature"><div class="feature-num">1</div><div><h3>The vocabulary is open</h3><p>ADL publishes a verb set, and an implementer may define more. A verb is a design decision about what is worth noticing, not a field the standard hands you. This is the whole freedom, and also the whole risk.</p></div></div>
+      <div class="feature"><div class="feature-num">2</div><div><h3>It is not bound to a launch session</h3><p>A statement can come from a chat, a simulation, a workplace system, an assessor's phone. Learning outside the course is representable for the first time.</p></div></div>
+      <div class="feature"><div class="feature-num">3</div><div><h3>The object can be a criterion</h3><p>Nothing requires the object of a statement to be a course. It can be an assessment criterion, a learning outcome, a national occupational standard. This is the hinge that section five turns on.</p></div></div>
+      <div class="feature"><div class="feature-num">4</div><div><h3>Negative and partial events are first class</h3><p>Abandoned, dismissed, failed, interrupted. A learner leaving after four minutes is a statement. Under SCORM it is an absence of one.</p></div></div>
+    </div>
+
+
+    <div class="ix reveal">
+      <div class="ix-label">The same learner, two records</div>
+      <p class="ix-hint">One person, one forty minute session, working on a single assessment criterion. Switch between what each standard is able to write down.</p>
+      <div class="ix-tabs" role="tablist" aria-label="Record format">
+        <button class="ix-tab" role="tab" id="rc-t0" aria-controls="rc-p0" aria-selected="true">What SCORM records</button>
+        <button class="ix-tab" role="tab" id="rc-t1" aria-controls="rc-p1" aria-selected="false" tabindex="-1">What xAPI records</button>
+      </div>
+      <div class="ix-panel" role="tabpanel" id="rc-p0" aria-labelledby="rc-t0">
+<pre class="rec"><span class="k">cmi.completion_status</span>  <span class="v">completed</span>
+<span class="k">cmi.success_status</span>     <span class="v">passed</span>
+<span class="k">cmi.score.scaled</span>       <span class="v">0.82</span>
+<span class="k">cmi.session_time</span>       <span class="v">PT40M12S</span>
+<span class="muted">
+that is the whole record</span></pre>
+        <div class="verdict bad">
+          <p><b>Four facts, and none of them is the interesting one.</b> She got 82%. You cannot tell what she found hard, what she tried first, where she went back, or whether she can actually do the thing on Monday.</p>
+        </div>
+      </div>
+      <div class="ix-panel" role="tabpanel" id="rc-p1" aria-labelledby="rc-t1" hidden>
+<pre class="rec"><span class="k">09:02</span>  she <span class="v">initialised</span> the session
+<span class="k">09:05</span>  she <span class="v">attempted</span> the scenario, and failed it
+<span class="k">09:09</span>  she <span class="v">dismissed</span> the worked example we offered
+<span class="k">09:11</span>  she <span class="v">asked</span> "why does this break at scale"
+<span class="k">09:18</span>  she <span class="v">attempted</span> the scenario again, and passed
+<span class="k">09:26</span>  she <span class="v">reachedBloomLevel</span> evaluate
+<span class="k">09:34</span>  she <span class="v">demonstrated</span> against criterion ZFF-AU-05.2
+<span class="k">09:41</span>  she <span class="v">mastered</span> criterion ZFF-AU-05.2</pre>
+        <div class="verdict">
+          <p><b>The same forty minutes, described.</b> She refused the help, asked the better question, and got there on the second attempt. That sequence is what a tutor would have noticed, and it is the part a completion flag throws away.</p>
+        </div>
+      </div>
+    </div>
+
+    <p>To make that concrete rather than abstract, here is our own vocabulary. <a href="https://zavmo.ai">Zavmo</a> catalogues 217 event types. Alongside the standard ADL verbs it defines its own. <em>Discovered</em>, <em>discussed</em>, <em>delivered</em> and <em>demonstrated</em> mark the four phases of a learning loop. <em>Mastered</em> lands against a criterion. <em>ReachedBloomLevel</em> fires when a learner crosses a threshold of thinking. <em>Dismissed</em> fires when a learner rejects something the system recommended.</p>
+
+    <figure class="shot reveal">
+      <img src="./img/lesson.jpg" alt="A Zavmo lesson in progress. The right rail lists assessment criteria being ticked off. The left rail shows the learner's position on a ladder of thinking and a live feed of learning signals.">
+      <figcaption><b>A lesson, mid&#8209;session.</b> The right rail holds the assessment criteria, which do not move. The left shows where this learner currently sits on the ladder of thinking, and underneath it the learning signals firing as she works. That live feed is the statement stream in this paper, on screen, as it happens. The buttons at the foot of the card produce statements too. Choosing "I'm confused" or "Skip this one" is data.</figcaption>
+    </figure>
+
+    <p>Of those 217, 187 have a live emission point in the code, and 67 have actually fired in production, measured on 17 July 2026. We publish all three because they mean different things. Conflating them is how this field talks itself into believing it has data it does not have. Catalogued is an intention. Wired is an implementation. Observed is a fact. Only the third one is evidence.</p>
+  </section>
+
+  <section>
+    <div class="ix reveal">
+      <div class="ix-label">Verb explorer</div>
+      <p class="ix-hint">Pick a verb. See the assertion it makes, and what the older standard would have stored for the same moment.</p>
+      <div class="verbs" id="vb-list"></div>
+      <div class="vb-out">
+        <div class="vb-box x"><div class="h">The xAPI statement</div><p id="vb-x"></p></div>
+        <div class="vb-box s"><div class="h">What SCORM would hold</div><p id="vb-s"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 04 THE SCIENCE ──────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">04 · What the evidence says to adapt to</div>
+    <h2>Adaptivity is only as good as the variable it adapts on.</h2>
+
+    <p>A system that can observe anything still has to decide what to do about it. This is where most adaptive learning has gone wrong, and the research literature is clear enough to act on.</p>
+
+    <h3>Start with the ceiling</h3>
+    <p>Bloom's 1984 result is the reason anyone cares about personalisation: one&#8209;to&#8209;one mastery tutoring moved the average learner around two standard deviations above conventional class instruction.<sup class="fn">7</sup> Later work is more sober. VanLehn's 2011 review put human tutoring at an effect size of roughly 0.79. Intelligent tutoring systems came in at roughly 0.76. He described them as nearly as effective as human tutors.<sup class="fn">6</sup></p>
+    <p>That second finding is the more useful one. The advantage was never that the tutor was human. It was that the tutor could see what the learner was doing and respond to it.</p>
+
+    <h3>Adapt on prior knowledge and current performance</h3>
+    <p>The best&#8209;evidenced adaptive variable is what the learner already knows and how they are performing now. Knowledge tracing, introduced by Corbett and Anderson in 1994, models the probability that a learner has acquired a particular skill and updates it with each observed attempt.<sup class="fn">8</sup> Deep knowledge tracing later replaced the hand&#8209;built model with a recurrent network over the learner's interaction sequence.<sup class="fn">9</sup></p>
+    <p>Both require the same input: a sequence of observed attempts, tagged to a skill. That is an xAPI statement stream. It is not a completion flag.</p>
+
+    <h3>Adapt the schedule, not just the content</h3>
+    <p>Two of the largest and most replicated effects in the learning literature are about timing rather than material. Spacing practice across time outperforms massing it,<sup class="fn">10</sup> and retrieving information from memory outperforms restudying it.<sup class="fn">11</sup> Bjork's work on desirable difficulties makes the underlying point: conditions that slow performance during practice often improve retention afterwards.<sup class="fn">12</sup></p>
+    <p>This has an uncomfortable implication for adaptive systems. A system optimising for a smooth session is optimising against learning. Sometimes the correct adaptation is to make it harder, or to come back in nine days.</p>
+
+    <figure class="shot reveal">
+      <img src="./img/nick-demonstrate-q2-retry.png" alt="A Zavmo assessment question marked NOT QUITE, tagged to Learning Outcome 1, with the system telling the learner it will bring the question back at the end for another attempt.">
+      <figcaption><b>Spacing and honest marking, in the product.</b> The answer is marked <em>not quite</em> against the named learning outcome rather than silently scored down. Then the system says it will bring the question back at the end. That is distributed practice<sup class="fn">10</sup> and retrieval practice<sup class="fn">11</sup> as a scheduling decision, made from the statement stream rather than from a fixed course order.</figcaption>
+    </figure>
+
+    <h3>Manage load, and expect it to reverse</h3>
+    <p>Cognitive load theory explains why the same material must be presented differently to a novice and an expert.<sup class="fn">13</sup> Worked examples help beginners and start to hinder people who already know the material. Adaptivity here is not a nicety. Getting it wrong actively harms the more advanced learner.</p>
+
+    <h3>The thing not to adapt to</h3>
+    <p>The most popular basis for personalisation is the one with the least support. Pashler and colleagues reviewed the evidence for matching instruction to a learner's self&#8209;reported learning style. The studies needed to justify it had almost never been run. Those that met the standard did not support the practice.<sup class="fn">14</sup></p>
+    <p>We are saying this in our own white paper because it constrains our own product. Preference is worth collecting, because it affects whether somebody engages at all. It is not a sound basis for deciding what a learner is taught. Prior knowledge, observed performance and time since last retrieval are.</p>
+
+    <div class="quote reveal">
+      <p>Personalisation that adapts to what someone says they prefer is a comfort feature. Personalisation that adapts to what they have just demonstrated is an instructional one.</p>
+    </div>
+  </section>
+
+  <!-- ── 05 THE ASSESSMENT PROBLEM ───────────────────────────────────────── -->
+  <section>
+    <div class="section-label">05 · The heart of it</div>
+    <h2>How a free route and a fixed outcome are compatible.</h2>
+
+    <p>Here is the objection that stops most adaptive projects, and it is a good objection. If every learner takes a different route, what exactly is being certified? An external verifier is entitled to ask how two learners who did different things can hold the same qualification.</p>
+
+    <p>The answer is not new and it is not a technology answer. It comes from two established frameworks in assessment design, and the whole architecture in the next section is an implementation of them.</p>
+
+    <h3>Constructive alignment</h3>
+    <p>Biggs set out the principle in 1996. The intended learning outcome is the fixed point of a course, and teaching and assessment are designed backwards from it.<sup class="fn">15</sup> The outcome states what the learner must be able to do. It does not state how they got there. Under this framing a varied route is not a compromise. It is the design working as intended, so long as every route terminates in the same demonstrated capability.</p>
+
+    <h3>Evidence&#8209;centred design</h3>
+    <p>Mislevy, Steinberg and Almond made this operational for assessment.<sup class="fn">16</sup> Their framework separates three things that are usually collapsed together:</p>
+
+    <div class="grid cols-2 reveal">
+      <div class="card"><span class="chip walk">Fixed</span><h3>The student model</h3><p>What we want to claim about the learner. In a regulated qualification this is the assessment criterion, written down and levelled.</p></div>
+      <div class="card"><span class="chip walk">Fixed</span><h3>The evidence model</h3><p>What observation would justify that claim, and how an observation is scored into it. This is the part that protects the qualification.</p></div>
+      <div class="card"><span class="chip concept">Variable</span><h3>The task model</h3><p>The situation that produces the observation. Explicitly a design variable. Many tasks can yield the same evidence.</p></div>
+    </div>
+
+    <p>Read those three together and the objection dissolves. The claim is fixed. The rule for what counts as evidence for the claim is fixed. The task is the only thing free to move, and it was always meant to be.</p>
+
+    <p>This is why an adaptive system and a regulated qualification are not in tension. They are in tension only when the task is mistaken for the outcome. That is exactly the mistake a completion flag encourages, because a completion flag can only refer to a task.</p>
+
+    <h3>What it looks like on one criterion</h3>
+    <p>Take a single assessment criterion at Level 5: the learner can evaluate where an AI tool should and should not be used in their own department's work.</p>
+
+    <div class="reveal">
+      <div class="feature"><div class="feature-num">A</div><div><h3>One learner reads and writes</h3><p>Studies the material, produces a written evaluation of three processes in their department.</p></div></div>
+      <div class="feature"><div class="feature-num">B</div><div><h3>One learner argues</h3><p>Debates the question with a teaching character until they can defend a position against challenge, and the exchange is the evidence.</p></div></div>
+      <div class="feature"><div class="feature-num">C</div><div><h3>One learner builds</h3><p>Automates a real task badly, sees what breaks, reasons about why that class of work resisted it, and rebuilds.</p></div></div>
+    </div>
+
+
+    <div class="ix reveal">
+      <div class="ix-label">Three routes, one claim</div>
+      <p class="ix-hint">Pick a learner. The route changes completely. Look at what does not change underneath.</p>
+      <div class="ix-tabs" role="tablist" aria-label="Learner route">
+        <button class="ix-tab" role="tab" id="rt-t0" aria-controls="rt-p0" aria-selected="true">She reads and writes</button>
+        <button class="ix-tab" role="tab" id="rt-t1" aria-controls="rt-p1" aria-selected="false" tabindex="-1">He argues it out</button>
+        <button class="ix-tab" role="tab" id="rt-t2" aria-controls="rt-p2" aria-selected="false" tabindex="-1">They build it badly</button>
+      </div>
+      <div class="ix-panel" role="tabpanel" id="rt-p0" aria-labelledby="rt-t0">
+<pre class="rec">she <span class="v">experienced</span> the guidance on tool selection
+she <span class="v">attempted</span> a written evaluation of three processes
+she <span class="v">reachedBloomLevel</span> evaluate
+she <span class="v">mastered</span> criterion ZFF-AU-05.2</pre>
+      </div>
+      <div class="ix-panel" role="tabpanel" id="rt-p1" aria-labelledby="rt-t1" hidden>
+<pre class="rec">he <span class="v">discussed</span> tool selection with a teaching character
+he <span class="v">responded</span> to four challenges to his position
+he <span class="v">reachedBloomLevel</span> evaluate
+he <span class="v">mastered</span> criterion ZFF-AU-05.2</pre>
+      </div>
+      <div class="ix-panel" role="tabpanel" id="rt-p2" aria-labelledby="rt-t2" hidden>
+<pre class="rec">they <span class="v">attempted</span> automating a real weekly task
+they <span class="v">failed</span> it, and said why in their own words
+they <span class="v">attempted</span> it again on a narrower process
+they <span class="v">reachedBloomLevel</span> evaluate
+they <span class="v">mastered</span> criterion ZFF-AU-05.2</pre>
+      </div>
+      <div class="claim">
+        <div class="claim-l">Constant across all three</div>
+        <p>Criterion <b>ZFF-AU-05.2</b>, at Level 5. The learner can evaluate where an AI tool should and should not be used in their own department's work. Same criterion, same evidence rule, same level of thinking demanded. Only the task moved, and the task was always the variable.</p>
+      </div>
+    </div>
+
+    <p>Three tasks, three routes, three very different sessions. One evidence model. Each produces a statement asserting mastery against the same criterion identifier, with the working attached. A verifier reads the same claim in all three cases and can inspect what produced it. All three routes are live on <a href="https://zavmo.ai">Zavmo.ai</a> today.</p>
+
+    <figure class="shot reveal">
+      <img src="./img/demonstrate.jpg" alt="The Zavmo demonstrate screen. It states that the learner's evidence is reviewed against each assessment criterion, with modules listed underneath and the level of thinking each one reaches.">
+      <figcaption><b>The claim, not the course.</b> Evidence is reviewed against each assessment criterion, and each module carries the band of thinking it reaches rather than a percentage. This is the evidence model made visible to the learner, which is the part a completion certificate cannot show them.</figcaption>
+    </figure>
+
+    <p>Under SCORM this is not merely hard. It is unrepresentable, because there is one completion flag and it refers to the course, not the criterion.</p>
+  </section>
+
+  <!-- ── 06 ARCHITECTURE ─────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">06 · The architecture that follows</div>
+    <h2>Four parts, and only one of them moves.</h2>
+
+    <p>If the frameworks above are right, the system design falls out of them almost mechanically.</p>
+
+    <div class="reveal">
+      <div class="feature"><div class="feature-num">1</div><div><h3>A criterion registry</h3><p>Every learning outcome and assessment criterion has a stable identifier and a level. This is the fixed spine. It changes through a specification revision, never at runtime, and never because a learner did something unexpected.</p></div></div>
+      <div class="feature"><div class="feature-num">2</div><div><h3>A statement stream</h3><p>Everything the learner does, as xAPI statements, tagged with the criterion in play, the level of thinking demanded, and the session. This is the only part that varies freely.</p></div></div>
+      <div class="feature"><div class="feature-num">3</div><div><h3>An evidence model</h3><p>The rule that decides which statements, in which combination, justify a claim of mastery against a criterion. Authored deliberately, reviewable by a verifier, versioned like code.</p></div></div>
+      <div class="feature"><div class="feature-num">4</div><div><h3>A learner state model</h3><p>The running estimate of what this person can currently do, updated from the stream, used to choose what happens next. This is where knowledge tracing lives.</p></div></div>
+    </div>
+
+    <figure class="shot reveal">
+      <img src="./img/path.jpg" alt="A Zavmo learning path, built from the individual learner's own starting point rather than from a fixed course order.">
+      <figcaption><b>The learner state model, from the learner's side.</b> The path is built from this person's own baseline, so two people on the same qualification see different routes. The criteria underneath both routes are identical.</figcaption>
+    </figure>
+
+    <p>The audit trail is the statement stream itself. An external verifier does not read a completion report. They read what the learner did, in order, with the evidence model that turned it into a claim sitting alongside it. That is a stronger audit position than the one it replaces, not a weaker one. It is also the argument to make to a quality manager, rather than the argument about personalisation.</p>
+
+    <figure class="shot reveal">
+      <img src="./img/nick-deliver-mastery.png" alt="A Zavmo lesson where the coaching text names assessment criterion 2.2 directly, with the learning outcome and its assessment criteria listed in the right rail and the learner's position on the thinking ladder on the left.">
+      <figcaption><b>The criterion is addressable, so the teaching can point at it.</b> The coaching text names criterion 2.2 and says what it asks for. The right rail lists the criteria, and the left shows the level of thinking currently reached. Fixed spine, moving route, both on screen at once.</figcaption>
+    </figure>
+
+    <p>This is how <a href="https://zavmo.ai">Zavmo</a> is built, and the four parts above are the actual shape of it rather than a reference design. One deliberate constraint is worth naming. The generative part of the system chooses tasks and responses. It does not choose criteria, and it does not decide whether a criterion has been met. Those two decisions sit with the fixed registry and the authored evidence model. A system that lets a model invent the standard it is being judged against has no standard.</p>
+  </section>
+
+  <!-- ── 07 WHAT BREAKS ──────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">07 · What is genuinely hard</div>
+    <h2>The plumbing is the easy half.</h2>
+
+    <p>Anyone who tells you this is a migration project has not done it. Four things are harder than the technology.</p>
+
+    <div class="grid cols-2 reveal">
+      <div class="card"><span class="chip client">Hard</span><h3>Choosing the verbs</h3><p>An open vocabulary means every verb is a decision about what is worth measuring. A badly chosen verb is a badly chosen measure that then looks like data. This is instructional design work, not engineering work, and it is usually given to the wrong people.</p></div>
+      <div class="card"><span class="chip client">Hard</span><h3>Wiring what you catalogued</h3><p>The gap between events you designed and events that actually fire is real and it is large. Ours is 217 catalogued against 67 observed. Anyone claiming rich learning data should count theirs before quoting it.</p></div>
+      <div class="card"><span class="chip client">Hard</span><h3>Validity</h3><p>A statement is not evidence because it exists. It is evidence because an evidence model says it bears on a claim. Without that step you have replaced one weak measure with a very large number of weak measures.</p></div>
+      <div class="card"><span class="chip client">Hard</span><h3>Privacy</h3><p>Process data is more revealing than completion data. Hesitation, abandonment and repeated failure describe a person in a way a score does not. Data minimisation, retention limits and a lawful basis are design inputs here, not paperwork afterwards.</p></div>
+    </div>
+
+    <p>The privacy point deserves one more line, because it is the one most likely to be skipped. The argument of this paper is that you should capture how somebody learns. That is a more intimate record than what they scored, and it belongs to them. Anyone building this should be able to say what they collect, why, for how long, and how a learner gets it deleted, before the first statement is written.</p>
+  </section>
+
+  <!-- ── 08 WHAT TO DO ───────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">08 · Where to start</div>
+    <h2>Not with a migration.</h2>
+
+    <div class="reveal">
+      <div class="feature"><div class="feature-num">1</div><div><h3>Write down what you cannot currently see</h3><p>Take one course you already run. List the things you wish you knew about the people taking it that your LMS cannot tell you. Most of them will not be scores.</p></div></div>
+      <div class="feature"><div class="feature-num">2</div><div><h3>Count what your systems have actually recorded</h3><p>Not what the specification says they can record. What has fired. The gap is usually the whole story, and it is a one afternoon exercise.</p></div></div>
+      <div class="feature"><div class="feature-num">3</div><div><h3>Fix your outcomes before you free your routes</h3><p>Stable criterion identifiers and an authored evidence model come first. Adaptivity on top of vague outcomes produces variety without assurance, which is the worst of both.</p></div></div>
+      <div class="feature"><div class="feature-num">4</div><div><h3>Instrument one criterion end to end</h3><p>One criterion, more than one route to it, statements landing against the criterion rather than the course. Take that to your quality lead before you take it to your board. If you would rather see one working first, take a session on <a href="https://zavmo.ai">Zavmo.ai</a>.</p></div></div>
+      <div class="feature"><div class="feature-num">5</div><div><h3>Use cmi5 if you are keeping your LMS</h3><p>It exists precisely so this is not an all or nothing decision.<sup class="fn">4</sup></p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="ix reveal">
+      <div class="ix-label">Count your own gap</div>
+      <p class="ix-hint">Eight things a good tutor would notice about a learner. Tick the ones your current system could actually answer for a named person, this afternoon, without asking them.</p>
+      <div class="chk" id="chk">
+        <label><input type="checkbox"> Which part she went back to, and how many times</label>
+        <label><input type="checkbox"> Whether she refused a hint before she got it right</label>
+        <label><input type="checkbox"> The order she chose to do things in</label>
+        <label><input type="checkbox"> Where she stopped and did not come back that day</label>
+        <label><input type="checkbox"> Whether she can still do it nine days later</label>
+        <label><input type="checkbox"> Which specific criterion she is weakest against</label>
+        <label><input type="checkbox"> Whether she asked a better question at the end than the start</label>
+        <label><input type="checkbox"> What she would need next, on the evidence rather than the syllabus</label>
+      </div>
+      <div class="tally">
+        <span class="n" id="chk-n">0</span>
+        <p id="chk-t">Nothing ticked yet. Tick what your system can genuinely answer, not what it stores somewhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">What the stream is for</div>
+    <h2>The end of a course, with no percentage on it.</h2>
+    <figure class="shot reveal">
+      <img src="./img/andy-demonstrate-how-you-learned.png" alt="A Zavmo end-of-course summary telling the learner how they learned: their strongest mode, the level of thinking they reached, which guide they leaned on, when they work best, and questions to get curious about.">
+      <figcaption><b>Every line of this is built from statements.</b> The verbs the learner actually produced, the level of thinking they climbed to, which guide they leaned on, when they do their best work. None of it is answerable from a completion flag. Take a session on <a href="https://zavmo.ai">Zavmo.ai</a> and this is what waits at the end of it.</figcaption>
+    </figure>
+  </section>
+
+  <!-- ── CALLOUT / CTA ───────────────────────────────────────────────────── -->
+  <section>
+    <div class="callout reveal">
+      <h2 style="margin-bottom:10px">Reading about it is the weakest version of this.</h2>
+      <p style="margin-bottom:8px">Zavmo is built the way this paper describes. Fixed criteria, free routes, a statement for every step, and an evidence model that turns them into a claim a verifier can inspect.</p>
+      <p style="margin-bottom:22px">Go and take a session. You will produce the statements yourself, which is a faster way to understand the argument than another page of it.</p>
+      <a class="btn btn-primary" href="https://zavmo.ai">Experience it on Zavmo.ai</a>
+      <a class="btn btn-ghost" href="../">Back to all proposals</a>
+    </div>
+  </section>
+
+  <!-- ── REFERENCES ──────────────────────────────────────────────────────── -->
+  <section>
+    <div class="section-label">References and sources</div>
+    <h2>Every claim, traceable.</h2>
+    <ol class="refs">
+      <li><b>SCORM.</b> Advanced Distributed Learning, Sharable Content Object Reference Model. SCORM 2004 4th Edition released March 2009 and remains the final SCORM edition. Run&#8209;time data model reports completion status, success status, score and session time to an LMS. Version history and overview at <a href="https://scorm.com/scorm-explained/">scorm.com/scorm-explained</a>.</li>
+      <li><b>IEEE 9274.1.1&#8209;2023.</b> <em>IEEE Standard for Learning Technology, JavaScript Object Notation (JSON) Data Model Format and Representational State Transfer (RESTful) Web Service for Learner Experience Data Tracking and Access.</em> Standards board approved 30 March 2023, published 6 October 2023. Described by IEEE as a collaborative effort to improve and standardise the xAPI 1.0.3 specification. <a href="https://standards.ieee.org/ieee/9274.1.1/7321/">standards.ieee.org/ieee/9274.1.1</a>.</li>
+      <li><b>xAPI.</b> Advanced Distributed Learning, Experience API. Actor, verb, object statements written to a Learning Record Store, recording experiences beyond a single LMS. Originated as Project Tin Can, version 1.0 in 2013.</li>
+      <li><b>cmi5.</b> An xAPI profile defining launch, authorisation, reporting and course structure so an LMS can run xAPI content. Released June 2016. Adoption supported by the cmi5 CATAPULT project. <a href="https://xapi.com/cmi5/">xapi.com/cmi5</a>.</li>
+      <li><b>Caliper Analytics.</b> 1EdTech, current version 1.2. A parallel standard for capturing learning activity through metric profiles and a common labelling vocabulary. <a href="https://www.1edtech.org/standards/caliper">1edtech.org/standards/caliper</a>.</li>
+      <li><b>VanLehn, K.</b> (2011) The relative effectiveness of human tutoring, intelligent tutoring systems, and other tutoring systems. <em>Educational Psychologist</em>, 46(4), 197&#8209;221. Human tutoring effect size approximately 0.79, intelligent tutoring systems approximately 0.76.</li>
+      <li><b>Bloom, B. S.</b> (1984) The 2 sigma problem: the search for methods of group instruction as effective as one&#8209;to&#8209;one tutoring. <em>Educational Researcher</em>, 13(6), 4&#8209;16.</li>
+      <li><b>Corbett, A. T. &amp; Anderson, J. R.</b> (1994) Knowledge tracing: modeling the acquisition of procedural knowledge. <em>User Modeling and User&#8209;Adapted Interaction</em>, 4, 253&#8209;278. <a href="https://doi.org/10.1007/BF01099821">doi:10.1007/BF01099821</a></li>
+      <li><b>Piech, C., Bassen, J., Huang, J., Ganguli, S., Sahami, M., Guibas, L. J. &amp; Sohl&#8209;Dickstein, J.</b> (2015) Deep knowledge tracing. <em>Advances in Neural Information Processing Systems</em> 28. <a href="https://proceedings.neurips.cc/paper/2015/file/bac9162b47c56fc8a4d2a519803d51b3-Paper.pdf">proceedings.neurips.cc</a></li>
+      <li><b>Cepeda, N. J., Pashler, H., Vul, E., Wixted, J. T. &amp; Rohrer, D.</b> (2006) Distributed practice in verbal recall tasks: a review and quantitative synthesis. <em>Psychological Bulletin</em>, 132(3), 354&#8209;380. A meta&#8209;analysis of 839 assessments across 317 experiments.</li>
+      <li><b>Roediger, H. L. &amp; Karpicke, J. D.</b> (2006) Test&#8209;enhanced learning: taking memory tests improves long&#8209;term retention. <em>Psychological Science</em>, 17(3), 249&#8209;255. <a href="https://doi.org/10.1111/j.1467-9280.2006.01693.x">doi:10.1111/j.1467-9280.2006.01693.x</a></li>
+      <li><b>Bjork, E. L. &amp; Bjork, R. A.</b> (2011) Making things hard on yourself, but in a good way: creating desirable difficulties to enhance learning. In <em>Psychology and the Real World: Essays Illustrating Fundamental Contributions to Society</em>.</li>
+      <li><b>Sweller, J.</b> (1988) Cognitive load during problem solving: effects on learning. <em>Cognitive Science</em>, 12(2), 257&#8209;285. <a href="https://doi.org/10.1207/s15516709cog1202_4">doi:10.1207/s15516709cog1202_4</a></li>
+      <li><b>Pashler, H., McDaniel, M., Rohrer, D. &amp; Bjork, R.</b> (2008) Learning styles: concepts and evidence. <em>Psychological Science in the Public Interest</em>, 9(3), 105&#8209;119.</li>
+      <li><b>Biggs, J.</b> (1996) Enhancing teaching through constructive alignment. <em>Higher Education</em>, 32(3), 347&#8209;364. <a href="https://doi.org/10.1007/BF00138871">doi:10.1007/BF00138871</a></li>
+      <li><b>Mislevy, R. J., Steinberg, L. S. &amp; Almond, R. G.</b> (2003) Focus article: on the structure of educational assessments. <em>Measurement: Interdisciplinary Research and Perspectives</em>, 1(1), 3&#8209;62. The student, evidence and task model framework known as evidence&#8209;centred design.</li>
+      <li><b>Anderson, L. W. &amp; Krathwohl, D. R.</b> (eds, 2001) <em>A Taxonomy for Learning, Teaching, and Assessing: A Revision of Bloom's Taxonomy.</em> The revised taxonomy states cognitive processes as action verbs.</li>
+      <li><b>Zavmo emission audit.</b> <a href="https://zavmo.ai">zavmo.ai</a>. 217 event types catalogued, 187 with a live emission point in code, 67 observed in production. Measured 17 July 2026 by a deterministic code audit and a production query.</li>
+      <li><b>Denny, J.</b> (2026) <em>Measured in verbs: hyper personalised learning in the age of AI.</em> Companion paper. juliettedenny.com</li>
+    </ol>
+    <p class="note">Every source above was checked directly against the publisher, the journal or the standards body, on 10 September 2026. Volume and page numbers are given so any claim here can be followed to its origin. Source 18 is our own measurement, taken by a code audit and a production query rather than an estimate. Where a figure could not be attributed to a named source it does not appear in this paper at all.</p>
+  </section>
+
+  <footer>
+    Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
+    Zavmo · September 2026. Shareable with attribution.
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var g=document.getElementById('halo'), n=12, cx=50, cy=50, r=38;
+  for(var i=0;i<n;i++){
+    var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
+    var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',x.toFixed(1)); c.setAttribute('cy',y.toFixed(1)); c.setAttribute('r','2.4');
+    c.setAttribute('fill','#3FE4BC'); c.setAttribute('opacity', i%2?'0.55':'0.9');
+    g.appendChild(c);
+  }
+
+  // Tabs for the three interactive blocks. One controller, arrow-key aware.
+  document.querySelectorAll('[role="tablist"]').forEach(function(list){
+    var tabs = [].slice.call(list.querySelectorAll('[role="tab"]'));
+    function select(tab){
+      tabs.forEach(function(t){
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (panel) panel.hidden = !on;
+      });
+    }
+    tabs.forEach(function(tab, i){
+      tab.addEventListener('click', function(){ select(tab); });
+      tab.addEventListener('keydown', function(e){
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!d) return;
+        e.preventDefault();
+        var next = tabs[(i + d + tabs.length) % tabs.length];
+        select(next); next.focus();
+      });
+    });
+  });
+
+
+  // Verb explorer. Each entry: the assertion, and what SCORM would have held.
+  var VERBS = [
+    ['mastered',   'she mastered criterion ZFF-AU-05.2',            'A score against a course. The criterion is not addressable, so the claim cannot be made about it.'],
+    ['dismissed',  'she dismissed the worked example we offered',   'Nothing. Refusing help is not an event, so the strongest signal that she wanted to work it out herself is lost.'],
+    ['abandoned',  'she abandoned the module after four minutes',   'An absence. The record simply stays incomplete, which reads the same as never having started.'],
+    ['asked',      'she asked "why does this break at scale"',       'Nothing. The question a learner chooses to ask is the clearest evidence of where their thinking is, and there is no field for it.'],
+    ['reachedBloomLevel', 'she reachedBloomLevel evaluate',          'Nothing. Level of thinking has no representation, so a hard question and an easy one score the same.'],
+    ['attempted',  'she attempted the scenario, and failed it',      'A failed attempt can be stored, but only against the course, and usually only the last one.'],
+    ['discussed',  'she discussed tool selection with a character',  'Nothing. There is no activity type for a conversation, so this route to the outcome cannot be evidenced at all.'],
+    ['demonstrated','she demonstrated against criterion ZFF-AU-05.2','A pass flag on a quiz. What she actually did to earn it is not part of the record.']
+  ];
+  var vbList = document.getElementById('vb-list');
+  if (vbList) {
+    var vbX = document.getElementById('vb-x'), vbS = document.getElementById('vb-s');
+    VERBS.forEach(function(v, i){
+      var b = document.createElement('button');
+      b.className = 'verb'; b.type = 'button'; b.textContent = v[0];
+      b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+      b.addEventListener('click', function(){
+        vbList.querySelectorAll('.verb').forEach(function(o){ o.setAttribute('aria-pressed','false'); });
+        b.setAttribute('aria-pressed','true');
+        vbX.textContent = v[1]; vbS.textContent = v[2];
+      });
+      vbList.appendChild(b);
+    });
+    vbX.textContent = VERBS[0][1]; vbS.textContent = VERBS[0][2];
+  }
+
+  // Count your own gap.
+  var chk = document.getElementById('chk');
+  if (chk) {
+    var boxes = [].slice.call(chk.querySelectorAll('input'));
+    var n = document.getElementById('chk-n'), t = document.getElementById('chk-t');
+    var LINES = [
+      'Nothing ticked yet. Tick what your system can genuinely answer, not what it stores somewhere.',
+      'One. That is the shape of most estates, and it is not a failure of effort. It is the shape of the record.',
+      'Two. Both of those are probably scores. Notice that none of the process questions have gone in yet.',
+      'Three. Better than most. The ones still unticked are the ones a tutor would have answered without thinking.',
+      'Four. Half. You are almost certainly already emitting more than your reports read back.',
+      'Five. Strong. At this point the constraint is usually your reporting layer rather than your data.',
+      'Six. Unusual. You are running something well instrumented, and the last two are the hard ones for everybody.',
+      'Seven. Rare. Worth writing up, because most of the field would like to know how.',
+      'Eight. If all eight are genuinely true today, we would like to talk to you rather than the other way round.'
+    ];
+    var update = function(){
+      var c = boxes.filter(function(b){ return b.checked; }).length;
+      n.textContent = c; t.textContent = LINES[c];
+    };
+    boxes.forEach(function(b){ b.addEventListener('change', update); });
+    update();
+  }
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var els = document.querySelectorAll('.reveal');
+  if(reduce || !('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('in')}); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {threshold:.12});
+  els.forEach(function(e){ io.observe(e); });
+})();
+</script>
+</body>
+</html>

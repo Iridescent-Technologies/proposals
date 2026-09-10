@@ -57,6 +57,11 @@
       "match": "\\.html$"
     },
     {
+      "dir": "the-argument-for-xapi",
+      "tier": "hard",
+      "match": "\\.html$"
+    },
+    {
       "dir": "making-learning-unique",
       "tier": "hard",
       "match": "\\.html$"

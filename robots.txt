@@ -1,25 +1,39 @@
-# These are proposal and demo pages. They are written to be SENT to a named
-# person, not found by a stranger.
+# Most of this suite is public and meant to be found. Three pages are not.
 #
-# WHY THIS MATTERS MORE THAN IT LOOKS. Several of them carry titles like
-# "Level 5 Diploma in Future Fluency · specification" and name Gateway
-# Qualifications beside a draft that has not been submitted. The body copy
-# hedges properly. A search result does not show the body copy, it shows the
-# title, and Zavmo is mid-application with three awarding bodies who can search.
+# The whole suite used to refuse indexing. Every page carried a noindex meta
+# tag because the decks were sent to named people rather than found by
+# strangers. That was reversed on 10 September 2026: the suite is now the
+# public library, so the crawl is allowed and indexing is allowed with it.
 #
-# Note what this file deliberately does NOT say: "Disallow: /".
+# THREE EXCEPTIONS, AND THE FIRST TWO ARE THE ONES THAT MATTER.
 #
-# Blocking the crawl and asking to be de-indexed are different things, and doing
-# the first prevents the second. A URL blocked here is never fetched, so the
-# noindex meta tag on every page is never read, and anything already indexed
-# stays there with no way to remove it. Google's own guidance is to allow the
-# crawl so the noindex can be seen.
+#   qualifications-level-3/   Level 3 Future Fluency qualifications
+#   qualifications-level-5/   Level 5 Diploma in Future Fluency, specification
 #
-# So: crawling is allowed, indexing is refused by the meta tag on each page. If
-# you are tempted to tighten this to "Disallow: /", that is the trap. Don't.
+# Both are specifications that have NOT been submitted to an awarding body,
+# and their titles say the word "qualification" without saying "draft". The
+# body copy hedges properly. A search result does not show the body copy, it
+# shows the title, and Zavmo is mid-application with awarding bodies who can
+# search for exactly this. So those two keep the noindex meta tag and are left
+# out of sitemap.xml.
 #
-# None of this stops anyone opening a link she sends them. It only stops the
-# pages turning up in a search nobody intended.
+#   _template/                a placeholder deck, not content
+#
+# Note what this file deliberately does NOT say: "Disallow:" for those two.
+#
+# Blocking the crawl and asking to be de-indexed are different things, and
+# doing the first prevents the second. A URL blocked here is never fetched, so
+# the noindex meta tag is never read, and anything already indexed stays there
+# with no way to remove it. Google's own guidance is to allow the crawl so the
+# noindex can be seen. _template is disallowed because nothing there ever needs
+# de-indexing.
+#
+# ADDING A PAGE. Ask how its title reads on its own, with no body copy under
+# it. If that would embarrass an awarding body application, either retitle it
+# or give it the noindex tag and keep it out of the sitemap.
 
 User-agent: *
 Allow: /
+Disallow: /_template/
+
+Sitemap: https://iridescent-technologies.github.io/proposals/sitemap.xml
