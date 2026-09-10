@@ -1,25 +1,23 @@
-# These are proposal and demo pages. They are written to be SENT to a named
-# person, not found by a stranger.
+# These pages are public. They are meant to be found.
 #
-# WHY THIS MATTERS MORE THAN IT LOOKS. Several of them carry titles like
-# "Level 5 Diploma in Future Fluency · specification" and name Gateway
-# Qualifications beside a draft that has not been submitted. The body copy
-# hedges properly. A search result does not show the body copy, it shows the
-# title, and Zavmo is mid-application with three awarding bodies who can search.
+# This file used to allow the crawl while every page refused indexing with a
+# meta tag. That was deliberate at the time: the suite was sent to named people,
+# and two pages carry qualification specifications that are drafts.
 #
-# Note what this file deliberately does NOT say: "Disallow: /".
+# That decision was reversed on 10 September 2026. The suite is now the public
+# library, so the crawl is allowed and indexing is allowed with it.
 #
-# Blocking the crawl and asking to be de-indexed are different things, and doing
-# the first prevents the second. A URL blocked here is never fetched, so the
-# noindex meta tag on every page is never read, and anything already indexed
-# stays there with no way to remove it. Google's own guidance is to allow the
-# crawl so the noindex can be seen.
+# WHAT THAT MEANS, AND IT IS WORTH KNOWING BEFORE ADDING A PAGE HERE. A search
+# result shows the title, never the hedge in the body copy. Two pages name a
+# qualification specification that has not been submitted to an awarding body,
+# and Zavmo is mid-application with awarding bodies who can search. If a new
+# page would read badly as a bare title in a search result, give it a title that
+# reads correctly on its own, or put the noindex meta tag back on that one page.
 #
-# So: crawling is allowed, indexing is refused by the meta tag on each page. If
-# you are tempted to tighten this to "Disallow: /", that is the trap. Don't.
-#
-# None of this stops anyone opening a link she sends them. It only stops the
-# pages turning up in a search nobody intended.
+# _template is excluded below. It is a placeholder deck, not content.
 
 User-agent: *
 Allow: /
+Disallow: /_template/
+
+Sitemap: https://iridescent-technologies.github.io/proposals/sitemap.xml
