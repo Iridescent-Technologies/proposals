@@ -308,7 +308,7 @@
 
     <p>Its successor did not stall. The Experience API was published by Advanced Distributed Learning, the same US defence research programme that produced SCORM.<sup class="fn">3</sup> In 2023 it left that programme and became a formal international standard: IEEE 9274.1.1&#8209;2023, <em>IEEE Standard for Learning Technology, JavaScript Object Notation (JSON) Data Model Format and Representational State Transfer (RESTful) Web Service for Learner Experience Data Tracking and Access</em>. The IEEE Standards Association board approved it on 30 March 2023 and published it on 6 October 2023. It is built directly on the xAPI 1.0.3 specification.<sup class="fn">2</sup></p>
 
-    <p>Two supporting moves sit either side of it. cmi5, released in 2016, is the profile that lets an ordinary LMS launch and authorise xAPI content, so an organisation can move without abandoning the system it already runs.<sup class="fn">4</sup> In education rather than corporate training, 1EdTech's Caliper Analytics is doing the same job with a different vocabulary, now at version 1.2.<sup class="fn">5</sup></p>
+    <p>Two supporting moves sit either side of it. cmi5, released in 2016, is the profile that lets an ordinary LMS launch and authorise xAPI content. An organisation can move without abandoning the system it already runs.<sup class="fn">4</sup> In education rather than corporate training, 1EdTech's Caliper Analytics is doing the same job with a different vocabulary, now at version 1.2.<sup class="fn">5</sup></p>
 
 
     <div class="ix reveal">
@@ -425,7 +425,7 @@ that is the whole record</span></pre>
       <figcaption><b>A lesson, mid&#8209;session.</b> The right rail holds the assessment criteria, which do not move. The left shows where this learner currently sits on the ladder of thinking, and underneath it the learning signals firing as she works. That live feed is the statement stream in this paper, on screen, as it happens. The buttons at the foot of the card produce statements too. Choosing "I'm confused" or "Skip this one" is data.</figcaption>
     </figure>
 
-    <p>Of those 217, 187 have a live emission point in the code, and 67 have actually fired in production, measured on 17 July 2026. We publish all three numbers because they mean different things and conflating them is how this field talks itself into believing it has data it does not have. Catalogued is an intention. Wired is an implementation. Observed is a fact. Only the third one is evidence.</p>
+    <p>Of those 217, 187 have a live emission point in the code, and 67 have actually fired in production, measured on 17 July 2026. We publish all three because they mean different things. Conflating them is how this field talks itself into believing it has data it does not have. Catalogued is an intention. Wired is an implementation. Observed is a fact. Only the third one is evidence.</p>
   </section>
 
   <section>
@@ -448,7 +448,7 @@ that is the whole record</span></pre>
     <p>A system that can observe anything still has to decide what to do about it. This is where most adaptive learning has gone wrong, and the research literature is clear enough to act on.</p>
 
     <h3>Start with the ceiling</h3>
-    <p>Bloom's 1984 result is the reason anyone cares about personalisation: one&#8209;to&#8209;one mastery tutoring moved the average learner around two standard deviations above conventional class instruction.<sup class="fn">7</sup> Later work is more sober. VanLehn's 2011 review put human tutoring at an effect size of roughly 0.79 and intelligent tutoring systems at roughly 0.76, close enough that he described them as nearly as effective as human tutors.<sup class="fn">6</sup></p>
+    <p>Bloom's 1984 result is the reason anyone cares about personalisation: one&#8209;to&#8209;one mastery tutoring moved the average learner around two standard deviations above conventional class instruction.<sup class="fn">7</sup> Later work is more sober. VanLehn's 2011 review put human tutoring at an effect size of roughly 0.79. Intelligent tutoring systems came in at roughly 0.76. He described them as nearly as effective as human tutors.<sup class="fn">6</sup></p>
     <p>That second finding is the more useful one. The advantage was never that the tutor was human. It was that the tutor could see what the learner was doing and respond to it.</p>
 
     <h3>Adapt on prior knowledge and current performance</h3>
@@ -458,6 +458,11 @@ that is the whole record</span></pre>
     <h3>Adapt the schedule, not just the content</h3>
     <p>Two of the largest and most replicated effects in the learning literature are about timing rather than material. Spacing practice across time outperforms massing it,<sup class="fn">10</sup> and retrieving information from memory outperforms restudying it.<sup class="fn">11</sup> Bjork's work on desirable difficulties makes the underlying point: conditions that slow performance during practice often improve retention afterwards.<sup class="fn">12</sup></p>
     <p>This has an uncomfortable implication for adaptive systems. A system optimising for a smooth session is optimising against learning. Sometimes the correct adaptation is to make it harder, or to come back in nine days.</p>
+
+    <figure class="shot reveal">
+      <img src="./img/nick-demonstrate-q2-retry.png" alt="A Zavmo assessment question marked NOT QUITE, tagged to Learning Outcome 1, with the system telling the learner it will bring the question back at the end for another attempt.">
+      <figcaption><b>Spacing and honest marking, in the product.</b> The answer is marked <em>not quite</em> against the named learning outcome rather than silently scored down. Then the system says it will bring the question back at the end. That is distributed practice<sup class="fn">10</sup> and retrieval practice<sup class="fn">11</sup> as a scheduling decision, made from the statement stream rather than from a fixed course order.</figcaption>
+    </figure>
 
     <h3>Manage load, and expect it to reverse</h3>
     <p>Cognitive load theory explains why the same material must be presented differently to a novice and an expert.<sup class="fn">13</sup> Worked examples help beginners and start to hinder people who already know the material. Adaptivity here is not a nicety. Getting it wrong actively harms the more advanced learner.</p>
@@ -481,7 +486,7 @@ that is the whole record</span></pre>
     <p>The answer is not new and it is not a technology answer. It comes from two established frameworks in assessment design, and the whole architecture in the next section is an implementation of them.</p>
 
     <h3>Constructive alignment</h3>
-    <p>Biggs set out the principle in 1996: the intended learning outcome is the fixed point of a course, and teaching activities and assessment tasks are designed backwards from it.<sup class="fn">15</sup> The outcome states what the learner must be able to do. It does not state how they got there. Under this framing a varied route is not a compromise. It is the design working as intended, so long as every route terminates in the same demonstrated capability.</p>
+    <p>Biggs set out the principle in 1996. The intended learning outcome is the fixed point of a course, and teaching and assessment are designed backwards from it.<sup class="fn">15</sup> The outcome states what the learner must be able to do. It does not state how they got there. Under this framing a varied route is not a compromise. It is the design working as intended, so long as every route terminates in the same demonstrated capability.</p>
 
     <h3>Evidence&#8209;centred design</h3>
     <p>Mislevy, Steinberg and Almond made this operational for assessment.<sup class="fn">16</sup> Their framework separates three things that are usually collapsed together:</p>
@@ -494,7 +499,7 @@ that is the whole record</span></pre>
 
     <p>Read those three together and the objection dissolves. The claim is fixed. The rule for what counts as evidence for the claim is fixed. The task is the only thing free to move, and it was always meant to be.</p>
 
-    <p>This is why an adaptive system and a regulated qualification are not in tension. They are in tension only when the task is mistaken for the outcome, which is exactly the mistake a completion flag encourages, because a completion flag can only refer to a task.</p>
+    <p>This is why an adaptive system and a regulated qualification are not in tension. They are in tension only when the task is mistaken for the outcome. That is exactly the mistake a completion flag encourages, because a completion flag can only refer to a task.</p>
 
     <h3>What it looks like on one criterion</h3>
     <p>Take a single assessment criterion at Level 5: the learner can evaluate where an AI tool should and should not be used in their own department's work.</p>
@@ -568,7 +573,12 @@ they <span class="v">mastered</span> criterion ZFF-AU-05.2</pre>
       <figcaption><b>The learner state model, from the learner's side.</b> The path is built from this person's own baseline, so two people on the same qualification see different routes. The criteria underneath both routes are identical.</figcaption>
     </figure>
 
-    <p>The audit trail is the statement stream itself. An external verifier does not read a completion report. They read what the learner did, in order, with the evidence model that turned it into a claim sitting alongside it. That is a stronger audit position than the one it replaces, not a weaker one, and it is the argument to make to a quality manager rather than the argument about personalisation.</p>
+    <p>The audit trail is the statement stream itself. An external verifier does not read a completion report. They read what the learner did, in order, with the evidence model that turned it into a claim sitting alongside it. That is a stronger audit position than the one it replaces, not a weaker one. It is also the argument to make to a quality manager, rather than the argument about personalisation.</p>
+
+    <figure class="shot reveal">
+      <img src="./img/nick-deliver-mastery.png" alt="A Zavmo lesson where the coaching text names assessment criterion 2.2 directly, with the learning outcome and its assessment criteria listed in the right rail and the learner's position on the thinking ladder on the left.">
+      <figcaption><b>The criterion is addressable, so the teaching can point at it.</b> The coaching text names criterion 2.2 and says what it asks for. The right rail lists the criteria, and the left shows the level of thinking currently reached. Fixed spine, moving route, both on screen at once.</figcaption>
+    </figure>
 
     <p>This is how <a href="https://zavmo.ai">Zavmo</a> is built, and the four parts above are the actual shape of it rather than a reference design. One deliberate constraint is worth naming. The generative part of the system chooses tasks and responses. It does not choose criteria, and it does not decide whether a criterion has been met. Those two decisions sit with the fixed registry and the authored evidence model. A system that lets a model invent the standard it is being judged against has no standard.</p>
   </section>
@@ -625,6 +635,15 @@ they <span class="v">mastered</span> criterion ZFF-AU-05.2</pre>
     </div>
   </section>
 
+  <section>
+    <div class="section-label">What the stream is for</div>
+    <h2>The end of a course, with no percentage on it.</h2>
+    <figure class="shot reveal">
+      <img src="./img/andy-demonstrate-how-you-learned.png" alt="A Zavmo end-of-course summary telling the learner how they learned: their strongest mode, the level of thinking they reached, which guide they leaned on, when they work best, and questions to get curious about.">
+      <figcaption><b>Every line of this is built from statements.</b> The verbs the learner actually produced, the level of thinking they climbed to, which guide they leaned on, when they do their best work. None of it is answerable from a completion flag. Take a session on <a href="https://zavmo.ai">Zavmo.ai</a> and this is what waits at the end of it.</figcaption>
+    </figure>
+  </section>
+
   <!-- ── CALLOUT / CTA ───────────────────────────────────────────────────── -->
   <section>
     <div class="callout reveal">
@@ -646,22 +665,22 @@ they <span class="v">mastered</span> criterion ZFF-AU-05.2</pre>
       <li><b>xAPI.</b> Advanced Distributed Learning, Experience API. Actor, verb, object statements written to a Learning Record Store, recording experiences beyond a single LMS. Originated as Project Tin Can, version 1.0 in 2013.</li>
       <li><b>cmi5.</b> An xAPI profile defining launch, authorisation, reporting and course structure so an LMS can run xAPI content. Released June 2016. Adoption supported by the cmi5 CATAPULT project. <a href="https://xapi.com/cmi5/">xapi.com/cmi5</a>.</li>
       <li><b>Caliper Analytics.</b> 1EdTech, current version 1.2. A parallel standard for capturing learning activity through metric profiles and a common labelling vocabulary. <a href="https://www.1edtech.org/standards/caliper">1edtech.org/standards/caliper</a>.</li>
-      <li><b>VanLehn, K.</b> (2011) The relative effectiveness of human tutoring, intelligent tutoring systems, and other tutoring systems. <em>Educational Psychologist</em>, 46(4). Human tutoring effect size approximately 0.79, intelligent tutoring systems approximately 0.76.</li>
-      <li><b>Bloom, B. S.</b> (1984) The 2 sigma problem: the search for methods of group instruction as effective as one&#8209;to&#8209;one tutoring. <em>Educational Researcher</em>, 13(6).</li>
-      <li><b>Corbett, A. T. &amp; Anderson, J. R.</b> (1994) Knowledge tracing: modeling the acquisition of procedural knowledge. <em>User Modeling and User&#8209;Adapted Interaction</em>, 4(4).</li>
-      <li><b>Piech, C. et al.</b> (2015) Deep knowledge tracing. <em>Advances in Neural Information Processing Systems</em> 28.</li>
-      <li><b>Cepeda, N. J., Pashler, H., Vul, E., Wixted, J. T. &amp; Rohrer, D.</b> (2006) Distributed practice in verbal recall tasks: a review and quantitative synthesis. <em>Psychological Bulletin</em>, 132(3).</li>
-      <li><b>Roediger, H. L. &amp; Karpicke, J. D.</b> (2006) Test&#8209;enhanced learning: taking memory tests improves long&#8209;term retention. <em>Psychological Science</em>, 17(3).</li>
-      <li><b>Bjork, E. L. &amp; Bjork, R. A.</b> (2011) Making things hard on yourself, but in a good way: creating desirable difficulties to enhance learning. In <em>Psychology and the Real World</em>.</li>
-      <li><b>Sweller, J.</b> (1988) Cognitive load during problem solving: effects on learning. <em>Cognitive Science</em>, 12(2).</li>
-      <li><b>Pashler, H., McDaniel, M., Rohrer, D. &amp; Bjork, R.</b> (2008) Learning styles: concepts and evidence. <em>Psychological Science in the Public Interest</em>, 9(3).</li>
-      <li><b>Biggs, J.</b> (1996) Enhancing teaching through constructive alignment. <em>Higher Education</em>, 32.</li>
-      <li><b>Mislevy, R. J., Steinberg, L. S. &amp; Almond, R. G.</b> (2003) On the structure of educational assessments. <em>Measurement: Interdisciplinary Research and Perspectives</em>, 1(1). The student, evidence and task model framework known as evidence&#8209;centred design.</li>
+      <li><b>VanLehn, K.</b> (2011) The relative effectiveness of human tutoring, intelligent tutoring systems, and other tutoring systems. <em>Educational Psychologist</em>, 46(4), 197&#8209;221. Human tutoring effect size approximately 0.79, intelligent tutoring systems approximately 0.76.</li>
+      <li><b>Bloom, B. S.</b> (1984) The 2 sigma problem: the search for methods of group instruction as effective as one&#8209;to&#8209;one tutoring. <em>Educational Researcher</em>, 13(6), 4&#8209;16.</li>
+      <li><b>Corbett, A. T. &amp; Anderson, J. R.</b> (1994) Knowledge tracing: modeling the acquisition of procedural knowledge. <em>User Modeling and User&#8209;Adapted Interaction</em>, 4, 253&#8209;278. <a href="https://doi.org/10.1007/BF01099821">doi:10.1007/BF01099821</a></li>
+      <li><b>Piech, C., Bassen, J., Huang, J., Ganguli, S., Sahami, M., Guibas, L. J. &amp; Sohl&#8209;Dickstein, J.</b> (2015) Deep knowledge tracing. <em>Advances in Neural Information Processing Systems</em> 28. <a href="https://proceedings.neurips.cc/paper/2015/file/bac9162b47c56fc8a4d2a519803d51b3-Paper.pdf">proceedings.neurips.cc</a></li>
+      <li><b>Cepeda, N. J., Pashler, H., Vul, E., Wixted, J. T. &amp; Rohrer, D.</b> (2006) Distributed practice in verbal recall tasks: a review and quantitative synthesis. <em>Psychological Bulletin</em>, 132(3), 354&#8209;380. A meta&#8209;analysis of 839 assessments across 317 experiments.</li>
+      <li><b>Roediger, H. L. &amp; Karpicke, J. D.</b> (2006) Test&#8209;enhanced learning: taking memory tests improves long&#8209;term retention. <em>Psychological Science</em>, 17(3), 249&#8209;255. <a href="https://doi.org/10.1111/j.1467-9280.2006.01693.x">doi:10.1111/j.1467-9280.2006.01693.x</a></li>
+      <li><b>Bjork, E. L. &amp; Bjork, R. A.</b> (2011) Making things hard on yourself, but in a good way: creating desirable difficulties to enhance learning. In <em>Psychology and the Real World: Essays Illustrating Fundamental Contributions to Society</em>.</li>
+      <li><b>Sweller, J.</b> (1988) Cognitive load during problem solving: effects on learning. <em>Cognitive Science</em>, 12(2), 257&#8209;285. <a href="https://doi.org/10.1207/s15516709cog1202_4">doi:10.1207/s15516709cog1202_4</a></li>
+      <li><b>Pashler, H., McDaniel, M., Rohrer, D. &amp; Bjork, R.</b> (2008) Learning styles: concepts and evidence. <em>Psychological Science in the Public Interest</em>, 9(3), 105&#8209;119.</li>
+      <li><b>Biggs, J.</b> (1996) Enhancing teaching through constructive alignment. <em>Higher Education</em>, 32(3), 347&#8209;364. <a href="https://doi.org/10.1007/BF00138871">doi:10.1007/BF00138871</a></li>
+      <li><b>Mislevy, R. J., Steinberg, L. S. &amp; Almond, R. G.</b> (2003) Focus article: on the structure of educational assessments. <em>Measurement: Interdisciplinary Research and Perspectives</em>, 1(1), 3&#8209;62. The student, evidence and task model framework known as evidence&#8209;centred design.</li>
       <li><b>Anderson, L. W. &amp; Krathwohl, D. R.</b> (eds, 2001) <em>A Taxonomy for Learning, Teaching, and Assessing: A Revision of Bloom's Taxonomy.</em> The revised taxonomy states cognitive processes as action verbs.</li>
       <li><b>Zavmo emission audit.</b> <a href="https://zavmo.ai">zavmo.ai</a>. 217 event types catalogued, 187 with a live emission point in code, 67 observed in production. Measured 17 July 2026 by a deterministic code audit and a production query.</li>
       <li><b>Denny, J.</b> (2026) <em>Measured in verbs: hyper personalised learning in the age of AI.</em> Companion paper. juliettedenny.com</li>
     </ol>
-    <p class="note">Sources 1, 2, 4 and 5 were checked directly against the publisher's own page while writing. Source 18 is our own measurement. The remainder are standard published works in learning science and assessment, cited by author, title, year and journal so any claim here can be followed to its origin.</p>
+    <p class="note">Every source above was checked directly against the publisher, the journal or the standards body, on 10 September 2026. Volume and page numbers are given so any claim here can be followed to its origin. Source 18 is our own measurement, taken by a code audit and a production query rather than an estimate. Where a figure could not be attributed to a named source it does not appear in this paper at all.</p>
   </section>
 
   <footer>
