@@ -101,6 +101,22 @@ const BANNED = [
   { re: /\bunlock(ing|s|ed)?\b/gi, msg: 'AI lexicon: say what becomes possible' },
   { re: /\bcomprehensive\b/gi, msg: 'AI lexicon: say what it covers' },
   { re: /it'?s important to note/gi, msg: 'If it is important, just say it' },
+  // CLAIMING TO BE HONEST. Her rule, and the one she gives most often: "the word
+  // honest makes it seem not honest, only people who are not honest talk about
+  // being honest." Her note adding it here, September 2026: "overly honest
+  // sounds completely fake."
+  //
+  // These match the SPEAKER CLAIM only, never the adverb of manner. "Judge it
+  // honestly afterwards", "report what's true, framed honestly" and "read each
+  // one honestly" are all correct writing and all stay legal. What is banned is
+  // a writer stopping to certify themselves before saying the thing.
+  { re: /\b(?:to be|i want to be|i'?d like to be|let me be|i'?ll be|i will be|i have to be|we have to be|if i'?m|if i am|if we'?re)\s+(?:completely |totally |perfectly |entirely |brutally |really |quite |fully )?honest\b/gi, msg: 'never claim to be honest. Say the thing instead.' },
+  { re: /\bin all honesty\b/gi, msg: 'never claim to be honest. Say the thing instead.' },
+  { re: /\b(?:to be|i have to be|we have to be|let me be|i'?ll be|i will be)\s+straight with you\b/gi, msg: 'never claim to be honest. Say the thing instead.' },
+  { re: /\bthe honest truth\b/gi, msg: 'never claim to be honest. Say the thing instead.' },
+  // The hedge form only, at the start of a sentence or as a one-word aside.
+  // "Honestly, I think" is the tell. "answered honestly" is not.
+  { re: /(?:^|[.!?]\s+|["\u201c]\s*)honestly[,?]/gim, msg: 'never claim to be honest. Say the thing instead.' },
   { re: /\b(recognize|organiz(e|ed|ation)|color|behavior|analyze)\b/gi, msg: 'American spelling. British English throughout.' },
   { re: /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, msg: 'emoji. Fine in chat, not in published writing.' },
 ];
@@ -110,6 +126,26 @@ const WARNINGS = [
   { re: /\b(unleash|revolution)\w*/gi, msg: 'allowed when she says it in the first person about her own mission, never as a slogan or a headline' },
   { re: /\b(competency|pedagogy|triangulation|cognitive profile)\b/gi, msg: 'L&D jargon: fine for an L&D audience, not for anyone else' },
   { re: /\b(paradigm shift|thought leadership|best.in.class)\b/gi, msg: 'corporate filler' },
+  // "THE ASK" as a noun. Her instruction, September 2026: "that is AI speak as
+  // well, and I see it too much everywhere." A warning and not an error for two
+  // reasons. It is engineering shorthand in code comments right across the
+  // estate, where it is fine and nobody reads it. And "a big ask" is ordinary
+  // English, which this does not match anyway.
+  { re: /\b(?:the|my|our|your|their|one)\s+asks?\b/gi, msg: '"the ask": say what is wanted, or use the verb' },
+  // SELF-NARRATION. A sentence about her own state of mind standing in front of
+  // the thing she actually wants to say. Her correction on a LinkedIn draft,
+  // September 2026: "a human would say 'and here is the tough part', it's
+  // shorter, punchier, and it does not bring personal emotion into it."
+  //
+  // A warning and not an error, because the neighbouring move is the voice at
+  // its best. "I looked at the number and felt sick" is content: the feeling is
+  // the point of the sentence. "Here is the part I find harder to look at" is
+  // throat-clearing wearing a feeling. No regex can tell those apart, so this
+  // flags the shapes she has actually rejected and leaves the call to a person.
+  { re: /\b(?:here|this) is the (?:part|bit) (?:I|that I)\b/gi, msg: 'self-narration: "and here is the tough part", then move' },
+  { re: /\bthe (?:part|bit) (?:I|that I) find\b/gi, msg: 'self-narration: cut it and say the thing' },
+  { re: /\bwhat I keep coming back to\b/gi, msg: 'self-narration: cut it and say the thing' },
+  { re: /\bI (?:will|'ll) say (?:this |it )?plainly\b/gi, msg: 'self-narration: then say it plainly' },
 ];
 
 // The ten-year-old rule, in numbers. Derived from what she actually writes when
