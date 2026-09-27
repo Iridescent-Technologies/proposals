@@ -186,6 +186,15 @@ const EASY_EXIT = /\b(bin (this|it|if)|easy to (ignore|bin)|ignore (this|it)|no 
 // "Close on a specific next step and a date." A time-bound ask, not a feeling.
 const SPECIFIC_ASK = /\b(half an hour|twenty minutes|thirty minutes|fifteen minutes|\d+ ?(?:minutes|mins)|this week|next week|this month|next month|before (the end of )?(january|february|march|april|may|june|july|august|september|october|november|december)|on (monday|tuesday|wednesday|thursday|friday)|w\/c|week commencing)/i;
 
+// The OTHER close, opt-in per target with `"close": "question"` in voice-targets.json.
+//
+// Added 27 September 2026 for the flywheel's outbound mail, on Juliette's instruction: 39 warm
+// emails had gone with no reply, about half ended on half an hour or twenty minutes, and she
+// decided every outbound email closes on one easy question the reader can answer in a line.
+// That is the opposite of SPECIFIC_ASK, so a target chooses one or the other. The default is
+// unchanged: everything not opted in still needs a time-bound ask, as her guide says.
+const MEETING_ASK = /\b(half an hour|twenty minutes|thirty minutes|fifteen minutes|\d+ ?(?:minutes|mins)|compare notes|a (quick )?call|catch up|grab a coffee|book (a|some) time)\b/i;
+
 // The closes she names as the ones to never write. "Never 'let me know your
 // thoughts'."
 // The length ceiling, and it is the rule she actually asked for. Her complaint on
@@ -545,7 +554,7 @@ function sentences(text) {
     .filter((s) => s.split(/\s+/).filter(Boolean).length > 1);
 }
 
-function checkFile(path, tier) {
+function checkFile(path, tier, close = 'dated') {
   const raw = readFileSync(path, 'utf8');
   const isHtml = /\.(html?|astro)$/i.test(path);
   // A script is inverted: prose is pulled OUT of it rather than markup being
@@ -631,7 +640,18 @@ function checkFile(path, tier) {
       errors.push('no easy exit. She always gives one: "feel free to bin this", "treat this as easy to ignore". It is respect for their time, not self-deprecation.');
     }
 
-    if (!SPECIFIC_ASK.test(body)) {
+    if (close === 'question') {
+      // One easy question, and no meeting. The question is looked for AFTER the opening, because
+      // "How are you?" is the opener, not the ask.
+      const meeting = body.match(MEETING_ASK);
+      if (meeting) {
+        errors.push(`asks for a meeting ("${meeting[0]}"). This target closes on one easy question they can answer in a line.`);
+      }
+      const rest = afterGreeting.slice(opening.length);
+      if (!/\?/.test(rest)) {
+        errors.push('no closing question. This target closes on one easy question they can answer in a line.');
+      }
+    } else if (!SPECIFIC_ASK.test(body)) {
       errors.push('no specific next step and no date. Ask for something small and time-bound: half an hour, a view, this week.');
     }
 
@@ -695,7 +715,8 @@ for (const t of targets) {
   // prevent and would look exactly like everything passing.
   for (const file of walk(dir, re)) {
     if (jobs.some((j) => j.file === file)) continue;
-    jobs.push({ file, tier: t.tier ?? 'hard', warn: t.warn === true });
+    jobs.push({ file, tier: t.tier ?? 'hard', warn: t.warn === true,
+                close: t.close === 'question' ? 'question' : 'dated' });
   }
 }
 
@@ -809,8 +830,8 @@ if (drafts.length) {
   console.log(`  (skipping ${drafts.length} draft(s): ${drafts.map((d) => d.file.split('/').pop()).join(', ')})\n`);
 }
 
-for (const { file, tier, warn } of files) {
-  const { errors, warnings, stats } = checkFile(file, tier);
+for (const { file, tier, warn, close } of files) {
+  const { errors, warnings, stats } = checkFile(file, tier, close);
   const head = stats ? `${stats.count} sentences, avg ${stats.avg}, longest ${stats.longest}` : `[${tier}]`;
   console.log(`  ${relative(ROOT, file)}  ${head}${warn ? '  (backlog)' : ''}`);
   for (const e of errors) {
