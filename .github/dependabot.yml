@@ -1,0 +1,15 @@
+# Dependabot: what it watches and how often.
+# Security fixes open a PR as soon as an advisory lands, whatever the schedule.
+# Routine updates come weekly: minor and patch bumps bundled into one PR per
+# ecosystem, major versions as their own PR so each gets a proper upgrade.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      ci-actions:
+        patterns:
+          - "*"
