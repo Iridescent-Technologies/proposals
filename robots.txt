@@ -1,36 +1,43 @@
-# Most of this suite is public and meant to be found. Three pages are not.
+# This suite is the public library. Everything in it is meant to be found.
 #
-# The whole suite used to refuse indexing. Every page carried a noindex meta
-# tag because the decks were sent to named people rather than found by
-# strangers. That was reversed on 10 September 2026: the suite is now the
-# public library, so the crawl is allowed and indexing is allowed with it.
+# HISTORY, BECAUSE THIS FILE HAS NOW BEEN REVERSED TWICE.
 #
-# THREE EXCEPTIONS, AND THE FIRST TWO ARE THE ONES THAT MATTER.
+# Originally every page carried a noindex meta tag: the decks were sent to
+# named people rather than found by strangers. On 10 September 2026 that was
+# lifted for the suite, with two specifications held back:
 #
 #   qualifications-level-3/   Level 3 Future Fluency qualifications
 #   qualifications-level-5/   Level 5 Diploma in Future Fluency, specification
 #
-# Both are specifications that have NOT been submitted to an awarding body,
-# and their titles say the word "qualification" without saying "draft". The
-# body copy hedges properly. A search result does not show the body copy, it
-# shows the title, and Zavmo is mid-application with awarding bodies who can
-# search for exactly this. So those two keep the noindex meta tag and are left
-# out of sitemap.xml.
+# The reason was the title, not the body. Both are specifications that have NOT
+# been submitted to an awarding body, both use the word "qualification" without
+# the word "draft", and a search result shows the title with none of the hedging
+# the body copy does properly.
+#
+# On 22 September 2026 Juliette decided those two go in as well. The whole
+# library is now indexable. The reason above has not gone away; it has been
+# weighed and accepted, so record it rather than quietly dropping it.
+#
+# WHAT WOULD RETIRE THAT RISK. Put the word "draft" in the two <title> tags, so
+# the one line a search result does show says what the page is. That is a copy
+# change, not a robots change, and it is the cheaper half of this trade.
+#
+# ONE EXCEPTION REMAINS.
 #
 #   _template/                a placeholder deck, not content
 #
-# Note what this file deliberately does NOT say: "Disallow:" for those two.
+# _template is Disallowed rather than noindexed, which is the opposite of what
+# the two specifications got, and the difference is worth keeping straight.
+# Blocking the crawl and asking to be de-indexed are different things, and doing
+# the first prevents the second: a URL blocked here is never fetched, so a
+# noindex tag on it is never read, and anything already indexed stays there with
+# no way to remove it. Google's own guidance is to allow the crawl so the
+# noindex can be seen. _template can be blocked outright because nothing there
+# ever needs de-indexing in the first place.
 #
-# Blocking the crawl and asking to be de-indexed are different things, and
-# doing the first prevents the second. A URL blocked here is never fetched, so
-# the noindex meta tag is never read, and anything already indexed stays there
-# with no way to remove it. Google's own guidance is to allow the crawl so the
-# noindex can be seen. _template is disallowed because nothing there ever needs
-# de-indexing.
-#
-# ADDING A PAGE. Ask how its title reads on its own, with no body copy under
-# it. If that would embarrass an awarding body application, either retitle it
-# or give it the noindex tag and keep it out of the sitemap.
+# ADDING A PAGE. Ask how its title reads on its own, with no body copy under it.
+# If that would embarrass an awarding body application, retitle it. Add it to
+# sitemap.xml either way.
 
 User-agent: *
 Allow: /
