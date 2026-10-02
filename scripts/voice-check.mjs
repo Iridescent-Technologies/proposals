@@ -183,6 +183,9 @@ const HUMAN_OPENERS = /\b(how are you|hope (this|you|things|it)|good to (see|hea
 // self-deprecation.
 const EASY_EXIT = /\b(bin (this|it|if)|easy to (ignore|bin)|ignore (this|it)|no need to (reply|respond)|delete this|say no|not interested|leave it there)/i;
 
+// Exits she has turned down for the question close (2 October 2026). Wet, not upbeat.
+const NOT_HER_EXIT = /\b(feel free to bin|bin (this|it)|easy to (ignore|bin)|treat this as easy|delete this)\b/i;
+
 // "Close on a specific next step and a date." A time-bound ask, not a feeling.
 const SPECIFIC_ASK = /\b(half an hour|twenty minutes|thirty minutes|fifteen minutes|\d+ ?(?:minutes|mins)|this week|next week|this month|next month|before (the end of )?(january|february|march|april|may|june|july|august|september|october|november|december)|on (monday|tuesday|wednesday|thursday|friday)|w\/c|week commencing)/i;
 
@@ -636,7 +639,15 @@ function checkFile(path, tier, close = 'dated') {
       errors.push('opens with the business, not the person. Her rule: their name, then a human line, and the reason for writing comes after.');
     }
 
-    if (!EASY_EXIT.test(body)) {
+    // The easy exit is the rule for the dated close only. Under the question close it is not
+    // asked for, and "bin this" is refused outright: Juliette, 2 October 2026, "that's not very
+    // me, can we make it more upbeat". The closing question already leaves the reader free.
+    if (close === 'question') {
+      const bin = body.match(NOT_HER_EXIT);
+      if (bin) {
+        errors.push(`closes on "${bin[0]}". Not her: she wants the close upbeat. End on the question.`);
+      }
+    } else if (!EASY_EXIT.test(body)) {
       errors.push('no easy exit. She always gives one: "feel free to bin this", "treat this as easy to ignore". It is respect for their time, not self-deprecation.');
     }
 
