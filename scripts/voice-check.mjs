@@ -196,6 +196,15 @@ const SPECIFIC_ASK = /\b(half an hour|twenty minutes|thirty minutes|fifteen minu
 // decided every outbound email closes on one easy question the reader can answer in a line.
 // That is the opposite of SPECIFIC_ASK, so a target chooses one or the other. The default is
 // unchanged: everything not opted in still needs a time-bound ask, as her guide says.
+// The THIRD close, opt-in per target with `"close": "ask"` in voice-targets.json.
+//
+// Added 11 October 2026 for the flywheel's outbound mail, on Juliette's instruction. 175 warm
+// emails that closed on a question earned no human reply and no meeting, so the first email now
+// makes an offer and asks for fifteen minutes. That reverses the question close for those drafts,
+// so a time-bound ask is required again. No easy exit is asked for, and the wet ones are refused:
+// "bin this", "ignore this" and "no need to reply" were all in emails nobody answered.
+const WET_EXIT = /\b(feel free to bin|bin (this|it)|easy to (ignore|bin)|ignore (this|it)|no need to (reply|respond)|treat this as easy|delete this)\b/i;
+
 const MEETING_ASK = /\b(half an hour|twenty minutes|thirty minutes|fifteen minutes|\d+ ?(?:minutes|mins)|compare notes|a (quick )?call|catch up|grab a coffee|book (a|some) time)\b/i;
 
 // The closes she names as the ones to never write. "Never 'let me know your
@@ -642,7 +651,12 @@ function checkFile(path, tier, close = 'dated') {
     // The easy exit is the rule for the dated close only. Under the question close it is not
     // asked for, and "bin this" is refused outright: Juliette, 2 October 2026, "that's not very
     // me, can we make it more upbeat". The closing question already leaves the reader free.
-    if (close === 'question') {
+    if (close === 'ask') {
+      const wet = body.match(WET_EXIT);
+      if (wet) {
+        errors.push(`closes on "${wet[0]}". Not her: this target ends on a confident, specific ask.`);
+      }
+    } else if (close === 'question') {
       const bin = body.match(NOT_HER_EXIT);
       if (bin) {
         errors.push(`closes on "${bin[0]}". Not her: she wants the close upbeat. End on the question.`);
@@ -651,7 +665,16 @@ function checkFile(path, tier, close = 'dated') {
       errors.push('no easy exit. She always gives one: "feel free to bin this", "treat this as easy to ignore". It is respect for their time, not self-deprecation.');
     }
 
-    if (close === 'question') {
+    if (close === 'ask') {
+      // A specific, time-bound ask, put as a question after the opening.
+      if (!SPECIFIC_ASK.test(body)) {
+        errors.push('no specific ask. This target closes on a small, time-bound ask, such as fifteen minutes.');
+      }
+      const rest = afterGreeting.slice(opening.length);
+      if (!/\?/.test(rest)) {
+        errors.push('no closing question. Put the ask as a question the reader can say yes to.');
+      }
+    } else if (close === 'question') {
       // One easy question, and no meeting. The question is looked for AFTER the opening, because
       // "How are you?" is the opener, not the ask.
       const meeting = body.match(MEETING_ASK);
@@ -727,7 +750,7 @@ for (const t of targets) {
   for (const file of walk(dir, re)) {
     if (jobs.some((j) => j.file === file)) continue;
     jobs.push({ file, tier: t.tier ?? 'hard', warn: t.warn === true,
-                close: t.close === 'question' ? 'question' : 'dated' });
+                close: ['question', 'ask'].includes(t.close) ? t.close : 'dated' });
   }
 }
 
