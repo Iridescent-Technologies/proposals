@@ -23,7 +23,7 @@ Each one is a self-contained folder served at
 | **Zavmo. Where Neuroscience Meets Learning** | Overview of the Zavmo platform and its approach | [Open](https://iridescent-technologies.github.io/proposals/zavmo-overview/) |
 | **How Zavmo Is Built** | Architecture, model and trust story. for technical, security and L&D buyers | [Open](https://iridescent-technologies.github.io/proposals/how-zavmo-is-built/) |
 | **Grounded, Not Guessing** | How OFQUAL, NOS and job descriptions keep the AI teaching to the standard | [Open](https://iridescent-technologies.github.io/proposals/grounded-not-guessing/) |
-| **Human Fluency, unit by unit** | Draft Level 3 specifications for the ten Human Fluencies, the shared gate and the Change bridge. noindex, not submitted | [Open](https://iridescent-technologies.github.io/proposals/human-fluency/) |
+| **Human Fluency, unit by unit** | Draft Level 3 specifications for the ten Human Fluencies, the shared gate and the Change bridge. Draft, not submitted | [Open](https://iridescent-technologies.github.io/proposals/human-fluency/) |
 | **The Future Fluency Diplomas** | Learner briefing on Level 3 and Level 5: why it is graded, what each unit asks you to produce, and what the hours really are | [Open](https://iridescent-technologies.github.io/proposals/future-fluency-diplomas/) |
 
 ## Adding a page
