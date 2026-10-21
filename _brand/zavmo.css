@@ -61,7 +61,7 @@
   --border:var(--z-border); --border-2:var(--z-border-hover);
   --teal:var(--z-teal-ink); --teal-glow:var(--z-teal-ink); --teal-deep:var(--z-teal-ink);
   --teal-bright:var(--z-teal-ink); --teal-soft:var(--z-teal-ink); --teal-dark:var(--z-teal-ink);
-  --teal-subtle:rgba(0,217,192,.10); --teal-border:rgba(14,123,98,.28);
+  --teal-subtle:rgba(0,217,192,.08); --teal-border:rgba(14,123,98,.28);
   --ink:var(--z-text); --ink-2:var(--z-text-2); --ink-3:var(--z-text-3);
   --muted:var(--z-text-2); --line:var(--z-border);
   --font:var(--z-font);
@@ -141,9 +141,12 @@ footer{
   background:var(--z-navy);color:var(--z-on-dark-3);border-top:0;
   box-shadow:0 0 0 100vmax var(--z-navy);clip-path:inset(0 -100vmax -100vmax);
 }
-footer p,footer span,footer code{color:var(--z-on-dark-3)}
-footer a{color:var(--z-teal)}
-footer a:hover{color:#fff}
+/* Pages colour their footer lines inline for the old dark page, so the
+   on-dark inks have to win over a style attribute: hence !important. */
+footer *:not(a):not(img){color:var(--z-on-dark-2)!important}
+footer b,footer strong{color:var(--z-on-dark)!important}
+footer a,footer a *,footer em{color:var(--z-teal)!important}
+footer a:hover{color:#fff!important}
 .z-copyright{display:block;margin-top:12px;color:var(--z-on-dark-2)}
 .z-footer-logo{display:block;height:22px;width:auto;margin:0 0 14px}
 
@@ -162,7 +165,7 @@ p,.lede,li,.quote p{font-weight:400}
 .z-footer-min{padding:20px clamp(22px,5vw,48px);font-size:12.5px;margin-top:40px}
 .z-footer-min .z-copyright{margin:0}
 .z-copyright-fixed{position:fixed;left:16px;bottom:8px;margin:0;font-size:11px;line-height:1.4;color:var(--z-text-3);z-index:40;pointer-events:none}
-@media (max-width:560px){.z-copyright-fixed{left:0;right:0;text-align:center;bottom:2px;font-size:10px}}
+@media (max-width:560px){.z-copyright-fixed{left:0;right:0;text-align:center;bottom:0;padding:3px 0;font-size:10px;background:rgba(255,255,255,.96)}}
 
 /* ── slide decks (admin-journey, learner-journey): a solid bar so a tall
    slide no longer runs under it on a phone, and the counter on one line ── */
@@ -171,3 +174,12 @@ p,.lede,li,.quote p{font-weight:400}
 
 /* hub card and feature titles take the heading face, as zavmo.ai cards do */
 .c-title,.f-title{font-family:var(--z-font-heading);font-weight:600}
+
+/* decks on a phone: smaller logo so the bar's buttons fit, and room at the
+   foot of each slide for the copyright line */
+@media (max-width:560px){
+  .stage>.bar{gap:8px;padding:12px 14px}
+  .stage>.bar .z-logo{height:18px}
+  .stage{padding-bottom:16px}
+}
+footer code{background:transparent!important}

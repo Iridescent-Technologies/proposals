@@ -51,7 +51,7 @@
   .card:hover{border-color:var(--border-2);transform:translateY(-3px);box-shadow:0 26px 60px rgba(10,22,40,0.12)}
   .card:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
   .card-vis{height:172px;position:relative;overflow:hidden;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
-  .card-vis.learner{background:radial-gradient(80% 90% at 50% 20%,rgba(0,217,192,0.16),transparent 60%),#091522}
+  .card-vis.learner{background:radial-gradient(80% 90% at 50% 20%,rgba(0,217,192,0.16),transparent 60%),#f5f7fa}
   .card-vis.admin{background:linear-gradient(180deg,#fff,#eef2f5)}
   .card-body{padding:22px 24px 24px}
   .c-chip{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--teal);background:rgba(0,217,192,0.14);border-radius:100px;padding:4px 11px;margin-bottom:12px}
@@ -62,7 +62,7 @@
   .card:hover .c-foot svg{transform:translateX(4px)}
 
   /* mini learner widget preview */
-  .mini-lz{width:210px;background:rgba(10,22,40,0.05);border:1px solid rgba(0,217,192,0.22);border-radius:14px;padding:13px;transform:translateY(6px)}
+  .mini-lz{width:210px;background:#fff;border:1px solid rgba(0,217,192,0.22);border-radius:14px;padding:13px;transform:translateY(6px)}
   .mini-h{display:flex;align-items:center;gap:8px;margin-bottom:9px}
   .mini-orb{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#99f0e6,#00d9c0);box-shadow:0 0 10px rgba(0,217,192,0.6);flex:0 0 auto}
   .mini-name{font-size:11px;font-weight:600;color:var(--ink)}
@@ -74,13 +74,13 @@
   /* mini admin preview */
   .mini-admin{width:220px;background:#fff;border:1px solid #e4e8ed;border-radius:12px;overflow:hidden;transform:translateY(6px);box-shadow:0 12px 30px rgba(10,40,60,.14)}
   .mini-anav{height:24px;background:#fff;border-bottom:1px solid #eef1f4;display:flex;align-items:center;padding:0 10px;gap:6px}
-  .mini-adot{width:5px;height:5px;border-radius:50%;background:#0a7d6b}
-  .mini-atabs{display:flex;gap:8px;padding:8px 12px 0;font-size:8.5px;color:#8a97a3}
-  .mini-atab.on{color:#0a7d6b;font-weight:700;border-bottom:2px solid #0a7d6b;padding-bottom:5px}
+  .mini-adot{width:5px;height:5px;border-radius:50%;background:#0e7b62}
+  .mini-atabs{display:flex;gap:8px;padding:8px 12px 0;font-size:8.5px;color:#5d6875}
+  .mini-atab.on{color:#0e7b62;font-weight:700;border-bottom:2px solid #0e7b62;padding-bottom:5px}
   .mini-astats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;padding:12px}
   .mini-astat{background:#f6f8fa;border:1px solid #eef1f4;border-radius:7px;padding:7px 8px}
   .mini-astat b{display:block;font-size:13px;color:#0b1f33;font-weight:700}
-  .mini-astat span{font-size:7px;color:#5b6b7a}
+  .mini-astat span{font-size:7px;color:#4b5563}
 
   .also{margin-top:34px;display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--ink-3);font-weight:300;flex-wrap:wrap}
   .also a{color:var(--teal);font-weight:500}
@@ -156,6 +156,7 @@
   </div>
 
   <footer>
+    <img class="z-footer-logo" src="../_brand/zavmo-logo-mono-white.svg" alt="Zavmo" width="102" height="22">
     Little Zav is a standalone product with its own service and database. It embeds on any LMS.
     This demo runs on sample data. Nothing here is a live tenant.
     <span class="z-copyright">© 2026 Zavmo.ai. All rights reserved.</span>
