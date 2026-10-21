@@ -11,10 +11,10 @@
 <style>
   :root{
     --navy-0:#060e17; --navy-1:#0b1a2a;
-    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
-    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
-    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
-    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --surface:rgba(10,22,40,0.045); --surface-2:rgba(10,22,40,0.07);
+    --border:rgba(10,22,40,0.1); --border-2:rgba(0,217,192,0.28);
+    --teal:#0e7b62; --teal-glow:#0e7b62; --teal-deep:#0e7b62;
+    --ink:#0a1628; --ink-2:rgba(10,22,40,0.72); --ink-3:rgba(10,22,40,0.5);
     --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   }
   *{box-sizing:border-box}
@@ -22,8 +22,8 @@
   body{
     margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;
     background:
-      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
-      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      radial-gradient(120% 70% at 82% -8%, rgba(0,217,192,0.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(45,90,138,0.048), transparent 55%),
       linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
     background-repeat:no-repeat;background-size:100% 100%;-webkit-font-smoothing:antialiased;
   }
@@ -54,16 +54,16 @@
   .points b{color:var(--ink);font-weight:500}
 
   .controls{display:flex;flex-wrap:wrap;align-items:center;gap:13px}
-  .try-btn{cursor:pointer;display:inline-flex;align-items:center;gap:9px;background:var(--teal);color:var(--navy-0);border:none;border-radius:100px;padding:13px 22px;font-family:inherit;font-size:14px;font-weight:600;box-shadow:0 8px 26px rgba(47,207,168,.28);transition:.18s}
-  .try-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(47,207,168,.36)}
+  .try-btn{cursor:pointer;display:inline-flex;align-items:center;gap:9px;background:var(--teal);color:var(--navy-0);border:none;border-radius:100px;padding:13px 22px;font-family:inherit;font-size:14px;font-weight:600;box-shadow:0 8px 26px rgba(0,217,192,0.28);transition:.18s}
+  .try-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,217,192,0.36)}
   .try-btn svg{width:16px;height:16px}
   .now-playing{font-size:12.5px;color:var(--ink-3);font-weight:300}
   .now-playing b{color:var(--ink-2);font-weight:500}
 
   /* widget frame column */
   .device{position:relative;justify-self:center;width:100%;max-width:460px}
-  .device-halo{position:absolute;inset:-14% -8% -10%;background:radial-gradient(60% 55% at 50% 34%,rgba(47,207,168,.20),transparent 70%);filter:blur(14px);z-index:0;pointer-events:none}
-  .lz-frame{position:relative;z-index:1;display:block;width:100%;height:600px;border:1px solid var(--border);border-radius:26px;background:var(--navy-0);box-shadow:0 30px 70px rgba(0,0,0,.5);}
+  .device-halo{position:absolute;inset:-14% -8% -10%;background:radial-gradient(60% 55% at 50% 34%,rgba(0,217,192,0.2),transparent 70%);filter:blur(14px);z-index:0;pointer-events:none}
+  .lz-frame{position:relative;z-index:1;display:block;width:100%;height:600px;border:1px solid var(--border);border-radius:26px;background:var(--navy-0);box-shadow:0 30px 70px rgba(10,22,40,0.15);}
   .caption{position:relative;z-index:1;text-align:center;font-size:12px;color:var(--ink-3);margin-top:16px;font-weight:300}
   .caption b{color:var(--teal);font-weight:500}
 
@@ -75,20 +75,14 @@
   }
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
+<link rel="stylesheet" href="../_brand/zavmo.css">
 </head>
 <body>
 <div class="wrap">
 
   <div class="topbar">
-    <a class="brand" href="./index.html" aria-label="Little Zav demo home">
-      <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
-          <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
-          <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
-        <g id="halo"></g>
-        <circle cx="50" cy="50" r="14" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
-      </svg>
-      <span class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Little Zav · learner view</span></span>
+    <a class="brand z-logo-link" href="./index.html" aria-label="Little Zav demo home">
+      <img class="z-logo" src="../_brand/zavmo-logo-mono-navy.svg" alt="Zavmo" width="130" height="28"><span class="z-logo-tag">Little Zav · learner view</span>
     </a>
     <a class="back" href="./index.html">
       <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -128,7 +122,7 @@
 <script>
 (function(){
   // Draw the 12-dot spark halo on the header logomark (matches the proposals hub).
-  var halo=document.getElementById('halo'), n=12, c=50, r=39;
+  var halo=(document.getElementById('halo')||document.createElementNS('http://www.w3.org/2000/svg','g')), n=12, c=50, r=39;
   for(var i=0;i<n;i++){
     var a=(i/n)*2*Math.PI-Math.PI/2, x=(c+r*Math.cos(a)).toFixed(1), y=(c+r*Math.sin(a)).toFixed(1);
     halo.insertAdjacentHTML('beforeend', i%3===0
@@ -159,5 +153,6 @@
   });
 })();
 </script>
+<footer class="z-footer-min"><span class="z-copyright">© 2026 Zavmo.ai. All rights reserved.</span></footer>
 </body>
 </html>

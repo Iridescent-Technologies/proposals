@@ -8,7 +8,7 @@
     :root {
       --bg-primary: #0a1628;
       --bg-secondary: #0d1e36;
-      --bg-card: rgba(13, 30, 54, 0.6);
+      --bg-card: rgba(255,255,255,0.6);
       --teal: #00d9c0;
       --teal-glow: #00ffeb;
       --teal-subtle: rgba(0, 217, 192, 0.15);
@@ -66,7 +66,7 @@
     /* ─── NAVIGATION ─── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: rgba(10, 22, 40, 0.92); backdrop-filter: blur(20px);
+      background: rgba(255,255,255,0.92); backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border-subtle);
       padding: 16px 48px;
     }
@@ -147,7 +147,7 @@
     .problem-card { position: relative; overflow: hidden; }
     .problem-card .icon-circle {
       width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, var(--bg-secondary), #132743);
+      background: linear-gradient(135deg, var(--bg-secondary), #e2eef7);
       border: 1.5px solid var(--teal-border); margin-bottom: 16px;
     }
     .problem-card svg { width: 22px; height: 22px; stroke: var(--teal); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
@@ -194,7 +194,7 @@
     }
     .mockup-bar {
       display: flex; align-items: center; gap: 6px; padding: 10px 16px;
-      background: rgba(10, 22, 40, 0.8); border-bottom: 1px solid var(--border-subtle);
+      background: #eef2f7; border-bottom: 1px solid var(--border-subtle);
     }
     .mockup-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-tertiary); opacity: 0.4; }
     .mockup-dot:first-child { background: #ff5f57; opacity: 0.7; }
@@ -208,11 +208,11 @@
     }
 
     /* Mini UI elements inside mockups */
-    .mock-sidebar { width: 48px; background: rgba(10,22,40,0.6); border-radius: 8px; padding: 8px 0; }
+    .mock-sidebar { width: 48px; background: rgba(10,22,40,0.06); border-radius: 8px; padding: 8px 0; }
     .mock-sidebar-item { width: 32px; height: 32px; border-radius: 8px; margin: 4px auto; background: rgba(0,217,192,0.08); }
     .mock-sidebar-item.active { background: var(--teal); }
     .mock-stat {
-      background: rgba(10,22,40,0.5); border: 1px solid rgba(0,217,192,0.08);
+      background: #f5f7fa; border: 1px solid rgba(0,217,192,0.08);
       border-radius: 10px; padding: 12px; text-align: center;
     }
     .mock-stat .num { font-size: 22px; font-weight: 600; color: var(--teal); }
@@ -225,7 +225,7 @@
       padding: 10px 14px; border-radius: 12px; font-size: 11px; line-height: 1.5;
       max-width: 85%; margin-bottom: 8px;
     }
-    .mock-chat-ai { background: rgba(13,30,54,0.8); border: 1px solid var(--teal-border); color: var(--text-secondary); }
+    .mock-chat-ai { background: rgba(255,255,255,0.8); border: 1px solid var(--teal-border); color: var(--text-secondary); }
     .mock-chat-user { background: var(--teal-subtle); border: 1px solid var(--teal-border); color: var(--text-primary); margin-left: auto; }
     .mock-node {
       width: 10px; height: 10px; border-radius: 50%; background: var(--teal); position: absolute;
@@ -296,6 +296,7 @@
       }
     }
   </style>
+<link rel="stylesheet" href="../_brand/zavmo.css">
 </head>
 <body>
 
@@ -303,7 +304,7 @@
   <nav>
     <div class="inner">
       <div>
-        <div class="logo">ZAVMO</div>
+        <img class="z-logo" src="../_brand/zavmo-logo-mono-navy.svg" alt="Zavmo" width="130" height="28">
         <div class="nav-tagline">Where neuroscience meets learning pedagogy</div>
       </div>
       <div style="display:flex;align-items:center;">
@@ -622,7 +623,7 @@
                 <div class="mock-stat" style="flex:1;"><div class="num">47</div><div class="lbl">Skills</div></div>
                 <div class="mock-stat" style="flex:1;"><div class="num">86h</div><div class="lbl">Learning</div></div>
               </div>
-              <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:14px;margin-bottom:10px;">
+              <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:14px;margin-bottom:10px;">
                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
                   <span style="font-size:12px;font-weight:600;color:var(--text-primary);">Sales Team Leadership</span>
                   <span style="font-size:11px;color:var(--teal);">75%</span>
@@ -631,8 +632,8 @@
                 <div style="font-size:10px;color:var(--text-tertiary);margin-top:6px;">3 lessons remaining &middot; 2h estimated</div>
               </div>
               <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:8px;padding:10px;font-size:11px;color:var(--text-secondary);">My Current Role</div>
-                <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:8px;padding:10px;font-size:11px;color:var(--text-secondary);">My Next Role</div>
+                <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:8px;padding:10px;font-size:11px;color:var(--text-secondary);">My Current Role</div>
+                <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:8px;padding:10px;font-size:11px;color:var(--text-secondary);">My Next Role</div>
               </div>
             </div>
           </div>
@@ -646,7 +647,7 @@
             </div>
             <div class="mockup-body">
               <div class="mockup-label">Training Needs Analysis</div>
-              <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:14px;margin-bottom:12px;">
+              <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:14px;margin-bottom:12px;">
                 <div style="font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:10px;">Skills Assessment</div>
                 <div style="margin-bottom:10px;">
                   <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px;"><span style="color:var(--text-secondary);">Leadership</span><span style="color:var(--teal);">82%</span></div>
@@ -684,7 +685,7 @@
             </div>
             <div class="mockup-body">
               <div class="mockup-label">AI Character Coaching</div>
-              <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;padding:8px 12px;background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;padding:8px 12px;background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:10px;">
                 <div style="width:28px;height:28px;border-radius:8px;background:var(--teal);display:flex;align-items:center;justify-content:center;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 </div>
@@ -710,7 +711,7 @@
             <div class="mockup-body">
               <div class="mockup-label">Your Knowledge Network</div>
               <!-- Neural network visualisation mockup -->
-              <div style="position:relative;height:160px;background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;overflow:hidden;margin-bottom:12px;">
+              <div style="position:relative;height:160px;background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:10px;overflow:hidden;margin-bottom:12px;">
                 <!-- Nodes -->
                 <div style="position:absolute;top:30px;left:40px;width:12px;height:12px;border-radius:50%;background:var(--teal-glow);box-shadow:0 0 10px rgba(0,255,235,0.5);"></div>
                 <div style="position:absolute;top:70px;left:100px;width:16px;height:16px;border-radius:50%;background:var(--teal);box-shadow:0 0 14px rgba(0,217,192,0.5);"></div>
@@ -777,12 +778,12 @@
                 <!-- Left: Config -->
                 <div style="flex:0.4;">
                   <div style="font-size:10px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Character</div>
-                  <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:8px;padding:8px 10px;margin-bottom:10px;display:flex;align-items:center;gap:6px;">
+                  <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:8px;padding:8px 10px;margin-bottom:10px;display:flex;align-items:center;gap:6px;">
                     <div style="width:20px;height:20px;border-radius:6px;background:var(--teal);"></div>
                     <span style="font-size:11px;color:var(--text-primary);">The Builder</span>
                   </div>
                   <div style="font-size:10px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Prompt Template</div>
-                  <div style="background:rgba(10,22,40,0.8);border:1px solid rgba(26,58,92,0.5);border-radius:6px;padding:8px;font-family:monospace;font-size:9px;color:var(--text-secondary);line-height:1.5;min-height:80px;">
+                  <div style="background:#f5f7fa;border:1px solid #e5e7eb;border-radius:6px;padding:8px;font-family:monospace;font-size:9px;color:var(--text-secondary);line-height:1.5;min-height:80px;">
                     You are {character_name}, a<br>
                     {role} who teaches using<br>
                     {methodology}. Adapt your<br>
@@ -798,22 +799,22 @@
                 <!-- Right: Live preview -->
                 <div style="flex:0.6;">
                   <div style="font-size:10px;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Live Simulation</div>
-                  <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:8px;padding:10px;min-height:140px;">
+                  <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:8px;padding:10px;min-height:140px;">
                     <div class="mock-chat-bubble mock-chat-ai" style="font-size:10px;margin-bottom:6px;">Welcome! I am The Builder. Let us start by exploring what you already know about leadership frameworks.</div>
                     <div class="mock-chat-bubble mock-chat-user" style="font-size:10px;margin-bottom:6px;">I know about transformational vs transactional styles.</div>
                     <div class="mock-chat-bubble mock-chat-ai" style="font-size:10px;">Brilliant foundation. Now, how would you apply transformational leadership when your team faces a tight deadline?</div>
                   </div>
                   <!-- Quality metrics -->
                   <div style="display:flex;gap:6px;margin-top:8px;">
-                    <div style="flex:1;background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:6px;padding:6px;text-align:center;">
+                    <div style="flex:1;background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:6px;padding:6px;text-align:center;">
                       <div style="font-size:14px;font-weight:600;color:var(--teal);">94%</div>
                       <div style="font-size:8px;color:var(--text-tertiary);">Quality</div>
                     </div>
-                    <div style="flex:1;background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:6px;padding:6px;text-align:center;">
+                    <div style="flex:1;background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:6px;padding:6px;text-align:center;">
                       <div style="font-size:14px;font-weight:600;color:var(--teal);">A+</div>
                       <div style="font-size:8px;color:var(--text-tertiary);">Pedagogy</div>
                     </div>
-                    <div style="flex:1;background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:6px;padding:6px;text-align:center;">
+                    <div style="flex:1;background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:6px;padding:6px;text-align:center;">
                       <div style="font-size:14px;font-weight:600;color:var(--teal);">12</div>
                       <div style="font-size:8px;color:var(--text-tertiary);">xAPI Events</div>
                     </div>
@@ -973,7 +974,7 @@
             <!-- Bloom's Taxonomy Pyramid -->
             <div style="display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:8px;">
               <!-- Create (top - narrowest) -->
-              <div style="width:40%;min-height:40px;border-radius:8px;background:rgba(0,217,192,0.22);border:1px solid rgba(0,217,192,0.35);display:flex;align-items:center;justify-content:center;padding:8px 14px;text-align:center;">
+              <div style="width:40%;min-height:40px;border-radius:8px;background:rgba(0,217,192,0.14);border:1px solid rgba(0,217,192,0.35);display:flex;align-items:center;justify-content:center;padding:8px 14px;text-align:center;">
                 <div>
                   <div style="font-size:12px;font-weight:700;color:var(--teal);margin-bottom:2px;">Create</div>
                   <div style="font-size:10px;color:var(--text-secondary);line-height:1.4;">Design solutions, produce original work</div>
@@ -1038,19 +1039,19 @@
             <p style="font-size:14px;margin-bottom:16px;">For admins, this means unprecedented visibility into your organisation&rsquo;s learning culture:</p>
             <!-- Mockup: Growth mindset metrics -->
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-              <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:12px;text-align:center;">
+              <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:12px;text-align:center;">
                 <div style="font-size:22px;font-weight:600;color:var(--teal);">73%</div>
                 <div style="font-size:10px;color:var(--text-tertiary);">Growth mindset ratio</div>
               </div>
-              <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:12px;text-align:center;">
+              <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:12px;text-align:center;">
                 <div style="font-size:22px;font-weight:600;color:var(--teal);">+18%</div>
                 <div style="font-size:10px;color:var(--text-tertiary);">Improvement over 6 months</div>
               </div>
-              <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:12px;text-align:center;">
+              <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:12px;text-align:center;">
                 <div style="font-size:22px;font-weight:600;color:var(--teal);">142</div>
                 <div style="font-size:10px;color:var(--text-tertiary);">Reframing interventions</div>
               </div>
-              <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:12px;text-align:center;">
+              <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.08);border-radius:10px;padding:12px;text-align:center;">
                 <div style="font-size:22px;font-weight:600;color:var(--teal);">91%</div>
                 <div style="font-size:10px;color:var(--text-tertiary);">Resilience after intervention</div>
               </div>
@@ -1081,7 +1082,7 @@
         </p>
 
         <!-- xAPI Analytics Mockup Dashboard -->
-        <div style="background:rgba(10,22,40,0.6);border:1px solid var(--border-subtle);border-radius:12px;padding:20px;overflow:hidden;">
+        <div style="background:#f5f7fa;border:1px solid var(--border-subtle);border-radius:12px;padding:20px;overflow:hidden;">
           <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border-subtle);">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
             <span style="font-size:12px;font-weight:600;color:var(--text-primary);">xAPI Analytics Dashboard</span>
@@ -1112,7 +1113,7 @@
           </div>
           <!-- Bloom's per character bar chart mockup -->
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-            <div style="background:rgba(10,22,40,0.4);border:1px solid var(--border-subtle);border-radius:8px;padding:14px;">
+            <div style="background:#ffffff;border:1px solid var(--border-subtle);border-radius:8px;padding:14px;">
               <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin-bottom:10px;">Bloom&rsquo;s Distribution by Character</div>
               <!-- Stacked mini bars for each character -->
               <div style="display:flex;flex-direction:column;gap:5px;">
@@ -1174,7 +1175,7 @@
               </div>
             </div>
             <!-- Activity Heatmap mockup -->
-            <div style="background:rgba(10,22,40,0.4);border:1px solid var(--border-subtle);border-radius:8px;padding:14px;">
+            <div style="background:#ffffff;border:1px solid var(--border-subtle);border-radius:8px;padding:14px;">
               <div style="font-size:11px;font-weight:600;color:var(--text-primary);margin-bottom:10px;">Activity Heatmap &middot; This Week</div>
               <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;">
                 <div style="font-size:7px;color:var(--text-tertiary);text-align:center;padding-bottom:4px;">Mon</div>
@@ -1372,21 +1373,21 @@
 
         <!-- Three Operational Modes -->
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;">
-          <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.12);border-radius:12px;padding:20px;text-align:center;">
+          <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.12);border-radius:12px;padding:20px;text-align:center;">
             <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,217,192,0.1);border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
             </div>
             <h4 style="font-size:13px;color:var(--teal);margin-bottom:6px;">Observer mode</h4>
             <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Silently watches engagement signals, cognitive load and emotional indicators across all interactions</p>
           </div>
-          <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.12);border-radius:12px;padding:20px;text-align:center;">
+          <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.12);border-radius:12px;padding:20px;text-align:center;">
             <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,217,192,0.1);border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
             <h4 style="font-size:13px;color:var(--teal);margin-bottom:6px;">Recommendation mode</h4>
             <p style="font-size:11px;color:var(--text-tertiary);line-height:1.5;">Suggests adjustments to teaching characters. Modify tone, increase scaffolding, or shift cognitive level</p>
           </div>
-          <div style="background:rgba(10,22,40,0.5);border:1px solid rgba(0,217,192,0.12);border-radius:12px;padding:20px;text-align:center;">
+          <div style="background:#f5f7fa;border:1px solid rgba(0,217,192,0.12);border-radius:12px;padding:20px;text-align:center;">
             <div style="width:40px;height:40px;border-radius:50%;background:rgba(0,217,192,0.1);border:1px solid var(--teal-border);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             </div>
@@ -1542,12 +1543,13 @@
   <!-- FOOTER -->
   <footer>
     <div class="container">
-      <div class="logo" style="margin-bottom:12px;font-size:16px;">ZAVMO</div>
+      <img class="z-footer-logo" src="../_brand/zavmo-logo-mono-white.svg" alt="Zavmo" width="102" height="22">
       <p style="font-size:13px;color:var(--text-tertiary);line-height:1.6;">
         Making learning as unique as you are.<br>
         Iridescent Technology Ltd &middot; A Growth Engineering Company
       </p>
     </div>
+    <span class="z-copyright">© 2026 Zavmo.ai. All rights reserved.</span>
   </footer>
 
   <!-- SCROLL REVEAL SCRIPT -->

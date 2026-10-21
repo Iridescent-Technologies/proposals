@@ -5,29 +5,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The admin console · Zavmo</title>
 <style>
-  :root{--teal:#22c7a9;--teal-soft:#9fe8da;--muted:rgba(255,255,255,.62);--line:rgba(255,255,255,.12)}
+  :root{--teal:#0e7b62;--teal-soft:#0e7b62;--muted:rgba(10,22,40,0.62);--line:rgba(10,22,40,0.12)}
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(160deg,#0a1b2e 0%,#102a49 55%,#0a1b2e 100%);color:#fff;overflow:hidden;height:100vh}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(160deg,#0a1b2e 0%,#102a49 55%,#0a1b2e 100%);color:#0a1628;overflow:hidden;height:100vh}
   .stars{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.9;transition:opacity .5s}
   .stars.dim{opacity:.32}
   .stage{position:fixed;inset:0;display:flex;flex-direction:column;z-index:1}
   .bar{display:flex;align-items:center;gap:14px;padding:18px 26px}
   .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.14em;font-size:13px;text-transform:uppercase}
-  .zmark{width:30px;height:30px;border-radius:9px;background:linear-gradient(150deg,#16324f,#0a1b2e);display:grid;place-items:center;border:1px solid rgba(255,255,255,.16);box-shadow:0 4px 14px rgba(0,0,0,.35)}
+  .zmark{width:30px;height:30px;border-radius:9px;background:linear-gradient(150deg,#16324f,#0a1b2e);display:grid;place-items:center;border:1px solid rgba(10,22,40,0.16);box-shadow:0 4px 14px rgba(10,22,40,0.105)}
   .zmark span{font-weight:700;font-size:15px}
   .bar .spacer{flex:1}
   .counter{font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);letter-spacing:.04em}
-  .btn{appearance:none;border:1px solid var(--line);background:rgba(255,255,255,.04);color:#dfe9f4;font-size:12px;letter-spacing:.04em;padding:7px 12px;border-radius:8px;cursor:pointer;transition:.15s}
-  .btn:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
+  .btn{appearance:none;border:1px solid var(--line);background:rgba(10,22,40,0.04);color:#4b5563;font-size:12px;letter-spacing:.04em;padding:7px 12px;border-radius:8px;cursor:pointer;transition:.15s}
+  .btn:hover{background:rgba(10,22,40,0.1);border-color:rgba(10,22,40,0.28)}
   .slide{flex:1;display:flex;align-items:center;justify-content:center;gap:46px;padding:6px 56px 26px;min-height:0}
   .copy{width:330px;flex:none}
   .eyebrow{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:14px}
   .title{font-size:33px;line-height:1.12;font-weight:600;letter-spacing:-.01em;margin-bottom:16px}
-  .caption{font-size:16px;line-height:1.6;color:#cdd9e7;font-weight:300}
+  .caption{font-size:16px;line-height:1.6;color:#4b5563;font-weight:300}
   .step-no{margin-top:22px;font-size:13px;color:var(--muted)}
   .shotwrap{flex:1;height:100%;display:flex;align-items:center;justify-content:center;min-width:0}
-  .shot{max-width:100%;max-height:100%;border-radius:13px;box-shadow:0 30px 70px -22px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.08);background:#fff;overflow:hidden;display:flex;flex-direction:column}
+  .shot{max-width:100%;max-height:100%;border-radius:13px;box-shadow:0 30px 70px -22px rgba(10,22,40,0.21),0 0 0 1px rgba(10,22,40,0.08);background:#fff;overflow:hidden;display:flex;flex-direction:column}
   .shot img{display:block;max-width:100%;max-height:74vh;border-radius:0}
   .browser-bar{display:flex;align-items:center;gap:7px;padding:9px 14px;background:#eef2f7;flex:none}
   .browser-bar .d{width:11px;height:11px;border-radius:50%}
@@ -39,53 +39,56 @@
   .cover .zbig span{font-size:36px}
   .cover .big{font-size:60px;line-height:1.05;font-weight:600;letter-spacing:-.02em}
   .cover .big em{font-style:normal;color:var(--teal)}
-  .cover .sub{margin-top:22px;font-size:19px;color:#cdd9e7;font-weight:300;max-width:52ch;line-height:1.6}
+  .cover .sub{margin-top:22px;font-size:19px;color:#4b5563;font-weight:300;max-width:52ch;line-height:1.6}
   .cover .meta{margin-top:38px;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
   .hint{margin-top:32px;font-size:13px;color:var(--muted)}
-  .hint kbd{background:rgba(255,255,255,.08);border:1px solid var(--line);border-radius:6px;padding:2px 8px;margin:0 2px;font-size:12px}
+  .hint kbd{background:rgba(10,22,40,0.08);border:1px solid var(--line);border-radius:6px;padding:2px 8px;margin:0 2px;font-size:12px}
   .sectiondiv .snum{font-size:15px;letter-spacing:.3em;color:var(--teal);font-weight:600;margin-bottom:20px}
   .sectiondiv .stitle{font-size:50px;font-weight:600;letter-spacing:-.02em;max-width:18ch}
-  .sectiondiv .ssub{margin-top:18px;font-size:18px;color:#cdd9e7;font-weight:300;max-width:48ch;line-height:1.6}
+  .sectiondiv .ssub{margin-top:18px;font-size:18px;color:#4b5563;font-weight:300;max-width:48ch;line-height:1.6}
   .sectiondiv .srule{width:54px;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-soft));border-radius:2px;margin:30px auto 0}
   .statementdiv{flex-direction:column;gap:0;text-align:center;padding:0 7vw}
   .statementdiv .seyebrow{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:22px}
   .statementdiv .sbig{font-size:52px;line-height:1.09;font-weight:600;letter-spacing:-.02em;max-width:22ch}
   .statementdiv .sbig em{font-style:normal;color:var(--teal)}
-  .statementdiv .sbody{margin-top:26px;font-size:19.5px;line-height:1.62;color:#d4e0ec;font-weight:300;max-width:62ch}
-  .statementdiv .sbody b{color:#fff;font-weight:500}
+  .statementdiv .sbody{margin-top:26px;font-size:19.5px;line-height:1.62;color:#4b5563;font-weight:300;max-width:62ch}
+  .statementdiv .sbody b{color:#0a1628;font-weight:500}
   .statementdiv .scredit{margin-top:26px;font-size:13px;letter-spacing:.04em;color:var(--muted)}
-  .progress{height:3px;background:rgba(255,255,255,.08)}
+  .progress{height:3px;background:rgba(10,22,40,0.08)}
   .progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-soft));transition:width .35s cubic-bezier(.4,0,.2,1)}
   .dots{display:flex;gap:6px;justify-content:center;padding:12px 0 16px;flex-wrap:wrap}
-  .dots b{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:.2s}
+  .dots b{width:7px;height:7px;border-radius:50%;background:rgba(10,22,40,0.22);cursor:pointer;transition:.2s}
   .dots b.on{background:var(--teal);transform:scale(1.35)}
   .dots b.sec{width:5px;height:5px;background:rgba(34,199,169,.45);border-radius:1px;transform:rotate(45deg)}
   .dots b.sec.on{background:var(--teal)}
   .zone{position:fixed;top:64px;bottom:56px;width:22%;z-index:5;cursor:pointer}
   .zone.l{left:0}.zone.r{right:0}
-  .nav-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:6;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;opacity:0;transition:.2s}
+  .nav-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:6;width:46px;height:46px;border-radius:50%;background:rgba(10,22,40,0.06);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;opacity:0;transition:.2s}
   .stage:hover .nav-arrow{opacity:.6}
-  .nav-arrow:hover{opacity:1!important;background:rgba(255,255,255,.16)}
+  .nav-arrow:hover{opacity:1!important;background:rgba(10,22,40,0.16)}
   .nav-arrow.l{left:18px}.nav-arrow.r{right:18px}
-  .nav-arrow svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-  .grid{position:fixed;inset:0;background:rgba(8,17,29,.97);z-index:30;display:none;grid-template-columns:repeat(4,1fr);gap:16px;padding:56px;overflow:auto;align-content:start}
+  .nav-arrow svg{width:20px;height:20px;stroke:#0a1628;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .grid{position:fixed;inset:0;background:rgba(255,255,255,.97);z-index:30;display:none;grid-template-columns:repeat(4,1fr);gap:16px;padding:56px;overflow:auto;align-content:start}
   .grid.show{display:grid}
   .grid .ghead{grid-column:1/-1;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-top:10px}
-  .grid figure{cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#0f2540;transition:.18s}
+  .grid figure{cursor:pointer;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#f5f7fa;transition:.18s}
   .grid figure:hover{border-color:var(--teal);transform:translateY(-3px)}
   .grid img{width:100%;display:block}
-  .grid figcaption{font-size:12px;color:#cdd9e7;padding:8px 10px}
+  .grid figcaption{font-size:12px;color:#4b5563;padding:8px 10px}
   .grid .gclose{position:fixed;top:20px;right:26px;color:var(--muted);font-size:13px;letter-spacing:.1em;cursor:pointer}
   @media (max-width:1024px){.slide{flex-direction:column;gap:18px;padding:10px 22px 18px}.copy{width:100%;max-width:680px;text-align:center}.shot img{max-height:52vh}}
   .fade{animation:fade .4s ease}
   @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .stars{display:none}
+  .zbig-mark{width:74px;height:74px;margin-bottom:30px}
 </style>
+<link rel="stylesheet" href="../_brand/zavmo.css">
 </head>
 <body>
 <canvas id="stars" class="stars"></canvas>
 <div class="stage">
   <div class="bar">
-    <div class="brand"><span class="zmark"><span>Z</span></span> Zavmo · Admin</div>
+    <div class="brand"><a class="z-logo-link" href="https://zavmo.ai" aria-label="Zavmo"><img class="z-logo" src="../_brand/zavmo-logo-mono-navy.svg" alt="Zavmo" width="130" height="28"><span class="z-logo-tag">Admin</span></a></div>
     <div class="spacer"></div>
     <div class="counter" id="counter"></div>
     <button class="btn" id="gridBtn">Overview</button>
@@ -160,7 +163,7 @@ function contentIndexOf(n){return S.slice(0,n+1).filter(s=>s.img).length;}
 function render(){
   const s=S[i];
   slide.className='slide fade'+(s.cover?' cover':'')+(s.section?' sectiondiv':'')+(s.statement?' statementdiv':'');
-  if(s.cover){slide.innerHTML=`<span class="zmark zbig"><span>Z</span></span><div class="big">${s.big}</div><div class="sub">${s.sub}</div><div class="meta">Live product walk-through</div><div class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or click · <kbd>P</kbd> autoplay · <kbd>G</kbd> overview · <kbd>F</kbd> fullscreen</div>`;}
+  if(s.cover){slide.innerHTML=`<img class="zbig-mark" src="../_brand/zavmo-logomark.svg" alt="" width="74" height="74"><div class="big">${s.big}</div><div class="sub">${s.sub}</div><div class="meta">Live product walk-through</div><div class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or click · <kbd>P</kbd> autoplay · <kbd>G</kbd> overview · <kbd>F</kbd> fullscreen</div>`;}
   else if(s.section){slide.innerHTML=`<div class="snum">${s.num}</div><div class="stitle">${s.title}</div><div class="ssub">${s.sub}</div><div class="srule"></div>`;}
   else if(s.statement){slide.innerHTML=`${s.eyebrow?`<div class="seyebrow">${s.eyebrow}</div>`:''}<div class="sbig">${s.big}</div>${s.body?`<div class="sbody">${s.body}</div>`:''}${s.credit?`<div class="scredit">${s.credit}</div>`:''}`;}
   else{const ci=contentIndexOf(i);slide.innerHTML=`<div class="copy"><div class="eyebrow">${s.eyebrow}</div><div class="title">${s.title}</div><div class="caption">${s.caption}</div><div class="step-no">${ci} / ${contentCount}</div></div><div class="shotwrap"><div class="shot"><div class="browser-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>${BRAND_URL}</span></div><img src="images/${s.img}" alt="${s.title}"></div></div>`;}
@@ -197,5 +200,6 @@ requestAnimationFrame(frame);}
 addEventListener('resize',resize);resize();frame();})();
 render();
 </script>
+<p class="z-copyright-fixed">© 2026 Zavmo.ai. All rights reserved.</p>
 </body>
 </html>

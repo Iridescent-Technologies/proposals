@@ -24,23 +24,23 @@
 <style>
   :root{
     --navy-0:#060e17; --navy-1:#0b1a2a;
-    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
-    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
-    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
-    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --surface:rgba(10,22,40,0.045); --surface-2:rgba(10,22,40,0.07);
+    --border:rgba(10,22,40,0.1); --border-2:rgba(0,217,192,0.28);
+    --teal:#0e7b62; --teal-glow:#0e7b62; --teal-deep:#0e7b62;
+    --ink:#0a1628; --ink-2:rgba(10,22,40,0.72); --ink-3:rgba(10,22,40,0.5);
     --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
     --bg-primary:var(--navy-0); --bg-secondary:var(--navy-1); --bg-card:var(--surface);
-    --teal-subtle:rgba(47,207,168,.14); --teal-border:var(--border-2);
+    --teal-subtle:rgba(0,217,192,0.14); --teal-border:var(--border-2);
     --text-primary:var(--ink); --text-secondary:var(--ink-2); --text-tertiary:var(--ink-3);
-    --amber:#f5b544; --blue:#8fb8ff;
+    --amber:#2d5a8a; --blue:#2d5a8a;
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;background:var(--navy-0);scroll-behavior:smooth}
   body{
     margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;line-height:1.55;
     background:
-      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
-      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      radial-gradient(120% 70% at 82% -8%, rgba(0,217,192,0.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(45,90,138,0.048), transparent 55%),
       linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
     background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;
     -webkit-font-smoothing:antialiased;
@@ -52,7 +52,7 @@
   /* nav */
   nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;
     padding:14px clamp(22px,5vw,48px);
-    background:rgba(6,14,23,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    background:rgba(255,255,255,0.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
     border-bottom:1px solid var(--border);}
   .logomark{width:34px;height:34px;flex:0 0 auto}
   .brand-txt{display:flex;flex-direction:column;line-height:1}
@@ -64,7 +64,7 @@
   .nav-link svg{width:15px;height:15px}
   .nav-cta{background:var(--teal);color:var(--navy-0);padding:9px 20px;border-radius:100px;
     font-size:13px;font-weight:600;transition:.2s;margin-left:14px;}
-  .nav-cta:hover{background:var(--teal-glow);box-shadow:0 0 20px rgba(47,207,168,.4)}
+  .nav-cta:hover{background:var(--teal-glow);box-shadow:0 0 20px rgba(0,217,192,0.4)}
 
   /* hero */
   .hero{padding:clamp(48px,10vh,104px) 0 clamp(36px,7vh,64px);display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
@@ -74,7 +74,7 @@
   .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
   .btn{padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
   .btn-primary{background:var(--teal);color:var(--navy-0)}
-  .btn-primary:hover{background:var(--teal-glow);box-shadow:0 8px 28px rgba(47,207,168,.3)}
+  .btn-primary:hover{background:var(--teal-glow);box-shadow:0 8px 28px rgba(0,217,192,0.3)}
   .btn-ghost{border:1px solid var(--border-2);color:var(--ink)}
   .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
   .hero-orb{width:min(320px,34vw);height:min(320px,34vw);flex:0 0 auto}
@@ -102,7 +102,7 @@
   /* quote / callout */
   .quote{border-left:2px solid var(--teal);padding:8px 0 8px 26px;margin:20px 0}
   .quote p{font-size:clamp(20px,3vw,30px);font-weight:200;color:var(--ink);line-height:1.32;max-width:54ch}
-  .callout{background:linear-gradient(135deg,rgba(47,207,168,.1),rgba(47,207,168,.04));
+  .callout{background:linear-gradient(135deg,rgba(0,217,192,0.1),rgba(0,217,192,0.04));
     border:1px solid var(--teal-border);border-radius:18px;padding:clamp(26px,4vw,40px)}
 
   /* feature rows */
@@ -128,19 +128,19 @@
   /* ten fluencies orbit */
   .orbit-stage{position:relative;width:min(560px,86vw);aspect-ratio:1;margin:8px auto 0}
   .orbit-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:96px;height:96px;border-radius:50%;
-    background:radial-gradient(circle at 42% 38%,#f2fffb,#6ee9db 45%,#04d9c1);color:var(--navy-0);
+    background:radial-gradient(circle at 42% 38%,#0a1628,#6ee9db 45%,#04d9c1);color:var(--navy-0);
     display:flex;align-items:center;justify-content:center;text-align:center;font-weight:600;font-size:13px;z-index:5;
-    box-shadow:0 0 40px rgba(63,228,188,.5);animation:corePulse 3.6s ease-in-out infinite}
-  @keyframes corePulse{0%,100%{box-shadow:0 0 34px rgba(63,228,188,.42)}50%{box-shadow:0 0 60px rgba(63,228,188,.7)}}
+    box-shadow:0 0 40px rgba(0,217,192,0.5);animation:corePulse 3.6s ease-in-out infinite}
+  @keyframes corePulse{0%,100%{box-shadow:0 0 34px rgba(0,217,192,0.42)}50%{box-shadow:0 0 60px rgba(0,217,192,0.7)}}
   .ring{position:absolute;inset:0;border-radius:50%;border:1px solid var(--border);animation:spin 60s linear infinite}
-  .ring.r2{inset:14%;animation-duration:44s;animation-direction:reverse;border-color:rgba(47,207,168,.12)}
+  .ring.r2{inset:14%;animation-duration:44s;animation-direction:reverse;border-color:rgba(0,217,192,0.12)}
   @keyframes spin{to{transform:rotate(360deg)}}
   /* node = pure position (orbits with the ring); chip = pure counter-rotation (keeps text upright).
      Splitting them avoids the mismatched translate+rotate matrix blend that skewed the labels. */
   .node{position:absolute;display:grid;place-items:center;width:0;height:0}
   .chip-fl{background:var(--surface);border:1px solid var(--teal-border);
     border-radius:100px;padding:7px 13px;font-size:12px;font-weight:500;color:var(--ink);white-space:nowrap;backdrop-filter:blur(10px);
-    animation:spin 60s linear infinite reverse;box-shadow:0 4px 18px rgba(0,0,0,.28)}
+    animation:spin 60s linear infinite reverse;box-shadow:0 4px 18px rgba(10,22,40,0.084)}
   .chip-fl.r2{animation-duration:44s;animation-direction:normal}
   .chip-fl b{color:var(--teal);font-weight:600}
   .chip-fl.sm{font-size:11px;padding:5px 11px;color:var(--ink-2);border-color:var(--border)}
@@ -165,8 +165,8 @@
   .ktier .kside{position:absolute;right:calc(100% + 16px);white-space:nowrap;font-size:11px;color:var(--ink-3);top:50%;transform:translateY(-50%)}
   .ktier.stop{border-color:var(--amber);color:var(--ink)}
   .ktier.stop .kside{color:var(--amber)}
-  .ktier.peak{background:linear-gradient(135deg,rgba(47,207,168,.22),rgba(47,207,168,.06));border-color:var(--teal);color:var(--ink);
-    font-weight:600;box-shadow:0 0 30px rgba(47,207,168,.25)}
+  .ktier.peak{background:linear-gradient(135deg,rgba(0,217,192,0.22),rgba(0,217,192,0.06));border-color:var(--teal);color:var(--ink);
+    font-weight:600;box-shadow:0 0 30px rgba(0,217,192,0.25)}
   .ktier.peak .kside{color:var(--teal);font-weight:600}
 
   /* gap chart */
@@ -188,11 +188,11 @@
   .fw-card p{font-size:13px;line-height:1.5;margin:0}
 
   /* career passport */
-  .passport{background:linear-gradient(135deg,rgba(47,207,168,.09),rgba(234,251,244,.03));border:1px solid var(--teal-border);
+  .passport{background:linear-gradient(135deg,rgba(0,217,192,0.09),rgba(10,22,40,0.03));border:1px solid var(--teal-border);
     border-radius:20px;padding:clamp(22px,3vw,34px);overflow:hidden;margin-top:12px}
   .pp-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-bottom:1px dashed var(--border-2);padding-bottom:16px;margin-bottom:22px}
   .pp-seal{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 40% 36%,#6ee9db,#04d9c1);flex:0 0 auto;
-    box-shadow:0 0 22px rgba(63,228,188,.5)}
+    box-shadow:0 0 22px rgba(0,217,192,0.5)}
   .pp-k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:3px}
   .pp-head h3{margin:0;font-size:clamp(19px,2.6vw,26px);font-weight:600;letter-spacing:-.01em}
   .pp-illus{margin-left:auto;font-size:10.5px;color:var(--ink-3);border:1px solid var(--border);border-radius:100px;padding:4px 12px}
@@ -217,7 +217,7 @@
     background:linear-gradient(90deg,var(--teal-deep),var(--teal-glow));transition:width 1.5s cubic-bezier(.4,0,.2,1) .2s}
   .in .deg-fill{width:var(--w,50%)}
   .deg-was{position:absolute;z-index:2;top:50%;width:11px;height:11px;border-radius:50%;transform:translate(-50%,-50%);
-    background:var(--navy-1);border:2px solid var(--amber);box-shadow:0 0 0 3px rgba(6,14,23,.6)}
+    background:var(--navy-1);border:2px solid var(--amber);box-shadow:0 0 0 3px rgba(255,255,255,0.6)}
   .deg-cap{font-size:11.5px;color:var(--ink-2);white-space:nowrap;text-align:right}
   .deg-cap b{color:var(--teal);font-weight:600}
   .deg-cap.move b{color:var(--teal-glow)}
@@ -230,9 +230,9 @@
   .milestone{display:grid;grid-template-columns:auto 1fr;gap:20px;padding:0 0 26px;position:relative}
   .milestone:last-child{padding-bottom:0}
   .m-rail{display:flex;flex-direction:column;align-items:center}
-  .m-dot{width:16px;height:16px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(47,207,168,.18);flex:0 0 auto;margin-top:3px}
+  .m-dot{width:16px;height:16px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(0,217,192,0.18);flex:0 0 auto;margin-top:3px}
   .m-dot.hollow{background:transparent;border:2px solid var(--teal-border);box-shadow:none}
-  .m-line{width:2px;flex:1;background:linear-gradient(180deg,var(--teal-border),rgba(234,251,244,.06));margin-top:4px;min-height:22px}
+  .m-line{width:2px;flex:1;background:linear-gradient(180deg,var(--teal-border),rgba(10,22,40,0.06));margin-top:4px;min-height:22px}
   .milestone:last-child .m-line{display:none}
   .m-body h4{margin:0 0 4px;font-size:16px;font-weight:600;color:var(--ink)}
   .m-body p{margin:0;font-size:14px}
@@ -259,18 +259,12 @@
     .layer::before{transform:scaleY(1)}.gap-fill{opacity:1}.draw{stroke-dashoffset:0}
   }
 </style>
+<link rel="stylesheet" href="../_brand/zavmo.css">
 </head>
 <body>
 
 <nav>
-  <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
-      <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
-      <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
-    <g id="halo"></g>
-    <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
-  </svg>
-  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">The Horizon</span></div>
+  <a class="z-logo-link" href="https://zavmo.ai" aria-label="Zavmo"><img class="z-logo" src="../_brand/zavmo-logo-mono-navy.svg" alt="Zavmo" width="130" height="28"><span class="z-logo-tag">The Horizon</span></a>
   <span class="nav-spacer"></span>
   <a class="nav-link" href="../">
     <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -366,9 +360,11 @@
   </section>
 
   <footer>
+    <img class="z-footer-logo" src="../_brand/zavmo-logo-mono-white.svg" alt="Zavmo" width="102" height="22">
     Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
-    Future Fluency · Zavmo / Iridescent Technologies. Built from the shared <code style="color:var(--ink-2)">_template</code>. Palette: navy + teal + DM Sans.<br>
+    Future Fluency · Zavmo / Iridescent Technologies.<br>
     <span style="color:var(--ink-3)">Draft collateral · for review before publication.</span>
+    <span class="z-copyright">© 2026 Zavmo.ai. All rights reserved.</span>
   </footer>
 
 </div>
@@ -378,7 +374,7 @@
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   // logomark halo: 12 dots (matches the hub chrome exactly)
-  var g=document.getElementById('halo'), n=12, cx=50, cy=50, r=38;
+  var g=(document.getElementById('halo')||document.createElementNS('http://www.w3.org/2000/svg','g')), n=12, cx=50, cy=50, r=38;
   for(var i=0;i<n;i++){
     var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
     var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
@@ -393,11 +389,11 @@
     +'<defs><radialGradient id="nuc" cx="42%" cy="38%" r="65%"><stop offset="0%" stop-color="#f2fffb"/><stop offset="35%" stop-color="#6ee9db"/><stop offset="75%" stop-color="#04d9c1"/><stop offset="100%" stop-color="#04d9c1"/></radialGradient></defs>';
   for(var j=0;j<3;j++){
     s+='<g transform="rotate('+ang[j]+' 120 120)"><path d="'+pd+'" fill="none" stroke="rgba(47,207,168,.26)" stroke-width="1.4"/>'
-      +'<circle r="5.5" fill="#3FE4BC" style="filter:drop-shadow(0 0 6px rgba(63,228,188,.9))">'
+      +'<circle r="5.5" fill="#3FE4BC" style="filter:drop-shadow(0 0 6px rgba(0,217,192,0.9))">'
       + (reduce?'':'<animateMotion dur="'+dur[j]+'" repeatCount="indefinite" '+(j===1?'keyPoints="1;0" keyTimes="0;1" calcMode="linear" ':'')+'path="'+pd+'"/>')
       +'</circle></g>';
   }
-  s+='<circle cx="120" cy="120" r="20" fill="url(#nuc)" style="filter:drop-shadow(0 0 16px rgba(63,228,188,.72))"/></svg>';
+  s+='<circle cx="120" cy="120" r="20" fill="url(#nuc)" style="filter:drop-shadow(0 0 16px rgba(0,217,192,0.72))"/></svg>';
   var ho=document.getElementById('heroOrb'); if(ho) ho.innerHTML=s;
 
   // ten Fluencies orbit: 6 primary on outer ring, 4 emerging on inner ring

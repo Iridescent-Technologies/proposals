@@ -21,34 +21,34 @@
 <style>
   :root{
     --navy-0:#060e17; --navy-1:#0b1a2a;
-    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
-    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
-    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
-    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --surface:rgba(10,22,40,0.045); --surface-2:rgba(10,22,40,0.07);
+    --border:rgba(10,22,40,0.1); --border-2:rgba(0,217,192,0.28);
+    --teal:#0e7b62; --teal-glow:#0e7b62; --teal-deep:#0e7b62;
+    --ink:#0a1628; --ink-2:rgba(10,22,40,0.72); --ink-3:rgba(10,22,40,0.5);
     --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
     --bg-primary:var(--navy-0); --bg-secondary:var(--navy-1); --bg-card:var(--surface);
-    --teal-subtle:rgba(47,207,168,.14); --teal-border:var(--border-2);
+    --teal-subtle:rgba(0,217,192,0.14); --teal-border:var(--border-2);
     --text-primary:var(--ink); --text-secondary:var(--ink-2); --text-tertiary:var(--ink-3);
-    --amber:#f5b544; --blue:#8fb8ff;
+    --amber:#2d5a8a; --blue:#2d5a8a;
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;background:var(--navy-0);scroll-behavior:smooth}
   body{
     margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;line-height:1.55;
     background:
-      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
-      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      radial-gradient(120% 70% at 82% -8%, rgba(0,217,192,0.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(45,90,138,0.048), transparent 55%),
       linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
     background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;
     -webkit-font-smoothing:antialiased;
   }
   a{color:inherit;text-decoration:none}
   em{font-style:normal;color:var(--teal-glow)}
-  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;color:var(--teal-glow);background:rgba(47,207,168,.08);padding:1px 6px;border-radius:5px}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.86em;color:var(--teal-glow);background:rgba(0,217,192,0.08);padding:1px 6px;border-radius:5px}
   .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(22px,5vw,48px)}
 
   nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:14px clamp(22px,5vw,48px);
-    background:rgba(6,14,23,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+    background:rgba(255,255,255,0.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
   .logomark{width:34px;height:34px;flex:0 0 auto}
   .brand-txt{display:flex;flex-direction:column;line-height:1}
   .word{font-size:13px;font-weight:600;letter-spacing:.26em}
@@ -58,7 +58,7 @@
   .nav-link:hover{color:var(--teal)}
   .nav-link svg{width:15px;height:15px}
   .nav-cta{background:var(--teal);color:var(--navy-0);padding:9px 20px;border-radius:100px;font-size:13px;font-weight:600;transition:.2s;margin-left:14px}
-  .nav-cta:hover{background:var(--teal-glow);box-shadow:0 0 20px rgba(47,207,168,.4)}
+  .nav-cta:hover{background:var(--teal-glow);box-shadow:0 0 20px rgba(0,217,192,0.4)}
 
   .hero{padding:clamp(56px,12vh,120px) 0 clamp(40px,8vh,72px)}
   .eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
@@ -67,7 +67,7 @@
   .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
   .btn{padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:8px}
   .btn-primary{background:var(--teal);color:var(--navy-0)}
-  .btn-primary:hover{background:var(--teal-glow);box-shadow:0 8px 28px rgba(47,207,168,.3)}
+  .btn-primary:hover{background:var(--teal-glow);box-shadow:0 8px 28px rgba(0,217,192,0.3)}
   .btn-ghost{border:1px solid var(--border-2);color:var(--ink)}
   .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
 
@@ -88,7 +88,7 @@
   .grid.cols-2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
   .card{display:flex;flex-direction:column;gap:10px;background:var(--surface);border:1px solid var(--border);
     border-radius:18px;padding:24px;backdrop-filter:blur(18px);transition:.2s}
-  .card:hover{background:var(--surface-2);border-color:var(--border-2);transform:translateY(-2px);box-shadow:0 18px 44px rgba(0,0,0,.32)}
+  .card:hover{background:var(--surface-2);border-color:var(--border-2);transform:translateY(-2px);box-shadow:0 18px 44px rgba(10,22,40,0.096)}
   .chip{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);width:max-content}
   .chip.walk{color:var(--teal)}
   .chip.client{color:var(--amber)}
@@ -103,14 +103,14 @@
   .quote{border-left:2px solid var(--teal);padding:8px 0 8px 26px;margin:8px 0}
   .quote p{font-size:clamp(20px,3vw,28px);font-weight:200;color:var(--ink);line-height:1.35;max-width:54ch}
   .quote cite{display:block;margin-top:14px;font-size:13px;color:var(--ink-3);font-style:normal}
-  .callout{background:linear-gradient(135deg,rgba(47,207,168,.1),rgba(47,207,168,.04));border:1px solid var(--teal-border);border-radius:18px;padding:32px 34px}
+  .callout{background:linear-gradient(135deg,rgba(0,217,192,0.1),rgba(0,217,192,0.04));border:1px solid var(--teal-border);border-radius:18px;padding:32px 34px}
 
   /* ── layered architecture stack (deck-specific component) ──────────────── */
   .stack{display:flex;flex-direction:column;gap:10px}
   .layer{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center;
     background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 22px;transition:.2s}
   .layer:hover{border-color:var(--teal-border);background:var(--surface-2)}
-  .layer.accent{background:linear-gradient(135deg,rgba(47,207,168,.12),rgba(47,207,168,.04));border-color:var(--teal-border)}
+  .layer.accent{background:linear-gradient(135deg,rgba(0,217,192,0.12),rgba(0,217,192,0.04));border-color:var(--teal-border)}
   .layer-name{font-size:14px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
   .layer-name small{display:block;font-weight:400;font-size:11px;color:var(--teal);letter-spacing:.02em;margin-top:4px}
   .layer-desc{font-size:13.5px;color:var(--ink-2);font-weight:300;line-height:1.5;margin:0;max-width:none}
@@ -138,18 +138,12 @@
   }
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}.reveal{opacity:1;transform:none}}
 </style>
+<link rel="stylesheet" href="../_brand/zavmo.css">
 </head>
 <body>
 
 <nav>
-  <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
-      <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
-      <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
-    <g id="halo"></g>
-    <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
-  </svg>
-  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">How it is built</span></div>
+  <a class="z-logo-link" href="https://zavmo.ai" aria-label="Zavmo"><img class="z-logo" src="../_brand/zavmo-logo-mono-navy.svg" alt="Zavmo" width="130" height="28"><span class="z-logo-tag">How it is built</span></a>
   <span class="nav-spacer"></span>
   <a class="nav-link" href="../">
     <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -298,15 +292,17 @@
   </section>
 
   <footer>
+    <img class="z-footer-logo" src="../_brand/zavmo-logo-mono-white.svg" alt="Zavmo" width="102" height="22">
     Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
     Architecture overview for evaluation. The specifics are confirmed under NDA in a technical session: model versions, framework coverage, deployment topology.
+    <span class="z-copyright">© 2026 Zavmo.ai. All rights reserved.</span>
   </footer>
 
 </div>
 
 <script>
 (function(){
-  var g=document.getElementById('halo'), n=12, cx=50, cy=50, r=38;
+  var g=(document.getElementById('halo')||document.createElementNS('http://www.w3.org/2000/svg','g')), n=12, cx=50, cy=50, r=38;
   for(var i=0;i<n;i++){
     var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
     var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
