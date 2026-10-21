@@ -1,26 +1,25 @@
-# Most of this suite is public and meant to be found. Four pages are not.
+# Most of this suite is public and meant to be found. Three pages are not.
 #
 # The whole suite used to refuse indexing. Every page carried a noindex meta
 # tag because the decks were sent to named people rather than found by
 # strangers. That was reversed on 10 September 2026: the suite is now the
 # public library, so the crawl is allowed and indexing is allowed with it.
 #
-# FOUR EXCEPTIONS, AND THE FIRST THREE ARE THE ONES THAT MATTER.
+# THREE EXCEPTIONS, AND THE FIRST TWO ARE THE ONES THAT MATTER.
 #
 #   qualifications-level-3/   Level 3 Future Fluency qualifications
 #   qualifications-level-5/   Level 5 Diploma in Future Fluency, specification
-#   human-fluency/            Human Fluency unit specifications, draft
 #
-# All three are specifications that have NOT been submitted to an awarding body,
+# Both are specifications that have NOT been submitted to an awarding body,
 # and their titles say the word "qualification" without saying "draft". The
 # body copy hedges properly. A search result does not show the body copy, it
 # shows the title, and Zavmo is mid-application with awarding bodies who can
-# search for exactly this. So those three keep the noindex meta tag and are left
+# search for exactly this. So those two keep the noindex meta tag and are left
 # out of sitemap.xml.
 #
 #   _template/                a placeholder deck, not content
 #
-# Note what this file deliberately does NOT say: "Disallow:" for those three.
+# Note what this file deliberately does NOT say: "Disallow:" for those two.
 #
 # Blocking the crawl and asking to be de-indexed are different things, and
 # doing the first prevents the second. A URL blocked here is never fetched, so
@@ -28,6 +27,9 @@
 # with no way to remove it. Google's own guidance is to allow the crawl so the
 # noindex can be seen. _template is disallowed because nothing there ever needs
 # de-indexing.
+#
+# human-fluency/ is also an unsubmitted specification, but it IS indexed, by
+# choice on 21 Oct 2026. Its title says "draft", which answers the test below.
 #
 # ADDING A PAGE. Ask how its title reads on its own, with no body copy under
 # it. If that would embarrass an awarding body application, either retitle it
