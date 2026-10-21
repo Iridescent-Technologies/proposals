@@ -21,7 +21,7 @@
   --cream:rgba(10,22,40,0.96); --cream-80:rgba(10,22,40,0.8);
   --cream-62:rgba(10,22,40,0.62); --cream-45:rgba(10,22,40,0.58);
   --hair:rgba(10,22,40,0.08); --hair-2:rgba(10,22,40,0.06);
-  --coral:#FF8A6B; --blue:#5AA2FF; --violet:#B58BFF;
+  --coral:#0e7b62; --blue:#2d5a8a; --violet:#0a1628;
   --radius:16px; --radius-lg:20px;
   /* spacing scale. 8px base, airier. one system, snapped everywhere. */
   --sp-act:192px;     /* between acts (section padding) */
@@ -137,9 +137,9 @@ p.lead{font-size:18px;line-height:1.85;color:var(--cream-80);max-width:620px}
 .persona-head{display:flex;align-items:center;gap:16px;margin-bottom:18px}
 .avatar{width:60px;height:60px;flex-shrink:0}
 .ptag{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;display:inline-block}
-.ptag.cur{color:var(--coral);background:rgba(255,138,107,.12);border:1px solid rgba(255,138,107,.28)}
-.ptag.fut{color:var(--blue);background:rgba(90,162,255,.12);border:1px solid rgba(90,162,255,.28)}
-.ptag.qual{color:var(--violet);background:rgba(181,139,255,.12);border:1px solid rgba(181,139,255,.28)}
+.ptag.cur{color:var(--coral);background:rgba(0,217,192,.12);border:1px solid rgba(0,217,192,.28)}
+.ptag.fut{color:var(--blue);background:rgba(45,90,138,.12);border:1px solid rgba(45,90,138,.28)}
+.ptag.qual{color:var(--violet);background:rgba(10,22,40,.12);border:1px solid rgba(10,22,40,.28)}
 .pname{font-size:19px;font-weight:600;color:var(--cream)}
 .prole{font-size:13px;color:var(--cream-62)}
 .persona-card p{font-size:14px;color:var(--cream-80)}
@@ -194,7 +194,7 @@ p.lead{font-size:18px;line-height:1.85;color:var(--cream-80);max-width:620px}
 @media(max-width:780px){.faculty{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.faculty{grid-template-columns:1fr}}
 .teacher{position:relative;border:1px solid var(--hair);border-radius:14px;background:rgba(10,22,40,0.015);padding:22px 16px;text-align:center}
-.teacher.met{border-color:rgba(255,138,107,.4);background:rgba(255,138,107,.05)}
+.teacher.met{border-color:rgba(0,217,192,.4);background:rgba(0,217,192,.05)}
 .teacher .tdot{width:36px;height:36px;border-radius:50%;margin:0 auto 12px;background:radial-gradient(circle at 50% 35%,#99f0e6,#0e7b62);
   display:flex;align-items:center;justify-content:center;color:#06121d;font-weight:700;font-size:13px;box-shadow:0 0 13px rgba(0,217,192,0.4)}
 .teacher .tn{font-size:15px;font-weight:600;color:var(--cream)}
@@ -202,7 +202,7 @@ p.lead{font-size:18px;line-height:1.85;color:var(--cream-80);max-width:620px}
 .teacher .ttag{display:inline-block;margin-top:11px;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
   color:var(--teal-bright);background:rgba(0,217,192,0.1);border-radius:999px;padding:3px 9px}
 .teacher .nd{display:inline-block;margin-top:11px;margin-left:5px;font-size:10px;font-weight:600;letter-spacing:.04em;
-  color:#cdb6ff;background:rgba(181,139,255,.12);border:1px solid rgba(181,139,255,.3);border-radius:999px;padding:3px 9px}
+  color:#cdb6ff;background:rgba(10,22,40,.12);border:1px solid rgba(10,22,40,.3);border-radius:999px;padding:3px 9px}
 .teacher .metflag{position:absolute;top:12px;right:12px;font-size:9.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--coral)}
 .agent13{margin-top:var(--sp-media);border:1px solid rgba(0,217,192,0.24);border-radius:var(--radius-lg);
   background:radial-gradient(110% 120% at 50% -10%,rgba(20,168,139,.12),transparent 62%),rgba(10,22,40,0.015);padding:34px 26px;text-align:center}
@@ -348,10 +348,10 @@ p.lead,.muted{text-align:center;margin-left:auto;margin-right:auto}
     <div class="card persona-card">
       <div class="persona-head">
         <svg class="avatar" viewBox="0 0 60 60" aria-hidden="true">
-          <circle cx="30" cy="30" r="29" fill="none" stroke="#FF8A6B" stroke-width="2" stroke-opacity="0.55"/>
-          <circle cx="30" cy="30" r="24" fill="rgba(255,138,107,0.12)"/>
-          <circle cx="30" cy="23" r="9" fill="#FF8A6B" fill-opacity="0.85"/>
-          <path d="M14 47 a16 16 0 0 1 32 0 Z" fill="#FF8A6B" fill-opacity="0.7"/>
+          <circle cx="30" cy="30" r="29" fill="none" stroke="#0e7b62" stroke-width="2" stroke-opacity="0.55"/>
+          <circle cx="30" cy="30" r="24" fill="rgba(0,217,192,0.12)"/>
+          <circle cx="30" cy="23" r="9" fill="#0e7b62" fill-opacity="0.85"/>
+          <path d="M14 47 a16 16 0 0 1 32 0 Z" fill="#0e7b62" fill-opacity="0.7"/>
         </svg>
         <div>
           <span class="ptag cur">Current role</span>
@@ -371,10 +371,10 @@ p.lead,.muted{text-align:center;margin-left:auto;margin-right:auto}
     <div class="card persona-card">
       <div class="persona-head">
         <svg class="avatar" viewBox="0 0 60 60" aria-hidden="true">
-          <circle cx="30" cy="30" r="29" fill="none" stroke="#5AA2FF" stroke-width="2" stroke-opacity="0.55"/>
-          <circle cx="30" cy="30" r="24" fill="rgba(90,162,255,0.12)"/>
-          <circle cx="30" cy="23" r="9" fill="#5AA2FF" fill-opacity="0.85"/>
-          <path d="M14 47 a16 16 0 0 1 32 0 Z" fill="#5AA2FF" fill-opacity="0.7"/>
+          <circle cx="30" cy="30" r="29" fill="none" stroke="#2d5a8a" stroke-width="2" stroke-opacity="0.55"/>
+          <circle cx="30" cy="30" r="24" fill="rgba(45,90,138,0.12)"/>
+          <circle cx="30" cy="23" r="9" fill="#2d5a8a" fill-opacity="0.85"/>
+          <path d="M14 47 a16 16 0 0 1 32 0 Z" fill="#2d5a8a" fill-opacity="0.7"/>
         </svg>
         <div>
           <span class="ptag fut">Future role</span>
@@ -394,10 +394,10 @@ p.lead,.muted{text-align:center;margin-left:auto;margin-right:auto}
     <div class="card persona-card">
       <div class="persona-head">
         <svg class="avatar" viewBox="0 0 60 60" aria-hidden="true">
-          <circle cx="30" cy="30" r="29" fill="none" stroke="#B58BFF" stroke-width="2" stroke-opacity="0.55"/>
-          <circle cx="30" cy="30" r="24" fill="rgba(181,139,255,0.12)"/>
-          <circle cx="30" cy="23" r="9" fill="#B58BFF" fill-opacity="0.85"/>
-          <path d="M14 47 a16 16 0 0 1 32 0 Z" fill="#B58BFF" fill-opacity="0.7"/>
+          <circle cx="30" cy="30" r="29" fill="none" stroke="#0a1628" stroke-width="2" stroke-opacity="0.55"/>
+          <circle cx="30" cy="30" r="24" fill="rgba(10,22,40,0.12)"/>
+          <circle cx="30" cy="23" r="9" fill="#0a1628" fill-opacity="0.85"/>
+          <path d="M14 47 a16 16 0 0 1 32 0 Z" fill="#0a1628" fill-opacity="0.7"/>
         </svg>
         <div>
           <span class="ptag qual">Qualification</span>
