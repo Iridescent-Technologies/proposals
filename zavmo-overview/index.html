@@ -8,7 +8,7 @@
     :root {
       --bg-primary: #0a1628;
       --bg-secondary: #0d1e36;
-      --bg-card: rgba(13, 30, 54, 0.6);
+      --bg-card: rgba(255,255,255,0.6);
       --teal: #00d9c0;
       --teal-glow: #00ffeb;
       --teal-subtle: rgba(0, 217, 192, 0.15);
@@ -225,7 +225,7 @@
       padding: 10px 14px; border-radius: 12px; font-size: 11px; line-height: 1.5;
       max-width: 85%; margin-bottom: 8px;
     }
-    .mock-chat-ai { background: rgba(13,30,54,0.8); border: 1px solid var(--teal-border); color: var(--text-secondary); }
+    .mock-chat-ai { background: rgba(255,255,255,0.8); border: 1px solid var(--teal-border); color: var(--text-secondary); }
     .mock-chat-user { background: var(--teal-subtle); border: 1px solid var(--teal-border); color: var(--text-primary); margin-left: auto; }
     .mock-node {
       width: 10px; height: 10px; border-radius: 50%; background: var(--teal); position: absolute;
@@ -296,6 +296,7 @@
       }
     }
   </style>
+<link rel="stylesheet" href="../_brand/zavmo.css">
 </head>
 <body>
 
@@ -303,7 +304,7 @@
   <nav>
     <div class="inner">
       <div>
-        <div class="logo">ZAVMO</div>
+        <img class="z-logo" src="../_brand/zavmo-logo-mono-navy.svg" alt="Zavmo" width="130" height="28">
         <div class="nav-tagline">Where neuroscience meets learning pedagogy</div>
       </div>
       <div style="display:flex;align-items:center;">
@@ -1542,12 +1543,13 @@
   <!-- FOOTER -->
   <footer>
     <div class="container">
-      <div class="logo" style="margin-bottom:12px;font-size:16px;">ZAVMO</div>
+      <img class="z-footer-logo" src="../_brand/zavmo-logo-mono-white.svg" alt="Zavmo" width="102" height="22">
       <p style="font-size:13px;color:var(--text-tertiary);line-height:1.6;">
         Making learning as unique as you are.<br>
         Iridescent Technology Ltd &middot; A Growth Engineering Company
       </p>
     </div>
+    <span class="z-copyright">© 2026 Zavmo.ai. All rights reserved.</span>
   </footer>
 
   <!-- SCROLL REVEAL SCRIPT -->

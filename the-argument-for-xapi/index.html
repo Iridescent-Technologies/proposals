@@ -25,27 +25,27 @@
   :root{
     /* ── canonical tokens (from the hub, the source of truth) ───────────── */
     --navy-0:#060e17; --navy-1:#0b1a2a;
-    --surface:rgba(234,251,244,.045); --surface-2:rgba(234,251,244,.07);
-    --border:rgba(234,251,244,.10); --border-2:rgba(47,207,168,.28);
-    --teal:#2FCFA8; --teal-glow:#3FE4BC; --teal-deep:#14A88B;
-    --ink:#EAFBF4; --ink-2:rgba(234,251,244,.72); --ink-3:rgba(234,251,244,.50);
+    --surface:rgba(10,22,40,0.045); --surface-2:rgba(10,22,40,0.07);
+    --border:rgba(10,22,40,0.1); --border-2:rgba(0,217,192,0.28);
+    --teal:#0e7b62; --teal-glow:#0e7b62; --teal-deep:#0e7b62;
+    --ink:#0a1628; --ink-2:rgba(10,22,40,0.72); --ink-3:rgba(10,22,40,0.5);
     --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 
     /* ── deck-oriented aliases (map cleanly to the tokens above) ─────────── */
     --bg-primary:var(--navy-0); --bg-secondary:var(--navy-1); --bg-card:var(--surface);
-    --teal-subtle:rgba(47,207,168,.14); --teal-border:var(--border-2);
+    --teal-subtle:rgba(0,217,192,0.14); --teal-border:var(--border-2);
     --text-primary:var(--ink); --text-secondary:var(--ink-2); --text-tertiary:var(--ink-3);
 
     /* ── accent chips for categorising content (match the hub) ───────────── */
-    --amber:#f5b544; --blue:#8fb8ff;
+    --amber:#2d5a8a; --blue:#2d5a8a;
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;background:var(--navy-0);scroll-behavior:smooth}
   body{
     margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;line-height:1.55;
     background:
-      radial-gradient(120% 70% at 82% -8%, rgba(16,185,138,.16), transparent 52%),
-      radial-gradient(90% 60% at 6% 4%, rgba(40,90,120,.16), transparent 55%),
+      radial-gradient(120% 70% at 82% -8%, rgba(0,217,192,0.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(45,90,138,0.048), transparent 55%),
       linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
     background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;
     -webkit-font-smoothing:antialiased;
@@ -58,7 +58,7 @@
   nav{
     position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;
     padding:14px clamp(22px,5vw,48px);
-    background:rgba(6,14,23,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+    background:rgba(255,255,255,0.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
     border-bottom:1px solid var(--border);
   }
   .logomark{width:34px;height:34px;flex:0 0 auto}
@@ -73,7 +73,7 @@
     background:var(--teal);color:var(--navy-0);padding:9px 20px;border-radius:100px;
     font-size:13px;font-weight:600;transition:.2s;margin-left:14px;
   }
-  .nav-cta:hover{background:var(--teal-glow);box-shadow:0 0 20px rgba(47,207,168,.4)}
+  .nav-cta:hover{background:var(--teal-glow);box-shadow:0 0 20px rgba(0,217,192,0.4)}
 
   /* ── hero ─────────────────────────────────────────────────────────────── */
   .hero{padding:clamp(56px,12vh,120px) 0 clamp(40px,8vh,72px)}
@@ -83,7 +83,7 @@
   .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
   .btn{padding:13px 28px;border-radius:100px;font-size:14px;font-weight:600;transition:.2s;display:inline-flex;align-items:center;gap:8px}
   .btn-primary{background:var(--teal);color:var(--navy-0)}
-  .btn-primary:hover{background:var(--teal-glow);box-shadow:0 8px 28px rgba(47,207,168,.3)}
+  .btn-primary:hover{background:var(--teal-glow);box-shadow:0 8px 28px rgba(0,217,192,0.3)}
   .btn-ghost{border:1px solid var(--border-2);color:var(--ink)}
   .btn-ghost:hover{border-color:var(--teal);color:var(--teal)}
 
@@ -108,7 +108,7 @@
     display:flex;flex-direction:column;gap:10px;background:var(--surface);border:1px solid var(--border);
     border-radius:18px;padding:24px;backdrop-filter:blur(18px);transition:.2s;
   }
-  .card:hover{background:var(--surface-2);border-color:var(--border-2);transform:translateY(-2px);box-shadow:0 18px 44px rgba(0,0,0,.32)}
+  .card:hover{background:var(--surface-2);border-color:var(--border-2);transform:translateY(-2px);box-shadow:0 18px 44px rgba(10,22,40,0.096)}
   .chip{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);width:max-content}
   .chip.walk{color:var(--teal)}
   .chip.client{color:var(--amber)}
@@ -125,7 +125,7 @@
   .quote{border-left:2px solid var(--teal);padding:8px 0 8px 26px;margin:8px 0}
   .quote p{font-size:clamp(20px,3vw,28px);font-weight:200;color:var(--ink);line-height:1.35;max-width:52ch}
   .quote cite{display:block;margin-top:14px;font-size:13px;color:var(--ink-3);font-style:normal}
-  .callout{background:linear-gradient(135deg,rgba(47,207,168,.1),rgba(47,207,168,.04));
+  .callout{background:linear-gradient(135deg,rgba(0,217,192,0.1),rgba(0,217,192,0.04));
     border:1px solid var(--teal-border);border-radius:18px;padding:28px 30px}
 
   /* ── footer ───────────────────────────────────────────────────────────── */
@@ -157,7 +157,7 @@
   ol.refs li::before{content:counter(r);position:absolute;left:0;top:1px;width:26px;height:26px;
              border-radius:50%;background:var(--surface-2);border:1px solid var(--border);
              color:var(--teal);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center}
-  ol.refs a{color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(47,207,168,.3)}
+  ol.refs a{color:var(--teal);text-decoration:none;border-bottom:1px solid rgba(0,217,192,0.3)}
   ol.refs a:hover{color:var(--teal-glow)}
   .callout h3{margin-top:0}
 
@@ -178,18 +178,18 @@
   .ix-panel h4{font-size:15px;font-weight:500;margin:0 0 4px;color:var(--ink)}
   .ix-panel p{font-size:14px;line-height:1.6;color:var(--ink-2);margin:0 0 16px;font-weight:300}
   .rec{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;
-      line-height:1.9;background:rgba(6,14,23,.55);border:1px solid var(--border);
+      line-height:1.9;background:rgba(255,255,255,0.55);border:1px solid var(--border);
       border-radius:12px;padding:16px 18px;overflow-x:auto;color:var(--ink-2)}
   .rec .k{color:var(--ink-3)}
   .rec .v{color:var(--teal-glow)}
-  .rec .muted{color:rgba(234,251,244,.28)}
+  .rec .muted{color:rgba(10,22,40,0.28)}
   .verdict{display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:14px 16px;
-      border-radius:12px;border:1px solid var(--border-2);background:rgba(47,207,168,.07)}
-  .verdict.bad{border-color:rgba(245,181,68,.3);background:rgba(245,181,68,.06)}
+      border-radius:12px;border:1px solid var(--border-2);background:rgba(0,217,192,0.07)}
+  .verdict.bad{border-color:rgba(45,90,138,.3);background:rgba(45,90,138,.06)}
   .verdict p{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink-2);font-weight:300}
   .verdict b{color:var(--ink);font-weight:600}
   .claim{margin-top:20px;padding:16px 18px;border-radius:12px;border:1px dashed var(--border-2);
-      background:rgba(47,207,168,.05)}
+      background:rgba(0,217,192,0.05)}
   .claim .claim-l{font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
       color:var(--teal);margin-bottom:6px}
   .claim p{margin:0;font-size:14px;line-height:1.55;color:var(--ink);font-weight:300}
@@ -205,7 +205,7 @@
   .tl-dot:hover span.d{border-color:var(--border-2)}
   .tl-dot[aria-selected="true"]{color:var(--teal)}
   .tl-dot[aria-selected="true"] span.d{background:var(--teal);border-color:var(--teal);
-      box-shadow:0 0 0 5px rgba(47,207,168,.16)}
+      box-shadow:0 0 0 5px rgba(0,217,192,0.16)}
   .tl-dot:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:8px}
   @media(max-width:560px){
     .tl{grid-template-columns:repeat(2,1fr);gap:18px 0}
@@ -216,7 +216,7 @@
   /* ── figures ──────────────────────────────────────────────────────────── */
   figure.shot{margin:30px 0}
   figure.shot img{width:100%;height:auto;display:block;border-radius:16px;
-      border:1px solid var(--border);box-shadow:0 24px 60px rgba(0,0,0,.42)}
+      border:1px solid var(--border);box-shadow:0 24px 60px rgba(10,22,40,0.126)}
   figure.shot figcaption{font-size:13px;line-height:1.6;color:var(--ink-3);
       margin-top:14px;font-weight:300;max-width:66ch}
   figure.shot figcaption b{color:var(--ink-2);font-weight:600}
@@ -232,7 +232,7 @@
       border:solid var(--navy-0);border-width:0 2px 2px 0;transform:rotate(45deg)}
   .chk input:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
   .tally{display:flex;align-items:baseline;gap:12px;padding:16px 18px;border-radius:12px;
-      border:1px solid var(--border-2);background:rgba(47,207,168,.07);flex-wrap:wrap}
+      border:1px solid var(--border-2);background:rgba(0,217,192,0.07);flex-wrap:wrap}
   .tally .n{font-size:30px;font-weight:200;color:var(--teal);line-height:1}
   .tally p{margin:0;font-size:13.5px;line-height:1.55;color:var(--ink-2);font-weight:300;flex:1;min-width:220px}
   /* ── verb explorer ────────────────────────────────────────────────────── */
@@ -244,27 +244,21 @@
   .verb[aria-pressed="true"]{background:var(--teal);color:var(--navy-0);border-color:var(--teal);font-weight:600}
   .verb:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
   .vb-out{display:grid;gap:12px;grid-template-columns:1fr 1fr}
-  .vb-box{padding:15px 17px;border-radius:12px;border:1px solid var(--border);background:rgba(6,14,23,.45)}
+  .vb-box{padding:15px 17px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,0.45)}
   .vb-box .h{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
   .vb-box.x .h{color:var(--teal)}
-  .vb-box.s .h{color:rgba(245,181,68,.85)}
+  .vb-box.s .h{color:rgba(45,90,138,.85)}
   .vb-box p{margin:0;font-size:13.5px;line-height:1.6;color:var(--ink-2);font-weight:300}
   .vb-box.x p{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;color:var(--teal-glow)}
   @media(max-width:560px){.vb-out{grid-template-columns:1fr}}
 </style>
+<link rel="stylesheet" href="../_brand/zavmo.css">
 </head>
 <body>
 
 <!-- ── TOP NAV ───────────────────────────────────────────────────────────── -->
 <nav>
-  <svg class="logomark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <defs><radialGradient id="orb" cx="42%" cy="38%" r="65%">
-      <stop offset="0%" stop-color="#99f0e6"/><stop offset="45%" stop-color="#28dfc9"/>
-      <stop offset="100%" stop-color="#00d9c0"/></radialGradient></defs>
-    <g id="halo"></g>
-    <circle cx="50" cy="50" r="15" fill="url(#orb)" style="filter:drop-shadow(0 0 8px rgba(63,228,188,.7))"/>
-  </svg>
-  <div class="brand-txt"><span class="word">ZAVMO</span><span class="tag">Proposals &amp; walkthroughs</span></div>
+  <a class="z-logo-link" href="https://zavmo.ai" aria-label="Zavmo"><img class="z-logo" src="../_brand/zavmo-logo-mono-navy.svg" alt="Zavmo" width="130" height="28"><span class="z-logo-tag">Proposals &amp; walkthroughs</span></a>
   <span class="nav-spacer"></span>
   <a class="nav-link" href="../">
     <svg viewBox="0 0 24 24" fill="none"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -686,13 +680,14 @@ they <span class="v">mastered</span> criterion ZFF-AU-05.2</pre>
   <footer>
     Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
     Zavmo · September 2026. Shareable with attribution.
+    <span class="z-copyright">© 2026 Zavmo.ai. All rights reserved.</span>
   </footer>
 
 </div>
 
 <script>
 (function(){
-  var g=document.getElementById('halo'), n=12, cx=50, cy=50, r=38;
+  var g=(document.getElementById('halo')||document.createElementNS('http://www.w3.org/2000/svg','g')), n=12, cx=50, cy=50, r=38;
   for(var i=0;i<n;i++){
     var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
     var c=document.createElementNS('http://www.w3.org/2000/svg','circle');

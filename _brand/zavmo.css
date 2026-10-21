@@ -1,0 +1,173 @@
+/* ══════════════════════════════════════════════════════════════════════
+   ZAVMO PROPOSALS · shared brand layer
+   The one place the hub's look is set. Every page links this AFTER its own
+   inline <style>, so these rules win at equal specificity and a page keeps
+   its own layout while taking the current Zavmo look.
+
+   Source: zavmo.ai and learn.zavmo.ai, which share one system
+   (zavmo-web src/styles/global.css and fonts.css on main, 21 Oct 2026).
+   Collateral source: zavmo-branded-collateral/_source/brand.css. Where the
+   two differ the live site wins. The one difference is type: the collateral
+   names Inter and Space Grotesk, the live sites use DM Sans for body and
+   Figtree for headings (DD-007).
+
+   Light only, like zavmo.ai (DD-001). The navy is an accent band (the
+   footer), never a page background. No dark mode.
+
+   Teal has two jobs. #00d9c0 is for fills, rules and icons and is never
+   text. #0e7b62 is teal you can read on white.
+
+   The legacy token names below (--navy-0, --ink, --surface and the rest)
+   are kept and given light values, because about twenty pages were built
+   on them. New pages should use the template, which uses the same names.
+   ══════════════════════════════════════════════════════════════════════ */
+
+/* ── Fonts: the same self-hosted files zavmo.ai serves ───────────────── */
+@font-face{font-family:'DM Sans';font-style:normal;font-display:swap;font-weight:100 1000;
+  src:url(fonts/dm-sans-latin.woff2) format('woff2-variations');
+  unicode-range:U+0000-002F,U+003A-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'DM Sans';font-style:normal;font-display:swap;font-weight:100 1000;
+  src:url(fonts/dm-sans-latin-ext.woff2) format('woff2-variations');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+/* Digits in body text are Figtree's, as on zavmo.ai */
+@font-face{font-family:'DM Sans';font-style:normal;font-display:swap;font-weight:100 1000;
+  src:url(fonts/figtree-latin.woff2) format('woff2-variations');unicode-range:U+0030-0039}
+@font-face{font-family:'Figtree';font-style:normal;font-display:swap;font-weight:300 700;
+  src:url(fonts/figtree-latin.woff2) format('woff2-variations');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:'Figtree';font-style:normal;font-display:swap;font-weight:300 700;
+  src:url(fonts/figtree-latin-ext.woff2) format('woff2-variations');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+
+:root{
+  /* ── canonical Zavmo tokens (zavmo.ai global.css) ── */
+  --z-navy:#0a1628; --z-navy-500:#2d5a8a;
+  --z-teal:#00d9c0; --z-teal-ink:#0e7b62;
+  --z-bg:#ffffff; --z-bg-2:#f5f7fa;
+  --z-border:#e5e7eb; --z-border-hover:#cbd5e1;
+  --z-text:#0a1628; --z-text-2:#4b5563; --z-text-3:#5d6875;
+  --z-on-dark:rgba(234,251,244,.95); --z-on-dark-2:rgba(234,251,244,.75); --z-on-dark-3:rgba(234,251,244,.6);
+  --z-font:"DM Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --z-font-heading:"Figtree",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --z-radius:12px; --z-radius-lg:16px; --z-btn-radius:10px;
+  --z-shadow-sm:0 1px 3px rgba(10,22,40,.04);
+  --z-shadow:0 4px 12px rgba(10,22,40,.06);
+  --z-shadow-lg:0 8px 24px rgba(10,22,40,.08);
+  --z-btn-shadow:0 4px 14px rgba(26,54,93,.3);
+
+  /* ── legacy names, light values ── */
+  --navy-0:var(--z-bg); --navy-1:var(--z-bg-2); --navy-2:var(--z-bg-2);
+  --surface:var(--z-bg); --surface-2:var(--z-bg-2);
+  --border:var(--z-border); --border-2:var(--z-border-hover);
+  --teal:var(--z-teal-ink); --teal-glow:var(--z-teal-ink); --teal-deep:var(--z-teal-ink);
+  --teal-bright:var(--z-teal-ink); --teal-soft:var(--z-teal-ink); --teal-dark:var(--z-teal-ink);
+  --teal-subtle:rgba(0,217,192,.10); --teal-border:rgba(14,123,98,.28);
+  --ink:var(--z-text); --ink-2:var(--z-text-2); --ink-3:var(--z-text-3);
+  --muted:var(--z-text-2); --line:var(--z-border);
+  --font:var(--z-font);
+  --bg-primary:var(--z-bg); --bg-secondary:var(--z-bg-2); --bg-card:var(--z-bg);
+  --text-primary:var(--z-text); --text-secondary:var(--z-text-2); --text-tertiary:var(--z-text-3);
+  --border-subtle:var(--z-border);
+  /* category chips: amber and blue are off the v5 palette, so they become
+     the two inks the palette has */
+  --amber:var(--z-navy-500); --blue:var(--z-navy-500);
+}
+
+html{background:var(--z-bg)}
+body{
+  background:var(--z-bg);color:var(--z-text);font-family:var(--z-font);
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:var(--z-font-heading);color:var(--z-text);word-spacing:.06em}
+h1{font-weight:600;letter-spacing:-.01em}
+h2{font-weight:600;letter-spacing:-.01em}
+h3,h4{font-weight:600}
+p{color:var(--z-text-2)}
+em{color:var(--z-teal-ink)}
+::selection{background:rgba(0,217,192,.25)}
+:focus-visible{outline:3px solid var(--z-teal-ink);outline-offset:2px}
+
+/* eyebrows and section labels: tracked uppercase in teal ink */
+.eyebrow,.hero-eyebrow{color:var(--z-teal-ink);font-weight:700}
+.section-label{color:var(--z-text-3);font-weight:700}
+
+/* ── header: white bar, navy logo, as zavmo.ai ─────────────────────── */
+nav,body>header.z-header{
+  background:rgba(255,255,255,.92);
+  border-bottom:1px solid var(--z-border);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+}
+.z-logo{display:block;height:28px;width:auto;flex:0 0 auto}
+.z-logo-link{display:inline-flex;align-items:center;gap:14px;flex:0 0 auto}
+.z-logo-tag{font-size:12px;font-weight:500;color:var(--z-text-3);padding-left:14px;border-left:1px solid var(--z-border);line-height:1.2}
+.nav-link{color:var(--z-text-2)}
+.nav-link:hover{color:var(--z-teal-ink)}
+
+/* ── buttons: navy primary, outlined ghost (zavmo.ai .btn-primary) ── */
+.nav-cta,.btn-primary,.btn.primary{
+  background:var(--z-navy);color:#fff;border-radius:var(--z-btn-radius);
+  box-shadow:var(--z-btn-shadow);font-weight:600;
+}
+.nav-cta:hover,.btn-primary:hover,.btn.primary:hover{
+  background:color-mix(in srgb,var(--z-navy) 78%,#000);color:#fff;
+  box-shadow:0 6px 20px rgba(26,54,93,.42);
+}
+.btn{border-radius:var(--z-btn-radius)}
+.btn-ghost{
+  background:rgba(14,123,98,.05);border:1px solid var(--z-teal-ink);color:var(--z-teal-ink);
+}
+.btn-ghost:hover{border-color:var(--z-teal-ink);color:var(--z-teal-ink);background:rgba(14,123,98,.09)}
+
+/* ── cards and panels: white, hairline border, soft shadow ─────────── */
+.card,.stat,.featured{
+  background:var(--z-bg);border:1px solid var(--z-border);border-radius:var(--z-radius-lg);
+  box-shadow:var(--z-shadow-sm);backdrop-filter:none;-webkit-backdrop-filter:none;
+}
+.card:hover,.featured:hover{
+  background:var(--z-bg);border-color:var(--z-border-hover);box-shadow:var(--z-shadow-lg);
+}
+.featured{background:linear-gradient(135deg,rgba(0,217,192,.07),rgba(0,217,192,.02)),var(--z-bg);border-color:rgba(14,123,98,.28)}
+.featured:hover{background:linear-gradient(135deg,rgba(0,217,192,.1),rgba(0,217,192,.03)),var(--z-bg)}
+.f-arrow{background:var(--z-navy);color:#fff;box-shadow:var(--z-btn-shadow)}
+.f-chip{background:rgba(0,217,192,.12);color:var(--z-teal-ink)}
+.callout{background:linear-gradient(135deg,rgba(0,217,192,.08),rgba(0,217,192,.02));border-color:rgba(14,123,98,.28)}
+.quote{border-left-color:var(--z-teal)}
+.feature-num{background:rgba(0,217,192,.10);border-color:rgba(14,123,98,.28);color:var(--z-teal-ink)}
+.stat-num{font-family:var(--z-font-heading);font-weight:600;color:var(--z-teal-ink)}
+code{color:var(--z-navy)}
+
+/* ── footer: the navy band zavmo.ai ends on, run to both edges ─────── */
+footer{
+  background:var(--z-navy);color:var(--z-on-dark-3);border-top:0;
+  box-shadow:0 0 0 100vmax var(--z-navy);clip-path:inset(0 -100vmax -100vmax);
+}
+footer p,footer span,footer code{color:var(--z-on-dark-3)}
+footer a{color:var(--z-teal)}
+footer a:hover{color:#fff}
+.z-copyright{display:block;margin-top:12px;color:var(--z-on-dark-2)}
+.z-footer-logo{display:block;height:22px;width:auto;margin:0 0 14px}
+
+/* ── body weight: zavmo.ai sets body copy at 400, never the old 200/300 ── */
+p,.lede,li,.quote p{font-weight:400}
+
+/* ── phone: logo and back link on one line ─────────────────────────── */
+.nav-link{white-space:nowrap}
+@media (max-width:560px){
+  .z-logo{height:24px}
+  .z-logo-tag{display:none}
+}
+.z-logo-link,.z-logo-link:hover{text-decoration:none}
+
+/* ── copyright on pages with no footer ─────────────────────────────── */
+.z-footer-min{padding:20px clamp(22px,5vw,48px);font-size:12.5px;margin-top:40px}
+.z-footer-min .z-copyright{margin:0}
+.z-copyright-fixed{position:fixed;left:16px;bottom:8px;margin:0;font-size:11px;line-height:1.4;color:var(--z-text-3);z-index:40;pointer-events:none}
+@media (max-width:560px){.z-copyright-fixed{left:0;right:0;text-align:center;bottom:2px;font-size:10px}}
+
+/* ── slide decks (admin-journey, learner-journey): a solid bar so a tall
+   slide no longer runs under it on a phone, and the counter on one line ── */
+.stage>.bar{position:relative;z-index:10;background:var(--z-bg)}
+.bar .counter{white-space:nowrap}
+
+/* hub card and feature titles take the heading face, as zavmo.ai cards do */
+.c-title,.f-title{font-family:var(--z-font-heading);font-weight:600}

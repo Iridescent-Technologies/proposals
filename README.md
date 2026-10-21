@@ -28,8 +28,9 @@ Each one is a self-contained folder served at
 ## Adding a page
 
 1. Check it is **buyer-facing and non-confidential**. If it names a client, it does not go here.
-2. Create a top-level folder with an `index.html` (self-contained. inline CSS/JS,
-   embed assets as data URIs).
+2. Copy `_template` to a top-level folder (inline CSS/JS, embed assets as data URIs).
+   Keep the `<link>` to `../_brand/zavmo.css`: it carries the Zavmo brand, fonts
+   and logo, and the copyright line in the footer.
 3. Commit and push to `main`; GitHub Pages deploys automatically (~1-2 min).
 4. Add a row to the index above and a card to `index.html`.
 

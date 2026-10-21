@@ -4,19 +4,37 @@ The canonical starting point for every new Zavmo proposal or walkthrough. Copy i
 
 ## Design system (do not deviate)
 
+The look is the one zavmo.ai and learn.zavmo.ai share. It lives in one file,
+`_brand/zavmo.css`, which every page links **after** its own `<style>`. Change
+the brand there and every page follows.
+
 | Token | Value | Use |
 |---|---|---|
-| `--navy-0` / `--navy-1` | `#060e17` / `#0b1a2a` | Page background (deep → base) |
-| `--teal` | `#2FCFA8` | Primary accent, links, CTAs |
-| `--teal-glow` | `#3FE4BC` | Hover/emphasis |
-| `--ink` / `--ink-2` / `--ink-3` | white → 72% → 50% | Text: primary / body / muted |
-| `--surface` / `--border` | translucent ink | Cards, dividers |
-| `--amber` `#f5b544` / `--blue` `#8fb8ff` | chip accents | Client / concept categories |
-| Font | **DM Sans** declared, system-font fallback (not loaded as a webfont, to match the live site) | Everything |
+| `--z-bg` / `--z-bg-2` | `#ffffff` / `#f5f7fa` | Page and quiet panels. White, always |
+| `--z-navy` | `#0a1628` | Text, the primary button, the footer band |
+| `--z-teal` | `#00d9c0` | Fills, rules and icons. **Never text** |
+| `--z-teal-ink` | `#0e7b62` | Teal you can read: links, eyebrows, highlighted words |
+| `--z-text-2` / `--z-text-3` | `#4b5563` / `#5d6875` | Body and muted text |
+| `--z-border` | `#e5e7eb` | Card and divider hairlines |
+| Headings | **Figtree** 600 | h1 to h4, stat numbers |
+| Body | **DM Sans** 400 | Everything else |
 
-**Rules:** navy background, teal accent, DM Sans only. No new colours, no other fonts, no light backgrounds (the light aesthetic is the *product* brand; the *proposals* suite is navy). Weights lean light. `h1` is 200, `h2` is 300.
+Both fonts are self-hosted in `_brand/fonts/`, the same files zavmo.ai serves.
+The logo is `_brand/zavmo-logo-mono-navy.svg` (white version for the navy
+footer).
 
-> Note: the two teal values in the wild differ. The hub uses `#2FCFA8`. The older `zavmo-overview` deck uses `#00d9c0`. **This template's `#2FCFA8` is canonical.** Older decks can be retrofitted over time.
+**Rules:** white page, navy text, navy primary button with a 10px radius,
+teal ink for anything teal you read. No dark backgrounds except the navy footer
+band. No other colours or fonts. The older names in each page's `:root`
+(`--navy-0`, `--ink`, `--surface` and the rest) are kept and given light
+values by `_brand/zavmo.css`, so pages built on them still work.
+
+The source of truth is zavmo-web `src/styles/global.css` on `main`. The print
+collateral (`zavmo-branded-collateral/_source/brand.css`) agrees on every
+colour but names Inter and Space Grotesk; the live sites use DM Sans and
+Figtree, and the live sites win.
+
+Every page carries "© 2026 Zavmo.ai. All rights reserved." in its footer.
 
 ## How the copy should read
 
@@ -29,7 +47,7 @@ so use them as the pattern rather than writing over it. Full guide:
 
 ## Components included
 
-Nav (logomark + back-to-hub + CTA) · hero (eyebrow / h1 / lede / CTAs) · stat bar · text + pull-quote · numbered feature rows · glass card grid · callout · footer · scroll-reveal. All keyboard-accessible and reduced-motion aware.
+Nav (Zavmo logo + back-to-hub + CTA) · hero (eyebrow / h1 / lede / CTAs) · stat bar · text + pull-quote · numbered feature rows · glass card grid · callout · footer · scroll-reveal. All keyboard-accessible and reduced-motion aware.
 
 ## How to add a new deck
 
@@ -48,4 +66,4 @@ Nav (logomark + back-to-hub + CTA) · hero (eyebrow / h1 / lede / CTAs) · stat 
    Chip class picks the accent: `walk` (teal), `client` (amber), `concept` (blue), or none (grey).
 5. Push to `main`. GitHub Pages deploys it automatically.
 
-Each deck stays a **self-contained folder**. No shared stylesheet, per the repo convention. The tradeoff: when the system changes, update this template and let new decks inherit it. Retrofit older decks as needed.
+Each deck stays a folder of its own, with its layout in its own `<style>`. The one shared file is `_brand/zavmo.css`, which holds the brand, so a brand change is made once rather than in every deck.
