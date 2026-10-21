@@ -22,7 +22,6 @@
 <meta name="description" content="Draft Level 3 unit specifications for the ten Human Fluencies, the shared gate and the Change bridge: every learning outcome and assessment criterion, with level checks.">
 <meta property="og:title" content="Human Fluency unit specifications, draft">
 <meta property="og:description" content="Ten Human Fluencies, 24 units, 300 assessment criteria, in full. Draft for review, not submitted.">
-<link rel="stylesheet" href="../_brand/zavmo.css">
 <style>
   :root{
     --navy-0:#060e17; --navy-1:#0b1a2a;
@@ -272,6 +271,13 @@
     .reveal{opacity:1!important;transform:none!important}
   }
 </style>
+<link rel="stylesheet" href="../_brand/zavmo.css">
+<style>
+  /* The nav is 53px tall on a phone, not the 63px the shared sheet assumes. */
+  @media (max-width:600px){:root{--navh:53px}}
+  table.idx tr.grp th{background:transparent;color:var(--teal-ink,#0e7b62);font-size:12px;letter-spacing:1px;text-transform:uppercase;padding-top:16px;border-bottom:1px solid #e5e7eb}
+  table.idx td.cref + td{white-space:normal;min-width:14em}
+</style>
 </head>
 <body>
 <a class="skip" href="#start">Skip to content</a>
@@ -341,34 +347,46 @@
     <h3 style="margin-top:30px" id="units">2.1 The unit index</h3>
     <p class="muted" style="font-size:13.5px">Level 3 · 24 units · 300 TQT. Select a reference to open that unit.</p>
     <div class="tw"><table class="tbl idx">
-      <thead><tr><th scope="col">Fluency</th><th scope="col">Ref</th><th scope="col">Unit</th><th scope="col">TQT</th><th scope="col">Credits</th><th scope="col">GLH</th><th scope="col">LOs</th><th scope="col">Criteria</th></tr></thead>
+      <thead><tr><th scope="col">Ref</th><th scope="col">Unit</th><th scope="col">TQT</th><th scope="col">Credits</th><th scope="col">GLH</th><th scope="col">LOs</th><th scope="col">Criteria</th></tr></thead>
       <tbody>
-        <tr><td rowspan="1"><strong>The gate</strong></td><td class="cref"><a href="#zff-ei-03">ZFF-EI-03</a></td><td>Understanding and Managing Emotions in Own Work and Life</td><td>15</td><td>1.5</td><td>8</td><td>5</td><td>15</td></tr>
-        <tr><td rowspan="2"><strong>Purpose Fluency</strong></td><td class="cref"><a href="#zhf-pu-03">ZHF-PU-03</a></td><td>Choosing Own Goals</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
+        <tr class="grp"><th colspan="7" scope="colgroup">The gate</th></tr>
+        <tr><td class="cref"><a href="#zff-ei-03">ZFF-EI-03</a></td><td>Understanding and Managing Emotions in Own Work and Life</td><td>15</td><td>1.5</td><td>8</td><td>5</td><td>15</td></tr>
+        <tr class="grp"><th colspan="7" scope="colgroup">Purpose Fluency</th></tr>
+        <tr><td class="cref"><a href="#zhf-pu-03">ZHF-PU-03</a></td><td>Choosing Own Goals</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
         <tr><td class="cref"><a href="#zhf-ld-03">ZHF-LD-03</a></td><td>Designing and Testing a Life</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
-        <tr><td rowspan="2"><strong>Courage Fluency</strong></td><td class="cref"><a href="#zhf-co-03">ZHF-CO-03</a></td><td>Acting When Something Is at Risk</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
+        <tr class="grp"><th colspan="7" scope="colgroup">Courage Fluency</th></tr>
+        <tr><td class="cref"><a href="#zhf-co-03">ZHF-CO-03</a></td><td>Acting When Something Is at Risk</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
         <tr><td class="cref"><a href="#zhf-re-03">ZHF-RE-03</a></td><td>Recovering From Setbacks</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
-        <tr><td rowspan="1"><strong>Care Fluency</strong></td><td class="cref"><a href="#zhf-ca-03">ZHF-CA-03</a></td><td>Caring for Others and Accepting Care</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
-        <tr><td rowspan="4"><strong>Connection Fluency</strong></td><td class="cref"><a href="#zhf-cn-03">ZHF-CN-03</a></td><td>Building the Connections a Life Needs</td><td>15</td><td>1.5</td><td>8</td><td>5</td><td>15</td></tr>
+        <tr class="grp"><th colspan="7" scope="colgroup">Care Fluency</th></tr>
+        <tr><td class="cref"><a href="#zhf-ca-03">ZHF-CA-03</a></td><td>Caring for Others and Accepting Care</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
+        <tr class="grp"><th colspan="7" scope="colgroup">Connection Fluency</th></tr>
+        <tr><td class="cref"><a href="#zhf-cn-03">ZHF-CN-03</a></td><td>Building the Connections a Life Needs</td><td>15</td><td>1.5</td><td>8</td><td>5</td><td>15</td></tr>
         <tr><td class="cref"><a href="#zhf-cf-03">ZHF-CF-03</a></td><td>Stepping Out of Conflict</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
         <tr><td class="cref"><a href="#zhf-fb-03">ZHF-FB-03</a></td><td>Asking For and Using Feedback</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
         <tr><td class="cref"><a href="#zhf-tm-03">ZHF-TM-03</a></td><td>Making a Team Work</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
-        <tr><td rowspan="1"><strong>Mind, Body and Spirit Fluency</strong></td><td class="cref"><a href="#zhf-mb-03">ZHF-MB-03</a></td><td>Thinking With the Whole Self</td><td>15</td><td>1.5</td><td>8</td><td>5</td><td>15</td></tr>
-        <tr><td rowspan="3"><strong>Thinking Fluency</strong></td><td class="cref"><a href="#zhf-ct-03">ZHF-CT-03</a></td><td>Testing Claims and Own Reasoning</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
+        <tr class="grp"><th colspan="7" scope="colgroup">Mind, Body and Spirit Fluency</th></tr>
+        <tr><td class="cref"><a href="#zhf-mb-03">ZHF-MB-03</a></td><td>Thinking With the Whole Self</td><td>15</td><td>1.5</td><td>8</td><td>5</td><td>15</td></tr>
+        <tr class="grp"><th colspan="7" scope="colgroup">Thinking Fluency</th></tr>
+        <tr><td class="cref"><a href="#zhf-ct-03">ZHF-CT-03</a></td><td>Testing Claims and Own Reasoning</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
         <tr><td class="cref"><a href="#zhf-qu-03">ZHF-QU-03</a></td><td>Finding the Right Question</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
         <tr><td class="cref"><a href="#zhf-ln-03">ZHF-LN-03</a></td><td>Learning How to Learn With AI</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
-        <tr><td rowspan="2"><strong>Creative Fluency</strong></td><td class="cref"><a href="#zhf-cr-03">ZHF-CR-03</a></td><td>Making Original Work With AI as a Partner</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
+        <tr class="grp"><th colspan="7" scope="colgroup">Creative Fluency</th></tr>
+        <tr><td class="cref"><a href="#zhf-cr-03">ZHF-CR-03</a></td><td>Making Original Work With AI as a Partner</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
         <tr><td class="cref"><a href="#zhf-ta-03">ZHF-TA-03</a></td><td>Judging Quality and Saying Why</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
-        <tr><td rowspan="2"><strong>Story Fluency</strong></td><td class="cref"><a href="#zhf-st-03">ZHF-ST-03</a></td><td>Explaining and Telling Stories People Remember</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
+        <tr class="grp"><th colspan="7" scope="colgroup">Story Fluency</th></tr>
+        <tr><td class="cref"><a href="#zhf-st-03">ZHF-ST-03</a></td><td>Explaining and Telling Stories People Remember</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
         <tr><td class="cref"><a href="#zhf-in-03">ZHF-IN-03</a></td><td>Persuading and Negotiating Fairly</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
-        <tr><td rowspan="3"><strong>Freedom Fluency</strong></td><td class="cref"><a href="#zhf-fd-03">ZHF-FD-03</a></td><td>Keeping Own Attention and Options</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
+        <tr class="grp"><th colspan="7" scope="colgroup">Freedom Fluency</th></tr>
+        <tr><td class="cref"><a href="#zhf-fd-03">ZHF-FD-03</a></td><td>Keeping Own Attention and Options</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
         <tr><td class="cref"><a href="#zhf-md-03">ZHF-MD-03</a></td><td>Handling Social Media and Outrage</td><td>15</td><td>1.5</td><td>8</td><td>5</td><td>15</td></tr>
         <tr><td class="cref"><a href="#zhf-mo-03">ZHF-MO-03</a></td><td>Managing Money in a Changing Working Life</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
-        <tr><td rowspan="2"><strong>Responsibility Fluency</strong></td><td class="cref"><a href="#zhf-rs-03">ZHF-RS-03</a></td><td>Making and Keeping Commitments</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
+        <tr class="grp"><th colspan="7" scope="colgroup">Responsibility Fluency</th></tr>
+        <tr><td class="cref"><a href="#zhf-rs-03">ZHF-RS-03</a></td><td>Making and Keeping Commitments</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
         <tr><td class="cref"><a href="#zhf-et-03">ZHF-ET-03</a></td><td>Making and Owning Ethical Decisions</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
-        <tr><td rowspan="1"><strong>The bridge to Future Fluency</strong></td><td class="cref"><a href="#zff-ch-03">ZFF-CH-03</a></td><td>Facing Change in Own Working Life</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
+        <tr class="grp"><th colspan="7" scope="colgroup">The bridge to Future Fluency</th></tr>
+        <tr><td class="cref"><a href="#zff-ch-03">ZFF-CH-03</a></td><td>Facing Change in Own Working Life</td><td>12</td><td>1.2</td><td>6</td><td>4</td><td>12</td></tr>
       </tbody>
-      <tfoot><tr><td></td><td></td><td>Total</td><td>300</td><td>30.0</td><td>152</td><td>100</td><td>300</td></tr></tfoot>
+      <tfoot><tr><td></td><td>Total</td><td>300</td><td>30.0</td><td>152</td><td>100</td><td>300</td></tr></tfoot>
     </table></div>
   </section>
 
@@ -377,7 +395,7 @@
     <h2>The units</h2>
   </section>
 
-<div class="section-label" style="margin-top:44px">The gate</div>
+<div class="section-label">The gate</div>
 
 <section class="unit" id="zff-ei-03">
   <div class="unit-head">
@@ -388,8 +406,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to notice, name and manage their own emotions in their own work and life, and to read the emotions of the people they deal with. Learners predict which emotions a week will bring, then log and name them several times a day. They find what sets their emotions off and how it shows. They select a way of managing an emotion, predict how it will go and try it. They check how well they read another person. They then review what worked and set the next step.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not how emotionally intelligent they seem. Every criterion asks for a record, a description or an action. No criterion asks an assessor to judge maturity, calm or attitude. The wow moments sit at 1.3 and 3.3, where the learner's own evidence is set against their own prediction. The learner chooses which events to log and use, and a situation can be described in general terms, so no criterion requires disclosing anything private. Learners can always reach a person for support. This unit shares the gate with ZFF-GM-03 and is open to both Future Fluency and Human Fluency learners.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not how emotionally intelligent they seem. Every criterion asks for a record, a description or an action. No criterion asks an assessor to judge maturity, calm or attitude. The wow moments sit at 1.3 and 3.3, where the learner's own evidence is set against their own prediction. The learner chooses which events to log and use, and a situation can be described in general terms, so no criterion requires disclosing anything private. Learners can always reach a person for support. This unit shares the gate with ZFF-GM-03 and is open to both Future Fluency and Human Fluency learners.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -455,8 +471,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to tell the goals they chose from the goals they were handed, and to set one aim of their own. Learners sort their recent goals. They predict what they return to when nobody asks them to, then track it for two weeks. They set one aim, plan for the first obstacle and take the first step. After a month they decide whether the aim is still theirs.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not how purposeful they seem. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge commitment or motivation. Letting go of an aim at 4.2 meets the criterion as fully as keeping it. The wow moments sit at 2.3 and 3.3, where the learner's own evidence is set against their own prediction. No criterion requires disclosing anything private: the learner chooses which goals to use.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not how purposeful they seem. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge commitment or motivation. Letting go of an aim at 4.2 meets the criterion as fully as keeping it. The wow moments sit at 2.3 and 3.3, where the learner's own evidence is set against their own prediction. No criterion requires disclosing anything private: the learner chooses which goals to use.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -512,8 +526,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to look at the life they have and test a life they might want. Learners rank their values, predict where their time goes, then record it hour by hour. They rate their life across health, work, play and love. They test one possible life by talking to someone living it and trying a small piece. They then plan practice towards a real role and try the first session.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not whether their life is a good one. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge the learner's choices. The wow moments sit at 1.3 and 3.3, where the learner's own evidence is set against their own prediction. Where a direction involves money, the unit gives skills and guidance only, never personal financial advice. The learner chooses what to record and share, so no criterion requires disclosing anything private. Learners can always reach a person for support.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not whether their life is a good one. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge the learner's choices. The wow moments sit at 1.3 and 3.3, where the learner's own evidence is set against their own prediction. Where a direction involves money, the unit gives skills and guidance only, never personal financial advice. The learner chooses what to record and share, so no criterion requires disclosing anything private. Learners can always reach a person for support.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -571,8 +583,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to act for something that matters while the risk is real. Learners name what they avoid and what avoiding it costs. They predict how a feared conversation will go, have it and compare. They carry out one small act of courage in their own work and judge it. They raise a concern through a suitable channel and review what happened.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not how brave they seem. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge confidence or character. The wow moment sits at 2.3, where the learner's own evidence is set against their own prediction. The learner chooses each act and its size, and a small one meets every criterion. No criterion requires a risk to the learner's safety, health or job, or disclosing anything private. A concern that is a safeguarding or legal matter goes through the employer's own procedure, and this unit does not replace it. Learners can always reach a person for support.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not how brave they seem. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge confidence or character. The wow moment sits at 2.3, where the learner's own evidence is set against their own prediction. The learner chooses each act and its size, and a small one meets every criterion. No criterion requires a risk to the learner's safety, health or job, or disclosing anything private. A concern that is a safeguarding or legal matter goes through the employer's own procedure, and this unit does not replace it. Learners can always reach a person for support.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -628,8 +638,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to recover from setbacks in their own work and life. Learners find the pattern in how they explain their setbacks. They predict whether retelling one will change how it feels, then write about it and check. They build a recovery routine and use it for two weeks. They then test a claim about what a past hard time built in them against evidence.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not how resilient they seem. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge strength or attitude. The wow moments sit at 2.3 and 4.2, where the learner's own evidence is set against their own prediction or claim. The learner chooses which setbacks to use, a small one meets every criterion, and no criterion requires disclosing anything private. The unit is not therapy. Learners can always reach a person for support.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not how resilient they seem. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge strength or attitude. The wow moments sit at 2.3 and 4.2, where the learner's own evidence is set against their own prediction or claim. The learner chooses which setbacks to use, a small one meets every criterion, and no criterion requires disclosing anything private. The unit is not therapy. Learners can always reach a person for support.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -687,8 +695,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to give care where it is needed, without losing themselves, and to accept it. Learners predict how much a small kindness will mean, give it and ask. They identify who around them needs support and what kind, and give it. They find where caring costs them too much and try a way of caring that protects their energy. They then ask for help they would normally avoid asking for, and compare.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not how caring they seem. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge kindness or warmth. The wow moments sit at 1.3 and 4.3, where the learner's own evidence is set against their own prediction. The learner chooses the people and the help involved, and no criterion requires disclosing anything private or taking on a caring duty. Learners can always reach a person for support.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not how caring they seem. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge kindness or warmth. The wow moments sit at 1.3 and 4.3, where the learner's own evidence is set against their own prediction. The learner chooses the people and the help involved, and no criterion requires disclosing anything private or taking on a caring duty. Learners can always reach a person for support.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -746,8 +752,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to build the connections their own life needs, on purpose. Learners compare how much they think someone liked them after a conversation with what that person says. They map their connections by kind and find where the map is thin. They invest time in one connection of each kind and count the hours. They then repair one relationship after a rupture and review what changed.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not how sociable they are. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge warmth, confidence or attitude. The wow moment sits at 1.3, where the learner's prediction of how much they were liked is set against the other person's own rating. Other people can be recorded by initials or by role. No criterion requires the learner to disclose anything private, and at 5.1 the learner chooses which rupture to work on and how much to say about it. Learners can always reach a person for support. The research on social ties and survival is taught as a research finding, and the unit makes no health claims.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not how sociable they are. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge warmth, confidence or attitude. The wow moment sits at 1.3, where the learner's prediction of how much they were liked is set against the other person's own rating. Other people can be recorded by initials or by role. No criterion requires the learner to disclose anything private, and at 5.1 the learner chooses which rupture to work on and how much to say about it. Learners can always reach a person for support. The research on social ties and survival is taught as a research finding, and the unit makes no health claims.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -811,8 +815,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to step out of a conflict that keeps coming back in their own life. Learners map one recurring conflict and find each role they have played in it. They write the other person's reason in words that person would sign. They retell the conflict as an outsider would see it. They then open a hard conversation without blame, predicting the response first, and review what changed.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not whether they are a calm or reasonable person. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge attitude or temperament. The wow moments sit at 3.3, where the outsider's account is set against the learner's own, and 4.2, where the other person's response is set against the learner's prediction. The drama triangle and its ways out are taught as practitioner models, not tested findings, and the unit says so. The learner chooses which conflict to work on and should choose one where a conversation is safe. A conflict that involves harm or risk is not suitable for this unit. Other people can be recorded by initials or by role. No criterion requires the learner to disclose anything private. Learners can always reach a person for support.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not whether they are a calm or reasonable person. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge attitude or temperament. The wow moments sit at 3.3, where the outsider's account is set against the learner's own, and 4.2, where the other person's response is set against the learner's prediction. The drama triangle and its ways out are taught as practitioner models, not tested findings, and the unit says so. The learner chooses which conflict to work on and should choose one where a conversation is safe. A conflict that involves harm or risk is not suitable for this unit. Other people can be recorded by initials or by role. No criterion requires the learner to disclose anything private. Learners can always reach a person for support.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -868,8 +870,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to get feedback that helps and to use it. Learners ask some people for feedback and others for advice, predicting first which will be more useful. They name which trigger fired when they rejected a piece of feedback. They give one piece of feedback that is specific and kind. They then act on feedback, show the person what changed and review what worked.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not how open they are to criticism. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge openness or attitude. The wow moment sits at 1.3, where the replies the learner received are set against their own prediction of which request would work better. The three triggers are taught as a practitioner model, not a tested finding. Other people can be recorded by initials or by role. No criterion requires the learner to disclose anything private, and at 2.1 the learner chooses which feedback to work on. Learners can always reach a person for support.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not how open they are to criticism. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge openness or attitude. The wow moment sits at 1.3, where the replies the learner received are set against their own prediction of which request would work better. The three triggers are taught as a practitioner model, not a tested finding. Other people can be recorded by initials or by role. No criterion requires the learner to disclose anything private, and at 2.1 the learner chooses which feedback to work on. Learners can always reach a person for support.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -925,8 +925,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to make a team they belong to work better, as a member. Learners predict how safe other members feel to speak up, then ask them anonymously and compare. They act in ways that make it safer for others to speak. Before a decision, they contribute what only they know and propose that others do the same. They then estimate their own share of the work, compare the team's claimed shares and review what worked.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does as a team member, not whether they are a good team player. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge attitude or likeability. The wow moments sit at 1.3, where the team's anonymous answers are set against the learner's prediction, and 4.2, where the team's claimed shares are set against the learner's own estimate. Answers at 1.2 stay anonymous and optional. The learner proposes the question and agrees it with the other members before it is used. Other people can be recorded by initials or by role. No criterion requires the learner to disclose anything private.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does as a team member, not whether they are a good team player. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge attitude or likeability. The wow moments sit at 1.3, where the team's anonymous answers are set against the learner's prediction, and 4.2, where the team's claimed shares are set against the learner's own estimate. Answers at 1.2 stay anonymous and optional. The learner proposes the question and agrees it with the other members before it is used. Other people can be recorded by initials or by role. No criterion requires the learner to disclose anything private.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -984,8 +982,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to notice how their mind, body and sense of meaning shape their own thinking. Learners predict how often their mind wanders, then sample it for a week and compare. They catch body signals before a feeling has a name. They test one change to sleep, movement or time outdoors on their own thinking. They practise a habit of stillness or awe, and name what gives their life meaning, from any faith or none.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not how calm, well or spiritual they are. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge wellbeing, belief or attitude. The wow moments sit at 1.3 and 3.3, where the learner's own records are set against their own prediction. The unit makes no health claims. It teaches what research found about attention and thinking, and the test at LO3 measures thinking, not health. No criterion asks for a change to diet, medication or treatment. Meaning is approached from any faith or none, and no criterion asks the learner to state a faith or belief. No criterion requires the learner to disclose anything private. Learners can always reach a person for support.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not how calm, well or spiritual they are. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge wellbeing, belief or attitude. The wow moments sit at 1.3 and 3.3, where the learner's own records are set against their own prediction. The unit makes no health claims. It teaches what research found about attention and thinking, and the test at LO3 measures thinking, not health. No criterion asks for a change to diet, medication or treatment. Meaning is approached from any faith or none, and no criterion asks the learner to state a faith or belief. No criterion requires the learner to disclose anything private. Learners can always reach a person for support.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1051,8 +1047,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to test their own reasoning as hard as they test other people's. Learners review an argument of their own as if a stranger had written it, predicting first how well it will hold up. They check a claim by reading other sources about it, not by reading it more closely. They identify common reasoning errors in their own thinking. They then state a judgement on mixed evidence as a probability, and review it later against what happened.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not whether they are a good thinker. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge open-mindedness or attitude. The wow moments sit at 1.3 and 4.3, where the learner's own evidence is set against their own prediction.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not whether they are a good thinker. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge open-mindedness or attitude. The wow moments sit at 1.3 and 4.3, where the learner's own evidence is set against their own prediction.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1108,8 +1102,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to decide what the problem is before solving it. Learners write several versions of a real problem before choosing one. They run a timed burst of questions on a problem they have already solved, predicting first whether it was the right one. They question an AI answer until its weakest claim shows. They then reframe a problem by asking what could be taken away, and review whether the new question worked better.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses the questions the learner writes and what they do with them, not curiosity. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge whether the learner is inquisitive. The wow moments sit at 2.3 and 3.3, where the learner's own evidence is set against their own prediction or rating.</p>
 <p><strong>Design note.</strong> The unit assesses the questions the learner writes and what they do with them, not curiosity. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge whether the learner is inquisitive. The wow moments sit at 2.3 and 3.3, where the learner's own evidence is set against their own prediction or rating.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1165,8 +1157,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to study in the ways that work, not the ways that feel like they work. Learners compare rereading with self-testing on their own material, predicting first which will last a week. They plan their own learning with spaced sessions and self-tests. They set an AI tool to quiz them instead of giving answers. They then review what worked for them and change how they learn.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not how motivated they are. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge commitment or attitude. The wow moment sits at 1.3, where the learner's own score a week later is set against their own prediction.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not how motivated they are. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge commitment or attitude. The wow moment sits at 1.3, where the learner's own score a week later is set against their own prediction.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1224,8 +1214,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to get past the first ideas, theirs and the machine's. Learners keep generating ideas past the point where they expect to run dry, predicting first how many more will come. They move a solution from an unrelated field into their own brief. They use AI to widen the options while keeping their own direction. They then make something, share it with people who make similar work and improve it from the response.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner produces and records, not whether they are a creative person. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge flair or attitude. The wow moments sit at 1.3 and 4.3, where the learner's own evidence is set against their own prediction or rating.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner produces and records, not whether they are a creative person. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge flair or attitude. The wow moments sit at 1.3 and 4.3, where the learner's own evidence is set against their own prediction or rating.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1281,8 +1269,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to judge quality and give reasons that hold. Learners look at their own work from a year ago, predicting first how it will look now. They rank work by comparing it in pairs, then rank it again later to see whether their reasons hold. They separate what they like from what works for an audience. They then ask AI for many options and cut them down, saying why each one went.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses the learner's judgements and the reasons they record, not whether they have good taste. Every criterion asks for a description, a record or an action. No criterion asks an assessor to share or judge the learner's preferences. The wow moment sits at 1.3, where what the learner now sees in their own old work is set against their own prediction.</p>
 <p><strong>Design note.</strong> The unit assesses the learner's judgements and the reasons they record, not whether they have good taste. Every criterion asks for a description, a record or an action. No criterion asks an assessor to share or judge the learner's preferences. The wow moment sits at 1.3, where what the learner now sees in their own old work is set against their own prediction.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1340,8 +1326,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to explain what they know so that other people follow it and remember it. Learners tap out a song for someone, predicting first whether it will be named, and link the result to their own unclear explanations. They turn a point into a story with a person, a problem and a change. They speak to a group and check a day later what stuck. They then shape one message for three audiences and test each one.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner prepares, delivers and records, not how confident a speaker they are. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge charisma or polish. The wow moments sit at 1.3 and 3.3, where the learner's own evidence is set against their own prediction.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner prepares, delivers and records, not how confident a speaker they are. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge charisma or polish. The wow moments sit at 1.3 and 3.3, where the learner's own evidence is set against their own prediction.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1397,8 +1381,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to make a case and reach an agreement without pressure or tricks. Learners test how well they understand a view they hold strongly by explaining how it would work. They make a case to a real person who disagrees, framed in that person's values. They negotiate on interests rather than positions, predicting first what the other side wants. They then write the strongest case against their own view and say what they now accept.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not whether they win. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge confidence, charm or attitude, and no criterion rewards getting an outcome at the other person's cost. The learner chooses the view used at LO1, and no criterion requires a political or private view to be disclosed. Conversations are evidenced by the learner's own notes; no recording of the other person is required. The wow moments sit at 1.3 and 3.3, where the learner's own evidence is set against their own prediction.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not whether they win. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge confidence, charm or attitude, and no criterion rewards getting an outcome at the other person's cost. The learner chooses the view used at LO1, and no criterion requires a political or private view to be disclosed. Conversations are evidenced by the learner's own notes; no recording of the other person is required. The wow moments sit at 1.3 and 3.3, where the learner's own evidence is set against their own prediction.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1456,8 +1438,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to keep control of their own attention and widen their own choices at work. Learners predict how much of their phone use is started by notifications, then log a day and find out. They set rules that change the situation in advance and track whether the rules hold. They decide which of their own tasks to hand to AI and which to keep practising. They then take a first step to build a skill that would travel to another employer.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not how disciplined they feel. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge willpower or attitude. The pick-up log records who started each pick-up, not what was looked at. The wow moment sits at 1.3, where the learner's own evidence is set against their own prediction.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not how disciplined they feel. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge willpower or attitude. The pick-up log records who started each pick-up, not what was looked at. The wow moment sits at 1.3, where the learner's own evidence is set against their own prediction.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1513,8 +1493,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to use social media on their own terms. Learners predict how their feeds will affect their mood, then log a week and compare. They pause before acting on posts that provoke them. They check a widely shared claim before sharing it, recording what they believed first. They disagree online without joining a pile-on. They then change their own feed so it serves a goal they have set.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not which views they hold. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge attitude, and no criterion requires a political view to be disclosed: the learner chooses the posts and claims used. Evidence describes posts without naming any private individual. Pile-ons and outrage can be upsetting, so learners can always reach a person for support, and no criterion requires disclosing anything private. The wow moments sit at 1.3 and 3.3, where the learner's own evidence is set against their own prediction.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not which views they hold. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge attitude, and no criterion requires a political view to be disclosed: the learner chooses the posts and claims used. Evidence describes posts without naming any private individual. Pile-ons and outrage can be upsetting, so learners can always reach a person for support, and no criterion requires disclosing anything private. The wow moments sit at 1.3 and 3.3, where the learner's own evidence is set against their own prediction.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1578,8 +1556,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner money skills for a working life that keeps changing. Learners read a payslip and work out what minimum payments on a debt really cost. They estimate their hourly pay, then calculate their real hourly pay and compare. They set a savings goal with a default step that does not rely on willpower. They then compare ways to grow their income, including new skills.</p>
-
-  <p class="note"><b>Design note.</b> The unit teaches money skills and guidance only. It never gives personal financial advice, and no criterion asks for or rewards a personal recommendation. For free, impartial guidance, learners are pointed to MoneyHelper, run by the Money and Pensions Service. The assessor judges the method, not the learner's financial choices. Learners may use rounded figures or a sample payslip, and no criterion requires disclosing anything private. Every criterion asks for a description, a record, a calculation or an action. The wow moment sits at 2.3, where the learner's own evidence is set against their own estimate.</p>
 <p><strong>Design note.</strong> The unit teaches money skills and guidance only. It never gives personal financial advice, and no criterion asks for or rewards a personal recommendation. For free, impartial guidance, learners are pointed to MoneyHelper, run by the Money and Pensions Service. The assessor judges the method, not the learner's financial choices. Learners may use rounded figures or a sample payslip, and no criterion requires disclosing anything private. Every criterion asks for a description, a record, a calculation or an action. The wow moment sits at 2.3, where the learner's own evidence is set against their own estimate.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1637,8 +1613,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to spend their energy on what they can change, and to keep the commitments they make. Learners log a week of worries, predict which will come true, and find out. They make three commitments, predict how long each will take, and track them daily. They own a real mistake and take a step to repair it. They then choose how to respond in a situation under pressure.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not how they feel about themselves. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge confidence, guilt or attitude. The learner chooses which worries and which mistake to use. Learners can always reach a person for support, and no criterion requires disclosing anything private. The wow moments sit at 1.3 and 2.3, where the learner's own evidence is set against their own prediction.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not how they feel about themselves. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge confidence, guilt or attitude. The learner chooses which worries and which mistake to use. Learners can always reach a person for support, and no criterion requires disclosing anything private. The wow moments sit at 1.3 and 2.3, where the learner's own evidence is set against their own prediction.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1694,8 +1668,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to notice a moral choice and make it with care. Learners name the values at stake in a real dilemma from their own work or life. They test a moral judgement they hold firmly, recording first how well they expect to justify it. They make a real decision and explain it to someone whose view they do not know. They then decide which of their own decisions should never be handed to a machine.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses how the learner reaches and explains a decision, not which decision or view they hold. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge character or attitude. The learner chooses the dilemma and the judgement used, and no criterion requires disclosing anything private. The wow moment sits at 2.3, where the learner's own evidence is set against their own prediction.</p>
 <p><strong>Design note.</strong> The unit assesses how the learner reaches and explains a decision, not which decision or view they hold. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge character or attitude. The learner chooses the dilemma and the judgement used, and no criterion requires disclosing anything private. The wow moment sits at 2.3, where the learner's own evidence is set against their own prediction.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1753,8 +1725,6 @@
   <div class="unit-body">
     <h3 class="sub">Unit aim</h3>
 <p>This unit gives the learner the skills to go through a change in their own working life with a clear view of it. Learners compare how they expected a past change to feel with how it turned out. They map which tasks in their work will stay and which will change. They run one small experiment with a new way of working, predicting the result first. They then review what has ended, what has started and what comes next.</p>
-
-  <p class="note"><b>Design note.</b> The unit assesses what the learner records and does, not how they feel about change. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge confidence or attitude. The wow moments sit at 1.3 and 3.3, where the learner's own evidence is set against their own prediction.</p>
 <p><strong>Design note.</strong> The unit assesses what the learner records and does, not how they feel about change. Every criterion asks for a description, a record or an action. No criterion asks an assessor to judge confidence or attitude. The wow moments sit at 1.3 and 3.3, where the learner's own evidence is set against their own prediction.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
@@ -1872,7 +1842,7 @@
       var a = links[en.target.id]; if(!a) return;
       if(en.isIntersecting){
         Array.prototype.forEach.call(bar.querySelectorAll('a.on'), function(x){ x.classList.remove('on'); });
-        a.classList.add('on');
+        a.classList.add('on'); bar.scrollTo({left: a.offsetLeft - bar.offsetLeft - 16, behavior: 'smooth'});
       }
     });
   }, {rootMargin:'-120px 0px -60% 0px', threshold:0});
