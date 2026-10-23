@@ -144,6 +144,9 @@
     .js .step.on.noshot .scales{grid-template-columns:repeat(2,minmax(0,1fr))}
     .js .step.on > .shots{grid-column:2;grid-row:1 / span 30;margin-top:0}
     .js .step.on > .shots.below{grid-column:1 / -1;grid-row:auto;margin-top:8px}
+    /* A picture below the text: the text takes the full reading width, not the narrow side column. */
+    .js .step.on:has(> .shots.below){display:block}
+    .js .step.on > .shots.below{margin-top:20px}
     .js .step.on .chapters{grid-template-columns:repeat(2,minmax(0,1fr))}
     .js .step.on .flow,.js .step.on .scales{grid-template-columns:minmax(0,1fr)}
     .js .step.on .shots figure{flex:1 1 100%}
