@@ -10,11 +10,11 @@
      HOW PATHWAYS WORK · a click-through of the pathway builder design
 
      The screens are renders of the "Pathway builder mock-up" design canvas,
-     version 8 (23 Oct 2026). They are a DESIGN. Much of what they show is not
-     built. Every step therefore carries two lines, "Live today" and "Still to
-     build", taken from the pathway builder map of 23 Oct 2026. An item goes in
-     "Live today" only if the map marks it Built. Items the map marks as a
-     pathway choice are left out of both lines rather than claimed.
+     version 8 (23 Oct 2026). They are a DESIGN, and some of what they show is
+     still being built. Juliette asked on 23 Oct 2026 for the per-step "Live
+     today" and "Still to build" lines to come off: the client gets each part as
+     it is built. The one line at the top still says the screens show the
+     builder as we are building it.
 
      Every step is plain HTML, so the page reads top to bottom with no script.
      The script only shows one step at a time and adds Back and Next.
@@ -81,13 +81,6 @@
   .chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px 20px;list-style:none;padding:0!important;margin:4px 0 16px!important}
   .chapters li{margin:0;padding:8px 0;border-top:1px solid var(--z-border);font-size:15.5px}
 
-  .status{max-width:68ch;margin:18px 0 22px;border:1px solid var(--z-border);border-radius:12px;overflow:hidden;font-size:15px}
-  .status div{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 14px}
-  .status div + div{border-top:1px solid var(--z-border)}
-  .status dt{font-weight:600;color:#0a1628;margin:0}
-  .status dd{margin:0;color:var(--z-text-2)}
-  .status .live dt::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--z-teal);margin-right:7px;vertical-align:1px}
-  .status .todo dt::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;border:1.5px solid var(--z-text-3);margin-right:7px;vertical-align:0}
 
   /* ── screenshots ── */
   .shots{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;margin-top:8px}
@@ -164,7 +157,6 @@
     .hp-intro{margin-bottom:22px;padding-bottom:16px}
     .hp-intro .eyebrow{display:none}
     .hp-intro h1{font-size:23px;margin-bottom:6px}
-    .status div{grid-template-columns:1fr;gap:2px}
     .flow,.scales{grid-template-columns:minmax(0,1fr)}
     figure.narrow{flex:1 1 100%;max-width:340px}
     .hp-big .scroll img.w{max-width:none;width:760px}
@@ -244,10 +236,6 @@
         </ol>
         <p>Beside every pathway sits Skills. It records where each learner started and where they finished.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Building a pathway in the admin console, with Zavmo's conversation beside it.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>The nine chapters as drawn here, with Preview and After as steps of their own.</dd></div>
-      </dl>
       <div class="shots">
         <figure class="wide"><button class="zoom" type="button"><img src="01-chapters.png" alt="The top of a pathway called Future Fluency, Level 3, marked Draft, with the nine chapters in a row from Purpose to After." width="768" height="236" loading="lazy"></button>
           <figcaption>The nine chapters run across the top of every pathway. A tick means the chapter is ready.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -271,10 +259,6 @@
         <h3>Compliance is the exception</h3>
         <p>Some training must be the same for everyone, such as fire safety. Switch a pathway to compliance and every learner does everything. Nothing is skipped and nothing adapts.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Zavmo teaching each module and lesson, and questions about the learner's own role.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>The skills check and skipping, a task at work after each module, more practice where confidence is low, the practice and confidence scores, and the compliance switch.</dd></div>
-      </dl>
       <div class="shots">
         <figure><button class="zoom" type="button"><img src="02-adapts.png" alt="The Teaching chapter with compliance off. Skip a module passed in the skills check, start at your level and more practice where confidence is low are all on." width="768" height="888" loading="lazy"></button>
           <figcaption>Compliance off. Each of these choices shapes the pathway around the learner.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -291,10 +275,6 @@
         <p>Every chapter opens already filled with our recommendation. You check it, and change anything you disagree with.</p>
         <p>The conversation is the fast way in. The chapters are where you check the detail.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>The conversation beside each chapter, which talks you through one chapter at a time.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>One conversation that builds the whole pathway, a preview of each chapter in the chat, and chapters that open already filled.</dd></div>
-      </dl>
       <div class="shots below">
         <figure class="wide"><button class="zoom" type="button"><img src="03-talk.png" alt="The pathway builder on a laptop. On the left Zavmo's conversation, where a spoken answer has become the Purpose chapter. On the right the Purpose chapter, filled in." width="1440" height="1000" loading="lazy"></button>
           <figcaption>One spoken answer has become the Purpose chapter. Zavmo is now drafting Learners.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -314,10 +294,6 @@
         <p>A pathway that names a change at work can be measured. One that does not ends as a course people finished.</p>
         <p>Purpose also sets the compliance switch. On means every learner does everything. Nothing is skipped, nothing adapts, lessons go in order and Demonstrate is required. Off means Zavmo adapts to each learner.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>The name, why the pathway exists, its goals and the organisation's context.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>The two questions about change at work, and the compliance switch.</dd></div>
-      </dl>
       <div class="shots">
         <figure><button class="zoom" type="button"><img src="04-purpose.png" alt="The Purpose chapter: name, why this pathway exists, what should change at work, and organisation context." width="768" height="1000" loading="lazy"></button>
           <figcaption>Purpose, with what should change at work open.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -341,10 +317,6 @@
           <li>What they must know before they start.</li>
         </ul>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Choosing learners by job role, and their country and language.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>Department or location, time each week, accessibility needs, and what they must know first.</dd></div>
-      </dl>
       <div class="shots">
         <figure><button class="zoom" type="button"><img src="05-learners.png" alt="The Learners chapter, filled with Zavmo's recommendation. One value, hours each week, has been changed and is marked." width="768" height="1072" loading="lazy"></button>
           <figcaption>Learners, filled with our recommendation. One change has been made, and only that is marked.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -361,10 +333,6 @@
         <p>You can describe the pathway and Zavmo finds matching units from awarding bodies. These are the organisations that set and certify qualifications.</p>
         <p>Each source carries its level, hours and credit.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Future Fluency units, your own specifications and material, and level, hours and credit.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>Zavmo finding awarding body units from a description, and dropping your files straight in.</dd></div>
-      </dl>
       <div class="shots">
         <figure class="narrow"><button class="zoom" type="button"><img src="06-sources.png" alt="Zavmo's conversation. It has filled Learners from a spoken answer and asks whether to teach from Future Fluency Level 3 or your own material too." width="440" height="780" loading="lazy"></button>
           <figcaption>In the conversation, Zavmo has filled Learners and asks about Sources next.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -381,10 +349,6 @@
         <p>Each outcome and criterion also has a Bloom level. Bloom's taxonomy is a scale of how deep a task goes. It runs from remembering a fact to creating something new. It sets the level each learner must show.</p>
         <p>Zavmo sets every level. You change one only if you disagree. If a criterion is never assessed, Zavmo tells you.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Outcomes and assessment criteria for each module, with a Bloom level on each.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>Learning objectives per module, a Bloom target for each module, editing levels, and the warning when a criterion is never assessed.</dd></div>
-      </dl>
       <div class="shots">
         <figure><button class="zoom" type="button"><img src="07-outcomes.png" alt="The Outcomes chapter, by module. One criterion is never assessed and needs you. Bloom levels are set for every module." width="768" height="644" loading="lazy"></button>
           <figcaption>Outcomes, with one criterion that nothing assesses yet.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -402,10 +366,6 @@
         <p>A module they already pass is skipped. A learner who rates themselves highly answers two quick questions first.</p>
         <p>Questions every learner answers once, such as their job title, sit in Settings. Discover asks only what this pathway needs.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Questions for this pathway.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>The skills check at the start, and skipping a module already passed.</dd></div>
-      </dl>
       <div class="shots">
         <figure><button class="zoom" type="button"><img src="08-discover.png" alt="The Discover stage: questions for this pathway, and a skills check at the start on practice and confidence." width="768" height="233" loading="lazy"></button>
           <figcaption>Discover, in the Teaching chapter.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -421,10 +381,6 @@
         <p>They answer a few questions about their job. Their answers shape the examples in every lesson that follows. So the learning is about their work, not a case study.</p>
         <p>They book their own sessions around their week. You set a date to finish by. Their manager gets one page on what to expect and how to help.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Discussion questions.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>Answers shaping every example, learners booking their own sessions, the finish date and the manager briefing.</dd></div>
-      </dl>
       <div class="shots">
         <figure><button class="zoom" type="button"><img src="09-discuss.png" alt="The Discuss stage: discussion questions, learners book their own sessions, complete by, and a manager briefing at the start." width="768" height="345" loading="lazy"></button>
           <figcaption>Discuss, in the Teaching chapter.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -441,10 +397,6 @@
         <p>After each module they do one real task on the job. In this example, that is drafting a rota with AI.</p>
         <p>Where their confidence is low, they get more practice. Zavmo comes back to anything they got wrong. Each session opens with what they did last time.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Modules and lessons.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>Skipping a module already passed, the task at work after each module, and more practice where confidence is low.</dd></div>
-      </dl>
       <div class="shots">
         <figure><button class="zoom" type="button"><img src="10-deliver.png" alt="The Deliver stage: modules and lessons, start at your level, skip a passed module, apply it at work, more practice where confidence is low, and more." width="768" height="695" loading="lazy"></button>
           <figcaption>Deliver, in the Teaching chapter.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -462,10 +414,6 @@
         <p>Then someone signs it off. That can be their manager, someone in your learning team, or an assessor you name.</p>
         <p>Sign-off is the only route to a certificate. No sign-off, no certificate.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Checking that every criterion is assessed.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>Evidence formats, uploads, feedback and resubmission, the own work confirmation, and sign-off.</dd></div>
-      </dl>
       <div class="shots">
         <figure><button class="zoom" type="button"><img src="11-demonstrate.png" alt="The Demonstrate stage on a laptop, with Sign-off open. It asks who signs off a learner's evidence: their line manager, someone in L&amp;D, or an assessor you name." width="768" height="1000" loading="lazy"></button>
           <figcaption>Sign-off needs a decision from you before launch.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -485,10 +433,6 @@
         <p><b>Badges</b> mark a learner's progress. You see every badge the pathway gives, and approve each one before launch. A badge you do not approve is not given.</p>
         <p>You can switch off anything that gets in your people's way.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Pictures for objectives, outcomes and criteria, pictures in lessons, and badges in the learner's app.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>Choosing games for each module, the switch for diagrams, and approving badges before launch.</dd></div>
-      </dl>
       <div class="shots">
         <figure><button class="zoom" type="button"><img src="12-see-and-do.png" alt="The See and do chapter: games in each module, pictures and diagrams, and six badges each waiting to be approved." width="768" height="1620" loading="lazy"></button>
           <figcaption>Launch waits until the badges are approved.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -504,10 +448,6 @@
         <p>You pick the kind of learner, such as a team lead new to AI. You see what they would see, from the first question to the certificate.</p>
         <p>Nothing you do counts as learning or shows in reports. Tell Zavmo anything that confused you, and it changes it.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Previewing a pathway as a learner.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>Preview as its own step before launch, and a preview button on every chapter.</dd></div>
-      </dl>
       <div class="shots">
         <figure><button class="zoom" type="button"><img src="13-preview.png" alt="The Preview chapter: a phone showing the first question of module 1, and a choice of which learner to walk it as." width="768" height="1100" loading="lazy"></button>
           <figcaption>Walk it as a learner. Launch opens once you have.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -529,10 +469,6 @@
         </ul>
         <p>We have not drawn this screen yet, so there is no picture of it here.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Versions and publishing, and giving a pathway to people, a group or a department.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>Required and due dates, managers, a cover picture or video, certificates, and alerts.</dd></div>
-      </dl>
     </section>
 
     <!-- 15 -->
@@ -548,9 +484,6 @@
         </ul>
         <p>Their answers sit in reports, beside where they started and finished.</p>
       </div>
-      <dl class="status">
-        <div class="todo"><dt>Still to build</dt><dd>All of After.</dd></div>
-      </dl>
       <div class="shots">
         <figure><button class="zoom" type="button"><img src="15-after.png" alt="The After chapter: what did you think at the end, a manager check-in, and a follow-up a month later asking have you used it." width="768" height="1100" loading="lazy"></button>
           <figcaption>Three things after they finish. Zavmo asks if a month suits your people.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
@@ -578,10 +511,6 @@
         <p>High confidence with little practice is where a learner needs support most.</p>
         <p>The next pathway they take starts where this one ended.</p>
       </div>
-      <dl class="status">
-        <div class="live"><dt>Live today</dt><dd>Skill frameworks, and skills linked to pathways.</dd></div>
-        <div class="todo"><dt>Still to build</dt><dd>Skills checks scored on practice and confidence, and Zavmo building the skills from a pathway.</dd></div>
-      </dl>
     </section>
   </main>
 </div>
