@@ -127,6 +127,27 @@
       </div>
     </article>
 
+    <article class="card film">
+      <a class="film-poster" href="./practise/" aria-label="Watch Practise as you go: short games in your lessons">
+        <img src="./media/practise-landscape-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg></span>
+      </a>
+      <div class="film-body">
+        <span class="film-meta">36 seconds · with sound</span>
+        <h2 class="film-title"><a href="./practise/">Practise as you go: short games in your lessons</a></h2>
+        <p class="film-desc">Ask to practise, and The Coach turns the lesson into a short game built around your own work.</p>
+        <div class="film-actions">
+          <a class="btn btn-primary" href="./practise/">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>Watch
+          </a>
+          <button type="button" class="btn btn-ghost copy-link" data-url="https://iridescent-technologies.github.io/proposals/videos/practise/">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="copy-label">Copy link</span>
+          </button>
+        </div>
+        <p class="copy-status" role="status" aria-live="polite"></p>
+      </div>
+    </article>
+
     <!-- ── SLOT: "Your learning record" ───────────────────────────────────
          The second film, not made yet. Do not show an empty card publicly.
          When the film exists:
@@ -137,6 +158,8 @@
               title, words, file names and every og:/twitter: URL.
            3. Write its one line from the film's own captions, then remove
               these comment markers.
+           4. Add its card to the "Watch next" row on every other film page,
+              and give its own page a row of the others.
 
     <article class="card film">
       <a class="film-poster" href="./learning-record/" aria-label="Watch Your learning record">
