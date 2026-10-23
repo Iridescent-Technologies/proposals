@@ -24,6 +24,10 @@
 #                             out of sitemap.xml, but NOT disallowed, so the tag
 #                             can be read.
 #
+#   how-skills-work/          the same, for Skills and assessments. Unlisted on
+#                             23 Oct 2026, by the same rule: noindex, off the
+#                             hub and out of sitemap.xml, NOT disallowed.
+#
 # Note what this file deliberately does NOT say: "Disallow:" for those two.
 #
 # Blocking the crawl and asking to be de-indexed are different things, and
