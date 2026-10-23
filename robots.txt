@@ -1,11 +1,11 @@
-# Most of this suite is public and meant to be found. Three pages are not.
+# Most of this suite is public and meant to be found. Four pages are not.
 #
 # The whole suite used to refuse indexing. Every page carried a noindex meta
 # tag because the decks were sent to named people rather than found by
 # strangers. That was reversed on 10 September 2026: the suite is now the
 # public library, so the crawl is allowed and indexing is allowed with it.
 #
-# THREE EXCEPTIONS, AND THE FIRST TWO ARE THE ONES THAT MATTER.
+# FOUR EXCEPTIONS, AND THE FIRST TWO ARE THE ONES THAT MATTER.
 #
 #   qualifications-level-3/   Level 3 Future Fluency qualifications
 #   qualifications-level-5/   Level 5 Diploma in Future Fluency, specification
@@ -18,6 +18,11 @@
 # out of sitemap.xml.
 #
 #   _template/                a placeholder deck, not content
+#
+#   how-pathways-work/        a design walkthrough sent by link, unlisted by
+#                             choice on 23 Oct 2026. noindex, off the hub and
+#                             out of sitemap.xml, but NOT disallowed, so the tag
+#                             can be read.
 #
 # Note what this file deliberately does NOT say: "Disallow:" for those two.
 #
