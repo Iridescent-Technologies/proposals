@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<!-- Unlisted: sent by link, never found by a stranger. Not on the hub, not in
+     the sitemap. See robots.txt: the crawl stays allowed so this tag is read. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ─────────────────────────────────────────────────────────────────────────
+     HOW PATHWAYS WORK · a click-through of the pathway builder design
+
+     The screens are renders of the "Pathway builder mock-up" design canvas,
+     version 8 (23 Oct 2026). They are a DESIGN. Much of what they show is not
+     built. Every step therefore carries two lines, "Live today" and "Still to
+     build", taken from the pathway builder map of 23 Oct 2026. An item goes in
+     "Live today" only if the map marks it Built. Items the map marks as a
+     pathway choice are left out of both lines rather than claimed.
+
+     Every step is plain HTML, so the page reads top to bottom with no script.
+     The script only shows one step at a time and adds Back and Next.
+     ───────────────────────────────────────────────────────────────────────── -->
+<title>How a Zavmo pathway works · Zavmo</title>
+<meta name="description" content="A step-by-step look at how a Zavmo pathway is built, how it adapts to each learner, and how it checks they can do the work.">
+<meta property="og:title" content="How a Zavmo pathway works · Zavmo">
+<meta property="og:description" content="Step by step: how a pathway is built, how it adapts to each learner, and how it checks they can do the work.">
+<link rel="icon" href="../_brand/zavmo-logomark.svg" type="image/svg+xml">
+<style>
+  :root{
+    --bar-h:64px;
+    --nav-h:68px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-padding-top:calc(var(--bar-h) + 12px)}
+  body{margin:0;background:#fff;color:#0a1628;font-size:17px;line-height:1.6}
+  img{max-width:100%;height:auto}
+  a{color:var(--z-teal-ink)}
+
+  /* ── top bar ── */
+  .hp-bar{position:sticky;top:0;z-index:20;height:var(--bar-h);display:flex;align-items:center;gap:12px;
+    padding:0 clamp(16px,3vw,32px);background:#fff;border-bottom:1px solid var(--z-border)}
+  .hp-bar .spacer{flex:1}
+  .hp-count{font-size:14px;color:var(--z-text-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .hp-steps-btn{display:none}
+
+  /* ── layout ── */
+  .hp-wrap{display:grid;grid-template-columns:280px minmax(0,1fr);gap:clamp(24px,3vw,48px);
+    max-width:1320px;margin:0 auto;padding:0 clamp(16px,3vw,32px)}
+  .hp-list{position:sticky;top:var(--bar-h);align-self:start;max-height:calc(100vh - var(--bar-h));overflow:auto;
+    padding:28px 0 24px}
+  .hp-list h2{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--z-text-3);margin:0 0 10px;font-family:var(--z-font)}
+  .hp-list ol{list-style:none;margin:0;padding:0;counter-reset:s}
+  .hp-list li{counter-increment:s}
+  .hp-list a{display:flex;gap:10px;align-items:baseline;padding:7px 10px;border-radius:8px;text-decoration:none;
+    color:var(--z-text-2);font-size:15px;line-height:1.35}
+  .hp-list a::before{content:counter(s);flex:0 0 22px;font-size:13px;color:var(--z-text-3);font-variant-numeric:tabular-nums}
+  .hp-list a:hover{background:var(--z-bg-2);color:#0a1628}
+  .hp-list a[aria-current="step"]{background:rgba(0,217,192,.12);color:#0a1628;font-weight:600}
+  .hp-list a[aria-current="step"]::before{color:var(--z-teal-ink)}
+  .hp-list .grp{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--z-text-3);margin:14px 10px 4px}
+
+  .hp-main{min-width:0;padding:28px 0 calc(var(--nav-h) + 40px)}
+  .hp-intro{max-width:68ch;margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid var(--z-border)}
+  .hp-intro .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 8px}
+  .hp-intro h1{font-size:clamp(28px,4vw,40px);line-height:1.15;margin:0 0 10px}
+  .hp-note{margin:0;font-size:15px;color:var(--z-text-2)}
+
+  /* ── a step ── */
+  .step{scroll-margin-top:calc(var(--bar-h) + 12px)}
+  .js .step{display:none}
+  .js .step.on{display:block}
+  .step + .step{margin-top:64px}
+  .js .step + .step{margin-top:0}
+  .step-no{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--z-teal-ink);font-weight:700;margin:0 0 6px}
+  .step h2{font-size:clamp(24px,3vw,32px);line-height:1.2;margin:0 0 14px}
+  .step h3{font-size:18px;margin:22px 0 6px}
+  .copy{max-width:68ch}
+  .copy p{margin:0 0 12px}
+  .copy ul,.copy ol{margin:0 0 12px;padding-left:1.2em}
+  .copy li{margin:0 0 6px;color:var(--z-text-2)}
+  .copy li b,.copy p b{color:#0a1628;font-weight:600}
+  .chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px 20px;list-style:none;padding:0!important;margin:4px 0 16px!important}
+  .chapters li{margin:0;padding:8px 0;border-top:1px solid var(--z-border);font-size:15.5px}
+
+  .status{max-width:68ch;margin:18px 0 22px;border:1px solid var(--z-border);border-radius:12px;overflow:hidden;font-size:15px}
+  .status div{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:10px 14px}
+  .status div + div{border-top:1px solid var(--z-border)}
+  .status dt{font-weight:600;color:#0a1628;margin:0}
+  .status dd{margin:0;color:var(--z-text-2)}
+  .status .live dt::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--z-teal);margin-right:7px;vertical-align:1px}
+  .status .todo dt::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;border:1.5px solid var(--z-text-3);margin-right:7px;vertical-align:0}
+
+  /* ── screenshots ── */
+  .shots{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;margin-top:8px}
+  figure{margin:0;flex:1 1 360px;min-width:0}
+  figure.narrow{flex:0 1 300px}
+  figure.wide{flex:1 1 100%}
+  .zoom{display:block;width:100%;padding:0;border:1px solid var(--z-border);border-radius:12px;overflow:hidden;background:var(--z-bg-2);
+    cursor:zoom-in;box-shadow:var(--z-shadow)}
+  .zoom img{display:block;width:100%}
+  figcaption{margin-top:8px;font-size:14px;line-height:1.45;color:var(--z-text-3)}
+  figcaption .mark{display:block;font-size:12.5px;margin-top:2px}
+
+  /* the Skills schematic: drawn, not a screen */
+  .flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:760px;margin:8px 0 6px;list-style:none;padding:0}
+  .flow li{border:1px solid var(--z-border);border-radius:12px;padding:14px;background:var(--z-bg-2);position:relative}
+  .flow b{display:block;font-family:var(--z-font-heading);font-size:16px;color:#0a1628;margin-bottom:4px}
+  .flow span{font-size:14.5px;color:var(--z-text-2);line-height:1.45;display:block}
+  .flow small{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--z-teal-ink);font-weight:700;margin-bottom:6px}
+  .scales{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:760px;margin:12px 0 0}
+  .scales div{border-left:3px solid var(--z-teal);padding:4px 0 4px 12px;font-size:15px;color:var(--z-text-2)}
+  .scales b{color:#0a1628;display:block}
+
+  /* ── Back and Next, always in reach ── */
+  .hp-nav{display:none}
+  .js .hp-nav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;height:var(--nav-h);align-items:center;gap:12px;
+    padding:0 clamp(16px,3vw,32px);background:rgba(255,255,255,.97);border-top:1px solid var(--z-border)}
+  .hp-nav .inner{display:flex;align-items:center;gap:12px;width:100%;max-width:1320px;margin:0 auto}
+  .hp-nav .where{flex:1;min-width:0;font-size:14px;color:var(--z-text-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .hp-nav .where b{color:#0a1628;font-weight:600}
+  .hp-btn{appearance:none;font:inherit;font-size:15px;font-weight:600;min-height:44px;padding:0 18px;border-radius:var(--z-btn-radius);cursor:pointer;white-space:nowrap}
+  .hp-btn.back{background:#fff;border:1px solid var(--z-border-hover);color:#0a1628}
+  .hp-btn.next{background:var(--z-navy);border:1px solid var(--z-navy);color:#fff}
+  .hp-btn[disabled]{opacity:.4;cursor:default}
+  .hp-btn.ghost{background:#fff;border:1px solid var(--z-border-hover);color:#0a1628;font-size:14px;min-height:40px;padding:0 14px}
+
+  footer.z-footer-min{position:relative;z-index:1}
+  .js footer.z-footer-min{margin-bottom:var(--nav-h)}
+
+  /* ── enlarged screenshot ── */
+  dialog.hp-big{border:0;padding:0;margin:0;width:100vw;height:100vh;max-width:none;max-height:none;background:#fff}
+  dialog.hp-big::backdrop{background:rgba(10,22,40,.5)}
+  .hp-big .top{position:sticky;top:0;left:0;display:flex;align-items:center;gap:12px;padding:10px 16px;background:#fff;border-bottom:1px solid var(--z-border);z-index:1}
+  .hp-big .top p{flex:1;margin:0;font-size:14px;color:var(--z-text-2);min-width:0}
+  .hp-big .scroll{overflow:auto;height:calc(100vh - 61px);padding:16px}
+  .hp-big img{display:block;margin:0 auto;max-width:100%}
+
+  .step h2:focus{outline:none}
+
+  /* ── wide screens: words on the left, the screens beside them ── */
+  @media (min-width:1200px){
+    .js .step.on{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);column-gap:40px;align-items:start}
+    .js .step.on > *{grid-column:1}
+    .js .step.on.noshot{display:block}
+    .js .step.on.noshot .flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .js .step.on.noshot .scales{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .js .step.on > .shots{grid-column:2;grid-row:1 / span 30;margin-top:0}
+    .js .step.on > .shots.below{grid-column:1 / -1;grid-row:auto;margin-top:8px}
+    .js .step.on .chapters{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .js .step.on .flow,.js .step.on .scales{grid-template-columns:minmax(0,1fr)}
+    .js .step.on .shots figure{flex:1 1 100%}
+    .js .step.on .shots figure.narrow{flex:0 1 340px}
+    .js .step.on .shots.pair figure{flex:1 1 calc(50% - 10px)}
+  }
+
+  /* ── phone and small tablet: the step list becomes a drawer ── */
+  @media (max-width:959px){
+    body{font-size:16px}
+    .hp-wrap{grid-template-columns:minmax(0,1fr);padding:0 16px}
+    .hp-steps-btn{display:inline-flex;align-items:center}
+    .hp-list{display:none}
+    .hp-list.open{display:block;position:fixed;top:var(--bar-h);left:0;right:0;bottom:var(--nav-h);max-height:none;z-index:19;background:#fff;
+      padding:16px;border-bottom:1px solid var(--z-border)}
+    .hp-main{padding-top:20px}
+    .hp-intro{margin-bottom:22px;padding-bottom:16px}
+    .hp-intro .eyebrow{display:none}
+    .hp-intro h1{font-size:23px;margin-bottom:6px}
+    .status div{grid-template-columns:1fr;gap:2px}
+    .flow,.scales{grid-template-columns:minmax(0,1fr)}
+    figure.narrow{flex:1 1 100%;max-width:340px}
+    .hp-big .scroll img.w{max-width:none;width:760px}
+  }
+  @media (max-width:420px){
+    .hp-nav .where{display:none}
+    .hp-nav .inner{justify-content:space-between}
+    .hp-btn{flex:1}
+    .hp-count{display:none}
+    .hp-big .hp-btn{flex:0 0 auto}
+    .hp-big .top p{font-size:13px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .js .step.on{animation:hpIn .25s ease}
+    @keyframes hpIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  }
+</style>
+<link rel="stylesheet" href="../_brand/zavmo.css">
+<script>document.documentElement.className += ' js';</script>
+</head>
+<body>
+
+<header class="hp-bar">
+  <a class="z-logo-link" href="https://zavmo.ai" aria-label="Zavmo"><img class="z-logo" src="../_brand/zavmo-logo-mono-navy.svg" alt="Zavmo" width="130" height="28"><span class="z-logo-tag">How pathways work</span></a>
+  <span class="spacer"></span>
+  <span class="hp-count" id="count" aria-live="polite"></span>
+  <button class="hp-btn ghost hp-steps-btn" id="stepsBtn" type="button" aria-expanded="false" aria-controls="steps">All steps</button>
+</header>
+
+<div class="hp-wrap">
+  <nav class="hp-list" id="steps" aria-label="Steps">
+    <h2>Steps</h2>
+    <ol>
+      <li><a href="#what-a-pathway-is">What a pathway is</a></li>
+      <li><a href="#how-it-adapts">How it adapts to each learner</a></li>
+      <li><a href="#talk-to-zavmo">Build it by talking to Zavmo</a></li>
+      <li><span class="grp">The chapters</span><a href="#purpose">Purpose</a></li>
+      <li><a href="#learners">Learners</a></li>
+      <li><a href="#sources">Sources</a></li>
+      <li><a href="#outcomes">Outcomes</a></li>
+      <li><span class="grp">Teaching, in four stages</span><a href="#discover">Discover</a></li>
+      <li><a href="#discuss">Discuss</a></li>
+      <li><a href="#deliver">Deliver</a></li>
+      <li><a href="#demonstrate">Demonstrate</a></li>
+      <li><span class="grp">Before and after launch</span><a href="#see-and-do">See and do</a></li>
+      <li><a href="#preview">Preview</a></li>
+      <li><a href="#launch">Launch</a></li>
+      <li><a href="#after">After</a></li>
+      <li><a href="#skills">Skills: where each learner started and finished</a></li>
+    </ol>
+  </nav>
+
+  <main class="hp-main" id="main">
+    <div class="hp-intro">
+      <p class="eyebrow">Walkthrough</p>
+      <h1>How a Zavmo pathway works</h1>
+      <p class="hp-note">These screens show the pathway builder as we are building it. Some steps are live today and others are in build.</p>
+    </div>
+
+    <!-- 1 -->
+    <section class="step" id="what-a-pathway-is" aria-labelledby="h-1">
+      <p class="step-no">Step 1 of 16</p>
+      <h2 id="h-1">What a pathway is</h2>
+      <div class="copy">
+        <p>A pathway is a programme of learning for a group of people. It takes them from where they are to a clear change at work.</p>
+        <p>You set one up in nine chapters. Each chapter answers one question.</p>
+        <ol class="chapters">
+          <li><b>Purpose.</b> Why does it exist?</li>
+          <li><b>Learners.</b> Who is it for?</li>
+          <li><b>Sources.</b> What do we teach from?</li>
+          <li><b>Outcomes.</b> What will they be able to do?</li>
+          <li><b>Teaching.</b> How do we teach it and check it?</li>
+          <li><b>See and do.</b> Games, pictures and badges.</li>
+          <li><b>Preview.</b> What will a learner see?</li>
+          <li><b>Launch.</b> Who gets it, and by when?</li>
+          <li><b>After.</b> Did it change what they do?</li>
+        </ol>
+        <p>Beside every pathway sits Skills. It records where each learner started and where they finished.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Building a pathway in the admin console, with Zavmo's conversation beside it.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>The nine chapters as drawn here, with Preview and After as steps of their own.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure class="wide"><button class="zoom" type="button"><img src="01-chapters.png" alt="The top of a pathway called Future Fluency, Level 3, marked Draft, with the nine chapters in a row from Purpose to After." width="768" height="236" loading="lazy"></button>
+          <figcaption>The nine chapters run across the top of every pathway. A tick means the chapter is ready.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="step" id="how-it-adapts" aria-labelledby="h-2">
+      <p class="step-no">Step 2 of 16</p>
+      <h2 id="h-2">How it adapts to each learner</h2>
+      <div class="copy">
+        <p>Most training gives everyone the same course. A Zavmo pathway is designed to adapt to each person. That is how a learner builds skill, not only knowledge.</p>
+        <h3>It starts where they are</h3>
+        <p>At Discover, a short check of their skills places each learner. They skip what they can already do.</p>
+        <h3>It uses their own job</h3>
+        <p>At Discuss, they tell us about their role. Zavmo teaches at their level and takes every example from their own work. The learning is about their job, not a case study about somebody else's.</p>
+        <h3>Practice turns knowing into doing</h3>
+        <p>After each module they do one real task at work. Games give them practice inside each lesson. Where their confidence is low, they get more practice.</p>
+        <h3>It checks they can do it</h3>
+        <p>Demonstrate asks for evidence that they can do the work, not only know about it. Skills then records the change from where they started to where they finished. It scores practice (knows it, has applied it, uses it routinely) and confidence.</p>
+        <h3>Compliance is the exception</h3>
+        <p>Some training must be the same for everyone, such as fire safety. Switch a pathway to compliance and every learner does everything. Nothing is skipped and nothing adapts.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Zavmo teaching each module and lesson, and questions about the learner's own role.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>The skills check and skipping, a task at work after each module, more practice where confidence is low, the practice and confidence scores, and the compliance switch.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="02-adapts.png" alt="The Teaching chapter with compliance off. Skip a module passed in the skills check, start at your level and more practice where confidence is low are all on." width="768" height="888" loading="lazy"></button>
+          <figcaption>Compliance off. Each of these choices shapes the pathway around the learner.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="step" id="talk-to-zavmo" aria-labelledby="h-3">
+      <p class="step-no">Step 3 of 16</p>
+      <h2 id="h-3">Build it by talking to Zavmo</h2>
+      <div class="copy">
+        <p>You do not have to fill nine chapters by hand. You talk to Zavmo, by voice or by typing.</p>
+        <p>Zavmo asks what it needs. As you answer, it fills each chapter and shows you what it wrote.</p>
+        <p>Every chapter opens already filled with our recommendation. You check it, and change anything you disagree with.</p>
+        <p>The conversation is the fast way in. The chapters are where you check the detail.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>The conversation beside each chapter, which talks you through one chapter at a time.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>One conversation that builds the whole pathway, a preview of each chapter in the chat, and chapters that open already filled.</dd></div>
+      </dl>
+      <div class="shots below">
+        <figure class="wide"><button class="zoom" type="button"><img src="03-talk.png" alt="The pathway builder on a laptop. On the left Zavmo's conversation, where a spoken answer has become the Purpose chapter. On the right the Purpose chapter, filled in." width="1440" height="1000" loading="lazy"></button>
+          <figcaption>One spoken answer has become the Purpose chapter. Zavmo is now drafting Learners.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="step" id="purpose" aria-labelledby="h-4">
+      <p class="step-no">Step 4 of 16 · Chapter 1</p>
+      <h2 id="h-4">Purpose</h2>
+      <div class="copy">
+        <p>Purpose says why the pathway exists. It asks two plain questions.</p>
+        <ul>
+          <li><b>What should people do differently at work?</b></li>
+          <li><b>What will show it worked?</b></li>
+        </ul>
+        <p>A pathway that names a change at work can be measured. One that does not ends as a course people finished.</p>
+        <p>Purpose also sets the compliance switch. On means every learner does everything. Nothing is skipped, nothing adapts, lessons go in order and Demonstrate is required. Off means Zavmo adapts to each learner.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>The name, why the pathway exists, its goals and the organisation's context.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>The two questions about change at work, and the compliance switch.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="04-purpose.png" alt="The Purpose chapter: name, why this pathway exists, what should change at work, and organisation context." width="768" height="1000" loading="lazy"></button>
+          <figcaption>Purpose, with what should change at work open.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+        <figure><button class="zoom" type="button"><img src="04-compliance-on.png" alt="A fire safety pathway with compliance on. A dark banner says every learner does everything, and each adaptive choice is locked." width="768" height="908" loading="lazy"></button>
+          <figcaption>Compliance on. The choices that adapt are locked, with one line saying why.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="step" id="learners" aria-labelledby="h-5">
+      <p class="step-no">Step 5 of 16 · Chapter 2</p>
+      <h2 id="h-5">Learners</h2>
+      <div class="copy">
+        <p>Learners says who the pathway is for, and what they can give it.</p>
+        <p>The same content lands differently for a new starter with an hour a week and an expert with ten minutes. Knowing who they are sets the pace.</p>
+        <ul>
+          <li>Who gets it: by job role, department or location.</li>
+          <li>Their country and language.</li>
+          <li>The time they can give each week.</li>
+          <li>Any accessibility needs.</li>
+          <li>What they must know before they start.</li>
+        </ul>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Choosing learners by job role, and their country and language.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>Department or location, time each week, accessibility needs, and what they must know first.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="05-learners.png" alt="The Learners chapter, filled with Zavmo's recommendation. One value, hours each week, has been changed and is marked." width="768" height="1072" loading="lazy"></button>
+          <figcaption>Learners, filled with our recommendation. One change has been made, and only that is marked.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="step" id="sources" aria-labelledby="h-6">
+      <p class="step-no">Step 6 of 16 · Chapter 3</p>
+      <h2 id="h-6">Sources</h2>
+      <div class="copy">
+        <p>Sources is what Zavmo teaches from. Zavmo teaches only what it can point to.</p>
+        <p>That can be a recognised standard, a Future Fluency unit, or your own organisation's material. Learners trust a pathway built on something they recognise.</p>
+        <p>You can describe the pathway and Zavmo finds matching units from awarding bodies. These are the organisations that set and certify qualifications.</p>
+        <p>Each source carries its level, hours and credit.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Future Fluency units, your own specifications and material, and level, hours and credit.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>Zavmo finding awarding body units from a description, and dropping your files straight in.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure class="narrow"><button class="zoom" type="button"><img src="06-sources.png" alt="Zavmo's conversation. It has filled Learners from a spoken answer and asks whether to teach from Future Fluency Level 3 or your own material too." width="440" height="780" loading="lazy"></button>
+          <figcaption>In the conversation, Zavmo has filled Learners and asks about Sources next.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="step" id="outcomes" aria-labelledby="h-7">
+      <p class="step-no">Step 7 of 16 · Chapter 4</p>
+      <h2 id="h-7">Outcomes</h2>
+      <div class="copy">
+        <p>Outcomes say what learners will be able to do. They are set for the whole pathway and for each module.</p>
+        <p>Each outcome has assessment criteria: the things a learner must show. Every lesson and every piece of evidence traces back to one.</p>
+        <p>Each outcome and criterion also has a Bloom level. Bloom's taxonomy is a scale of how deep a task goes. It runs from remembering a fact to creating something new. It sets the level each learner must show.</p>
+        <p>Zavmo sets every level. You change one only if you disagree. If a criterion is never assessed, Zavmo tells you.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Outcomes and assessment criteria for each module, with a Bloom level on each.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>Learning objectives per module, a Bloom target for each module, editing levels, and the warning when a criterion is never assessed.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="07-outcomes.png" alt="The Outcomes chapter, by module. One criterion is never assessed and needs you. Bloom levels are set for every module." width="768" height="644" loading="lazy"></button>
+          <figcaption>Outcomes, with one criterion that nothing assesses yet.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="step" id="discover" aria-labelledby="h-8">
+      <p class="step-no">Step 8 of 16 · Teaching, stage 1 of 4</p>
+      <h2 id="h-8">Discover</h2>
+      <div class="copy">
+        <p>Teaching has four stages: Discover, Discuss, Deliver and Demonstrate. This is where the pathway meets each learner.</p>
+        <p>Discover finds out what a learner can already do, so nobody sits through it again.</p>
+        <p>It starts with a needs assessment, often called a TNA (training needs assessment). It is a short check of their skills.</p>
+        <p>A module they already pass is skipped. A learner who rates themselves highly answers two quick questions first.</p>
+        <p>Questions every learner answers once, such as their job title, sit in Settings. Discover asks only what this pathway needs.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Questions for this pathway.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>The skills check at the start, and skipping a module already passed.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="08-discover.png" alt="The Discover stage: questions for this pathway, and a skills check at the start on practice and confidence." width="768" height="233" loading="lazy"></button>
+          <figcaption>Discover, in the Teaching chapter.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="step" id="discuss" aria-labelledby="h-9">
+      <p class="step-no">Step 9 of 16 · Teaching, stage 2 of 4</p>
+      <h2 id="h-9">Discuss</h2>
+      <div class="copy">
+        <p>Discuss is about the learner's own role.</p>
+        <p>They answer a few questions about their job. Their answers shape the examples in every lesson that follows. So the learning is about their work, not a case study.</p>
+        <p>They book their own sessions around their week. You set a date to finish by. Their manager gets one page on what to expect and how to help.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Discussion questions.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>Answers shaping every example, learners booking their own sessions, the finish date and the manager briefing.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="09-discuss.png" alt="The Discuss stage: discussion questions, learners book their own sessions, complete by, and a manager briefing at the start." width="768" height="345" loading="lazy"></button>
+          <figcaption>Discuss, in the Teaching chapter.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="step" id="deliver" aria-labelledby="h-10">
+      <p class="step-no">Step 10 of 16 · Teaching, stage 3 of 4</p>
+      <h2 id="h-10">Deliver</h2>
+      <div class="copy">
+        <p>Deliver teaches each module at the learner's level, then asks them to use it at work.</p>
+        <p>Lessons begin where the learner is, not at the first page.</p>
+        <p>After each module they do one real task on the job. In this example, that is drafting a rota with AI.</p>
+        <p>Where their confidence is low, they get more practice. Zavmo comes back to anything they got wrong. Each session opens with what they did last time.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Modules and lessons.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>Skipping a module already passed, the task at work after each module, and more practice where confidence is low.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="10-deliver.png" alt="The Deliver stage: modules and lessons, start at your level, skip a passed module, apply it at work, more practice where confidence is low, and more." width="768" height="695" loading="lazy"></button>
+          <figcaption>Deliver, in the Teaching chapter.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="step" id="demonstrate" aria-labelledby="h-11">
+      <p class="step-no">Step 11 of 16 · Teaching, stage 4 of 4</p>
+      <h2 id="h-11">Demonstrate</h2>
+      <div class="copy">
+        <p>Demonstrate checks that a learner can do it, not only that they know it.</p>
+        <p>They choose how to show their evidence: a report, a proposal, a presentation or a recorded explanation. Every criterion is assessed at least once.</p>
+        <p>They get feedback on each criterion, and can send their work again. They confirm it is their own work, and say how they used AI.</p>
+        <p>Then someone signs it off. That can be their manager, someone in your learning team, or an assessor you name.</p>
+        <p>Sign-off is the only route to a certificate. No sign-off, no certificate.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Checking that every criterion is assessed.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>Evidence formats, uploads, feedback and resubmission, the own work confirmation, and sign-off.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="11-demonstrate.png" alt="The Demonstrate stage on a laptop, with Sign-off open. It asks who signs off a learner's evidence: their line manager, someone in L&amp;D, or an assessor you name." width="768" height="1000" loading="lazy"></button>
+          <figcaption>Sign-off needs a decision from you before launch.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+        <figure class="narrow"><button class="zoom" type="button"><img src="11-demonstrate-phone.png" alt="The same Demonstrate stage on a phone, for reading. Sign-off is marked as needing you." width="390" height="1465" loading="lazy"></button>
+          <figcaption>On a phone the builder is for reading. You make changes on a computer.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="step" id="see-and-do" aria-labelledby="h-12">
+      <p class="step-no">Step 12 of 16 · Chapter 6</p>
+      <h2 id="h-12">See and do</h2>
+      <div class="copy">
+        <p>See and do holds the games, pictures and badges. Practice and pictures make learning stick.</p>
+        <p><b>Games</b> give practice inside every module. Zavmo picks the games that suit each module, and you can see every one.</p>
+        <p><b>Pictures and diagrams</b> are made in your own colours. They explain objectives, outcomes and the steps in a process.</p>
+        <p><b>Badges</b> mark a learner's progress. You see every badge the pathway gives, and approve each one before launch. A badge you do not approve is not given.</p>
+        <p>You can switch off anything that gets in your people's way.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Pictures for objectives, outcomes and criteria, pictures in lessons, and badges in the learner's app.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>Choosing games for each module, the switch for diagrams, and approving badges before launch.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="12-see-and-do.png" alt="The See and do chapter: games in each module, pictures and diagrams, and six badges each waiting to be approved." width="768" height="1620" loading="lazy"></button>
+          <figcaption>Launch waits until the badges are approved.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section class="step" id="preview" aria-labelledby="h-13">
+      <p class="step-no">Step 13 of 16 · Chapter 7</p>
+      <h2 id="h-13">Preview</h2>
+      <div class="copy">
+        <p>Before anyone else sees it, you walk the pathway as a learner.</p>
+        <p>You pick the kind of learner, such as a team lead new to AI. You see what they would see, from the first question to the certificate.</p>
+        <p>Nothing you do counts as learning or shows in reports. Tell Zavmo anything that confused you, and it changes it.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Previewing a pathway as a learner.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>Preview as its own step before launch, and a preview button on every chapter.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="13-preview.png" alt="The Preview chapter: a phone showing the first question of module 1, and a choice of which learner to walk it as." width="768" height="1100" loading="lazy"></button>
+          <figcaption>Walk it as a learner. Launch opens once you have.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section class="step noshot" id="launch" aria-labelledby="h-14">
+      <p class="step-no">Step 14 of 16 · Chapter 8</p>
+      <h2 id="h-14">Launch</h2>
+      <div class="copy">
+        <p>Launch sends the pathway out to the right people.</p>
+        <ul>
+          <li>You publish a version, and give it to people, a group or a department.</li>
+          <li>You set whether it is required, and when it is due.</li>
+          <li>Managers are told, so they know to support their people.</li>
+          <li>You choose the certificate, and a cover picture or video.</li>
+          <li>Zavmo alerts you if anything needs a look.</li>
+        </ul>
+        <p>We have not drawn this screen yet, so there is no picture of it here.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Versions and publishing, and giving a pathway to people, a group or a department.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>Required and due dates, managers, a cover picture or video, certificates, and alerts.</dd></div>
+      </dl>
+    </section>
+
+    <!-- 15 -->
+    <section class="step" id="after" aria-labelledby="h-15">
+      <p class="step-no">Step 15 of 16 · Chapter 9</p>
+      <h2 id="h-15">After</h2>
+      <div class="copy">
+        <p>The pathway does not stop at the certificate. People forget most of what they do not use, so we follow up at work.</p>
+        <ul>
+          <li><b>At the end,</b> each learner answers one question: what did you think?</li>
+          <li><b>At the end,</b> their manager is asked what has changed at work.</li>
+          <li><b>A month later,</b> Zavmo sends a reminder and a quick check. Have you used it? They rate their skills again.</li>
+        </ul>
+        <p>Their answers sit in reports, beside where they started and finished.</p>
+      </div>
+      <dl class="status">
+        <div class="todo"><dt>Still to build</dt><dd>All of After.</dd></div>
+      </dl>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="15-after.png" alt="The After chapter: what did you think at the end, a manager check-in, and a follow-up a month later asking have you used it." width="768" height="1100" loading="lazy"></button>
+          <figcaption>Three things after they finish. Zavmo asks if a month suits your people.<span class="mark">Example pathway, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 16 -->
+    <section class="step noshot" id="skills" aria-labelledby="h-16">
+      <p class="step-no">Step 16 of 16</p>
+      <h2 id="h-16">Skills: where each learner started and finished</h2>
+      <div class="copy">
+        <p>Skills is one record of what each person can do. It builds up across every pathway they take.</p>
+        <p>It measures the same skills three times.</p>
+      </div>
+      <ol class="flow">
+        <li><small>Start</small><b>Discover</b><span>The skills check places the learner, and passed modules are skipped.</span></li>
+        <li><small>Finish</small><b>Demonstrate</b><span>The same skills are checked again, for example by their manager.</span></li>
+        <li><small>A month later</small><b>After</b><span>They rate the skills again, once they have used them at work.</span></li>
+      </ol>
+      <div class="scales">
+        <div><b>Practice</b>Knows it, has applied it, uses it routinely.</div>
+        <div><b>Confidence</b>How sure they are.</div>
+      </div>
+      <div class="copy" style="margin-top:16px">
+        <p>High confidence with little practice is where a learner needs support most.</p>
+        <p>The next pathway they take starts where this one ended.</p>
+      </div>
+      <dl class="status">
+        <div class="live"><dt>Live today</dt><dd>Skill frameworks, and skills linked to pathways.</dd></div>
+        <div class="todo"><dt>Still to build</dt><dd>Skills checks scored on practice and confidence, and Zavmo building the skills from a pathway.</dd></div>
+      </dl>
+    </section>
+  </main>
+</div>
+
+<footer class="z-footer-min">
+  <span class="z-copyright">© 2026 Zavmo.ai. All rights reserved.</span>
+</footer>
+
+<div class="hp-nav" id="nav">
+  <div class="inner">
+    <button class="hp-btn back" id="back" type="button">Back</button>
+    <span class="where" id="where"></span>
+    <button class="hp-btn next" id="next" type="button">Next</button>
+  </div>
+</div>
+
+<dialog class="hp-big" id="big" aria-label="Enlarged screen">
+  <div class="top"><p id="bigCap"></p><button class="hp-btn ghost" id="bigClose" type="button">Close</button></div>
+  <div class="scroll"><img id="bigImg" alt=""></div>
+</dialog>
+
+<script>
+(function(){
+  var steps=[].slice.call(document.querySelectorAll('.step'));
+  var links=[].slice.call(document.querySelectorAll('.hp-list a'));
+  var list=document.getElementById('steps'), stepsBtn=document.getElementById('stepsBtn');
+  var back=document.getElementById('back'), next=document.getElementById('next');
+  var where=document.getElementById('where'), count=document.getElementById('count');
+  var i=0;
+
+  function indexOf(id){for(var k=0;k<steps.length;k++)if(steps[k].id===id)return k;return -1;}
+  function title(k){return steps[k].querySelector('h2').textContent;}
+
+  function show(k,opts){
+    i=Math.max(0,Math.min(steps.length-1,k));
+    steps.forEach(function(s,n){s.classList.toggle('on',n===i);});
+    links.forEach(function(a,n){if(n===i)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');});
+    back.disabled=i===0;
+    next.textContent=i===steps.length-1?'Back to the start':'Next';
+    where.innerHTML=(i<steps.length-1)?'Next: <b>'+title(i+1)+'</b>':'That is every step';
+    count.textContent='Step '+(i+1)+' of '+steps.length;
+    var hash='#'+steps[i].id;
+    if(!(opts&&opts.initial)&&location.hash!==hash){try{history.replaceState(null,'',hash);}catch(e){}}
+    closeList();
+    if(!opts||!opts.keepScroll){window.scrollTo(0,0);}
+    if(opts&&opts.focus){steps[i].querySelector('h2').setAttribute('tabindex','-1');steps[i].querySelector('h2').focus({preventScroll:true});}
+  }
+  function openList(){list.classList.add('open');stepsBtn.setAttribute('aria-expanded','true');stepsBtn.textContent='Close';}
+  function closeList(){list.classList.remove('open');stepsBtn.setAttribute('aria-expanded','false');stepsBtn.textContent='All steps';}
+
+  back.onclick=function(){show(i-1,{focus:true});};
+  next.onclick=function(){show(i===steps.length-1?0:i+1,{focus:true});};
+  stepsBtn.onclick=function(){list.classList.contains('open')?closeList():openList();};
+  links.forEach(function(a,n){a.onclick=function(e){e.preventDefault();show(n,{focus:true});};});
+
+  document.addEventListener('keydown',function(e){
+    if(big.open)return;
+    if(e.target.closest&&e.target.closest('input,textarea,select'))return;
+    if(e.key==='ArrowRight'){e.preventDefault();if(i<steps.length-1)show(i+1,{focus:true});}
+    else if(e.key==='ArrowLeft'){e.preventDefault();if(i>0)show(i-1,{focus:true});}
+    else if(e.key==='Escape'){closeList();}
+  });
+  window.addEventListener('hashchange',function(){var k=indexOf(location.hash.slice(1));if(k>-1&&k!==i)show(k);});
+
+  // Tap a screen to see it full size. On a phone the wide boards open wider
+  // than the screen, so they can be read and panned.
+  var big=document.getElementById('big'), bigImg=document.getElementById('bigImg'), bigCap=document.getElementById('bigCap');
+  [].slice.call(document.querySelectorAll('.zoom')).forEach(function(b){
+    var img=b.querySelector('img');
+    b.setAttribute('aria-label','Enlarge: '+img.alt);
+    b.onclick=function(){
+      bigImg.src=img.currentSrc||img.src; bigImg.alt=img.alt;
+      bigImg.className=(+img.getAttribute('width')>500)?'w':'';
+      bigImg.style.width='';
+      var fig=b.closest('figure').querySelector('figcaption');
+      bigCap.textContent=fig?fig.firstChild.textContent:'';
+      if(big.showModal)big.showModal();else big.setAttribute('open','');
+    };
+  });
+  function closeBig(){if(big.close)big.close();else big.removeAttribute('open');}
+  document.getElementById('bigClose').onclick=closeBig;
+  big.addEventListener('click',function(e){if(e.target===big)closeBig();});
+
+  var start=indexOf(location.hash.slice(1));
+  show(start>-1?start:0,{initial:true});
+  // A deep link lands on its step, with the page title above it in view.
+  setTimeout(function(){window.scrollTo(0,0);},0);
+})();
+</script>
+</body>
+</html>

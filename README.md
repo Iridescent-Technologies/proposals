@@ -17,6 +17,7 @@ Each one is a self-contained folder served at
 | **Little Zav. try it yourself** | Play the real learner widget, then run the admin console. both live, both on sample data | [Open](https://iridescent-technologies.github.io/proposals/little-zav-demo/) |
 | **The Learner Journey** | Click-through walkthrough of the live learner experience | [Open](https://iridescent-technologies.github.io/proposals/learner-journey/) |
 | **The Admin Console** | Click-through walkthrough of the live admin console and its reporting | [Open](https://iridescent-technologies.github.io/proposals/admin-journey/) |
+| **How a pathway works** (unlisted) | Sent by link only: not on the hub, not in the sitemap, noindex. Click-through of the pathway builder design, step by step, with what is live today and what is still to build | [Open](https://iridescent-technologies.github.io/proposals/how-pathways-work/) |
 | **Making learning as unique as you are** | The personalisation story. 2 Sigma, xAPI, and three-persona adaptation | [Open](https://iridescent-technologies.github.io/proposals/making-learning-unique/) |
 | **A class of one** | Eleven ways a lesson adapts to the learner, shown on the live product, with expert tester feedback | [Open](https://iridescent-technologies.github.io/proposals/a-class-of-one/) |
 | **Why Zavmo** | The learning efficiency flywheel. the business case | [Open](https://iridescent-technologies.github.io/proposals/why-zavmo/) |
