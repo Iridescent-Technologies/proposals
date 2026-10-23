@@ -171,6 +171,9 @@
     .js .step.on.noshot .scales{grid-template-columns:repeat(2,minmax(0,1fr))}
     .js .step.on > .shots{grid-column:2;grid-row:1 / span 30;margin-top:0}
     .js .step.on > .shots.below{grid-column:1 / -1;grid-row:auto;margin-top:8px}
+    /* A picture below the text: the text takes the full reading width, not the narrow side column. */
+    .js .step.on:has(> .shots.below){display:block}
+    .js .step.on > .shots.below{margin-top:20px}
     .js .step.on .chapters{grid-template-columns:repeat(2,minmax(0,1fr))}
     .js .step.on .flow,.js .step.on .scales{grid-template-columns:minmax(0,1fr)}
     .js .step.on .shots figure{flex:1 1 100%}
@@ -609,7 +612,7 @@
     </section>
 
     <!-- 16 -->
-    <section class="step noshot" id="skills" aria-labelledby="h-16">
+    <section class="step" id="skills" aria-labelledby="h-16">
       <p class="step-no">Step 16 of 16 · After launch</p>
       <h2 id="h-16">Check the result in Skills</h2>
       <div class="copy">
@@ -618,6 +621,7 @@
           <li>Click <b class="ui">Skills</b> in the left menu.</li>
           <li>Click <b class="ui">In your pathways</b> and open your pathway. Check the skills each module builds.</li>
           <li>Click <b class="ui">Assessments</b> to see where learners started and finished.</li>
+          <li>Click <b class="ui">People</b> and open a learner, such as Priya Shah. The spider shows where she started and finished this pathway, and every rating sits below it.</li>
         </ol>
         <p class="worked"><b>You will know it worked when</b> your pathway lists its skills, and does not say <b class="ui">None linked</b>.</p>
         <p class="why">Why: Skills records the same skills three times, so the next pathway starts where this one ended.</p>
@@ -629,6 +633,10 @@
       </ol>
       <div class="copy" style="margin-top:16px">
         <p><a href="../how-skills-work/">Set up Skills, step by step</a>.</p>
+      </div>
+          <div class="shots">
+        <figure><button class="zoom" type="button"><img src="16-where-they-started.png" alt="A learner&#39;s skills record with a spider chart of where she started and finished the pathway, then each skill with every rating and what was shown at work." width="768" height="1900" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:3%;top:13%">4</span></span></button>
+          <figcaption>Where Priya started and finished, then every rating behind it.<span class="mark">Example data, not live data.</span></figcaption></figure>
       </div>
     </section>
   </main>
