@@ -14,6 +14,8 @@ Each one is a self-contained folder served at
 | Page | What it is | Live link |
 |----------|------------|-----------|
 | **Little Zav. Proactive Chatbot** | Interactive deck: a playable Little Zav widget, the admin panel, and white-label deployment for Growth Engineering LMS clients | [Open](https://iridescent-technologies.github.io/proposals/little-zav/) |
+| **Videos** | Short films, each on its own page so one film can be sent as a link. Copy link on every card. First film: Welcome to Zavmo (1 minute, voiced, a wide file for screens and a tall one for phones). Media in `videos/media/` under stable names | [Open](https://iridescent-technologies.github.io/proposals/videos/) |
+| **Welcome to Zavmo** (film) | A learner signs up, names their job, and Zavmo teaches them in it from the first lesson | [Open](https://iridescent-technologies.github.io/proposals/videos/welcome/) |
 | **Little Zav. try it yourself** | Play the real learner widget, then run the admin console. both live, both on sample data | [Open](https://iridescent-technologies.github.io/proposals/little-zav-demo/) |
 | **The Learner Journey** | Click-through walkthrough of the live learner experience | [Open](https://iridescent-technologies.github.io/proposals/learner-journey/) |
 | **The Admin Console** | Click-through walkthrough of the live admin console and its reporting | [Open](https://iridescent-technologies.github.io/proposals/admin-journey/) |

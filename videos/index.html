@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ─────────────────────────────────────────────────────────────────────────
+     VIDEOS · the list of Zavmo films
+     Each film has its own page (videos/<slug>/) so a single film can be sent
+     as a link instead of an attached file. Every card here carries a
+     "Copy link" button that copies that film page's PUBLIC URL, taken from
+     data-url, never from location, so it is right even when tested locally.
+
+     Media lives in videos/media/ under stable lower-case names. Links to
+     those names are sent out in email, so never rename a file in place: add
+     a new name instead. Posters are stills cut from the film, so nothing on
+     this page plays by itself.
+
+     Brand: ../_brand/zavmo.css. Copy: no em dashes, sentence case, British
+     spelling, no unsourced numbers. See _template/README.md.
+     ───────────────────────────────────────────────────────────────────────── -->
+<title>Videos · Zavmo</title>
+<meta name="description" content="Short films of Zavmo, each with its own link to send.">
+<link rel="canonical" href="https://iridescent-technologies.github.io/proposals/videos/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Zavmo">
+<meta property="og:url" content="https://iridescent-technologies.github.io/proposals/videos/">
+<meta property="og:title" content="Videos · Zavmo">
+<meta property="og:description" content="Short films of Zavmo, each with its own link to send.">
+<meta property="og:image" content="https://iridescent-technologies.github.io/proposals/videos/media/welcome-landscape-poster.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta property="og:image:alt" content="Welcome to learn.zavmo.ai, beside the learn sign-in screen">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Videos · Zavmo">
+<meta name="twitter:description" content="Short films of Zavmo, each with its own link to send.">
+<meta name="twitter:image" content="https://iridescent-technologies.github.io/proposals/videos/media/welcome-landscape-poster.jpg">
+
+<style>
+  :root{
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(10,22,40,0.045); --surface-2:rgba(10,22,40,0.07);
+    --border:rgba(10,22,40,0.1); --border-2:rgba(0,217,192,0.28);
+    --teal:#0e7b62; --ink:#0a1628; --ink-2:rgba(10,22,40,0.72); --ink-3:rgba(10,22,40,0.5);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 clamp(16px,5vw,48px)}
+
+  nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;padding:14px clamp(16px,5vw,48px)}
+  .nav-spacer{flex:1}
+  .nav-link{font-size:13px;display:inline-flex;align-items:center;gap:6px}
+  .nav-link svg{width:15px;height:15px}
+
+  .hero{padding:clamp(36px,8vh,80px) 0 clamp(20px,4vh,36px)}
+  .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
+  h1{line-height:1.08;font-size:clamp(32px,5.4vw,52px);margin:0 0 16px;text-wrap:balance}
+  .lede{font-size:clamp(16px,2vw,19px);line-height:1.55;color:var(--ink-2);max-width:56ch;margin:0}
+
+  .films{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;padding:8px 0 24px}
+  .film{display:flex;flex-direction:column;overflow:hidden;padding:0}
+  .film-poster{position:relative;display:block;aspect-ratio:16/9;background:var(--z-bg-2,#f5f7fa);border-bottom:1px solid var(--z-border,#e5e7eb)}
+  .film-poster img{display:block;width:100%;height:100%;object-fit:cover}
+  .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;
+    background:var(--z-navy,#0a1628);color:#fff;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 18px rgba(10,22,40,.25)}
+  .play svg{width:20px;height:20px;margin-left:3px}
+  .film-body{display:flex;flex-direction:column;gap:8px;padding:18px 20px 20px;flex:1}
+  .film-meta{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--z-teal-ink,#0e7b62)}
+  .film-title{font-size:19px;line-height:1.3;margin:0}
+  .film-title a:hover{text-decoration:underline;text-underline-offset:3px}
+  .film-desc{font-size:15px;line-height:1.5;margin:0;flex:1}
+  .film-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 18px;
+    font:inherit;font-size:14px;font-weight:600;cursor:pointer;border:0;flex:1 1 0;white-space:nowrap}
+  .btn svg{width:16px;height:16px;flex:0 0 auto}
+  .copy-status{font-size:13px;min-height:1.4em;margin:0;color:var(--z-teal-ink,#0e7b62)}
+
+  .note{font-size:14px;color:var(--ink-3);margin:8px 0 0}
+  footer{margin-top:48px;padding:32px 0 48px;font-size:12.5px;line-height:1.7}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<link rel="stylesheet" href="../_brand/zavmo.css">
+</head>
+<body>
+
+<nav>
+  <a class="z-logo-link" href="https://zavmo.ai" aria-label="Zavmo"><img class="z-logo" src="../_brand/zavmo-logo-mono-navy.svg" alt="Zavmo" width="130" height="28"><span class="z-logo-tag">Videos</span></a>
+  <span class="nav-spacer"></span>
+  <a class="nav-link" href="../">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H6M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    All proposals
+  </a>
+</nav>
+
+<main class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Videos</div>
+    <h1>See Zavmo in a minute.</h1>
+    <p class="lede">Short films of the product as a learner sees it. Each film has its own link, so you can send one on its own.</p>
+  </header>
+
+  <div class="films">
+
+    <article class="card film">
+      <a class="film-poster" href="./welcome/" aria-label="Watch Welcome to Zavmo: your first lesson, in your own job">
+        <img src="./media/welcome-landscape-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg></span>
+      </a>
+      <div class="film-body">
+        <span class="film-meta">1 minute · with sound</span>
+        <h2 class="film-title"><a href="./welcome/">Welcome to Zavmo: your first lesson, in your own job</a></h2>
+        <p class="film-desc">A learner signs up, names their job, and Zavmo teaches them in it from the first lesson.</p>
+        <div class="film-actions">
+          <a class="btn btn-primary" href="./welcome/">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>Watch
+          </a>
+          <button type="button" class="btn btn-ghost copy-link" data-url="https://iridescent-technologies.github.io/proposals/videos/welcome/">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="copy-label">Copy link</span>
+          </button>
+        </div>
+        <p class="copy-status" role="status" aria-live="polite"></p>
+      </div>
+    </article>
+
+    <!-- ── SLOT: "Your learning record" ───────────────────────────────────
+         The second film, not made yet. Do not show an empty card publicly.
+         When the film exists:
+           1. Put it in videos/media/ as learning-record-landscape.mp4 and
+              learning-record-portrait.mp4, with posters cut from the film
+              (learning-record-landscape-poster.jpg, -portrait-poster.jpg).
+           2. Copy videos/welcome/ to videos/learning-record/ and change the
+              title, words, file names and every og:/twitter: URL.
+           3. Write its one line from the film's own captions, then remove
+              these comment markers.
+
+    <article class="card film">
+      <a class="film-poster" href="./learning-record/" aria-label="Watch Your learning record">
+        <img src="./media/learning-record-landscape-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+        <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg></span>
+      </a>
+      <div class="film-body">
+        <span class="film-meta">LENGTH · with sound</span>
+        <h2 class="film-title"><a href="./learning-record/">Your learning record</a></h2>
+        <p class="film-desc">ONE LINE, FROM THE FILM'S OWN CAPTIONS.</p>
+        <div class="film-actions">
+          <a class="btn btn-primary" href="./learning-record/">Watch</a>
+          <button type="button" class="btn btn-ghost copy-link" data-url="https://iridescent-technologies.github.io/proposals/videos/learning-record/"><span class="copy-label">Copy link</span></button>
+        </div>
+        <p class="copy-status" role="status" aria-live="polite"></p>
+      </div>
+    </article>
+    ─────────────────────────────────────────────────────────────────────── -->
+
+  </div>
+
+  <p class="note">More films to come.</p>
+
+</main>
+
+<div class="wrap">
+  <footer>
+    <img class="z-footer-logo" src="../_brand/zavmo-logo-mono-white.svg" alt="Zavmo" width="102" height="22">
+    Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
+    <span class="z-copyright">© 2026 Zavmo.ai. All rights reserved.</span>
+  </footer>
+</div>
+
+<script>
+// Copy link: copies the film page's public URL from data-url. The clipboard
+// API needs a secure context, so a hidden textarea is the fallback.
+(function(){
+  function copy(text){
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise(function(ok, fail){
+      var t = document.createElement('textarea');
+      t.value = text; t.setAttribute('readonly', ''); t.style.position = 'fixed'; t.style.opacity = '0';
+      document.body.appendChild(t); t.select();
+      try { document.execCommand('copy') ? ok() : fail(); } catch (e) { fail(e); }
+      document.body.removeChild(t);
+    });
+  }
+  document.querySelectorAll('.copy-link').forEach(function(btn){
+    var label = btn.querySelector('.copy-label');
+    var status = btn.closest('.film-body, .film-head').querySelector('.copy-status');
+    btn.addEventListener('click', function(){
+      var url = btn.getAttribute('data-url');
+      copy(url).then(function(){
+        label.textContent = 'Link copied';
+        status.textContent = 'Copied: ' + url;
+      }, function(){
+        status.textContent = 'Copy this link: ' + url;
+      });
+      clearTimeout(btn._t);
+      btn._t = setTimeout(function(){ label.textContent = 'Copy link'; }, 2500);
+    });
+  });
+})();
+</script>
+</body>
+</html>
