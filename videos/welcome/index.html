@@ -15,7 +15,7 @@
      The film shows a draft course. Never call Future Fluency accredited or
      approved here, and claim no credits or assessment. Every claim on this
      page is one the film itself makes on screen or in the voiceover
-     (zavmo-branded-collateral/videos/welcome-film-2026-10-23/vo3/lines.json
+     (zavmo-branded-collateral/videos/welcome-film-2026-10-23/vo4/lines.json
      and videos/_pipeline/film-welcome.html).
 
      The og:/twitter: URLs are absolute because link previews need them.
@@ -95,6 +95,21 @@
   .next p{margin:0 0 18px;font-size:15px}
   .next .btn{padding:12px 22px;font-size:15px;white-space:normal;text-align:center}
 
+  /* Watch next: poster cards for the other films. Add a card here when a
+     new film goes live, on every film page. Never an empty or "coming soon" card. */
+  .watch-next{margin:clamp(28px,5vh,44px) 0 0}
+  .watch-next h2{font-size:clamp(18px,2.2vw,22px);margin:0 0 14px}
+  .wn-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+  .wn{display:flex;flex-direction:column;overflow:hidden;padding:0}
+  .wn-poster{position:relative;display:block;aspect-ratio:16/9;background:var(--z-bg-2,#f5f7fa);border-bottom:1px solid var(--z-border,#e5e7eb)}
+  .wn-poster img{display:block;width:100%;height:100%;object-fit:cover}
+  .wn .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;
+    background:var(--z-navy,#0a1628);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(10,22,40,.25)}
+  .wn .play svg{width:18px;height:18px;margin-left:3px}
+  .wn-body{padding:14px 16px 16px}
+  .wn-meta{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--z-teal-ink,#0e7b62)}
+  .wn-title{font-size:16px;line-height:1.35;margin:4px 0 0}
+
   footer{margin-top:48px;padding:32px 0 48px;font-size:12.5px;line-height:1.7}
 
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -143,6 +158,22 @@
   <section class="about">
     <p class="lede">A learner signs up, names their job, and Zavmo teaches them in it from the first lesson.</p>
     <p>The film follows one learner, an operations manager, from sign-up into the free Future Fluency module. The coach teaches in conversation, with short games along the way.</p>
+  </section>
+
+  <section class="watch-next" aria-labelledby="wn-h">
+    <h2 id="wn-h">Watch next</h2>
+    <div class="wn-row">
+      <article class="card wn">
+        <a class="wn-poster" href="../practise/" aria-label="Watch Practise as you go: short games in your lessons">
+          <img src="../media/practise-landscape-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg></span>
+        </a>
+        <div class="wn-body">
+          <span class="wn-meta">36 seconds · with sound</span>
+          <h3 class="wn-title"><a href="../practise/">Practise as you go: short games in your lessons</a></h3>
+        </div>
+      </article>
+    </div>
   </section>
 
   <section class="next callout">
