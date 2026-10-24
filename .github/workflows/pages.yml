@@ -1,0 +1,46 @@
+# Publishes the site to GitHub Pages from an allow-list.
+#
+# Pages used to serve the whole repo, so every internal file was public. Now
+# scripts/build-site.sh copies only the site's pages and files into _site, and
+# only _site is published. That is what lets the repo be private while the site
+# stays public. To publish a new top-level page, add it to the list in that
+# script; the build fails until every top-level item is decided.
+
+name: pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the site from the allow-list
+        run: bash scripts/build-site.sh _site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
