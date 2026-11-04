@@ -35,6 +35,7 @@ SITE_FOLDERS=(
   exec-summary
   future-fluency
   future-fluency-diplomas
+  games
   grounded-not-guessing
   how-pathways-work
   how-skills-work
