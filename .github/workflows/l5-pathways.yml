@@ -1,0 +1,30 @@
+# The Level 5 Diploma role versions must match the generic Diploma.
+#
+# Each role page under qualifications-level-5/<role>/ is generated from the
+# generic page's units and criteria plus scripts/l5-pathways/<role>.json. A
+# criterion changed on the generic page and not rebuilt would put two
+# different qualifications live under one name. This fails the PR instead.
+
+name: l5-pathways
+
+on:
+  pull_request:
+    paths:
+      - 'qualifications-level-5/**'
+      - 'scripts/l5-pathways/**'
+      - 'scripts/build-l5-pathways.py'
+  push:
+    branches: [main]
+    paths:
+      - 'qualifications-level-5/**'
+      - 'scripts/l5-pathways/**'
+      - 'scripts/build-l5-pathways.py'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Role pages match the generic Diploma
+        run: python3 scripts/build-l5-pathways.py --check

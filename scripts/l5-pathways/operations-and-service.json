@@ -1,0 +1,143 @@
+{
+  "slug": "operations-and-service",
+  "name": "Operations and service",
+  "title": "Operations and Service",
+  "for": "For people who lead an operations, customer service or administration function: contact centre, service desk, complaints, fulfilment, field service, facilities and back-office managers and team leaders.",
+  "shift": [
+    "In an operations or service department, AI and automation arrive at the front of the queue first. An AI agent answers first-line queries. Automated ticket routing decides which team a case reaches. Drafted replies, call summaries and case notes appear before an adviser types a word. Scheduling tools propose the roster and the order of a field engineer's visits.",
+    "What changes for the department is where its people spend their effort. Simple, repeated contacts leave the queue. What reaches a person is harder, more emotional or more unusual. Team leaders check machine output as well as people's work. Quality monitoring can cover every contact rather than a sample. The knowledge base becomes something the automation reads, so one wrong article gives many wrong answers.",
+    "The learner leads that shift for their own function. They decide what the department should automate and what it should keep human. They decide how its people's roles change. They work from the department's own queue, case and order data, with the people whose work changes. The organisation's service strategy is set elsewhere and is outside this qualification."
+  ],
+  "rules": [
+    {
+      "name": "UK GDPR",
+      "why": "Customer records, call recordings and case notes are personal data, read alongside the Data Protection Act 2018. Article 22 restricts solely automated decisions with legal or similarly significant effects. AI monitoring of colleagues' calls processes their data too. Recorded as a constraint at AU-05 1.4, and as checks and human decisions at AU-05 5.1 and PJ-05 4.4."
+    },
+    {
+      "name": "Equality Act 2010",
+      "why": "A service provider must make reasonable adjustments for disabled customers. So an AI agent or automated channel cannot be the only way in. Recorded at AU-05 1.4, and as a route to a person in the fallbacks at AU-05 5.1 and PJ-05 4.5. The employer's duty to colleagues shapes the support set at EI-05 4.4."
+    },
+    {
+      "name": "Health and Safety at Work etc. Act 1974",
+      "why": "The employer must protect the health and safety of employees and others affected by the work. Automated job allocation in field service, warehouse or facilities work can change who works alone and where. Recorded as a constraint at AU-05 1.4 and as a risk at AU-05 5.2 and PJ-05 4.6."
+    },
+    {
+      "name": "Working Time Regulations 1998",
+      "why": "Automated rostering must still give the rest breaks and keep within the limits these regulations set. Recorded as an obligation at PJ-05 1.6 and as a check on any rostering change at AU-05 5.1."
+    },
+    {
+      "name": "Trade Union and Labour Relations (Consolidation) Act 1992",
+      "why": "Proposed redundancies on a large enough scale bring collective consultation duties under this Act. That duty sits with the organisation, not the department. The learner records it at EI-05 1.5 and works within it at EI-05 3.6."
+    },
+    {
+      "name": "Privacy and Electronic Communications Regulations 2003",
+      "why": "Automated calls, texts and emails that carry marketing fall under these regulations. Adding promotional content to service messages, such as appointment reminders, is recorded as a constraint at AU-05 1.4."
+    },
+    {
+      "name": "FCA Handbook, Dispute Resolution: Complaints sourcebook (DISP)",
+      "why": "Applies only to financial services firms under FCA rules. There it governs how complaints are handled and recorded. Automating complaint logging or first responses in that sector is recorded at AU-05 1.4 and PJ-05 1.6."
+    }
+  ],
+  "units": {
+    "ZFF-GM-05": {
+      "context": "Here the change is what advisers, coordinators and administrators need to be good at once automation takes the routine work. Fewer people key orders or reset passwords. More people handle escalations and check what an AI agent told a customer. Others maintain knowledge articles and notice when routing goes wrong. The learner finds what the function can do now, decides what it will need, and leads people through the difference.",
+      "los": {
+        "LO1": "An adviser whose strength was speed on routine calls now meets only complex ones (1.1). The learner compares ways of building capability, such as floor coaching, side-by-side listening and courses (1.2). They evaluate why training often leaves the queue unchanged (1.3). Shift patterns, time off the phones and budget are constraints (1.4), and team views are weighed (1.5).",
+        "LO2": "The learner decides how to establish what the function holds and needs (2.1). An existing skills matrix is a source, not the answer. Evidence comes from quality evaluations, escalation logs, training records and handled cases (2.3). What is required follows from changing processes, such as triaging what the AI agent cannot resolve (2.2, 2.4). The learner finds where the gap costs most (2.5) and how far the evidence holds (2.6).",
+        "LO3": "The learner sets the criteria for choosing before looking at options (3.1). Options include coaching, moving work between shifts, recruiting, redeploying from a shrinking back-office queue, or buying in support (3.2). Costs come from the department's rota and queue figures (3.3). Comparable service teams inform the choice (3.4). One capability not worth building is argued (3.5) before options are evaluated (3.6).",
+        "LO4": "The learner names each group whose expected capability changes, such as second-line advisers who will review AI drafted replies (4.1). They consult them in huddles and one-to-ones, recording by role (4.2). Concerns that change the recommendation are sorted from those that do not (4.3, 4.4). Each person gets their actions, support and period (4.5). The learner decides what will show the change took hold (4.6).",
+        "LO5": "The learner evaluates the change against 2.4, using the evidence chosen at 4.6 (5.1). They evaluate its effect on output from the department's own systems (5.2). Where a shift kept working the old way, the reasons are evaluated (5.3). The learner reviews their own method and criteria (5.4) and what they would decide differently (5.5)."
+      },
+      "evidence": [
+        "2.1, 2.6: A method note on how capability was established across shifts and teams. It states why that method was chosen and where evidence was thin.",
+        "2.3, 2.5: A capability summary from the team's own quality evaluations, escalation logs and training records. Annotations show where the gap causes repeat contacts or rework.",
+        "3.1, 3.3, 3.6: An options paper that states the learner's own criteria first. It then costs coaching, redeployment and recruitment from the department's rota and queue figures.",
+        "4.2, 4.3, 4.4: Consultation notes from huddles and one-to-ones, with colleagues identified by role. A dated revision of the recommendation states what changed and why.",
+        "4.5: A one-page statement for each affected role, such as second-line adviser or order administrator. It sets out actions, support and the period of the change.",
+        "5.1, 5.2, 5.3: An evaluation using at least one measurement taken after the change. It draws on the department's own case or quality records and states its limits."
+      ],
+      "level_watch": "It drops to Level 4 when the learner is handed a skills matrix, a quality scorecard or a set service-level target to close the gap against. That decides 2.1 and 3.1 for them. It rises above Level 5 when the learner redesigns the organisation's service model, which is recorded at 1.4 instead."
+    },
+    "ZFF-EI-05": {
+      "context": "In this function the roles that change are often many and alike. Advisers lose routine contacts to an AI agent. Schedulers get rosters a tool proposes. Administrators see their data entry automated. Shift work, part-time contracts and remote teams make everyone hard to reach. The learner works with all of them, including those who do not accept the change, and with the teams who depend on them.",
+      "los": {
+        "LO1": "Once simple contacts are automated, each remaining contact is longer and harder (1.1). The learner evaluates what is at stake for long-serving advisers, new starters, team leaders and quality assessors (1.2). They compare approaches to working with people through change (1.3). They evaluate why agreed changes slip back on the floor (1.4). Consultation duties, union agreements and procedures are recorded at 1.5.",
+        "LO2": "The learner identifies each changing role and who depends on it, such as the dispatch team that relies on case notes (2.1). They decide how to hear from every shift and site, and why (2.2). They record what each group raises (2.3). They separate objections to the change from objections to how it is made (2.4). They judge which parts may not hold (2.5) and how absent voices were handled (2.6).",
+        "LO3": "The learner sets the criteria for judging the department's response first (3.1). A point such as a claim that the AI agent mishandles customers in vulnerable circumstances is tested against evidence (3.2). The learner decides which points change the plan (3.3). Comparable service teams inform the response (3.4), and the plan is adapted (3.5). Continued refusal is handled within 1.5 (3.6).",
+        "LO4": "Each person hears what changes, when, and what is expected, for example at a shift briefing then one-to-ones (4.1). Every point raised gets a stated response with reasons (4.2). The learner holds a recorded discussion with someone who has said they do not accept the change (4.3). Support is set per person, such as protected time off the queue (4.4). Keeping people informed and measuring the effect is planned (4.5).",
+        "LO5": "The learner evaluates the effect on the changed roles against 4.5 (5.1). They evaluate the effect on the department's work from its own figures (5.2). They judge how far what people raised changed what the department did (5.3). They review the method and criteria they set (5.4) and what they would determine differently (5.5)."
+      },
+      "evidence": [
+        "2.1: A role-impact list for the function, by role and not by name. It shows what changes for each role and which other teams depend on it.",
+        "2.2, 2.3, 2.6: A record of how views were gathered across early, late and weekend shifts. It shows what each group raised and how absent colleagues were handled.",
+        "2.4, 2.5: An analysis separating objections to the change from objections to its handling. It gives a reasoned view of which parts are least likely to hold.",
+        "3.1, 3.3, 3.5: A response log with the learner's own criteria and each point raised. Each entry records the decision taken and the resulting change to the plan.",
+        "4.3: A record of a discussion with Colleague A, who stated at 2.3 that they did not accept the change. It shows what was agreed and not, with witness testimony.",
+        "5.1, 5.2: An evaluation of the changed roles from the department's own case, rota and quality records. It uses at least one measurement taken after the change."
+      ],
+      "level_watch": "It drops to Level 4 when a change template or an HR briefing script fixes who to consult and what may be conceded. That decides 2.2, 3.1 and 3.3. It rises above Level 5 when the learner sets how the organisation handles role change, which is recorded at 1.5 instead."
+    },
+    "ZFF-AU-05": {
+      "context": "Here the candidates are the function's own processes. Answering routine queries, routing tickets and logging complaints. Booking appointments, building rosters, processing orders and updating case records. Some are good candidates and some are not, such as complaints from customers in vulnerable circumstances. The learner works out which from the department's own figures. They consult the people affected and recommend to whoever would decide.",
+      "los": {
+        "LO1": "Advisers can lose the easy contacts that broke up a hard shift (1.1). The learner compares automating one queue at a time with one change across every channel (1.2). They evaluate why service automation disappoints, such as rising repeat contacts (1.3). Systems, supplier contracts, data permissions and the rules on this page are constraints (1.4). Views within the department are weighed (1.5).",
+        "LO2": "The learner maps the function's processes, inputs, outputs and people, including hand-offs (2.1). They decide how to find where effort goes, such as sampling cases, and why (2.2). Volume and time come from the department's own telephony, ticketing or order systems (2.3). They identify what other teams rely on (2.4). They judge the figures, such as miscoded contact reasons (2.5).",
+        "LO3": "The learner sets the criteria a candidate must meet before evaluating any (3.1). Each candidate is split into parts that could and could not be automated (3.2). Costs and benefits come from the department's own figures (3.3). Comparable work informs the evaluation (3.4). At least one process is kept human, with reasons (3.5). Candidates are then evaluated against the learner's criteria (3.6).",
+        "LO4": "The learner identifies whose work would change and how, such as advisers, quality staff and the knowledge base owner (4.1). They consult them and record what is raised (4.2). They decide which concerns alter the evaluation (4.3) and revise it (4.4). They evaluate only the skills these automations need, such as maintaining routing rules (4.5).",
+        "LO5": "Each recommended process gets checks, fallbacks and points of human decision, such as a clear route to a person (5.1). Risks to the department are evaluated, each with a response (5.2). The recommendation goes to the person who would decide (5.3). The learner reviews the method and criteria they set (5.4) and what they would change (5.5)."
+      },
+      "evidence": [
+        "2.1, 2.4: A process map of the function, from contact or order received to case closed. It shows inputs, outputs, roles and the teams that depend on each step.",
+        "2.2, 2.3, 2.5: A method note and an effort table from the team's own queue and ticket data. Notes record miscoded or missing records.",
+        "3.1, 3.2, 3.6: An evaluation of candidate processes against the learner's own criteria. Each process is split into parts that could and could not be automated.",
+        "3.5: A reasoned case for keeping one process human. For example, handling complaints from customers in vulnerable circumstances.",
+        "4.2, 4.3, 4.4: Consultation notes from advisers, team leaders and the knowledge base owner, by role. A dated revision shows how the evaluation changed.",
+        "5.1, 5.2, 5.3: The recommendation as presented, with checks, fallbacks and human decision points for each process. A risk table and witness testimony of the presentation."
+      ],
+      "level_watch": "It drops to Level 4 when the learner is told which queues to automate, or given a supplier's business case template or a cost per contact target. Any one decides 2.2 or 3.1. It rises above Level 5 when it reshapes the organisation's channel strategy, which is recorded at 1.4 instead."
+    },
+    "ZFF-DA-05": {
+      "context": "Operations and service departments produce a lot of data. Queue and wait times, contact reasons, handle times and resolution rates. Complaint categories, order records, field visit outcomes and quality scores. Many of these measures were set long ago and drive behaviour nobody chose. The learner works out what the measures count and encourage. Then they use the data to decide where effort should go.",
+      "los": {
+        "LO1": "Does a resolved ticket mean the customer stopped contacting, or the adviser closed it (1.1)? The learner analyses what each measure drives, such as rushing calls to protect handle time (1.2). They evaluate what the measures miss, such as repeat contact on another channel (1.3). They compare ways of measuring service work (1.4). They weigh views about what the figures show (1.5).",
+        "LO2": "The learner decides the question, for example whether effort goes into contacts the department's own processes create (2.1). They choose the data that bears on it (2.2). They state what was set aside and its effect (2.3). They decide how to work with the data (2.4). They judge its quality, including miscoded reasons and cases closed in bulk (2.5).",
+        "LO3": "The learner analyses the data against the question (3.1) and interprets where effort goes (3.2). They name a second reading, such as seasonal demand rather than a process fault, and judge between them (3.3). Comparable work tests the reading (3.4). The limits of the data are stated (3.5). Where an AI tool categorised contacts, the learner says what was checked (3.6).",
+        "LO4": "The learner decides the changes to priorities that follow (4.1). They decide what the department would stop or reduce to make room (4.2). They consult the people affected (4.3) and adapt the changes (4.4). They present to the person who sets the department's priorities and answer challenge (4.5). They state how the effect will be measured (4.6).",
+        "LO5": "The learner evaluates the effect against what was stated at 4.6 (5.1). They review the method set at 2.4 (5.2). They identify what the department would measure differently, and what they would determine differently next time (5.3)."
+      },
+      "evidence": [
+        "1.1, 1.2, 1.3: An annotated list of the function's current measures. For each, what it counts, the behaviour it drives on the floor and what it misses.",
+        "2.1, 2.2, 2.3, 2.4: A question and method note. It names the data chosen from the team's own case and contact records, the data set aside, and why.",
+        "2.5, 3.5: A data quality note on miscoded contact reasons, duplicates and gaps. It states what the data cannot show.",
+        "3.3, 3.6: An analysis comparing two readings of the same queue data. It declares any AI categorisation used and the sample checked by hand.",
+        "4.3, 4.5: Consultation notes by role. Witness testimony of the presentation to the person who sets the priorities, with the challenge and the response.",
+        "5.1: A follow-up using at least one measurement taken after the change, against the measure stated at 4.6. It states its period and limits."
+      ],
+      "level_watch": "It drops to Level 4 when the learner is given the question, or a dashboard and service-level target that already decide which figures matter. 2.1 and 2.4 must be theirs. It rises above Level 5 when the learner reconsiders what the department measures for, or sets organisation-wide service standards."
+    },
+    "ZFF-PJ-05": {
+      "context": "The plan covers one function's year. Seasonal peaks, the quarter-end order surge, annual renewals and weather that drives field service demand. Audits, and the processes that appear only once a year. The learner sets the boundary, maps and costs the work, and chooses what to automate and what to keep human. They consult, sequence the changes around the peaks, and present the plan for sign-off.",
+      "los": {
+        "LO1": "The learner sets the boundary, such as customer service with complaints but not the warehouse, and why (1.1). They map the year, including rare processes such as a product recall (1.2). Volume, time and cost come from the department's own systems (1.3), by a method they choose (1.4). Disputed figures are resolved and recorded (1.5). Fixed obligations, such as client contract commitments, are identified (1.6).",
+        "LO2": "The learner sets the selection criteria (2.1) and analyses each main process against them (2.2). Each candidate is costed from the department's own figures (2.3). Comparable work informs the evaluation, with what it established (2.4). Processes to keep human are named with reasons (2.5). Candidates are ranked against one another (2.6).",
+        "LO3": "The learner identifies who each change would affect, including other shifts, sites and dependent teams (3.1). They consult them and record what is raised (3.2). They analyse the concerns and decide which change the plan (3.3). The plan is adapted with reasons (3.4). The skills this plan needs, and how to obtain them, are evaluated (3.5).",
+        "LO4": "Changes are sequenced around the department's own year, such as no go-live before a known peak (4.1). Dependencies on IT, suppliers and other departments are identified (4.2). Resources and timing are stated (4.3). Each change has checks and owners (4.4) and a fallback, such as reopening a human queue (4.5). Risks are evaluated (4.6), and each change has a starting figure (4.7).",
+        "LO5": "The plan goes to the person who signs off the department's plans (5.1). The learner answers challenge on figures, sequence and risks (5.2). The decision and any conditions are recorded (5.3). They evaluate their method and criteria (5.4) and how far consultation changed the plan (5.5). They identify what they would determine differently next year (5.6)."
+      },
+      "evidence": [
+        "1.1, 1.2: A boundary statement and a year map of the function's processes. It marks the peaks and the occasional processes found in a full year of records.",
+        "1.3, 1.4, 1.5: A costed process table from the department's own telephony, ticketing, order or job records. A method note shows how disputed figures were resolved.",
+        "2.1, 2.5, 2.6: A ranked candidate evaluation against the learner's own criteria. It names the processes kept human and the reasons for each.",
+        "3.2, 3.3, 3.4: A consultation record across shifts and sites, by role. A change log shows how the plan moved in response.",
+        "4.1, 4.2, 4.4, 4.5, 4.7: The annual plan itself, sequenced around the peaks. It shows outside dependencies, checks, fallbacks and a starting figure for each measure.",
+        "5.1, 5.2, 5.3: The presentation pack and witness testimony of the challenge raised and answered. The recorded decision, with any conditions."
+      ],
+      "level_watch": "It drops to Level 4 when the learner is given the process list, the criteria, a benefits template or an efficiency target. It rises above Level 5 when the plan redesigns how the organisation serves its customers. A needed organisational change is recorded at 4.2 as a dependency instead."
+    }
+  },
+  "open": [
+    "No operations or service practitioner, and no assessor, has read this version yet. The examples follow the descriptor and the generic units. They have not been tested against a real department.",
+    "The rules list is a starting set for UK employers. Sector rules for service teams in utilities, telecoms, housing or health are not covered. They would need checking for a learner in those sectors.",
+    "Shift-based teams may find it hard to consult every shift (EI-05 2.3 and 4.3, PJ-05 3.2). Whether consultation sampled by shift is enough is for an assessor to confirm."
+  ]
+}
