@@ -126,7 +126,9 @@ def page(role, styles, script, units, roles):
         for e in ru["evidence"]:
             check_refs(role["slug"], u, e.split(":", 1)[0])
             ref, _, rest = e.partition(":")
-            out.append(f'      <li><strong>{esc(ref.strip())}.</strong> {esc(rest.strip())}</li>')
+            rest = rest.strip()
+            rest = rest[:1].upper() + rest[1:]
+            out.append(f'      <li><strong>{esc(ref.strip())}.</strong> {esc(rest)}</li>')
         out.append('    </ul>')
         out.append('    <h3 class="sub">Keeping it at Level 5</h3>')
         out.append(f'    <p>{esc(ru["level_watch"])}</p>')

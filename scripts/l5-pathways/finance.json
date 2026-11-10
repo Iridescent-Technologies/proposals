@@ -2,7 +2,7 @@
   "slug": "finance",
   "name": "Finance",
   "title": "Finance",
-  "for": "Finance managers, financial controllers, payroll managers and procurement leads who run a finance function or a team within one, such as accounts payable, credit control, planning and analysis, payroll or procurement.",
+  "for": "Finance managers, financial controllers and payroll managers who run a finance function or a team within one, such as accounts payable, credit control, planning and analysis, or payroll.",
   "shift": [
     "Much of a finance team's week is matching, checking and explaining. Invoices are matched to orders. Bank lines are matched to the ledger. Variances are explained in words each month. Tools now take a first pass at each of these. An invoice-matching tool clears the clean matches and queues the rest. AI drafts variance commentary from the ledger. A forecasting tool proposes next quarter's figures from the trend.",
     "The work does not disappear. It moves. The accounts payable clerk who keyed invoices now works the exception queue. The management accountant who wrote commentary now checks a draft against the business. Fewer hours go on processing. More go on judging whether an output is right. That changes what each role needs to be good at, and which mistakes are now possible.",
@@ -10,32 +10,36 @@
   ],
   "rules": [
     {
-      "name": "Companies Act 2006, accounting records",
-      "why": "Records must show and explain each transaction, and any automated step has to leave records that still do. It is a constraint at ZFF-AU-05 1.4 and an obligation at ZFF-PJ-05 1.6, and it shapes the checks at ZFF-AU-05 5.1."
+      "name": "Companies Act 2006, section 386 (accounting records)",
+      "why": "Records must show and explain each transaction, and any automated step has to leave records that still do. It is a constraint at ZFF-AU-05 1.4 and an obligation at ZFF-PJ-05 1.6, and it shapes the checks at ZFF-AU-05 5.1. This applies to companies; other bodies have their own equivalent."
     },
     {
-      "name": "HMRC Making Tax Digital for VAT",
+      "name": "HMRC Making Tax Digital for VAT, for VAT-registered businesses",
       "why": "VAT records must be kept digitally, and figures must reach the return through digital links. A new tool between ledger and return must keep that chain intact. It is recorded at ZFF-AU-05 1.4 and ZFF-PJ-05 1.6."
     },
     {
       "name": "HMRC PAYE Real Time Information reporting",
-      "why": "Payroll must report pay to HMRC on or before each payday. No change may put that date at risk. It is recorded at ZFF-PJ-05 1.6 and shapes the fallbacks at ZFF-PJ-05 4.5."
+      "why": "Payroll must send a Full Payment Submission to HMRC on or before each payday. No change may put that date at risk. It is recorded at ZFF-PJ-05 1.6 and shapes the fallbacks at ZFF-PJ-05 4.5."
     },
     {
       "name": "UK GDPR and the Data Protection Act 2018",
       "why": "Payroll, expense and supplier bank records hold personal data. That limits which tools may process them and which data an analysis may use. It is recorded at ZFF-AU-05 1.4 and, where data is set aside, at ZFF-DA-05 2.3."
     },
     {
-      "name": "Segregation of duties and delegated authority limits",
+      "name": "The organisation's financial controls: segregation of duties and authority limits",
       "why": "Raising, authorising and paying stay with different people, each within an authority limit. An automation that does two of those steps can collapse the separation. It is weighed at ZFF-AU-05 3.5 and 5.1 and at ZFF-PJ-05 4.4."
     },
     {
-      "name": "Audit trail and access for external audit",
-      "why": "Auditors need to trace an entry to its source and see who checked it. Each automated step needs that trail. Where the auditor must review a new control first, that is a dependency at ZFF-PJ-05 4.2."
+      "name": "Companies Act 2006, section 499 (auditors' right of access to records)",
+      "why": "Where the accounts are audited, auditors need to trace an entry to its source and see who checked it. Each automated step needs that trail. Where the auditor must review a new control first, that is a dependency at ZFF-PJ-05 4.2."
     },
     {
       "name": "The organisation's own change and consultation procedures",
       "why": "How the department may change people's roles is set by the organisation's procedures and any agreements in place. The learner works within them and records them at ZFF-EI-05 1.5 and ZFF-GM-05 1.4."
+    },
+    {
+      "name": "Trade Union and Labour Relations (Consolidation) Act 1992",
+      "why": "Proposing to dismiss 20 or more employees as redundant at one establishment within 90 days requires collective consultation with appropriate representatives (section 188). That includes dismissing and re-engaging people to change their terms. The Employment Rights Act 2025 is changing these duties, so check what is in force. Recorded at ZFF-EI-05 1.5."
     }
   ],
   "units": {
