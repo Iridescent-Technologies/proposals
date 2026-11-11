@@ -35,7 +35,7 @@
     --teal-subtle:rgba(0,217,192,0.14); --teal-border:var(--border-2);
     --text-primary:var(--ink); --text-secondary:var(--ink-2); --text-tertiary:var(--ink-3);
     --amber:#2d5a8a; --blue:#2d5a8a;
-    --navh:63px; --subh:56px;
+    --navh:57px; --subh:56px;
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;background:var(--navy-0);scroll-behavior:smooth}
@@ -284,15 +284,24 @@
   table.evt td:last-child{width:1%}
   .st-c{color:var(--ink-3);border-color:var(--border);border-style:dashed;background:transparent}
   .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
-  .grid2 .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px}
   .grid2 .card p{margin:10px 0 0;font-size:14px}
   .callout.warn{background:linear-gradient(135deg,rgba(45,90,138,.11),rgba(45,90,138,.03));border-color:rgba(45,90,138,.32)}
   .callout.warn .section-label{color:var(--amber)}
   .levelgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:16px 0}
-  .levelgrid .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px}
+  .grid2 .card,.levelgrid .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px}
   .levelgrid .chip{font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
   .levelgrid p{margin:8px 0 0;font-size:14px}
-  @media (max-width:640px){ table.check{min-width:0} table.check td:first-child{width:40%} }
+  .lcheck p{margin:0 0 8px}
+  @media (max-width:640px){
+    table.tbl:not(.idx){min-width:0}
+    table.tbl:not(.idx) thead th,table.tbl:not(.idx) td:first-child{white-space:normal}
+    td.evn{white-space:normal;overflow-wrap:anywhere}
+    table.evt{min-width:0}
+    table.evt thead{display:none}
+    table.evt tr{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:12px}
+    table.evt td{display:block;padding:0;border:0;width:auto!important}
+    table.evt td:nth-child(2){grid-column:1/-1;grid-row:2}
+  }
   @media print{ td.evn{color:#000!important} .st-c{border-style:dashed!important} }
 </style>
 <link rel="stylesheet" href="../_brand/zavmo.css">
@@ -395,7 +404,7 @@
     <p>Two things are easy to misread in that table. <strong>Guided learning is not the same as time with Zavmo.</strong> It is the hours spent under direction. Tutoring is one part of that, not all of it. <strong>The other hours are not all project work.</strong> They are reflection, reading and personal investigation as well as the project, and most of it happens inside the learner's own job.</p>
 
     <h3 style="margin-top:30px" id="level-rule">2.3 The level rule every criterion is written to</h3>
-    <p>Every criterion in every unit is held against the Ofqual RQF Level 5 descriptor.</p>
+    <p>Every criterion in every unit is held against the Ofqual RQF Level 5 descriptor. Each unit's level check names the clause in short and lists the criteria that answer it.</p>
     <div class="levelgrid">
       <div class="card"><span class="chip">Knowledge</span><p>Practical, theoretical or technological knowledge and understanding of a subject or field of work to find ways forward in <strong>broadly defined, complex contexts</strong>. Can <strong>analyse, interpret and evaluate</strong> relevant information, concepts and ideas. Is aware of the nature and scope of the area. <strong>Understands different perspectives, approaches or schools of thought and the reasoning behind them.</strong></p></div>
       <div class="card"><span class="chip">Skills</span><p><strong>Determine, adapt and use</strong> appropriate methods, cognitive and practical skills to address <strong>broadly defined, complex</strong> problems. <strong>Use relevant research or development</strong> to inform actions. <strong>Evaluate</strong> actions, methods and results.</p></div>
@@ -423,7 +432,7 @@
     <h3 class="sub">Unit aim</h3>
     <p>This unit gives the learner the skills to lead a department through a change in what its people are expected to be good at. The emphasis is on the judgement and the leading rather than on any particular skill being built. Learners establish what capability their department currently holds and what its work will require as its processes change, determine for themselves the criteria by which options for closing the difference will be evaluated, and evaluate those options using figures from their own systems and evidence of how comparable work has gone elsewhere. They then consult the people whose expected capability changes, adapt the recommendation in the light of what those conversations establish, set out what each person is expected to do and what support is available, and evaluate what the change produced in the department's work.</p>
     <p>Scope is departmental. Keeping the learner's own skills current is ZFF-GM-03 and is outside this unit.</p>
-    <p><strong>Design note.</strong> <strong>This unit assesses what the learner does, not the attitude anyone reports holding.</strong> Every criterion is an observable action, a stated determination, or a judgement made against evidence that can be produced. No criterion asks the learner to demonstrate a growth mindset, and no criterion asks an assessor to judge a learner's or a colleague's attitude, resilience or confidence. Those would not be assessable.</p>
+    <p><strong>Design note.</strong> This unit assesses what the learner does, not the attitude anyone reports holding. Every criterion is an observable action, a stated determination, or a judgement made against evidence that can be produced. No criterion asks the learner to demonstrate a growth mindset, and no criterion asks an assessor to judge a learner's or a colleague's attitude, resilience or confidence. Those would not be assessable.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
       <div class="lo-head"><span class="lo-badge">LO1</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Know how a change in required capability affects the work of a department.</div><span class="lo-count">5 criteria</span></div>
@@ -480,22 +489,22 @@
     </div>
     <p class="tally"><strong>5 learning outcomes, 28 assessment criteria.</strong></p>
     <h3 class="sub">Level check</h3>
-    <div class="tw"><table class="tbl free check"><thead><tr><th scope="col">Descriptor clause</th><th scope="col">Answered by</th></tr></thead><tbody>
-      <tr><td>Find ways forward in broadly defined, complex contexts</td><td>LO2 and LO3. Nobody states which capabilities matter, what the department should be able to do next, or how the difference should be closed. 2.1 and 3.1 require the learner to determine the method and the criteria before any option can be evaluated</td></tr>
-      <tr><td>Analyse, interpret and evaluate relevant information, concepts and ideas</td><td>1.1, 2.5 and 4.3 analyse; 3.3 interprets; 1.3, 1.5, 2.6, 3.5, 3.6, 5.1, 5.2, 5.3 and 5.4 evaluate</td></tr>
-      <tr><td>Is aware of the nature and scope of the area</td><td>1.4, 2.2, 2.3. The learner establishes what the department's roles require and what its people can already do before proposing anything</td></tr>
-      <tr><td>Understands different perspectives, approaches or schools of thought and the reasoning behind them</td><td>1.2 and 1.5. Both require the reasoning, not only the position</td></tr>
-      <tr><td>Determine, adapt and use appropriate methods to address broadly defined, complex problems</td><td>2.1, 2.4, 3.1 and 4.6 determine; 4.4 adapts; LO3 and LO4 use</td></tr>
-      <tr><td>Use relevant research or development to inform actions</td><td>3.4, which uses investigation of comparable work to inform the choice rather than to describe the field</td></tr>
-      <tr><td>Evaluate actions, methods and results</td><td>LO5 in full, and 4.3. 5.4 evaluates the method and the criteria the learner determined rather than ones they were given</td></tr>
-    </tbody></table></div>
+    <div class="lcheck">
+    <p><em class="it">Broadly defined, complex contexts</em>: LO2 and LO3. Nobody states which capabilities matter, what the department should be able to do next, or how the difference should be closed. 2.1 and 3.1 require the learner to determine the method and the criteria before any option can be evaluated.</p>
+    <p><em class="it">Analyse, interpret and evaluate</em>: 1.1, 2.5 and 4.3 analyse; 3.3 interprets; 1.3, 1.5, 2.6, 3.5, 3.6, 5.1, 5.2, 5.3 and 5.4 evaluate.</p>
+    <p><em class="it">Nature and scope of the area</em>: 1.4, 2.2, 2.3. The learner establishes what the department's roles require and what its people can already do before proposing anything.</p>
+    <p><em class="it">Different perspectives and their reasoning</em>: 1.2 and 1.5. Both require the reasoning, not only the position.</p>
+    <p><em class="it">Determine, adapt and use methods</em>: 2.1, 2.4, 3.1 and 4.6 determine; 4.4 adapts; LO3 and LO4 use.</p>
+    <p><em class="it">Research informs action</em>: 3.4, which uses investigation of comparable work to inform the choice rather than to describe the field.</p>
+    <p><em class="it">Evaluate actions, methods and results</em>: LO5 in full, and 4.3. 5.4 evaluates the method and the criteria the learner determined rather than ones they were given.</p>
+    </div>
     <p><strong>Boundary against Level 3.</strong> ZFF-GM-03 is the closest unit in the suite and the difference has to be visible in the wording. There the learner keeps their own skills current: they compare their own skills with what their own role will require, plan one piece of their own learning, and review what it changed. Here the learner establishes what a department can already do, determines what it will need, evaluates the options for closing the difference, and leads the people through the change. No criterion in this unit takes the learner's own skills as its object. <em>Determine</em>, <em>analyse</em> and <em>interpret</em> appear here and appear nowhere in ZFF-GM-03.</p>
-    <p><strong>Boundary against Level 4.</strong> A Level 4 version would read: assess your team against the competency framework you have been given, and choose from the training options on the approved list, within the budget you have been set. Every one of those is a definition supplied from outside. Removing all three is what makes this Level 5. <strong>Watch 3.1 if the unit is ever edited.</strong> If the criteria for evaluating options are supplied as a competency framework or a template rather than determined by the learner, the unit becomes Level 4 and the qualification's level claim goes with it. The same applies to 2.1: supplying a skills-audit instrument drops the unit a level.</p>
+    <p><strong>Boundary against Level 4.</strong> A Level 4 version would read: assess your team against the competency framework you have been given, and choose from the training options on the approved list, within the budget you have been set. Every one of those is a definition supplied from outside. Removing all three is what makes this Level 5. <strong>3.1 carries the level.</strong> If the criteria for evaluating options are supplied as a competency framework or a template rather than determined by the learner, the unit becomes Level 4 and the qualification's level claim goes with it. The same applies to 2.1: supplying a skills-audit instrument drops the unit a level.</p>
     <p><strong>Boundary against Level 6 and above.</strong> No criterion asks the learner to <em>critically</em> analyse, to design research, or to evaluate implications beyond the department. 3.4 uses investigation that already exists. 5.2 evaluates the effect on the department's own work, which is scope-bounded. Two moves are above the level and are excluded: reconsidering what the department's roles are <em>for</em>, and changing what the organisation as a whole expects of its people. Where the recommendation genuinely requires an organisational change to proceed, the correct treatment is to record it at 1.4 as a constraint, not to widen the unit.</p>
     <h3 class="sub">Assessment guidance</h3>
     <ul class="bul">
-      <li><strong>LO5 and elapsed time.</strong> Where the change has had too little time to take full effect within the unit, the learner evaluates the effect seen so far and states its limits: the period it covers and what it cannot yet show. That meets 5.1 to 5.3. See section 4, item 9.</li>
-      <li><strong>Consultation records.</strong> 4.2 records what named colleagues raised. Colleagues are identified by role in the portfolio, not by name. See section 4, item 8.</li>
+      <li><strong>LO5 and elapsed time.</strong> Where the change has had too little time to take full effect within the unit, the learner evaluates the effect seen so far and states its limits: the period it covers and what it cannot yet show. That meets 5.1 to 5.3. See section 4.9.</li>
+      <li><strong>Consultation records.</strong> 4.2 records what colleagues raised. Colleagues are identified by role in the portfolio, not by name. See section 4.8.</li>
     </ul>
     <h3 class="sub">Evidence</h3>
     <p>Zavmo records the learner's work on this unit inside the platform: which outcomes and criteria they opened, what the tutor put to them, what they answered, where their reasoning was working at the analyse level the unit asks for, and the moment each outcome was recorded as met. It records nothing about the department itself. Every statement the builder produces names the outcome and the criteria it bears on, so a statement made while the learner works on LO3 carries <code>learning_outcome_id</code> of LO3 and <code>assessment_criteria_addressed</code> of 3.1 and 3.6. The assessor reads the record criterion by criterion rather than as a session log.</p>
@@ -506,19 +515,19 @@
       <tr><td>ZAV-LRN-032</td><td>Knowledge check answered, with the learner's response held on the statement</td><td><span class="st st-o">Observed</span></td></tr>
       <tr><td>ZAV-BLM-004</td><td>Bloom evidence at the analyse level, which is the level 1.1, 2.5 and 4.3 ask for</td><td><span class="st st-o">Observed</span></td></tr>
       <tr><td>ZAV-LRN-050<br>ZAV-LRN-052</td><td>Learning outcome met, and the unit recorded as complete</td><td><span class="st st-o">Observed</span></td></tr>
-      <tr><td>ZAV-CRT-002<br>ZAV-CRT-003<br>ZAV-CRT-004</td><td>Assessment criterion attempted, passed and failed, each carrying a criterion id and an evidence id. This is the row that matters most to an assessor, and it has never fired</td><td><span class="st st-w">Wired</span></td></tr>
+      <tr><td>ZAV-CRT-002<br>ZAV-CRT-003<br>ZAV-CRT-004</td><td>Assessment criterion attempted, passed and failed, each carrying a criterion id and an evidence id</td><td><span class="st st-w">Wired</span></td></tr>
       <tr><td>ZAV-CRT-005</td><td>Evidence submitted against a criterion, with an evidence id and an evidence type</td><td><span class="st st-w">Wired</span></td></tr>
       <tr><td>ZAV-OFQ-003<br>ZAV-OFQ-004</td><td>Regulated learning outcome met and assessment criterion passed, carrying the outcome id, the unit id, the criterion id and the ids of the statements offered as evidence</td><td><span class="st st-w">Wired</span></td></tr>
       <tr><td>ZAV-GM-001<br>to ZAV-GM-006</td><td>Growth-mindset language and setback signals. Present in the platform, and deliberately not evidence for any criterion here: the unit assesses what the learner does, never the attitude anyone reports</td><td><span class="st st-w">Wired</span></td></tr>
     </tbody></table></div>
-    <p class="srcnote">Status as measured against the production store on 17 July 2026. <a href="#xapi">What the three words mean, and what they do not</a>.</p>
-    <p><strong>What the platform record does not reach.</strong></p>
+    <p class="srcnote">Statuses are explained in <a href="#xapi">the evidence trail</a>.</p>
+    <h3 class="sub">What the platform record does not reach</h3>
     <p>Most of LO4, and the parts of LO2, LO3 and LO5 that reach into the department, happen where there is no telemetry.</p>
     <ul class="bul">
         <li>2.3, 3.3 and 5.2 draw figures from the department's own records and systems. Zavmo does not hold those systems. The figures reach the portfolio as artefacts the learner submits and annotates.</li>
-        <li>4.2 consults the people whose expected capability changes, and 4.5 states to each of them what they are expected to do and what support is available. Those are meetings. Witness testimony from the line manager and the recorded professional discussion carry them, as section 4 already requires.</li>
+        <li>4.2 consults the people whose expected capability changes, and 4.5 states to each of them what they are expected to do and what support is available. Those are meetings. Witness testimony from the line manager and the recorded professional discussion carry them, as section 4 requires.</li>
         <li>4.4 adapts the recommendation. The changed recommendation is a document. What makes it assessable is the learner's account of what changed and why, tested in discussion.</li>
-        <li>LO5 evaluates a change that takes effect in the department after the learning has ended. No platform event reaches it.</li>
+        <li>LO5 evaluates effects in the department's own work. No platform event reaches them.</li>
       </ul>
     <p class="backtop"><a href="#units">Back to the unit index</a></p>
   </div>
@@ -534,7 +543,7 @@
     <h3 class="sub">Unit aim</h3>
     <p>This unit gives the learner the skills to work with the people whose roles change when a department automates part of its work, including the people who do not want the change. The emphasis is on what the department establishes and what it then does, rather than on any single conversation. Learners establish who is affected and what changes for each of them, determine for themselves the method by which they will find out what those people raise, and analyse what is raised to separate objections to the change itself from objections to the way it is being made. They then determine the criteria by which the department's response will be evaluated, decide which points change the department's plans and which do not, work directly with the people concerned including those who continue not to accept the change, and evaluate what the whole of it produced in the department's work.</p>
     <p>Scope is departmental. Strengthening one working relationship is not this unit. What the organisation as a whole should do about role change is set elsewhere and is outside it.</p>
-    <p><strong>Design note.</strong> <strong>This unit assesses what the learner does, not the emotional state anyone reports holding.</strong> Every criterion is an observable action, a stated determination, or a judgement made against recorded evidence. No criterion asks the learner to demonstrate empathy, and no criterion asks an assessor to rate a learner's self-awareness or regulation. Those would not be assessable. Emotional intelligence is what the unit builds. The conduct of a real change, and its record, are what it assesses.</p>
+    <p><strong>Design note.</strong> This unit assesses what the learner does, not the emotional state anyone reports holding. Every criterion is an observable action, a stated determination, or a judgement made against recorded evidence. No criterion asks the learner to demonstrate empathy, and no criterion asks an assessor to rate a learner's self-awareness or regulation. Those would not be assessable. Emotional intelligence is what the unit builds. The conduct of a real change, and its record, are what it assesses.</p>
     <h3 class="sub">Learning outcomes and assessment criteria</h3>
     <div class="lo">
       <div class="lo-head"><span class="lo-badge">LO1</span><div class="lo-stem"><span class="lo-lead">The learner will:</span> Know how people in a department respond when their roles change.</div><span class="lo-count">5 criteria</span></div>
@@ -564,7 +573,7 @@
         <tr><td class="cref">3.2</td><td>Analyse the points raised by people who do not accept the change, and evaluate which of them are supported by evidence</td></tr>
         <tr><td class="cref">3.3</td><td>Determine which points will change the department's plans and which will not, and state the reasons in each case</td></tr>
         <tr><td class="cref">3.4</td><td>Use relevant investigation of comparable changes, inside or outside own organisation, to inform the response</td></tr>
-        <tr><td class="cref">3.5</td><td>Adapt the department's plans in response to what was established at 2.3, and state what changed</td></tr>
+        <tr><td class="cref">3.5</td><td>Adapt the department's plans in line with the points determined at 3.3, and state what changed</td></tr>
         <tr><td class="cref">3.6</td><td>Determine what the department will do where a person continues not to accept the change, within the obligations and constraints identified at 1.5</td></tr>
       </tbody></table></div>
     </div>
@@ -590,25 +599,25 @@
     </div>
     <p class="tally"><strong>5 learning outcomes, 27 assessment criteria.</strong></p>
     <h3 class="sub">Level check</h3>
-    <div class="tw"><table class="tbl free check"><thead><tr><th scope="col">Descriptor clause</th><th scope="col">Answered by</th></tr></thead><tbody>
-      <tr><td>Find ways forward in broadly defined, complex contexts</td><td>LO2 and LO3. Nobody tells the learner how to find out what people think, what counts as a point worth acting on, or where the line falls between changing the plan and holding it. 2.2, 3.1 and 3.3 require the learner to determine all three</td></tr>
-      <tr><td>Analyse, interpret and evaluate relevant information, concepts and ideas</td><td>1.1, 2.4 and 3.2 analyse; 2.5 interprets; 1.2, 1.4, 2.6, 3.2, 5.1, 5.2, 5.3 and 5.4 evaluate. 2.3 to 2.5 run the descriptor's verbs in its own order across a single body of recorded evidence</td></tr>
-      <tr><td>Is aware of the nature and scope of the area</td><td>1.5, 2.1, 2.3. The learner establishes who is affected, who depends on them, and what the department is obliged to do, before deciding anything</td></tr>
-      <tr><td>Understands different perspectives, approaches or schools of thought and the reasoning behind them</td><td>1.2 and 1.3, and 2.4. 2.4 makes the learner separate the objection to the change from the objection to how it is being made, which are different positions with different reasoning</td></tr>
-      <tr><td>Determine, adapt and use appropriate methods to address broadly defined, complex problems</td><td>2.2, 3.1, 3.3, 3.6, 4.4 and 4.5 determine; 3.5 adapts; LO2 and LO4 use</td></tr>
-      <tr><td>Use relevant research or development to inform actions</td><td>3.4, which uses investigation of comparable changes to inform the response rather than to describe the field</td></tr>
-      <tr><td>Evaluate actions, methods and results</td><td>LO5 in full, and 3.2. 5.4 evaluates the method and the criteria the learner determined rather than ones they were given</td></tr>
-    </tbody></table></div>
+    <div class="lcheck">
+    <p><em class="it">Broadly defined, complex contexts</em>: LO2 and LO3. Nobody tells the learner how to find out what people think, what counts as a point worth acting on, or where the line falls between changing the plan and holding it. 2.2, 3.1 and 3.3 require the learner to determine all three.</p>
+    <p><em class="it">Analyse, interpret and evaluate</em>: 1.1, 2.4 and 3.2 analyse; 2.5 interprets; 1.2, 1.4, 2.6, 3.2, 5.1, 5.2, 5.3 and 5.4 evaluate. 2.3 to 2.5 run the descriptor's verbs in its own order across a single body of recorded evidence.</p>
+    <p><em class="it">Nature and scope of the area</em>: 1.5, 2.1, 2.3. The learner establishes who is affected, who depends on them, and what the department is obliged to do, before deciding anything.</p>
+    <p><em class="it">Different perspectives and their reasoning</em>: 1.2 and 1.3, and 2.4. 2.4 makes the learner separate the objection to the change from the objection to how it is being made, which are different positions with different reasoning.</p>
+    <p><em class="it">Determine, adapt and use methods</em>: 2.2, 3.1, 3.3, 3.6, 4.4 and 4.5 determine; 3.5 adapts; LO2 and LO4 use.</p>
+    <p><em class="it">Research informs action</em>: 3.4, which uses investigation of comparable changes to inform the response rather than to describe the field.</p>
+    <p><em class="it">Evaluate actions, methods and results</em>: LO5 in full, and 3.2. 5.4 evaluates the method and the criteria the learner determined rather than ones they were given.</p>
+    </div>
     <p><strong>Boundary against Level 3.</strong> ZFF-EI-03 is the closest unit in the suite. There the learner names and manages their own emotions and reads the people they deal with directly. Here the object is every person whose role changes, the people whose work depends on those roles, and the department's own output. The learner determines the method, sets the criteria, decides which objections move the plan, and answers for the result. No criterion in this unit takes the learner's own emotions as its object.</p>
-    <p><strong>Boundary against Level 4.</strong> A Level 4 version would supply the list of people to consult, a briefing script to work from, and a decision already taken about which objections may be conceded. 2.2, 3.1 and 3.3 exist specifically to remove all three. <strong>Watch 3.1 and 3.3 if the unit is ever edited.</strong> A change-management template that fixes what counts as an acceptable response defines the problem for the learner and drops the unit a level. Supplying a template is exactly the kind of helpfulness a delivery team adds later without realising what it costs.</p>
+    <p><strong>Boundary against Level 4.</strong> A Level 4 version would supply the list of people to consult, a briefing script to work from, and a decision already taken about which objections may be conceded. 2.2, 3.1 and 3.3 exist specifically to remove all three. <strong>3.1 and 3.3 carry the level.</strong> A change-management template that fixes what counts as an acceptable response defines the problem for the learner and drops the unit a level.</p>
     <p><strong>Boundary against Level 6 and above.</strong> No criterion asks the learner to <em>critically</em> analyse, to design research, or to evaluate implications beyond the department. 3.4 uses investigation that already exists. 5.2 evaluates the effect on the department's own work. Two moves are above the level and are excluded: reconsidering what the department's roles are <em>for</em>, and changing how the organisation as a whole handles role change. Where the response genuinely requires either, the correct treatment is to record it at 1.5 as a constraint the department is working within, not to widen the unit.</p>
     <h3 class="sub">Assessment guidance</h3>
     <ul class="bul">
       <li><strong>4.3 needs a stated position.</strong> The person must have said that they do not accept the change, in the consultation at 2.3 or since. The learner's own inference that someone disagrees does not meet 4.3.</li>
-      <li><strong>4.3 where nobody objects.</strong> If no one in the department has stated that they do not accept the change, a discussion with a person who raised a point the department did not accept meets 4.3. If there is no such person either, a simulated discussion may be used, with the reason recorded. See section 4, item 7.</li>
+      <li><strong>3.2 and 4.3 where nobody objects.</strong> If no one in the department has stated that they do not accept the change, a person who raised a point the department did not accept meets both. If there is no such person either, a simulated discussion may be used for 4.3, with the reason recorded. The other person is played by a human in role, the assessor or the line manager, using a position recorded at 2.3 or found at 3.4. A role-play with the AI tutor does not meet 4.3. See section 4.7.</li>
       <li><strong>3.6 is a determination.</strong> A recorded determination meets 3.6. No learner is required to evidence a disciplinary or contractual action against a colleague in order to pass this unit.</li>
-      <li><strong>LO5 and elapsed time.</strong> Where the change has had too little time to take full effect, the learner evaluates the effect seen so far and states its limits. See section 4, item 9.</li>
-      <li><strong>Consultation records.</strong> 2.3, 4.1 and 4.3 record what named colleagues raised. Colleagues are identified by role in the portfolio, not by name. See section 4, item 8.</li>
+      <li><strong>LO5 and elapsed time.</strong> Where the change has had too little time to take full effect, the learner evaluates the effect seen so far and states its limits. See section 4.9.</li>
+      <li><strong>Consultation records.</strong> 2.3, 4.1 and 4.3 record what colleagues raised. Colleagues are identified by role in the portfolio, not by name. See section 4.8.</li>
     </ul>
     <h3 class="sub">Evidence</h3>
     <p>The gap is widest in this unit and it should be said first. What Zavmo records is the preparation and the practice: the dialogue that builds LO1, the role-play or case study the tutor put in front of the learner, the questions the learner asked rather than answered. What it cannot record is the conversation at 4.3 with a colleague who does not accept the change, which is the unit's hardest criterion and its most important one.</p>
@@ -624,8 +633,8 @@
       <tr><td>ZAV-OFQ-003<br>ZAV-OFQ-004</td><td>Regulated learning outcome met and assessment criterion passed</td><td><span class="st st-w">Wired</span></td></tr>
       <tr><td>ZAV-MP-006</td><td>A written or spoken reflection, held with the prompt that produced it</td><td><span class="st st-w">Wired</span></td></tr>
     </tbody></table></div>
-    <p class="srcnote">Status as measured against the production store on 17 July 2026. <a href="#xapi">What the three words mean, and what they do not</a>.</p>
-    <p><strong>What the platform record does not reach.</strong></p>
+    <p class="srcnote">Statuses are explained in <a href="#xapi">the evidence trail</a>.</p>
+    <h3 class="sub">What the platform record does not reach</h3>
     <ul class="bul">
         <li><strong>The whole of LO4.</strong> 4.1 states to each person what is changing. 4.2 responds to each point raised. 4.3 conducts a discussion with a person who does not accept the change and records what was agreed and what was not. 4.4 and 4.5 follow from those. Every one happens with a colleague, in the learner's workplace.</li>
         <li>2.3 establishes what each person or group raises about the change. That is a consultation record, not telemetry.</li>
@@ -700,22 +709,22 @@
     </div>
     <p class="tally"><strong>5 learning outcomes, 26 assessment criteria.</strong></p>
     <h3 class="sub">Level check</h3>
-    <div class="tw"><table class="tbl free check"><thead><tr><th scope="col">Descriptor clause</th><th scope="col">Answered by</th></tr></thead><tbody>
-      <tr><td>Find ways forward in broadly defined, complex contexts</td><td>LO2, LO3. Nobody states which processes to look at or what would make one worth automating. 2.2 and 3.1 require the learner to determine both before any evaluation can start</td></tr>
-      <tr><td>Analyse, interpret and evaluate</td><td>1.1, 3.2, 4.3 analyse; 3.3 interpret; 1.3, 1.5, 3.5, 3.6, 4.5, 5.2 evaluate</td></tr>
-      <tr><td>Aware of the nature and scope of the area</td><td>1.4, 2.1, 2.4</td></tr>
-      <tr><td>Understands different perspectives and the reasoning behind them</td><td>1.2 and 1.5. Both require the reasoning, not only the position</td></tr>
-      <tr><td>Determine, adapt and use appropriate methods</td><td>2.2, 3.1 determine; 4.4 adapt; LO2 and LO3 use</td></tr>
-      <tr><td>Use relevant research or development to inform actions</td><td>3.4</td></tr>
-      <tr><td>Evaluate actions, methods and results</td><td>LO5, and 4.3. 5.4 evaluates the method the learner determined rather than one they were given</td></tr>
-    </tbody></table></div>
-    <p><strong>Boundary against Level 4.</strong> A Level 4 version would read: evaluate the three processes your director has identified, against the business case template, within the budget you have been given. Every one of those is a definition supplied from outside. Removing all three is what makes this Level 5. <strong>Watch 3.1 if the unit is ever edited.</strong> If the criteria are supplied as a template rather than determined by the learner, the unit becomes Level 4 and the qualification's level claim goes with it.</p>
+    <div class="lcheck">
+    <p><em class="it">Broadly defined, complex contexts</em>: LO2, LO3. Nobody states which processes to look at or what would make one worth automating. 2.2 and 3.1 require the learner to determine both before any evaluation can start.</p>
+    <p><em class="it">Analyse, interpret and evaluate</em>: 1.1, 3.2, 4.3 analyse; 3.3 interpret; 1.3, 1.5, 3.5, 3.6, 4.5, 5.2 evaluate.</p>
+    <p><em class="it">Nature and scope of the area</em>: 1.4, 2.1, 2.4.</p>
+    <p><em class="it">Different perspectives and their reasoning</em>: 1.2 and 1.5. Both require the reasoning, not only the position.</p>
+    <p><em class="it">Determine, adapt and use methods</em>: 2.2, 3.1 determine; 4.4 adapt; LO2 and LO3 use.</p>
+    <p><em class="it">Research informs action</em>: 3.4.</p>
+    <p><em class="it">Evaluate actions, methods and results</em>: LO5, and 4.3. 5.4 evaluates the method the learner determined rather than one they were given.</p>
+    </div>
+    <p><strong>Boundary against Level 4.</strong> A Level 4 version would read: evaluate the three processes your director has identified, against the business case template, within the budget you have been given. Every one of those is a definition supplied from outside. Removing all three is what makes this Level 5. <strong>3.1 carries the level.</strong> If the criteria are supplied as a template rather than determined by the learner, the unit becomes Level 4 and the qualification's level claim goes with it.</p>
     <p><strong>Boundary against Level 6.</strong> No criterion asks the learner to <em>critically</em> analyse or to design research. 3.4 uses investigation that already exists. 5.2 evaluates risks to the department, which is scope-bounded.</p>
     <h3 class="sub">Assessment guidance</h3>
     <ul class="bul">
-      <li><strong>5.3 where no decision maker is available.</strong> If the person who would decide cannot be reached within the period of the unit, a presentation to the most senior person available who could put it to them meets 5.3, with the reason recorded. See section 4, item 7.</li>
+      <li><strong>5.3 where no decision maker is available.</strong> If the person who would decide cannot be reached within the period of the unit, a presentation to a person senior to the learner, with authority over the department's work, who will take it to the decision maker, meets 5.3. The reason is recorded. See section 4.7.</li>
       <li><strong>Skills the department lacks.</strong> 4.5 evaluates only the skills these automations would need. The wider judgement about the capability a department holds and requires belongs to ZFF-GM-05.</li>
-      <li><strong>Consultation records.</strong> 4.2 records what named colleagues raised. Colleagues are identified by role in the portfolio, not by name. See section 4, item 8.</li>
+      <li><strong>Consultation records.</strong> 4.2 records what colleagues raised. Colleagues are identified by role in the portfolio, not by name. See section 4.8.</li>
     </ul>
     <h3 class="sub">Evidence</h3>
     <p>The evidence divides cleanly across this unit's 80 hours. LO1 is knowledge, and the platform records the dialogue that builds it. LO2, LO3 and LO5 produce artefacts, and the platform records their submission and the criteria they were submitted against. LO4 and 5.3 are meetings, and the platform records nothing at all.</p>
@@ -731,8 +740,8 @@
       <tr><td>ZAV-CRT-002<br>ZAV-CRT-003<br>ZAV-CRT-004</td><td>Assessment criterion attempted, passed and failed</td><td><span class="st st-w">Wired</span></td></tr>
       <tr><td>ZAV-OFQ-002<br>ZAV-OFQ-005</td><td>Regulated unit attempted and completed, against the unit id</td><td><span class="st st-w">Wired</span></td></tr>
     </tbody></table></div>
-    <p class="srcnote">Status as measured against the production store on 17 July 2026. <a href="#xapi">What the three words mean, and what they do not</a>.</p>
-    <p><strong>What the platform record does not reach.</strong></p>
+    <p class="srcnote">Statuses are explained in <a href="#xapi">the evidence trail</a>.</p>
+    <h3 class="sub">What the platform record does not reach</h3>
     <ul class="bul">
         <li>2.1 maps the department's processes and 2.3 takes volume and time cost from the department's own systems. Those systems are not Zavmo's and never will be.</li>
         <li><strong>The whole of LO4.</strong> 4.2 consults the people whose work would change and records what was raised. The consultation record is the evidence, and it is made outside the platform.</li>
@@ -801,29 +810,29 @@
       <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
         <tr><td class="cref">5.1</td><td>Evaluate the effect of the changed priorities against what was stated at 4.6, using evidence</td></tr>
         <tr><td class="cref">5.2</td><td>Evaluate how effective the method determined at 2.4 was, giving reasons</td></tr>
-        <tr><td class="cref">5.3</td><td>Identify what would be determined differently next time, and the reasons</td></tr>
+        <tr><td class="cref">5.3</td><td>Identify what the department would measure differently, and what would be determined differently next time, and the reasons</td></tr>
       </tbody></table></div>
     </div>
     <p class="tally"><strong>5 learning outcomes, 25 assessment criteria.</strong></p>
     <h3 class="sub">Level check</h3>
-    <div class="tw"><table class="tbl free check"><thead><tr><th scope="col">Descriptor clause</th><th scope="col">Answered by</th></tr></thead><tbody>
-      <tr><td>Find ways forward in broadly defined, complex contexts</td><td>LO2. The question is not supplied. 2.1 requires the learner to determine it and give reasons, 2.4 to determine how it will be answered</td></tr>
-      <tr><td>Analyse, interpret and evaluate</td><td>1.1, 1.2, 3.1 analyse; 3.2 interpret; 1.3, 1.5, 2.3, 2.5, 3.3, 3.5, 3.6, 4.2 evaluate. 3.1 to 3.3 run the three verbs in the descriptor's own order across a single body of data</td></tr>
-      <tr><td>Aware of the nature and scope of the area</td><td>1.1, 1.3, 3.5</td></tr>
-      <tr><td>Understands different perspectives and the reasoning behind them</td><td>1.4 and 1.5, and 3.3. 3.3 makes the learner hold two readings of the same data at once and choose between them on evidence</td></tr>
-      <tr><td>Determine, adapt and use appropriate methods</td><td>2.1, 2.2, 2.4, 4.1 determine; 4.4 adapt; LO3 use</td></tr>
-      <tr><td>Use relevant research or development to inform actions</td><td>3.4</td></tr>
-      <tr><td>Evaluate actions, methods and results</td><td>LO5</td></tr>
-    </tbody></table></div>
-    <p><strong>Why LO5 has three criteria.</strong> The other units evaluate a method and a set of criteria the learner determined. Here the method is evaluated at 5.2, and the measure the change is judged against is set at 4.6 and tested at 5.1. There is no separate set of selection criteria to review, so there is no fourth criterion. The unit's 25 criteria are in line with the rest of the Diploma.</p>
+    <div class="lcheck">
+    <p><em class="it">Broadly defined, complex contexts</em>: LO2. The question is not supplied. 2.1 requires the learner to determine it and give reasons, 2.4 to determine how it will be answered.</p>
+    <p><em class="it">Analyse, interpret and evaluate</em>: 1.1, 1.2, 3.1 analyse; 3.2 interpret; 1.3, 1.5, 2.3, 2.5, 3.3, 3.5, 3.6, 4.2 evaluate. 3.1 to 3.3 run the three verbs in the descriptor's own order across a single body of data.</p>
+    <p><em class="it">Nature and scope of the area</em>: 1.1, 1.3, 3.5.</p>
+    <p><em class="it">Different perspectives and their reasoning</em>: 1.4 and 1.5, and 3.3. 3.3 makes the learner hold two readings of the same data at once and choose between them on evidence.</p>
+    <p><em class="it">Determine, adapt and use methods</em>: 2.1, 2.2, 2.4, 4.1 determine; 4.4 adapt; LO3 use.</p>
+    <p><em class="it">Research informs action</em>: 3.4.</p>
+    <p><em class="it">Evaluate actions, methods and results</em>: LO5.</p>
+    </div>
+    <p><strong>Why LO5 has three criteria.</strong> The other units evaluate a method and a set of criteria the learner determined. Here the method is evaluated at 5.2, and the measure the change is judged against is set at 4.6 and tested at 5.1. 5.3 reviews what the department measures, which the unit's scope says the learner may change. There is no separate set of selection criteria to review, so there is no fourth criterion.</p>
     <p><strong>Boundary against Level 3.</strong> ZFF-DA-03 is the closest unit in the suite and the difference has to be visible in the wording. In ZFF-DA-03 the learner states a question about their own work and recommends to the person who decides. Here the learner determines a question about a department's priorities, determines the method, changes what the department measures, and consults the people affected. <em>Analyse</em> and <em>determine</em> appear here and appear nowhere in ZFF-DA-03.</p>
     <p><strong>Boundary against Level 4.</strong> A Level 4 version would supply the question and the reporting pack. 2.1 and 2.4 exist specifically to remove both.</p>
     <p><strong>Boundary against Level 6.</strong> Nothing asks the learner to critically analyse or to design research, to evaluate implications beyond the department, or to reconsider what the department is measuring <em>for</em>, which is the Level 7 move.</p>
     <h3 class="sub">Assessment guidance</h3>
     <ul class="bul">
-      <li><strong>LO5 and elapsed time.</strong> Where the changed priorities have had too little time to take full effect, the learner evaluates the effect seen so far against 4.6 and states its limits. See section 4, item 9.</li>
-      <li><strong>4.5 where no decision maker is available.</strong> The rule at section 4, item 7 applies.</li>
-      <li><strong>Consultation records.</strong> 4.3 records what named colleagues raised. Colleagues are identified by role in the portfolio, not by name. See section 4, item 8.</li>
+      <li><strong>LO5 and elapsed time.</strong> Where the changed priorities have had too little time to take full effect, the learner evaluates the effect seen so far against 4.6 and states its limits. See section 4.9.</li>
+      <li><strong>4.5 where no decision maker is available.</strong> The rule at section 4.7 applies.</li>
+      <li><strong>Consultation records.</strong> 4.3 records what colleagues raised. Colleagues are identified by role in the portfolio, not by name. See section 4.8.</li>
     </ul>
     <h3 class="sub">Evidence</h3>
     <p>The analysis in this unit happens in the learner's own tools, on their department's own data. Zavmo records the learning around it, and the submission of what came out of it, not the analysis itself.</p>
@@ -838,8 +847,8 @@
       <tr><td>ZAV-OFQ-003<br>ZAV-OFQ-004</td><td>Regulated learning outcome met and assessment criterion passed</td><td><span class="st st-w">Wired</span></td></tr>
       <tr><td>ZAV-LRN-051</td><td>Bloom level advanced. Defined in the registry, with no emit call site in code</td><td><span class="st st-c">Catalogued</span></td></tr>
     </tbody></table></div>
-    <p class="srcnote">Status as measured against the production store on 17 July 2026. <a href="#xapi">What the three words mean, and what they do not</a>.</p>
-    <p><strong>What the platform record does not reach.</strong></p>
+    <p class="srcnote">Statuses are explained in <a href="#xapi">the evidence trail</a>.</p>
+    <h3 class="sub">What the platform record does not reach</h3>
     <ul class="bul">
         <li>1.1 to 1.3 rest on the measures the department actually reports. Those are the department's, not the platform's.</li>
         <li>3.1 to 3.5 are analysis carried out in the learner's own tools. Only the output reaches the platform, as a submitted artefact.</li>
@@ -890,7 +899,7 @@
       <div class="tw"><table class="crit"><thead><tr><th scope="col">Ref</th><th scope="col">The learner can</th></tr></thead><tbody>
         <tr><td class="cref">3.1</td><td>Identify the people whose work each recommended change would affect, and how it would affect them</td></tr>
         <tr><td class="cref">3.2</td><td>Consult those people, and record what was raised</td></tr>
-        <tr><td class="cref">3.3</td><td>Analyse the concerns raised, and evaluate which of them change the plan</td></tr>
+        <tr><td class="cref">3.3</td><td>Analyse the concerns raised and the reasoning given for them, and evaluate which of them change the plan</td></tr>
         <tr><td class="cref">3.4</td><td>Adapt the plan in response, and state what changed and the reasons</td></tr>
         <tr><td class="cref">3.5</td><td>Evaluate the skills the department will need that it does not currently hold, and state how they will be obtained</td></tr>
       </tbody></table></div>
@@ -921,24 +930,25 @@
     <p class="tally"><strong>5 learning outcomes, 30 assessment criteria.</strong></p>
     <h3 class="sub">Level check</h3>
     <p>This is the unit most likely to be challenged on level, in both directions. The challenge from below is that a stated deliverable makes the problem well defined. The challenge from above is that an annual plan for a department sounds strategic. Both are answered here rather than left to a review.</p>
-    <div class="tw"><table class="tbl free check"><thead><tr><th scope="col">Descriptor clause</th><th scope="col">Answered by</th></tr></thead><tbody>
-      <tr><td>Find ways forward in broadly defined, complex contexts</td><td>LO1, LO2. See the paragraph below on what is and is not given</td></tr>
-      <tr><td>Analyse, interpret and evaluate</td><td>2.2, 3.3 analyse; 2.3 interpret; 1.5, 2.5, 2.6, 3.5, 4.6 evaluate</td></tr>
-      <tr><td>Aware of the nature and scope of the area</td><td>1.1, 1.2, 1.6, 4.2</td></tr>
-      <tr><td>Understands different perspectives and the reasoning behind them</td><td>3.2 and 3.3. 3.2 records the positions people take on the plan, and 3.3 weighs each one and its reasoning against the plan</td></tr>
-      <tr><td>Determine, adapt and use appropriate methods</td><td>1.1, 1.4, 2.1, 4.7 determine; 3.4 adapt; LO2 and LO4 use. Four determinations, each of which would be supplied at Level 4</td></tr>
-      <tr><td>Use relevant research or development to inform actions</td><td>2.4, with a requirement to state what it established rather than merely that it was done</td></tr>
-      <tr><td>Evaluate actions, methods and results</td><td>LO5, and 4.6</td></tr>
-    </tbody></table></div>
+    <div class="lcheck">
+    <p><em class="it">Broadly defined, complex contexts</em>: LO1, LO2. See the paragraph below on what is and is not given.</p>
+    <p><em class="it">Analyse, interpret and evaluate</em>: 2.2, 3.3 analyse; 2.3 interpret; 1.5, 2.5, 2.6, 3.5, 4.6 evaluate.</p>
+    <p><em class="it">Nature and scope of the area</em>: 1.1, 1.2, 1.6, 4.2.</p>
+    <p><em class="it">Different perspectives and their reasoning</em>: 3.2 and 3.3. 3.2 records the positions people take on the plan, and 3.3 analyses each one and the reasoning given for it.</p>
+    <p><em class="it">Determine, adapt and use methods</em>: 1.1, 1.4, 2.1, 4.7 determine; 3.4 adapt; LO2 and LO4 use. Four determinations, each of which would be supplied at Level 4.</p>
+    <p><em class="it">Research informs action</em>: 2.4, with a requirement to state what it established rather than merely that it was done.</p>
+    <p><em class="it">Evaluate actions, methods and results</em>: LO5, and 4.6.</p>
+    </div>
     <p><strong>What is given, and what is not.</strong> The brief names the deliverable: an annual automation plan for your department. That is the whole of what is stated. It does not name the processes, the criteria, the method, the measure of benefit, the people who must agree, the shape of the year, or the answer. Two competent learners in the same department would produce different plans and both could be sound. That is the descriptor's <em>broadly defined</em>, and it is why the same brief at Level 3 is not the same kind of brief at all. There the object was named and only the instance was chosen.</p>
-    <p><strong>What would push it to Level 4.</strong> Supplying the criteria at 2.1, supplying the process list at 1.2, or supplying a business case template that fixes what counts as a benefit. Any one defines the problem for the learner and drops the unit a level. The assessment guidance says so, because supplying a template is exactly the kind of helpfulness a delivery team adds later without realising what it costs.</p>
+    <p><strong>What would push it to Level 4.</strong> Supplying the criteria at 2.1, supplying the process list at 1.2, or supplying a business case template that fixes what counts as a benefit. Any one defines the problem for the learner and drops the unit a level. The assessment guidance below says so, because supplying a template is exactly the kind of helpfulness a delivery team adds later without realising what it costs.</p>
     <p><strong>What would push it to Level 7.</strong> Both exclusions are explicit. First, reframing what the department is <em>for</em>. Second, producing a plan that changes how the organisation as a whole operates. A learner who produces either has produced work above the level, and the criterion is still not met. Assessors find this counter-intuitive and need telling. Where a plan genuinely requires an organisational change to proceed, the correct treatment is to record it at 4.2 as a dependency outside the department, not to widen the plan.</p>
     <p><strong>Not Level 6.</strong> Nothing asks the learner to critically analyse, to design research, or to evaluate implications. 4.2 identifies dependencies. It does not place the learner in a context where many factors interact and none can be held constant.</p>
     <h3 class="sub">Assessment guidance</h3>
     <ul class="bul">
-      <li><strong>5.3 where the decision is outstanding.</strong> A sign-off deferred beyond the period of the unit is ordinary. A recorded outstanding decision, with the reason for the delay and the date it is expected, meets 5.3. 5.1 and 5.2 still require the presentation and the challenge to have taken place. See section 4, item 7.</li>
+      <li><strong>5.3 where the decision is outstanding.</strong> A sign-off deferred beyond the period of the unit is ordinary. A recorded outstanding decision, with the reason for the delay and the date it is expected, meets 5.3. 5.1 and 5.2 still require the presentation and the challenge to have taken place. See section 4.7.</li>
+      <li><strong>Nothing is supplied that defines the problem.</strong> No criteria, process list or benefit template is supplied for 1.2, 2.1 or 2.3. Supplying any one drops the unit to Level 4.</li>
       <li><strong>Skills the department lacks.</strong> 3.5 evaluates only the skills this plan would need, and how they will be obtained. The wider capability judgement belongs to ZFF-GM-05.</li>
-      <li><strong>Consultation records.</strong> 3.2 records what named colleagues raised. Colleagues are identified by role in the portfolio, not by name. See section 4, item 8.</li>
+      <li><strong>Consultation records.</strong> 3.2 records what colleagues raised. Colleagues are identified by role in the portfolio, not by name. See section 4.8.</li>
     </ul>
     <h3 class="sub">Evidence</h3>
     <p>This is where the record earns its place. A hundred and forty hours across a department's own year is the hardest evidence to assemble at this level and the most expensive to assess, because an assessor normally meets it as a finished plan and has to reconstruct months of work from it. The platform's record does not remove that problem, but it changes what the assessor starts from. Every statement carries two times, the moment the thing happened and the moment it was stored, so the order of the work is read rather than inferred. Statements are written by the Zavmo backend and never by the learner's browser, so a learner cannot post their own. The store is a single table inside Zavmo's own service: there is no external learning record store and nothing is mirrored anywhere else.</p>
@@ -955,8 +965,8 @@
       <tr><td>ZAV-LRN-054</td><td>Where a year-long project stopped, and when</td><td><span class="st st-w">Wired</span></td></tr>
       <tr><td>ZAV-CRT-010</td><td>Certificate generated. Defined in the registry, with no emit call site in code</td><td><span class="st st-c">Catalogued</span></td></tr>
     </tbody></table></div>
-    <p class="srcnote">Status as measured against the production store on 17 July 2026. <a href="#xapi">What the three words mean, and what they do not</a>.</p>
-    <p><strong>What the platform record does not reach.</strong></p>
+    <p class="srcnote">Statuses are explained in <a href="#xapi">the evidence trail</a>.</p>
+    <h3 class="sub">What the platform record does not reach</h3>
     <ul class="bul">
         <li><strong>The plan itself.</strong> It is a document produced in the learner's workplace, in the learner's own tools. Every criterion in LO4, from the sequence at 4.1 to the fallbacks at 4.5, is a property of that document and is assessed by reading it.</li>
         <li><strong>The whole of LO3.</strong> 3.1 to 3.5 consult a department, over a year, about work that would change. Witness testimony and the consultation record carry it.</li>
@@ -972,17 +982,24 @@
     <div class="section-label">Section 4</div>
     <h2>Assessment and quality assurance</h2>
     <p>The same model applies to every unit.</p>
-    <div class="honest">
-      <div class="hrow"><div class="hnum">1</div><div class="hbody"><p><strong>Portfolio of evidence from real work</strong></p><p>Assessment is by portfolio drawn from work the learner is already responsible for, gathered over the period of the unit. There is no examination.</p></div></div>
-      <div class="hrow"><div class="hnum">2</div><div class="hbody"><p><strong>The AI teaches. A human assessor decides.</strong></p><p>Zavmo's AI tutors deliver the learning and prompt the learner to produce and submit evidence. <strong>The AI does not make the assessment decision.</strong> Every decision on every criterion is made by a named, occupationally competent, appropriately qualified human assessor, internally verified by a qualified IQA against a sampling plan, and sampled by the awarding organisation's External Quality Assurer.</p></div></div>
-      <div class="hrow"><div class="hnum">3</div><div class="hbody"><p><strong>How evidence is captured</strong></p><p>Learner activity in the platform is captured as xAPI statements and assembled into the portfolio: the tasks they selected, the instruction sets they wrote and rewrote, the outputs the tool returned, the checks they ran, the amendments they made and the reasons they gave. This gives the assessor a time-stamped record of the learner's process rather than only a finished artefact. <strong>The xAPI record is evidence presented to the assessor. It is not an assessment decision.</strong> Section 5 sets out which events fire today, which are only wired, and what the record does not reach.</p></div></div>
-      <div class="hrow"><div class="hnum">4</div><div class="hbody"><p><strong>Professional discussion is mandatory</strong></p><p>At least one recorded professional discussion per unit, conducted by the qualified assessor. This is the primary control for authenticating the learner at distance and confirming the portfolio is their own work.</p></div></div>
-      <div class="hrow"><div class="hnum">5</div><div class="hbody"><p><strong>Declared AI use</strong></p><p>Learners are expected to use AI in producing evidence, because that is the subject of the qualification. All AI use in evidence must be declared. The assessment decision rests on the learner's judgement about the AI output, not on the polish of the output itself, and that judgement is confirmed in live discussion.</p></div></div>
-      <div class="hrow"><div class="hnum">6</div><div class="hbody"><p><strong>Suggested evidence</strong></p><p>Records of professional discussion and oral questioning for the knowledge outcomes. Product evidence, annotated by the learner, for the skills outcomes. Witness testimony from a line manager where a criterion turns on something that happened in real work. Reflective accounts for the review outcomes. These are suggestions and centres could use other evidence, provided the criteria are covered and the evidence can be internally and externally verified.</p></div></div>
-      <div class="hrow"><div class="hnum">7</div><div class="hbody"><p><strong>Real-work grounding, and when real work does not supply the moment</strong></p><p>The tasks used must be tasks the learner is already responsible for. A simulated task is used only where the learner's real work does not supply what a criterion needs, and the reason is recorded. Three cases are expected: the role offers no suitable task; nobody in the department disagrees with the change (ZFF-EI-05 4.3); or no decision maker is available within the period of the unit (ZFF-AU-05 5.3, ZFF-DA-05 4.5, ZFF-PJ-05 5.1 and 5.2). Each unit's assessment guidance says what meets the criterion in that case.</p></div></div>
-      <div class="hrow"><div class="hnum">8</div><div class="hbody"><p><strong>Colleagues named in the portfolio</strong></p><p>Several criteria record what colleagues raised about a change to their own roles: ZFF-GM-05 4.2, ZFF-EI-05 2.3, 4.1 and 4.3, ZFF-AU-05 4.2, ZFF-DA-05 4.3 and ZFF-PJ-05 3.2. In submitted evidence colleagues are identified by role, not by name. Each colleague is told that what they raise may be recorded, without their name, as evidence for a qualification. Where the assessor needs to confirm who said what, that is done in the professional discussion and not written into the portfolio. Portfolio evidence is kept only for the period the awarding organisation requires.</p></div></div>
-      <div class="hrow"><div class="hnum">9</div><div class="hbody"><p><strong>Effects that need time to show</strong></p><p>ZFF-GM-05, ZFF-EI-05 and ZFF-DA-05 each end by evaluating the effect of a change. A change made inside a unit may not have shown its full effect by the time the unit ends. The learner then evaluates the effect seen so far and states its limits: the period the evidence covers and what it cannot yet show. That meets the criterion. The criteria are not reduced, because evaluating what a change produced is the descriptor clause those outcomes answer. ZFF-PJ-05 runs across the department's own year and plans the measure at 4.7 rather than evaluating an effect.</p></div></div>
-    </div>
+    <h3 style="margin-top:30px" id="a4-1">4.1 Portfolio of evidence from real work</h3>
+    <p>Assessment is by portfolio drawn from work the learner is already responsible for, gathered over the period of the unit. There is no examination.</p>
+    <h3 style="margin-top:30px" id="a4-2">4.2 The AI teaches. A human assessor decides</h3>
+    <p>Zavmo's AI tutors deliver the learning and prompt the learner to produce and submit evidence. <strong>The AI does not make the assessment decision.</strong> Every decision on every criterion is made by a named, occupationally competent, appropriately qualified human assessor, internally verified by a qualified IQA against a sampling plan, and sampled by the awarding organisation's External Quality Assurer.</p>
+    <h3 style="margin-top:30px" id="a4-3">4.3 How evidence is captured</h3>
+    <p>Learner activity in the platform is captured as xAPI statements and assembled into the portfolio: the tasks they selected, the instruction sets they wrote and rewrote, the outputs the tool returned, the checks they ran, the amendments they made and the reasons they gave. This gives the assessor a time-stamped record of the learner's process rather than only a finished artefact. <strong>The xAPI record is evidence presented to the assessor. It is not an assessment decision.</strong> Section 5 sets out which events fire today, which are only wired, and what the record does not reach.</p>
+    <h3 style="margin-top:30px" id="a4-4">4.4 Professional discussion is mandatory</h3>
+    <p>At least one recorded professional discussion per unit, conducted by the qualified assessor. This is the primary control for authenticating the learner at distance and confirming the portfolio is their own work.</p>
+    <h3 style="margin-top:30px" id="a4-5">4.5 Declared AI use</h3>
+    <p>Learners are expected to use AI in producing evidence, because that is the subject of the qualification. All AI use in evidence must be declared. The assessment decision rests on the learner's judgement about the AI output, not on the polish of the output itself, and that judgement is confirmed in live discussion.</p>
+    <h3 style="margin-top:30px" id="a4-6">4.6 Suggested evidence</h3>
+    <p>Records of professional discussion and oral questioning for the knowledge outcomes. Product evidence, annotated by the learner, for the skills outcomes. Witness testimony from a line manager where a criterion turns on something that happened in real work. Reflective accounts for the review outcomes. These are suggestions and centres could use other evidence, provided the criteria are covered and the evidence can be internally and externally verified.</p>
+    <h3 style="margin-top:30px" id="a4-7">4.7 Real-work grounding, and when real work does not supply the moment</h3>
+    <p>The tasks used must be tasks the learner is already responsible for. A simulated task is used only where the learner's real work does not supply what a criterion needs, and the reason is recorded. Two cases are expected: the role offers no suitable task, or nobody in the department disagrees with the change (ZFF-EI-05 3.2 and 4.3, whose guidance sets out what meets them). A third case is not simulation. Where no decision maker is available within the period of the unit (ZFF-AU-05 5.3, ZFF-DA-05 4.5), a presentation to a person senior to the learner, with authority over the department's work, who will take it to the decision maker, meets those criteria, with the reason recorded. ZFF-PJ-05 5.1 and 5.2 have no fallback: the plan is presented to the person who signs it off.</p>
+    <h3 style="margin-top:30px" id="a4-8">4.8 Colleagues in the portfolio</h3>
+    <p>Several criteria record what colleagues raised about a change to their own roles: ZFF-GM-05 4.2, ZFF-EI-05 2.3, 4.1 and 4.3, ZFF-AU-05 4.2, ZFF-DA-05 4.3 and ZFF-PJ-05 3.2. In submitted evidence colleagues are identified by role, not by name. Where a role identifies one person, a label such as Colleague A is used instead. Each colleague is told that what they raise may be recorded, without their name, as evidence for a qualification. Where the assessor needs to confirm who said what, that is done in the professional discussion. The recording of that discussion is portfolio evidence and is kept under the same rule. Portfolio evidence is kept only for the period the awarding organisation requires.</p>
+    <h3 style="margin-top:30px" id="a4-9">4.9 Effects that need time to show</h3>
+    <p>ZFF-GM-05, ZFF-EI-05 and ZFF-DA-05 each end by evaluating the effect of a change. A change made inside a unit may not have shown its full effect by the time the unit ends. The learner then evaluates the effect seen so far and states its limits: the period the evidence covers and what it cannot yet show. That meets the criterion only if at least one measurement has been taken after the change, against the measure set earlier in the unit. A forecast of the effect does not meet it. The criteria are not reduced, because evaluating what a change produced is the descriptor clause those outcomes answer. ZFF-PJ-05 runs across the department's own year and plans the measure at 4.7 rather than evaluating an effect.</p>
     <p class="backtop"><a href="#units">Back to the unit index</a></p>
   </section>
 
@@ -991,10 +1008,6 @@
     <h2>The evidence trail</h2>
     <p>Zavmo writes every learner action as an xAPI statement. For a qualification assessed from real work carried out over months, that record is the difference between an assessor reading a finished artefact and an assessor reading how it was made. This section sets out what the record holds, how a statement reaches an individual assessment criterion, and, at equal length, what it does not hold.</p>
 
-    <div class="callout warn reveal" style="margin-top:22px">
-      <div class="section-label">Read this before the tables</div>
-      <p style="margin-bottom:0">No learner has yet been registered against this Diploma, so none of the events named on this page has fired for it. What follows describes a mechanism and its measured state on 17 July 2026. It is not a record that already exists for this qualification and it should not be read as one.</p>
-    </div>
 
     <h3 style="margin-top:30px">One store, written from the back end</h3>
     <p>Statements use the xAPI vocabulary of actor, verb, object, context and result. There is no external learning record store. Every statement is a row in a single Postgres table inside Zavmo's own service, and nothing is mirrored anywhere else. Statements are written by the back end and never by the learner's browser, because a statement posted by a learner is a statement a learner controls. Each row carries two times: when the thing happened, and when it was stored.</p>
@@ -1020,7 +1033,7 @@
     <p>An assessor therefore reads the record filtered to one criterion at a time rather than as a session log. Two families carry criterion-level attribution directly: ZAV-CRT-002, ZAV-CRT-003 and ZAV-CRT-004, which hold a criterion id and an evidence id for a criterion attempted, passed or failed; and the ZAV-OFQ family, which holds the regulated outcome id, unit id and criterion id together with the ids of the statements offered as evidence for them.</p>
 
     <h3 style="margin-top:30px">Three words, used strictly</h3>
-    <p>Every event named on this page carries one of three statuses. They mean different things, and treating them as interchangeable is how a specification gets caught.</p>
+    <p>Every event named on this page carries one of three statuses. They mean different things and are never used interchangeably.</p>
     <div class="grid2">
       <div class="card">
         <span class="st st-o">Observed</span>
@@ -1048,13 +1061,6 @@
       </table>
     </div>
 
-    <h3 style="margin-top:30px">What the record does not yet do</h3>
-    <ul class="bul">
-      <li><strong>The events that matter most to an assessor have never fired.</strong> ZAV-CRT-002, ZAV-CRT-003 and ZAV-CRT-004, and the whole ZAV-OFQ family, are wired and have not been seen in production. No learner has yet run a regulated qualification on the platform, which is why. An event that has never emitted is not evidence, and none is presented here as evidence.</li>
-      <li><strong>Attribution does not reach every row.</strong> At the July measurement the store held 20,610 statements from 547 distinct learners, spanning 13 February to 17 July 2026. Of those, 3,908 carried a canonical event id, so per-event attribution reached 19 per cent of rows. The rest hold the verb and the object but cannot be tied to a named catalogued event. Closing that is tracked work, and it is not closed.</li>
-      <li><strong>150 catalogued events have never fired.</strong> Where one appears in a unit table above it is marked <span class="st st-c">Catalogued</span> and is named so a reviewer sees the gap, not because it is being offered.</li>
-    </ul>
-
     <h3 style="margin-top:30px">What xAPI never evidences, at any status</h3>
     <p>At Level 5 a large share of the work happens in meetings, in consultation with people, and in documents produced in the learner's own workplace. No amount of wiring reaches any of it.</p>
     <ul class="bul">
@@ -1063,7 +1069,6 @@
       <li><strong>The department's own systems.</strong> Every criterion that reads "using figures from the department's own systems" draws on systems Zavmo does not hold and will not hold.</li>
       <li><strong>Work in the learner's own tools, including AI used outside Zavmo.</strong> ZFF-DA-05 3.6 is the clearest case and is dealt with in that unit's section.</li>
     </ul>
-    <p>Saying this plainly is the point rather than a concession. A record that claims more than it holds fails the first time an External Quality Assurer samples against it, and it takes the credible parts down with it.</p>
 
     <h3 style="margin-top:30px">What does not move</h3>
     <p>Section 4 states it and this section does not change it. The AI teaches. A human assessor decides. The xAPI record is evidence presented to a named, occupationally competent assessor, and it is never an assessment decision. Where a statement records that a validating agent checked a submission, what is recorded is that a check ran and what it said. The decision on the criterion is still the assessor's, is internally verified, and is sampled by the awarding organisation.</p>
@@ -1084,8 +1089,9 @@
       <div class="hrow"><div class="hnum">3</div><p><strong>Whether AI-led tutoring counts as guided learning is unresolved.</strong> GLH is shown as indicative throughout. The split in section 2.2 depends on the answer.</p></div>
       <div class="hrow"><div class="hnum">4</div><p><strong>How knowledge criteria may be evidenced is unresolved.</strong> We have assumed recorded tutoring dialogue can evidence knowledge outcomes rather than written tests. That assumption favours our model, so it should not be taken on our word. If written assessment is required, the hours split needs revisiting.</p></div>
       <div class="hrow"><div class="hnum">5</div><p><strong>The assessor layer does not exist yet.</strong> We do not yet employ occupationally competent assessors or a qualified IQA. Section 4 describes what we will put in place, not what is running today.</p></div>
-      <div class="hrow"><div class="hnum">6</div><p><strong>The Diploma has not been checked against the register.</strong> It has not been compared with qualifications already regulated. That check has to happen before submission.</p></div>
-      <div class="hrow"><div class="hnum">7</div><p><strong>Demand figures are excluded on purpose.</strong> We hold internal estimates of which fluencies are most in demand. They are not evidence and they are not in this specification.</p></div>
+      <div class="hrow"><div class="hnum">6</div><p><strong>The register check is not repeated on this page.</strong> Section 7 of the Gateway specification pack compares both Diplomas with the Ofqual register extract of 2 September 2026. The units have changed since, so it should be re-run before submission.</p></div>
+      <div class="hrow"><div class="hnum">7</div><p><strong>The evidence trail has not run for this Diploma.</strong> No learner has been registered against it, so none of the events on this page has fired for it. The events that carry a criterion decision, ZAV-CRT-002 to ZAV-CRT-004 and the ZAV-OFQ family, are wired and have never been seen in production. At the July measurement, 19 per cent of stored statements carried a named event id.</p></div>
+      <div class="hrow"><div class="hnum">8</div><p><strong>Demand figures are excluded on purpose.</strong> We hold internal estimates of which fluencies are most in demand. They are not evidence and they are not in this specification.</p></div>
     </div>
     <p class="backtop"><a href="#units">Back to the unit index</a></p>
   </section>
