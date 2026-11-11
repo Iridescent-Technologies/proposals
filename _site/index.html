@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Zavmo product demos and walkthroughs. See the platform, the learner experience and the capability evidence for yourself.">
+<meta property="og:title" content="Zavmo demos and walkthroughs">
+<meta property="og:description" content="See Zavmo for yourself: interactive demos, click-through walkthroughs and platform deep dives.">
+<title>Demos and walkthroughs · Zavmo</title>
+<style>
+  :root{
+    --navy-0:#060e17; --navy-1:#0b1a2a;
+    --surface:rgba(10,22,40,0.045); --surface-2:rgba(10,22,40,0.07);
+    --border:rgba(10,22,40,0.1); --border-2:rgba(0,217,192,0.28);
+    --teal:#0e7b62; --teal-glow:#0e7b62; --teal-deep:#0e7b62;
+    --ink:#0a1628; --ink-2:rgba(10,22,40,0.72); --ink-3:rgba(10,22,40,0.5);
+    --font:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--navy-0)}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);min-height:100vh;
+    background:
+      radial-gradient(120% 70% at 82% -8%, rgba(0,217,192,0.16), transparent 52%),
+      radial-gradient(90% 60% at 6% 4%, rgba(45,90,138,0.048), transparent 55%),
+      linear-gradient(180deg,var(--navy-1) 0%,var(--navy-0) 100%);
+    background-repeat:no-repeat;background-size:100% 100%;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:clamp(40px,8vh,84px) clamp(22px,5vw,48px) 72px}
+  em{font-style:normal;color:var(--teal-glow)}
+  a{color:inherit;text-decoration:none}
+
+  /* header */
+  header{display:flex;align-items:center;gap:16px;margin-bottom:clamp(34px,7vh,58px)}
+  .logomark{width:46px;height:46px;flex:0 0 auto}
+  .brand-txt{display:flex;flex-direction:column;line-height:1}
+  .word{font-size:15px;font-weight:600;letter-spacing:.26em;color:var(--ink)}
+  .tag{font-size:11px;color:var(--teal);margin-top:6px;letter-spacing:.04em}
+  .nav-spacer{flex:1}
+  .nav-link{font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;min-height:44px}
+  .nav-link svg{width:14px;height:14px}
+
+  .hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+  h1{font-weight:200;letter-spacing:-.01em;line-height:1.05;font-size:clamp(34px,6vw,60px);margin:0 0 18px;text-wrap:balance}
+  .lede{font-size:clamp(15px,2vw,19px);line-height:1.55;color:var(--ink-2);max-width:56ch;margin:0 0 clamp(34px,6vh,52px);font-weight:300}
+
+  /* featured card */
+  .featured{
+    display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:26px;
+    background:rgba(0,217,192,0.06);border:1px solid var(--border-2);border-radius:24px;
+    padding:26px 30px;margin-bottom:30px;transition:.22s;position:relative;overflow:hidden;
+  }
+  .featured:hover{background:rgba(0,217,192,0.09);transform:translateY(-2px);box-shadow:0 24px 60px rgba(10,22,40,0.108)}
+  .featured:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+  .atom-wrap{width:88px;height:88px;flex:0 0 auto}
+  .featured .f-body{min-width:0}
+  .f-chip{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--teal);background:rgba(0,217,192,0.14);border-radius:100px;padding:4px 11px;margin-bottom:11px}
+  .f-title{font-size:clamp(21px,3vw,27px);font-weight:400;letter-spacing:-.01em;margin:0 0 8px}
+  .f-desc{font-size:14.5px;line-height:1.5;color:var(--ink-2);font-weight:300;margin:0;max-width:60ch}
+  .f-arrow{width:46px;height:46px;border-radius:50%;background:var(--teal);color:var(--navy-0);display:flex;align-items:center;justify-content:center;flex:0 0 auto;box-shadow:0 6px 22px rgba(0,217,192,0.3);transition:.22s}
+  .featured:hover .f-arrow{transform:translateX(3px)}
+  .f-arrow svg{width:20px;height:20px}
+
+  .section-label{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:30px 0 14px}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:16px}
+  .card{
+    display:flex;flex-direction:column;gap:10px;background:var(--surface);border:1px solid var(--border);
+    border-radius:18px;padding:22px 22px 20px;backdrop-filter:blur(18px);transition:.2s;position:relative;
+  }
+  .card:hover{background:var(--surface-2);border-color:var(--border-2);transform:translateY(-2px);box-shadow:0 18px 44px rgba(10,22,40,0.096)}
+  .card:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+  .c-chip{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+  .c-chip.walk{color:var(--teal)}
+  .c-chip.client{color:#2d5a8a}
+  .c-chip.concept{color:#2d5a8a}
+  .c-title{font-size:17px;font-weight:500;letter-spacing:-.01em;line-height:1.3;margin:0;color:var(--ink)}
+  .c-desc{font-size:13px;line-height:1.5;color:var(--ink-2);font-weight:300;margin:0;flex:1}
+  .c-foot{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--teal);font-weight:500;margin-top:4px}
+  .c-foot svg{width:15px;height:15px;transition:.2s}
+  .card:hover .c-foot svg{transform:translateX(3px)}
+
+  footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:12.5px;color:var(--ink-3);line-height:1.6;font-weight:300}
+  footer a{color:var(--teal)}
+
+  @media (max-width:620px){
+    .featured{grid-template-columns:1fr;text-align:left;gap:18px}
+    .featured .f-arrow{position:absolute;top:24px;right:24px;width:40px;height:40px}
+    .atom-wrap{width:66px;height:66px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<link rel="stylesheet" href="_brand/zavmo.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <a class="z-logo-link" href="https://zavmo.ai" aria-label="Zavmo"><img class="z-logo" src="_brand/zavmo-logo-mono-navy.svg" alt="Zavmo" width="130" height="28"><span class="z-logo-tag">Demos &amp; walkthroughs</span></a>
+    <span class="nav-spacer"></span>
+    <a class="nav-link" href="./videos/">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 4.5v15l13-7.5z" fill="currentColor"/></svg>
+      Videos
+    </a>
+  </header>
+
+  <div class="hero-eyebrow">See it for yourself</div>
+  <h1>Zavmo demos &amp; product walkthroughs.</h1>
+  <p class="lede">Play the product, click through the learner and admin experience, and read the thinking behind it. No form, no sales call, no waiting.</p>
+
+  <a class="featured" href="./little-zav/">
+    <span class="atom-wrap" id="atomWrap"></span>
+    <div class="f-body">
+      <span class="f-chip">Interactive · new</span>
+      <h2 class="f-title">Little Zav, the proactive chatbot</h2>
+      <p class="f-desc">A playable Little Zav widget with four live interactions. All five admin pages, rendered in the real admin theme. Plus the switch-on and white-label story for Growth Engineering LMS clients.</p>
+    </div>
+    <span class="f-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </a>
+
+  <div class="section-label">Videos</div>
+  <div class="grid">
+    <a class="card" href="./videos/">
+      <span class="c-chip walk">Film · 1 minute</span>
+      <h3 class="c-title">Welcome to Zavmo: your first lesson, in your own job</h3>
+      <p class="c-desc">A learner signs up, names their job, and Zavmo teaches them in it from the first lesson. Each film has its own link to send.</p>
+      <span class="c-foot">Watch<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </div>
+
+  <div class="section-label">Product walkthroughs</div>
+  <div class="grid">
+    <a class="card" href="./little-zav-demo/">
+      <span class="c-chip walk">Interactive · try it</span>
+      <h3 class="c-title">Little Zav: try it yourself</h3>
+      <p class="c-desc">Two shareable views: play the real learner widget, then run the admin console. Both live, both on sample data.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./learner-journey/">
+      <span class="c-chip walk">Walkthrough</span>
+      <h3 class="c-title">The learner journey</h3>
+      <p class="c-desc">A click-through of the live learner experience, screen by screen.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./admin-journey/">
+      <span class="c-chip walk">Walkthrough</span>
+      <h3 class="c-title">The admin console</h3>
+      <p class="c-desc">A click-through of the live admin console and its reporting.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./making-learning-unique/">
+      <span class="c-chip concept">Concept</span>
+      <h3 class="c-title">Making learning as unique as you are</h3>
+      <p class="c-desc">The personalisation story: 2 Sigma, xAPI and three-persona adaptation.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./a-class-of-one/">
+      <span class="c-chip concept">Concept</span>
+      <h3 class="c-title">A class of one</h3>
+      <p class="c-desc">Eleven ways a lesson adapts to the learner, shown on the live product, with expert tester feedback.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./why-zavmo/">
+      <span class="c-chip concept">The business case</span>
+      <h3 class="c-title">Why Zavmo</h3>
+      <p class="c-desc">The learning efficiency flywheel. Better learning, straight to the bottom line.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </div>
+
+  <div class="section-label">Platform deep dives</div>
+  <div class="grid">
+    <a class="card" href="./zavmo-overview/">
+      <span class="c-chip">Overview</span>
+      <h3 class="c-title">Where neuroscience meets learning</h3>
+      <p class="c-desc">An overview of the Zavmo platform and the thinking behind it.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./how-zavmo-is-built/">
+      <span class="c-chip">Deep dive</span>
+      <h3 class="c-title">How Zavmo is built</h3>
+      <p class="c-desc">The architecture, the model and the trust story. Written for technical, security and L&amp;D buyers.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./learning-innovation-behaviour-change/">
+      <span class="c-chip">Measurement</span>
+      <h3 class="c-title">Learning innovation &amp; behaviour change</h3>
+      <p class="c-desc">217 xAPI statements across 19 signal families. So behaviour change is queryable, not asserted.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./the-argument-for-xapi/">
+      <span class="c-chip concept">White paper</span>
+      <h3 class="c-title">The argument for xAPI</h3>
+      <p class="c-desc">Why xAPI is the future of learning technologies. One standard stopped in 2009, the other became an IEEE standard in 2023. Cited throughout.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./grounded-not-guessing/">
+      <span class="c-chip">Deep dive</span>
+      <h3 class="c-title">Grounded, not guessing</h3>
+      <p class="c-desc">How Ofqual, NOS and job descriptions keep the AI teaching to the standard. Not off-piste.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </div>
+
+  <div class="section-label">Start here: the one-page summary</div>
+  <div class="grid" style="grid-template-columns:1fr">
+    <a class="card" href="./exec-summary/">
+      <span class="c-chip walk">Executive summary · one page</span>
+      <h3 class="c-title">Zavmo, in one page</h3>
+      <p class="c-desc">The whole Future Fluency argument: the eight-move loop, what an L&amp;D buyer gets, and a launchpad into all nine decks.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </div>
+
+  <div class="section-label">Future Fluency: the language of your future</div>
+  <div class="grid">
+    <a class="card" href="./future-fluency/">
+      <span class="c-chip walk">Flagship · start here</span>
+      <h3 class="c-title">Future Fluency</h3>
+      <p class="c-desc">The full framework: certified vs capable, the three-layer model, the ten Fluencies, the grounding moat and the career passport.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./certified-vs-capable/">
+      <span class="c-chip client">The problem</span>
+      <h3 class="c-title">Certified vs capable</h3>
+      <p class="c-desc">The gap every L&amp;D leader sits on. And why the frameworks they rely on cannot see it.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./the-fluency-framework/">
+      <span class="c-chip walk">The framework · IP</span>
+      <h3 class="c-title">The Fluency Framework</h3>
+      <p class="c-desc">Three layers, one honest loop: the seven capabilities, the ten Fluencies, and your moving degree.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./the-ten-fluencies/">
+      <span class="c-chip walk">Layer 2 · the map</span>
+      <h3 class="c-title">The ten Fluencies</h3>
+      <p class="c-desc">The languages of the modern workplace, on the rotating wheel. Derived from 58,802 UK roles.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./proof-not-self-report/">
+      <span class="c-chip walk">The proof</span>
+      <h3 class="c-title">Proof, not self-report</h3>
+      <p class="c-desc">The evidence loop. And why capability, not completion, is the only thing worth measuring.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./the-horizon/">
+      <span class="c-chip concept">The horizon</span>
+      <h3 class="c-title">The Horizon</h3>
+      <p class="c-desc">From a course library to the forward-facing map of UK skills. And the awarding-body road.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./career-passporting/">
+      <span class="c-chip walk">For every role</span>
+      <h3 class="c-title">Career passporting</h3>
+      <p class="c-desc">A living, evidenced career passport for every role in your organisation. And the grounded route between any two.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </div>
+
+  <div class="section-label">The qualifications</div>
+  <div class="grid">
+    <a class="card" href="./future-fluency-diplomas/">
+      <span class="c-chip walk">Level 3 and Level 5 &middot; learner briefing</span>
+      <h3 class="c-title">The Future Fluency Diplomas, explained to the learner</h3>
+      <p class="c-desc">Why it is graded, what each unit asks you to produce at work, and what the hours really are. Switches between the Level 3 and Level 5 tracks.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./qualifications-level-3/">
+      <span class="c-chip walk">Level 3 · Award and Diploma</span>
+      <span class="c-chip client">Draft for review · not submitted</span>
+      <h3 class="c-title">Future Fluency at Level 3</h3>
+      <p class="c-desc">Six units, 390 hours, 39 credits, 145 assessment criteria. Every learning outcome and every criterion in full, with the level check against the Ofqual descriptor.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./qualifications-level-5/">
+      <span class="c-chip walk">Level 5 · Diploma</span>
+      <span class="c-chip client">Draft for review · not submitted</span>
+      <h3 class="c-title">Future Fluency at Level 5</h3>
+      <p class="c-desc">Five units, 410 hours, 41 credits, 136 assessment criteria. The managerial tier, where the learner leads a department through the change rather than changing their own work.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./human-fluency/">
+      <span class="c-chip walk">Level 3 · Human Fluency</span>
+      <span class="c-chip client">Draft for review · not submitted</span>
+      <h3 class="c-title">Human Fluency, unit by unit</h3>
+      <p class="c-desc">Ten Human Fluencies, the shared gate and the Change bridge. 24 short units, 300 hours, 300 assessment criteria, each with its level check.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </div>
+
+  <div class="section-label">Measurement, impact &amp; ROI</div>
+  <div class="grid">
+    <a class="card" href="./active-learning/">
+      <span class="c-chip walk">How we measure</span>
+      <h3 class="c-title">Active learning, measured</h3>
+      <p class="c-desc">SCORM and video measure the content. Zavmo measures the mind at work: active-learning signal, grouped into families, scored for depth.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a class="card" href="./insight-and-impact/">
+      <span class="c-chip concept">What you get</span>
+      <h3 class="c-title">Insight, impact &amp; ROI</h3>
+      <p class="c-desc">The skills gap you can finally see, impact measured to results, and ROI you can defend. All grounded in JD, NOS and Ofqual.</p>
+      <span class="c-foot">Open<svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    </a>
+  </div>
+
+  <footer>
+    <img class="z-footer-logo" src="_brand/zavmo-logo-mono-white.svg" alt="Zavmo" width="102" height="22">
+    Hosted on GitHub Pages · <a href="https://github.com/Iridescent-Technologies/proposals">Iridescent-Technologies/proposals</a><br>
+    This site is <em>public</em> and buyer-facing. Product demos and walkthroughs only.<br>
+    Client-specific proposals do <strong>not</strong> belong here: anything in this repo is readable by anyone with the link.
+    <span class="z-copyright">© 2026 Zavmo.ai. All rights reserved.</span>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  // halo of 12 dots around the logomark orb
+  var g=(document.getElementById('halo')||document.createElementNS('http://www.w3.org/2000/svg','g')), n=12, cx=50, cy=50, r=38;
+  for(var i=0;i<n;i++){
+    var a=(i/n)*2*Math.PI-Math.PI/2, x=cx+r*Math.cos(a), y=cy+r*Math.sin(a);
+    var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('cx',x.toFixed(1)); c.setAttribute('cy',y.toFixed(1)); c.setAttribute('r','2.4');
+    c.setAttribute('fill','#3FE4BC'); c.setAttribute('opacity', i%2? '0.55':'0.9');
+    g.appendChild(c);
+  }
+  // atom-spark mascot for the featured card (nucleus + 3 orbiting electrons)
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var pd='M 22,80 a 58,22 0 1,0 116,0 a 58,22 0 1,0 -116,0', ang=[0,60,120], dur=['3s','2.4s','3.4s'];
+  var s='<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" aria-label="Little Zav mascot" style="width:100%;height:100%">'
+    +'<defs><radialGradient id="nuc" cx="42%" cy="38%" r="65%"><stop offset="0%" stop-color="#f2fffb"/><stop offset="35%" stop-color="#6ee9db"/><stop offset="75%" stop-color="#04d9c1"/><stop offset="100%" stop-color="#04d9c1"/></radialGradient></defs>';
+  for(var j=0;j<3;j++){
+    s+='<g transform="rotate('+ang[j]+' 80 80)"><path d="'+pd+'" fill="none" stroke="rgba(47,207,168,.28)" stroke-width="1.2"/>'
+      +'<circle r="4" fill="#3FE4BC" style="filter:drop-shadow(0 0 5px rgba(0,217,192,0.9))">'
+      + (reduce ? '' : '<animateMotion dur="'+dur[j]+'" repeatCount="indefinite" '+(j===1?'keyPoints="1;0" keyTimes="0;1" calcMode="linear" ':'')+'path="'+pd+'"/>')
+      +'</circle></g>';
+  }
+  s+='<circle cx="80" cy="80" r="14" fill="url(#nuc)" style="filter:drop-shadow(0 0 12px rgba(0,217,192,0.75))"/></svg>';
+  document.getElementById('atomWrap').innerHTML=s;
+})();
+</script>
+</body>
+</html>

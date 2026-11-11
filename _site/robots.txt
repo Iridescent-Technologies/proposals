@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /_template/
+
+Sitemap: https://iridescent-technologies.github.io/proposals/sitemap.xml

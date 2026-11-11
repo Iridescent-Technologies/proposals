@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The learner journey · Zavmo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" />
+<style>
+  :root{--teal:#0e7b62;--teal-soft:#0e7b62;--teal-bright:#0e7b62;--muted:rgba(10,22,40,0.6);--line:rgba(10,22,40,0.11)}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:"DM Sans","Noto Sans Armenian",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;background:linear-gradient(162deg,#0a1b2e 0%,#11304f 55%,#0a1b2e 100%);color:#0a1628;overflow:hidden;height:100vh}
+  .stars{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.9;transition:opacity .5s}
+  .stars.dim{opacity:.32}
+  .stage{position:fixed;inset:0;display:flex;flex-direction:column;z-index:1}
+  .bar{display:flex;align-items:center;gap:12px;padding:18px 26px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.14em;font-size:13px;text-transform:uppercase}
+  .zmark{width:30px;height:30px;border-radius:9px;background:linear-gradient(150deg,#16324f,#0a1b2e);display:grid;place-items:center;border:1px solid rgba(10,22,40,0.16);box-shadow:0 4px 14px rgba(10,22,40,0.105)}
+  .zmark span{font-weight:700;font-size:15px}
+  .bar .spacer{flex:1}
+  .counter{font-variant-numeric:tabular-nums;font-size:13px;color:var(--muted);letter-spacing:.04em;margin-right:4px}
+  .btn{appearance:none;border:1px solid var(--line);background:rgba(10,22,40,0.04);color:#4b5563;font-size:12px;letter-spacing:.04em;padding:7px 12px;border-radius:8px;cursor:pointer;transition:.15s}
+  .btn:hover{background:rgba(10,22,40,0.1);border-color:rgba(10,22,40,0.28)}
+  .btn.accent{border-color:rgba(25,184,153,.5);background:rgba(25,184,153,.1);color:var(--teal-soft);font-weight:500}
+  .btn.accent:hover{background:rgba(25,184,153,.2);border-color:var(--teal)}
+  .slide{flex:1;display:flex;align-items:center;justify-content:center;gap:46px;padding:6px 56px 26px;min-height:0}
+  .copy{width:340px;flex:none}
+  .eyebrow{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:14px}
+  .title{font-size:32px;line-height:1.14;font-weight:500;letter-spacing:-.015em;margin-bottom:16px}
+  .caption{font-size:15.5px;line-height:1.65;color:#4b5563;font-weight:300}
+  .step-no{margin-top:22px;font-size:13px;color:var(--muted)}
+  .shotwrap{flex:1;height:100%;display:flex;align-items:center;justify-content:center;min-width:0}
+  .shot{max-width:100%;max-height:100%;border-radius:13px;box-shadow:0 2px 8px rgba(10,22,40,0.09),0 34px 80px -24px rgba(10,22,40,0.216),0 0 0 1px rgba(10,22,40,0.07);background:#fff;overflow:hidden;display:flex;flex-direction:column}
+  .shot img{display:block;max-width:100%;max-height:74vh;border-radius:0}
+  .shot.dark{background:#0a1422}
+  .browser-bar{display:flex;align-items:center;gap:7px;padding:9px 14px;background:#eef2f7;flex:none}
+  .shot.dark .browser-bar{background:#0f1d2e;border-bottom:1px solid rgba(10,22,40,0.06)}
+  .browser-bar .d{width:11px;height:11px;border-radius:50%}
+  .d.r{background:#ff5f57}.d.y{background:#febc2e}.d.g{background:#28c840}
+  .browser-url{flex:1;background:#fff;border-radius:6px;padding:4px 12px;font-size:12px;color:#5b6b7c;text-align:center;max-width:300px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:6px}
+  .browser-url svg{width:11px;height:11px;opacity:.6}
+  .shot.dark .browser-url{background:rgba(10,22,40,0.06);color:#4b5563}
+  .cover,.sectiondiv{flex-direction:column;gap:0;text-align:center}
+  .cover .zbig{width:74px;height:74px;border-radius:20px;margin-bottom:26px}
+  .cover .zbig span{font-size:36px}
+  .cover-kicker{display:inline-flex;align-items:center;gap:9px;margin-bottom:26px;padding:8px 16px;border-radius:999px;border:1px solid rgba(25,184,153,.4);background:rgba(25,184,153,.1);color:var(--teal-soft);font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+  .cover-kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--teal-bright);box-shadow:0 0 0 0 rgba(0,217,192,0.7);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,217,192,0.55)}70%{box-shadow:0 0 0 7px rgba(0,217,192,0)}100%{box-shadow:0 0 0 0 rgba(0,217,192,0)}}
+  .cover .big{font-size:60px;line-height:1.06;font-weight:500;letter-spacing:-.025em}
+  .cover .big em{font-style:normal;font-weight:500;color:var(--teal)}
+  .cover .sub{margin-top:24px;font-size:19px;color:#4b5563;font-weight:300;max-width:52ch;line-height:1.62}
+  .cover .meta{margin-top:36px;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .hint{margin-top:30px;font-size:13px;color:var(--muted)}
+  .hint kbd{background:rgba(10,22,40,0.08);border:1px solid var(--line);border-radius:6px;padding:2px 8px;margin:0 2px;font-size:12px}
+  .sectiondiv .snum{font-size:13px;letter-spacing:.32em;color:var(--teal);font-weight:600;margin-bottom:20px}
+  .sectiondiv .stitle{font-size:50px;font-weight:400;letter-spacing:-.025em;line-height:1.08;max-width:18ch}
+  .sectiondiv .ssub{margin-top:20px;font-size:18px;color:#4b5563;font-weight:300;max-width:48ch;line-height:1.62}
+  .sectiondiv .srule{width:54px;height:3px;background:linear-gradient(90deg,var(--teal),var(--teal-soft));border-radius:2px;margin:28px auto 0}
+  .statementdiv{flex-direction:column;gap:0;text-align:center;padding:0 7vw}
+  .statementdiv .seyebrow{font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:24px}
+  .statementdiv .sbig{font-size:52px;line-height:1.1;font-weight:400;letter-spacing:-.025em;max-width:22ch}
+  .statementdiv .sbig em{font-style:normal;font-weight:500;color:var(--teal)}
+  .statementdiv .sbody{margin-top:28px;font-size:19.5px;line-height:1.64;color:#4b5563;font-weight:300;max-width:62ch}
+  .statementdiv .sbody b{color:#0a1628;font-weight:500}
+  .statementdiv .scredit{margin-top:28px;font-size:12.5px;letter-spacing:.06em;color:var(--muted)}
+  .progress{height:3px;background:rgba(10,22,40,0.08)}
+  .progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-soft));transition:width .35s cubic-bezier(.4,0,.2,1)}
+  /* segmented chapter navigation: one pill per section, with sub-progress */
+  .chapters{display:flex;gap:6px;justify-content:center;align-items:center;padding:10px 18px 14px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+  .chapters .chap{position:relative;display:flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;border:1px solid transparent;background:rgba(10,22,40,0.05);cursor:pointer;transition:.18s;overflow:hidden;white-space:nowrap}
+  .chapters .chap:hover{background:rgba(10,22,40,0.1)}
+  .chapters .chap .clabel{position:relative;z-index:1;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:.18s;max-width:0;opacity:0;overflow:hidden;transition:max-width .25s ease,opacity .2s ease,color .18s}
+  .chapters .chap .cdot{position:relative;z-index:1;width:6px;height:6px;border-radius:50%;background:rgba(10,22,40,0.35);flex:none;transition:.18s}
+  .chapters .chap:hover .clabel{max-width:200px;opacity:1;color:#4b5563}
+  .chapters .chap.done .cdot{background:var(--teal)}
+  .chapters .chap.on{background:rgba(25,184,153,.14);border-color:rgba(25,184,153,.4)}
+  .chapters .chap.on .clabel{max-width:200px;opacity:1;color:var(--teal-soft);font-weight:600}
+  .chapters .chap.on .cdot{background:var(--teal-bright);box-shadow:0 0 7px rgba(0,217,192,0.7)}
+  /* sub-progress fill inside the active chapter pill */
+  .chapters .chap .cfill{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(25,184,153,.22);z-index:0;transition:width .35s cubic-bezier(.4,0,.2,1)}
+  .zone{position:fixed;top:64px;bottom:56px;width:20%;z-index:5;cursor:pointer}
+  .zone.l{left:0}.zone.r{right:0}
+  .nav-arrow{position:fixed;top:50%;transform:translateY(-50%);z-index:6;width:46px;height:46px;border-radius:50%;background:rgba(10,22,40,0.06);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer;opacity:0;transition:.2s}
+  .stage:hover .nav-arrow{opacity:.6}
+  .nav-arrow:hover{opacity:1!important;background:rgba(10,22,40,0.16)}
+  .nav-arrow.l{left:18px}.nav-arrow.r{right:18px}
+  .nav-arrow svg{width:20px;height:20px;stroke:#0a1628;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  /* jump-to-section menu */
+  .menu{position:fixed;inset:0;background:rgba(8,17,29,.92);z-index:40;display:none;align-items:center;justify-content:center}
+  .menu.show{display:flex}
+  .menu-inner{width:min(680px,90vw);max-height:84vh;overflow:auto}
+  .menu-title{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:600;text-align:center;margin-bottom:24px}
+  .menu-list{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .menu-item{display:flex;align-items:baseline;gap:12px;padding:16px 18px;border:1px solid var(--line);border-radius:12px;background:rgba(10,22,40,0.03);cursor:pointer;transition:.15s}
+  .menu-item:hover{border-color:var(--teal);background:rgba(25,184,153,.08);transform:translateY(-2px)}
+  .menu-item .mnum{font-size:12px;letter-spacing:.16em;color:var(--teal);font-weight:600;white-space:nowrap}
+  .menu-item .mtit{font-size:18px;font-weight:600}
+  .menu-item .msub{font-size:13px;color:var(--muted);font-weight:300;margin-top:2px}
+  .menu-close{position:fixed;top:22px;right:28px;color:var(--muted);font-size:13px;letter-spacing:.1em;cursor:pointer}
+  .grid{position:fixed;inset:0;background:rgba(8,17,29,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:30;display:none;grid-template-columns:repeat(4,1fr);gap:18px;padding:30px 54px 54px;overflow:auto;align-content:start}
+  .grid.show{display:grid}
+  .grid .gtitle{grid-column:1/-1;position:sticky;top:-30px;z-index:2;margin:0 -54px;padding:26px 54px 16px;background:linear-gradient(180deg,rgba(8,17,29,.96) 60%,rgba(8,17,29,0));text-align:center}
+  .grid .gtitle .gt-eyebrow{font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:600}
+  .grid .gtitle .gt-big{font-size:26px;font-weight:500;letter-spacing:-.02em;margin-top:6px}
+  .grid .gtitle .gt-sub{font-size:13.5px;color:var(--muted);font-weight:300;margin-top:5px}
+  .grid .ghead{grid-column:1/-1;display:flex;align-items:center;gap:14px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-top:18px}
+  .grid .ghead:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(25,184,153,.4),transparent)}
+  .grid figure{cursor:pointer;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#f5f7fa;transition:.2s;box-shadow:0 8px 24px -12px rgba(10,22,40,0.15)}
+  .grid figure:hover{border-color:var(--teal);transform:translateY(-4px);box-shadow:0 16px 34px -14px rgba(10,22,40,0.18),0 0 0 1px rgba(25,184,153,.3)}
+  .grid img{width:100%;display:block}
+  .grid figcaption{font-size:12px;color:#4b5563;font-weight:400;padding:9px 12px;border-top:1px solid rgba(10,22,40,0.06)}
+  .grid .gclose{position:fixed;top:20px;right:26px;color:var(--muted);font-size:13px;letter-spacing:.1em;cursor:pointer}
+  /* hub: 2x2 persona-journey grid */
+  .hubdiv{flex-direction:column;gap:0;text-align:center;padding:0 4vw}
+  .hubdiv .heyebrow{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:8px}
+  .hubdiv .hbig{font-size:27px;line-height:1.14;font-weight:500;letter-spacing:-.02em;max-width:24ch}
+  .hubdiv .hbig em{font-style:normal;font-weight:500;color:var(--teal)}
+  .hubdiv .hsub{margin-top:10px;font-size:14.5px;color:#4b5563;font-weight:300;max-width:64ch;line-height:1.5}
+  .hubgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:min(880px,92vw);margin:20px auto 0}
+  .hubcard{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:5px;padding:18px 22px;border:1px solid var(--line);border-radius:15px;background:rgba(10,22,40,0.035);cursor:pointer;transition:.18s;position:relative;overflow:hidden}
+  .hubcard:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--teal),var(--teal-soft));opacity:.85}
+  .hubcard:hover{border-color:var(--teal);background:rgba(25,184,153,.09);transform:translateY(-3px)}
+  .hubcard .hctag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:600}
+  .hubcard .hcname{font-size:21px;font-weight:600;letter-spacing:-.01em}
+  .hubcard .hcname b{color:var(--teal-soft);font-weight:600}
+  .hubcard .hcgoal{font-size:14px;color:#4b5563;font-weight:400;line-height:1.42}
+  .hubcard .hcmeta{margin-top:auto;padding-top:9px;font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:7px}
+  .hubcard .hcmeta svg{width:13px;height:13px;stroke:var(--teal);fill:none;stroke-width:2.2}
+  /* the engine: a slim secondary strip along the bottom, distinct from the 4 learner cards */
+  .hubengine{display:flex;align-items:center;gap:14px;width:min(880px,92vw);margin:14px auto 0;padding:13px 22px;border:1px dashed rgba(10,22,40,0.18);border-radius:13px;background:rgba(10,22,40,0.025);cursor:pointer;transition:.18s;text-align:left}
+  .hubengine:hover{border-color:var(--teal);background:rgba(25,184,153,.07)}
+  .hubengine .heicon{width:30px;height:30px;flex:none;border-radius:8px;display:grid;place-items:center;border:1px solid var(--line);background:rgba(10,22,40,0.04)}
+  .hubengine .heicon svg{width:16px;height:16px;stroke:var(--teal);fill:none;stroke-width:2}
+  .hubengine .hetag{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:600}
+  .hubengine .hename{font-size:16px;font-weight:600;margin-top:1px}
+  .hubengine .hename b{color:var(--teal-soft);font-weight:600}
+  .hubengine .hegoal{flex:1;font-size:13px;color:#4b5563;font-weight:300;line-height:1.4;border-left:1px solid var(--line);padding-left:14px;margin-left:4px}
+  .hubengine .hearrow{flex:none;width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2.2}
+  @media (max-width:1024px){.slide{flex-direction:column;gap:18px;padding:10px 22px 18px}.copy{width:100%;max-width:680px;text-align:center}.shot img{max-height:50vh}.menu-list{grid-template-columns:1fr}.hubgrid{grid-template-columns:1fr;grid-template-rows:none}.hubdiv .hbig{font-size:30px}.grid{grid-template-columns:repeat(3,1fr)}}
+  /* phones */
+  @media (max-width:640px){
+    .bar{padding:12px 16px;gap:8px}
+    .brand{font-size:11px;letter-spacing:.1em}
+    .zmark{width:26px;height:26px}.zmark span{font-size:13px}
+    .counter{display:none}
+    .btn{padding:6px 9px;font-size:11px}
+    .slide{gap:14px;padding:8px 18px 14px}
+    .copy{max-width:none}
+    .eyebrow{font-size:11px;letter-spacing:.18em;margin-bottom:10px}
+    .title{font-size:23px;margin-bottom:11px}
+    .caption{font-size:14px;line-height:1.6}
+    .step-no{margin-top:14px;font-size:12px}
+    .shot img{max-height:42vh}
+    .browser-url{font-size:10px;max-width:180px}
+    .cover .zbig{width:58px;height:58px;border-radius:16px;margin-bottom:18px}
+    .cover .zbig span{font-size:28px}
+    .cover-kicker{font-size:11px;letter-spacing:.14em;padding:7px 13px;margin-bottom:20px}
+    .cover .big{font-size:34px;letter-spacing:-.02em}
+    .cover .sub{font-size:15.5px;margin-top:16px}
+    .hint{font-size:11px;margin-top:20px}.hint kbd{display:none}
+    .sectiondiv .snum{font-size:11px;letter-spacing:.24em;margin-bottom:12px}
+    .sectiondiv .stitle{font-size:30px}
+    .sectiondiv .ssub{font-size:15px;margin-top:14px}
+    .statementdiv{padding:0 6vw}
+    .statementdiv .seyebrow{font-size:11px;letter-spacing:.2em;margin-bottom:16px}
+    .statementdiv .sbig{font-size:29px;line-height:1.14}
+    .statementdiv .sbody{font-size:15.5px;margin-top:18px;line-height:1.6}
+    .hubdiv{padding:0 5vw}
+    .hubdiv .hbig{font-size:22px}
+    .hubdiv .hsub{font-size:13px}
+    .hubgrid{gap:11px;margin-top:14px}
+    .hubcard{padding:14px 16px}
+    .hubcard .hcname{font-size:18px}
+    .hubcard .hcgoal{font-size:13px}
+    .hubcard .hcmeta{font-size:11.5px}
+    .hubengine{flex-wrap:wrap;gap:10px;padding:12px 16px}
+    .hubengine .hegoal{flex-basis:100%;border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:9px;margin-left:0}
+    /* touch: zones smaller, arrows always visible */
+    .zone{width:16%}
+    .nav-arrow{opacity:.5;width:38px;height:38px}
+    .nav-arrow.l{left:8px}.nav-arrow.r{right:8px}
+    .grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:20px 16px 40px}
+    .grid .gtitle{margin:0 -16px;padding:18px 16px 12px;top:-20px}
+    .grid .gtitle .gt-big{font-size:20px}
+    .grid figcaption{font-size:11px;padding:7px 9px}
+    .menu-inner{width:92vw}
+    .menu-item{padding:13px 14px}
+    .menu-item .mtit{font-size:16px}
+    .routeend{bottom:52px;font-size:12px;padding:8px 14px}
+    .chapters{gap:5px;padding:8px 10px 12px}
+    .chapters .chap{padding:5px 9px}
+    .chapters .chap .clabel{font-size:10px}
+    /* on phones, only the active pill expands (hover doesn't exist) */
+    .chapters .chap:hover .clabel{max-width:0;opacity:0}
+    .chapters .chap.on .clabel{max-width:160px;opacity:1}
+  }
+  /* let tall narrow phones scroll a slide if a screenshot + copy don't fit */
+  @media (max-width:640px) and (max-height:560px){
+    body{overflow:auto}
+    .stage{position:relative;min-height:100vh}
+    .slide{min-height:0}
+  }
+  .fade{animation:fade .4s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  /* end-of-route cue: appears on the last slide of a learner journey */
+  .routeend{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);z-index:7;display:none;align-items:center;gap:9px;padding:9px 18px;border-radius:999px;border:1px solid rgba(25,184,153,.5);background:rgba(25,184,153,.12);color:#bff0e5;font-size:13px;letter-spacing:.04em;cursor:pointer;transition:.16s;backdrop-filter:blur(4px)}
+  .routeend.show{display:flex;animation:fade .4s ease}
+  .routeend:hover{background:rgba(25,184,153,.22);border-color:var(--teal)}
+  .routeend svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .stars{display:none}
+  .zbig-mark{width:74px;height:74px;margin-bottom:30px}
+</style>
+<link rel="stylesheet" href="../_brand/zavmo.css">
+</head>
+<body>
+<canvas id="stars" class="stars"></canvas>
+<div class="stage">
+  <div class="bar">
+    <div class="brand"><a class="z-logo-link" href="https://zavmo.ai" aria-label="Zavmo"><img class="z-logo" src="../_brand/zavmo-logo-mono-navy.svg" alt="Zavmo" width="130" height="28"></a></div>
+    <div class="spacer"></div>
+    <div class="counter" id="counter"></div>
+    <button class="btn accent" id="menuBtn" title="Jump to a section (M)">Sections</button>
+    <button class="btn" id="gridBtn" title="Overview (G)">Overview</button>
+    <button class="btn" id="fsBtn" title="Fullscreen (F)">Fullscreen</button>
+  </div>
+  <div class="slide" id="slide"></div>
+  <div class="chapters" id="chapters"></div>
+  <div class="progress"><i id="bar"></i></div>
+</div>
+<div class="zone l" id="zl"></div><div class="zone r" id="zr"></div>
+<div class="nav-arrow l" id="al"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></div>
+<div class="nav-arrow r" id="ar"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
+<div class="routeend" id="routeEnd"><svg viewBox="0 0 24 24"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg>Back to the four journeys</div>
+<div class="menu" id="menu"><div class="menu-close" id="menuClose">CLOSE ×</div><div class="menu-inner"><div class="menu-title">Jump to a learner experience</div><div class="menu-list" id="menuList"></div></div></div>
+<div class="grid" id="grid"><div class="gclose" id="gclose">CLOSE ×</div></div>
+
+<script>
+const S=[
+  { cover:true, big:'Learning as unique<br>as <em>you are</em>',
+    sub:'Four learners. Four very different goals. One companion that meets each of them where they stand. And the learning science behind every screen.' },
+
+  { statement:true, eyebrow:'Why this matters', big:'What if <em>everyone</em> had a tutor?',
+    body:'In 1984, Benjamin Bloom proved something extraordinary. A learner with a one-to-one tutor, taught to mastery, outperforms <b>98% of a conventional classroom</b>. That is two full standard deviations. The catch nobody could crack: you cannot give every person their own expert tutor. For forty years, that has been the holy grail of education. The <b>“two-sigma problem.”</b>',
+    credit:'Bloom, B. (1984). The 2 Sigma Problem.' },
+
+  { statement:true, chart:'twosigma', eyebrow:'The proof', title:'Two standard deviations',
+    body:'A tutored learner, taught to mastery, lands in the <b>top 2%</b>. They outperform 98% of the very same students in an ordinary classroom. That is the size of the prize.' },
+
+  { statement:true, eyebrow:'The Zavmo answer', big:'Now everyone can.',
+    body:'Zavmo is a personal tutor for every learner. It learns <b>how you learn</b>, teaches only what <b>you</b> need, in <b>your</b> world, at <b>your</b> pace. All of it to genuine mastery, against a real national standard. The two-sigma result, for everyone. The journey is the same shape for all four. <b>Discover, Discuss, Deliver, Demonstrate</b>. But every step bends around the learner. Pick one and watch.' },
+
+  { hub:true, eyebrow:'Choose a learner', big:'Four learners.<br>Whose journey shall we <em>walk</em>?',
+    sub:'The same four-stage spine. But each path begins differently. Pick one and follow their route to a proven, nationally-benchmarked outcome.',
+    cards:[
+      { tag:'A new skill', name:'<b>Nick</b> Futura', goal:'A data analyst mastering Data Presentation Techniques. Start to certified.', meta:'Full journey · ends in the credential', go:'route-nick' },
+      { tag:'A qualification', name:'<b>Alice</b> Rockwell', goal:'Working toward a City & Guilds Level 4 Diploma in Hospitality Management.', meta:'Discover · the qualification route', go:'route-alice' },
+      { tag:'Your current role', name:'<b>Steve</b> Ridge', goal:'A Warehouse Supervisor getting better at the job he already does.', meta:'Discover · the current-role route', go:'route-steve' },
+      { tag:'A future goal', name:'<b>Flure</b> Wood', goal:'A Hospital Operations Coordinator aiming to become a Client Services Team Lead.', meta:'Discover · the future-role route', go:'route-flure' }
+    ],
+    engine:{ tag:'Under the hood', name:'The <b>shared engine</b>', goal:'The craft beneath all four: onboarding, delivery, the five games, the Mind Palace.', go:'route-engine' } },
+
+  { section:true, route:'route-nick', id:'route-nick', num:'NICK · A NEW SKILL', title:'Nick masters a new skill', sub:'A data analyst goes from curious to certified in Data Presentation Techniques. The full journey, every stage.' },
+  { route:'route-nick', img:'15.png', eyebrow:'Nick · Discover · Your path', title:'Pick your path', caption:'Nick chooses <b>New skill</b>: “go from curious to capable in something you choose.” Current role, future goal, qualification and skill all sit side by side. Any one of them shapes what comes next. The destination is now fixed, and that is what lets Zavmo design the learning <b>backwards</b> from it.' },
+  { route:'route-nick', img:'16.png', eyebrow:'Nick · Discover · Case study', title:'A case study, written for him', caption:'Zavmo writes a bespoke scenario for Nick’s exact world and asks him to choose a response and rate his own confidence. This is <b>calibration</b>. Comparing what you think you know against what you can actually do is where real self-awareness, and real learning, begins.' },
+  { route:'route-nick', img:'nick-mcq-quickcheck.png', eyebrow:'Nick · Deliver · Retrieval', title:'It checks him, mid-lesson', caption:'Right inside the conversation, Zavmo poses a quick multiple-choice check on what makes a data presentation land. No separate quiz tab. Pulling the answer out yourself builds far stronger memory than re-reading ever could. Captured live, in a real lesson.' },
+  { route:'route-nick', img:'nick-mcq-answered.png', eyebrow:'Nick · Deliver · Feedback', title:'Immediate, specific feedback', caption:'Nick answers and Zavmo responds at once, confirming what is right and why. Immediate, specific feedback is the single biggest lever on how fast someone improves, and here it arrives in the flow of the lesson, not a fortnight later.' },
+  { route:'route-nick', img:'nick-deliver-mastery.png', eyebrow:'Nick · Deliver · Mastery learning', title:'It knows when he’s got it', caption:'Nick meets the learning outcome, proven through the conversation and not a tick-box. Zavmo confirms it and moves on. Mastery learning in action: you advance because you’ve <b>got it</b>, not because the clock ran out.' },
+  { route:'route-nick', img:'nick-lesson-complete-reflection.png', eyebrow:'Nick · Deliver · Close of lesson', title:'A warm close, every time', caption:'The lesson ends with Zavmo reflecting back what Nick just achieved. Not a silent jump to the next item. Closing the loop turns a unit of work into a small, felt win, and felt wins are what bring a learner back tomorrow.' },
+  { route:'route-nick', img:'nick-milestone-first-module.png', eyebrow:'Nick · Gamification · Milestone', title:'A milestone he can feel', caption:'A signature badge marks Nick finishing his first module. It is a warm, character-voiced celebration rather than a silent counter. Motivation is not a nice-to-have. Visible milestones turn steady effort into momentum.' },
+  { route:'route-nick', img:'nick-demonstrate-intro.png', eyebrow:'Nick · Demonstrate', title:'Now, prove it', caption:'A twelve-question check that climbs Bloom’s ladder, Remember to Create, with a live running score. Recognising the right answer inside a lesson is one thing. <b>Demonstrating</b> it cleanly, under your own steam, is the proof the competence is really his.' },
+  { route:'route-nick', img:'nick-demonstrate-q1.png', eyebrow:'Nick · Demonstrate · The check', title:'Question by question', caption:'Each question is pitched at a rising cognitive level and graded the instant Nick answers. Multiple choice, true/false and written responses, marked by the same standard a human assessor would use.' },
+  { route:'route-nick', img:'nick-demonstrate-q1-correct.png', eyebrow:'Nick · Demonstrate · Live score', title:'Instant feedback, live score', caption:'Right answers build the running total toward the credential. The act of being tested is itself one of the most powerful ways to cement a memory. The “testing effect,” turned into momentum.' },
+  { route:'route-nick', img:'nick-demonstrate-q2-retry.png', eyebrow:'Nick · Demonstrate · Honest grading', title:'It marks honestly and lets him recover', caption:'A written answer that falls short is marked as such, with the reason, and Nick gets the chance to answer again. The standard does not bend. The support does. Honest assessment is what makes the eventual credential mean something.' },
+
+  { route:'route-nick', statement:true, eyebrow:'The moment it all lands', big:'Before the proof,<br>it shows them <em>how far they came</em>.',
+    body:'This is the emotional heart of Zavmo. Before it issues anything, it stops and reflects the learner’s whole journey back to them: every outcome they met, the depth of thinking they reached, the questions they got right first time. Seeing your own growth made visible is what turns effort into pride. And pride is what makes a learner come back and do it again.' },
+  { route:'route-nick', img:'andy-demonstrate-reflection-howyougothere.png', eyebrow:'Demonstrate · The reflection', title:'“Here’s how you got here”', caption:'The climax of the whole experience. Zavmo speaks to the learner by name and walks the Bloom climb: <b>Remember, Understand, Apply, Analyse, Evaluate, Create</b>. <b>Twelve right first time of twelve</b>, deepest thinking reaching Create. Not a score on a screen: a person being shown, in plain words, exactly how far they have come. Captured live, in a real certified run.' },
+  { route:'route-nick', img:'andy-demonstrate-how-you-learned.png', eyebrow:'Demonstrate · How you learned', title:'It reflects <em>how</em> you learned, not just what', caption:'The part no exam ever gives you. Zavmo names a learning superpower. Here, <b>The Explorer</b>. Then it shows what it noticed along the way: the rhythm you worked in, the day you pushed hardest, the moments you got curious. Qualitative, personal, and earned. This is the single most distinctive screen in the whole product, and it only exists because the journey was real.' },
+  { route:'route-nick', img:'andy-demonstrate-readiness-statement.png', eyebrow:'The credential', title:'“Well held”: a credential that means something', caption:'A clean <b>100%</b>, twelve right first time, and Zavmo issues a nationally-benchmarked readiness statement. That is an <b>Ofqual-regulated TLM Level 3 Certificate in AWS Cloud Systems and Services</b>, 444 credits towards the qualification. Because the result is externally validated, it means something to an employer, not just inside the app.' },
+
+  { section:true, route:'route-alice', id:'route-alice', num:'ALICE · A QUALIFICATION', title:'Alice earns a qualification', sub:'A customer-service team leader working toward a real, Ofqual-regulated diploma. Chosen, then assessed against, before a single lesson is taught.' },
+  { route:'route-alice', img:'alice-discover-qualification.png', eyebrow:'Alice · Discover · Your path', title:'She picks a real qualification', caption:'Alice chooses the <b>Qualification</b> path and lands on a City & Guilds Level 4 Diploma in Principles of Hospitality Management. It is a genuine, Ofqual-regulated award, searched and selected, not invented content. When the destination is a recognised standard, the effort is worth something beyond the app.' },
+  { route:'route-alice', img:'35.png', eyebrow:'Alice · Discover · Inside the qualification', title:'See exactly what she’ll learn', caption:'Open any unit and the full standard is laid bare: the occupational standard it maps to, its level, every performance criterion (what she must be able to do) and every knowledge requirement (what she must understand). Transparency drives commitment: learners invest more when they can see exactly what they are signing up for.' },
+  { route:'route-alice', img:'17.png', eyebrow:'Alice · Discover · Assessment', title:'Assessed against every unit', caption:'The qualification breaks into real, nationally-benchmarked units, each with its own focus. Zavmo assesses Alice against every one <b>before</b> teaching a thing. That is the fastest, most respectful route to mastery: no time on what she has nailed, all of it on what she has not.' },
+  { route:'route-alice', img:'20.png', eyebrow:'Alice · Discover · Her study plan', title:'A plan that sequences itself', caption:'From the results, Zavmo builds a priority-ordered plan. Fastest wins first, with units, hours and a week-by-week timeline. Spacing the work across weeks rather than cramming is not a nicety. Spaced practice is one of the strongest findings in the science of memory.' },
+
+  { section:true, route:'route-steve', id:'route-steve', num:'STEVE · YOUR CURRENT ROLE', title:'Steve grows in his current role', sub:'A warehouse supervisor getting measurably better at the job he already does. The learning is grounded in his real Monday morning.' },
+  { route:'route-steve', img:'steve-discover-currentrole.png', eyebrow:'Steve · Discover · Your path', title:'He starts from the job he’s in', caption:'Steve chooses the <b>Current role</b> path. Warehouse Supervisor. From here Zavmo builds the learning around the work he already does, not a generic syllabus. Skill transfers best when it is practised in the exact context you will use it in.' },
+  { route:'route-steve', img:'27.png', eyebrow:'Steve · Discover · His job, in full', title:'See the whole role', caption:'Steve’s own role rendered as a complete picture: the real day-to-day, every responsibility by experience band, and exactly who he works with. When a learner can see precisely what the role demands, the learning has an obvious purpose, and purpose is what sustains effort.' },
+  { route:'route-steve', img:'16.png', eyebrow:'Steve · Discover · Case study', title:'A dilemma from his floor', caption:'Zavmo writes Steve a scenario straight from his world. Damaged racking at 06:45, a despatch target under scrutiny, no clean answer. Then it asks what he would do first, and how confident he is. Calibrating judgement against a realistic dilemma is where genuine self-awareness, and learning, begin.' },
+  { route:'route-steve', img:'20.png', eyebrow:'Steve · Discover · His study plan', title:'A plan built around his week', caption:'From his answers, Zavmo sequences a priority-ordered plan that fits around shift work. Fastest, highest-impact wins first. Learning designed backwards from the real job is learning he will actually finish.' },
+
+  { section:true, route:'route-flure', id:'route-flure', num:'FLURE · A FUTURE GOAL', title:'Flure reaches for a future role', sub:'A hospital operations coordinator planning the move to Client Services Team Lead. The learning is designed backwards from where she is heading.' },
+  { route:'route-flure', img:'flure-discover-futurerole.png', eyebrow:'Flure · Discover · Your path', title:'She names where she’s heading', caption:'Flure chooses the <b>Future goal</b> path, from Hospital Operations Coordinator toward Client Services Team Lead. “What it means to be a Client Services Team Lead, and how I’m getting you there.” Naming the destination is exactly what lets Zavmo design the learning <b>backwards</b> from it.' },
+  { route:'route-flure', img:'27.png', eyebrow:'Flure · Discover · The target role, in full', title:'See the role she’s aiming at', caption:'Zavmo lays out the target role in full: its real responsibilities, the skills it demands, and how they differ from where she stands today. Seeing the gap clearly is the first step to closing it deliberately rather than hoping to drift across.' },
+  { route:'route-flure', img:'18.png', eyebrow:'Flure · Discover · Bloom’s taxonomy', title:'Measured by depth, not boxes ticked', caption:'Every skill for the future role is mapped across Bloom’s six cognitive levels, Remember to Create. Flure rates where she honestly sits today. Progress means <b>moving up the levels</b>: the difference between knowing about the job and being able to do it.' },
+  { route:'route-flure', img:'20.png', eyebrow:'Flure · Discover · Her study plan', title:'A path to the new role', caption:'Zavmo turns the gap between today’s role and tomorrow’s into a sequenced, priority-ordered plan: units, hours and a week-by-week timeline pointed squarely at Client Services Team Lead. You are not collecting courses. You are assembling the person you set out to become.' },
+
+  { section:true, route:'route-engine', id:'route-engine', num:'THE SHARED SPINE', title:'One journey, under the hood', sub:'Whichever path a learner picks, the same craft runs beneath it: onboarding, delivery, games, the Mind Palace. Here is the engine all four share.' },
+  { img:'01.png', eyebrow:'Getting started', title:'Sign up', caption:'A learner arrives. No jargon, no course catalogue to wade through. Just a name, an email, and a conversation about to begin. The tone is set in the first second: this is a relationship, not a content library.' },
+  { img:'02.png', eyebrow:'Getting started', title:'Straight into the conversation', caption:'Sign-up takes seconds and flows directly into onboarding. There is no email-verification wall between a learner and their first experience. Every step removed is one less reason to drop out before the value lands.' },
+
+  { section:true, num:'ONBOARDING', title:'Onboarding', sub:'Seven short chapters that build a portrait of the learner: who they are, where they are heading, and how they learn best.' },
+  { statement:true, eyebrow:'The pedagogy · Why all the questions', big:'You can’t personalise<br>what you don’t know.',
+    body:'Before Zavmo teaches a single thing, it builds a <b>learner model</b>. That is a living picture of your role, your goals, your prior knowledge and how your mind actually works. Every question here has a purpose. It is what lets everything that follows be genuinely <b>yours</b>, not one-size-fits-all.' },
+  { img:'03.png', eyebrow:'Onboarding · Chapter 1', title:'Who you are', caption:'Zavmo introduces itself and learns the basics, one gentle question at a time, with a progress rail on the right. Small conversational steps lower the pressure. People share far more when it feels like a chat than when it feels like a form.' },
+  { img:'04.png', eyebrow:'Onboarding · Chapter 2', title:'What you’re doing now', caption:'Role, industry, experience, and an honest picture of the working week. Why it matters: this is what lets every future example come from <b>your</b> world. Skill transfers best when it is practised in the context you will actually use it in.' },
+  { img:'05.png', eyebrow:'Onboarding · Chapter 3', title:'What you’ve already studied', caption:'Prior qualifications, matched to the national qualifications register. The principle is simple and respectful: <b>do not re-teach what you already know.</b> Zavmo builds on your existing knowledge instead of wasting your time on it.' },
+  { img:'06.png', eyebrow:'Onboarding · Chapter 4 · Life design', title:'Where you’re heading', caption:'Goals at six months, two years and five years. This is the heart of it: you describe the <b>life you are designing for</b>, and Zavmo plans the learning <b>backwards</b> from there. Every lesson becomes a deliberate step toward who you are trying to become. Not content for its own sake.' },
+  { img:'07.png', eyebrow:'Onboarding', title:'A halfway pulse-check', caption:'The required chapters are done. The next three are optional and more personal. Handing the learner control is not just courtesy. Autonomy is one of the strongest drivers of motivation, and motivated learners go further.' },
+  { img:'08.png', eyebrow:'Onboarding · Chapter 5', title:'How you feel about it', caption:'When you are most yourself, and where the wobble shows up. Learning is emotional, not only cognitive. Knowing where your confidence dips lets Zavmo support you there, before it becomes the reason you stop.' },
+  { img:'09.png', eyebrow:'Onboarding · Chapter 6', title:'Things you love', caption:'Books, films and music, so the stories and analogies are <b>yours</b>, never generic corporate speak. A new idea anchored to something you already love is an idea that sticks. That is the science of meaningful encoding.' },
+  { img:'10.png', eyebrow:'Onboarding · Chapter 7 · Metacognition', title:'It learns how <em style="color:var(--teal);font-style:normal">you</em> learn', caption:'This is the move that sets Zavmo apart. Before teaching anything, it asks <b>how you learn</b>. Your sharpest time of day, the session length you will sustain, the pace you want, whether you need the example or the theory first. Metacognition, built into the system: the lesson then arrives the way <b>you</b> take things in best.' },
+  { img:'11.png', eyebrow:'The payoff', title:'Your portrait', caption:'Zavmo reflects back everything it heard: “here’s who I see”. It turns a pile of answers into a recognisable person. The learner model is complete, and nothing is taught until Zavmo knows exactly who it is teaching.' },
+
+  { section:true, num:'THE DASHBOARD', title:'Your dashboard', sub:'Everything personal, in one place.' },
+  { img:'12.png', eyebrow:'In the app · Home', title:'Zavmo notices, in your words', caption:'The home is not a list of courses. It is Zavmo talking to you. “I’ve been noticing…” narrates exactly where you stand and the one thing that would move you forward. You can push back live with “Reflect again” or “I’ve got it wrong”, and it re-reads you. Guidance that adapts beats a static to-do list every time.' },
+  { img:'36.png', eyebrow:'In the app · Continuity', title:'It picks up exactly where you left off', caption:'“Pick up where you left off” drops you back into the conversation mid-sentence. Your active path shows the recognised qualification, the units inside it, and an honest “on track, finish by late November.” Every interaction is captured as an xAPI statement, the evidence standard serious training records are built on. Peer signals only appear once enough learners join, fully anonymised.' },
+
+  { section:true, num:'DISCOVER & ASSESS', title:'Discover & assess', sub:'Each of the four chose a path. Whatever the path, the shared move is the same: fix the destination, then prove where you actually stand before teaching a thing.' },
+  { statement:true, eyebrow:'The pedagogy · Assessment first', big:'It finds the gap<br>before it fills it.',
+    body:'Most courses teach everything to everyone and test at the end. Zavmo does the opposite: it <b>assesses what you can already do first</b>, then teaches only the gap. That is the fastest, most respectful route to mastery. No time on what you have nailed, all of it on what you have not.' },
+  { img:'14.png', eyebrow:'Discover · Real qualifications', title:'Benchmarked to national standards', caption:'Every qualification is benchmarked to recognised national standards. So a learner knows what they are studying is the real thing, not invented content. Genuine, externally-validated outcomes are what make the effort worth something beyond the app.' },
+  { img:'18.png', eyebrow:'Discover · Pedagogy · Bloom’s taxonomy', title:'Measured by depth, not boxes ticked', caption:'The spine of how Zavmo teaches and grades. Every skill is mapped across Bloom’s six cognitive levels: Remember, Understand, Apply, Analyse, Evaluate, Create. You rate where you honestly sit. Progress means <b>moving up the levels</b>, from recalling a fact to creating something new. That is the difference between knowing about a thing and being able to do it.' },
+
+  { section:true, num:'LESSON DELIVERY', title:'Lesson delivery', sub:'Zavmo teaches in your world. Pitched at your Bloom’s level, paced to how you learn. And you can talk to it.' },
+  { statement:true, eyebrow:'The pedagogy · Active learning', big:'You don’t watch.<br>You <em>do</em>.',
+    body:'Reading and watching feel like learning, then fade fast. Zavmo teaches the way the evidence says works: <b>retrieval</b> (pulling answers out, not having them poured in), <b>deliberate practice</b> at the edge of your ability, and immediate feedback. Every screen that follows is built to make you do the thinking.' },
+  { img:'21.png', eyebrow:'Deliver · The Coach', title:'Teaching, in context', caption:'“The Coach” teaches conversationally, using a worked example from Jordan’s own world: managing cloud infrastructure with version control tied into a CI/CD pipeline. Then it asks a real question. Worked examples in your own context are how abstract ideas become usable skill. This is learning designed to <b>transfer</b>.' },
+  { img:'38.png', eyebrow:'Deliver · Retrieval', title:'It checks you, mid-conversation', caption:'No separate quiz tab. Right inside the lesson, Zavmo poses a real dilemma: scaling a service from a single AWS region to three with no downtime. The options it offers are tempting but wrong. The Bloom chip and the criteria on the right update live as you answer. Pulling the answer out yourself builds far stronger memory than re-reading ever could. Captured live, in a real lesson.' },
+  { img:'33.png', eyebrow:'Deliver · Feedback', title:'You steer it, and it scores you', caption:'Every message is interactive: answer in your own words, or tap “Got it”, “Slower please”, “Show me an example” or “Read it to me”. And it grades your thinking live at its Bloom level. Immediate, specific feedback is the single biggest lever on how fast someone improves.' },
+  { img:'37.png', eyebrow:'Deliver · Deliberate practice', title:'It drops you into a live scenario', caption:'Mid-lesson, Zavmo turns teaching into doing. A real scenario: a 14:47 latency spike in eu-west-1 with 47 payment transactions in flight. Then a card asking what you would do first. You do not read about handling an incident, you work it, and Zavmo responds to your actual decision. Practising the real task is what builds the real skill.' },
+  { img:'45.png', eyebrow:'Deliver · Role-play', title:'It plays the people in your world', caption:'Ask Zavmo to role-play and it stays fully in character. Here it becomes “Sam,” a burnt-out engineer pushing back on an impossible deadline, body language and all (“leans back in chair, jaw tight”). You rehearse the hard conversation safely, as many times as you like. Safe-to-fail rehearsal is how people get good at things that are costly to get wrong for real. Captured live, in a real lesson.' },
+  { img:'22.png', eyebrow:'Deliver · Desirable difficulty', title:'It adapts to your answer', caption:'Answer well and Zavmo recognises the competence, then stress-tests it with a sharper, harder follow-up. It is pitched exactly at your edge, never a fixed script. Too easy and you coast. Too hard and you stall. This is the “desirable difficulty” that produces the steepest learning.' },
+  { statement:true, eyebrow:'Deliver · Five ways to make it stick', big:'It doesn’t test you.<br>It plays with you.',
+    body:'Between the conversation, Zavmo weaves in five kinds of interactive game: matching, sequencing, fill-the-gap, sorting and prioritising, each tagged to a Bloom’s level. They are not decoration. Games turn passive review into <b>active recall</b>, pair words with movement (dual coding), and space practice over time. Those are three of the most reliable memory boosters there are.' },
+  { img:'39.png', eyebrow:'Game · Match', title:'Match the pairs', caption:'Drag each term to its definition. It is a fast, tactile way to lock in vocabulary and concepts, scored instantly with an undo to rethink. Active recall, at the Remember / Understand level.' },
+  { img:'40.png', eyebrow:'Game · Sequence', title:'Put it in order', caption:'Re-order the steps of a real process until the sequence is right. Perfect where the <b>order</b> is the point: procedures, frameworks, decision flows. Harder than simply recognising the steps, and more valuable.' },
+  { img:'41.png', eyebrow:'Game · Fill the gap', title:'Complete the picture', caption:'A word bank and a sentence with holes in it. Choose the right words in context. It checks genuine understanding, not just recognition, because the surrounding meaning has to fit.' },
+  { img:'42.png', eyebrow:'Game · Sort', title:'Sort into categories', caption:'Drag each item into the right bucket. Great for the distinctions that matter: what counts and what does not. That is exactly where learners tend to blur things together.' },
+  { img:'43.png', eyebrow:'Game · Prioritise', title:'Rank what matters most', caption:'Order a list by priority and defend the call. This is judgement, not memory. It is the higher-order, Evaluate-level thinking that separates competence from mastery.' },
+  { img:'28.png', eyebrow:'Deliver · Voice', title:'Talk to Zavmo, hands-free', caption:'Learners do not have to type. Turn on voice and Zavmo reads every reply aloud and transcribes what you say. It is streamed in the moment, never stored, and consent can be withdrawn any time. A choice of input lowers the barrier and the cognitive load, so more attention goes to the learning itself.' },
+  { img:'44.png', eyebrow:'Deliver · Mastery learning', title:'It knows when you’ve got it', caption:'You meet every learning outcome, proven through the conversation and not a tick-box. Zavmo then closes the lesson with “Brilliant work,” confirms the outcomes, and opens the assessment. Mastery learning in action: you advance because you have <b>got it</b>, not because the clock ran out. Captured live at the end of a real lesson.' },
+
+  { statement:true, eyebrow:'Demonstrate · Where it all comes to a head', big:'And then,<br>you <em>prove</em> it.',
+    body:'Every path lands in the same place: a twelve-question demonstration that climbs Bloom’s ladder, an honest live score, then a reflection that shows you exactly how far you came. At the end, a nationally-benchmarked credential. You saw it in full on <b>Nick’s</b> route: the climb, “here’s how you got here,” and “well held.” The same proof waits at the end of every journey.' },
+
+  { section:true, num:'YOUR PROFILE', title:'Your profile', sub:'A living profile the learner owns.' },
+  { img:'29.png', eyebrow:'Your profile', title:'Everything you’ve shared, in one place', caption:'Work, goals, how you like to learn, interests and support needs. All editable any time, auto-saving as you go. The learner owns and steers their own model. As you change, the teaching changes with you.' },
+
+  { section:true, num:'MIND PALACE', title:'Mind Palace', sub:'Progress you can see, feel and return to. A constellation that grows with you.' },
+  { img:'30.png', darkframe:true, eyebrow:'Mind Palace · Day one', title:'It begins with one moment', caption:'Every learner starts with an empty sky. “Your palace begins with one moment of learning”. The first outcome you master lights the first star. Making progress <b>visible</b> is a quiet but powerful motivator.' },
+  { img:'31.png', darkframe:true, eyebrow:'Mind Palace · Taking shape', title:'The first stars appear', caption:'A few outcomes in, the constellation forms. Each star is an outcome mastered, each line a connection between ideas, clustered by module. Knowledge is not a list, it is a structure, and seeing how ideas connect is part of understanding them.' },
+  { img:'32.png', darkframe:true, eyebrow:'Mind Palace · Growing', title:'A map of everything you know', caption:'As you progress, the palace fills in. Here, seventeen outcomes across five clusters, reaching Evaluate-level, two earned just today. This is metacognition you can look at: a living map of how far you have come, and how it all fits together.' },
+  { img:'34.png', darkframe:true, eyebrow:'Gamification · Rewards', title:'Moments you earn', caption:'Signature milestone badges: First Lesson, First Insight, First Week, Bloom’s Climb, Comeback Kid, First Qualification. Each one unlocked with a warm, character-voiced celebration. Alongside streaks and weekly challenges, they turn steady effort into momentum you can feel. Motivation is not a nice-to-have. It is what brings the learner back tomorrow.' },
+
+  { section:true, num:'YOUR LIFE, BY DESIGN', title:'Your life, by design', sub:'Every step, pointed at the life the learner came to build.' },
+  { statement:true, eyebrow:'Designed backwards', big:'Learning that points<br>at <em>your</em> life.',
+    body:'Whether the goal was Nick’s new skill, Alice’s qualification, Steve’s current role or Flure’s next one, Zavmo never lost it. The units and the order of the lessons were all planned <b>backwards</b> from where each learner said they were heading. You are not collecting courses. You are assembling the person you set out to become.' },
+  { img:'46.png', eyebrow:'Personalisation · Made visible', title:'It shows you how it’s shaping this around you', caption:'“Already shaping your lessons”: Zavmo shows its working. It targets your next step up, casts role-plays around the colleagues in your role, and grounds every worked example in your actual working week, with “Because you told me…” beside each one. This is what “as unique as you are” looks like in practice. It is why you keep coming back.' },
+  { statement:true, eyebrow:'Progress that compounds', big:'One mastered outcome<br>at a time.',
+    body:'Each lesson lights another star, each check earns real credit, each credential is a rung toward the role you are aiming for. Because it is mastery learning, none of it is hollow. Every step is competence you genuinely own. Keep showing up, and the distance between where you are and where you are heading quietly closes.' },
+
+  { statement:true, eyebrow:'The revolution', big:'Join the<br><em>learning revolution</em>.',
+    body:'Four learners, four very different goals. One companion that knew each of them, taught to their level, made them <b>do</b> the work, proved they could, and benchmarked it to a real national standard. Not content pushed at a crowd with a quiz at the end. The two-sigma result, <b>at the scale of everyone</b>. Learning, finally, as unique as you are.',
+    credit:'Zavmo · learn.zavmo.ai' }
+];
+
+let i=0;
+const BRAND_URL='learn.zavmo.ai';
+const slide=document.getElementById('slide'),counter=document.getElementById('counter'),chaptersEl=document.getElementById('chapters'),bar=document.getElementById('bar');
+const contentCount=S.filter(s=>s.img).length;
+// Build chapters: an "Intro" group for everything before the first section,
+// then one chapter per section:true slide, each running until the next section.
+const CHAPTERS=(function(){
+  const short={ 'NICK · A NEW SKILL':'Nick','ALICE · A QUALIFICATION':'Alice','STEVE · YOUR CURRENT ROLE':'Steve','FLURE · A FUTURE GOAL':'Flure','THE SHARED SPINE':'The engine','ONBOARDING':'Onboarding','THE DASHBOARD':'Dashboard','DISCOVER & ASSESS':'Discover','LESSON DELIVERY':'Delivery','YOUR PROFILE':'Profile','MIND PALACE':'Mind Palace','YOUR LIFE, BY DESIGN':'By design' };
+  const ch=[];let firstSection=S.findIndex(s=>s.section);
+  if(firstSection>0)ch.push({label:'Intro',start:0});
+  S.forEach((s,k)=>{if(s.section)ch.push({label:short[s.num]||s.num,start:k});});
+  // end index of each chapter = start of the next, or end of deck
+  ch.forEach((c,k)=>{c.end=(k+1<ch.length?ch[k+1].start:S.length)-1;});
+  return ch;
+})();
+function chapterOf(n){let r=0;for(let k=0;k<CHAPTERS.length;k++){if(n>=CHAPTERS[k].start)r=k;}return r;}
+function contentIndexOf(n){return S.slice(0,n+1).filter(s=>s.img).length;}
+function indexOfSection(id){return S.findIndex(s=>s.id===id);}
+// Each slide's route is carried forward from the last slide that declared one.
+// Slides before the first route (cover/intro/hub) have route=null = the "home" zone.
+(function(){let cur=null;S.forEach(s=>{if(s.route)cur=s.route;s._route=cur;});})();
+const HUB_INDEX=S.findIndex(s=>s.hub);
+function routeOf(n){return S[n]?S[n]._route:null;}
+function render(){
+  const s=S[i];
+  slide.className='slide fade'+(s.cover?' cover':'')+(s.section?' sectiondiv':'')+(s.statement?' statementdiv':'')+(s.hub?' hubdiv':'');
+  if(s.cover){slide.innerHTML=`<img class="zbig-mark" src="../_brand/zavmo-logomark.svg" alt="" width="74" height="74"><div class="cover-kicker"><span class="dot"></span>Live product walk-through</div><div class="big">${s.big}</div><div class="sub">${s.sub}</div><div class="hint">Use <kbd>←</kbd> <kbd>→</kbd> or click · <kbd>P</kbd> autoplay · <kbd>M</kbd> sections · <kbd>G</kbd> overview · <kbd>F</kbd> fullscreen</div>`;}
+  else if(s.hub){const arrow='<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>';const cog='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';const e=s.engine;slide.innerHTML=`<div class="heyebrow">${s.eyebrow}</div><div class="hbig">${s.big}</div><div class="hsub">${s.sub}</div><div class="hubgrid">${s.cards.map(c=>`<div class="hubcard" data-go="${c.go}"><div class="hctag">${c.tag}</div><div class="hcname">${c.name}</div><div class="hcgoal">${c.goal}</div><div class="hcmeta">${c.meta} ${arrow}</div></div>`).join('')}</div>${e?`<div class="hubengine" data-go="${e.go}"><div class="heicon">${cog}</div><div><div class="hetag">${e.tag}</div><div class="hename">${e.name}</div></div><div class="hegoal">${e.goal}</div><svg class="hearrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>`:''}`;[...slide.querySelectorAll('.hubcard,.hubengine')].forEach(el=>{el.onclick=()=>{const t=indexOfSection(el.dataset.go);if(t>=0)go(t);};});}
+  else if(s.section){slide.innerHTML=`<div class="snum">${s.num}</div><div class="stitle">${s.title}</div><div class="ssub">${s.sub}</div><div class="srule"></div>`;}
+  else if(s.chart==='twosigma'){const yb=360,amp=240,sd=92,mu1=320,mu2=660,bell=(mu)=>{let p='';for(let x=70;x<=930;x+=10.75){const y=yb-amp*Math.exp(-((x-mu)*(x-mu))/(2*sd*sd));p+=(p?'L':'M')+x.toFixed(1)+' '+y.toFixed(1)+' ';}return p;};slide.innerHTML=`<div style="text-align:center;width:100%;max-width:1000px"><div class="seyebrow">${s.eyebrow}</div><div class="sbig" style="font-size:38px;margin-bottom:4px">${s.title}</div><svg viewBox="0 0 1000 430" style="width:100%;max-width:900px;margin-top:6px"><defs><marker id="ah" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#19b899"/></marker></defs><line x1="60" y1="${yb}" x2="940" y2="${yb}" stroke="rgba(255,255,255,.16)" stroke-width="1.5"/><path d="${bell(mu2)}L930 ${yb} L70 ${yb} Z" fill="rgba(25,184,153,.13)"/><path d="${bell(mu1)}" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2.5"/><path d="${bell(mu2)}" fill="none" stroke="#19b899" stroke-width="3.5"/><circle cx="${mu1}" cy="${yb-amp}" r="5" fill="#fff"/><circle cx="${mu2}" cy="${yb-amp}" r="6.5" fill="#19b899"/><line x1="${mu1+10}" y1="${yb-amp-26}" x2="${mu2-14}" y2="${yb-amp-26}" stroke="#19b899" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#ah)"/><text x="${(mu1+mu2)/2}" y="${yb-amp-36}" text-anchor="middle" fill="#7fe6d2" font-size="22" font-weight="600">+2σ</text><text x="${mu1}" y="${yb+32}" text-anchor="middle" fill="rgba(255,255,255,.62)" font-size="17">Average classroom</text><text x="${mu1}" y="${yb+54}" text-anchor="middle" fill="rgba(255,255,255,.4)" font-size="14">50th percentile</text><text x="${mu2}" y="${yb+32}" text-anchor="middle" fill="#7fe6d2" font-size="17" font-weight="500">With a personal tutor</text><text x="${mu2}" y="${yb+54}" text-anchor="middle" fill="rgba(127,230,210,.7)" font-size="14">98th percentile</text></svg>${s.body?`<div class="sbody" style="margin:14px auto 0">${s.body}</div>`:''}</div>`;}
+  else if(s.statement){slide.innerHTML=`${s.eyebrow?`<div class="seyebrow">${s.eyebrow}</div>`:''}<div class="sbig">${s.big}</div>${s.body?`<div class="sbody">${s.body}</div>`:''}${s.credit?`<div class="scredit">${s.credit}</div>`:''}`;}
+  else{const ci=contentIndexOf(i);slide.innerHTML=`<div class="copy"><div class="eyebrow">${s.eyebrow}</div><div class="title">${s.title}</div><div class="caption">${s.caption}</div><div class="step-no">${ci} / ${contentCount}</div></div><div class="shotwrap"><div class="shot${s.darkframe?' dark':''}"><div class="browser-bar"><span class="d r"></span><span class="d y"></span><span class="d g"></span><span class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>${BRAND_URL}</span></div><img src="images/${s.img}" alt="${s.title}"></div></div>`;}
+  counter.textContent=(i+1)+' / '+S.length;
+  bar.style.width=(i/(S.length-1)*100)+'%';
+  updateChapters();
+  try{document.getElementById('stars').classList.toggle('dim',!!s.img)}catch(e){}
+  // Show the "back to the four journeys" cue on the last slide of any route.
+  const here=routeOf(i),atRouteEnd=!!here&&(i+1>=S.length||routeOf(i+1)!==here);
+  try{document.getElementById('routeEnd').classList.toggle('show',atRouteEnd)}catch(e){}
+  void slide.offsetWidth;
+}
+// Living constellation backdrop. Echoes the Mind Palace.
+(function(){const c=document.getElementById('stars');if(!c)return;const ctx=c.getContext('2d');let W,H,DPR,stars=[];
+function init(){const n=Math.min(110,Math.round((innerWidth*innerHeight)/15000));stars=[];for(let k=0;k<n;k++)stars.push({x:Math.random()*W,y:Math.random()*H,r:(Math.random()*1.5+0.5)*DPR,a:Math.random()*0.5+0.2,tw:Math.random()*6.28,sp:Math.random()*0.012+0.004,vx:(Math.random()-0.5)*0.05*DPR,vy:(Math.random()-0.5)*0.05*DPR});}
+function resize(){DPR=Math.min(2,window.devicePixelRatio||1);W=c.width=innerWidth*DPR;H=c.height=innerHeight*DPR;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';init();}
+const MAX=130*Math.min(2,window.devicePixelRatio||1);
+function frame(){ctx.clearRect(0,0,W,H);for(const s of stars){s.x+=s.vx;s.y+=s.vy;if(s.x<0)s.x=W;if(s.x>W)s.x=0;if(s.y<0)s.y=H;if(s.y>H)s.y=0;s.tw+=s.sp;}
+ctx.lineWidth=DPR;for(let a=0;a<stars.length;a++){for(let b=a+1;b<stars.length;b++){const s1=stars[a],s2=stars[b],dx=s1.x-s2.x,dy=s1.y-s2.y,d2=dx*dx+dy*dy,mx=MAX*MAX;if(d2<mx){ctx.strokeStyle='rgba(25,184,153,'+((1-d2/mx)*0.09)+')';ctx.beginPath();ctx.moveTo(s1.x,s1.y);ctx.lineTo(s2.x,s2.y);ctx.stroke();}}}
+for(const s of stars){const al=s.a*(0.55+0.45*Math.sin(s.tw));ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,6.3);ctx.fillStyle='rgba(127,230,210,'+al+')';ctx.fill();}
+requestAnimationFrame(frame);}
+addEventListener('resize',resize);resize();frame();})();
+function go(n){i=Math.max(0,Math.min(S.length-1,n));render();}
+function next(){
+  const here=routeOf(i);
+  // On the hub: do not bleed into a route. A card must be chosen.
+  if(S[i].hub)return;
+  // Inside a route: if the next slide leaves this route (or deck ends), return to the hub.
+  if(here&&(i+1>=S.length||routeOf(i+1)!==here)){go(HUB_INDEX);return;}
+  if(i<S.length-1)go(i+1);
+}
+function prev(){
+  const here=routeOf(i);
+  // Inside a route: stepping back off the front of the route returns to the hub.
+  if(here&&(i-1<0||routeOf(i-1)!==here)){go(HUB_INDEX);return;}
+  if(i>0)go(i-1);
+}
+let autoTimer=null;function toggleAuto(){if(autoTimer){clearInterval(autoTimer);autoTimer=null;document.body.classList.remove('playing');}else{document.body.classList.add('playing');autoTimer=setInterval(()=>go(i<S.length-1?i+1:0),6500);}}
+// Build one pill per chapter; clicking jumps to the chapter's first slide.
+CHAPTERS.forEach((c,k)=>{const el=document.createElement('div');el.className='chap';el.title=c.label;el.innerHTML=`<span class="cfill"></span><span class="cdot"></span><span class="clabel">${c.label}</span>`;el.onclick=()=>go(c.start);chaptersEl.appendChild(el);});
+function updateChapters(){const cur=chapterOf(i);[...chaptersEl.children].forEach((el,k)=>{const c=CHAPTERS[k];el.classList.toggle('on',k===cur);el.classList.toggle('done',k<cur);const fill=el.querySelector('.cfill');if(k===cur){const span=Math.max(1,c.end-c.start);fill.style.width=(((i-c.start)/span)*100)+'%';}else{fill.style.width=k<cur?'100%':'0';}});}
+document.getElementById('zr').onclick=next;document.getElementById('zl').onclick=prev;
+document.getElementById('ar').onclick=next;document.getElementById('al').onclick=prev;
+document.getElementById('routeEnd').onclick=()=>go(HUB_INDEX);
+
+// jump-to-section menu
+const menu=document.getElementById('menu'),menuList=document.getElementById('menuList');
+S.forEach((s,k)=>{if(!s.section)return;const it=document.createElement('div');it.className='menu-item';it.innerHTML=`<span class="mnum">${s.num}</span><div><div class="mtit">${s.title}</div><div class="msub">${s.sub}</div></div>`;it.onclick=()=>{go(k);menu.classList.remove('show');};menuList.appendChild(it);});
+function toggleMenu(){menu.classList.toggle('show');grid.classList.remove('show');}
+document.getElementById('menuBtn').onclick=toggleMenu;
+document.getElementById('menuClose').onclick=()=>menu.classList.remove('show');
+menu.onclick=e=>{if(e.target===menu)menu.classList.remove('show');};
+
+addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key)){e.preventDefault();next();}else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();prev();}else if(e.key==='Home')go(0);else if(e.key==='End')go(S.length-1);else if(e.key.toLowerCase()==='f')toggleFs();else if(e.key.toLowerCase()==='g')toggleGrid();else if(e.key.toLowerCase()==='m')toggleMenu();else if(e.key.toLowerCase()==='p')toggleAuto();else if(e.key==='Escape'){grid.classList.remove('show');menu.classList.remove('show');if(autoTimer)toggleAuto();}});
+let tx=0;addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)dx<0?next():prev();});
+function toggleFs(){if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();}
+document.getElementById('fsBtn').onclick=toggleFs;
+const grid=document.getElementById('grid');
+const gtitle=document.createElement('div');gtitle.className='gtitle';gtitle.innerHTML='<div class="gt-eyebrow">Overview</div><div class="gt-big">Every screen, at a glance</div><div class="gt-sub">Tap any screen to jump straight to it.</div>';grid.appendChild(gtitle);
+S.forEach((s,k)=>{if(s.section){const h=document.createElement('div');h.className='ghead';h.textContent=s.num+' · '+s.title;grid.appendChild(h);return;}if(!s.img)return;const fig=document.createElement('figure');fig.innerHTML=`<img src="images/${s.img}" loading="lazy"><figcaption>${s.title}</figcaption>`;fig.onclick=()=>{go(k);grid.classList.remove('show');};grid.appendChild(fig);});
+function toggleGrid(){grid.classList.toggle('show');menu.classList.remove('show');}
+document.getElementById('gridBtn').onclick=toggleGrid;
+document.getElementById('gclose').onclick=()=>grid.classList.remove('show');
+render();
+</script>
+<p class="z-copyright-fixed">© 2026 Zavmo.ai. All rights reserved.</p>
+</body>
+</html>

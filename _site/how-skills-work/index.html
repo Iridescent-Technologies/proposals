@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<!-- Unlisted: sent by link, never found by a stranger. Not on the hub, not in
+     the sitemap. See robots.txt: the crawl stays allowed so this tag is read. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- ─────────────────────────────────────────────────────────────────────────
+     HOW SKILLS AND ASSESSMENTS WORK · a click-through of the Skills design
+
+     Built like how-pathways-work/, and from the same rules. The screens are
+     renders of the "Skills area mock-up" design canvas (23 Oct 2026). They are
+     a DESIGN, and some of what they show is still being built. No per-step
+     "Live today" or "Still to build" lines: the client gets each part as it is
+     built. The one line at the top says the screens show Skills as we are
+     building it.
+
+     Since 23 Oct 2026 each step leads with "What you do": numbered actions
+     that name the on-screen labels, and matching numbered markers on the
+     screenshot, placed in percentages so they scale. The steps run in set-up
+     order: framework, priority skills, role profile, assessment, publish,
+     pathways, then weekly use.
+
+     #assessments is a group link: it opens the first Assessments step, so it
+     can be sent on its own. Every step also has its own link.
+
+     The job description figure is APPROXIMATE_SCALE.jobDescriptions in
+     zavmo-web src/lib/catalogue/scale.ts (over 43,000, measured 11 Aug 2026),
+     used in the past tense as that file asks.
+     ───────────────────────────────────────────────────────────────────────── -->
+<title>Set up Skills and assessments · Zavmo</title>
+<meta name="description" content="A step-by-step look at Zavmo Skills: one record of what each person can do, and the assessments that fill it.">
+<meta property="og:title" content="How Skills and assessments work · Zavmo">
+<meta property="og:description" content="Step by step: the skills picture, role profiles, assessments, and how each result lands in one record.">
+<link rel="icon" href="../_brand/zavmo-logomark.svg" type="image/svg+xml">
+<style>
+  :root{
+    --bar-h:64px;
+    --nav-h:68px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-padding-top:calc(var(--bar-h) + 12px)}
+  body{margin:0;background:#fff;color:#0a1628;font-size:17px;line-height:1.6}
+  img{max-width:100%;height:auto}
+  a{color:var(--z-teal-ink)}
+
+  /* ── top bar ── */
+  .hp-bar{position:sticky;top:0;z-index:20;height:var(--bar-h);display:flex;align-items:center;gap:12px;
+    padding:0 clamp(16px,3vw,32px);background:#fff;border-bottom:1px solid var(--z-border)}
+  .hp-bar .spacer{flex:1}
+  .hp-count{font-size:14px;color:var(--z-text-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .hp-steps-btn{display:none}
+
+  /* ── layout ── */
+  .hp-wrap{display:grid;grid-template-columns:280px minmax(0,1fr);gap:clamp(24px,3vw,48px);
+    max-width:1320px;margin:0 auto;padding:0 clamp(16px,3vw,32px)}
+  .hp-list{position:sticky;top:var(--bar-h);align-self:start;max-height:calc(100vh - var(--bar-h));overflow:auto;
+    padding:28px 0 24px}
+  .hp-list h2{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--z-text-3);margin:0 0 10px;font-family:var(--z-font)}
+  .hp-list ol{list-style:none;margin:0;padding:0;counter-reset:s}
+  .hp-list li{counter-increment:s}
+  .hp-list a{display:flex;gap:10px;align-items:baseline;padding:7px 10px;border-radius:8px;text-decoration:none;
+    color:var(--z-text-2);font-size:15px;line-height:1.35}
+  .hp-list a::before{content:counter(s);flex:0 0 22px;font-size:13px;color:var(--z-text-3);font-variant-numeric:tabular-nums}
+  .hp-list a:hover{background:var(--z-bg-2);color:#0a1628}
+  .hp-list a[aria-current="step"]{background:rgba(0,217,192,.12);color:#0a1628;font-weight:600}
+  .hp-list a[aria-current="step"]::before{color:var(--z-teal-ink)}
+  .grp-anchor{display:block;height:0}
+  .js .grp-anchor{display:none}
+  .hp-list .grp{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--z-text-3);margin:14px 10px 4px}
+
+  .hp-main{min-width:0;padding:28px 0 calc(var(--nav-h) + 40px)}
+  .hp-intro{max-width:68ch;margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid var(--z-border)}
+  .hp-intro .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 8px}
+  .hp-intro h1{font-size:clamp(28px,4vw,40px);line-height:1.15;margin:0 0 10px}
+  .hp-note{margin:0;font-size:15px;color:var(--z-text-2)}
+
+  /* ── a step ── */
+  .step{scroll-margin-top:calc(var(--bar-h) + 12px)}
+  .js .step{display:none}
+  .js .step.on{display:block}
+  .step + .step{margin-top:64px}
+  .js .step + .step{margin-top:0}
+  .step-no{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--z-teal-ink);font-weight:700;margin:0 0 6px}
+  .step h2{font-size:clamp(24px,3vw,32px);line-height:1.2;margin:0 0 14px}
+  .step h3{font-size:18px;margin:22px 0 6px}
+  .copy{max-width:68ch}
+  .copy p{margin:0 0 12px}
+  .copy ul,.copy ol{margin:0 0 12px;padding-left:1.2em}
+  .copy li{margin:0 0 6px;color:var(--z-text-2)}
+  .copy li b,.copy p b{color:#0a1628;font-weight:600}
+  .chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px 20px;list-style:none;padding:0!important;margin:4px 0 16px!important}
+  .chapters li{margin:0;padding:8px 0;border-top:1px solid var(--z-border);font-size:15.5px}
+
+
+  /* ── screenshots ── */
+  .shots{display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;margin-top:8px}
+  figure{margin:0;flex:1 1 360px;min-width:0}
+  figure.narrow{flex:0 1 300px}
+  figure.wide{flex:1 1 100%}
+  .zoom{display:block;width:100%;padding:0;border:1px solid var(--z-border);border-radius:12px;overflow:hidden;background:var(--z-bg-2);
+    cursor:zoom-in;box-shadow:var(--z-shadow)}
+  .zoom img{display:block;width:100%}
+  figcaption{margin-top:8px;font-size:14px;line-height:1.45;color:var(--z-text-3)}
+  figcaption .mark{display:block;font-size:12.5px;margin-top:2px}
+
+  /* the Skills schematic: drawn, not a screen */
+  .flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:760px;margin:8px 0 6px;list-style:none;padding:0}
+  .flow li{border:1px solid var(--z-border);border-radius:12px;padding:14px;background:var(--z-bg-2);position:relative}
+  .flow b{display:block;font-family:var(--z-font-heading);font-size:16px;color:#0a1628;margin-bottom:4px}
+  .flow span{font-size:14.5px;color:var(--z-text-2);line-height:1.45;display:block}
+  .flow small{display:block;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--z-teal-ink);font-weight:700;margin-bottom:6px}
+  .scales{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;max-width:760px;margin:12px 0 0}
+  .scales div{border-left:3px solid var(--z-teal);padding:4px 0 4px 12px;font-size:15px;color:var(--z-text-2)}
+  .scales b{color:#0a1628;display:block}
+
+  /* ── Back and Next, always in reach ── */
+  .hp-nav{display:none}
+  .js .hp-nav{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;height:var(--nav-h);align-items:center;gap:12px;
+    padding:0 clamp(16px,3vw,32px);background:rgba(255,255,255,.97);border-top:1px solid var(--z-border)}
+  .hp-nav .inner{display:flex;align-items:center;gap:12px;width:100%;max-width:1320px;margin:0 auto}
+  .hp-nav .where{flex:1;min-width:0;font-size:14px;color:var(--z-text-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .hp-nav .where b{color:#0a1628;font-weight:600}
+  .hp-btn{appearance:none;font:inherit;font-size:15px;font-weight:600;min-height:44px;padding:0 18px;border-radius:var(--z-btn-radius);cursor:pointer;white-space:nowrap}
+  .hp-btn.back{background:#fff;border:1px solid var(--z-border-hover);color:#0a1628}
+  .hp-btn.next{background:var(--z-navy);border:1px solid var(--z-navy);color:#fff}
+  .hp-btn[disabled]{opacity:.4;cursor:default}
+  .hp-btn.ghost{background:#fff;border:1px solid var(--z-border-hover);color:#0a1628;font-size:14px;min-height:40px;padding:0 14px}
+
+  footer.z-footer-min{position:relative;z-index:1}
+  .js footer.z-footer-min{margin-bottom:var(--nav-h)}
+
+  /* ── enlarged screenshot ── */
+  dialog.hp-big{border:0;padding:0;margin:0;width:100vw;height:100vh;max-width:none;max-height:none;background:#fff}
+  dialog.hp-big::backdrop{background:rgba(10,22,40,.5)}
+  .hp-big .top{position:sticky;top:0;left:0;display:flex;align-items:center;gap:12px;padding:10px 16px;background:#fff;border-bottom:1px solid var(--z-border);z-index:1}
+  .hp-big .top p{flex:1;margin:0;font-size:14px;color:var(--z-text-2);min-width:0}
+  .hp-big .scroll{overflow:auto;height:calc(100vh - 61px);padding:16px}
+  .hp-big img{display:block;margin:0 auto;max-width:100%}
+
+  /* ── the how-to: numbered actions, and matching numbers on the screens ── */
+  .hp-sum{margin:18px 0 0;border:1px solid var(--z-border);border-radius:12px;background:var(--z-bg-2);padding:0}
+  .hp-sum summary{cursor:pointer;padding:12px 16px;font-family:var(--z-font-heading);font-weight:700;font-size:17px;color:#0a1628}
+  .hp-sum[open] summary{border-bottom:1px solid var(--z-border)}
+  .hp-sum .sum-lead{margin:12px 16px;font-size:15px;color:var(--z-text-2)}
+  .hp-sum ol{margin:0 16px 12px;padding-left:1.6em;font-size:15px;line-height:1.45}
+  .hp-sum li{margin:0 0 6px;padding-left:4px;break-inside:avoid}
+  @media (min-width:960px){.hp-sum ol{columns:2;column-gap:36px}}
+  .hp-sum li::marker{color:var(--z-teal-ink);font-weight:700}
+  .hp-sum a{color:#0a1628;text-decoration:none}
+  .hp-sum a:hover{text-decoration:underline}
+  .ui{font-weight:600;color:#0a1628}
+  .copy .pre{font-size:15.5px;color:var(--z-text-2)}
+  .step h3.do-h{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--z-text-3);margin:4px 0 10px;font-family:var(--z-font)}
+  .copy ol.do{list-style:none;counter-reset:d;margin:0 0 14px;padding:0}
+  .copy ol.do li{counter-increment:d;position:relative;padding:1px 0 0 38px;margin:0 0 12px;color:#0a1628}
+  .copy ol.do li::before{content:counter(d);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;
+    background:var(--z-navy);color:#fff;font:700 14px/26px var(--z-font);text-align:center;box-shadow:0 0 0 2px var(--z-teal)}
+  .copy .worked{border-left:3px solid var(--z-teal);padding:4px 0 4px 12px;margin:0 0 12px;color:#0a1628}
+  .copy .why{font-size:15px;color:var(--z-text-2)}
+  .zoom{position:relative}
+  .pins{position:absolute;inset:0;pointer-events:none}
+  .pin{position:absolute;transform:translate(-50%,-50%);width:24px;height:24px;border-radius:50%;background:var(--z-navy);color:#fff;
+    font:700 13px/24px var(--z-font);text-align:center;box-shadow:0 0 0 2px var(--z-teal),0 1px 4px rgba(10,22,40,.4)}
+  .hp-big .bigwrap{position:relative;width:fit-content;max-width:100%;margin:0 auto}
+  .hp-big .bigwrap img{max-width:100%}
+  .hp-big .pin{width:30px;height:30px;font-size:16px;line-height:30px}
+
+  .step h2:focus{outline:none}
+
+  /* ── wide screens: words on the left, the screens beside them ── */
+  @media (min-width:1200px){
+    .js .step.on{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);column-gap:40px;align-items:start}
+    .js .step.on > *{grid-column:1}
+    .js .step.on.noshot{display:block}
+    .js .step.on.noshot .flow{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .js .step.on.noshot .scales{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .js .step.on > .shots{grid-column:2;grid-row:1 / span 30;margin-top:0}
+    .js .step.on > .shots.below{grid-column:1 / -1;grid-row:auto;margin-top:8px}
+    /* A picture below the text: the text takes the full reading width, not the narrow side column. */
+    .js .step.on:has(> .shots.below){display:block}
+    .js .step.on > .shots.below{margin-top:20px}
+    .js .step.on .chapters{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .js .step.on .flow,.js .step.on .scales{grid-template-columns:minmax(0,1fr)}
+    .js .step.on .shots figure{flex:1 1 100%}
+    .js .step.on .shots figure.narrow{flex:0 1 340px}
+    .js .step.on .shots.pair figure{flex:1 1 calc(50% - 10px)}
+  }
+
+  /* ── phone and small tablet: the step list becomes a drawer ── */
+  @media (max-width:959px){
+    body{font-size:16px}
+    .hp-wrap{grid-template-columns:minmax(0,1fr);padding:0 16px}
+    .hp-steps-btn{display:inline-flex;align-items:center}
+    .hp-list{display:none}
+    .hp-list.open{display:block;position:fixed;top:var(--bar-h);left:0;right:0;bottom:var(--nav-h);max-height:none;z-index:19;background:#fff;
+      padding:16px;border-bottom:1px solid var(--z-border)}
+    .hp-main{padding-top:20px}
+    .hp-intro{margin-bottom:22px;padding-bottom:16px}
+    .hp-intro .eyebrow{display:none}
+    .hp-intro h1{font-size:23px;margin-bottom:6px}
+    .flow,.scales{grid-template-columns:minmax(0,1fr)}
+    figure.narrow{flex:1 1 100%;max-width:340px}
+    .hp-big .scroll .bigwrap.w{max-width:none;width:760px}
+    .hp-big .scroll .bigwrap.w img{width:100%}
+    .pin{width:22px;height:22px;font-size:12px;line-height:22px}
+  }
+  @media (max-width:420px){
+    .hp-nav .where{display:none}
+    .hp-nav .inner{justify-content:space-between}
+    .hp-btn{flex:1}
+    .hp-count{display:none}
+    .hp-big .hp-btn{flex:0 0 auto}
+    .hp-big .top p{font-size:13px}
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .js .step.on{animation:hpIn .25s ease}
+    @keyframes hpIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  }
+</style>
+<link rel="stylesheet" href="../_brand/zavmo.css">
+<script>document.documentElement.className += ' js';</script>
+</head>
+<body>
+
+<header class="hp-bar">
+  <a class="z-logo-link" href="https://zavmo.ai" aria-label="Zavmo"><img class="z-logo" src="../_brand/zavmo-logo-mono-navy.svg" alt="Zavmo" width="130" height="28"><span class="z-logo-tag">How Skills works</span></a>
+  <span class="spacer"></span>
+  <span class="hp-count" id="count" aria-live="polite"></span>
+  <button class="hp-btn ghost hp-steps-btn" id="stepsBtn" type="button" aria-expanded="false" aria-controls="steps">All steps</button>
+</header>
+
+<div class="hp-wrap">
+  <nav class="hp-list" id="steps" aria-label="Steps">
+    <h2>Steps</h2>
+    <ol>
+      <li><span class="grp">Set up Skills</span><a href="#what-skills-is-for">Open Skills</a></li>
+      <li><a href="#start-a-framework">Start your skills framework</a></li>
+      <li><a href="#frameworks">Check your skills framework</a></li>
+      <li><a href="#priority-skills">Choose your priority skills</a></li>
+      <li><a href="#role-profiles">Make a role profile from our library</a></li>
+      <li><a href="#what-an-assessment-is-for">Start an assessment</a></li>
+      <li><a href="#building-an-assessment">Check Zavmo's draft</a></li>
+      <li><a href="#practice-and-confidence">Check the question</a></li>
+      <li><a href="#who-rates">Choose who rates</a></li>
+      <li><a href="#publish-assessment">Publish the assessment</a></li>
+      <li><a href="#discover-and-demonstrate">Put it at the start of a pathway</a></li>
+      <li><a href="#in-your-pathways">Link skills to your pathways</a></li>
+      <li><span class="grp">Use it every week</span><a href="#what-to-do-next">Act on What to do next</a></li>
+      <li><a href="#the-skills-picture">Read the skills picture</a></li>
+      <li><a href="#a-roles-gaps">Close a role's gaps</a></li>
+      <li><a href="#who-can-do-this">Find who can do this</a></li>
+      <li><a href="#a-persons-record">Open a person's record</a></li>
+      <li><a href="#managers-confirm">Managers confirm a level</a></li>
+      <li><a href="#start-and-end">Compare the start and the end</a></li>
+      <li><a href="#into-the-record">Read one skill's ratings</a></li>
+      <li><a href="#on-a-phone">On a phone</a></li>
+    </ol>
+  </nav>
+
+  <main class="hp-main" id="main">
+    <div class="hp-intro">
+      <p class="eyebrow">Set-up guide</p>
+      <h1>Set up Skills and assessments</h1>
+      <p class="hp-note">These screens show Skills as we are building it.</p>
+      <details class="hp-sum" id="sum" open>
+        <summary>Set up Skills in 12 steps, then use it every week</summary>
+        <p class="sum-lead">Skills is one record of what each person can do. You say which skills matter, we find out where each person is, and you act on the gap.</p>
+        <ol>
+          <li><a href="#what-skills-is-for">Click <b class="ui">Skills</b> in the left menu.</a></li>
+          <li><a href="#start-a-framework">Click <b class="ui">Frameworks</b> and pick one way to start.</a></li>
+          <li><a href="#frameworks">Check the skills, and the line for each level.</a></li>
+          <li><a href="#priority-skills">Click <b class="ui">Choose priority skills</b> and set a target for each.</a></li>
+          <li><a href="#role-profiles">Click <b class="ui">Roles</b>, then <b class="ui">New role profile</b>, and approve it.</a></li>
+          <li><a href="#what-an-assessment-is-for">Click <b class="ui">Assessments</b>, then <b class="ui">New assessment</b>.</a></li>
+          <li><a href="#building-an-assessment">Check each section of Zavmo&#8217;s draft.</a></li>
+          <li><a href="#practice-and-confidence">Read the line for each answer.</a></li>
+          <li><a href="#who-rates">Choose who rates under <b class="ui">Who rates</b>.</a></li>
+          <li><a href="#publish-assessment">Click <b class="ui">Publish</b>, then <b class="ui">Yes, publish it</b>.</a></li>
+          <li><a href="#discover-and-demonstrate">Put it at Discover in a pathway.</a></li>
+          <li><a href="#in-your-pathways">Click <b class="ui">In your pathways</b> and check the skills each module builds.</a></li>
+        </ol>
+        <p class="sum-lead">Then, every week: act on the cards under <b class="ui">What to do next</b>, and read the skills picture.</p>
+      </details>
+    </div>
+
+    <!-- 1 -->
+    <section class="step" id="what-skills-is-for" aria-labelledby="h-1">
+      <p class="step-no">Step 1 of 21 · Set up Skills</p>
+      <h2 id="h-1">Open Skills</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Click <b class="ui">Skills</b> in the left menu.</li>
+          <li>Skills opens on <b class="ui">Overview</b>. The tabs beside it are <b class="ui">People</b>, <b class="ui">Roles</b>, <b class="ui">Assessments</b>, <b class="ui">Frameworks</b> and <b class="ui">In your pathways</b>.</li>
+          <li>Ask Zavmo a question in its conversation, such as "Do we have the skills we need for the AI plan?"</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> you see <b class="ui">What to do next</b> and <b class="ui">The skills picture</b>.</p>
+        <p class="why">Why: the next pathway starts where the last one ended, and your people lead can answer the board.</p>
+      </div>
+      <div class="shots below">
+        <figure class="wide"><button class="zoom" type="button"><img src="01-overview.png" alt="Skills on a laptop. On the left, Zavmo's conversation answers: do we have the skills we need for the AI plan? On the right, the Overview with cards saying what to do next." width="1440" height="1000" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:13.5%;top:18.9%">1</span><span class="pin" style="left:47.4%;top:16.8%">2</span><span class="pin" style="left:20.5%;top:10.6%">3</span></span></button>
+          <figcaption>The Overview. Ask Zavmo a question, or start from the cards.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="step" id="start-a-framework" aria-labelledby="h-2">
+      <p class="step-no">Step 2 of 21 · Set up Skills</p>
+      <h2 id="h-2">Start your skills framework</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Click the <b class="ui">Frameworks</b> tab.</li>
+          <li>Pick one way to start: <b class="ui">Start from ours</b>, <b class="ui">Import a CSV</b> or <b class="ui">Draft from pathways</b>.</li>
+          <li>Importing a spreadsheet? Click <b class="ui">Download the layout</b> first, so your rows match.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> Zavmo drafts the framework and opens it, marked <b class="ui">Draft</b>.</p>
+        <p class="why">Why: a skills framework lists the skills your organisation asks for, and what each one looks like at each level. Whichever way you start, it becomes your one primary framework.</p>
+      </div>
+      <div class="shots below">
+        <figure class="wide"><button class="zoom" type="button"><img src="02-framework-start.png" alt="Frameworks, with no framework yet. Three ways to start: from Zavmo&#8217;s framework, import a CSV, or draft from your pathways." width="1440" height="1000" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:75%;top:16.6%">1</span><span class="pin" style="left:47.5%;top:48.45%">2</span><span class="pin" style="left:64%;top:44.85%">2</span><span class="pin" style="left:80.5%;top:48.45%">2</span><span class="pin" style="left:64%;top:49.6%">3</span></span></button>
+          <figcaption>Three ways to start. You can change everything after.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="step" id="frameworks" aria-labelledby="h-3">
+      <p class="step-no">Step 3 of 21 · Set up Skills</p>
+      <h2 id="h-3">Check your skills framework</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Click <b class="ui">Check the skills</b> in Zavmo&#8217;s reply.</li>
+          <li>Click <b class="ui">Change</b> beside any skill, or <b class="ui">Add a skill</b>.</li>
+          <li>Open <b class="ui">What each level looks like</b>, marked <b class="ui">To check</b>.</li>
+          <li>Read the line for each level: <b class="ui">Own work</b>, <b class="ui">Team</b>, <b class="ui">Department</b> and <b class="ui">Organisation</b>.</li>
+          <li>To link a pathway you built, find <b class="ui">Pathways that build it</b> under the open skill and click <b class="ui">Attach a pathway</b>. Pick your pathway, then check the modules Zavmo suggests.</li>
+          <li>Already have your own framework? Under <b class="ui">Mapped onto this one</b>, click <b class="ui">Upload a framework</b> and choose your spreadsheet, CSV or document. Check any skill Zavmo is unsure of.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> no section says <b class="ui">To check</b>. Publish then opens, and the framework is marked <b class="ui">Primary</b>.</p>
+        <p class="why">Why: every rater sees the same line for each level, so a rating means the same thing to everyone.</p>
+      </div>
+      <div class="shots below">
+        <figure class="wide"><button class="zoom" type="button"><img src="03-framework-draft.png" alt="A draft Northfield skills framework. Zavmo drafted eight skills from two pathways and a job description. Skills and what each level looks like are marked To check." width="1440" height="1180" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:19.4%;top:30.4%">1</span><span class="pin" style="left:97.6%;top:22.5%">2</span><span class="pin" style="left:49.6%;top:68.6%">2</span><span class="pin" style="left:87.5%;top:74.5%">3</span></span></button>
+          <figcaption>Zavmo&#8217;s draft, with two sections to check.<span class="mark">Example data, not live data.</span></figcaption></figure>
+        <figure><button class="zoom" type="button"><img src="15-frameworks.png" alt="The published Northfield skills framework, marked primary. One skill is open, showing what it looks like in your own work, a team, a department and the organisation, and the pathways that build it with an Attach a pathway button. Below, Upload a framework." width="768" height="1714" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:3%;top:33.8%">4</span><span class="pin" style="left:3%;top:63.4%">5</span><span class="pin" style="left:3%;top:94.6%">6</span></span></button>
+          <figcaption>One skill open, with a line for each level.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="step" id="priority-skills" aria-labelledby="h-4">
+      <p class="step-no">Step 4 of 21 · Set up Skills</p>
+      <h2 id="h-4">Choose your priority skills</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>On <b class="ui">Overview</b>, click <b class="ui">Choose priority skills</b>, above the first bar.</li>
+          <li>Tick the four or five skills your plans depend on.</li>
+          <li>For each one, pick <b class="ui">Level</b>, <b class="ui">Practice</b> and <b class="ui">Who needs it</b>.</li>
+          <li>Click <b class="ui">Save 4 priority skills</b>.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> the Overview lists them under <b class="ui">Priority skills, set by you</b>.</p>
+        <p class="why">Why: a target is a level and a practice word, such as &#8220;Team, uses it routinely&#8221;. The skills picture and Download for the board lead with these.</p>
+      </div>
+      <div class="shots below">
+        <figure class="narrow"><button class="zoom" type="button"><img src="04-priority-link.png" alt="The top of the Skills Overview: a Who can do this? button, what to do next, and the skills picture with a Choose priority skills link." width="769" height="920" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:75%;top:93.4%">1</span></span></button>
+          <figcaption>Choose priority skills sits above the first bar.<span class="mark">Example data, not live data.</span></figcaption></figure>
+        <figure class="wide"><button class="zoom" type="button"><img src="04-priority.png" alt="Choose priority skills. Four skills are ticked, each with a level, a practice word and who needs it. A Save 4 priority skills button sits at the bottom." width="1440" height="1200" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:47.4%;top:22.1%">2</span><span class="pin" style="left:50.6%;top:28.3%">3</span><span class="pin" style="left:47.4%;top:92%">4</span></span></button>
+          <figcaption>Four priority skills, each with a target.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="step" id="role-profiles" aria-labelledby="h-5">
+      <p class="step-no">Step 5 of 21 · Set up Skills</p>
+      <h2 id="h-5">Make a role profile from our library</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Click the <b class="ui">Roles</b> tab, then <b class="ui">New role profile</b>.</li>
+          <li>Type the role into the search, such as <b class="ui">Operations team lead</b>.</li>
+          <li>Pick the closest job description. Click <b class="ui">Read it</b> to see it in full.</li>
+          <li>Open Zavmo's draft. Check each <b class="ui">Skill</b>, <b class="ui">Target</b> and <b class="ui">Need</b>. Click <b class="ui">Change a skill</b> to change one.</li>
+          <li>Fill in <b class="ui">Owner and review date</b>, then click <b class="ui">Approve the profile</b>.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> the draft no longer says <b class="ui">To check</b>. Nothing is live until you approve it.</p>
+        <p class="why">Why: a role profile says which skills a role needs, and how well. We built our library from over 43,000 job descriptions, so you do not start from scratch. Your own job description is optional: <b class="ui">Choose a file</b>.</p>
+      </div>
+      <div class="shots below">
+        <figure class="wide"><button class="zoom" type="button"><img src="05-roles-list.png" alt="Roles: four role profiles with their owner and review date, and a New role profile button at the top right." width="1440" height="1000" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:60.1%;top:17.8%">1</span><span class="pin" style="left:86.4%;top:8.35%">1</span></span></button>
+          <figcaption>Every role profile. New role profile starts one from our library.<span class="mark">Example data, not live data.</span></figcaption></figure>
+        <figure class="wide"><button class="zoom" type="button"><img src="04-role-from-library.png" alt="Roles. A search for Operations team lead finds three job descriptions. Zavmo has drafted a Team lead profile from the first, with four essential skills and one desirable, waiting to be checked." width="1440" height="1460" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:48.3%;top:23%">2</span><span class="pin" style="left:48.3%;top:27.3%">3</span><span class="pin" style="left:75%;top:90.7%">4</span><span class="pin" style="left:50.4%;top:90.7%">5</span></span></button>
+          <figcaption>A Team lead profile, drafted from the library and waiting for you to check it.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+    <span id="assessments" class="grp-anchor"></span>
+
+    <!-- 6 -->
+    <section class="step" id="what-an-assessment-is-for" data-alias="assessments" aria-labelledby="h-6">
+      <p class="step-no">Step 6 of 21 · Set up Skills</p>
+      <h2 id="h-6">Start an assessment</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Click the <b class="ui">Assessments</b> tab.</li>
+          <li>Click <b class="ui">New assessment</b>. Or ask Zavmo: "Build a starting assessment for team leads, from their profile."</li>
+          <li>To finish one Zavmo has drafted already, open it under <b class="ui">Drafts</b>.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> a draft opens with five sections to check.</p>
+        <p class="why">Why: an assessment finds out where someone is on a skill. A person is asked once, not on every pathway.</p>
+      </div>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="13-start-and-end.png" alt="The Assessments tab. A New assessment button at the top, the assessments in use, and one draft waiting to be checked." width="768" height="1611" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:49.2%;top:11.1%">1</span><span class="pin" style="left:76.5%;top:5.2%">2</span><span class="pin" style="left:78.6%;top:85.9%">3</span></span></button>
+          <figcaption>Every assessment, and where it is used.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="step" id="building-an-assessment" aria-labelledby="h-7">
+      <p class="step-no">Step 7 of 21 · Set up Skills</p>
+      <h2 id="h-7">Check Zavmo's draft</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Tell Zavmo who it is for, as in the request at the top.</li>
+          <li>Click <b class="ui">Check the question</b> in Zavmo's reply.</li>
+          <li>Open <b class="ui">Skills it asks about</b> and check the skills.</li>
+          <li>Open <b class="ui">When it is asked</b> and <b class="ui">What it writes</b>, and check both.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> only the sections in the next two steps still say <b class="ui">To check</b>. Publish opens once none do.</p>
+        <p class="why">Why: Zavmo takes the skills from the profile and drafts the questions. You do not write them from scratch.</p>
+      </div>
+      <div class="shots below">
+        <figure class="wide"><button class="zoom" type="button"><img src="09-build-assessment.png" alt="A draft assessment called Where do you start? Team leads, built by Zavmo from four skills. The question is open and marked To check." width="1440" height="1060" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:20.5%;top:10.6%">1</span><span class="pin" style="left:20%;top:36.1%">2</span><span class="pin" style="left:90%;top:18.8%">3</span><span class="pin" style="left:90%;top:79%">4</span></span></button>
+          <figcaption>One spoken request, one draft assessment, one section open at a time.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="step" id="practice-and-confidence" aria-labelledby="h-8">
+      <p class="step-no">Step 8 of 21 · Set up Skills</p>
+      <h2 id="h-8">Check the question</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Read the line under <b class="ui">Knows it</b>, <b class="ui">Has applied it</b> and <b class="ui">Uses it routinely</b>. Learners answer against these lines.</li>
+          <li>Keep <b class="ui">Not yet, or not sure</b>, so nobody has to guess.</li>
+          <li>Check the three answers under <b class="ui">How sure are you?</b></li>
+          <li>Tell Zavmo any line you would change.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> <b class="ui">The question</b> says <b class="ui">Ready</b>.</p>
+        <p class="why">Why: we ask about practice, not knowledge. People answer "have you done this at work?" well. Confidence sits beside the answer and is never turned into a level.</p>
+      </div>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="10-practice-confidence.png" alt="What the learner sees: one skill, three practice answers each with a line on what it looks like, a quiet not yet answer, and three confidence answers." width="720" height="508" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:5%;top:34.4%">1</span><span class="pin" style="left:5%;top:55.4%">2</span><span class="pin" style="left:5%;top:71.5%">3</span></span></button>
+          <figcaption>Each answer has a line on what it looks like.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="step" id="who-rates" aria-labelledby="h-9">
+      <p class="step-no">Step 9 of 21 · Set up Skills</p>
+      <h2 id="h-9">Choose who rates</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Open <b class="ui">Who rates</b>, marked <b class="ui">To check</b>.</li>
+          <li>Leave <b class="ui">The learner rates themselves</b> <b class="ui">On</b>.</li>
+          <li>Leave <b class="ui">Their manager confirms</b> <b class="ui">On</b>. Zavmo proposes a level and the manager agrees or changes it.</li>
+          <li>Leave <b class="ui">Two quick questions before a skip</b> <b class="ui">On</b>, so nobody skips a lesson on their word alone.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> <b class="ui">Who rates</b> says <b class="ui">Ready</b> and Publish opens.</p>
+        <p class="why">Why: self-ratings are a good start and a poor proof. The level that counts is the one shown at work.</p>
+      </div>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="11-who-rates.png" alt="The same assessment with Who rates open: the learner, their manager and two quick questions before a skip, each switched on." width="768" height="1000" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:80.5%;top:33.7%">1</span><span class="pin" style="left:80%;top:40.2%">2</span><span class="pin" style="left:80%;top:47.2%">3</span><span class="pin" style="left:80%;top:54.2%">4</span></span></button>
+          <figcaption>Who rates, open. The learner sees every rating and who gave it.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="step" id="publish-assessment" aria-labelledby="h-10">
+      <p class="step-no">Step 10 of 21 · Set up Skills</p>
+      <h2 id="h-10">Publish the assessment</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Click <b class="ui">Publish</b>. It opens once every section says <b class="ui">Ready</b>.</li>
+          <li>Click <b class="ui">Yes, publish it</b>.</li>
+          <li>Click <b class="ui">Use it in a pathway</b>.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> it moves to <b class="ui">Published</b> and says <b class="ui">You published this today</b>.</p>
+        <p class="why">Why: once it is published you can use it at Discover or Demonstrate on any pathway. A later change makes version 2. Answers already given stay as they are.</p>
+      </div>
+      <div class="shots below">
+        <figure class="wide"><button class="zoom" type="button"><img src="09-publish.png" alt="The draft assessment with every section ready. A Publish button, and a box asking to confirm: Yes, publish it, or Not yet." width="1440" height="1000" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:46.6%;top:55.35%">1</span><span class="pin" style="left:48.1%;top:71.85%">2</span></span></button>
+          <figcaption>Every section is checked, so Publish is open.<span class="mark">Example data, not live data.</span></figcaption></figure>
+        <figure class="wide"><button class="zoom" type="button"><img src="09-published.png" alt="Assessments: the new assessment under Published, version 1, with a Use it in a pathway button." width="1440" height="1000" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:48.1%;top:43.4%">3</span></span></button>
+          <figcaption>Published, and ready for a pathway.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="step" id="discover-and-demonstrate" aria-labelledby="h-11">
+      <p class="step-no">Step 11 of 21 · Set up Skills</p>
+      <h2 id="h-11">Put it at the start of a pathway</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Open <b class="ui">Discover: assessment at the start</b>. Only published assessments are listed.</li>
+          <li>Pick the assessment, such as <b class="ui">Where do you start? Team leads</b>.</li>
+          <li>Check <b class="ui">Demonstrate: assessment at the end</b>. It asks the same skills again.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> the row says <b class="ui">Ready</b>, with <b class="ui">You chose this</b> and an <b class="ui">Undo</b>.</p>
+        <p class="why">Why: Discover places each learner, so they skip what they can already do. Demonstrate shows the change at the end.</p>
+        <p class="why"><a href="../how-pathways-work/#discover">See Discover</a> and <a href="../how-pathways-work/#demonstrate">see Demonstrate</a> in the pathway guide.</p>
+      </div>
+      <div class="shots below">
+        <figure class="wide"><button class="zoom" type="button"><img src="17-pick-at-discover.png" alt="A pathway&#8217;s Teaching chapter: Discover, assessment at the start, with Where do you start? Team leads picked. Demonstrate, assessment at the end, is ready." width="1440" height="1000" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:47.4%;top:19.65%">1</span><span class="pin" style="left:50%;top:29.95%">2</span><span class="pin" style="left:47.4%;top:61.6%">3</span></span></button>
+          <figcaption>Pick it at Discover. Demonstrate asks the same skills again.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="step" id="in-your-pathways" aria-labelledby="h-12">
+      <p class="step-no">Step 12 of 21 · Set up Skills</p>
+      <h2 id="h-12">Link skills to your pathways</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Click the <b class="ui">In your pathways</b> tab.</li>
+          <li>Open a pathway, such as <b class="ui">Future Fluency, Level 3</b>.</li>
+          <li>Check the <b class="ui">Skills this builds</b> for each module.</li>
+          <li>Open a pathway marked <b class="ui">To check</b> and check the skills Zavmo linked.</li>
+          <li>For one marked <b class="ui">None linked</b>, such as the refresher, click <b class="ui">Ask Zavmo to link the refresher</b>.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> no pathway says <b class="ui">None linked</b>.</p>
+        <p class="why">Why: without this link a pathway cannot skip what someone has shown, or record what moved.</p>
+      </div>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="16-in-your-pathways.png" alt="In your pathways. Future Fluency, Level 3 is open, with Discover, Deliver and Demonstrate side by side, and the skills each module builds." width="768" height="1000" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:85%;top:12.4%">1</span><span class="pin" style="left:96.5%;top:24.8%">2</span><span class="pin" style="left:55.5%;top:42.8%">3</span><span class="pin" style="left:78.6%;top:74.5%">4</span><span class="pin" style="left:40%;top:89.2%">5</span></span></button>
+          <figcaption>Discover places, Deliver builds, Demonstrate shows.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section class="step" id="what-to-do-next" aria-labelledby="h-13">
+      <p class="step-no">Step 13 of 21 · Use it every week</p>
+      <h2 id="h-13">Act on What to do next</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>On <b class="ui">Overview</b>, read the cards under <b class="ui">What to do next</b>. The most useful comes first.</li>
+          <li>Click the button on a card: <b class="ui">Give a pathway</b>, <b class="ui">Draft a pathway</b>, <b class="ui">Review</b> or <b class="ui">Remind them</b>.</li>
+          <li>Click the cross on a card to set it aside.</li>
+          <li>Click the link under the cards to see the rest.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> Zavmo shows what it did in the conversation, with an <b class="ui">Undo</b>.</p>
+        <p class="why">Why: each card says what its figure rests on. Nothing changes until you press the button.</p>
+      </div>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="02-what-to-do-next.png" alt="Four cards. 14 people in Operations, Leeds, are below target. A priority skill no pathway builds. A profile due for review. 6 managers with levels waiting." width="744" height="480" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:2.7%;top:19.4%">1</span><span class="pin" style="left:24.4%;top:43%">2</span><span class="pin" style="left:49.2%;top:18.5%">3</span><span class="pin" style="left:49%;top:93.6%">4</span></span></button>
+          <figcaption>Four cards, each with one button.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section class="step" id="the-skills-picture" aria-labelledby="h-14">
+      <p class="step-no">Step 14 of 21 · Use it every week</p>
+      <h2 id="h-14">Read the skills picture</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Under <b class="ui">Showing</b>, pick the whole organisation, or a department, location, role or team.</li>
+          <li>Under <b class="ui">Change since</b>, pick the date to compare with.</li>
+          <li>On a skill below target, click <b class="ui">Give a pathway</b>.</li>
+          <li>Click <b class="ui">Find people</b> to see who already has it.</li>
+          <li>Click <b class="ui">Download for the board</b> for one page on your priority skills.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> the line beside the boxes shows how many people you are looking at.</p>
+        <p class="why">Why: each bar splits people into <b class="ui">Shown at work, at target</b>, <b class="ui">Rated at target, not shown</b>, <b class="ui">Below target</b> and <b class="ui">No rating</b>.</p>
+      </div>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="03-skills-picture.png" alt="The skills picture for the whole organisation. Four priority skills, each with a target, a bar in four parts, the counts, the newest rating date and one action." width="744" height="1242" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:13%;top:6.1%">1</span><span class="pin" style="left:51%;top:6.1%">2</span><span class="pin" style="left:64.3%;top:25.5%">3</span><span class="pin" style="left:90%;top:27.6%">4</span><span class="pin" style="left:33%;top:96.6%">5</span></span></button>
+          <figcaption>Each row ends in an action: give a pathway, or find people.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section class="step" id="a-roles-gaps" aria-labelledby="h-15">
+      <p class="step-no">Step 15 of 21 · Use it every week</p>
+      <h2 id="h-15">Close a role's gaps</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Click the <b class="ui">Roles</b> tab, then open a role, such as <b class="ui">Team lead</b>.</li>
+          <li>Open <b class="ui">Zavmo proposes a change</b>, if there is one, and check it.</li>
+          <li>Select a part of any bar to see who is in it.</li>
+          <li>Click <b class="ui">Give the gap pathways to 19 people</b>. Each person gets the pathway for the skill they are below on.</li>
+          <li>Under <b class="ui">Ready for this role</b>, click <b class="ui">Add to a shortlist</b>.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> the person says <b class="ui">On the shortlist</b>, with an <b class="ui">Undo</b>.</p>
+        <p class="why">Why: Ready for this role lists people in other roles who show the essentials. That is where succession starts.</p>
+      </div>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="05-role-gaps.png" alt="The Team lead role. Four essential skills and one desirable, each with a bar. Below, Ready for this role lists three people in other roles." width="768" height="1600" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:28%;top:4.2%">1</span><span class="pin" style="left:77.8%;top:15%">2</span><span class="pin" style="left:26%;top:29.1%">3</span><span class="pin" style="left:41.5%;top:72%">4</span><span class="pin" style="left:73%;top:86.5%">5</span></span></button>
+          <figcaption>A review date that has passed shows in a quiet outline, never in red.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 16 -->
+    <section class="step" id="who-can-do-this" aria-labelledby="h-16">
+      <p class="step-no">Step 16 of 21 · Use it every week</p>
+      <h2 id="h-16">Find who can do this</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Click <b class="ui">Who can do this?</b> at the top of Skills.</li>
+          <li>Pick the skill under <b class="ui">Skill</b>, and the lowest level you need under <b class="ui">At least</b>.</li>
+          <li>Narrow it by <b class="ui">Department</b>, <b class="ui">Location</b> or <b class="ui">Role</b>. Leave <b class="ui">Shown at work only</b> on.</li>
+          <li>Click <b class="ui">Add to a shortlist</b> beside each person, then <b class="ui">Download the shortlist</b>.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> the shortlist box names how many people it holds.</p>
+        <p class="why">Why: each result says how the level is known, and when. Nothing is sent to anyone from this screen.</p>
+      </div>
+      <div class="shots below">
+        <figure class="narrow"><button class="zoom" type="button"><img src="04-priority-link.png" alt="The top of the Skills Overview, with a Who can do this? button at the top right." width="769" height="920" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:74%;top:9%">1</span></span></button>
+          <figcaption>Who can do this? sits at the top of Skills.<span class="mark">Example data, not live data.</span></figcaption></figure>
+        <figure class="wide"><button class="zoom" type="button"><img src="06-who-can-do-this.png" alt="Who can do this? A search for people in Operations, Doncaster who check what AI gives back. Seven match. Two are on a shortlist for a pilot." width="1440" height="1100" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:47.6%;top:15.9%">2</span><span class="pin" style="left:72.4%;top:15.9%">2</span><span class="pin" style="left:47.6%;top:24.5%">3</span><span class="pin" style="left:86%;top:56.7%">4</span><span class="pin" style="left:48.4%;top:83.8%">4</span></span></button>
+          <figcaption>Zavmo made a shortlist for a pilot, and asks about a third person.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 17 -->
+    <section class="step" id="a-persons-record" aria-labelledby="h-17">
+      <p class="step-no">Step 17 of 21 · Use it every week</p>
+      <h2 id="h-17">Open a person's record</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Click <b class="ui">People</b> in the left menu, then a person.</li>
+          <li>Read each skill's ratings side by side: <b class="ui">Who rated</b>, <b class="ui">Practice</b>, <b class="ui">Confidence</b> and <b class="ui">Date</b>.</li>
+          <li>Ask Zavmo what they should do next.</li>
+          <li>Click a next step under <b class="ui">Next for Priya</b>, such as <b class="ui">Talk to Hannah</b>.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> a green line under the skill says what you set, with an <b class="ui">Undo</b>.</p>
+        <p class="why">Why: we never average ratings into one number. The level that counts is the one shown at work.</p>
+      </div>
+      <div class="shots below">
+        <figure class="wide"><button class="zoom" type="button"><img src="07-skills-record.png" alt="Priya Shah's skills record. One skill below target and one at target, each with ratings from Priya, her manager and work shown, side by side. Zavmo has set a stretch task." width="1440" height="1340" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:12.6%;top:17.6%">1</span><span class="pin" style="left:48.5%;top:26.1%">2</span><span class="pin" style="left:28%;top:8.1%">3</span><span class="pin" style="left:47%;top:92.4%">4</span></span></button>
+          <figcaption>A stretch task will show the skill at work.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 18 -->
+    <section class="step" id="managers-confirm" aria-labelledby="h-18">
+      <p class="step-no">Step 18 of 21 · Use it every week</p>
+      <h2 id="h-18">Managers confirm a level</h2>
+      <div class="copy">
+        <p class="pre">This is what a manager sees. You send a reminder from the <b class="ui">Remind them</b> card.</p>
+        <h3 class="do-h">What the manager does</h3>
+        <ol class="do">
+          <li>Read where Zavmo's level came from, under each skill.</li>
+          <li>Agree, or pick the level they have seen: <b class="ui">Knows it</b>, <b class="ui">Has applied it</b> or <b class="ui">Uses it routinely</b>.</li>
+          <li>Click <b class="ui">Agree</b>, or <b class="ui">I have not seen this</b>.</li>
+          <li>Click <b class="ui">Next: Tom Okafor, 2 skills</b> to move to the next person.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> the skill says <b class="ui">You agreed</b>, with an <b class="ui">Undo</b>.</p>
+        <p class="why">Why: managers skip blank forms, so we never send one. It takes about a minute.</p>
+      </div>
+      <div class="shots below">
+        <figure class="wide"><button class="zoom" type="button"><img src="12-manager-confirms.png" alt="A manager confirming three proposed levels for Priya Shah. Two are agreed. The third, keeping the site safe during a change, waits for the manager." width="1440" height="1000" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:48.3%;top:61.6%">1</span><span class="pin" style="left:65%;top:69.4%">2</span><span class="pin" style="left:48.3%;top:74.4%">3</span><span class="pin" style="left:48.3%;top:87%">4</span></span></button>
+          <figcaption>Two levels agreed by voice. Zavmo asks about the third.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 19 -->
+    <section class="step" id="start-and-end" aria-labelledby="h-19">
+      <p class="step-no">Step 19 of 21 · Use it every week</p>
+      <h2 id="h-19">Compare the start and the end</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>Click the <b class="ui">Assessments</b> tab.</li>
+          <li>Open the end assessment, such as <b class="ui">What changed? Team leads</b>.</li>
+          <li>Compare where people started and finished in the spider chart: the dashed outline is the start, the filled shape the end. The table below it gives <b class="ui">At the start</b>, <b class="ui">At the end</b> and <b class="ui">Shown at work</b> for each skill.</li>
+          <li>Open <b class="ui">A month later, at work</b> to see when the follow-up is due.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> you see the three columns side by side. We never combine them into one score.</p>
+        <p class="why">Why: a skip at the start is "placed", never "shown". It counts as shown only once they do it at work.</p>
+      </div>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="13-start-and-end.png" alt="Assessments in use. The starting assessment, the end assessment with a table of the start, the end and shown at work for four skills, and the follow-up a month later." width="768" height="1611" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:49.2%;top:11.1%">1</span><span class="pin" style="left:88%;top:23.2%">2</span><span class="pin" style="left:66%;top:37%">3</span><span class="pin" style="left:88%;top:77.3%">4</span></span></button>
+          <figcaption>Three moments, one set of skills.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 20 -->
+    <section class="step" id="into-the-record" aria-labelledby="h-20">
+      <p class="step-no">Step 20 of 21 · Use it every week</p>
+      <h2 id="h-20">Read one skill's ratings</h2>
+      <div class="copy">
+        <h3 class="do-h">What you do</h3>
+        <ol class="do">
+          <li>In a person's record, find the skill.</li>
+          <li>Read each row: <b class="ui">Who rated</b>, then <b class="ui">Practice</b>, <b class="ui">Confidence</b> and <b class="ui">Date</b>.</li>
+          <li>Set a task by mistake? Click <b class="ui">Undo</b> beside it.</li>
+        </ol>
+        <p class="worked"><b>You will know it worked when</b> you can see how the skill moved, row by row.</p>
+        <p class="why">Why: a rating is never edited. A new one is added beside it, and the next pathway reads the record first.</p>
+      </div>
+      <div class="shots">
+        <figure><button class="zoom" type="button"><img src="14-into-the-record.png" alt="One skill in Priya Shah's record: her rating at the start, her rating at the end of module 3, a level waiting for her manager, and not yet shown at work." width="720" height="339" loading="lazy"><span class="pins" aria-hidden="true"><span class="pin" style="left:63.8%;top:9.7%">1</span><span class="pin" style="left:16.5%;top:26.1%">2</span><span class="pin" style="left:75.4%;top:90.7%">3</span></span></button>
+          <figcaption>Her own ratings, her manager's, and work shown, in one place.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+
+    <!-- 21 -->
+    <section class="step" id="on-a-phone" aria-labelledby="h-21">
+      <p class="step-no">Step 21 of 21</p>
+      <h2 id="h-21">On a phone</h2>
+      <div class="copy">
+        <p>On a phone, Skills is for reading. The priority skills and the cards are there, on the move. You make changes on a computer.</p>
+      </div>
+      <div class="shots">
+        <figure class="narrow"><button class="zoom" type="button"><img src="18-phone.png" alt="Skills on a phone: four priority skills, each with its bar and counts, then what to do next." width="390" height="1540" loading="lazy"></button>
+          <figcaption>The skills picture on a phone.<span class="mark">Example data, not live data.</span></figcaption></figure>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer class="z-footer-min">
+  <span class="z-copyright">© 2026 Zavmo.ai. All rights reserved.</span>
+</footer>
+
+<div class="hp-nav" id="nav">
+  <div class="inner">
+    <button class="hp-btn back" id="back" type="button">Back</button>
+    <span class="where" id="where"></span>
+    <button class="hp-btn next" id="next" type="button">Next</button>
+  </div>
+</div>
+
+<dialog class="hp-big" id="big" aria-label="Enlarged screen">
+  <div class="top"><p id="bigCap"></p><button class="hp-btn ghost" id="bigClose" type="button">Close</button></div>
+  <div class="scroll"><div class="bigwrap" id="bigWrap"><img id="bigImg" alt=""><span class="pins" id="bigPins" aria-hidden="true"></span></div></div>
+</dialog>
+
+<script>
+(function(){
+  var steps=[].slice.call(document.querySelectorAll('.step'));
+  var links=[].slice.call(document.querySelectorAll('.hp-list li > a'));
+  var list=document.getElementById('steps'), stepsBtn=document.getElementById('stepsBtn');
+  var back=document.getElementById('back'), next=document.getElementById('next');
+  var where=document.getElementById('where'), count=document.getElementById('count');
+  var i=0;
+
+  function indexOf(id){for(var k=0;k<steps.length;k++)if(steps[k].id===id||steps[k].getAttribute('data-alias')===id)return k;return -1;}
+  function title(k){return steps[k].querySelector('h2').textContent;}
+
+  function show(k,opts){
+    i=Math.max(0,Math.min(steps.length-1,k));
+    steps.forEach(function(s,n){s.classList.toggle('on',n===i);});
+    links.forEach(function(a,n){if(n===i)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');});
+    back.disabled=i===0;
+    next.textContent=i===steps.length-1?'Back to the start':'Next';
+    where.innerHTML=(i<steps.length-1)?'Next: <b>'+title(i+1)+'</b>':'That is every step';
+    count.textContent='Step '+(i+1)+' of '+steps.length;
+    var hash='#'+steps[i].id;
+    if(!(opts&&opts.initial)&&location.hash!==hash){try{history.replaceState(null,'',hash);}catch(e){}}
+    closeList();
+    if(sum){sum.open=(opts&&opts.initial)?(i===0):false;}
+    if(!opts||!opts.keepScroll){window.scrollTo(0,0);}
+    if(opts&&opts.focus){steps[i].querySelector('h2').setAttribute('tabindex','-1');steps[i].querySelector('h2').focus({preventScroll:true});}
+  }
+  function openList(){list.classList.add('open');stepsBtn.setAttribute('aria-expanded','true');stepsBtn.textContent='Close';}
+  function closeList(){list.classList.remove('open');stepsBtn.setAttribute('aria-expanded','false');stepsBtn.textContent='All steps';}
+
+  // The set-up summary at the top: each line opens its step. It folds away
+  // once someone moves on, so it does not push every step down the page.
+  var sum=document.getElementById('sum');
+  if(sum){[].slice.call(sum.querySelectorAll('a')).forEach(function(a){a.onclick=function(e){e.preventDefault();var k=indexOf(a.getAttribute('href').slice(1));if(k>-1)show(k,{focus:true});};});}
+
+  back.onclick=function(){show(i-1,{focus:true});};
+  next.onclick=function(){show(i===steps.length-1?0:i+1,{focus:true});};
+  stepsBtn.onclick=function(){list.classList.contains('open')?closeList():openList();};
+  links.forEach(function(a,n){a.onclick=function(e){e.preventDefault();show(n,{focus:true});};});
+
+  document.addEventListener('keydown',function(e){
+    if(big.open)return;
+    if(e.target.closest&&e.target.closest('input,textarea,select'))return;
+    if(e.key==='ArrowRight'){e.preventDefault();if(i<steps.length-1)show(i+1,{focus:true});}
+    else if(e.key==='ArrowLeft'){e.preventDefault();if(i>0)show(i-1,{focus:true});}
+    else if(e.key==='Escape'){closeList();}
+  });
+  window.addEventListener('hashchange',function(){var k=indexOf(location.hash.slice(1));if(k>-1&&k!==i)show(k);});
+
+  // Tap a screen to see it full size. On a phone the wide boards open wider
+  // than the screen, so they can be read and panned.
+  var big=document.getElementById('big'), bigImg=document.getElementById('bigImg'), bigCap=document.getElementById('bigCap');
+  var bigWrap=document.getElementById('bigWrap'), bigPins=document.getElementById('bigPins');
+  [].slice.call(document.querySelectorAll('.zoom')).forEach(function(b){
+    var img=b.querySelector('img');
+    b.setAttribute('aria-label','Enlarge: '+img.alt);
+    b.onclick=function(){
+      bigImg.src=img.currentSrc||img.src; bigImg.alt=img.alt;
+      // The numbers ride on the image's own box, in percentages, so they stay
+      // on their controls at any size.
+      bigWrap.className='bigwrap'+((+img.getAttribute('width')>500)?' w':'');
+      var pins=b.querySelector('.pins'); bigPins.innerHTML=pins?pins.innerHTML:'';
+      var fig=b.closest('figure').querySelector('figcaption');
+      bigCap.textContent=fig?fig.firstChild.textContent:'';
+      if(big.showModal)big.showModal();else big.setAttribute('open','');
+    };
+  });
+  function closeBig(){if(big.close)big.close();else big.removeAttribute('open');}
+  document.getElementById('bigClose').onclick=closeBig;
+  big.addEventListener('click',function(e){if(e.target===big)closeBig();});
+
+  var start=indexOf(location.hash.slice(1));
+  show(start>-1?start:0,{initial:true});
+  // A deep link lands on its step, with the page title above it in view.
+  setTimeout(function(){window.scrollTo(0,0);},0);
+  // The browser's own jump to the fragment can land after that, so repeat it
+  // once the page has loaded.
+  window.addEventListener('load',function(){setTimeout(function(){window.scrollTo(0,0);},0);});
+})();
+</script>
+</body>
+</html>
