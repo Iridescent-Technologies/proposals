@@ -1,0 +1,139 @@
+{
+  "slug": "sales-and-marketing",
+  "name": "Sales and marketing",
+  "title": "Sales and Marketing",
+  "for": "People who lead a sales, marketing or account management team, such as a sales manager, marketing manager or account management lead.",
+  "shift": [
+    "In a sales or marketing team, AI now drafts outreach emails, proposals, campaign copy and social posts. Automated lead scoring ranks the inbound list. CRM records fill themselves from calls and emails. A weekly report that took a day now takes minutes. The work left is checking what comes back and deciding what goes out under the team's name. It is also judging which leads and accounts deserve a person's time.",
+    "That changes the content of each role. A business development representative may write fewer first emails and qualify more replies. A content producer may edit more than they draft. An account manager may start a renewal with a briefing already built. Some established skills matter less. New ones matter more, such as checking a generated claim before it is published.",
+    "The person leading the function decides how far to take this. Their evidence is the team's own pipeline, campaign and account figures. They answer for what the team sends, says and records. Rules on electronic marketing, personal data and advertising claims all apply. Choosing which markets to sell into is not theirs to decide here. Where the change needs that, it is recorded as a constraint or a dependency."
+  ],
+  "rules": [
+    {
+      "name": "UK GDPR",
+      "why": "CRM records of prospects and customers are personal data. Scoring them automatically or passing them to an AI tool needs a lawful basis. It is a constraint at ZFF-AU-05 1.4 and an obligation at ZFF-PJ-05 1.6."
+    },
+    {
+      "name": "Privacy and Electronic Communications Regulations 2003 (PECR)",
+      "why": "Marketing emails and texts to individual subscribers need consent unless the soft opt-in applies: an existing customer, similar products, and an opt-out offered when details were collected and in every message. Emails to corporate addresses do not need consent but must identify the sender and give an address for opting out. Who may be contacted belongs in the checks at ZFF-AU-05 5.1 and the obligations at ZFF-PJ-05 1.6."
+    },
+    {
+      "name": "CAP Code (UK Code of Non-broadcast Advertising and Direct & Promotional Marketing)",
+      "why": "Marketing must not mislead, and marketers must hold evidence for objective claims before publication. AI-drafted copy can state things nobody can evidence, so a human check on claims is recorded at ZFF-AU-05 5.1 and ZFF-PJ-05 4.4."
+    },
+    {
+      "name": "Digital Markets, Competition and Consumers Act 2024",
+      "why": "It prohibits unfair commercial practices towards consumers, including fake reviews. Where the team sells to consumers, generated reviews or testimonials are risks to record at ZFF-AU-05 5.2 and ZFF-PJ-05 4.6."
+    },
+    {
+      "name": "Equality Act 2010",
+      "why": "When roles change, a disabled colleague may need reasonable adjustments to the new work. That shapes the support at ZFF-EI-05 4.4 and ZFF-GM-05 4.5, within the obligations identified at ZFF-EI-05 1.5."
+    },
+    {
+      "name": "Trade Union and Labour Relations (Consolidation) Act 1992",
+      "why": "Proposing to dismiss 20 or more employees as redundant at one establishment within 90 days requires collective consultation with appropriate representatives (section 188). That includes dismissing and re-engaging people to change their terms. The Employment Rights Act 2025 is changing these duties, so check what is in force. Recorded at ZFF-EI-05 1.5."
+    }
+  ],
+  "units": {
+    "ZFF-GM-05": {
+      "context": "Here the change is in what sales and marketing people are expected to be good at. Writing a first draft matters less when AI produces one. Checking it, editing it to the team's standard and judging whether to send it matter more. The learner establishes what the team can do today from its own records. They determine what it will need, then lead the people through the change.",
+      "los": {
+        "LO1": "The learner analyses what happens when skills like writing outreach from scratch stop being what the work needs (1.1). They compare ways to build capability, such as call coaching or peer review of drafts (1.2). They evaluate why sales training so often fails to change calls (1.3). Commission plans, role definitions, budget and the campaign calendar are constraints at 1.4, and the team's views are weighed at 1.5.",
+        "LO2": "The learner determines how to establish capability, such as reviewing real proposals and call notes rather than a self-rating survey (2.1). They establish what each role requires (2.2) and what the team can already do from its records (2.3). They determine what drafting, scoring and reporting will require next (2.4). They find where the gap costs most, such as rework on proposals (2.5), and how far the evidence holds (2.6).",
+        "LO3": "The learner sets the criteria for judging options before looking at any (3.1). Options include coaching, moving research work between roles, recruiting or using an agency (3.2). Costs and benefits come from the team's own figures (3.3) and from comparable teams (3.4). They name a capability not to build, such as in-house video, with reasons (3.5). Then they recommend against their own criteria (3.6).",
+        "LO4": "The learner identifies who is affected, such as representatives known for writing outreach by hand (4.1), and consults them (4.2). A common concern is that commission will dip while new skills bed in. The learner decides whether such concerns change the recommendation (4.3) and adapts it (4.4). Each person gets actions, support and a period (4.5), and the learner decides what output will show the change (4.6).",
+        "LO5": "The learner evaluates the change against the requirement at 2.4, using the evidence chosen at 4.6 (5.1). They evaluate the effect on the team's work from its own CRM or campaign reports (5.2). They find where it did not take, such as one territory still writing by hand (5.3). They review their method and criteria (5.4) and what they would decide differently next time (5.5)."
+      },
+      "evidence": [
+        "2.1, 2.3, 2.6: a capability record built from a sample of the team's own proposals and call notes. It gives the reasons for that method and notes gaps, such as roles with no recent work.",
+        "2.4, 2.5: a statement of what the team will need once AI drafts first outreach. The gap is costed in the team's own terms, such as hours of rework on proposals.",
+        "3.1, 3.3, 3.6: the learner's own criteria for choosing between coaching, reallocation, recruitment and agency support. It includes costs from the team's systems and a recommendation.",
+        "4.2, 4.3, 4.4: a consultation record with colleagues identified by role, and the concerns raised about targets and commission. The revised recommendation shows what changed.",
+        "4.5: a short note for each affected role. It sets out the expected actions, the support available and the period it covers.",
+        "5.1, 5.2, 5.3: a review using at least one measurement taken after the change, against the evidence set at 4.6. It states its period and limits, and names where the change did not take effect."
+      ],
+      "level_watch": "It drops to Level 4 when a supplied sales competency framework or a fixed training list decides 2.1 and 3.1. It rises above Level 5 when the learner redesigns how the organisation sells, instead of recording that need at 1.4."
+    },
+    "ZFF-EI-05": {
+      "context": "Sales and marketing roles change when AI drafts the emails and automated scoring routes the leads. Some people welcome it. Others see the part of the job they were best at, and paid for, being taken over. The learner works with all of them, including those who do not accept the change. They answer for what the team does as a result.",
+      "los": {
+        "LO1": "The learner analyses how the team's work changes as roles shift (1.1). They evaluate what is at stake for field sales, inside sales and content producers, including targets and commission (1.2). They compare approaches to working with people through the change (1.3). They evaluate why agreed changes slip back, such as representatives returning to private spreadsheets (1.4). Commission terms and consultation procedures are identified at 1.5.",
+        "LO2": "The learner identifies whose roles change and who depends on them, such as a finance colleague who relies on CRM forecasts (2.1). They determine how to hear what people raise, perhaps team meetings plus one-to-ones (2.2), and record it (2.3). They separate objections to automated lead routing from objections to how territories were moved (2.4). They judge what is least likely to stick (2.5) and who was missed (2.6).",
+        "LO3": "The learner sets the criteria for judging the team's response to each point (3.1). They test objections against evidence (3.2). One example is a claim that AI-drafted emails get fewer replies, checked in the team's outreach records. They determine which points change the plan (3.3), use comparable changes (3.4) and adapt (3.5). They decide what happens if someone still disagrees, within the limits at 1.5 (3.6).",
+        "LO4": "The learner tells each person what changes, when, and what is expected (4.1). An example is a rule that a person checks every AI-drafted proposal before it reaches a client. They answer each point raised (4.2). They hold a recorded discussion with someone who has said they do not accept the change (4.3). They determine each person's support (4.4), how people stay informed and how the effect is measured (4.5).",
+        "LO5": "The learner evaluates the effect on the changed roles against 4.5 (5.1). They evaluate the effect on the team's work from its own pipeline or campaign figures (5.2). They judge how far the points recorded at 2.3 changed what the team did (5.3). They review their method and criteria (5.4) and what they would decide differently next time (5.5)."
+      },
+      "evidence": [
+        "2.1: a map of the roles that change, such as business development representatives and a campaign executive. It shows the colleagues outside the team who depend on their work.",
+        "2.2, 2.3, 2.6: a consultation plan with its reasons and a record of what each role raised. Colleagues appear by role or as Colleague A, with a note on who did not take part.",
+        "2.4, 3.2, 3.3: an analysis separating objections to automated lead routing from objections to how it was introduced. Each is tested against the team's outreach records, with a decision on the plan.",
+        "4.3: a record of a discussion with Colleague A, who stated they do not accept the change. It shows what was agreed and what was not, backed by witness testimony.",
+        "4.4, 4.5: a support and communication plan for the changed roles, including any reasonable adjustments. It states how the effect on their work will be measured.",
+        "5.1, 5.2: a review against the measures set at 4.5, using the team's own CRM activity and pipeline report. It states the period the evidence covers."
+      ],
+      "level_watch": "It drops to Level 4 when a supplied change script or rollout template decides 2.2, 3.1 and 3.3. It rises above Level 5 when the learner redesigns commission across the business, which belongs at 1.5 as a constraint."
+    },
+    "ZFF-AU-05": {
+      "context": "Sales and marketing teams repeat many processes. They qualify leads, log calls, build proposals and quotes, schedule posts and send email campaigns. They prepare account review packs and the weekly report. The learner works out which could be automated, which should not be, and what it would cost to find out. The unit stops at a recommendation to whoever decides.",
+      "los": {
+        "LO1": "The learner analyses how automation changes people's work, such as representatives no longer researching each prospect by hand (1.1). They compare approaches, such as one campaign stream first against the whole lead process at once (1.2). They evaluate why sales automation disappoints, such as lead scores nobody trusts (1.3). CRM permissions, data rules and agency contracts are constraints at 1.4, and team views are weighed at 1.5.",
+        "LO2": "The learner maps processes from enquiry to signed proposal, or from campaign brief to published post (2.1). They determine how to find where effort goes, such as CRM activity logs plus a short time sample (2.2). They establish volume and time cost from those systems (2.3). They identify what other teams depend on, such as handover notes (2.4), and how reliable the figures are (2.5).",
+        "LO3": "The learner sets the criteria a candidate must meet (3.1). They analyse a process such as proposal writing to see which parts could be automated (3.2). Costs and benefits come from the team's own figures (3.3), tested against comparable teams (3.4). They name a process to keep manual, such as pricing exceptions for key accounts (3.5). Then they recommend against their own criteria (3.6).",
+        "LO4": "The learner identifies whose work would change and how (4.1), then consults them (4.2). A representative might warn that automated follow-ups would reach people who asked not to be emailed. The learner decides whether concerns like this alter the evaluation (4.3) and adapts it (4.4). They evaluate the skills these automations need that the team lacks (4.5).",
+        "LO5": "For each recommended process the learner states the checks, fallbacks and points of human decision (5.1). One example is a person approving every generated claim before a campaign goes out. They evaluate the risks to the team, such as breaking the electronic marketing rules (5.2). They present to the person who would decide (5.3). They review their method (5.4) and what they would change next time (5.5)."
+      },
+      "evidence": [
+        "2.1, 2.4: a process map of the team's lead handling, proposal and campaign work. It shows inputs, outputs, people and the teams that depend on each process.",
+        "2.2, 2.3, 2.5: a note on how effort was measured, with volumes and time costs from the team's CRM and email platform. It states how gaps were handled.",
+        "3.1, 3.2, 3.3, 3.6: the learner's own criteria and an evaluation of candidates such as call logging and proposal drafting. Costs come from the team's figures, ending in a recommendation.",
+        "3.5: a reasoned case for keeping one process manual, such as replies to complaints raised on social media.",
+        "4.2, 4.3, 4.4: a consultation record with colleagues identified by role. The revised evaluation shows what changed.",
+        "5.1, 5.2, 5.3: the recommendation as presented, with checks, fallbacks and points of human decision. It carries a risk table covering PECR and UK GDPR, and witness testimony of the presentation."
+      ],
+      "level_watch": "It drops to Level 4 when the processes are already chosen and a supplied business case template decides 3.1. It rises above Level 5 when the recommendation changes how the whole organisation sells, instead of recording that need at 1.4."
+    },
+    "ZFF-DA-05": {
+      "context": "Sales and marketing teams hold many measures. Pipeline value, conversion by stage, cost per lead, open rates, renewals and attributed revenue are common. Each encourages some behaviour and leaves something out. The learner uses the team's own data to decide where its effort should go, and may change what it measures. What the organisation needs the function to achieve is set elsewhere.",
+      "los": {
+        "LO1": "The learner analyses what each measure counts and over what period (1.1). For example, does a qualified lead mean the same in marketing and sales reports? They analyse the behaviour each measure drives, such as call targets that reward volume (1.2), and what it leaves out (1.3). They compare measuring approaches, such as different ways of attributing a sale, with their reasoning (1.4). They weigh the team's views (1.5).",
+        "LO2": "The learner determines a question about the team's priorities (2.1). One might be whether account managers should spend more time on renewals than new business. They determine the data that bears on it (2.2) and identify what they set aside (2.3). They determine the method (2.4) and evaluate the data's quality, such as duplicate contacts or stages updated late (2.5).",
+        "LO3": "The learner analyses the data against the question (3.1) and interprets where effort is going (3.2). They find a second reading the same data supports and weigh the two (3.3). Renewals might look strong only because difficult accounts moved to another team. They test the reading through comparable work (3.4) and state the data's limits (3.5). They say where an AI tool was used and what they checked (3.6).",
+        "LO4": "The learner determines the change to priorities (4.1). They evaluate what the team would stop to make room, such as a low-yield event (4.2). They consult the people affected (4.3) and adapt the proposal (4.4). They present it to the person who decides the team's priorities and answer challenge (4.5). They state how the effect will be measured, and over what period (4.6).",
+        "LO5": "The learner evaluates the effect against 4.6, using at least one measurement taken after the change (5.1). They evaluate the method determined at 2.4 (5.2). They identify what the team would measure and decide differently next time (5.3). An example is retiring a measure that rewarded the wrong behaviour."
+      },
+      "evidence": [
+        "1.1, 1.2, 1.3: an annotated copy of the team's own pipeline report. It shows what each measure counts, the behaviour it drives and what it misses.",
+        "2.1, 2.2, 2.3, 2.4: a question note stating the priority question, the data chosen and set aside, and the method. Each choice has its reasons.",
+        "2.5, 3.1, 3.2: the analysis, done in the learner's own tools, with a data quality note on duplicate contacts and stale opportunities.",
+        "3.3, 3.5, 3.6: two readings of the same campaign or pipeline data, compared, with the limits of what it shows. It declares any AI tool used and what was checked.",
+        "4.3, 4.4, 4.5: a consultation record by role and the adapted proposal. Witness testimony covers the presentation and the challenge answered.",
+        "4.6, 5.1: the measure and period stated in advance, and a review after at least one later measurement. It states what the evidence cannot yet show."
+      ],
+      "level_watch": "It drops to Level 4 when a supplied question, reporting pack or fixed attribution model removes 2.1 and 2.4. It rises above Level 5 when the learner reconsiders the organisation's revenue targets rather than what the team counts."
+    },
+    "ZFF-PJ-05": {
+      "context": "The brief is an annual automation plan for the learner's own sales, marketing or account management team. Nothing else is stated. The learner maps the team's year, including renewal cycles, trade events and seasonal campaigns. They cost the options from the team's own figures and consult the people affected. Then they present the plan to whoever signs off the team's plans.",
+      "los": {
+        "LO1": "The learner determines the boundary, such as whether marketing operations sit inside the plan (1.1). They map the year's processes, including rare ones such as annual price updates and event follow-up (1.2). They establish volume, time and cost from the team's systems (1.3) and determine the method (1.4). They evaluate the figures, including disputed ones (1.5), and identify what must still be met, such as consent records (1.6).",
+        "LO2": "The learner sets the selection criteria (2.1) and analyses each main process against them (2.2). Costs and benefits come from the team's own figures (2.3). They investigate comparable work and state what it established (2.4). They identify processes to keep manual, such as negotiating terms with key accounts (2.5). Then they put the candidates in order (2.6).",
+        "LO3": "The learner identifies who each change affects, such as campaign executives if email builds are automated (3.1). They consult those people (3.2) and analyse the concerns and reasoning given (3.3). They adapt the plan (3.4). They evaluate the skills this plan needs that the team lacks, and how they will be obtained (3.5).",
+        "LO4": "The learner sequences changes around the team's year, such as not moving lead routing just before a major event (4.1). Dependencies include the CRM administrator or the website team (4.2). Resources, checks, fallbacks and risks are stated for each change (4.3 to 4.6). Each change has a measure and a starting figure (4.7).",
+        "LO5": "The learner presents the plan to the person who signs off the team's plans (5.1). They answer challenge on its figures, sequence and risks (5.2). The decision and any conditions are recorded (5.3). They evaluate their method and criteria (5.4) and how far consultation changed the plan (5.5). They identify what they would decide differently next year (5.6)."
+      },
+      "evidence": [
+        "1.1, 1.2, 1.6: a year map of the team's processes with the boundary stated. It lists the obligations that continue, such as consent records and contract terms.",
+        "1.3, 1.4, 1.5: a cost table built from the team's CRM, email platform and time records. It states the method and how disputed figures were settled.",
+        "2.1, 2.3, 2.5, 2.6: the learner's own selection criteria and a costed evaluation of each candidate. It names the processes kept manual, with reasons, and the recommended order.",
+        "3.2, 3.3, 3.4: a consultation record kept across the year, with colleagues identified by role. A change log shows how the plan moved in response.",
+        "4.1, 4.2, 4.4, 4.5, 4.7: the plan itself, sequenced across the year, with dependencies and checks. It names who carries out each check, when each fallback is used, and each starting figure.",
+        "5.1, 5.2, 5.3: the presentation pack, witness testimony of the challenge, and the recorded decision with any conditions."
+      ],
+      "level_watch": "It drops to Level 4 when a process list, a supplied funnel model or a business case template decides 1.2, 2.1 or 2.3. It is above the level when the plan reshapes how the organisation goes to market. That need belongs at 4.2 as a dependency."
+    }
+  },
+  "open": [
+    "No sales or marketing practitioner, and no assessor with sales or marketing experience, has read this version.",
+    "The rules listed are for teams working in the UK. A team that markets to people abroad works under other laws too, and this version does not cover them.",
+    "Several examples assume the team keeps a CRM and an email platform with activity records. A team without them needs another source of figures for ZFF-AU-05 2.3 and ZFF-PJ-05 1.3, and this version does not say which."
+  ]
+}

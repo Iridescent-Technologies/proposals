@@ -1,0 +1,144 @@
+{
+  "slug": "hr-and-ld",
+  "name": "HR and L&D",
+  "title": "HR and Learning and Development",
+  "for": "Heads of HR, HR managers and L&D managers who lead an HR or L&D team, or a clear part of one.",
+  "shift": [
+    "In HR and L&D, AI and automation reach the high-volume work first. Screening, interview scheduling, policy queries, onboarding paperwork, payroll inputs and learning records are all candidates. So are drafting course content and theming survey comments. The team's day moves from doing that work to checking it.",
+    "That changes what the function needs its own people to be good at. An HR adviser who answered routine queries now handles the harder cases a chatbot passes on. A learning designer builds less content and spends more time judging it. Is it accurate, and does it change what people do? Some roles shrink, some grow and some change shape.",
+    "The function is also where the rules bite hardest. It holds special category data and makes decisions about people's jobs. Others expect it to get change right. At Level 5 the learner leads their own HR or L&D function through this shift. The organisation's people strategy, and what HR is for, are set elsewhere."
+  ],
+  "rules": [
+    {
+      "name": "UK GDPR, Articles 9, 22A to 22D and 35",
+      "why": "HR data includes special category data (Article 9). Articles 22A to 22D allow decisions about people made solely by automated means only with safeguards: telling the person, letting them make representations, and a human review on request. Special category data restricts them further. Screening and triage tools need human decision points and usually a data protection impact assessment (Article 35), recorded at ZFF-AU-05 1.4 and 5.1."
+    },
+    {
+      "name": "Equality Act 2010",
+      "why": "An AI screening tool or policy chatbot can disadvantage people who share a protected characteristic, and the duty to make reasonable adjustments still applies. Recorded as a constraint at ZFF-AU-05 1.4, a risk at ZFF-AU-05 5.2 and a check at ZFF-PJ-05 4.4."
+    },
+    {
+      "name": "Employment Rights Act 1996",
+      "why": "Changing what a role involves can change its terms. Section 4 requires a written statement of any change to the particulars within one month of the change. Whether the change needs the employee's agreement depends on their contract. That is recorded at ZFF-GM-05 1.4 and ZFF-EI-05 1.5."
+    },
+    {
+      "name": "Trade Union and Labour Relations (Consolidation) Act 1992",
+      "why": "Proposing to dismiss 20 or more employees as redundant at one establishment within 90 days requires collective consultation with appropriate representatives (section 188). That includes dismissing and re-engaging people to change their terms. The Employment Rights Act 2025 is changing these duties, so check what is in force. Recorded at ZFF-EI-05 1.5 and 3.6, and as a dependency at ZFF-PJ-05 4.2."
+    },
+    {
+      "name": "Transfer of Undertakings (Protection of Employment) Regulations 2006",
+      "why": "Moving payroll or learning administration to an outside provider can be a service provision change, and the people doing that work may transfer with it. This limits the outside option at ZFF-GM-05 3.2 and is recorded at ZFF-GM-05 1.4 and ZFF-PJ-05 4.2."
+    },
+    {
+      "name": "Acas Code of Practice on disciplinary and grievance procedures",
+      "why": "Employment tribunals take the Code into account, so a case management tool cannot remove its steps: investigation, a meeting and the chance to appeal. Recorded as a constraint at ZFF-AU-05 1.4 and a point of human decision at ZFF-AU-05 5.1."
+    },
+    {
+      "name": "Equality Act 2010 (Gender Pay Gap Information) Regulations 2017",
+      "why": "Private and voluntary sector employers with 250 or more employees publish gender pay gap figures each year, and HR usually produces them. Recorded at ZFF-PJ-05 1.6 as an obligation, and as a fixed point in the sequence at ZFF-PJ-05 4.1."
+    }
+  ],
+  "units": {
+    "ZFF-GM-05": {
+      "context": "Here the department is the learner's own HR or L&D function, not the workforce it serves. The learner establishes what their own team can do now. That might be case handling, employment law, workforce data, learning design or facilitation. They then determine what the team will need once screening, queries and content drafting are automated. Then they lead their own people through that change.",
+      "los": {
+        "LO1": "1.1 covers an HR adviser whose skill with routine policy queries matters less once a chatbot answers them. 1.4 names the team's limits, such as budget, role profiles, any recognition agreement and development time. 1.5 takes the views held inside the team. In L&D these often divide between people who build content and people who judge it.",
+        "LO2": "2.1 asks the learner to determine how capability will be established, not to run a ready-made skills audit. 2.3 draws on the team's own records: the case log, advice quality checks and learning evaluations. 2.4 and 2.5 find where the gap costs most. That is often in the complex cases left once routine queries are automated.",
+        "LO3": "3.2 options include developing advisers, moving work between HR operations and business partnering, recruiting, redeploying, or buying in specialist advice. 3.3 uses the team's own figures, such as training and agency spend. 3.5 might be a capability the team keeps buying in rather than building, with the reasons evaluated.",
+        "LO4": "4.2 consults the team members whose expected capability changes, such as recruitment coordinators and learning administrators. 4.4 adapts the recommendation after that. 4.5 sets out each person's actions, support and period. 4.6 decides what will count as evidence in the team's work, such as the quality of case files.",
+        "LO5": "5.1 and 5.2 evaluate the change against 2.4, using the evidence set at 4.6 and HR system figures. 5.3 finds where the change did not take, such as advisers still answering routine queries by hand. 5.4 and 5.5 look back at the learner's own method and criteria."
+      },
+      "evidence": [
+        "2.1, 2.6: a method note on how the team's capability was established, why, and how evidence gaps were handled.",
+        "2.3, 2.5: an annotated summary of the case log and advice quality checks, in aggregate, showing where the gap costs most.",
+        "3.1, 3.3, 3.6: an options paper costed from the department's own training and agency spend. It is evaluated against criteria the learner set.",
+        "4.2, 4.3, 4.4: a consultation record with team members identified by role, the concerns analysed, and what changed in the recommendation.",
+        "4.5: a change note for each affected role, with actions, support and period.",
+        "5.1, 5.2, 5.3: a review using HR system figures taken after the change, with the period covered and its limits."
+      ],
+      "level_watch": "The trap is the organisation's competency framework or job architecture. Used as the method at 2.1 or the criteria at 3.1, it drops the unit to Level 4, though it may be cited and weighed at 2.6. An L&D learner who turns this into what the whole workforce needs has gone above the level, and that belongs at 1.4 as a constraint."
+    },
+    "ZFF-EI-05": {
+      "context": "The people whose roles change are in the learner's own HR or L&D team. HR handles role change for other departments all the time. Here its own team is the one going through it, and its usual process is not a ready answer. Typical cases are a recruitment coordinator whose screening moves to an AI screening tool, or an HR adviser whose routine queries go to a chatbot. Another is a learning administrator whose records work is automated.",
+      "los": {
+        "LO1": "1.2 evaluates what is at stake for HR administrators, advisers and learning designers, and why they take their positions. 1.4 asks why role changes get agreed and then quietly undone. An example is advisers who keep taking calls the chatbot should handle. 1.5 names what governs the department: consultation duties, agreements, contracts and the organisation's change procedure.",
+        "LO2": "2.1 identifies who changes and who depends on them, such as hiring managers who rely on recruitment coordinators. 2.2 determines how the learner will find out what people raise. 2.4 separates objections to the change from objections to how it is made. In an HR team the second kind often concerns how their own function consulted them.",
+        "LO3": "3.1 sets the learner's own criteria for judging the department's response. 3.2 tests objections against evidence, such as a claim that candidates will dislike automated screening. 3.6 decides what happens where someone still does not accept the change, within 1.5. A recorded determination meets it, and no disciplinary or contractual action is needed.",
+        "LO4": "4.1 states to each person what changes, when, and what is expected of them. 4.3 is a discussion with a team member who has said they do not accept the change. It records what was agreed and what was not. 4.4 and 4.5 set out the support, the updates and how the effect on their work will be measured.",
+        "LO5": "5.1 and 5.2 evaluate the effect on the changed roles and on the department's work. Figures might be case response times or time to fill vacancies. 5.3 judges how far what people raised at 2.3 changed what the department did. 5.4 reviews the method from 2.2 and the criteria from 3.1."
+      },
+      "evidence": [
+        "2.1: a map of the roles changing in the team and the roles that depend on them, by role title only.",
+        "2.2, 2.3, 2.6: the consultation method and why it was chosen, what each group raised, and how non-participants were handled.",
+        "2.4, 2.5: an analysis separating objections to the change from objections to how it is made.",
+        "3.1, 3.3, 3.5: a decision log of which points changed the department's plans, against the learner's own criteria.",
+        "4.3: a record of the discussion with Colleague A, who stated they do not accept the change. Witness testimony supports it.",
+        "5.1, 5.2, 5.3: an evaluation using the team's own figures taken after the change, stating its limits."
+      ],
+      "level_watch": "It drops to Level 4 when the learner follows a change toolkit or briefing script with the concessions already decided. That removes 2.2, 3.1 and 3.3. HR learners are tempted to rewrite how the organisation handles role change, which is above the level and is recorded at 1.5 as a constraint."
+    },
+    "ZFF-AU-05": {
+      "context": "The department is the learner's HR or L&D function, and the processes are its own. They include recruitment, onboarding, case management, policy queries, payroll inputs, learning administration and course design. The learner works out what could be automated, what should not be, and what finding out would cost. They then put a recommendation to whoever decides.",
+      "los": {
+        "LO1": "1.1 looks at what automation does to screening, scheduling and records work. 1.3 evaluates why HR automation fails to deliver, such as a chatbot that passes on more queries than it resolves. 1.4 identifies limits: system permissions, supplier contracts, data protection duties and the team's skills. 1.5 takes the team's views and their reasoning.",
+        "LO2": "2.1 maps the team's processes with inputs, outputs and people, from vacancy approval to offer. 2.2 determines how effort will be established. 2.3 takes volumes and time from HR and learning systems, such as cases opened and course bookings. 2.4 finds what others depend on, such as payroll inputs to finance.",
+        "LO3": "3.1 is where the learner sets their own criteria. In HR these may cover personal data, or whether a person must make the decision. 3.2 splits a process such as screening into what a tool could and could not do. 3.5 names a process that should not be automated, such as a grievance outcome, with reasons.",
+        "LO4": "4.1 and 4.2 consult the people whose work would change, such as recruitment coordinators. 4.3 and 4.4 analyse what they raise and adapt the evaluation. 4.5 evaluates the skills these automations need, such as checking a tool's outputs for bias. The wider capability question stays with ZFF-GM-05.",
+        "LO5": "5.1 states the checks, fallbacks and human decision points for each recommended process. These matter most where decisions about people are involved. 5.2 evaluates the risks to the department. 5.3 presents to the person who decides, often the HR director. 5.4 and 5.5 review the learner's own method."
+      },
+      "evidence": [
+        "2.1, 2.4: a process map of the function showing inputs, outputs, people and what other teams depend on.",
+        "2.3, 2.5: volume and time figures from HR and learning systems, with a note on reliability and gaps.",
+        "3.1, 3.2, 3.3, 3.6: an evaluation of candidates such as interview scheduling and policy queries, against the learner's own criteria.",
+        "3.5: a reasoned case for keeping one process with a person, such as a reasonable adjustment decision.",
+        "4.2, 4.3, 4.4: the consultation record, with colleagues identified by role, and the adapted evaluation.",
+        "5.1, 5.2, 5.3: the recommendation paper with checks and fallbacks, and witness testimony of the presentation."
+      ],
+      "level_watch": "It drops to Level 4 when the HR director names the processes, or a supplier's business case template fixes the benefits. Either supplies 3.1. Recommending a new HR operating model or an organisation-wide system is above the level, because the unit stops at the function's own processes."
+    },
+    "ZFF-DA-05": {
+      "context": "HR and L&D functions report measures such as time to hire, case closure time, training completion and learning hours. This unit asks what those measures count and what behaviour they encourage in the team. It also asks what they leave out. The learner then determines a question about where the function's own effort should go.",
+      "los": {
+        "LO1": "1.1 analyses what each measure counts and over what period. Does time to hire run from approval or from advert? 1.2 analyses behaviour: a completion measure can push a team towards short mandatory modules. A closure measure can push advisers to close cases early. 1.3 and 1.4 cover what is left out, and other ways to measure this work.",
+        "LO2": "2.1 determines a question about the function's priorities. An example is whether L&D effort should move from content production to supporting managers. 2.2 and 2.3 select data and evaluate what was set aside, including special category data. 2.4 determines the method. 2.5 evaluates data quality, such as inconsistent categories in the case log.",
+        "LO3": "3.1 and 3.2 analyse the data and interpret where the team's effort goes. 3.3 holds a second reading, such as rising cases reflecting a new reporting route. 3.6 matters in HR. Where an AI tool themed survey or exit interview comments, the learner evaluates what was checked and why.",
+        "LO4": "4.1 and 4.2 determine the new priorities and what stops, such as a course catalogue few people use. 4.3 and 4.4 consult those affected and adapt the proposal. 4.5 presents to whoever decides the function's priorities and responds to challenge. 4.6 states how the effect will be measured, and over what period.",
+        "LO5": "5.1 evaluates the effect against 4.6, using at least one measurement taken after the change. 5.2 reviews the method from 2.4. 5.3 names what the function would measure differently, which the unit allows. An example is a measure of whether learning was applied at work."
+      },
+      "evidence": [
+        "1.1, 1.2, 1.3: an annotated copy of the function's own report, showing what each measure counts and drives.",
+        "2.1, 2.2, 2.3, 2.4: a question and method note, with the data used and the data set aside.",
+        "2.5, 3.5: a data quality log for the case or learning records, with gaps and errors and how they were handled.",
+        "3.3, 3.4: a short paper weighing two readings of the same data, tested against comparable work.",
+        "3.6: a declaration of where an AI tool was used and what was checked, confirmed in professional discussion.",
+        "4.3, 4.4, 4.5, 4.6: the consultation record, the adapted proposal, and witness testimony of the challenge.",
+        "5.1, 5.3: a review against the measure stated at 4.6, using at least one measurement taken after the change. It states its period and limits, and what the function would measure differently."
+      ],
+      "level_watch": "It drops to Level 4 when the question is handed down, such as explaining a turnover figure for the board. A supplied HR analytics pack used as the method does the same. It rises above Level 5 when the question becomes workforce strategy, or what HR measures for."
+    },
+    "ZFF-PJ-05": {
+      "context": "The plan covers the learner's own HR or L&D function across its year. That includes the peaks: recruitment intakes, performance and pay reviews, payroll year end and training renewals. Gender pay gap reporting is one too, where it applies. The brief names only the deliverable. The learner determines the boundary, processes, criteria and sequence, and presents the plan for sign-off.",
+      "los": {
+        "LO1": "1.1 sets the boundary, such as HR operations with or without L&D. 1.2 maps the year, including occasional work like a restructure consultation. 1.3 and 1.4 establish volume, time and cost from HR, payroll and learning systems. 1.6 lists what must keep being met, such as right to work checks and payroll deadlines.",
+        "LO2": "2.1 sets the learner's own selection criteria. 2.2 and 2.3 analyse each main process and interpret cost and benefit from the function's figures. 2.5 names what should not be automated, such as the final decision in a disciplinary case. 2.6 sets the order of the recommendations.",
+        "LO3": "3.1 and 3.2 consult the people each change would affect, across the year. 3.3 and 3.4 analyse their concerns and adapt the plan. 3.5 evaluates the skills this plan needs that the team lacks, such as checking automated screening for bias. It also states how they will be obtained.",
+        "LO4": "4.1 sequences changes around the HR calendar, such as not switching the case system mid pay review. 4.2 identifies dependencies: IT, finance, the data protection officer and union consultation. Any organisational change is recorded there as a dependency. 4.4 and 4.5 set checks and fallbacks. 4.7 sets each starting figure.",
+        "LO5": "5.1 and 5.2 present the plan to whoever signs off the function's plans and answer challenge on it. 5.3 records the decision and its conditions. An outstanding decision, recorded with its reason and expected date, also meets it. 5.4 to 5.6 review the method, the consultation's effect and next year."
+      },
+      "evidence": [
+        "1.1, 1.2, 1.6: a year map of the function's processes, its boundary and its obligations.",
+        "1.3, 1.4, 1.5: a cost model from HR, payroll and learning figures, with how disputed figures were handled.",
+        "2.1, 2.5, 2.6: a ranked list of candidates against the learner's own criteria, with what stays with a person.",
+        "3.2, 3.3, 3.4: the consultation record across the year and a log of how the plan changed.",
+        "4.1 to 4.7: the annual plan, with sequence, dependencies, resources, checks, fallbacks, risks and starting figures.",
+        "5.1, 5.2, 5.3: the presentation pack, witness testimony of the challenge, and the recorded decision."
+      ],
+      "level_watch": "It drops to Level 4 when the learner works from a supplied process list, an HR transformation template or a business case template. Any one supplies 1.2, 2.1 or 2.3. A plan that becomes a new HR operating model for the organisation is above the level, and is recorded at 4.2 as a dependency."
+    }
+  },
+  "open": [
+    "No HR or L&D practitioner, and no assessor, has read this version. The examples come from the generic specification and general HR practice.",
+    "No employment lawyer has checked the rules. Articles 22A to 22D replaced Article 22 under the Data (Use and Access) Act 2025. Confirm on legislation.gov.uk that they are in force before learners use this page.",
+    "HR holds confidential case records about employees across the organisation. Section 4.8 covers colleagues consulted about their own roles, not case records about others. How case figures are aggregated for ZFF-GM-05 2.3 and ZFF-EI-05 5.2 needs a ruling."
+  ]
+}

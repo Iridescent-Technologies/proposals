@@ -1,0 +1,147 @@
+{
+  "slug": "finance",
+  "name": "Finance",
+  "title": "Finance",
+  "for": "Finance managers, financial controllers and payroll managers who run a finance function or a team within one, such as accounts payable, credit control, planning and analysis, or payroll.",
+  "shift": [
+    "Much of a finance team's week is matching, checking and explaining. Invoices are matched to orders. Bank lines are matched to the ledger. Variances are explained in words each month. Tools now take a first pass at each of these. An invoice-matching tool clears the clean matches and queues the rest. AI drafts variance commentary from the ledger. A forecasting tool proposes next quarter's figures from the trend.",
+    "The work does not disappear. It moves. The accounts payable clerk who keyed invoices now works the exception queue. The management accountant who wrote commentary now checks a draft against the business. Fewer hours go on processing. More go on judging whether an output is right. That changes what each role needs to be good at, and which mistakes are now possible.",
+    "Some things do not move when the tools do. Records must still explain each transaction. The VAT return must still come from digital records. Payroll must still report on time. Duties kept apart must stay apart, even when one tool does both steps. At this level the learner leads their own finance function or team through that shift. How the organisation as a whole runs finance is set above them."
+  ],
+  "rules": [
+    {
+      "name": "Companies Act 2006, section 386 (accounting records)",
+      "why": "Records must show and explain each transaction, and any automated step has to leave records that still do. It is a constraint at ZFF-AU-05 1.4 and an obligation at ZFF-PJ-05 1.6, and it shapes the checks at ZFF-AU-05 5.1. This applies to companies; other bodies have their own equivalent."
+    },
+    {
+      "name": "HMRC Making Tax Digital for VAT, for VAT-registered businesses",
+      "why": "VAT records must be kept digitally, and figures must reach the return through digital links. A new tool between ledger and return must keep that chain intact. It is recorded at ZFF-AU-05 1.4 and ZFF-PJ-05 1.6."
+    },
+    {
+      "name": "HMRC PAYE Real Time Information reporting",
+      "why": "Payroll must send a Full Payment Submission to HMRC on or before each payday. No change may put that date at risk. It is recorded at ZFF-PJ-05 1.6 and shapes the fallbacks at ZFF-PJ-05 4.5."
+    },
+    {
+      "name": "UK GDPR and the Data Protection Act 2018",
+      "why": "Payroll, expense and supplier bank records hold personal data. That limits which tools may process them and which data an analysis may use. It is recorded at ZFF-AU-05 1.4 and, where data is set aside, at ZFF-DA-05 2.3."
+    },
+    {
+      "name": "The organisation's financial controls: segregation of duties and authority limits",
+      "why": "Raising, authorising and paying stay with different people, each within an authority limit. An automation that does two of those steps can collapse the separation. It is weighed at ZFF-AU-05 3.5 and 5.1 and at ZFF-PJ-05 4.4."
+    },
+    {
+      "name": "Companies Act 2006, section 499 (auditors' right of access to records)",
+      "why": "Where the accounts are audited, auditors need to trace an entry to its source and see who checked it. Each automated step needs that trail. Where the auditor must review a new control first, that is a dependency at ZFF-PJ-05 4.2."
+    },
+    {
+      "name": "The organisation's own change and consultation procedures",
+      "why": "How the department may change people's roles is set by the organisation's procedures and any agreements in place. The learner works within them and records them at ZFF-EI-05 1.5 and ZFF-GM-05 1.4."
+    },
+    {
+      "name": "Trade Union and Labour Relations (Consolidation) Act 1992",
+      "why": "Proposing to dismiss 20 or more employees as redundant at one establishment within 90 days requires collective consultation with appropriate representatives (section 188). That includes dismissing and re-engaging people to change their terms. The Employment Rights Act 2025 is changing these duties, so check what is in force. Recorded at ZFF-EI-05 1.5."
+    }
+  ],
+  "units": {
+    "ZFF-GM-05": {
+      "context": "In finance this unit is about what the team needs to be good at once tools do the matching and first drafts. An accounts payable team that keyed invoices now needs people who can read an exception queue. A management accounts team now needs people who can test an AI draft against the ledger. The learner establishes what their team can do now and what it will need. They then lead its people through the change.",
+      "los": {
+        "LO1": "At 1.1 the learner analyses how the team's work changes. That includes a long-serving clerk whose strength was fast, accurate keying. 1.2 and 1.5 ask for the reasoning behind each approach and view, such as formal training against learning on the job. 1.3 looks at why system training can leave people working the old way. 1.4 records constraints such as the close calendar, job grades, agreements and budget.",
+        "LO2": "The learner determines their own method at 2.1. A skills audit form supplied from outside does not meet it. At 2.2 and 2.3 they draw on the team's own records, such as who clears which exceptions and review notes on journals. 2.4 determines what the team will need, such as reviewing tool-matched invoices. 2.5 and 2.6 find where the gap costs most, such as rework at close. They also test how far the records can be trusted.",
+        "LO3": "At 3.1 the learner sets their own criteria, such as cover for the next year end, and cost. 3.2 goes beyond training. Options include reallocating reconciliations, recruiting a systems accountant or borrowing support from another team. 3.3 uses the team's own figures, such as overtime at close. 3.4 draws on how a comparable team handled a similar change. At 3.5 the learner might decide specialist tax capability is better bought in than built.",
+        "LO4": "4.1 and 4.5 name each affected role, such as the purchase ledger clerk or Colleague A. For each they state the actions expected, the support offered and the period. 4.2 and 4.3 record and analyse what people raised. One example is a fear that signing off a tool's matches carries more personal risk than keying. 4.4 shows how the recommendation changed. 4.6 sets what will count as evidence, such as fewer reopened reconciliations.",
+        "LO5": "5.1 and 5.2 evaluate the change against 2.4 and the evidence set at 4.6. They use the team's own figures, such as the close timetable or exception ageing. If only one close has passed, the learner evaluates the effect seen so far and states its limits. 5.3 asks where the change did not take hold. 5.4 and 5.5 review the learner's own method and criteria."
+      },
+      "evidence": [
+        "2.1, 2.3: A note of the method chosen to establish the team's capability. Extracts from the team's own records support it, such as exception logs by preparer, annotated by the learner.",
+        "2.4, 2.5: A statement of what the accounts payable team will need once an invoice-matching tool is live. It sets this against what the team holds now and marks the costliest gap.",
+        "3.1, 3.3, 3.6: An options paper built on the learner's own criteria. Each option is costed from the team's overtime and contractor figures, and the recommended options are named.",
+        "4.2, 4.3, 4.4: Consultation notes with colleagues identified by role. The learner's analysis of what was raised, and the revised recommendation showing what changed.",
+        "4.5: A short plan for each affected role. It states the actions expected, the support available and the period.",
+        "5.1, 5.2, 5.3: A review after at least one month-end close. It is set against the evidence determined at 4.6 and states the limits of the period."
+      ],
+      "level_watch": "It drops to Level 4 when a competency framework or skills matrix from a transformation team defines what the team needs. It also drops when options come from a fixed training list within a set budget. It rises above Level 5 when the learner sets out to redesign finance roles across the organisation, which belongs at 1.4 as a constraint."
+    },
+    "ZFF-EI-05": {
+      "context": "In finance the people whose roles change are often long-serving and very accurate at the work being automated. A payroll administrator may feel a tool's mistakes will be theirs to answer for. Some people object to the change itself. Others object to how it is made, such as moving to a new tool during year end. The learner works with all of them, including those who do not accept it.",
+      "los": {
+        "LO1": "1.1 and 1.2 analyse what changes for the team and what is at stake for each group. Clerks may lose keying work while reviewers take on more sign-off risk. 1.3 compares approaches, such as a volunteer pilot against moving everyone at once. 1.4 looks at why agreed changes drift back, such as manual workarounds kept alive at close. 1.5 records the organisation's procedures and any agreements in place.",
+        "LO2": "2.1 names each role that changes and the roles that depend on it. Budget holders rely on accounts payable, and employees rely on payroll. 2.2 is the learner's own choice of method, such as one-to-ones for payroll staff. 2.3 records what each person raised. 2.4 separates objections to the change from objections to how it is made. 2.5 finds the parts least likely to stick. 2.6 states how absent views were handled.",
+        "LO3": "3.1 sets the criteria for judging each response, such as whether a point bears on control, accuracy or workload. 3.2 tests objections against evidence. A claim that the tool mishandles credit notes is checked against the exception log. 3.3 and 3.5 decide which points change the plan and record what changed. 3.4 draws on comparable changes. 3.6 decides what happens if someone still does not accept it, within 1.5.",
+        "LO4": "4.1 states to each person what is changing and when. Timing works around the close calendar and the payroll cut-off. 4.2 answers each point with what the department will do and why. 4.3 is a recorded discussion with a person who has said they do not accept the change. 4.4 sets support for each changed role. 4.5 sets how people are kept informed and how the effect will be measured.",
+        "LO5": "5.1 and 5.2 evaluate the effect on the people whose roles changed and on the team's work. They use the team's own figures, such as payroll corrections. 5.3 tests how far the points recorded at 2.3 changed what the team did. 5.4 and 5.5 review the learner's own method and criteria."
+      },
+      "evidence": [
+        "2.1: A role map of each finance role that changes and what changes for it. It also shows dependent roles, such as budget holders and employees paid through payroll.",
+        "2.2, 2.3, 2.6: The learner's consultation method and the record of what each person or group raised. Colleagues are identified by role, with a note on how absent views were handled.",
+        "2.4, 3.2: An analysis sorting objections to the change from objections to how it is made. Each objection is tested against the team's own records.",
+        "3.3, 3.5: A decision log stating which points changed the plan and which did not, with reasons. The revised plan sits beside it.",
+        "4.3: A record of the discussion with Colleague A, who stated they do not accept the change. It shows what was agreed and what was not, with witness testimony from the line manager.",
+        "5.1, 5.2, 5.3: A review after at least one close or payroll cycle. It uses the team's own figures and states the limits of the period covered."
+      ],
+      "level_watch": "It drops to Level 4 when the learner is handed the people to consult, a briefing script and a fixed list of concessions. It rises above Level 5 when the learner tries to change how the organisation handles role change, such as regrading finance roles across the group. That belongs at 1.5 as a constraint."
+    },
+    "ZFF-AU-05": {
+      "context": "In finance this unit asks which parts of purchase-to-pay, the close, credit control or payroll could be automated. It also asks which should not be, and what it would cost to find out. The learner maps what the team does, sets their own criteria, and tests candidates against the team's own figures. Control runs through all of it. Each automated step needs checks, fallbacks and points of human decision.",
+      "los": {
+        "LO1": "1.1 analyses how automation changes a finance team's work, such as a clerk moving from keying to exceptions. 1.2 compares approaches, such as one ledger end to end against one step across all ledgers. 1.3 looks at why finance automations fall short, such as poor supplier master data. 1.4 records constraints such as the finance system, licence terms, user permissions, segregation of duties and the team's skills.",
+        "LO2": "2.1 maps the team's processes, such as purchase-to-pay from order to payment run. 2.2 determines how to find where effort goes, such as time logs across one close. 2.3 takes volume and time from the team's own systems, such as invoice and manual journal counts. 2.4 finds what other teams depend on, such as budget holders waiting on accruals. 2.5 tests how far the figures can be trusted.",
+        "LO3": "At 3.1 the learner sets the criteria a candidate must meet, such as volume, error cost and control risk. 3.2 might split bank reconciliation into automatic matching and human review of the rest. 3.3 costs each candidate from the team's own figures. 3.4 draws on comparable work elsewhere. 3.5 names a process to keep manual, such as releasing the payment run. 3.6 sets out the recommendation.",
+        "LO4": "4.1 and 4.2 identify and consult the people whose work would change. These include purchase ledger clerks, the payments officer and budget holders who authorise invoices. 4.3 tests which concerns alter the evaluation, such as part-delivered orders the tool cannot match. 4.4 records what changed. 4.5 covers only the skills these automations need, such as maintaining matching rules.",
+        "LO5": "5.1 states the checks, fallbacks and points of human decision for each process. Examples are a sample review of auto-matched invoices and a manual route before a payment run. 5.2 evaluates risks such as a broken audit trail or a duplicate payment. 5.3 presents to the person who would decide, such as the financial controller. 5.4 and 5.5 review the learner's own method and criteria."
+      },
+      "evidence": [
+        "2.1, 2.4: A process map of the team's purchase-to-pay or close processes. It shows inputs, outputs, people and the other teams that depend on each step.",
+        "2.2, 2.3, 2.5: Volume and time figures from the finance system and the team's own logs. The learner's note covers the method and the gaps in the figures.",
+        "3.1, 3.3, 3.6: An evaluation of candidate processes against the learner's own criteria. It is costed from the team's figures and ends in a recommendation.",
+        "3.5: A short case for a process the team should keep manual, such as payment run release, with reasons.",
+        "4.2, 4.3, 4.4: Consultation notes with clerks and budget holders identified by role. The revised evaluation shows what changed.",
+        "5.1, 5.2, 5.3: The recommendation as presented, with checks, fallbacks and points of human decision for each process. Witness testimony confirms it was presented."
+      ],
+      "level_watch": "It drops to Level 4 when the learner is handed the processes to evaluate. It also drops when a business case template or control framework fixes what counts as a benefit. It rises above Level 5 when the work becomes a redesign of how the organisation runs finance, such as a shared service centre. That belongs at 1.4 as a constraint."
+    },
+    "ZFF-DA-05": {
+      "context": "Finance teams report many measures of their own work, such as days to close, debtor days and forecast accuracy. This unit asks what those measures count and what behaviour they encourage. A target on days to close can push accruals towards rough estimates. A count of invoices processed can push hard invoices to the back. The learner then uses the team's own data to decide where its effort should go.",
+      "los": {
+        "LO1": "1.1 and 1.2 analyse what the team's measures count, over what period, and what they encourage. 1.3 evaluates what they leave out, such as time budget holders spend on queries. 1.4 compares approaches, such as speed against first-time accuracy, with the reasoning behind each. 1.5 sets out the views within the team about what its measures show.",
+        "LO2": "2.1 is the learner's own question. One example is whether credit control should chase by value or by age of debt. 2.2 and 2.3 choose the data and state what was set aside and why. That might be disputes held only in email, or personal data left out under UK GDPR. 2.4 determines the method. 2.5 evaluates data quality, such as duplicate customer accounts.",
+        "LO3": "3.1 and 3.2 analyse the data and interpret where the team's effort is going. 3.3 holds an alternative reading. A rise in late payments might reflect a billing error rather than weaker chasing. 3.4 tests the reading against comparable work. 3.5 states what the data cannot show. 3.6 records where AI was used, such as drafted commentary on the aged debt report, and what was checked.",
+        "LO4": "4.1 and 4.2 set the change in priorities and what the team would stop or reduce. A weekly report nobody uses is a typical candidate. 4.3 and 4.4 consult the people affected and adapt. 4.5 presents to the person who sets the team's priorities, and responds to challenge. 4.6 states how the effect will be measured, which may mean changing a measure the team reports.",
+        "LO5": "5.1 evaluates the effect against 4.6, using at least one measurement taken after the change. 5.2 reviews the method set at 2.4. 5.3 identifies what the team would measure differently and what would be determined differently next time. One example is exception ageing in place of invoice counts."
+      },
+      "evidence": [
+        "1.1, 1.2, 1.3: An annotated copy of the team's current measures. It states what each counts, over what period, what it encourages and what it leaves out.",
+        "2.1, 2.2, 2.3: A note of the learner's question about the team's priorities and the data chosen. It records the data set aside and the effect of setting it aside.",
+        "3.1, 3.2, 3.3: The analysis from the learner's own tools. It includes the alternative reading and why one is better supported.",
+        "3.6: A declaration of where an AI tool was used in the analysis. It states what was checked against the ledger or source report, and why.",
+        "4.3, 4.4, 4.5: Consultation notes and the revised proposal. A record of the challenge raised when it went to the decision maker.",
+        "5.1, 5.3: A review against the measure stated at 4.6, using figures from after the change. It ends with what the team would measure differently."
+      ],
+      "level_watch": "It drops to Level 4 when the learner is given the question and the monthly reporting pack to answer it from. It rises above Level 5 when the learner reconsiders what finance measures for, such as rewriting the organisation's performance measures. That is outside this unit."
+    },
+    "ZFF-PJ-05": {
+      "context": "The brief is an annual automation plan for the learner's own finance function or team. The finance year gives it shape. There are month-end closes, quarter ends, year end and audit, budget setting, VAT returns and the payroll year end. Nothing else is given. The learner decides the processes, what counts as a benefit, the order, and whose agreement is needed.",
+      "los": {
+        "LO1": "1.1 sets the boundary, such as transactional finance but not treasury. 1.2 maps processes across the year, including occasional ones such as audit requests and the budget round. 1.3 and 1.4 take volume, time and cost from the team's own systems, by a method the learner determines. 1.5 handles gaps and disputed figures. 1.6 lists the obligations the plan must keep meeting, such as VAT returns and payroll reporting.",
+        "LO2": "2.1 sets the learner's own criteria for selecting candidates. 2.2 and 2.3 analyse each main process and interpret its cost and benefit from the team's figures. 2.4 states what investigation of comparable work established. 2.5 names the processes that should stay manual, with reasons for each. 2.6 puts the candidates in order.",
+        "LO3": "3.1 and 3.2 identify and consult everyone whose work the plan changes. That includes clerks, budget holders who authorise spend and the payroll team. 3.3 and 3.4 analyse what was raised and adapt the plan. 3.5 evaluates the skills this plan needs and how they will be obtained. Maintaining rules on a matching tool is one example.",
+        "LO4": "4.1 sequences the changes around the finance calendar, such as avoiding a go-live just before year end. 4.2 identifies dependencies, such as system changes owned by IT or the auditor's review of a new control. 4.3 states resources and when they are needed. 4.4 and 4.5 state the checks, who does them, and fallbacks such as a manual payment run. 4.6 evaluates risks. 4.7 sets each starting figure.",
+        "LO5": "5.1 and 5.2 present the plan to the person who signs off the department's plans, such as the finance director. The learner responds to challenge on figures, sequence and risks. 5.3 records the decision and any conditions. 5.4 to 5.6 review the method and criteria, how far consultation changed the plan, and what to change next year."
+      },
+      "evidence": [
+        "1.1, 1.2, 1.6: A boundary statement and a year map of the team's processes, including audit requests. It lists the obligations the plan must keep meeting.",
+        "1.3, 1.4, 1.5: A cost base for each main process from the team's own systems. The method is stated and disputed figures are resolved or flagged.",
+        "2.1, 2.5, 2.6: The learner's selection criteria and the ordered list of candidates. The processes kept manual are listed with reasons.",
+        "3.2, 3.3, 3.4: Consultation records with colleagues identified by role. A change log shows how the plan moved in response.",
+        "4.1, 4.2, 4.4, 4.5: The plan itself, sequenced against the team's own close calendar. Each change carries its dependencies, checks, owners and fallback.",
+        "5.1, 5.2, 5.3: Witness testimony of the presentation and a note of the challenge raised. The recorded decision, with any conditions."
+      ],
+      "level_watch": "It drops to Level 4 when a transformation team supplies the process list, the selection criteria or a business case template that fixes what counts as a benefit. It rises above Level 5 when the plan reshapes how the organisation runs finance, such as centralising processing across the group. That belongs at 4.2 as a dependency outside the department."
+    }
+  },
+  "open": [
+    "No finance practitioner, and no assessor with finance experience, has read this version yet.",
+    "Many finance teams work under an internal control framework that lists each process's controls. An assessor needs to confirm it may inform the constraints at ZFF-AU-05 1.4. It must not become the criteria at ZFF-AU-05 3.1 or ZFF-PJ-05 2.1.",
+    "The rules named here apply to most UK finance teams. Sector rules, such as those for financial services firms or public bodies, are not covered and may add constraints."
+  ]
+}
